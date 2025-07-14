@@ -252,7 +252,7 @@ const HeyTalentLanding = () => {
             <div className="flex items-center justify-center gap-4 text-primary animate-bounce-in-delay-2">
               <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-current animate-float hover:scale-125 transition-transform duration-200" style={{animationDelay: `${i * 0.2}s`}} />
+                  <Star key={i} className="w-5 h-5 fill-current hover:scale-110 transition-transform duration-200" />
                 ))}
               </div>
               <span className="font-semibold text-lg hover:scale-110 transition-transform duration-300">4,9 / 5</span>
