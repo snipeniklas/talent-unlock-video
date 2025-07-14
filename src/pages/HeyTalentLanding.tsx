@@ -7,6 +7,7 @@ import { Play, Star, CheckCircle, Users, Clock, Shield, Calendar, Linkedin } fro
 import videoThumbnail from '@/assets/video-thumbnail.jpg';
 import customerLogos from '@/assets/customer-logos.png';
 import verifiedBadge from '@/assets/verified-badge.png';
+import heyTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
 const HeyTalentLanding = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,13 +26,21 @@ const HeyTalentLanding = () => {
       {/* Sticky Trust Bar */}
       <div className="sticky top-0 z-40 bg-white border-b shadow-sm">
         <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-center gap-8 flex-wrap">
-            <div className="flex items-center gap-4">
-              <img src={customerLogos} alt="Kundenstimmen" className="h-8 opacity-60" />
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center">
+              <img src={heyTalentLogo} alt="HeyTalent" className="h-8 md:h-10" />
             </div>
-            <div className="flex items-center gap-2 bg-gradient-primary text-white px-4 py-2 rounded-full">
-              <img src={verifiedBadge} alt="Verified" className="w-5 h-5" />
-              <span className="text-sm font-semibold">Geprüfte Entwickler</span>
+            
+            {/* Trust Elements */}
+            <div className="flex items-center gap-4 md:gap-8">
+              <div className="hidden md:flex items-center gap-4">
+                <img src={customerLogos} alt="Kundenstimmen" className="h-6 opacity-60" />
+              </div>
+              <div className="flex items-center gap-2 bg-gradient-primary text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full">
+                <img src={verifiedBadge} alt="Verified" className="w-4 h-4 md:w-5 md:h-5" />
+                <span className="text-xs md:text-sm font-semibold">Geprüfte Entwickler</span>
+              </div>
             </div>
           </div>
         </div>
