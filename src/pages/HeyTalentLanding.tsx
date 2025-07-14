@@ -63,7 +63,8 @@ const HeyTalentLanding = () => {
 
       {/* Benefit Ticker */}
       <div className="bg-neutral-50 h-12 flex items-center overflow-hidden border-b">
-        <div className="animate-slide-text hover:animate-none flex items-center gap-12 whitespace-nowrap">
+        <div className="animate-slide-text hover:animate-none flex items-center gap-12 whitespace-nowrap min-w-max">
+          {/* First set */}
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
             30 % günstiger <span className="text-primary text-lg">•</span>
           </span>
@@ -94,38 +95,8 @@ const HeyTalentLanding = () => {
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
             Onboarding in &lt; 1 Tag <span className="text-primary text-lg">•</span>
           </span>
-          {/* Multiple duplicates for no empty space */}
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            30 % günstiger <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Start in 7 Tagen <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Geprüfte KI-Entwickler <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Geld-zurück-Garantie <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Keine Headhunter-Fee <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Remote & DSGVO-konform <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Skalierung jederzeit möglich <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Kein Recruiting-Aufwand <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Zeitzonen-kompatibel (+/-2 h) <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Onboarding in &lt; 1 Tag <span className="text-primary text-lg">•</span>
-          </span>
-          {/* Third set for seamless loop */}
+          
+          {/* Second set for seamless loop */}
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
             30 % günstiger <span className="text-primary text-lg">•</span>
           </span>
