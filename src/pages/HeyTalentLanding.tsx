@@ -405,7 +405,7 @@ const HeyTalentLanding = () => {
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-4 gap-8 mb-8">
               <div>
-                <h3 className="font-bold text-xl mb-4">HeyTalent</h3>
+                <h3 className="font-bold text-xl mb-4">HejTalent</h3>
                 <p className="text-gray-300 text-sm">
                   Ihr Partner für geprüfte KI-Entwickler aus Deutschland und Europa.
                 </p>
@@ -414,23 +414,30 @@ const HeyTalentLanding = () => {
               <div>
                 <h4 className="font-semibold mb-4">Rechtliches</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="/impressum" className="text-gray-300 hover:text-white transition-colors">Impressum</a></li>
-                  <li><a href="/datenschutz" className="text-gray-300 hover:text-white transition-colors">Datenschutz</a></li>
-                  <li><a href="/agb" className="text-gray-300 hover:text-white transition-colors">AGB</a></li>
+                  <li><a href="https://hejtalent.de/imprint-de/" className="text-gray-300 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Impressum</a></li>
+                  <li><a href="https://hejtalent.de/privacy-policy-de/" className="text-gray-300 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Datenschutz</a></li>
                 </ul>
               </div>
               
               <div>
                 <h4 className="font-semibold mb-4">Kontakt</h4>
                 <ul className="space-y-2 text-sm text-gray-300">
-                  <li>kontakt@heytalent.de</li>
-                  <li>+49 (0) 30 12345678</li>
+                  <li>
+                    <a href="mailto:kontakt@hejcompany.de" className="hover:text-white transition-colors">
+                      kontakt@hejcompany.de
+                    </a>
+                  </li>
+                  <li>
+                    <a href="tel:+4989901762180" className="hover:text-white transition-colors">
+                      +49 89 9017 6218
+                    </a>
+                  </li>
                 </ul>
               </div>
               
               <div>
                 <h4 className="font-semibold mb-4">Social Media</h4>
-                <a href="https://linkedin.com/company/heytalent" target="_blank" rel="noopener noreferrer" 
+                <a href="https://www.linkedin.com/company/hejtalent/?originalSubdomain=de" target="_blank" rel="noopener noreferrer" 
                    className="text-gray-300 hover:text-white transition-colors">
                   <Linkedin className="w-6 h-6" />
                 </a>
@@ -438,7 +445,7 @@ const HeyTalentLanding = () => {
             </div>
             
             <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-300">
-              © 2024 HeyTalent. Alle Rechte vorbehalten.
+              © 2025 HejTalent. Alle Rechte vorbehalten.
             </div>
           </div>
         </div>
