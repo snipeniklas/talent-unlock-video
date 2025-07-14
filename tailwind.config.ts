@@ -76,6 +76,7 @@ export default {
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-subtle': 'var(--gradient-subtle)',
+				'shimmer': 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -119,6 +120,26 @@ export default {
 						transform: 'translateY(0)'
 					}
 				},
+				'slide-in-left': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(-30px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				'slide-in-right': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(30px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
 				'scale-in': {
 					'0%': {
 						opacity: '0',
@@ -128,14 +149,84 @@ export default {
 						opacity: '1',
 						transform: 'scale(1)'
 					}
+				},
+				'bounce-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'scale(0.3)'
+					},
+					'50%': {
+						opacity: '1',
+						transform: 'scale(1.05)'
+					},
+					'70%': {
+						transform: 'scale(0.9)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0px)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
+				},
+				'pulse-glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 20px hsl(235 77% 62% / 0.3)'
+					},
+					'50%': {
+						boxShadow: '0 0 40px hsl(235 77% 62% / 0.6)'
+					}
+				},
+				'shimmer': {
+					'0%': {
+						backgroundPosition: '-200% 0'
+					},
+					'100%': {
+						backgroundPosition: '200% 0'
+					}
+				},
+				'rotate-y': {
+					'0%': {
+						transform: 'rotateY(0deg)'
+					},
+					'100%': {
+						transform: 'rotateY(360deg)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.6s ease-out',
+				'fade-in-delay-1': 'fade-in 0.6s ease-out 0.1s both',
+				'fade-in-delay-2': 'fade-in 0.6s ease-out 0.2s both',
+				'fade-in-delay-3': 'fade-in 0.6s ease-out 0.3s both',
+				'fade-in-delay-4': 'fade-in 0.6s ease-out 0.4s both',
 				'slide-up': 'slide-up 0.6s ease-out',
-				'scale-in': 'scale-in 0.4s ease-out'
+				'slide-up-delay-1': 'slide-up 0.6s ease-out 0.1s both',
+				'slide-up-delay-2': 'slide-up 0.6s ease-out 0.2s both',
+				'slide-up-delay-3': 'slide-up 0.6s ease-out 0.3s both',
+				'slide-up-delay-4': 'slide-up 0.6s ease-out 0.4s both',
+				'slide-in-left': 'slide-in-left 0.6s ease-out',
+				'slide-in-right': 'slide-in-right 0.6s ease-out',
+				'scale-in': 'scale-in 0.4s ease-out',
+				'scale-in-delay-1': 'scale-in 0.4s ease-out 0.1s both',
+				'scale-in-delay-2': 'scale-in 0.4s ease-out 0.2s both',
+				'scale-in-delay-3': 'scale-in 0.4s ease-out 0.3s both',
+				'bounce-in': 'bounce-in 0.8s ease-out',
+				'bounce-in-delay-1': 'bounce-in 0.8s ease-out 0.2s both',
+				'bounce-in-delay-2': 'bounce-in 0.8s ease-out 0.4s both',
+				'bounce-in-delay-3': 'bounce-in 0.8s ease-out 0.6s both',
+				'float': 'float 3s ease-in-out infinite',
+				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+				'shimmer': 'shimmer 2s linear infinite',
+				'rotate-y': 'rotate-y 20s linear infinite'
 			},
 			transitionProperty: {
 				'smooth': 'var(--transition-smooth)',

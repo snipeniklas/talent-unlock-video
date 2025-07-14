@@ -24,21 +24,21 @@ const HeyTalentLanding = () => {
   return (
     <div className="min-h-screen bg-background font-inter">
       {/* Sticky Trust Bar */}
-      <div className="sticky top-0 z-40 bg-white border-b shadow-sm">
+      <div className="sticky top-0 z-40 bg-white border-b shadow-sm backdrop-blur-sm bg-white/95">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div className="flex items-center">
-              <img src={heyTalentLogo} alt="HeyTalent" className="h-8 md:h-10" />
+            <div className="flex items-center animate-slide-in-left">
+              <img src={heyTalentLogo} alt="HeyTalent" className="h-8 md:h-10 hover:scale-105 transition-transform duration-300" />
             </div>
             
             {/* Trust Elements */}
-            <div className="flex items-center gap-4 md:gap-8">
+            <div className="flex items-center gap-4 md:gap-8 animate-slide-in-right">
               <div className="hidden md:flex items-center gap-4">
-                <img src={customerLogos} alt="Kundenstimmen" className="h-6 opacity-60" />
+                <img src={customerLogos} alt="Kundenstimmen" className="h-6 opacity-60 hover:opacity-80 transition-opacity duration-300" />
               </div>
-              <div className="flex items-center gap-2 bg-gradient-primary text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full">
-                <img src={verifiedBadge} alt="Verified" className="w-4 h-4 md:w-5 md:h-5" />
+              <div className="flex items-center gap-2 bg-gradient-primary text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full animate-pulse-glow hover:scale-105 transition-transform duration-300">
+                <img src={verifiedBadge} alt="Verified" className="w-4 h-4 md:w-5 md:h-5 animate-rotate-y" />
                 <span className="text-xs md:text-sm font-semibold">Geprüfte Entwickler</span>
               </div>
             </div>
@@ -47,36 +47,38 @@ const HeyTalentLanding = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="py-16 lg:py-24">
+      <section className="py-16 lg:py-24 overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center animate-fade-in">
-            <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
               Wie Sie in 7 Tagen geprüfte KI-Entwickler{' '}
-              <span className="text-primary">30% günstiger</span> bekommen
+              <span className="text-primary bg-gradient-to-r from-primary to-primary-hover bg-clip-text animate-shimmer bg-shimmer bg-200% animate-bounce-in-delay-1">
+                30% günstiger
+              </span> bekommen
             </h1>
             
-            <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto animate-fade-in-delay-1">
               Exklusives Video zeigt Ihnen den bewährten 3-Schritte-Prozess für hochqualifizierte Entwickler 
               aus unserem Netzwerk – ohne Risiko und mit Geld-zurück-Garantie.
             </p>
 
             {/* Video Thumbnail/Player */}
-            <div className="relative mb-12 animate-slide-up">
-              <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto">
+            <div className="relative mb-12 animate-slide-up-delay-2">
+              <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto group hover:shadow-3xl transition-all duration-700 hover:scale-[1.02]">
                 {!isVideoUnlocked ? (
                   <>
                     <div className="relative">
                       <img 
                         src={videoThumbnail} 
                         alt="Video Thumbnail" 
-                        className="w-full h-auto filter blur-sm opacity-80"
+                        className="w-full h-auto filter blur-sm opacity-80 group-hover:blur-none group-hover:opacity-90 transition-all duration-500"
                       />
-                      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="w-24 h-24 bg-white bg-opacity-90 rounded-full flex items-center justify-center mb-4 mx-auto shadow-xl hover:bg-opacity-100 transition-all duration-300">
-                            <Play className="w-12 h-12 text-primary ml-1" />
+                      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-30 transition-all duration-500">
+                        <div className="text-center animate-float">
+                          <div className="w-24 h-24 bg-white bg-opacity-90 rounded-full flex items-center justify-center mb-4 mx-auto shadow-xl hover:bg-opacity-100 transition-all duration-300 animate-pulse-glow hover:scale-110">
+                            <Play className="w-12 h-12 text-primary ml-1 animate-bounce" />
                           </div>
-                          <p className="text-white text-lg font-semibold">
+                          <p className="text-white text-lg font-semibold animate-fade-in-delay-3">
                             Video ansehen & Methode erfahren
                           </p>
                         </div>
@@ -84,7 +86,7 @@ const HeyTalentLanding = () => {
                     </div>
                   </>
                 ) : (
-                  <div className="aspect-video bg-black flex items-center justify-center">
+                  <div className="aspect-video bg-black flex items-center justify-center animate-scale-in">
                     <iframe
                       src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
                       title="HeyTalent Video"
@@ -102,44 +104,49 @@ const HeyTalentLanding = () => {
               variant="cta"
               size="xl"
               onClick={handleCTAClick}
-              className="mb-16 animate-scale-in"
+              className="mb-16 animate-bounce-in-delay-3 hover:animate-pulse relative overflow-hidden"
               disabled={isVideoUnlocked}
             >
-              {isVideoUnlocked ? 'Video bereits freigeschaltet' : 'Video jetzt freischalten'}
+              <span className="relative z-10">
+                {isVideoUnlocked ? 'Video bereits freigeschaltet' : 'Video jetzt freischalten'}
+              </span>
+              {!isVideoUnlocked && (
+                <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>
+              )}
             </Button>
 
             {/* 3-Bullet Preview */}
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto animate-fade-in">
-              <Card className="border-2 hover:border-primary transition-colors duration-300">
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              <Card className="border-2 hover:border-primary transition-all duration-500 animate-slide-up-delay-1 hover:shadow-xl hover:scale-105 group">
                 <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <CheckCircle className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2">30-50% Kostenersparnis</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">30-50% Kostenersparnis</h3>
                   <p className="text-muted-foreground">
                     Sparen Sie bis zu €4.000 pro Monat bei gleicher Qualität durch unser direktes Netzwerk
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-primary transition-colors duration-300">
+              <Card className="border-2 hover:border-primary transition-all duration-500 animate-slide-up-delay-2 hover:shadow-xl hover:scale-105 group">
                 <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Clock className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2">48h Matching-Prozess</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">48h Matching-Prozess</h3>
                   <p className="text-muted-foreground">
                     Von der Anfrage zum perfekten Entwickler in nur 2 Tagen – Start bereits nach 7 Tagen
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-primary transition-colors duration-300">
+              <Card className="border-2 hover:border-primary transition-all duration-500 animate-slide-up-delay-3 hover:shadow-xl hover:scale-105 group">
                 <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Shield className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2">100% Geld-zurück-Garantie</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">100% Geld-zurück-Garantie</h3>
                   <p className="text-muted-foreground">
                     Nicht zufrieden? Volle Rückerstattung in den ersten 14 Tagen – ohne Fragen
                   </p>
@@ -151,55 +158,55 @@ const HeyTalentLanding = () => {
       </section>
 
       {/* Trust Stack */}
-      <section className="py-16 bg-gradient-subtle">
+      <section className="py-16 bg-gradient-subtle overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-brand-dark mb-12">
+            <h2 className="text-3xl font-bold text-brand-dark mb-12 animate-fade-in">
               Über 50 Unternehmen vertrauen bereits auf HeyTalent
             </h2>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <Card className="p-6">
+              <Card className="p-6 hover:shadow-xl transition-all duration-500 animate-slide-in-left hover:scale-105 group">
                 <div className="flex items-start gap-4">
-                  <div className="flex text-yellow-400 mb-2">
+                  <div className="flex text-yellow-400 mb-2 group-hover:animate-bounce">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-current" />
+                      <Star key={i} className="w-5 h-5 fill-current hover:scale-125 transition-transform duration-200" style={{animationDelay: `${i * 0.1}s`}} />
                     ))}
                   </div>
                   <div className="flex-1">
-                    <p className="text-muted-foreground mb-3">
+                    <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
                       "Binnen 5 Tagen hatte ich den perfekten KI-Entwickler. Spart uns monatlich €3.200 bei besserer Qualität."
                     </p>
-                    <div className="text-sm font-semibold">Marcus Weber, CTO TechStart GmbH</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Marcus Weber, CTO TechStart GmbH</div>
                   </div>
                 </div>
               </Card>
 
-              <Card className="p-6">
+              <Card className="p-6 hover:shadow-xl transition-all duration-500 animate-slide-in-right hover:scale-105 group">
                 <div className="flex items-start gap-4">
-                  <div className="flex text-yellow-400 mb-2">
+                  <div className="flex text-yellow-400 mb-2 group-hover:animate-bounce">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-current" />
+                      <Star key={i} className="w-5 h-5 fill-current hover:scale-125 transition-transform duration-200" style={{animationDelay: `${i * 0.1}s`}} />
                     ))}
                   </div>
                   <div className="flex-1">
-                    <p className="text-muted-foreground mb-3">
+                    <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
                       "Deutschsprachige Kommunikation und Top-Skills. Unser MVP war in 3 Wochen fertig – unfassbar!"
                     </p>
-                    <div className="text-sm font-semibold">Sarah Müller, Gründerin InnovateLab</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Sarah Müller, Gründerin InnovateLab</div>
                   </div>
                 </div>
               </Card>
             </div>
 
-            <div className="flex items-center justify-center gap-4 text-primary">
+            <div className="flex items-center justify-center gap-4 text-primary animate-bounce-in-delay-2">
               <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-current" />
+                  <Star key={i} className="w-5 h-5 fill-current animate-float hover:scale-125 transition-transform duration-200" style={{animationDelay: `${i * 0.2}s`}} />
                 ))}
               </div>
-              <span className="font-semibold text-lg">4,9 / 5</span>
-              <span className="text-muted-foreground">aus 57 Bewertungen</span>
+              <span className="font-semibold text-lg hover:scale-110 transition-transform duration-300">4,9 / 5</span>
+              <span className="text-muted-foreground hover:text-foreground transition-colors duration-300">aus 57 Bewertungen</span>
             </div>
           </div>
         </div>
@@ -209,13 +216,13 @@ const HeyTalentLanding = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
               Häufig gestellte Fragen
             </h2>
 
             <Accordion type="single" collapsible className="space-y-4">
-              <AccordionItem value="quality" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left">
+              <AccordionItem value="quality" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-1 group">
+                <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
                   Wie stellen Sie die Qualität der Entwickler sicher?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
@@ -224,8 +231,8 @@ const HeyTalentLanding = () => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="privacy" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left">
+              <AccordionItem value="privacy" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-2 group">
+                <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
                   Wie wird der Datenschutz gewährleistet?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
@@ -234,8 +241,8 @@ const HeyTalentLanding = () => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="communication" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left">
+              <AccordionItem value="communication" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-3 group">
+                <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
                   Sprechen die Entwickler fließend Deutsch?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
@@ -244,8 +251,8 @@ const HeyTalentLanding = () => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="contract" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left">
+              <AccordionItem value="contract" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-4 group">
+                <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
                   Welche Vertragsmodelle bieten Sie an?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
@@ -260,23 +267,23 @@ const HeyTalentLanding = () => {
 
       {/* Secondary CTA - Only visible after video unlock */}
       {isVideoUnlocked && (
-        <section className="py-16 bg-gradient-primary">
+        <section className="py-16 bg-gradient-primary animate-fade-in">
           <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto text-center text-white animate-fade-in">
-              <h2 className="text-3xl font-bold mb-4">
+            <div className="max-w-2xl mx-auto text-center text-white">
+              <h2 className="text-3xl font-bold mb-4 animate-slide-up">
                 Bereit für Ihren KI-Entwickler?
               </h2>
-              <p className="text-xl mb-8 opacity-90">
+              <p className="text-xl mb-8 opacity-90 animate-slide-up-delay-1">
                 Buchen Sie jetzt Ihr 15-minütiges Beratungsgespräch und erfahren Sie, 
                 wie wir Ihnen helfen können.
               </p>
               <Button
                 variant="secondary"
                 size="xl"
-                className="bg-white text-primary hover:bg-gray-100"
+                className="bg-white text-primary hover:bg-gray-100 animate-bounce-in-delay-2 hover:scale-105 transition-all duration-300"
                 onClick={() => window.open('https://calendly.com/heytalent', '_blank')}
               >
-                <Calendar className="w-5 h-5 mr-2" />
+                <Calendar className="w-5 h-5 mr-2 animate-bounce" />
                 Beratungsgespräch buchen
               </Button>
             </div>
