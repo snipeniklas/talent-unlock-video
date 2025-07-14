@@ -60,12 +60,8 @@ const HeyTalentLanding = () => {
             
             {/* Trust Elements */}
             <div className="flex items-center gap-4 md:gap-8 animate-slide-in-right">
-              <div className="hidden md:flex items-center gap-4">
+              <div className="flex items-center gap-4">
                 <img src={customerLogos} alt="Kundenstimmen" className="h-6 opacity-60 hover:opacity-80 transition-opacity duration-300" />
-              </div>
-              <div className="flex items-center gap-2 bg-gradient-primary text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full animate-pulse-glow hover:scale-105 transition-transform duration-300">
-                <img src={verifiedBadge} alt="Verified" className="w-4 h-4 md:w-5 md:h-5 animate-rotate-y" />
-                <span className="text-xs md:text-sm font-semibold">Geprüfte Entwickler</span>
               </div>
             </div>
           </div>
