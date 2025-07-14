@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -12,6 +12,32 @@ import heyTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434
 const HeyTalentLanding = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isVideoUnlocked, setIsVideoUnlocked] = useState(false);
+  const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = cardRefs.current.indexOf(entry.target as HTMLDivElement);
+          if (index !== -1) {
+            setVisibleCards(prev => {
+              const newState = [...prev];
+              newState[index] = entry.isIntersecting;
+              return newState;
+            });
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: '50px' }
+    );
+
+    cardRefs.current.forEach(ref => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleVideoUnlock = () => {
     setIsVideoUnlocked(true);
@@ -117,7 +143,15 @@ const HeyTalentLanding = () => {
 
             {/* 3-Bullet Preview */}
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              <Card className="border-2 hover:border-primary transition-all duration-500 animate-slide-up-delay-1 hover:shadow-xl hover:scale-105 group">
+              <Card 
+                ref={(el) => {cardRefs.current[0] = el;}}
+                className={`border-2 hover:border-primary transition-all duration-500 hover:shadow-xl hover:scale-105 group ${
+                  visibleCards[0] 
+                    ? 'animate-scale-in opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: '0.1s' }}
+              >
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <CheckCircle className="w-6 h-6 text-white" />
@@ -129,7 +163,15 @@ const HeyTalentLanding = () => {
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-primary transition-all duration-500 animate-slide-up-delay-2 hover:shadow-xl hover:scale-105 group">
+              <Card 
+                ref={(el) => {cardRefs.current[1] = el;}}
+                className={`border-2 hover:border-primary transition-all duration-500 hover:shadow-xl hover:scale-105 group ${
+                  visibleCards[1] 
+                    ? 'animate-scale-in opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: '0.3s' }}
+              >
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Clock className="w-6 h-6 text-white" />
@@ -141,7 +183,15 @@ const HeyTalentLanding = () => {
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-primary transition-all duration-500 animate-slide-up-delay-3 hover:shadow-xl hover:scale-105 group">
+              <Card 
+                ref={(el) => {cardRefs.current[2] = el;}}
+                className={`border-2 hover:border-primary transition-all duration-500 hover:shadow-xl hover:scale-105 group ${
+                  visibleCards[2] 
+                    ? 'animate-scale-in opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: '0.5s' }}
+              >
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Shield className="w-6 h-6 text-white" />
