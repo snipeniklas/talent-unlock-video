@@ -79,6 +79,21 @@ const HeyTalentLanding = () => {
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
             Keine Headhunter-Fee <span className="text-primary text-lg">•</span>
           </span>
+          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+            Remote & DSGVO-konform <span className="text-primary text-lg">•</span>
+          </span>
+          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+            Skalierung jederzeit möglich <span className="text-primary text-lg">•</span>
+          </span>
+          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+            Kein Recruiting-Aufwand <span className="text-primary text-lg">•</span>
+          </span>
+          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+            Zeitzonen-kompatibel (+/-2 h) <span className="text-primary text-lg">•</span>
+          </span>
+          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+            Onboarding in &lt; 1 Tag <span className="text-primary text-lg">•</span>
+          </span>
           {/* Duplicate for seamless loop */}
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
             30 % günstiger <span className="text-primary text-lg">•</span>
@@ -94,6 +109,21 @@ const HeyTalentLanding = () => {
           </span>
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
             Keine Headhunter-Fee <span className="text-primary text-lg">•</span>
+          </span>
+          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+            Remote & DSGVO-konform <span className="text-primary text-lg">•</span>
+          </span>
+          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+            Skalierung jederzeit möglich <span className="text-primary text-lg">•</span>
+          </span>
+          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+            Kein Recruiting-Aufwand <span className="text-primary text-lg">•</span>
+          </span>
+          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+            Zeitzonen-kompatibel (+/-2 h) <span className="text-primary text-lg">•</span>
+          </span>
+          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+            Onboarding in &lt; 1 Tag <span className="text-primary text-lg">•</span>
           </span>
         </div>
       </div>
