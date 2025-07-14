@@ -218,9 +218,9 @@ const HeyTalentLanding = () => {
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               <Card className="p-6 hover:shadow-xl transition-all duration-500 animate-slide-in-left hover:scale-105 group">
                 <div className="flex items-start gap-4">
-                  <div className="flex text-yellow-400 mb-2 group-hover:animate-bounce">
+                  <div className="flex text-yellow-400 mb-2">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-current hover:scale-125 transition-transform duration-200" style={{animationDelay: `${i * 0.1}s`}} />
+                      <Star key={i} className="w-5 h-5 fill-current hover:scale-110 transition-transform duration-200" style={{animationDelay: `${i * 0.1}s`}} />
                     ))}
                   </div>
                   <div className="flex-1">
@@ -234,9 +234,9 @@ const HeyTalentLanding = () => {
 
               <Card className="p-6 hover:shadow-xl transition-all duration-500 animate-slide-in-right hover:scale-105 group">
                 <div className="flex items-start gap-4">
-                  <div className="flex text-yellow-400 mb-2 group-hover:animate-bounce">
+                  <div className="flex text-yellow-400 mb-2">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-current hover:scale-125 transition-transform duration-200" style={{animationDelay: `${i * 0.1}s`}} />
+                      <Star key={i} className="w-5 h-5 fill-current hover:scale-110 transition-transform duration-200" style={{animationDelay: `${i * 0.1}s`}} />
                     ))}
                   </div>
                   <div className="flex-1">
