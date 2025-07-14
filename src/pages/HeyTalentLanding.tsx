@@ -52,17 +52,12 @@ const HeyTalentLanding = () => {
       {/* Sticky Trust Bar */}
       <div className="sticky top-0 z-40 bg-white border-b shadow-sm backdrop-blur-sm bg-white/95">
         <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex items-center animate-slide-in-left">
-              <img src={heyTalentLogo} alt="HeyTalent" className="h-8 md:h-10 hover:scale-105 transition-transform duration-300" />
+            {/* Just Logo */}
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center animate-slide-in-left">
+                <img src={heyTalentLogo} alt="HeyTalent" className="h-8 md:h-10 hover:scale-105 transition-transform duration-300" />
+              </div>
             </div>
-            
-            {/* Trust Elements */}
-            <div className="flex items-center justify-end animate-slide-in-right">
-              <img src={customerLogos} alt="Kundenstimmen" className="h-6 opacity-60 hover:opacity-80 transition-opacity duration-300" />
-            </div>
-          </div>
         </div>
       </div>
 
