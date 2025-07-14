@@ -235,7 +235,7 @@ export default {
 				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
 				'shimmer': 'shimmer 2s linear infinite',
 				'rotate-y': 'rotate-y 20s linear infinite',
-				'slide-text': 'slide-text 20s linear infinite'
+				'slide-text': 'slide-text 35s linear infinite'
 			},
 			transitionProperty: {
 				'smooth': 'var(--transition-smooth)',
