@@ -198,6 +198,14 @@ export default {
 					'100%': {
 						transform: 'rotateY(360deg)'
 					}
+				},
+				'slide-text': {
+					'0%': {
+						transform: 'translateX(100%)'
+					},
+					'100%': {
+						transform: 'translateX(-100%)'
+					}
 				}
 			},
 			animation: {
@@ -226,7 +234,8 @@ export default {
 				'float': 'float 3s ease-in-out infinite',
 				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
 				'shimmer': 'shimmer 2s linear infinite',
-				'rotate-y': 'rotate-y 20s linear infinite'
+				'rotate-y': 'rotate-y 20s linear infinite',
+				'slide-text': 'slide-text 20s linear infinite'
 			},
 			transitionProperty: {
 				'smooth': 'var(--transition-smooth)',

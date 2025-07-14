@@ -72,6 +72,43 @@ const HeyTalentLanding = () => {
         </div>
       </div>
 
+      {/* Benefit Ticker */}
+      <div className="bg-neutral-50 h-12 flex items-center overflow-hidden border-b">
+        <div className="animate-slide-text hover:animate-none flex items-center gap-8 whitespace-nowrap">
+          <span className="flex items-center gap-2 text-sm font-medium text-brand-dark">
+            30 % günstiger <span className="text-primary">•</span>
+          </span>
+          <span className="flex items-center gap-2 text-sm font-medium text-brand-dark">
+            Start in 7 Tagen <span className="text-primary">•</span>
+          </span>
+          <span className="flex items-center gap-2 text-sm font-medium text-brand-dark">
+            Geprüfte KI-Entwickler <span className="text-primary">•</span>
+          </span>
+          <span className="flex items-center gap-2 text-sm font-medium text-brand-dark">
+            Geld-zurück-Garantie <span className="text-primary">•</span>
+          </span>
+          <span className="flex items-center gap-2 text-sm font-medium text-brand-dark">
+            Keine Headhunter-Fee <span className="text-primary">•</span>
+          </span>
+          {/* Duplicate for seamless loop */}
+          <span className="flex items-center gap-2 text-sm font-medium text-brand-dark">
+            30 % günstiger <span className="text-primary">•</span>
+          </span>
+          <span className="flex items-center gap-2 text-sm font-medium text-brand-dark">
+            Start in 7 Tagen <span className="text-primary">•</span>
+          </span>
+          <span className="flex items-center gap-2 text-sm font-medium text-brand-dark">
+            Geprüfte KI-Entwickler <span className="text-primary">•</span>
+          </span>
+          <span className="flex items-center gap-2 text-sm font-medium text-brand-dark">
+            Geld-zurück-Garantie <span className="text-primary">•</span>
+          </span>
+          <span className="flex items-center gap-2 text-sm font-medium text-brand-dark">
+            Keine Headhunter-Fee <span className="text-primary">•</span>
+          </span>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="py-16 lg:py-24 overflow-hidden">
         <div className="container mx-auto px-4">
