@@ -410,7 +410,7 @@ const HeyTalentLanding = () => {
               <div>
                 <h3 className="font-bold text-xl mb-4">HejTalent</h3>
                 <p className="text-gray-300 text-sm">
-                  Ihr Partner für geprüfte KI-Entwickler aus Deutschland und Europa.
+                  Ihr Partner für geprüfte internationale Remote-KI-Entwickler.
                 </p>
               </div>
               

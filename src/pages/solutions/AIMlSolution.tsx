@@ -83,7 +83,7 @@ const AIMlSolution = () => {
   ];
 
   const benefits = [
-    "Zugang zu Top-KI-Experten aus Deutschland und Europa",
+    "Zugang zu Top-KI-Experten international",
     "Flexible Projektlaufzeiten: von Proof of Concepts bis Langzeitprojekte",
     "Komplette KI-Teams oder einzelne Spezialisten",
     "Praxiserprobte Erfahrung in verschiedenen Branchen",

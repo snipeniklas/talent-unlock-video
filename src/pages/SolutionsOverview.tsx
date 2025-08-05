@@ -24,7 +24,7 @@ const SolutionsOverview = () => {
       title: 'Remote IT-Entwickler & Tech-Experten',
       description: 'Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur',
       icon: Code,
-      benefits: ['Senior-Level Entwickler', 'Agile Arbeitsweise', 'Deutsche & EU-Zeitzone'],
+      benefits: ['Senior-Level Entwickler', 'Agile Remote-Arbeitsweise', 'Internationale Zeitzone-Abdeckung'],
       cta: 'Remote IT-Experten finden'
     },
     {

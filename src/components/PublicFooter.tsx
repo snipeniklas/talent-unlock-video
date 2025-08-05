@@ -13,7 +13,7 @@ const PublicFooter = () => {
           <div>
             <h3 className="text-2xl font-bold mb-6">HeyTalent</h3>
             <p className="text-white/80 mb-6">
-              Ihr vertrauensvoller Partner für qualifizierte Remote-Fachkräfte aus Deutschland und Europa.
+              Ihr vertrauensvoller Partner für qualifizierte internationale Remote-Fachkräfte.
             </p>
             <div className="flex space-x-4">
               <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-hover transition-colors cursor-pointer">

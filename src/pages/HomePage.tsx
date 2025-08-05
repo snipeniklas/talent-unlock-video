@@ -440,7 +440,7 @@ const HomePage = () => {
               <p className="text-lg text-muted-foreground mb-6">
                 Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach 
                 erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und 
-                Vermittlung von Remote-Talenten aus Deutschland und Europa.
+                Vermittlung von internationalen Remote-Talenten.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 group hover:scale-105 transition-transform duration-200">

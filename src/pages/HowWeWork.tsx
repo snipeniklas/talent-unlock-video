@@ -60,7 +60,7 @@ const HowWeWork = () => {
     "Geprüfte Qualität: Alle Kandidaten durchlaufen unseren Screening-Prozess",
     "Flexible Arbeitsmodelle: Vollzeit, Teilzeit oder projektbasiert",
     "Transparente Kommunikation: Regelmäßige Updates und Feedback",
-    "Kultureller Fit: Deutsche und europäische Kandidaten mit ähnlicher Arbeitskultur",
+    "Kultureller Fit: Internationale Remote-Kandidaten mit passender Arbeitskultur",
     "Rechtssicherheit: Alle arbeitsrechtlichen Aspekte sind abgedeckt"
   ];
 

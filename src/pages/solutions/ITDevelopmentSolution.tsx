@@ -82,10 +82,10 @@ const ITDevelopmentSolution = () => {
   ];
 
   const benefits = [
-    "Zugang zu Top-Entwicklern aus Deutschland und Europa",
+    "Zugang zu Top-Entwicklern international",
     "Flexible Team-Zusammenstellung je nach Projektanforderungen",
     "Agile Arbeitsweise und moderne Entwicklungspraktiken",
-    "Deutsche Zeitzone und Sprachkenntnisse",
+    "Optimale Zeitzone-Abdeckung für Remote-Zusammenarbeit",
     "Schneller Projektstart: Entwickler in 1-2 Wochen einsatzbereit",
     "Keine Recruiting-Kosten oder HR-Aufwände"
   ];
@@ -110,7 +110,7 @@ const ITDevelopmentSolution = () => {
               Erfahrene Remote-Entwickler für Ihre IT-Projekte
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Verstärken Sie Ihr IT-Team mit qualifizierten Remote-Entwicklern aus Deutschland und Europa. 
+              Verstärken Sie Ihr IT-Team mit qualifizierten internationalen Remote-Entwicklern. 
               Von Full-Stack Development bis DevOps - wir haben die Experten für Ihr Projekt.
             </p>
             <Button size="lg" className="text-lg px-8 bg-primary text-white hover:bg-primary-hover">

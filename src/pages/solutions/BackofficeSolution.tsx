@@ -60,7 +60,7 @@ const BackofficeSolution = () => {
   const benefits = [
     "Bis zu 60% Kosteneinsparung gegenüber lokalen Vollzeitkräften",
     "Flexible Skalierung je nach Bedarf (Stunden, Tage, Monate)",
-    "Deutsche Sprachkenntnisse und EU-Zeitzone",
+    "Internationale Remote-Fachkräfte mit optimaler Zeitzone-Abdeckung",
     "Schneller Start: Einsatzbereit in 1-2 Wochen",
     "Keine HR-Aufwände: Wir übernehmen Recruiting und Betreuung",
     "Backup-Lösungen bei Ausfall verfügbar"
