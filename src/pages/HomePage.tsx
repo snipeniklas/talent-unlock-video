@@ -211,11 +211,11 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-20 px-4">
+      {/* Solutions Section */}
+      <section id="solutions" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Unsere Services</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Unsere Lösungen</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-delay-1">
               Maßgeschneiderte Lösungen für Ihre KI-Projekte und Entwicklerbedarfe
             </p>
@@ -254,6 +254,63 @@ const HomePage = () => {
                       </li>
                     ))}
                   </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Working Method Section */}
+      <section id="working-method" className="py-20 bg-gradient-subtle px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">So arbeiten wir</h2>
+            <p className="text-xl text-muted-foreground animate-fade-in-delay-1">
+              Vier Schritte zu Ihrem Erfolg
+            </p>
+          </div>
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { step: "01", title: "Bedarfsanalyse", desc: "Verstehen Ihrer Anforderungen" },
+              { step: "02", title: "Team-Matching", desc: "Passende Experten finden" },
+              { step: "03", title: "Onboarding & Ramp-Up", desc: "Schneller Projektstart" },
+              { step: "04", title: "Kontinuierliche Optimierung", desc: "Erfolg sicherstellen" }
+            ].map((item, index) => (
+              <div key={index} className="text-center group hover:scale-105 transition-transform duration-300">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl group-hover:animate-bounce">
+                  {item.step}
+                </div>
+                <h3 className="text-lg font-semibold text-brand-dark mb-2">{item.title}</h3>
+                <p className="text-muted-foreground">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Use Cases Section */}
+      <section id="use-cases" className="py-20 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Use Cases</h2>
+            <p className="text-xl text-muted-foreground animate-fade-in-delay-1">
+              Erfolgreiche Projekte aus verschiedenen Bereichen
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { title: "Prozessautomation im Finanzwesen", result: "40% Zeitersparnis", company: "FinTech Startup" },
+              { title: "KI-gestützte Kundenbetreuung", result: "95% Vorhersagegenauigkeit", company: "E-Commerce" },
+              { title: "Skalierbare Microservices", result: "50% schnellere Releases", company: "Tech Scale-up" }
+            ].map((useCase, index) => (
+              <Card key={index} className="p-6 hover:shadow-xl transition-all duration-300 group hover:scale-105">
+                <CardHeader>
+                  <CardTitle className="text-lg group-hover:text-primary transition-colors">{useCase.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-primary mb-2">{useCase.result}</div>
+                  <div className="text-muted-foreground">{useCase.company}</div>
                 </CardContent>
               </Card>
             ))}
