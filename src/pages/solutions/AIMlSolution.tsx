@@ -300,13 +300,13 @@ const AIMlSolution = () => {
             Sprechen Sie mit uns über Ihre KI-Visionen. Wir finden die passenden Remote-Experten für Ihr AI-Projekt.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
+            <Button asChild size="lg" className="text-lg px-8 bg-primary text-white hover:bg-primary-hover">
               <Link to="/app/search-requests/new">
                 <Phone className="w-5 h-5 mr-2" />
-                Suchauftrag kostenlos erstellen
+                RaaS Anfrage erstellen
               </Link>
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8">
+            <Button variant="outline" size="lg" className="text-lg px-8 border-2 border-primary bg-white text-primary hover:bg-primary hover:text-white">
               KI-Experten kennenlernen
             </Button>
           </div>
