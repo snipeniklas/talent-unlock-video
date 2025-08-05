@@ -9,6 +9,7 @@ import AuthPage from "./pages/AuthPage";
 import AppLayout from "./layouts/AppLayout";
 import Dashboard from "./pages/app/Dashboard";
 import SearchRequests from "./pages/app/SearchRequests";
+import NewSearchRequest from "./pages/app/NewSearchRequest";
 import Specialists from "./pages/app/Specialists";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/app" element={<AppLayout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="search-requests" element={<SearchRequests />} />
+            <Route path="search-requests/new" element={<NewSearchRequest />} />
             <Route path="specialists" element={<Specialists />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
