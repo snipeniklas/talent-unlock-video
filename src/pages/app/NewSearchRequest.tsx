@@ -24,6 +24,7 @@ import { de } from 'date-fns/locale';
 import { CalendarIcon, X, Plus, ArrowLeft, Save } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { supabase } from '@/integrations/supabase/client';
 
 const NewSearchRequest = () => {
   const navigate = useNavigate();
@@ -84,8 +85,55 @@ const NewSearchRequest = () => {
     setIsSubmitting(true);
 
     try {
-      // Here you would normally save to the database
-      // For now, just show success and redirect
+      // Get current user and their company
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        throw new Error('Not authenticated');
+      }
+
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('company_id')
+        .eq('user_id', user.id)
+        .single();
+
+      if (!profile?.company_id) {
+        throw new Error('No company found for user');
+      }
+
+      // Parse budget into salary_min and salary_max
+      let salary_min = null;
+      let salary_max = null;
+      if (formData.budget) {
+        const budgetMatch = formData.budget.match(/(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)/);
+        if (budgetMatch) {
+          salary_min = parseInt(budgetMatch[1].replace(/\./g, ''));
+          salary_max = parseInt(budgetMatch[2].replace(/\./g, ''));
+        }
+      }
+
+      // Create search request
+      const { error } = await supabase
+        .from('search_requests')
+        .insert({
+          title: formData.title,
+          description: formData.description,
+          location: formData.location,
+          employment_type: formData.workType,
+          experience_level: formData.experienceLevel,
+          salary_min,
+          salary_max,
+          requirements: formData.requirements,
+          skills_required: formData.requiredSkills,
+          company_id: profile.company_id,
+          created_by: user.id,
+          status: 'active'
+        });
+
+      if (error) {
+        console.error('Database error:', error);
+        throw error;
+      }
       
       toast({
         title: "Suchauftrag erstellt",
@@ -94,6 +142,7 @@ const NewSearchRequest = () => {
       
       navigate('/app/search-requests');
     } catch (error) {
+      console.error('Error creating search request:', error);
       toast({
         title: "Fehler",
         description: "Beim Erstellen des Suchauftrags ist ein Fehler aufgetreten.",
