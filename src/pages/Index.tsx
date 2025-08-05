@@ -1,7 +1,7 @@
-import HeyTalentLanding from './HeyTalentLanding';
+import HomePage from './HomePage';
 
 const Index = () => {
-  return <HeyTalentLanding />;
+  return <HomePage />;
 };
 
 export default Index;
