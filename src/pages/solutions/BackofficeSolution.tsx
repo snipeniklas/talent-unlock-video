@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -93,13 +94,15 @@ const BackofficeSolution = () => {
               Buchhaltung und operative Aufgaben. Flexibel, kostengünstig und sofort einsatzbereit.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
-                <Phone className="w-6 h-6 mr-3" />
-                Remote Backoffice-Kräfte finden
-                <ArrowRight className="w-6 h-6 ml-3" />
+              <Button asChild size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
+                <Link to="/app/search-requests/new">
+                  <Phone className="w-6 h-6 mr-3" />
+                  Suchauftrag kostenlos erstellen
+                  <ArrowRight className="w-6 h-6 ml-3" />
+                </Link>
               </Button>
               <Button variant="outline" size="lg" className="text-xl px-12 py-6 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105">
-                Kostenlose Beratung buchen
+                Remote Backoffice-Kräfte entdecken
               </Button>
             </div>
           </div>
@@ -214,9 +217,11 @@ const BackofficeSolution = () => {
             Sprechen Sie mit uns über Ihre Anforderungen. Wir finden die passenden Remote-Fachkräfte für Ihr Backoffice.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="text-xl px-12 py-6 bg-white text-primary hover:bg-white/90 hover:shadow-xl hover:scale-105 transition-all duration-300">
-              <Phone className="w-6 h-6 mr-3" />
-              Kostenloses Beratungsgespräch
+            <Button asChild size="lg" className="text-xl px-12 py-6 bg-white text-primary hover:bg-white/90 hover:shadow-xl hover:scale-105 transition-all duration-300">
+              <Link to="/app/search-requests/new">
+                <Phone className="w-6 h-6 mr-3" />
+                Suchauftrag kostenlos erstellen
+              </Link>
             </Button>
             <Button variant="outline" size="lg" className="text-xl px-12 py-6 border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105">
               Remote-Fachkräfte kennenlernen

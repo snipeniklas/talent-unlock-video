@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Users, Code, Shield } from "lucide-react";
@@ -113,9 +113,11 @@ const SolutionsOverview = () => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Lassen Sie uns in einem kostenlosen Beratungsgespräch gemeinsam die passenden Remote-Experten für Ihre Herausforderungen finden.
           </p>
-          <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-            Kostenloses Beratungsgespräch buchen
-            <ArrowRight className="w-5 h-5 ml-2" />
+          <Button asChild size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
+            <Link to="/app/search-requests/new">
+              Suchauftrag kostenlos erstellen
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Link>
           </Button>
         </div>
       </section>

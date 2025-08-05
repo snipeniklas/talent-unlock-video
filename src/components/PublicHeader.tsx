@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import heyTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
@@ -28,8 +28,8 @@ const PublicHeader = () => {
             <Button variant="outline" asChild className="hidden md:inline-flex">
               <a href="/auth">Login</a>
             </Button>
-            <Button className="bg-primary hover:bg-primary-hover">
-              Kostenloses Strategiegespräch
+            <Button asChild className="bg-primary hover:bg-primary-hover">
+              <Link to="/app/search-requests/new">Suchauftrag kostenlos erstellen</Link>
             </Button>
           </div>
         </div>

@@ -72,11 +72,11 @@ const ContactCTA = () => {
           </div>
           
           <Card className="shadow-lg border-0">
-            <CardHeader>
-              <CardTitle className="text-2xl text-brand-dark">Kostenlose Beratung anfragen</CardTitle>
-              <p className="text-muted-foreground">
-                Erzählen Sie uns von Ihrem Projekt und wir melden uns binnen 24 Stunden
-              </p>
+             <CardHeader>
+               <CardTitle className="text-2xl text-brand-dark">Suchauftrag kostenlos erstellen</CardTitle>
+               <p className="text-muted-foreground">
+                 Erzählen Sie uns von Ihrem Projekt und wir melden uns binnen 24 Stunden
+               </p>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -109,10 +109,12 @@ const HomePage = () => {
             
             {/* Primary CTA */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-slide-up-delay-3">
-              <Button size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
-                <Phone className="w-6 h-6 mr-3" />
-                Kostenloses Beratungsgespräch
-                <ArrowRight className="w-6 h-6 ml-3" />
+              <Button asChild size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
+                <Link to="/app/search-requests/new">
+                  <Phone className="w-6 h-6 mr-3" />
+                  Suchauftrag kostenlos erstellen
+                  <ArrowRight className="w-6 h-6 ml-3" />
+                </Link>
               </Button>
               <Button 
                 variant="outline" 
@@ -406,15 +408,17 @@ const HomePage = () => {
 
             <Card className="p-6 hover:shadow-xl transition-all duration-500 animate-slide-in-right hover:scale-105">
               <CardHeader className="p-0 pb-6">
-                <CardTitle className="text-brand-dark">Kostenlose Beratung anfragen</CardTitle>
+                <CardTitle className="text-brand-dark">Suchauftrag kostenlos erstellen</CardTitle>
                 <CardDescription>
                   Erzählen Sie uns von Ihrem Projekt und wir melden uns binnen 24 Stunden
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-0">
-                <Button className="w-full bg-primary hover:bg-primary-hover animate-pulse-glow" size="lg">
-                  Jetzt Beratung anfragen
-                  <ArrowRight className="w-5 h-5 ml-2" />
+                <Button asChild className="w-full bg-primary hover:bg-primary-hover animate-pulse-glow" size="lg">
+                  <Link to="/app/search-requests/new">
+                    Suchauftrag kostenlos erstellen
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Link>
                 </Button>
               </CardContent>
             </Card>

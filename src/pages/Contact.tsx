@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -60,7 +61,7 @@ const Contact = () => {
             
             <Card>
               <CardHeader>
-                <CardTitle>Kostenloses Beratungsgespräch</CardTitle>
+                <CardTitle>Suchauftrag kostenlos erstellen</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
@@ -71,9 +72,11 @@ const Contact = () => {
                 <Input placeholder="Unternehmen" />
                 <Input placeholder="Telefon" />
                 <Textarea placeholder="Beschreiben Sie Ihren Remote-Fachkräfte-Bedarf..." className="h-32" />
-                <Button className="w-full bg-primary hover:bg-primary-hover">
-                  Beratungstermin anfragen
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                <Button asChild className="w-full bg-primary hover:bg-primary-hover">
+                  <Link to="/app/search-requests/new">
+                    Suchauftrag kostenlos erstellen
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
                 </Button>
               </CardContent>
             </Card>

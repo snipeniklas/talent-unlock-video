@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -386,13 +387,15 @@ const HeyTalentLanding = () => {
                 wie wir Ihnen helfen können.
               </p>
               <Button
+                asChild
                 variant="secondary"
                 size="xl"
                 className="bg-white text-primary hover:bg-gray-100 animate-bounce-in-delay-2 hover:scale-105 transition-all duration-300"
-                onClick={() => window.open('https://calendly.com/heytalent', '_blank')}
               >
-                <Calendar className="w-5 h-5 mr-2 animate-bounce" />
-                Beratungsgespräch buchen
+                <Link to="/app/search-requests/new">
+                  <Calendar className="w-5 h-5 mr-2 animate-bounce" />
+                  Suchauftrag kostenlos erstellen
+                </Link>
               </Button>
             </div>
           </div>
