@@ -283,7 +283,11 @@ const SearchRequests = () => {
                     <Eye className="w-4 h-4 mr-2" />
                     Details ansehen
                   </Button>
-                  <Button size="sm" variant="outline">
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    onClick={() => navigate(`/app/search-requests/${request.id}/applicants`)}
+                  >
                     Bewerber verwalten ({request.applicants})
                   </Button>
                   {request.status === 'active' && (
