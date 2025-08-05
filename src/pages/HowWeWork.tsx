@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Search, Users, Rocket, TrendingUp, CheckCircle } from "lucide-react";
+import { ArrowRight, Search, Users, Rocket, TrendingUp, CheckCircle, Clock } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
@@ -72,51 +72,73 @@ const HowWeWork = () => {
       </section>
 
       {/* Process Steps */}
-      <section className="py-16">
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid gap-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
+                Unser <span className="text-primary">RaaS</span> Prozess in 4 Schritten
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Von der Anfrage bis zur erfolgreichen Zusammenarbeit - so einfach funktioniert es
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12">
               {steps.map((step, index) => (
-                <div key={index} className="group">
-                  <Card className="transition-all duration-300 hover:shadow-xl hover:scale-[1.02] border-2 hover:border-primary">
-                    <div className="grid md:grid-cols-12 gap-6 p-8">
-                      {/* Step Number & Icon */}
-                      <div className="md:col-span-2 flex flex-col items-center">
-                        <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-2xl mb-4 group-hover:animate-bounce">
+                <div key={index} className="group relative">
+                  {/* Step Card */}
+                  <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-100 hover:border-primary/20 relative overflow-hidden">
+                    {/* Background decoration */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-primary opacity-5 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
+                    
+                    {/* Step header */}
+                    <div className="flex items-start gap-6 mb-6">
+                      <div className="flex-shrink-0">
+                        <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-3 group-hover:animate-bounce shadow-lg">
                           {step.step}
                         </div>
-                        <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <step.icon className="w-6 h-6 text-white" />
+                        <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto group-hover:bg-primary/10 transition-colors">
+                          <step.icon className="w-6 h-6 text-primary" />
                         </div>
                       </div>
-
-                      {/* Content */}
-                      <div className="md:col-span-8">
+                      
+                      <div className="flex-1 min-w-0">
                         <h3 className="text-2xl font-bold text-brand-dark mb-2 group-hover:text-primary transition-colors">
                           {step.title}
                         </h3>
-                        <p className="text-lg text-muted-foreground mb-4 font-medium">
+                        <p className="text-lg text-primary font-semibold mb-3">
                           {step.description}
                         </p>
-                        <p className="text-muted-foreground leading-relaxed">
-                          {step.details}
-                        </p>
-                      </div>
-
-                      {/* Timeline */}
-                      <div className="md:col-span-2 flex flex-col justify-center">
-                        <div className="bg-gradient-subtle rounded-lg p-4 text-center">
-                          <div className="text-sm text-muted-foreground mb-1">Dauer</div>
-                          <div className="font-semibold text-brand-dark">{step.timeline}</div>
+                        <div className="inline-flex items-center gap-2 bg-gray-100 rounded-full px-4 py-2 text-sm font-medium text-gray-600">
+                          <Clock className="w-4 h-4" />
+                          {step.timeline}
                         </div>
                       </div>
                     </div>
-                  </Card>
+                    
+                    {/* Step details */}
+                    <div className="relative z-10">
+                      <p className="text-gray-600 leading-relaxed text-lg">
+                        {step.details}
+                      </p>
+                    </div>
+
+                    {/* Step indicator line for connected flow */}
+                    {index < 2 && (
+                      <div className="hidden lg:block absolute -right-6 top-1/2 w-12 h-0.5 bg-gradient-primary opacity-30"></div>
+                    )}
+                    {index === 1 && (
+                      <div className="hidden lg:block absolute -bottom-6 left-1/2 w-0.5 h-12 bg-gradient-primary opacity-30"></div>
+                    )}
+                  </div>
                   
-                  {/* Connector Arrow */}
+                  {/* Mobile connector arrow */}
                   {index < steps.length - 1 && (
-                    <div className="flex justify-center py-4">
-                      <ArrowRight className="w-8 h-8 text-primary animate-bounce" />
+                    <div className="flex lg:hidden justify-center py-6">
+                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                        <ArrowRight className="w-4 h-4 text-white" />
+                      </div>
                     </div>
                   )}
                 </div>
