@@ -315,18 +315,11 @@ const HomePage = () => {
             />
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Candidate Overview */}
-            <InteractiveAppScreen
-              title="Verfügbare Ressourcen"
-              description="Entdecken Sie unsere qualifizierten Remote-Ressourcen"
-              screen="resources"
-            />
-
-            {/* Additional Resource Overview */}
+          <div className="grid lg:grid-cols-1 gap-8 max-w-2xl mx-auto">
+            {/* Resource Overview */}
             <InteractiveAppScreen
               title="Ressourcen-Übersicht"
-              description="Vollständige Übersicht aller verfügbaren Remote-Ressourcen"
+              description="Entdecken Sie von HeyTalent bereitgestellte Remote-Ressourcen für Ihre Projekte"
               screen="resources"
             />
           </div>
