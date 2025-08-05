@@ -27,6 +27,8 @@ import HowWeWork from "./pages/HowWeWork";
 import ResourceHub from "./pages/ResourceHub";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Support from "./pages/app/Support";
+import AdminSupport from "./pages/admin/AdminSupport";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +57,7 @@ const App = () => (
             <Route path="search-requests/:id/applicants" element={<ApplicantManagement />} />
             <Route path="specialists" element={<Specialists />} />
             <Route path="specialists/:id" element={<SpecialistDetail />} />
+            <Route path="support" element={<Support />} />
           </Route>
           
           {/* Admin Routes mit AppLayout */}
@@ -63,6 +66,7 @@ const App = () => (
             <Route path="resources" element={<ResourceManagement />} />
             <Route path="search-requests" element={<AdminSearchRequests />} />
             <Route path="companies" element={<CompanyManagement />} />
+            <Route path="support" element={<AdminSupport />} />
             <Route path="settings" element={<AdminSettings />} />
           </Route>
           

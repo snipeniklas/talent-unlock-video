@@ -10,7 +10,8 @@ import {
   UserCheck,
   Plus,
   FileText,
-  Shield
+  Shield,
+  MessageCircle
 } from "lucide-react";
 import {
   Sidebar,
@@ -98,6 +99,7 @@ export function AppSidebar() {
     { title: "Dashboard", url: "/app/dashboard", icon: Home },
     { title: "Suchaufträge", url: "/app/search-requests", icon: Search },
     { title: "Spezialisten", url: "/app/specialists", icon: Users },
+    { title: "Support Chat", url: "/app/support", icon: MessageCircle },
     { title: "Einstellungen", url: "/app/settings", icon: Settings },
   ];
 
@@ -107,6 +109,7 @@ export function AppSidebar() {
     { title: "Alle Unternehmen", url: "/admin/companies", icon: Building2 },
     { title: "RaaS Ressourcen", url: "/admin/resources", icon: UserCheck },
     { title: "Kundenprojekte", url: "/admin/search-requests", icon: FileText },
+    { title: "Support Chat", url: "/admin/support", icon: MessageCircle },
     { title: "Benutzerverwaltung", url: "/admin/settings", icon: Settings },
   ];
 
