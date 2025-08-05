@@ -132,8 +132,8 @@ const AIMlSolution = () => {
               Realisieren Sie Ihre KI-Visionen mit erstklassigen Remote-Spezialisten. 
               Von Machine Learning bis Computer Vision - wir haben die Experten für Ihr Projekt.
             </p>
-            <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-              Remote KI-Experten finden
+            <Button size="lg" className="text-lg px-8 bg-primary text-white hover:bg-primary-hover">
+              RaaS Anfrage erstellen
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </div>
