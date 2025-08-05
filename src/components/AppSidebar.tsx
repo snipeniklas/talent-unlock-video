@@ -103,11 +103,11 @@ export function AppSidebar() {
 
   // Admin Navigation Items
   const adminItems = [
-    { title: "Admin Dashboard", url: "/app/admin/dashboard", icon: Shield },
-    { title: "Alle Unternehmen", url: "/app/admin/companies", icon: Building2 },
-    { title: "Alle Spezialisten", url: "/app/admin/specialists", icon: UserCheck },
-    { title: "Suchaufträge", url: "/app/admin/search-requests", icon: FileText },
-    { title: "System Einstellungen", url: "/app/admin/settings", icon: Settings },
+    { title: "Admin Dashboard", url: "/admin/dashboard", icon: Shield },
+    { title: "Alle Unternehmen", url: "/admin/companies", icon: Building2 },
+    { title: "Alle Spezialisten", url: "/admin/candidates", icon: UserCheck },
+    { title: "Suchaufträge", url: "/admin/search-requests", icon: FileText },
+    { title: "System Einstellungen", url: "/admin/settings", icon: Settings },
   ];
 
   if (loading) {
