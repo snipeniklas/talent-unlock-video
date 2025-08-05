@@ -83,77 +83,87 @@ const HowWeWork = () => {
       </section>
 
       {/* Detailed RaaS Explanation */}
-      <section className="py-16 bg-white">
+      <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 text-justify leading-relaxed">
-              {/* Left Column */}
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-brand-dark mb-6 border-b-2 border-primary/20 pb-3">
-                  RaaS - Ein revolutionäres Servicekonzept
-                </h3>
-                <p className="text-gray-700 text-lg">
-                  <span className="font-semibold text-primary">Resources as a Service (RaaS)</span> ist mehr als nur eine 
-                  moderne Bezeichnung – es ist ein grundlegend anderer Ansatz zur Bereitstellung von Fachkräften. 
-                  Im Gegensatz zu traditionellen Personalvermittlungen oder Zeitarbeitsfirmen schließen Sie bei uns 
-                  <span className="font-semibold"> keinen Arbeitsvertrag</span>, sondern einen flexiblen 
-                  <span className="font-semibold text-primary"> Dienstleistungsvertrag</span>.
-                </p>
-                <p className="text-gray-700 text-lg">
-                  Diese Unterscheidung ist entscheidend: Während Arbeitsverhältnisse starre Strukturen, 
-                  Kündigungsfristen und umfangreiche arbeitsrechtliche Verpflichtungen mit sich bringen, 
-                  bietet unser RaaS-Modell <span className="font-semibold">maximale Flexibilität</span>. 
-                  Sie erhalten genau die Expertise, die Sie benötigen – wann Sie sie benötigen.
-                </p>
-                <p className="text-gray-700 text-lg">
-                  Unsere Remote-Fachkräfte sind nicht Ihre Angestellten, sondern spezialisierte 
-                  <span className="font-semibold text-primary"> Dienstleistungspartner</span>, die nahtlos 
-                  in Ihre Projektstrukturen integriert werden. Das bedeutet: keine Lohnnebenkosten, 
-                  keine Sozialversicherungsbeiträge, keine Urlaubsansprüche oder Krankheitsausfälle 
-                  auf Ihrer Seite.
-                </p>
-                <p className="text-gray-700 text-lg">
-                  Die Vorteile sind messbar: <span className="font-semibold">Bis zu 60% Kosteneinsparung</span> 
-                  gegenüber lokalen Vollzeitkräften, <span className="font-semibold">100% planbare Budgets</span> 
-                  ohne versteckte Personalkosten und die Möglichkeit, 
-                  <span className="font-semibold text-primary"> sofort zu skalieren</span> – nach oben oder unten.
-                </p>
-              </div>
+            <Card className="border-0 shadow-xl bg-gradient-to-r from-white via-gray-50/50 to-white">
+              <CardContent className="p-8 lg:p-12">
+                <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+                  {/* Left Column */}
+                  <div className="space-y-6">
+                    <h3 className="text-2xl font-bold text-brand-dark mb-6 flex items-center gap-3">
+                      <div className="w-1 h-8 bg-gradient-primary rounded-full"></div>
+                      RaaS - Ein revolutionäres Servicekonzept
+                    </h3>
+                    <p className="text-muted-foreground text-lg leading-relaxed">
+                      <span className="font-semibold text-primary">Resources as a Service (RaaS)</span> ist mehr als nur eine 
+                      moderne Bezeichnung – es ist ein grundlegend anderer Ansatz zur Bereitstellung von Fachkräften. 
+                      Im Gegensatz zu traditionellen Personalvermittlungen oder Zeitarbeitsfirmen schließen Sie bei uns 
+                      <span className="font-semibold"> keinen Arbeitsvertrag</span>, sondern einen flexiblen 
+                      <span className="font-semibold text-primary"> Dienstleistungsvertrag</span>.
+                    </p>
+                    <p className="text-muted-foreground text-lg leading-relaxed">
+                      Diese Unterscheidung ist entscheidend: Während Arbeitsverhältnisse starre Strukturen, 
+                      Kündigungsfristen und umfangreiche arbeitsrechtliche Verpflichtungen mit sich bringen, 
+                      bietet unser RaaS-Modell <span className="font-semibold">maximale Flexibilität</span>. 
+                      Sie erhalten genau die Expertise, die Sie benötigen – wann Sie sie benötigen.
+                    </p>
+                    <p className="text-muted-foreground text-lg leading-relaxed">
+                      Unsere Remote-Fachkräfte sind nicht Ihre Angestellten, sondern spezialisierte 
+                      <span className="font-semibold text-primary"> Dienstleistungspartner</span>, die nahtlos 
+                      in Ihre Projektstrukturen integriert werden. Das bedeutet: keine Lohnnebenkosten, 
+                      keine Sozialversicherungsbeiträge, keine Urlaubsansprüche oder Krankheitsausfälle 
+                      auf Ihrer Seite.
+                    </p>
+                    <div className="bg-primary/5 border-l-4 border-primary p-4 rounded-r-lg">
+                      <p className="text-muted-foreground text-lg font-medium">
+                        Die Vorteile sind messbar: <span className="font-bold text-primary">Bis zu 60% Kosteneinsparung</span> 
+                        gegenüber lokalen Vollzeitkräften, <span className="font-bold">100% planbare Budgets</span> 
+                        ohne versteckte Personalkosten und die Möglichkeit, 
+                        <span className="font-bold text-primary"> sofort zu skalieren</span> – nach oben oder unten.
+                      </p>
+                    </div>
+                  </div>
 
-              {/* Right Column */}
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-brand-dark mb-6 border-b-2 border-primary/20 pb-3">
-                  Internationale Expertise ohne Grenzen
-                </h3>
-                <p className="text-gray-700 text-lg">
-                  Unser globales Netzwerk umfasst über <span className="font-semibold text-primary">500+ 
-                  geprüfte Remote-Fachkräfte</span> aus verschiedenen Zeitzonen und Kulturen. 
-                  Diese Vielfalt ist kein Zufall, sondern strategischer Vorteil: Sie erhalten Zugang 
-                  zu Talenten und Perspektiven, die lokal nicht verfügbar wären.
-                </p>
-                <p className="text-gray-700 text-lg">
-                  Jede unserer Remote-Ressourcen durchläuft einen <span className="font-semibold">
-                  mehrstufigen Qualifizierungsprozess</span>: Technische Skills-Tests, 
-                  Sprachkompetenz-Prüfungen, Referenz-Validierung und kulturelle Kompatibilitäts-Bewertung. 
-                  Das Ergebnis: <span className="font-semibold text-primary">98% Kundenzufriedenheit</span> 
-                  und eine durchschnittliche Projektfortführungsrate von über 90%.
-                </p>
-                <p className="text-gray-700 text-lg">
-                  Besonders wertvoll ist unsere <span className="font-semibold text-primary">
-                  24/7-Verfügbarkeit</span> durch internationale Zeitzonen-Abdeckung. 
-                  Während Ihr deutsches Team schläft, arbeiten unsere Ressourcen in anderen 
-                  Zeitzonen weiter an Ihren Projekten – ein kontinuierlicher Produktivitätsgewinn.
-                </p>
-                <p className="text-gray-700 text-lg">
-                  Die rechtliche Struktur ist dabei kristallklar: <span className="font-semibold">
-                  Wir übernehmen die vollständige Verantwortung</span> für unsere Remote-Fachkräfte – 
-                  von der Vertragsgestaltung über die Qualitätssicherung bis hin zur Backup-Planung 
-                  bei Ausfällen. Sie konzentrieren sich ausschließlich auf Ihr Kerngeschäft, 
-                  während wir die <span className="font-semibold text-primary">operative Exzellenz</span> 
-                  Ihrer erweiterten Remote-Teams gewährleisten.
-                </p>
-              </div>
-            </div>
+                  {/* Right Column */}
+                  <div className="space-y-6">
+                    <h3 className="text-2xl font-bold text-brand-dark mb-6 flex items-center gap-3">
+                      <div className="w-1 h-8 bg-gradient-primary rounded-full"></div>
+                      Internationale Expertise ohne Grenzen
+                    </h3>
+                    <p className="text-muted-foreground text-lg leading-relaxed">
+                      Unser globales Netzwerk umfasst über <span className="font-semibold text-primary">500+ 
+                      geprüfte Remote-Fachkräfte</span> aus verschiedenen Zeitzonen und Kulturen. 
+                      Diese Vielfalt ist kein Zufall, sondern strategischer Vorteil: Sie erhalten Zugang 
+                      zu Talenten und Perspektiven, die lokal nicht verfügbar wären.
+                    </p>
+                    <p className="text-muted-foreground text-lg leading-relaxed">
+                      Jede unserer Remote-Ressourcen durchläuft einen <span className="font-semibold">
+                      mehrstufigen Qualifizierungsprozess</span>: Technische Skills-Tests, 
+                      Sprachkompetenz-Prüfungen, Referenz-Validierung und kulturelle Kompatibilitäts-Bewertung. 
+                      Das Ergebnis: <span className="font-semibold text-primary">98% Kundenzufriedenheit</span> 
+                      und eine durchschnittliche Projektfortführungsrate von über 90%.
+                    </p>
+                    <p className="text-muted-foreground text-lg leading-relaxed">
+                      Besonders wertvoll ist unsere <span className="font-semibold text-primary">
+                      24/7-Verfügbarkeit</span> durch internationale Zeitzonen-Abdeckung. 
+                      Während Ihr deutsches Team schläft, arbeiten unsere Ressourcen in anderen 
+                      Zeitzonen weiter an Ihren Projekten – ein kontinuierlicher Produktivitätsgewinn.
+                    </p>
+                    <div className="bg-secondary/5 border-l-4 border-secondary p-4 rounded-r-lg">
+                      <p className="text-muted-foreground text-lg font-medium">
+                        Die rechtliche Struktur ist dabei kristallklar: <span className="font-bold">
+                        Wir übernehmen die vollständige Verantwortung</span> für unsere Remote-Fachkräfte – 
+                        von der Vertragsgestaltung über die Qualitätssicherung bis hin zur Backup-Planung 
+                        bei Ausfällen. Sie konzentrieren sich ausschließlich auf Ihr Kerngeschäft, 
+                        während wir die <span className="font-bold text-primary">operative Exzellenz</span> 
+                        Ihrer erweiterten Remote-Teams gewährleisten.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
