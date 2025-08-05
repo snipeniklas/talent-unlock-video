@@ -6,6 +6,7 @@ import { ArrowRight, Search, Users, Rocket, TrendingUp, CheckCircle } from "luci
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
+import InteractiveAppScreen from "@/components/InteractiveAppScreen";
 
 const HowWeWork = () => {
   const steps = [
@@ -120,6 +121,96 @@ const HowWeWork = () => {
                   )}
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Process Demo */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">
+              Erleben Sie den RaaS-Prozess in Aktion
+            </h2>
+            <p className="text-xl text-muted-foreground text-center mb-16 max-w-3xl mx-auto">
+              Sehen Sie, wie unsere Plattform jeden Schritt des Prozesses unterstützt und vereinfacht.
+            </p>
+            
+            <div className="grid lg:grid-cols-2 gap-12 mb-12">
+              {/* Step 1: Request Creation */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    01
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-brand-dark">RaaS Anfrage erstellen</h3>
+                    <p className="text-muted-foreground">Definieren Sie Ihre Anforderungen</p>
+                  </div>
+                </div>
+                <InteractiveAppScreen
+                  title="Neue RaaS Anfrage"
+                  description="Starten Sie hier Ihre RaaS-Anfrage mit wenigen Klicks"
+                  screen="dashboard"
+                />
+              </div>
+
+              {/* Step 2: Dashboard Overview */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    02
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-brand-dark">Prozess verfolgen</h3>
+                    <p className="text-muted-foreground">Behalten Sie den Überblick</p>
+                  </div>
+                </div>
+                <InteractiveAppScreen
+                  title="Projekt Dashboard"
+                  description="Verfolgen Sie den Fortschritt Ihrer RaaS-Anfragen"
+                  screen="dashboard"
+                />
+              </div>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12">
+              {/* Step 3: Resource Selection */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    03
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-brand-dark">Ressourcen entdecken</h3>
+                    <p className="text-muted-foreground">Finden Sie passende Experten</p>
+                  </div>
+                </div>
+                <InteractiveAppScreen
+                  title="Verfügbare Ressourcen"
+                  description="Entdecken Sie qualifizierte Remote-Experten für Ihr Projekt"
+                  screen="resources"
+                />
+              </div>
+
+              {/* Step 4: Request Management */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    04
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-brand-dark">Anfragen verwalten</h3>
+                    <p className="text-muted-foreground">Koordination & Follow-up</p>
+                  </div>
+                </div>
+                <InteractiveAppScreen
+                  title="RaaS Anfragen Übersicht"
+                  description="Verwalten Sie alle Ihre aktiven und vergangenen Anfragen"
+                  screen="search-requests"
+                />
+              </div>
             </div>
           </div>
         </div>
