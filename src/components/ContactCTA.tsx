@@ -87,7 +87,7 @@ const ContactCTA = () => {
               <Input placeholder="Telefon" />
               <Textarea placeholder="Beschreiben Sie Ihren Remote-Fachkräfte-Bedarf..." className="h-32" />
               <Button className="w-full bg-gradient-primary hover:shadow-xl transition-all duration-300 text-lg py-6 border-0">
-                Jetzt Beratung anfragen
+                Jetzt kostenfrei Suchauftrag einstellen
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </CardContent>
