@@ -10,7 +10,9 @@ import AppLayout from "./layouts/AppLayout";
 import Dashboard from "./pages/app/Dashboard";
 import SearchRequests from "./pages/app/SearchRequests";
 import NewSearchRequest from "./pages/app/NewSearchRequest";
+import SearchRequestDetail from "./pages/app/SearchRequestDetail";
 import Specialists from "./pages/app/Specialists";
+import SpecialistDetail from "./pages/app/SpecialistDetail";
 import BackofficeSolution from "./pages/solutions/BackofficeSolution";
 import AIMlSolution from "./pages/solutions/AIMlSolution";
 import ITDevelopmentSolution from "./pages/solutions/ITDevelopmentSolution";
@@ -43,7 +45,9 @@ const App = () => (
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="search-requests" element={<SearchRequests />} />
             <Route path="search-requests/new" element={<NewSearchRequest />} />
+            <Route path="search-requests/:id" element={<SearchRequestDetail />} />
             <Route path="specialists" element={<Specialists />} />
+            <Route path="specialists/:id" element={<SpecialistDetail />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

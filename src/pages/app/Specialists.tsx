@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -41,6 +42,7 @@ interface Specialist {
 }
 
 const Specialists = () => {
+  const navigate = useNavigate();
   const [specialists, setSpecialists] = useState<Specialist[]>([]);
   const [filteredSpecialists, setFilteredSpecialists] = useState<Specialist[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -307,7 +309,12 @@ const Specialists = () => {
               
               {/* Actions */}
               <div className="flex gap-3 pt-4 border-t">
-                <Button size="sm" variant="outline" className="flex-1">
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  className="flex-1"
+                  onClick={() => navigate(`/app/specialists/${specialist.id}`)}
+                >
                   <Eye className="w-4 h-4 mr-2" />
                   Vollständiges Profil
                 </Button>

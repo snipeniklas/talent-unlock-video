@@ -275,7 +275,11 @@ const SearchRequests = () => {
 
                 {/* Actions */}
                 <div className="flex gap-3 pt-4 border-t">
-                  <Button size="sm" variant="outline">
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    onClick={() => navigate(`/app/search-requests/${request.id}`)}
+                  >
                     <Eye className="w-4 h-4 mr-2" />
                     Details ansehen
                   </Button>
