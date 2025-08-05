@@ -7,6 +7,7 @@ import { ArrowRight, Users, Code, Shield, Star, CheckCircle, Mail, Phone, Linked
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
+import InteractiveAppScreen from "@/components/InteractiveAppScreen";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -281,6 +282,79 @@ const HomePage = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive App Demo Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark">
+              Erleben Sie die HeyTalent Plattform
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Entdecken Sie unsere intuitive Plattform und sehen Sie, wie einfach es ist, 
+              die perfekten Remote-Fachkräfte für Ihr Unternehmen zu finden.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+            {/* Customer Dashboard */}
+            <InteractiveAppScreen
+              title="Kunden-Dashboard"
+              description="Verwalten Sie Ihre Suchaufträge und verfolgen Sie den Fortschritt Ihrer Projekte"
+              screen="dashboard"
+            />
+
+            {/* Search Requests Management */}
+            <InteractiveAppScreen
+              title="Suchaufträge verwalten"
+              description="Erstellen und verwalten Sie Ihre Anfragen für Remote-Fachkräfte"
+              screen="search-requests"
+            />
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Candidate Overview */}
+            <InteractiveAppScreen
+              title="Bewerber-Übersicht"
+              description="Entdecken Sie vorgeschlagene Bewerber und ihre Qualifikationen"
+              screen="candidates"
+            />
+
+            {/* Admin Dashboard */}
+            <InteractiveAppScreen
+              title="HeyTalent Admin-Bereich"
+              description="Vollständige Verwaltung aller Kunden, Bewerber und Zuweisungen"
+              screen="admin"
+            />
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-16">
+            <div className="bg-gradient-subtle rounded-2xl p-8">
+              <h3 className="text-2xl font-bold mb-4 text-brand-dark">
+                Bereit, Ihre Remote-Fachkräfte zu finden?
+              </h3>
+              <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+                Starten Sie noch heute und erleben Sie, wie schnell und effizient 
+                Sie die besten Remote-Talente für Ihr Unternehmen finden können.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg" className="bg-gradient-primary hover:shadow-lg border-0">
+                  <Link to="/app/search-requests/new">
+                    Kostenlos testen
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg">
+                  <Link to="/resource-hub">
+                    Zur Plattform
+                  </Link>
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
