@@ -22,8 +22,6 @@ const PublicHeader = () => {
             <button onClick={() => navigate('/solutions')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Lösungen</button>
             <button onClick={() => navigate('/how-we-work')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">So arbeiten wir</button>
             <button onClick={() => navigate('/resource-hub')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Resource Hub</button>
-            <button onClick={() => navigate('/use-cases')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Use Cases</button>
-            <button onClick={() => navigate('/about')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Über uns</button>
             <button onClick={() => navigate('/contact')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Kontakt</button>
           </div>
           <div className="flex items-center space-x-4">
