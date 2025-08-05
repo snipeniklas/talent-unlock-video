@@ -88,16 +88,27 @@ const Support = () => {
   const { data: tickets = [], isLoading: ticketsLoading } = useQuery({
     queryKey: ['supportTickets'],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data: ticketsData, error } = await supabase
         .from('support_tickets')
-        .select(`
-          *,
-          profiles!support_tickets_created_by_fkey(first_name, last_name)
-        `)
+        .select('*')
         .order('updated_at', { ascending: false });
       
       if (error) throw error;
-      return data;
+
+      // Get related profiles separately
+      const creatorIds = [...new Set(ticketsData?.map(t => t.created_by) || [])];
+      const { data: profiles } = await supabase
+        .from('profiles')
+        .select('user_id, first_name, last_name')
+        .in('user_id', creatorIds);
+
+      // Combine data
+      const ticketsWithProfiles = ticketsData?.map(ticket => ({
+        ...ticket,
+        profiles: profiles?.find(p => p.user_id === ticket.created_by)
+      }));
+      
+      return ticketsWithProfiles || [];
     }
   });
 
