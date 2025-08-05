@@ -31,17 +31,14 @@ serve(async (req) => {
       throw new Error('Missing required parameters');
     }
 
-    // Get all admin users
+    // Get all admin users with their profiles
     const { data: adminUsers, error: adminError } = await supabase
       .from('user_roles')
-      .select(`
-        user_id,
-        profiles!inner(email, first_name, last_name)
-      `)
+      .select('user_id')
       .eq('role', 'admin');
 
     if (adminError) {
-      throw new Error(`Failed to fetch admin users: ${adminError.message}`);
+      throw new Error(`Failed to fetch admin roles: ${adminError.message}`);
     }
 
     if (!adminUsers || adminUsers.length === 0) {
@@ -51,7 +48,25 @@ serve(async (req) => {
       });
     }
 
-    const adminEmails = adminUsers.map(user => user.profiles.email).filter(Boolean);
+    // Get profiles for admin users
+    const adminUserIds = adminUsers.map(user => user.user_id);
+    const { data: adminProfiles, error: profileError } = await supabase
+      .from('profiles')
+      .select('email, first_name, last_name')
+      .in('user_id', adminUserIds);
+
+    if (profileError) {
+      throw new Error(`Failed to fetch admin profiles: ${profileError.message}`);
+    }
+
+    if (!adminProfiles || adminProfiles.length === 0) {
+      console.log('No admin profiles found');
+      return new Response(JSON.stringify({ success: true, message: 'No admins to notify' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const adminEmails = adminProfiles.map(profile => profile.email).filter(Boolean);
 
     let subject = '';
     let htmlContent = '';
