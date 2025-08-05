@@ -41,13 +41,13 @@ const SolutionsOverview = () => {
     <div className="min-h-screen bg-background font-inter">
       <PublicHeader />
       {/* Hero Section */}
-      <section className="py-16 lg:py-24">
+      <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
               Unsere Remote-Fachkräfte
             </h1>
-            <p className="text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+            <p className="text-xl lg:text-2xl text-muted-foreground mb-6 max-w-3xl mx-auto">
               Qualifizierte Remote-Experten für jeden Bereich - von administrativer Unterstützung 
               bis hin zu komplexen IT- und KI-Projekten.
             </p>
@@ -56,7 +56,7 @@ const SolutionsOverview = () => {
       </section>
 
       {/* Solutions Grid */}
-      <section className="py-16">
+      <section className="pb-16">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {solutions.map((solution, index) => (
