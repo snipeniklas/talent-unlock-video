@@ -22,7 +22,7 @@ import {
 interface InteractiveScreenProps {
   title: string;
   description: string;
-  screen: "dashboard" | "search-requests" | "resources" | "admin";
+  screen: "dashboard" | "search-requests" | "resources";
 }
 
 const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, description, screen }) => {
@@ -315,8 +315,6 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
         return renderSearchRequests();
       case "resources":
         return renderResources();
-      case "admin":
-        return renderAdmin();
       default:
         return renderDashboard();
     }

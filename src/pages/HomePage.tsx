@@ -323,11 +323,11 @@ const HomePage = () => {
               screen="resources"
             />
 
-            {/* Admin Dashboard */}
+            {/* Additional Resource Overview */}
             <InteractiveAppScreen
-              title="HeyTalent Admin-Bereich"
-              description="Vollständige Verwaltung aller Kunden, Bewerber und Zuweisungen"
-              screen="admin"
+              title="Ressourcen-Übersicht"
+              description="Vollständige Übersicht aller verfügbaren Remote-Ressourcen"
+              screen="resources"
             />
           </div>
 
