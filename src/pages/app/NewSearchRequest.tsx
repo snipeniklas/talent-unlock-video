@@ -113,22 +113,27 @@ const NewSearchRequest = () => {
       }
 
       // Create search request
+      const insertData = {
+        title: formData.title,
+        description: formData.description || null,
+        location: formData.location || null,
+        employment_type: formData.workType || null,
+        experience_level: formData.experienceLevel || null,
+        salary_min,
+        salary_max,
+        requirements: formData.requirements || null,
+        skills_required: formData.requiredSkills.length > 0 ? formData.requiredSkills : null,
+        company_id: profile.company_id,
+        created_by: user.id,
+        status: 'active'
+      };
+      
+      console.log('Insert data:', insertData);
+      console.log('Employment type value:', formData.workType, 'type:', typeof formData.workType);
+      
       const { error } = await supabase
         .from('search_requests')
-        .insert({
-          title: formData.title,
-          description: formData.description || null,
-          location: formData.location || null,
-          employment_type: formData.workType || null,
-          experience_level: formData.experienceLevel || null,
-          salary_min,
-          salary_max,
-          requirements: formData.requirements || null,
-          skills_required: formData.requiredSkills.length > 0 ? formData.requiredSkills : null,
-          company_id: profile.company_id,
-          created_by: user.id,
-          status: 'active'
-        });
+        .insert(insertData);
 
       if (error) {
         console.error('Database error:', error);
