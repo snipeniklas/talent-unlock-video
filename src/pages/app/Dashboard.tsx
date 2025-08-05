@@ -55,14 +55,31 @@ const Dashboard = () => {
           setCompanyName(profileData.data.companies.name);
         }
 
-        // Here you would fetch actual stats from your tables
-        // For now, using mock data
-        setStats({
-          activeSearchRequests: 3,
-          totalSpecialists: 12,
-          completedProjects: 8,
-          pendingRequests: 2
-        });
+        // Fetch actual stats from the database
+        const { data: { user: currentUser } } = await supabase.auth.getUser();
+        if (currentUser && profileData.data?.company_id) {
+          const [searchRequestsData, resourcesData] = await Promise.all([
+            supabase
+              .from('search_requests')
+              .select('status')
+              .eq('company_id', profileData.data.company_id),
+            supabase
+              .from('resources')
+              .select('id')
+          ]);
+
+          const activeRequests = searchRequestsData.data?.filter(r => r.status === 'active').length || 0;
+          const completedRequests = searchRequestsData.data?.filter(r => r.status === 'completed').length || 0;
+          const pendingRequests = searchRequestsData.data?.filter(r => r.status === 'pending').length || 0;
+          const totalSpecialists = resourcesData.data?.length || 0;
+
+          setStats({
+            activeSearchRequests: activeRequests,
+            totalSpecialists,
+            completedProjects: completedRequests,
+            pendingRequests
+          });
+        }
 
       } catch (error) {
         console.error('Error fetching dashboard data:', error);

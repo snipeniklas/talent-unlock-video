@@ -21,22 +21,27 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface SearchRequest {
   id: string;
   title: string;
   description: string;
-  status: 'active' | 'pending' | 'completed' | 'cancelled';
+  status: string;
   location: string;
-  budget: string;
-  requiredSkills: string[];
-  applicants: number;
-  createdAt: string;
-  deadline: string;
+  employment_type: string;
+  experience_level: string;
+  salary_min: number | null;
+  salary_max: number | null;
+  skills_required: string[];
+  created_at: string;
+  company_id: string;
 }
 
 const SearchRequests = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [searchRequests, setSearchRequests] = useState<SearchRequest[]>([]);
   const [filteredRequests, setFilteredRequests] = useState<SearchRequest[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -44,50 +49,63 @@ const SearchRequests = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Mock data - replace with actual API call
-    const mockData: SearchRequest[] = [
-      {
-        id: '1',
-        title: 'Senior AI Engineer für Computer Vision Projekt',
-        description: 'Wir suchen einen erfahrenen KI-Entwickler für ein spannendes Computer Vision Projekt im Bereich autonomes Fahren.',
-        status: 'active',
-        location: 'München, Deutschland',
-        budget: '80.000 - 120.000 €',
-        requiredSkills: ['Python', 'TensorFlow', 'Computer Vision', 'Deep Learning'],
-        applicants: 12,
-        createdAt: '2024-01-15',
-        deadline: '2024-02-15'
-      },
-      {
-        id: '2',
-        title: 'Machine Learning Spezialist - NLP',
-        description: 'Für unser neues Chatbot-Projekt benötigen wir einen ML-Experten mit Fokus auf Natural Language Processing.',
-        status: 'pending',
-        location: 'Remote',
-        budget: '70.000 - 90.000 €',
-        requiredSkills: ['Python', 'NLTK', 'spaCy', 'Transformers', 'PyTorch'],
-        applicants: 8,
-        createdAt: '2024-01-10',
-        deadline: '2024-02-01'
-      },
-      {
-        id: '3',
-        title: 'Data Scientist für Predictive Analytics',
-        description: 'Entwicklung von Vorhersagemodellen für unsere E-Commerce-Plattform zur Optimierung der Kundenexperience.',
-        status: 'completed',
-        location: 'Berlin, Deutschland',
-        budget: '65.000 - 85.000 €',
-        requiredSkills: ['R', 'Python', 'SQL', 'Tableau', 'Statistics'],
-        applicants: 15,
-        createdAt: '2023-12-20',
-        deadline: '2024-01-20'
-      }
-    ];
+    const fetchSearchRequests = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+          navigate('/auth');
+          return;
+        }
 
-    setSearchRequests(mockData);
-    setFilteredRequests(mockData);
-    setLoading(false);
-  }, []);
+        // Get user's company
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('company_id')
+          .eq('user_id', user.id)
+          .single();
+
+        if (!profile?.company_id) {
+          toast({
+            title: "Fehler",
+            description: "Keine Firma gefunden. Bitte kontaktieren Sie den Support.",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        // Fetch search requests for the company
+        const { data: requests, error } = await supabase
+          .from('search_requests')
+          .select('*')
+          .eq('company_id', profile.company_id)
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Error fetching search requests:', error);
+          toast({
+            title: "Fehler",
+            description: "Suchaufträge konnten nicht geladen werden.",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        setSearchRequests(requests || []);
+        setFilteredRequests(requests || []);
+      } catch (error) {
+        console.error('Error:', error);
+        toast({
+          title: "Fehler",
+          description: "Ein unerwarteter Fehler ist aufgetreten.",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSearchRequests();
+  }, [navigate, toast]);
 
   useEffect(() => {
     let filtered = searchRequests;
@@ -97,9 +115,9 @@ const SearchRequests = () => {
       filtered = filtered.filter(request =>
         request.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         request.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        request.requiredSkills.some(skill => 
+        (request.skills_required && request.skills_required.some(skill => 
           skill.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+        ))
       );
     }
 
@@ -243,33 +261,42 @@ const SearchRequests = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-muted-foreground" />
-                    <span>{request.location}</span>
+                    <span>{request.location || 'Nicht angegeben'}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="w-4 h-4 text-muted-foreground" />
-                    <span>{request.applicants} Bewerber</span>
+                    <span>0 Bewerber</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4 text-muted-foreground" />
-                    <span>Deadline: {new Date(request.deadline).toLocaleDateString('de-DE')}</span>
+                    <span>Erstellt: {new Date(request.created_at).toLocaleDateString('de-DE')}</span>
                   </div>
                 </div>
 
                 {/* Budget */}
                 <div>
                   <span className="font-medium">Budget: </span>
-                  <span className="text-primary font-semibold">{request.budget}</span>
+                  <span className="text-primary font-semibold">
+                    {request.salary_min && request.salary_max 
+                      ? `${request.salary_min.toLocaleString()} - ${request.salary_max.toLocaleString()} €`
+                      : 'Nicht angegeben'
+                    }
+                  </span>
                 </div>
 
                 {/* Required Skills */}
                 <div>
                   <span className="font-medium mb-2 block">Erforderliche Skills:</span>
                   <div className="flex flex-wrap gap-2">
-                    {request.requiredSkills.map((skill, index) => (
-                      <Badge key={index} variant="secondary" className="text-xs">
-                        {skill}
-                      </Badge>
-                    ))}
+                    {request.skills_required && request.skills_required.length > 0 ? (
+                      request.skills_required.map((skill, index) => (
+                        <Badge key={index} variant="secondary" className="text-xs">
+                          {skill}
+                        </Badge>
+                      ))
+                    ) : (
+                      <span className="text-muted-foreground text-sm">Keine Skills angegeben</span>
+                    )}
                   </div>
                 </div>
 
@@ -288,7 +315,7 @@ const SearchRequests = () => {
                     variant="outline"
                     onClick={() => navigate(`/app/search-requests/${request.id}/applicants`)}
                   >
-                    Bewerber verwalten ({request.applicants})
+                    Bewerber verwalten (0)
                   </Button>
                   {request.status === 'active' && (
                     <Button size="sm" variant="outline">

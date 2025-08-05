@@ -23,26 +23,29 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface Specialist {
   id: string;
-  name: string;
-  title: string;
-  avatar?: string;
+  first_name: string;
+  last_name: string;
+  current_position: string;
   location: string;
-  experience: number;
+  experience_years: number;
   rating: number;
   skills: string[];
-  availability: 'available' | 'busy' | 'unavailable';
-  hourlyRate: string;
-  description: string;
-  completedProjects: number;
+  status: string;
+  hourly_rate_min: number;
+  hourly_rate_max: number;
+  notes: string;
   email: string;
   phone: string;
 }
 
 const Specialists = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [specialists, setSpecialists] = useState<Specialist[]>([]);
   const [filteredSpecialists, setFilteredSpecialists] = useState<Specialist[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -50,74 +53,39 @@ const Specialists = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Mock data - replace with actual API call
-    const mockData: Specialist[] = [
-      {
-        id: '1',
-        name: 'Dr. Max Mustermann',
-        title: 'Senior AI Engineer',
-        location: 'München, Deutschland',
-        experience: 8,
-        rating: 4.9,
-        skills: ['Python', 'TensorFlow', 'Computer Vision', 'Deep Learning', 'PyTorch'],
-        availability: 'available',
-        hourlyRate: '120-150 €',
-        description: 'Spezialist für Computer Vision und Deep Learning mit 8 Jahren Erfahrung in der Automobilindustrie.',
-        completedProjects: 24,
-        email: 'max.mustermann@example.com',
-        phone: '+49 89 123456789'
-      },
-      {
-        id: '2',
-        name: 'Sarah Schmidt',
-        title: 'Machine Learning Spezialist',
-        location: 'Berlin, Deutschland',
-        experience: 6,
-        rating: 4.8,
-        skills: ['Python', 'Scikit-learn', 'NLP', 'Data Mining', 'Statistics'],
-        availability: 'busy',
-        hourlyRate: '100-130 €',
-        description: 'Expertin für Natural Language Processing und Data Science mit Fokus auf E-Commerce Anwendungen.',
-        completedProjects: 18,
-        email: 'sarah.schmidt@example.com',
-        phone: '+49 30 987654321'
-      },
-      {
-        id: '3',
-        name: 'Dr. Anna Weber',
-        title: 'Data Scientist',
-        location: 'Hamburg, Deutschland',
-        experience: 10,
-        rating: 5.0,
-        skills: ['R', 'Python', 'SQL', 'Tableau', 'Big Data', 'AWS'],
-        availability: 'available',
-        hourlyRate: '140-180 €',
-        description: 'Führende Expertin für Big Data Analytics und Cloud Computing mit PhD in Statistik.',
-        completedProjects: 32,
-        email: 'anna.weber@example.com',
-        phone: '+49 40 555666777'
-      },
-      {
-        id: '4',
-        name: 'Thomas Müller',
-        title: 'AI Research Engineer',
-        location: 'Remote',
-        experience: 5,
-        rating: 4.7,
-        skills: ['Python', 'PyTorch', 'Reinforcement Learning', 'Neural Networks', 'Mathematics'],
-        availability: 'available',
-        hourlyRate: '90-120 €',
-        description: 'Forschungsingenieur mit Schwerpunkt auf Reinforcement Learning und neuronale Netzwerke.',
-        completedProjects: 12,
-        email: 'thomas.mueller@example.com',
-        phone: '+49 711 333444555'
-      }
-    ];
+    const fetchSpecialists = async () => {
+      try {
+        const { data: resources, error } = await supabase
+          .from('resources')
+          .select('*')
+          .order('created_at', { ascending: false });
 
-    setSpecialists(mockData);
-    setFilteredSpecialists(mockData);
-    setLoading(false);
-  }, []);
+        if (error) {
+          console.error('Error fetching specialists:', error);
+          toast({
+            title: "Fehler",
+            description: "Spezialisten konnten nicht geladen werden.",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        setSpecialists(resources || []);
+        setFilteredSpecialists(resources || []);
+      } catch (error) {
+        console.error('Error:', error);
+        toast({
+          title: "Fehler",
+          description: "Ein unerwarteter Fehler ist aufgetreten.",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSpecialists();
+  }, [toast]);
 
   useEffect(() => {
     let filtered = specialists;
@@ -125,25 +93,25 @@ const Specialists = () => {
     // Filter by search term
     if (searchTerm) {
       filtered = filtered.filter(specialist =>
-        specialist.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        specialist.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        specialist.skills.some(skill => 
+        `${specialist.first_name} ${specialist.last_name}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        specialist.current_position?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (specialist.skills && specialist.skills.some(skill => 
           skill.toLowerCase().includes(searchTerm.toLowerCase())
-        ) ||
-        specialist.location.toLowerCase().includes(searchTerm.toLowerCase())
+        )) ||
+        specialist.location?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
-    // Filter by availability
+    // Filter by availability (map status to availability)
     if (availabilityFilter !== 'all') {
-      filtered = filtered.filter(specialist => specialist.availability === availabilityFilter);
+      filtered = filtered.filter(specialist => specialist.status === availabilityFilter);
     }
 
     setFilteredSpecialists(filtered);
   }, [searchTerm, availabilityFilter, specialists]);
 
-  const getAvailabilityColor = (availability: string) => {
-    switch (availability) {
+  const getAvailabilityColor = (status: string) => {
+    switch (status) {
       case 'available':
         return 'bg-green-100 text-green-800 hover:bg-green-100';
       case 'busy':
@@ -155,8 +123,8 @@ const Specialists = () => {
     }
   };
 
-  const getAvailabilityText = (availability: string) => {
-    switch (availability) {
+  const getAvailabilityText = (status: string) => {
+    switch (status) {
       case 'available':
         return 'Verfügbar';
       case 'busy':
@@ -164,7 +132,7 @@ const Specialists = () => {
       case 'unavailable':
         return 'Nicht verfügbar';
       default:
-        return availability;
+        return status || 'Unbekannt';
     }
   };
 
@@ -231,36 +199,38 @@ const Specialists = () => {
             <CardHeader>
               <div className="flex items-start gap-4">
                 <Avatar className="w-16 h-16">
-                  <AvatarImage src={specialist.avatar} />
+                  <AvatarImage src="" />
                   <AvatarFallback className="text-lg font-semibold bg-primary text-white">
-                    {specialist.name.split(' ').map(n => n[0]).join('')}
+                    {`${specialist.first_name?.[0] || ''}${specialist.last_name?.[0] || ''}`}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
                     <div>
-                      <CardTitle className="text-xl text-brand-dark">{specialist.name}</CardTitle>
+                      <CardTitle className="text-xl text-brand-dark">
+                        {`${specialist.first_name || ''} ${specialist.last_name || ''}`}
+                      </CardTitle>
                       <CardDescription className="text-base font-medium text-primary">
-                        {specialist.title}
+                        {specialist.current_position || 'Position nicht angegeben'}
                       </CardDescription>
                     </div>
-                    <Badge className={getAvailabilityColor(specialist.availability)}>
-                      {getAvailabilityText(specialist.availability)}
+                    <Badge className={getAvailabilityColor(specialist.status)}>
+                      {getAvailabilityText(specialist.status)}
                     </Badge>
                   </div>
                   
                   <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
-                      <span>{specialist.location}</span>
+                      <span>{specialist.location || 'Nicht angegeben'}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Briefcase className="w-4 h-4" />
-                      <span>{specialist.experience} Jahre</span>
+                      <span>{specialist.experience_years || 0} Jahre</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span>{specialist.rating}</span>
+                      <span>{specialist.rating || 'N/A'}</span>
                     </div>
                   </div>
                 </div>
@@ -269,17 +239,21 @@ const Specialists = () => {
             
             <CardContent className="space-y-4">
               {/* Description */}
-              <p className="text-muted-foreground">{specialist.description}</p>
+              <p className="text-muted-foreground">{specialist.notes || 'Keine Beschreibung verfügbar.'}</p>
               
               {/* Skills */}
               <div>
                 <span className="font-medium text-sm mb-2 block">Skills:</span>
                 <div className="flex flex-wrap gap-2">
-                  {specialist.skills.map((skill, index) => (
-                    <Badge key={index} variant="secondary" className="text-xs">
-                      {skill}
-                    </Badge>
-                  ))}
+                  {specialist.skills && specialist.skills.length > 0 ? (
+                    specialist.skills.map((skill, index) => (
+                      <Badge key={index} variant="secondary" className="text-xs">
+                        {skill}
+                      </Badge>
+                    ))
+                  ) : (
+                    <span className="text-muted-foreground text-sm">Keine Skills angegeben</span>
+                  )}
                 </div>
               </div>
               
@@ -287,11 +261,16 @@ const Specialists = () => {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="font-medium">Stundensatz:</span>
-                  <div className="text-primary font-semibold">{specialist.hourlyRate}</div>
+                  <div className="text-primary font-semibold">
+                    {specialist.hourly_rate_min && specialist.hourly_rate_max 
+                      ? `${specialist.hourly_rate_min}-${specialist.hourly_rate_max} €`
+                      : 'Nicht angegeben'
+                    }
+                  </div>
                 </div>
                 <div>
-                  <span className="font-medium">Projekte:</span>
-                  <div className="text-brand-dark font-semibold">{specialist.completedProjects} abgeschlossen</div>
+                  <span className="font-medium">Erfahrung:</span>
+                  <div className="text-brand-dark font-semibold">{specialist.experience_years || 0} Jahre</div>
                 </div>
               </div>
               
@@ -299,11 +278,11 @@ const Specialists = () => {
               <div className="grid grid-cols-1 gap-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  <span>{specialist.email}</span>
+                  <span>{specialist.email || 'Nicht angegeben'}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  <span>{specialist.phone}</span>
+                  <span>{specialist.phone || 'Nicht angegeben'}</span>
                 </div>
               </div>
               
