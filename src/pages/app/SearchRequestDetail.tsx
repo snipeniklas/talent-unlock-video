@@ -219,8 +219,11 @@ const SearchRequestDetail = () => {
                 </Badge>
               </div>
               <div className="space-y-2">
-                <Button className="w-full">
-                  Bewerben
+                <Button 
+                  className="w-full"
+                  onClick={() => navigate(`/app/search-requests/${id}/applicants`)}
+                >
+                  Bewerber verwalten
                 </Button>
                 <Button variant="outline" className="w-full">
                   Kontakt aufnehmen
