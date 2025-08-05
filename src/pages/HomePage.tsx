@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Users, Code, Shield, Star, CheckCircle, Mail, Phone, Linkedin, MapPin } from "lucide-react";
+import { ArrowRight, Users, Code, Shield, Star, CheckCircle, Mail, Phone, Linkedin, MapPin, Zap, Target, TrendingUp } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 
 const HomePage = () => {
@@ -81,108 +81,153 @@ const HomePage = () => {
       <PublicHeader />
 
       {/* Hero Section */}
-      <section className="py-16 lg:py-24 overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
-              Ihr Engpass. Unsere Lösung.
+      <section className="relative py-20 lg:py-32 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-hero opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Trust Badge */}
+            <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 mb-8 shadow-lg">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-brand-dark">Über 500+ erfolgreiche Vermittlungen</span>
+            </div>
+
+            <h1 className="text-5xl lg:text-7xl font-bold text-brand-dark mb-8 leading-tight animate-fade-in">
+              Ihr Engpass. 
+              <span className="bg-gradient-hero bg-clip-text text-transparent"> Unsere Lösung.</span>
             </h1>
-            <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in-delay-1">
+            <p className="text-2xl lg:text-3xl text-muted-foreground mb-6 max-w-4xl mx-auto animate-fade-in-delay-1 font-light">
               Qualifizierte Remote-Fachkräfte, die genau dort ansetzen, wo Sie sie brauchen.
             </p>
-            <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto animate-fade-in-delay-2">
+            <p className="text-xl text-muted-foreground mb-12 max-w-4xl mx-auto animate-fade-in-delay-2">
               Wählen Sie Ihr Thema und finden Sie Remote-Experten aus Backoffice, IT oder KI, 
               die Ihre Herausforderung präzise und schnell lösen.
             </p>
             
-            {/* Segment Tiles */}
-            <div className="grid md:grid-cols-3 gap-6 mb-12 animate-slide-up-delay-3">
-              <Card 
-                className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary"
-                onClick={() => navigate('/solutions/backoffice')}
-              >
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
-                    <Users className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                    Remote Backoffice-Fachkräfte
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="text-muted-foreground group-hover:text-brand-dark transition-colors">
-                    Qualifizierte Remote-Mitarbeiter für Administration, Buchhaltung und operative Unterstützung
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card 
-                className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary"
-                onClick={() => navigate('/solutions/it-development')}
-              >
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
-                    <Code className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                    Remote IT-Entwickler & Tech-Experten
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="text-muted-foreground group-hover:text-brand-dark transition-colors">
-                    Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card 
-                className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary"
-                onClick={() => navigate('/solutions/ai-ml')}
-              >
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
-                    <Shield className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                    Remote KI & ML-Spezialisten
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="text-muted-foreground group-hover:text-brand-dark transition-colors">
-                    KI-Experten und Data Scientists für Machine Learning und AI-Projekte
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-4">
-              <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-                Kostenloses Beratungsgespräch - Remote-Fachkräfte finden
-                <ArrowRight className="w-5 h-5 ml-2" />
+            {/* Primary CTA */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-slide-up-delay-3">
+              <Button size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
+                <Phone className="w-6 h-6 mr-3" />
+                Kostenloses Beratungsgespräch
+                <ArrowRight className="w-6 h-6 ml-3" />
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="text-lg px-8 border-primary text-primary hover:bg-primary hover:text-white"
+                className="text-xl px-12 py-6 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
                 onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Remote-Fachkräfte entdecken
               </Button>
+            </div>
+            
+            {/* Solution Cards */}
+            <div className="grid md:grid-cols-3 gap-8 animate-slide-up-delay-4">
+              <Card 
+                className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative"
+                onClick={() => navigate('/solutions/backoffice')}
+              >
+                {/* Background Gradient */}
+                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                
+                <CardHeader className="text-center pb-4 relative z-10">
+                  <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:animate-bounce shadow-lg">
+                    <Users className="w-10 h-10 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl group-hover:text-primary transition-colors mb-4">
+                    Remote Backoffice-Fachkräfte
+                  </CardTitle>
+                  <p className="text-muted-foreground group-hover:text-brand-dark transition-colors text-lg">
+                    Qualifizierte Remote-Mitarbeiter für Administration, Buchhaltung und operative Unterstützung
+                  </p>
+                </CardHeader>
+                <CardContent className="pt-0 relative z-10">
+                  <Button className="w-full bg-gradient-primary hover:shadow-lg transition-all duration-300 border-0">
+                    Jetzt starten <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card 
+                className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative"
+                onClick={() => navigate('/solutions/it-development')}
+              >
+                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                
+                <CardHeader className="text-center pb-4 relative z-10">
+                  <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:animate-bounce shadow-lg">
+                    <Code className="w-10 h-10 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl group-hover:text-primary transition-colors mb-4">
+                    Remote IT-Entwickler & Tech-Experten
+                  </CardTitle>
+                  <p className="text-muted-foreground group-hover:text-brand-dark transition-colors text-lg">
+                    Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur
+                  </p>
+                </CardHeader>
+                <CardContent className="pt-0 relative z-10">
+                  <Button className="w-full bg-gradient-primary hover:shadow-lg transition-all duration-300 border-0">
+                    Jetzt starten <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card 
+                className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative"
+                onClick={() => navigate('/solutions/ai-ml')}
+              >
+                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                
+                <CardHeader className="text-center pb-4 relative z-10">
+                  <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:animate-bounce shadow-lg">
+                    <Shield className="w-10 h-10 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl group-hover:text-primary transition-colors mb-4">
+                    Remote KI & ML-Spezialisten
+                  </CardTitle>
+                  <p className="text-muted-foreground group-hover:text-brand-dark transition-colors text-lg">
+                    KI-Experten und Data Scientists für Machine Learning und AI-Projekte
+                  </p>
+                </CardHeader>
+                <CardContent className="pt-0 relative z-10">
+                  <Button className="w-full bg-gradient-primary hover:shadow-lg transition-all duration-300 border-0">
+                    Jetzt starten <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-subtle overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-in">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group hover:scale-105 transition-transform duration-300">
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2 group-hover:animate-bounce">{stat.value}</div>
-                <div className="text-brand-dark/70 font-medium">{stat.label}</div>
-              </div>
-            ))}
+      <section className="py-20 bg-gradient-subtle overflow-hidden relative">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-brand-dark mb-4">Vertrauen Sie auf unsere Expertise</h2>
+              <p className="text-xl text-muted-foreground">Zahlen, die für sich sprechen</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center group hover:scale-110 transition-all duration-500 bg-white/50 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/80 hover:shadow-xl">
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-3 group-hover:animate-bounce">{stat.value}</div>
+                  <div className="text-brand-dark font-semibold text-lg">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+            
+            {/* CTA in Stats Section */}
+            <div className="text-center mt-16">
+              <Button size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
+                <Target className="w-6 h-6 mr-3" />
+                Werden Sie Teil dieser Erfolgsgeschichte
+                <ArrowRight className="w-6 h-6 ml-3" />
+              </Button>
+            </div>
           </div>
         </div>
       </section>
