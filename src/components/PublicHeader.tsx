@@ -21,6 +21,7 @@ const PublicHeader = () => {
               />
             </div>
             <div className="hidden md:flex space-x-8">
+              <button onClick={() => navigate('/')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Startseite</button>
               <button onClick={() => navigate('/solutions')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">RaaS Lösungen</button>
               <button onClick={() => navigate('/how-we-work')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">So arbeiten wir</button>
               <button onClick={() => navigate('/resource-hub')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">RaaS Hub</button>
