@@ -19,6 +19,7 @@ import AIMlSolution from "./pages/solutions/AIMlSolution";
 import ITDevelopmentSolution from "./pages/solutions/ITDevelopmentSolution";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import CandidateManagement from "./pages/admin/CandidateManagement";
+import AdminSearchRequests from "./pages/admin/AdminSearchRequests";
 import SolutionsOverview from "./pages/SolutionsOverview";
 import HowWeWork from "./pages/HowWeWork";
 import ResourceHub from "./pages/ResourceHub";
@@ -54,9 +55,12 @@ const App = () => (
             <Route path="specialists/:id" element={<SpecialistDetail />} />
           </Route>
           
-          {/* Admin Routes */}
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/candidates" element={<CandidateManagement />} />
+          {/* Admin Routes mit AppLayout */}
+          <Route path="/admin" element={<AppLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="candidates" element={<CandidateManagement />} />
+            <Route path="search-requests" element={<AdminSearchRequests />} />
+          </Route>
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
