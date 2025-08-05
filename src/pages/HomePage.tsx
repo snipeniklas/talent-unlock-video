@@ -98,13 +98,13 @@ const HomePage = () => {
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-bold text-brand-dark mb-8 leading-tight animate-fade-in">
-              Ihr Engpass. Unsere Lösung.
+              <span className="text-primary">RaaS</span> - Resources as a Service
             </h1>
             <p className="text-2xl lg:text-3xl text-muted-foreground mb-6 max-w-4xl mx-auto animate-fade-in-delay-1 font-light">
               Qualifizierte Remote-Fachkräfte, die genau dort ansetzen, wo Sie sie brauchen.
             </p>
             <p className="text-xl text-muted-foreground mb-12 max-w-4xl mx-auto animate-fade-in-delay-2">
-              Wählen Sie Ihr Thema und finden Sie Remote-Experten aus Backoffice, IT oder KI, 
+              Unser RaaS-Ansatz: Wählen Sie Ihr Thema und finden Sie Remote-Experten aus Backoffice, IT oder KI, 
               die Ihre Herausforderung präzise und schnell lösen.
             </p>
             
@@ -113,7 +113,7 @@ const HomePage = () => {
               <Button asChild size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
                 <Link to="/app/search-requests/new">
                   <Phone className="w-6 h-6 mr-3" />
-                  Suchauftrag kostenlos erstellen
+                  RaaS Anfrage stellen
                   <ArrowRight className="w-6 h-6 ml-3" />
                 </Link>
               </Button>
@@ -123,7 +123,7 @@ const HomePage = () => {
                 className="text-xl px-12 py-6 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
                 onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Remote-Fachkräfte entdecken
+                RaaS Lösungen entdecken
               </Button>
             </div>
             

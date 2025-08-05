@@ -21,9 +21,9 @@ const PublicHeader = () => {
               />
             </div>
             <div className="hidden md:flex space-x-8">
-              <button onClick={() => navigate('/solutions')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Lösungen</button>
+              <button onClick={() => navigate('/solutions')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">RaaS Lösungen</button>
               <button onClick={() => navigate('/how-we-work')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">So arbeiten wir</button>
-              <button onClick={() => navigate('/resource-hub')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Resource Hub</button>
+              <button onClick={() => navigate('/resource-hub')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">RaaS Hub</button>
               <button onClick={() => navigate('/contact')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Kontakt</button>
             </div>
             <div className="flex items-center space-x-4">
@@ -31,7 +31,7 @@ const PublicHeader = () => {
                 <a href="/auth">Login</a>
               </Button>
               <Button asChild className="bg-primary hover:bg-primary-hover">
-                <Link to="/app/search-requests/new">Suchauftrag kostenlos erstellen</Link>
+                <Link to="/app/search-requests/new">RaaS Anfrage erstellen</Link>
               </Button>
             </div>
           </div>
