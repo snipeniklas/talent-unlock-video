@@ -14,7 +14,7 @@ const corsHeaders = {
 };
 
 interface AdminNotificationRequest {
-  type: 'new_company' | 'new_search_request';
+  type: 'new_company' | 'new_search_request' | 'new_support_message';
   data: any;
 }
 
@@ -145,6 +145,60 @@ serve(async (req) => {
           </div>
           <p style="color: #666; font-size: 14px; margin-top: 30px;">
             Diese Benachrichtigung wurde automatisch vom HejTalent-System gesendet.
+          </p>
+        </div>
+      `;
+    } else if (type === 'new_support_message') {
+      subject = `💬 Neue Support-Nachricht von ${data.companyName}`;
+      htmlContent = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #333; border-bottom: 2px solid #dc3545; padding-bottom: 10px;">
+            💬 Neue Support-Nachricht
+          </h1>
+          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h2 style="color: #dc3545; margin-top: 0;">Ticket-Informationen:</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 8px; font-weight: bold; width: 150px;">Ticket-Titel:</td>
+                <td style="padding: 8px;">${data.ticketTitle || 'Nicht angegeben'}</td>
+              </tr>
+              <tr style="background-color: white;">
+                <td style="padding: 8px; font-weight: bold;">Unternehmen:</td>
+                <td style="padding: 8px;">${data.companyName || 'Nicht angegeben'}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Von:</td>
+                <td style="padding: 8px;">${data.senderName || 'Unbekannt'} (${data.senderEmail || 'Keine E-Mail'})</td>
+              </tr>
+              <tr style="background-color: white;">
+                <td style="padding: 8px; font-weight: bold;">Kategorie:</td>
+                <td style="padding: 8px;">${data.category || 'Allgemein'}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Priorität:</td>
+                <td style="padding: 8px; color: ${data.priority === 'high' ? '#dc3545' : data.priority === 'medium' ? '#ffc107' : '#28a745'};">
+                  ${data.priority === 'high' ? '🔴 Hoch' : data.priority === 'medium' ? '🟡 Mittel' : '🟢 Niedrig'}
+                </td>
+              </tr>
+              <tr style="background-color: white;">
+                <td style="padding: 8px; font-weight: bold;">Status:</td>
+                <td style="padding: 8px;">${data.status || 'Offen'}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Gesendet am:</td>
+                <td style="padding: 8px;">${new Date().toLocaleString('de-DE')}</td>
+              </tr>
+            </table>
+          </div>
+          <div style="background-color: #fff; padding: 20px; border-radius: 8px; border-left: 4px solid #dc3545; margin: 20px 0;">
+            <h3 style="color: #dc3545; margin-top: 0;">Nachrichteninhalt:</h3>
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; font-family: monospace; white-space: pre-wrap;">
+${data.messageContent || 'Kein Inhalt verfügbar'}
+            </div>
+          </div>
+          <p style="color: #666; font-size: 14px; margin-top: 30px;">
+            Diese Benachrichtigung wurde automatisch vom HejTalent-System gesendet.<br>
+            Bitte antworten Sie zeitnah auf die Support-Anfrage.
           </p>
         </div>
       `;
