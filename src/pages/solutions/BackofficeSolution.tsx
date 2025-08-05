@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Users, Calculator, FileText, Clock, Target, CheckCircle, Star, Phone } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
+import ContactCTA from "@/components/ContactCTA";
 
 const BackofficeSolution = () => {
   const targetAudience = [
@@ -224,6 +225,7 @@ const BackofficeSolution = () => {
         </div>
       </section>
       
+      <ContactCTA />
       <PublicFooter />
     </div>
   );

@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Users, Code, Shield, Star, CheckCircle, Mail, Phone, Linkedin, MapPin, Zap, Target, TrendingUp } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
+import ContactCTA from "@/components/ContactCTA";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -421,6 +422,7 @@ const HomePage = () => {
         </div>
       </section>
 
+      <ContactCTA />
       <PublicFooter />
     </div>
   );

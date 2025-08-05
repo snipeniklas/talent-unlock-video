@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ArrowRight, Search, Users, Rocket, TrendingUp, CheckCircle } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
+import ContactCTA from "@/components/ContactCTA";
 
 const HowWeWork = () => {
   const steps = [
@@ -163,6 +164,7 @@ const HowWeWork = () => {
         </div>
       </section>
       
+      <ContactCTA />
       <PublicFooter />
     </div>
   );

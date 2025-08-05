@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Code, Server, Smartphone, Database, Cloud, GitBranch, CheckCircle, Target, Users, Phone } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
+import ContactCTA from "@/components/ContactCTA";
 
 const ITDevelopmentSolution = () => {
   const targetAudience = [
@@ -266,6 +267,7 @@ const ITDevelopmentSolution = () => {
         </div>
       </section>
       
+      <ContactCTA />
       <PublicFooter />
     </div>
   );

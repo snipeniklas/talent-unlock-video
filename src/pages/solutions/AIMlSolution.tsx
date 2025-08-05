@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Brain, Database, BarChart3, Bot, Target, CheckCircle, Users, Phone, Lightbulb } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
+import ContactCTA from "@/components/ContactCTA";
 
 const AIMlSolution = () => {
   const targetAudience = [
@@ -309,6 +310,7 @@ const AIMlSolution = () => {
         </div>
       </section>
       
+      <ContactCTA />
       <PublicFooter />
     </div>
   );

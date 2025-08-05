@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ArrowRight, Users, FileText, BarChart, Settings, Lock, Shield } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
+import ContactCTA from "@/components/ContactCTA";
 
 const ResourceHub = () => {
   return (
@@ -61,6 +62,7 @@ const ResourceHub = () => {
         </div>
       </section>
       
+      <ContactCTA />
       <PublicFooter />
     </div>
   );
