@@ -40,9 +40,9 @@ const AuthPage = () => {
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Redirect authenticated users to home
+        // Redirect authenticated users to dashboard
         if (session?.user) {
-          navigate('/');
+          navigate('/app/dashboard');
         }
         
         if (loading) {
@@ -59,7 +59,7 @@ const AuthPage = () => {
       
       // Redirect if already authenticated
       if (session?.user) {
-        navigate('/');
+        navigate('/app/dashboard');
       }
     });
 
