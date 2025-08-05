@@ -16,7 +16,7 @@ const ResourceHub = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              Resource Hub - Ihr Login-Bereich
+              <span className="text-primary">Resource Hub</span> - Ihr Login-Bereich
             </h1>
             <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
               Zugang zu Ihren Remote-Fachkräften, Projekten und allen wichtigen Ressourcen

@@ -17,7 +17,7 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              Kontakt & Erstgespräch
+              <span className="text-primary">Kontakt</span> & Erstgespräch
             </h1>
             <p className="text-xl text-muted-foreground">
               Lassen Sie uns über Ihre Remote-Fachkräfte-Anforderungen sprechen

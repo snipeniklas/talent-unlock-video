@@ -45,7 +45,7 @@ const SolutionsOverview = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              Unsere Remote-Fachkräfte
+              Unsere <span className="text-primary">Remote</span>-Fachkräfte
             </h1>
             <p className="text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
               Qualifizierte Remote-Experten für jeden Bereich - von administrativer Unterstützung 

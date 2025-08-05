@@ -107,7 +107,7 @@ const ITDevelopmentSolution = () => {
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-6 bg-primary text-white px-6 py-2 text-lg">Remote IT-Entwickler</Badge>
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              Erfahrene Remote-Entwickler für Ihre IT-Projekte
+              Erfahrene <span className="text-primary">Remote</span>-Entwickler für Ihre IT-Projekte
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               Verstärken Sie Ihr IT-Team mit qualifizierten internationalen Remote-Entwicklern. 

@@ -86,7 +86,7 @@ const BackofficeSolution = () => {
               Remote Backoffice-Fachkräfte
             </Badge>
             <h1 className="text-5xl lg:text-7xl font-bold text-brand-dark mb-8 leading-tight">
-              Qualifizierte Remote-Unterstützung 
+              Qualifizierte <span className="text-primary">Remote</span>-Unterstützung 
               <span className="bg-gradient-hero bg-clip-text text-transparent"> für Ihr Backoffice</span>
             </h1>
             <p className="text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto font-light">
