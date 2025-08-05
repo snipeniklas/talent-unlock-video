@@ -60,10 +60,10 @@ const HowWeWork = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              So arbeiten wir
+              So funktioniert <span className="text-primary">RaaS</span>
             </h1>
             <p className="text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-              Von der ersten Bedarfsanalyse bis zur erfolgreichen Integration Ihrer Remote-Fachkraft - 
+              Von der ersten RaaS-Anfrage bis zur erfolgreichen Integration Ihrer Remote-Ressource - 
               unser bewährter 4-Stufen-Prozess garantiert Ihnen die besten Kandidaten.
             </p>
           </div>
@@ -160,7 +160,7 @@ const HowWeWork = () => {
           </p>
           <Button asChild size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
             <Link to="/app/search-requests/new">
-              Jetzt kostenfrei Suchauftrag einstellen
+              RaaS Anfrage kostenlos erstellen
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </Button>

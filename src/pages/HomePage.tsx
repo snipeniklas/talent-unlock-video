@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Users, Code, Shield, Star, CheckCircle, Mail, Phone, Linkedin, MapPin, Zap, Target, TrendingUp } from "lucide-react";
+import { ArrowRight, Users, Code, Shield, Star, CheckCircle, Mail, Phone, Linkedin, MapPin, Zap, Target, TrendingUp, Search } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
@@ -286,31 +286,110 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Interactive App Demo Section */}
+      {/* Interactive Platform Experience Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto max-w-7xl px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark">
-              Erleben Sie die HeyTalent Plattform
+              Erleben Sie unsere <span className="text-primary">RaaS</span> Plattform
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Entdecken Sie unsere intuitive Plattform und sehen Sie, wie einfach es ist, 
-              die perfekten Remote-Fachkräfte für Ihr Unternehmen zu finden.
+              Entdecken Sie, wie unsere intuitive Plattform Ihren gesamten RaaS-Prozess vereinfacht - 
+              von der Anfrage bis zur erfolgreichen Zusammenarbeit.
             </p>
           </div>
 
+          {/* Platform Features Grid */}
+          <div className="grid lg:grid-cols-3 gap-8 mb-16">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Search className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-brand-dark mb-3">RaaS Anfrage erstellen</h3>
+              <p className="text-muted-foreground mb-4">
+                Definieren Sie Ihre Anforderungen in nur wenigen Klicks. Unser intelligentes System 
+                erfasst automatisch alle relevanten Details für Ihre RaaS-Lösung.
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-2">
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  Skill-basierte Auswahl
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  Budget & Zeitrahmen
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  Projektspezifikation
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group">
+              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Users className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-brand-dark mb-3">Ressourcen-Matching</h3>
+              <p className="text-muted-foreground mb-4">
+                KI-gestütztes Matching verbindet Sie mit den passenden Remote-Experten aus unserem 
+                vorqualifizierten Pool von über 500+ Fachkräften.
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-2">
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  Automatisches Matching
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  Profil-Bewertungen
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  Verfügbarkeits-Check
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-gradient-to-br from-purple-50 to-violet-50 p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <TrendingUp className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-brand-dark mb-3">Projekt-Management</h3>
+              <p className="text-muted-foreground mb-4">
+                Verfolgen Sie Ihre RaaS-Projekte in Echtzeit. Von der Auswahl bis zur erfolgreichen 
+                Umsetzung behalten Sie jederzeit den Überblick.
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-2">
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  Live-Dashboard
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  Fortschritt-Tracking
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  Kommunikations-Hub
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Interactive App Demo */}
           <div className="grid lg:grid-cols-2 gap-8 mb-12">
             {/* Customer Dashboard */}
             <InteractiveAppScreen
               title="Kunden-Dashboard"
-              description="Verwalten Sie Ihre Suchaufträge und verfolgen Sie den Fortschritt Ihrer Projekte"
+              description="Verwalten Sie Ihre RaaS-Projekte und verfolgen Sie den Fortschritt in Echtzeit"
               screen="dashboard"
             />
 
             {/* Search Requests Management */}
             <InteractiveAppScreen
-              title="Suchaufträge verwalten"
-              description="Erstellen und verwalten Sie Ihre Anfragen für Remote-Fachkräfte"
+              title="RaaS Anfragen verwalten"
+              description="Erstellen und verwalten Sie Ihre Anfragen für Remote-Ressourcen"
               screen="search-requests"
             />
           </div>
@@ -319,7 +398,7 @@ const HomePage = () => {
             {/* Resource Overview */}
             <InteractiveAppScreen
               title="Ressourcen-Übersicht"
-              description="Entdecken Sie von HeyTalent bereitgestellte Remote-Ressourcen für Ihre Projekte"
+              description="Entdecken Sie verfügbare Remote-Ressourcen und deren Expertise"
               screen="resources"
             />
           </div>
