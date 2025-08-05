@@ -95,8 +95,7 @@ const HomePage = () => {
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-bold text-brand-dark mb-8 leading-tight animate-fade-in">
-              Ihr Engpass. 
-              <span className="bg-gradient-hero bg-clip-text text-transparent"> Unsere Lösung.</span>
+              Ihr Engpass. Unsere Lösung.
             </h1>
             <p className="text-2xl lg:text-3xl text-muted-foreground mb-6 max-w-4xl mx-auto animate-fade-in-delay-1 font-light">
               Qualifizierte Remote-Fachkräfte, die genau dort ansetzen, wo Sie sie brauchen.
