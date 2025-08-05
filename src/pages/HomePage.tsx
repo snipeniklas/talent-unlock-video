@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -6,6 +7,7 @@ import { ArrowRight, Users, Code, Shield, Star, CheckCircle, Mail, Phone, Linked
 import heyTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [activeService, setActiveService] = useState(0);
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -86,9 +88,8 @@ const HomePage = () => {
             <div className="hidden md:flex space-x-8">
               <a href="#solutions" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Lösungen</a>
               <a href="#working-method" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">So arbeiten wir</a>
-              <a href="#resources" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Resource Hub</a>
               <a href="#use-cases" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Use Cases</a>
-              <a href="#about" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Über HeyTalent</a>
+              <a href="#about" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Über uns</a>
               <a href="#contact" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Kontakt</a>
             </div>
             <div className="flex items-center space-x-4">
@@ -120,7 +121,10 @@ const HomePage = () => {
             
             {/* Segment Tiles */}
             <div className="grid md:grid-cols-3 gap-6 mb-12 animate-slide-up-delay-3">
-              <Card className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary">
+              <Card 
+                className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary"
+                onClick={() => navigate('/solutions/backoffice')}
+              >
                 <CardHeader className="text-center">
                   <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Users className="w-8 h-8 text-white" />
@@ -136,7 +140,10 @@ const HomePage = () => {
                 </CardContent>
               </Card>
 
-              <Card className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary">
+              <Card 
+                className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary"
+                onClick={() => navigate('/solutions/it-development')}
+              >
                 <CardHeader className="text-center">
                   <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Code className="w-8 h-8 text-white" />
@@ -152,7 +159,10 @@ const HomePage = () => {
                 </CardContent>
               </Card>
 
-              <Card className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary">
+              <Card 
+                className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary"
+                onClick={() => navigate('/solutions/ai-ml')}
+              >
                 <CardHeader className="text-center">
                   <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Shield className="w-8 h-8 text-white" />
@@ -174,7 +184,12 @@ const HomePage = () => {
                 Kostenloses Strategiegespräch buchen
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 border-primary text-primary hover:bg-primary hover:text-white">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-lg px-8 border-primary text-primary hover:bg-primary hover:text-white"
+                onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 Lösungen entdecken
               </Button>
             </div>
