@@ -150,9 +150,9 @@ const HowWeWork = () => {
                   </div>
                 </div>
                 <InteractiveAppScreen
-                  title="Neue RaaS Anfrage"
-                  description="Starten Sie hier Ihre RaaS-Anfrage mit wenigen Klicks"
-                  screen="dashboard"
+                  title="RaaS Anfrage erstellen"
+                  description="Starten Sie hier Ihre RaaS-Anfrage - definieren Sie Ihre Anforderungen"
+                  screen="search-requests"
                 />
               </div>
 
