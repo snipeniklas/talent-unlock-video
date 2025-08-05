@@ -23,10 +23,12 @@ const AuthPage = () => {
   const [signupPassword, setSignupPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [position, setPosition] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companyEmail, setCompanyEmail] = useState('');
   const [companyWebsite, setCompanyWebsite] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [registrationStep, setRegistrationStep] = useState(1);
 
   useEffect(() => {
     // Set up auth state listener FIRST
@@ -94,7 +96,14 @@ const AuthPage = () => {
     }
   };
 
-  const handleSignup = async (e: React.FormEvent) => {
+  const handlePersonalDataSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (firstName && lastName && position && signupEmail && signupPassword) {
+      setRegistrationStep(2);
+    }
+  };
+
+  const handleCompanyDataSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -109,6 +118,7 @@ const AuthPage = () => {
           data: {
             first_name: firstName,
             last_name: lastName,
+            position: position,
             company: {
               name: companyName,
               email: companyEmail,
@@ -137,6 +147,7 @@ const AuthPage = () => {
           title: "Registrierung erfolgreich",
           description: "Bitte prüfen Sie Ihre E-Mails zur Bestätigung.",
         });
+        setRegistrationStep(1); // Reset to step 1
       }
     } catch (error) {
       toast({
@@ -147,6 +158,10 @@ const AuthPage = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const goBackToPersonalData = () => {
+    setRegistrationStep(1);
   };
 
   if (loading) {
@@ -216,64 +231,89 @@ const AuthPage = () => {
             
             <TabsContent value="signup">
               <CardHeader>
-                <CardTitle>Unternehmen registrieren</CardTitle>
+                <CardTitle>
+                  Unternehmen registrieren - Schritt {registrationStep} von 2
+                </CardTitle>
                 <CardDescription>
-                  Erstellen Sie einen Account für Ihr Unternehmen
+                  {registrationStep === 1 
+                    ? "Ihre persönlichen Daten"
+                    : "Unternehmensinformationen"
+                  }
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSignup} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="first-name">Vorname</Label>
-                      <Input
-                        id="first-name"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                        disabled={isSubmitting}
-                      />
+                {registrationStep === 1 ? (
+                  <form onSubmit={handlePersonalDataSubmit} className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="first-name">Vorname</Label>
+                        <Input
+                          id="first-name"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          required
+                          disabled={isSubmitting}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="last-name">Nachname</Label>
+                        <Input
+                          id="last-name"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          required
+                          disabled={isSubmitting}
+                        />
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="last-name">Nachname</Label>
-                      <Input
-                        id="last-name"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        required
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-email">E-Mail</Label>
-                    <Input
-                      id="signup-email"
-                      type="email"
-                      value={signupEmail}
-                      onChange={(e) => setSignupEmail(e.target.value)}
-                      required
-                      disabled={isSubmitting}
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-password">Passwort</Label>
-                    <Input
-                      id="signup-password"
-                      type="password"
-                      value={signupPassword}
-                      onChange={(e) => setSignupPassword(e.target.value)}
-                      required
-                      disabled={isSubmitting}
-                      minLength={6}
-                    />
-                  </div>
-
-                  <div className="border-t pt-4">
-                    <h3 className="font-semibold mb-3">Unternehmensdaten</h3>
                     
+                    <div className="space-y-2">
+                      <Label htmlFor="position">Position im Unternehmen</Label>
+                      <Input
+                        id="position"
+                        value={position}
+                        onChange={(e) => setPosition(e.target.value)}
+                        required
+                        disabled={isSubmitting}
+                        placeholder="z.B. Geschäftsführer, IT-Leiter, CTO"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="signup-email">E-Mail</Label>
+                      <Input
+                        id="signup-email"
+                        type="email"
+                        value={signupEmail}
+                        onChange={(e) => setSignupEmail(e.target.value)}
+                        required
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="signup-password">Passwort</Label>
+                      <Input
+                        id="signup-password"
+                        type="password"
+                        value={signupPassword}
+                        onChange={(e) => setSignupPassword(e.target.value)}
+                        required
+                        disabled={isSubmitting}
+                        minLength={6}
+                      />
+                    </div>
+                    
+                    <Button 
+                      type="submit" 
+                      className="w-full" 
+                      disabled={isSubmitting}
+                    >
+                      Weiter zu Schritt 2
+                    </Button>
+                  </form>
+                ) : (
+                  <form onSubmit={handleCompanyDataSubmit} className="space-y-4">
                     <div className="space-y-4">
                       <div className="space-y-2">
                         <Label htmlFor="company-name">Unternehmensname</Label>
@@ -294,6 +334,7 @@ const AuthPage = () => {
                           value={companyEmail}
                           onChange={(e) => setCompanyEmail(e.target.value)}
                           disabled={isSubmitting}
+                          placeholder="info@unternehmen.de"
                         />
                       </div>
                       
@@ -309,16 +350,27 @@ const AuthPage = () => {
                         />
                       </div>
                     </div>
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Registrieren..." : "Unternehmen registrieren"}
-                  </Button>
-                </form>
+                    
+                    <div className="flex gap-4">
+                      <Button 
+                        type="button" 
+                        variant="outline"
+                        className="flex-1" 
+                        onClick={goBackToPersonalData}
+                        disabled={isSubmitting}
+                      >
+                        Zurück
+                      </Button>
+                      <Button 
+                        type="submit" 
+                        className="flex-1" 
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Registrieren..." : "Unternehmen registrieren"}
+                      </Button>
+                    </div>
+                  </form>
+                )}
               </CardContent>
             </TabsContent>
           </Tabs>
