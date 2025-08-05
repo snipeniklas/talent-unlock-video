@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Search, Users, Rocket, TrendingUp, CheckCircle } from "lucide-react";
+import PublicHeader from "@/components/PublicHeader";
 
 const HowWeWork = () => {
   const steps = [
@@ -50,6 +51,7 @@ const HowWeWork = () => {
 
   return (
     <div className="min-h-screen bg-background font-inter">
+      <PublicHeader />
       {/* Hero Section */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4">

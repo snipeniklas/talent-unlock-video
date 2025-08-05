@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Code, Cloud, Database, GitBranch, TestTube, Target, CheckCircle, TrendingUp, Zap } from "lucide-react";
-import heyTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import PublicHeader from "@/components/PublicHeader";
 
 const ITDevelopmentSolution = () => {
   const coreProblems = [
@@ -55,27 +55,7 @@ const ITDevelopmentSolution = () => {
 
   return (
     <div className="min-h-screen bg-background font-inter">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-40 bg-white border-b shadow-sm backdrop-blur-sm bg-white/95">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between w-full">
-            <div className="flex items-center">
-              <img src={heyTalentLogo} alt="HeyTalent" className="h-8 md:h-10 hover:scale-105 transition-transform duration-300" />
-            </div>
-            <div className="hidden md:flex space-x-8">
-              <a href="/" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Startseite</a>
-              <a href="/solutions/backoffice" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Backoffice</a>
-              <a href="/solutions/ai-ml" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">AI & ML</a>
-              <a href="#contact" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Kontakt</a>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button className="bg-primary hover:bg-primary-hover">
-                Tech-Audit jetzt buchen
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <PublicHeader />
 
       {/* Hero Section */}
       <section className="py-16 lg:py-24 bg-gradient-to-br from-background via-background/95 to-primary/5">
