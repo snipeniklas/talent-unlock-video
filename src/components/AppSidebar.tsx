@@ -89,7 +89,9 @@ export function AppSidebar() {
   const currentPath = location.pathname;
   const isActive = (path: string) => currentPath === path;
   const getNavCls = ({ isActive }: { isActive: boolean }) =>
-    isActive ? "bg-primary text-white font-medium" : "hover:bg-muted/50";
+    isActive 
+      ? "bg-primary text-white font-medium" 
+      : "text-foreground hover:bg-muted/50 hover:text-foreground";
 
   // Company Admin/User Navigation Items
   const companyItems = [
@@ -110,7 +112,7 @@ export function AppSidebar() {
 
   if (loading) {
     return (
-    <Sidebar className={isCollapsed ? "w-14" : "w-60"}>
+    <Sidebar className={`${isCollapsed ? "w-14" : "w-60"} bg-card border-r`}>
         <SidebarContent>
           <div className="flex items-center justify-center h-32">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -130,7 +132,7 @@ export function AppSidebar() {
       <SidebarContent>
         {/* Logo Section */}
         {!isCollapsed && (
-          <div className="flex items-center justify-center p-4 border-b">
+          <div className="flex items-center justify-center p-4 border-b bg-card">
             <img 
               src={heyTalentLogo} 
               alt="HeyTalent" 
@@ -140,7 +142,7 @@ export function AppSidebar() {
         )}
 
         <SidebarGroup>
-          <SidebarGroupLabel>
+          <SidebarGroupLabel className="text-foreground font-semibold">
             {userRole?.role === 'admin' ? 'Admin Bereich' : 'Hauptmenü'}
           </SidebarGroupLabel>
           
@@ -149,9 +151,13 @@ export function AppSidebar() {
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <NavLink to={item.url} end className={getNavCls}>
-                      <item.icon className="h-4 w-4" />
-                      {!isCollapsed && <span className="ml-2">{item.title}</span>}
+                    <NavLink 
+                      to={item.url} 
+                      end 
+                      className={({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${getNavCls({ isActive })}`}
+                    >
+                      <item.icon className="h-4 w-4 flex-shrink-0" />
+                      {!isCollapsed && <span className="flex-1">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -163,14 +169,17 @@ export function AppSidebar() {
         {/* Quick Actions */}
         {userRole?.role !== 'admin' && (
           <SidebarGroup>
-            <SidebarGroupLabel>Schnellzugriff</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-foreground font-semibold">Schnellzugriff</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <NavLink to="/app/search-requests/new" className={getNavCls}>
-                      <Plus className="h-4 w-4" />
-                      {!isCollapsed && <span className="ml-2">Neue Anfrage</span>}
+                    <NavLink 
+                      to="/app/search-requests/new" 
+                      className={({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${getNavCls({ isActive })}`}
+                    >
+                      <Plus className="h-4 w-4 flex-shrink-0" />
+                      {!isCollapsed && <span className="flex-1">Neue Anfrage</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -180,13 +189,13 @@ export function AppSidebar() {
         )}
 
         {/* Logout Section */}
-        <div className="mt-auto p-4 border-t">
+        <div className="mt-auto p-4 border-t bg-card">
           <Button
             variant="ghost"
-            className="w-full justify-start text-muted-foreground hover:text-foreground"
+            className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-muted/50"
             onClick={handleLogout}
           >
-            <LogOut className="h-4 w-4" />
+            <LogOut className="h-4 w-4 flex-shrink-0" />
             {!isCollapsed && <span className="ml-2">Abmelden</span>}
           </Button>
         </div>
