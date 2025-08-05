@@ -17,6 +17,8 @@ import SpecialistDetail from "./pages/app/SpecialistDetail";
 import BackofficeSolution from "./pages/solutions/BackofficeSolution";
 import AIMlSolution from "./pages/solutions/AIMlSolution";
 import ITDevelopmentSolution from "./pages/solutions/ITDevelopmentSolution";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import CandidateManagement from "./pages/admin/CandidateManagement";
 import SolutionsOverview from "./pages/SolutionsOverview";
 import HowWeWork from "./pages/HowWeWork";
 import ResourceHub from "./pages/ResourceHub";
@@ -51,6 +53,11 @@ const App = () => (
             <Route path="specialists" element={<Specialists />} />
             <Route path="specialists/:id" element={<SpecialistDetail />} />
           </Route>
+          
+          {/* Admin Routes */}
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/candidates" element={<CandidateManagement />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
