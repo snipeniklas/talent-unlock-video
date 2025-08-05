@@ -207,8 +207,8 @@ const BackofficeSolution = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-10"></div>
+      <section className="py-20 bg-gradient-primary relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8">
             Bereit für Remote Backoffice-Unterstützung?
