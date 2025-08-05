@@ -62,10 +62,10 @@ const SolutionsOverview = () => {
             {solutions.map((solution, index) => (
               <Card 
                 key={solution.id}
-                className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary h-full"
+                className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary h-full flex flex-col"
                 onClick={() => navigate(`/solutions/${solution.id}`)}
               >
-                <CardHeader className="text-center pb-6">
+                <CardHeader className="text-center pb-6 flex-shrink-0">
                   <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:animate-bounce">
                     <solution.icon className="w-10 h-10 text-white" />
                   </div>
@@ -76,8 +76,8 @@ const SolutionsOverview = () => {
                     {solution.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="space-y-3 mb-6">
+                <CardContent className="pt-0 flex-1 flex flex-col">
+                  <div className="space-y-3 mb-6 flex-1">
                     {solution.benefits.map((benefit, idx) => (
                       <div key={idx} className="flex items-center gap-3">
                         <div className="w-2 h-2 bg-primary rounded-full"></div>

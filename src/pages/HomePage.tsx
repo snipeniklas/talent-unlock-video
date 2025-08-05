@@ -130,7 +130,7 @@ const HomePage = () => {
             {/* Solution Cards */}
             <div className="grid md:grid-cols-3 gap-8 animate-slide-up-delay-4">
               <Card 
-                className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative"
+                className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative h-full flex flex-col"
                 onClick={() => navigate('/solutions/backoffice')}
               >
                 {/* Background Gradient */}
@@ -147,7 +147,7 @@ const HomePage = () => {
                     Qualifizierte Remote-Mitarbeiter für Administration, Buchhaltung und operative Unterstützung
                   </p>
                 </CardHeader>
-                <CardContent className="pt-0 relative z-10">
+                <CardContent className="pt-0 relative z-10 mt-auto">
                   <Button className="w-full bg-gradient-primary hover:shadow-lg transition-all duration-300 border-0">
                     Jetzt starten <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -155,7 +155,7 @@ const HomePage = () => {
               </Card>
 
               <Card 
-                className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative"
+                className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative h-full flex flex-col"
                 onClick={() => navigate('/solutions/it-development')}
               >
                 <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
@@ -171,7 +171,7 @@ const HomePage = () => {
                     Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur
                   </p>
                 </CardHeader>
-                <CardContent className="pt-0 relative z-10">
+                <CardContent className="pt-0 relative z-10 mt-auto">
                   <Button className="w-full bg-gradient-primary hover:shadow-lg transition-all duration-300 border-0">
                     Jetzt starten <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -179,7 +179,7 @@ const HomePage = () => {
               </Card>
 
               <Card 
-                className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative"
+                className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative h-full flex flex-col"
                 onClick={() => navigate('/solutions/ai-ml')}
               >
                 <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
@@ -195,7 +195,7 @@ const HomePage = () => {
                     KI-Experten und Data Scientists für Machine Learning und AI-Projekte
                   </p>
                 </CardHeader>
-                <CardContent className="pt-0 relative z-10">
+                <CardContent className="pt-0 relative z-10 mt-auto">
                   <Button className="w-full bg-gradient-primary hover:shadow-lg transition-all duration-300 border-0">
                     Jetzt starten <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
