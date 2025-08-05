@@ -331,7 +331,7 @@ const Support = () => {
         </Button>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6 h-[600px]">
+      <div className="grid lg:grid-cols-3 gap-6 h-[calc(100vh-200px)] min-h-[500px]">
         {/* Tickets Liste */}
         <Card className="lg:col-span-1">
           <CardHeader className="pb-3">
@@ -341,7 +341,7 @@ const Support = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0">
-            <ScrollArea className="h-[500px]">
+            <ScrollArea className="h-[calc(100vh-320px)] min-h-[400px]">
               {ticketsLoading ? (
                 <div className="p-4 text-center text-muted-foreground">
                   Tickets werden geladen...
@@ -422,7 +422,7 @@ const Support = () => {
               </CardHeader>
               <Separator />
               <CardContent className="p-0">
-                <ScrollArea className="h-[350px] p-4">
+                <ScrollArea className="h-[calc(100vh-420px)] min-h-[300px] p-4">
                   <div className="space-y-4">
                     {messages.map((message: any) => {
                       const isAdmin = message.user_roles?.some((ur: any) => ur.role === 'admin');
