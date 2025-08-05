@@ -29,6 +29,8 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Support from "./pages/app/Support";
 import AdminSupport from "./pages/admin/AdminSupport";
+import Settings from "./pages/app/Settings";
+import InviteRegister from "./pages/InviteRegister";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +51,7 @@ const App = () => (
           <Route path="/how-we-work" element={<HowWeWork />} />
           <Route path="/resource-hub" element={<ResourceHub />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/invite" element={<InviteRegister />} />
           <Route path="/app" element={<AppLayout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="search-requests" element={<SearchRequests />} />
@@ -58,6 +61,7 @@ const App = () => (
             <Route path="specialists" element={<Specialists />} />
             <Route path="specialists/:id" element={<SpecialistDetail />} />
             <Route path="support" element={<Support />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
           
           {/* Admin Routes mit AppLayout */}
