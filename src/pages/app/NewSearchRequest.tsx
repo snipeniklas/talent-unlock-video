@@ -224,8 +224,8 @@ const NewSearchRequest = () => {
                     <SelectValue placeholder="Art der Anstellung wählen" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="fulltime">Vollzeit</SelectItem>
-                    <SelectItem value="parttime">Teilzeit</SelectItem>
+                    <SelectItem value="full_time">Vollzeit</SelectItem>
+                    <SelectItem value="part_time">Teilzeit</SelectItem>
                     <SelectItem value="freelance">Freelance</SelectItem>
                     <SelectItem value="contract">Vertrag</SelectItem>
                   </SelectContent>
