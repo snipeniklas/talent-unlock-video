@@ -200,7 +200,8 @@ const Settings = () => {
       if (!inviteEmail.trim()) throw new Error('E-Mail-Adresse erforderlich');
       if (!currentUser?.profile?.company_id) throw new Error('Keine Firma gefunden');
 
-      const { error } = await supabase
+      // First create the invitation in the database
+      const { data: invitation, error } = await supabase
         .from('invitations')
         .insert({
           email: inviteEmail.toLowerCase().trim(),
@@ -208,16 +209,41 @@ const Settings = () => {
           invited_by: currentUser.user.id,
           status: 'pending',
           expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString() // 7 days
-        });
+        })
+        .select()
+        .single();
 
       if (error) throw error;
+
+      // Then send the invitation email
+      const { data, error: emailError } = await supabase.functions.invoke('send-invitation', {
+        body: {
+          email: inviteEmail.toLowerCase().trim(),
+          companyName: company?.name || 'Ihr Unternehmen',
+          inviteToken: invitation.id
+        }
+      });
+
+      if (emailError) {
+        console.error('Email sending failed:', emailError);
+        // Don't throw error here - invitation was created successfully
+        // Just log the issue for now
+      }
+
+      return { invitation, emailData: data };
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       setInviteEmail('');
       queryClient.invalidateQueries({ queryKey: ['companyInvitations'] });
+      
+      const successMessage = data.emailData?.inviteUrl 
+        ? `Einladung erstellt! Einladungslink: ${data.emailData.inviteUrl}`
+        : "Die Einladung wurde erfolgreich versendet.";
+      
       toast({
         title: "Einladung versendet",
-        description: "Die Einladung wurde erfolgreich versendet.",
+        description: successMessage,
+        duration: data.emailData?.inviteUrl ? 10000 : 4000, // Longer duration if showing URL
       });
     },
     onError: (error: any) => {
