@@ -14,6 +14,8 @@ import Specialists from "./pages/app/Specialists";
 import BackofficeSolution from "./pages/solutions/BackofficeSolution";
 import AIMlSolution from "./pages/solutions/AIMlSolution";
 import ITDevelopmentSolution from "./pages/solutions/ITDevelopmentSolution";
+import SolutionsOverview from "./pages/SolutionsOverview";
+import HowWeWork from "./pages/HowWeWork";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,9 +30,11 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/landing" element={<HeyTalentLanding />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/solutions" element={<SolutionsOverview />} />
           <Route path="/solutions/backoffice" element={<BackofficeSolution />} />
           <Route path="/solutions/it-development" element={<ITDevelopmentSolution />} />
           <Route path="/solutions/ai-ml" element={<AIMlSolution />} />
+          <Route path="/how-we-work" element={<HowWeWork />} />
           <Route path="/app" element={<AppLayout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="search-requests" element={<SearchRequests />} />

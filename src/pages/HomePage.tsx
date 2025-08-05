@@ -86,11 +86,12 @@ const HomePage = () => {
               <img src={heyTalentLogo} alt="HeyTalent" className="h-8 md:h-10 hover:scale-105 transition-transform duration-300" />
             </div>
             <div className="hidden md:flex space-x-8">
-              <a href="#solutions" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Lösungen</a>
-              <a href="#working-method" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">So arbeiten wir</a>
-              <a href="#use-cases" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Use Cases</a>
-              <a href="#about" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Über uns</a>
-              <a href="#contact" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Kontakt</a>
+              <button onClick={() => navigate('/solutions')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Lösungen</button>
+              <button onClick={() => navigate('/how-we-work')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">So arbeiten wir</button>
+              <button onClick={() => navigate('/resource-hub')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Resource Hub</button>
+              <button onClick={() => navigate('/use-cases')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Use Cases</button>
+              <button onClick={() => navigate('/about')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Über uns</button>
+              <button onClick={() => navigate('/contact')} className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Kontakt</button>
             </div>
             <div className="flex items-center space-x-4">
               <Button variant="outline" asChild className="hidden md:inline-flex">
