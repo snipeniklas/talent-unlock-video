@@ -16,6 +16,8 @@ import AIMlSolution from "./pages/solutions/AIMlSolution";
 import ITDevelopmentSolution from "./pages/solutions/ITDevelopmentSolution";
 import SolutionsOverview from "./pages/SolutionsOverview";
 import HowWeWork from "./pages/HowWeWork";
+import ResourceHub from "./pages/ResourceHub";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +37,8 @@ const App = () => (
           <Route path="/solutions/it-development" element={<ITDevelopmentSolution />} />
           <Route path="/solutions/ai-ml" element={<AIMlSolution />} />
           <Route path="/how-we-work" element={<HowWeWork />} />
+          <Route path="/resource-hub" element={<ResourceHub />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/app" element={<AppLayout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="search-requests" element={<SearchRequests />} />
