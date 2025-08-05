@@ -2,258 +2,311 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Brain, Database, TrendingUp, Target, CheckCircle, Zap, BarChart3, Bot } from "lucide-react";
+import { ArrowRight, Brain, Database, BarChart3, Bot, Target, CheckCircle, Users, Phone, Lightbulb } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 
 const AIMlSolution = () => {
-  const coreProblems = [
-    "POCs ohne Business-Impact",
-    "Fehlende MLOps-Infrastruktur", 
-    "Daten-Silos verhindern skalierbare Modelle"
+  const targetAudience = [
+    "CIOs und Data-Strategen",
+    "Innovationsmanager und Chief Digital Officers",
+    "Product Owner für AI-Projekte",
+    "Startups mit KI/ML-Ambitionen"
   ];
 
-  const aiExpertise = [
+  const coreProblems = [
     {
-      title: "Datenstrategie & Engineering",
-      description: "ETL-Pipelines (Airflow, dbt), Feature Stores",
-      icon: Database
-    },
-    {
-      title: "Modellentwicklung",
-      description: "TensorFlow, PyTorch, scikit-learn, HuggingFace",
+      title: "Mangel an KI-Expertise im Unternehmen",
+      description: "Schwierigkeiten, qualifizierte Data Scientists und ML-Engineers zu finden",
       icon: Brain
     },
     {
-      title: "MLOps & Deployment",
-      description: "MLflow, Kubeflow, Docker/Kubernetes",
-      icon: TrendingUp
+      title: "Hohe Kosten für KI-Spezialisten",
+      description: "KI-Experten sind extrem teuer und selten verfügbar",
+      icon: Target
     },
     {
-      title: "Explainable AI & Bias-Management",
-      description: "Transparente und faire KI-Systeme",
-      icon: BarChart3
-    },
-    {
-      title: "Prompt Engineering für LLMs",
-      description: "OpenAI, Anthropic, Llama",
-      icon: Bot
+      title: "Komplexität von KI-Projekten unterschätzt",
+      description: "KI-Projekte erfordern spezielle Kompetenzen und Erfahrung",
+      icon: Database
     }
   ];
 
-  const sixPhaseRoadmap = [
-    "Use-Case-Workshop (Impact-Analyse)",
-    "Daten Readiness Check",
-    "Prototyping & MVP",
-    "Production-Deployment",
-    "Monitoring & Model-Retraining",
-    "Governance & Compliance (DSGVO, EU-AI-Act)"
+  const aiSpecialists = [
+    {
+      role: "Machine Learning Engineers",
+      skills: "TensorFlow, PyTorch, scikit-learn, MLOps, Model Deployment",
+      specialization: "ML-Pipeline Development, Model Training & Optimization",
+      experience: "4+ Jahre"
+    },
+    {
+      role: "Data Scientists",
+      skills: "Python, R, Statistical Analysis, Predictive Modeling, Feature Engineering",
+      specialization: "Data Analysis, Business Intelligence, Statistical Modeling",
+      experience: "5+ Jahre"
+    },
+    {
+      role: "AI/NLP Spezialisten",
+      skills: "HuggingFace, OpenAI, LangChain, Prompt Engineering, Chatbots",
+      specialization: "Natural Language Processing, Conversational AI",
+      experience: "3+ Jahre"
+    },
+    {
+      role: "Computer Vision Engineers",
+      skills: "OpenCV, YOLO, CNN, Image Processing, Object Detection",
+      specialization: "Image Recognition, Video Analysis, Visual AI",
+      experience: "4+ Jahre"
+    },
+    {
+      role: "MLOps Engineers",
+      skills: "Docker, Kubernetes, MLflow, Kubeflow, CI/CD for ML",
+      specialization: "ML Infrastructure, Model Deployment, Monitoring",
+      experience: "4+ Jahre"
+    },
+    {
+      role: "AI Product Consultants",
+      skills: "AI Strategy, Business Case Development, ROI Analysis",
+      specialization: "AI Implementation Strategy, Business Integration",
+      experience: "6+ Jahre"
+    }
+  ];
+
+  const aiTechnologies = [
+    { name: "Machine Learning", tools: ["TensorFlow", "PyTorch", "scikit-learn", "XGBoost"] },
+    { name: "Deep Learning", tools: ["Neural Networks", "CNN", "RNN", "Transformers"] },
+    { name: "NLP & LLMs", tools: ["HuggingFace", "OpenAI", "LangChain", "BERT"] },
+    { name: "Computer Vision", tools: ["OpenCV", "YOLO", "Object Detection", "OCR"] },
+    { name: "MLOps", tools: ["MLflow", "Kubeflow", "Docker", "Kubernetes"] },
+    { name: "Data Engineering", tools: ["Apache Spark", "Airflow", "dbt", "BigQuery"] }
+  ];
+
+  const benefits = [
+    "Zugang zu Top-KI-Experten aus Deutschland und Europa",
+    "Flexible Projektlaufzeiten: von Proof of Concepts bis Langzeitprojekte",
+    "Komplette KI-Teams oder einzelne Spezialisten",
+    "Praxiserprobte Erfahrung in verschiedenen Branchen",
+    "Schneller Projektstart: KI-Experten in 1-2 Wochen verfügbar",
+    "Keine langfristigen Personalverpflichtungen"
   ];
 
   const results = [
-    "30 % Effizienzsteigerung im Kundenservice durch NLP-Bots",
-    "Predictive Maintenance mit 95 % Vorhersagegenauigkeit",
-    "Skalierbare ML-Lösungen in produktivem Betrieb"
+    { metric: "70%", description: "Erfolgreiche KI-Projekte" },
+    { metric: "50%", description: "Kosteneinsparung vs. lokale KI-Experten" },
+    { metric: "3x", description: "Schnellere Implementierung" },
+    { metric: "90%", description: "Kundenzufriedenheit mit KI-Lösungen" }
+  ];
+
+  const useCases = [
+    {
+      title: "Chatbots & Customer Service AI",
+      description: "Intelligente Kundenservice-Automatisierung mit NLP",
+      result: "80% Reduzierung der Support-Anfragen"
+    },
+    {
+      title: "Predictive Analytics",
+      description: "Vorhersagemodelle für Sales, Inventory und Maintenance",
+      result: "30% Verbesserung der Forecast-Genauigkeit"
+    },
+    {
+      title: "Computer Vision Anwendungen",
+      description: "Automatisierte Bild- und Videoanalyse",
+      result: "95% Genauigkeit bei Objekterkennung"
+    }
   ];
 
   return (
     <div className="min-h-screen bg-background font-inter">
       <PublicHeader />
-
+      
       {/* Hero Section */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-background via-background/95 to-primary/5">
+      <section className="py-16 lg:py-24 bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6 animate-fade-in">
-              <Brain className="w-4 h-4 mr-2 text-primary" />
-              AI & Machine Learning
-            </Badge>
-            <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
-              KI-Projekte, die wirklich liefern
+            <Badge className="mb-6 bg-primary text-white px-6 py-2 text-lg">Remote KI & ML-Spezialisten</Badge>
+            <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
+              Erfahrene Remote KI-Experten für Ihre AI-Projekte
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in-delay-1">
-              Für CIOs, Data-Strategen und Innovationsmanager, die KI erfolgreich in ihrem Unternehmen einsetzen möchten
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+              Realisieren Sie Ihre KI-Visionen mit erstklassigen Remote-Spezialisten. 
+              Von Machine Learning bis Computer Vision - wir haben die Experten für Ihr Projekt.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-2">
-              <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-                MLOps-Assessment anfordern
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 border-primary text-primary hover:bg-primary hover:text-white">
-                Mehr erfahren
-              </Button>
+            <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
+              Remote KI-Experten finden
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Target Audience */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Für wen?</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {targetAudience.map((audience, index) => (
+                <div key={index} className="flex items-center gap-3 p-4 bg-gradient-subtle rounded-lg">
+                  <Brain className="w-6 h-6 text-primary" />
+                  <span className="text-brand-dark font-medium">{audience}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Core Problems */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Kernprobleme</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-delay-1">
-              Diese KI-Herausforderungen kennen viele Unternehmen
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {coreProblems.map((problem, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 animate-scale-in" style={{ animationDelay: `${index * 0.2}s` }}>
-                <CardContent className="p-8">
-                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Target className="w-6 h-6 text-red-600" />
-                  </div>
-                  <p className="text-brand-dark font-medium">{problem}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* AI/ML Expertise */}
-      <section className="py-20 bg-gradient-subtle px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Unsere AI-/ML-Expertise</h2>
-            <p className="text-xl text-muted-foreground animate-fade-in-delay-1">
-              Von der Datenstrategie bis zur produktiven KI-Anwendung
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {aiExpertise.map((item, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all duration-500 hover:scale-105 group animate-slide-in-up" style={{ animationDelay: `${index * 0.2}s` }}>
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
-                    <item.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-lg text-brand-dark group-hover:text-primary transition-colors">
-                    {item.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm group-hover:text-brand-dark transition-colors">
-                    {item.description}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Kernprobleme</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {coreProblems.map((problem, index) => (
+                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <problem.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <CardTitle className="text-xl">{problem.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{problem.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 6-Phase Roadmap */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Unser 6-Phasen-Fahrplan</h2>
-            <p className="text-xl text-muted-foreground animate-fade-in-delay-1">
-              Systematischer Weg von der Idee zur produktiven KI-Lösung
-            </p>
+      {/* AI Specialists */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Unsere KI-Spezialisten</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {aiSpecialists.map((specialist, index) => (
+                <Card key={index} className="hover:shadow-lg transition-shadow h-full">
+                  <CardHeader>
+                    <CardTitle className="text-xl text-primary">{specialist.role}</CardTitle>
+                    <Badge variant="outline" className="w-fit">{specialist.experience} Erfahrung</Badge>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-3">{specialist.specialization}</p>
+                    <p className="text-sm font-medium">{specialist.skills}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="space-y-6">
-            {sixPhaseRoadmap.map((phase, index) => (
-              <div key={index} className="flex items-center gap-6 p-6 bg-blue-50 rounded-lg animate-slide-in-right" style={{ animationDelay: `${index * 0.2}s` }}>
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
-                  {index + 1}
+      {/* AI Technologies */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">KI-Technologie-Expertise</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {aiTechnologies.map((tech, index) => (
+                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-xl text-primary">{tech.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {tech.tools.map((tool, idx) => (
+                        <Badge key={idx} variant="secondary" className="text-xs">
+                          {tool}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Use Cases */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Erfolgreiche KI-Anwendungsfälle</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {useCases.map((useCase, index) => (
+                <Card key={index} className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-lg text-primary">{useCase.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-4">{useCase.description}</p>
+                    <div className="flex items-center gap-2">
+                      <Lightbulb className="w-4 h-4 text-green-500" />
+                      <span className="text-sm font-medium text-green-600">{useCase.result}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Ihre Vorteile</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-1" />
+                  <span className="text-muted-foreground">{benefit}</span>
                 </div>
-                <p className="text-lg font-medium text-brand-dark">{phase}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Results Section */}
-      <section className="py-20 bg-gradient-subtle px-4">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Ergebnisse</h2>
-            <p className="text-xl text-muted-foreground animate-fade-in-delay-1">
-              Messbare Erfolge mit produktiver KI
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            {results.map((result, index) => (
-              <div key={index} className="flex items-center gap-4 p-6 bg-green-50 rounded-lg animate-slide-in-left" style={{ animationDelay: `${index * 0.2}s` }}>
-                <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="w-5 h-5 text-white" />
+      {/* Results */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Messbare Ergebnisse</h2>
+            <div className="grid md:grid-cols-4 gap-8">
+              {results.map((result, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-4xl font-bold text-primary mb-2">{result.metric}</div>
+                  <div className="text-muted-foreground">{result.description}</div>
                 </div>
-                <p className="text-lg font-medium text-brand-dark">{result}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-primary text-white px-4">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in">
-            Bereit für produktive KI?
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-brand-dark mb-6">
+            Bereit für KI-Innovation?
           </h2>
-          <p className="text-xl mb-8 opacity-90 animate-fade-in-delay-1">
-            Lassen Sie uns Ihre KI-Readiness bewerten und einen konkreten Fahrplan entwickeln.
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Sprechen Sie mit uns über Ihre KI-Visionen. Wir finden die passenden Remote-Experten für Ihr AI-Projekt.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-2">
-            <Button size="lg" variant="secondary" className="text-lg px-8 bg-white text-primary hover:bg-gray-100">
-              <Brain className="w-5 h-5 mr-2" />
-              MLOps-Assessment anfordern
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
+              <Phone className="w-5 h-5 mr-2" />
+              Kostenloses KI-Strategiegespräch
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 border-white text-white hover:bg-white hover:text-primary">
-              KI-Success Stories ansehen
+            <Button variant="outline" size="lg" className="text-lg px-8">
+              KI-Experten kennenlernen
             </Button>
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="font-bold text-xl mb-4">HeyTalent</h3>
-              <p className="text-gray-300 text-sm">
-                Ihr Partner für erfolgreiche KI-Implementierungen und MLOps-Excellence.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Lösungen</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="/solutions/backoffice" className="text-gray-300 hover:text-white transition-colors">Backoffice</a></li>
-                <li><a href="/solutions/it-development" className="text-gray-300 hover:text-white transition-colors">IT-Development</a></li>
-                <li><a href="/solutions/ai-ml" className="text-gray-300 hover:text-white transition-colors">AI & ML</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Kontakt</h4>
-              <ul className="space-y-2 text-sm">
-                <li className="text-gray-300">kontakt@hejtalent.de</li>
-                <li className="text-gray-300">+49 89 9017 6218</li>
-                <li className="text-gray-300">München, Deutschland</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Rechtliches</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Impressum</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Datenschutz</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">AGB</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-700 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-              © 2024 HeyTalent. Alle Rechte vorbehalten.
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

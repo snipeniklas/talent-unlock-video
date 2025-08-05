@@ -38,40 +38,40 @@ const HomePage = () => {
 
   const services = [
     {
-      title: "KI-Entwickler Vermittlung",
-      description: "Qualifizierte AI-Entwickler aus Deutschland und Europa für Ihre Projekte",
-      features: ["Umfassende Prüfung", "Direkte Vermittlung", "Projektbasiert oder Festanstellung"]
+      title: "Remote Backoffice-Kräfte",
+      description: "Qualifizierte Remote-Mitarbeiter für administrative Aufgaben und operative Unterstützung",
+      features: ["Büroorganisation & Administration", "Buchhaltung & Controlling", "Kundenservice & Support"]
     },
     {
-      title: "Team-Building",
-      description: "Komplette Entwicklerteams für größere KI-Projekte",
-      features: ["Skalierbare Teams", "Verschiedene Expertisen", "Agile Methoden"]
+      title: "Remote IT-Entwickler",
+      description: "Erfahrene Remote-Entwickler für alle Bereiche der Softwareentwicklung",
+      features: ["Full-Stack Entwicklung", "DevOps & Cloud", "Mobile & Web Apps"]
     },
     {
-      title: "Consulting",
-      description: "Beratung für KI-Strategien und Technologie-Entscheidungen",
-      features: ["Strategieberatung", "Technologie-Evaluation", "Implementation Support"]
+      title: "Remote KI-Spezialisten",
+      description: "KI-Experten und Data Scientists für Machine Learning und AI-Projekte",
+      features: ["Machine Learning", "Data Science", "KI-Strategieberatung"]
     }
   ];
 
   const stats = [
-    { label: "Geprüfte Entwickler", value: "500+" },
-    { label: "Erfolgreiche Projekte", value: "150+" },
-    { label: "Zufriedene Kunden", value: "98%" },
-    { label: "Durchschnittliche Projektdauer", value: "6 Monate" }
+    { label: "Vermittelte Remote-Fachkräfte", value: "500+" },
+    { label: "Erfolgreiche Vermittlungen", value: "150+" },
+    { label: "Zufriedene Unternehmen", value: "98%" },
+    { label: "Durchschnittliche Besetzungszeit", value: "2 Wochen" }
   ];
 
   const testimonials = [
     {
       name: "Dr. Marcus Weber",
       company: "TechCorp GmbH",
-      text: "HejTalent hat uns dabei geholfen, unser KI-Team innerhalb von 4 Wochen zu vervollständigen. Die Qualität der Entwickler ist ausgezeichnet.",
+      text: "HeyTalent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.",
       rating: 5
     },
     {
       name: "Sarah Mueller",
-      company: "InnovateAI",
-      text: "Professionelle Abwicklung und top qualifizierte Kandidaten. Wir haben bereits mehrere Projekte erfolgreich umgesetzt.",
+      company: "StartupTech GmbH",
+      text: "Unser Remote-Entwicklungsteam von HeyTalent arbeitet seit 6 Monaten perfekt mit uns zusammen. Top Qualität!",
       rating: 5
     }
   ];
@@ -88,10 +88,10 @@ const HomePage = () => {
               Ihr Engpass. Unsere Lösung.
             </h1>
             <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in-delay-1">
-              Remote-Teams, die genau dort ansetzen, wo Sie sie brauchen.
+              Qualifizierte Remote-Fachkräfte, die genau dort ansetzen, wo Sie sie brauchen.
             </p>
             <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto animate-fade-in-delay-2">
-              Wählen Sie Ihr Thema und finden Sie Experten aus Backoffice, IT oder KI, 
+              Wählen Sie Ihr Thema und finden Sie Remote-Experten aus Backoffice, IT oder KI, 
               die Ihre Herausforderung präzise und schnell lösen.
             </p>
             
@@ -106,12 +106,12 @@ const HomePage = () => {
                     <Users className="w-8 h-8 text-white" />
                   </div>
                   <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                    Operative Rückendeckung im Tagesgeschäft
+                    Remote Backoffice-Fachkräfte
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
                   <p className="text-muted-foreground group-hover:text-brand-dark transition-colors">
-                    Prozessoptimierung, Automation und virtuelle Assistenz für mehr Effizienz
+                    Qualifizierte Remote-Mitarbeiter für Administration, Buchhaltung und operative Unterstützung
                   </p>
                 </CardContent>
               </Card>
@@ -125,12 +125,12 @@ const HomePage = () => {
                     <Code className="w-8 h-8 text-white" />
                   </div>
                   <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                    Skalierbare Entwicklung, wenn Ihr IT-Team am Limit ist
+                    Remote IT-Entwickler & Tech-Experten
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
                   <p className="text-muted-foreground group-hover:text-brand-dark transition-colors">
-                    Full-Stack Development, DevOps und Architektur-Expertise
+                    Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur
                   </p>
                 </CardContent>
               </Card>
@@ -144,12 +144,12 @@ const HomePage = () => {
                     <Shield className="w-8 h-8 text-white" />
                   </div>
                   <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                    KI-Projekte, die wirklich liefern
+                    Remote KI & ML-Spezialisten
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
                   <p className="text-muted-foreground group-hover:text-brand-dark transition-colors">
-                    MLOps, Datenstrategie und produktive KI-Implementierungen
+                    KI-Experten und Data Scientists für Machine Learning und AI-Projekte
                   </p>
                 </CardContent>
               </Card>
@@ -157,7 +157,7 @@ const HomePage = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-4">
               <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-                Kostenloses Strategiegespräch buchen
+                Kostenloses Beratungsgespräch - Remote-Fachkräfte finden
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button 
@@ -166,7 +166,7 @@ const HomePage = () => {
                 className="text-lg px-8 border-primary text-primary hover:bg-primary hover:text-white"
                 onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Lösungen entdecken
+                Remote-Fachkräfte entdecken
               </Button>
             </div>
           </div>
@@ -191,9 +191,9 @@ const HomePage = () => {
       <section id="solutions" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Unsere Lösungen</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Unsere Remote-Fachkräfte</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-delay-1">
-              Maßgeschneiderte Lösungen für Ihre KI-Projekte und Entwicklerbedarfe
+              Maßgeschneiderte Remote-Teams für Ihre spezifischen Anforderungen
             </p>
           </div>
 
@@ -299,11 +299,11 @@ const HomePage = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">Über HejTalent</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">Über HeyTalent</h2>
               <p className="text-lg text-muted-foreground mb-6">
                 Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach 
-                erstklassigen KI-Entwicklern sind. Unser Fokus liegt auf der gründlichen Prüfung und 
-                Vermittlung von Talenten aus Deutschland und Europa.
+                erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und 
+                Vermittlung von Remote-Talenten aus Deutschland und Europa.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 group hover:scale-105 transition-transform duration-200">
@@ -372,7 +372,7 @@ const HomePage = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Kontakt aufnehmen</h2>
             <p className="text-xl text-muted-foreground animate-fade-in-delay-1">
-              Lassen Sie uns gemeinsam Ihr KI-Projekt verwirklichen
+              Lassen Sie uns gemeinsam die passenden Remote-Fachkräfte für Ihr Unternehmen finden
             </p>
           </div>
 

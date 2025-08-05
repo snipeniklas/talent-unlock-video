@@ -11,27 +11,27 @@ const SolutionsOverview = () => {
   const solutions = [
     {
       id: 'backoffice',
-      title: 'Operative Rückendeckung im Tagesgeschäft',
-      description: 'Prozessoptimierung, Automation und virtuelle Assistenz für mehr Effizienz',
+      title: 'Remote Backoffice-Fachkräfte',
+      description: 'Qualifizierte Remote-Mitarbeiter für Administration, Buchhaltung und operative Unterstützung',
       icon: Users,
-      benefits: ['40% Zeitersparnis bei Routine-Tasks', 'Transparente Kennzahlen & Reports', 'Freedom to scale'],
-      cta: 'Prozess-Workshop gratis anfragen'
+      benefits: ['Kosteneinsparung bis zu 60%', 'Flexible Arbeitszeiten', 'Schnelle Einarbeitung'],
+      cta: 'Remote Backoffice-Kräfte finden'
     },
     {
       id: 'it-development',
-      title: 'Skalierbare Entwicklung, wenn Ihr IT-Team am Limit ist',
-      description: 'Full-Stack Development, DevOps und Architektur-Expertise',
+      title: 'Remote IT-Entwickler & Tech-Experten',
+      description: 'Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur',
       icon: Code,
-      benefits: ['50% kürzere Time-to-Market', 'Niedrigere Fehlerquoten', 'Nachhaltige Codequalität'],
-      cta: 'Tech-Audit jetzt buchen'
+      benefits: ['Senior-Level Entwickler', 'Agile Arbeitsweise', 'Deutsche & EU-Zeitzone'],
+      cta: 'Remote IT-Experten finden'
     },
     {
       id: 'ai-ml',
-      title: 'KI-Projekte, die wirklich liefern',
-      description: 'MLOps, Datenstrategie und produktive KI-Implementierungen',
+      title: 'Remote KI & ML-Spezialisten',
+      description: 'KI-Experten und Data Scientists für Machine Learning und AI-Projekte',
       icon: Shield,
-      benefits: ['30% Effizienzsteigerung', '95% Vorhersagegenauigkeit', 'Skalierbare ML-Lösungen'],
-      cta: 'MLOps-Assessment anfordern'
+      benefits: ['Spezialisierte KI-Expertise', 'Proven Track Record', 'Modernste Technologien'],
+      cta: 'Remote KI-Experten finden'
     }
   ];
 
@@ -43,11 +43,11 @@ const SolutionsOverview = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              Unsere Lösungen
+              Unsere Remote-Fachkräfte
             </h1>
             <p className="text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-              Spezialisierte Remote-Teams für jeden Bereich - von operativer Unterstützung 
-              bis hin zu komplexen KI-Implementierungen.
+              Qualifizierte Remote-Experten für jeden Bereich - von administrativer Unterstützung 
+              bis hin zu komplexen IT- und KI-Projekten.
             </p>
           </div>
         </div>
@@ -106,13 +106,13 @@ const SolutionsOverview = () => {
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-brand-dark mb-6">
-            Nicht sicher, welche Lösung die richtige für Sie ist?
+            Nicht sicher, welche Remote-Fachkräfte Sie benötigen?
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Lassen Sie uns in einem kostenlosen Strategiegespräch gemeinsam die beste Lösung für Ihre Herausforderungen finden.
+            Lassen Sie uns in einem kostenlosen Beratungsgespräch gemeinsam die passenden Remote-Experten für Ihre Herausforderungen finden.
           </p>
           <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-            Kostenloses Strategiegespräch buchen
+            Kostenloses Beratungsgespräch buchen
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>

@@ -2,225 +2,215 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Settings, Database, TrendingUp, CheckCircle, Target, Clock, Users, Star } from "lucide-react";
+import { ArrowRight, Users, Calculator, FileText, Clock, Target, CheckCircle, Star, Phone } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 
 const BackofficeSolution = () => {
-  const coreProblems = [
-    "Manuelle Routine zieht Ressourcen ab",
-    "Qualitätsschwankungen bei Dokumenten & Daten", 
-    "Hoher Aufwand für Onboarding neuer Mitarbeiter"
+  const targetAudience = [
+    "Geschäftsführer kleiner und mittlerer Unternehmen",
+    "Office-Manager und Assistenzteams",
+    "Buchhalter und Controlling-Verantwortliche",
+    "HR-Verantwortliche"
   ];
 
-  const expertise = [
+  const coreProblems = [
     {
-      title: "Prozessanalyse & -automation",
-      description: "RPA, Zapier, n8n",
-      icon: Settings
+      title: "Hohe Personalkosten im administrativen Bereich",
+      description: "Vollzeit-Backoffice-Kräfte vor Ort sind teuer und oft nicht voll ausgelastet",
+      icon: Calculator
     },
     {
-      title: "Data Quality Management",
-      description: "KPI-Dashboards mit Power BI, Supabase",
-      icon: Database
+      title: "Zeitaufwändige Routine-Aufgaben",
+      description: "Administration und Buchhaltung binden wertvolle Ressourcen, die für Kerngeschäft fehlen",
+      icon: Clock
     },
     {
-      title: "Virtuelle Assistenz-Teams",
-      description: "Mit definierten SLAs",
-      icon: Users
+      title: "Schwankende Arbeitsbelastung",
+      description: "Saisonale oder projektbedingte Spitzen schwer mit festem Personal abzudecken",
+      icon: FileText
+    }
+  ];
+
+  const remoteTalents = [
+    {
+      role: "Virtuelle Assistenten",
+      skills: "E-Mail-Management, Terminplanung, Kundenkommunikation, Datenerfassung",
+      experience: "3+ Jahre Erfahrung"
     },
     {
-      title: "Lean-Ansatz",
-      description: "Kontinuierliche Verbesserung nach Kaizen-Prinzip",
-      icon: TrendingUp
+      role: "Remote Buchhalter",
+      skills: "Finanzbuchhaltung, Lohnabrechnung, Controlling, Steuervorbereitungen",
+      experience: "5+ Jahre Erfahrung, DATEV-zertifiziert"
+    },
+    {
+      role: "Administrative Spezialisten",
+      skills: "Projektmanagement, Qualitätsmanagement, Compliance, Dokumentation",
+      experience: "4+ Jahre Branchenerfahrung"
+    },
+    {
+      role: "Customer Service Agents",
+      skills: "Kundenbetreuung, Beschwerdemanagement, CRM-Systeme, Verkaufsunterstützung",
+      experience: "3+ Jahre im Kundenservice"
     }
   ];
 
   const benefits = [
-    "40 % Zeitersparnis bei Routine-Tasks",
-    "Transparente Kennzahlen & Reports",
-    "Freedom to scale – ohne Einstellungsschub"
+    "Bis zu 60% Kosteneinsparung gegenüber lokalen Vollzeitkräften",
+    "Flexible Skalierung je nach Bedarf (Stunden, Tage, Monate)",
+    "Deutsche Sprachkenntnisse und EU-Zeitzone",
+    "Schneller Start: Einsatzbereit in 1-2 Wochen",
+    "Keine HR-Aufwände: Wir übernehmen Recruiting und Betreuung",
+    "Backup-Lösungen bei Ausfall verfügbar"
+  ];
+
+  const results = [
+    { metric: "60%", description: "Kosteneinsparung im Backoffice" },
+    { metric: "40h/Woche", description: "Freigesetzte Zeit für Kerngeschäft" },
+    { metric: "98%", description: "Kundenzufriedenheit mit Remote-Kräften" },
+    { metric: "2 Wochen", description: "Durchschnittliche Einarbeitungszeit" }
   ];
 
   return (
     <div className="min-h-screen bg-background font-inter">
       <PublicHeader />
-
+      
       {/* Hero Section */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-background via-background/95 to-primary/5">
+      <section className="py-16 lg:py-24 bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6 animate-fade-in">
-              <Settings className="w-4 h-4 mr-2 text-primary" />
-              Backoffice-Lösungen
-            </Badge>
-            <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
-              Operative Rückendeckung im Tagesgeschäft
+            <Badge className="mb-6 bg-primary text-white px-6 py-2 text-lg">Remote Backoffice-Fachkräfte</Badge>
+            <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
+              Qualifizierte Remote-Unterstützung für Ihr Backoffice
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in-delay-1">
-              Für Geschäftsführer, Office-Leiter und Assistenzteams, die ihre operativen Prozesse optimieren möchten
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+              Entlasten Sie Ihr Team mit erfahrenen Remote-Fachkräften für Administration, 
+              Buchhaltung und operative Aufgaben. Flexibel, kostengünstig und sofort einsatzbereit.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-2">
-              <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-                Prozess-Workshop gratis anfragen
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 border-primary text-primary hover:bg-primary hover:text-white">
-                Mehr erfahren
-              </Button>
+            <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
+              Remote Backoffice-Kräfte finden
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Target Audience */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Für wen?</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {targetAudience.map((audience, index) => (
+                <div key={index} className="flex items-center gap-3 p-4 bg-gradient-subtle rounded-lg">
+                  <Users className="w-6 h-6 text-primary" />
+                  <span className="text-brand-dark font-medium">{audience}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Core Problems */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Kernprobleme</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-delay-1">
-              Diese Herausforderungen kennen Sie sicher auch
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {coreProblems.map((problem, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 animate-scale-in" style={{ animationDelay: `${index * 0.2}s` }}>
-                <CardContent className="p-8">
-                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Target className="w-6 h-6 text-red-600" />
-                  </div>
-                  <p className="text-brand-dark font-medium">{problem}</p>
-                </CardContent>
-              </Card>
-            ))}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Kernprobleme</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {coreProblems.map((problem, index) => (
+                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <problem.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <CardTitle className="text-xl">{problem.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{problem.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Expertise Section */}
-      <section className="py-20 bg-gradient-subtle px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Unsere Expertise & Methoden</h2>
-            <p className="text-xl text-muted-foreground animate-fade-in-delay-1">
-              Bewährte Technologien und Methoden für Ihre operative Exzellenz
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {expertise.map((item, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all duration-500 hover:scale-105 group animate-slide-in-left" style={{ animationDelay: `${index * 0.2}s` }}>
-                <CardHeader>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center group-hover:animate-bounce">
-                      <item.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl text-brand-dark group-hover:text-primary transition-colors">
-                        {item.title}
-                      </CardTitle>
-                      <CardDescription className="text-base group-hover:text-brand-dark transition-colors">
-                        {item.description}
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-              </Card>
-            ))}
+      {/* Remote Talents */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Unsere Remote-Fachkräfte</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              {remoteTalents.map((talent, index) => (
+                <Card key={index} className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-xl text-primary">{talent.role}</CardTitle>
+                    <Badge variant="outline" className="w-fit">{talent.experience}</Badge>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-4">{talent.skills}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Ihr Nutzen</h2>
-            <p className="text-xl text-muted-foreground animate-fade-in-delay-1">
-              Messbare Ergebnisse, die Ihr Business voranbringen
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-center gap-4 p-6 bg-green-50 rounded-lg animate-slide-in-right" style={{ animationDelay: `${index * 0.2}s` }}>
-                <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="w-5 h-5 text-white" />
+      {/* Benefits */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Ihre Vorteile</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <CheckCircle className="w-6 h-6 text-green-500 mt-1" />
+                  <span className="text-muted-foreground">{benefit}</span>
                 </div>
-                <p className="text-lg font-medium text-brand-dark">{benefit}</p>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Results */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Messbare Ergebnisse</h2>
+            <div className="grid md:grid-cols-4 gap-8">
+              {results.map((result, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-4xl font-bold text-primary mb-2">{result.metric}</div>
+                  <div className="text-muted-foreground">{result.description}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-primary text-white px-4">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in">
-            Bereit für operative Exzellenz?
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-brand-dark mb-6">
+            Bereit für Remote Backoffice-Unterstützung?
           </h2>
-          <p className="text-xl mb-8 opacity-90 animate-fade-in-delay-1">
-            Lassen Sie uns in einem kostenlosen Workshop Ihre Prozesse analysieren und Optimierungspotentiale identifizieren.
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Sprechen Sie mit uns über Ihre Anforderungen. Wir finden die passenden Remote-Fachkräfte für Ihr Backoffice.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-2">
-            <Button size="lg" variant="secondary" className="text-lg px-8 bg-white text-primary hover:bg-gray-100">
-              <Clock className="w-5 h-5 mr-2" />
-              Prozess-Workshop gratis anfragen
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
+              <Phone className="w-5 h-5 mr-2" />
+              Kostenloses Beratungsgespräch
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 border-white text-white hover:bg-white hover:text-primary">
-              Referenzen ansehen
+            <Button variant="outline" size="lg" className="text-lg px-8">
+              Remote-Fachkräfte kennenlernen
             </Button>
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="font-bold text-xl mb-4">HeyTalent</h3>
-              <p className="text-gray-300 text-sm">
-                Ihr Partner für operative Exzellenz und Business-Transformation.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Lösungen</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="/solutions/backoffice" className="text-gray-300 hover:text-white transition-colors">Backoffice</a></li>
-                <li><a href="/solutions/it-development" className="text-gray-300 hover:text-white transition-colors">IT-Development</a></li>
-                <li><a href="/solutions/ai-ml" className="text-gray-300 hover:text-white transition-colors">AI & ML</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Kontakt</h4>
-              <ul className="space-y-2 text-sm">
-                <li className="text-gray-300">kontakt@hejtalent.de</li>
-                <li className="text-gray-300">+49 89 9017 6218</li>
-                <li className="text-gray-300">München, Deutschland</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Rechtliches</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Impressum</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Datenschutz</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">AGB</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-700 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-              © 2024 HeyTalent. Alle Rechte vorbehalten.
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

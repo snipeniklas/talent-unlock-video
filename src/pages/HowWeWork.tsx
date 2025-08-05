@@ -10,42 +10,42 @@ const HowWeWork = () => {
       step: "01",
       title: "Bedarfsanalyse",
       description: "Verstehen Ihrer Anforderungen",
-      details: "In einem ausführlichen Gespräch analysieren wir Ihre aktuellen Herausforderungen, Ziele und technischen Anforderungen. Wir identifizieren die Skills und Ressourcen, die Sie benötigen.",
+      details: "In einem ausführlichen Gespräch analysieren wir Ihre aktuellen Herausforderungen, gewünschten Skills und Budget. Wir identifizieren die Art der Remote-Fachkräfte, die Sie benötigen.",
       icon: Search,
       timeline: "1-2 Tage"
     },
     {
       step: "02", 
-      title: "Team-Matching",
-      description: "Passende Experten finden",
-      details: "Basierend auf Ihrer Bedarfsanalyse stellen wir ein maßgeschneidertes Team aus unseren geprüften Experten zusammen. Jeder Kandidat wird sorgfältig auf Ihre Anforderungen abgestimmt.",
+      title: "Kandidaten-Matching",
+      description: "Passende Remote-Experten finden",
+      details: "Basierend auf Ihrer Bedarfsanalyse präsentieren wir Ihnen 3-5 vorqualifizierte Remote-Kandidaten aus unserem Netzwerk. Jeder Kandidat wird sorgfältig auf Ihre Anforderungen abgestimmt.",
       icon: Users,
       timeline: "3-5 Tage"
     },
     {
       step: "03",
-      title: "Onboarding & Ramp-Up", 
-      description: "Schneller Projektstart",
-      details: "Unser strukturiertes Onboarding sorgt dafür, dass Ihr neues Team schnell produktiv wird. Wir unterstützen bei der Integration in Ihre bestehenden Prozesse und Tools.",
+      title: "Interview & Auswahl", 
+      description: "Kennenlernen und Entscheidung",
+      details: "Sie führen Interviews mit den vorgeschlagenen Kandidaten durch. Wir unterstützen Sie beim gesamten Auswahlprozess und bei Vertragsverhandlungen.",
       icon: Rocket,
-      timeline: "1-2 Wochen"
+      timeline: "1 Woche"
     },
     {
       step: "04",
-      title: "Kontinuierliche Optimierung",
-      description: "Erfolg sicherstellen", 
-      details: "Durch regelmäßige Check-ins und Performance-Reviews stellen wir sicher, dass die Zusammenarbeit optimal läuft und passen bei Bedarf das Team oder die Prozesse an.",
+      title: "Onboarding & Support",
+      description: "Erfolgreiche Integration sicherstellen", 
+      details: "Wir begleiten das Onboarding Ihrer neuen Remote-Fachkraft und stehen bei Fragen zur Verfügung. Regelmäßige Check-ins sorgen für eine reibungslose Zusammenarbeit.",
       icon: TrendingUp,
       timeline: "Laufend"
     }
   ];
 
   const benefits = [
-    "Schneller Start: Produktives Team in unter 2 Wochen",
-    "Geprüfte Qualität: Alle Experten durchlaufen unseren Screening-Prozess",
-    "Flexible Skalierung: Team-Größe je nach Projektphase anpassbar",
-    "Transparente Kommunikation: Regelmäßige Updates und Reports",
-    "Kultureller Fit: Deutsche und europäische Experten mit ähnlicher Arbeitskultur",
+    "Schneller Start: Qualifizierte Remote-Fachkraft in unter 2 Wochen",
+    "Geprüfte Qualität: Alle Kandidaten durchlaufen unseren Screening-Prozess",
+    "Flexible Arbeitsmodelle: Vollzeit, Teilzeit oder projektbasiert",
+    "Transparente Kommunikation: Regelmäßige Updates und Feedback",
+    "Kultureller Fit: Deutsche und europäische Kandidaten mit ähnlicher Arbeitskultur",
     "Rechtssicherheit: Alle arbeitsrechtlichen Aspekte sind abgedeckt"
   ];
 
@@ -60,8 +60,8 @@ const HowWeWork = () => {
               So arbeiten wir
             </h1>
             <p className="text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-              Von der ersten Bedarfsanalyse bis zum erfolgreichen Projektabschluss - 
-              unser bewährter 4-Stufen-Prozess garantiert Ihnen die besten Ergebnisse.
+              Von der ersten Bedarfsanalyse bis zur erfolgreichen Integration Ihrer Remote-Fachkraft - 
+              unser bewährter 4-Stufen-Prozess garantiert Ihnen die besten Kandidaten.
             </p>
           </div>
         </div>
@@ -149,14 +149,14 @@ const HowWeWork = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-brand-dark mb-6">
-            Bereit für den nächsten Schritt?
+            Bereit für Remote-Verstärkung?
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Lassen Sie uns in einem kostenlosen Strategiegespräch über Ihre Herausforderungen sprechen 
-            und gemeinsam den optimalen Weg für Ihr Projekt finden.
+            Lassen Sie uns in einem kostenlosen Beratungsgespräch über Ihre Anforderungen sprechen 
+            und gemeinsam die passenden Remote-Fachkräfte für Ihr Unternehmen finden.
           </p>
           <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-            Kostenloses Strategiegespräch buchen
+            Kostenloses Beratungsgespräch buchen
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>
