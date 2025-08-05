@@ -182,7 +182,7 @@ serve(async (req) => {
               </tr>
               <tr style="background-color: white;">
                 <td style="padding: 8px; font-weight: bold;">Status:</td>
-                <td style="padding: 8px;">${data.status || 'Offen'}</td>
+                <td style="padding: 8px;">${data.ticketStatus || 'Offen'}</td>
               </tr>
               <tr>
                 <td style="padding: 8px; font-weight: bold;">Gesendet am:</td>
