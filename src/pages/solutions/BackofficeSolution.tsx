@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Users, Calculator, FileText, Clock, Target, CheckCircle, Star, Phone } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
+import PublicFooter from "@/components/PublicFooter";
 
 const BackofficeSolution = () => {
   const targetAudience = [
@@ -222,6 +223,8 @@ const BackofficeSolution = () => {
           </div>
         </div>
       </section>
+      
+      <PublicFooter />
     </div>
   );
 };

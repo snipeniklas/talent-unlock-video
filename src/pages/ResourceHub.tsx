@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Users, FileText, BarChart, Settings, Lock, Shield } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
+import PublicFooter from "@/components/PublicFooter";
 
 const ResourceHub = () => {
   return (
@@ -59,6 +60,8 @@ const ResourceHub = () => {
           </div>
         </div>
       </section>
+      
+      <PublicFooter />
     </div>
   );
 };

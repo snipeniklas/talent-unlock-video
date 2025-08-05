@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Brain, Database, BarChart3, Bot, Target, CheckCircle, Users, Phone, Lightbulb } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
+import PublicFooter from "@/components/PublicFooter";
 
 const AIMlSolution = () => {
   const targetAudience = [
@@ -307,6 +308,8 @@ const AIMlSolution = () => {
           </div>
         </div>
       </section>
+      
+      <PublicFooter />
     </div>
   );
 };

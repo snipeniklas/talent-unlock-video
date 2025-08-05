@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Users, Code, Shield } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
+import PublicFooter from "@/components/PublicFooter";
 
 const SolutionsOverview = () => {
   const navigate = useNavigate();
@@ -117,6 +118,8 @@ const SolutionsOverview = () => {
           </Button>
         </div>
       </section>
+      
+      <PublicFooter />
     </div>
   );
 };

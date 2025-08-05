@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowRight, Mail, Phone, MapPin, Clock } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
+import PublicFooter from "@/components/PublicFooter";
 
 const Contact = () => {
   return (
@@ -79,6 +80,8 @@ const Contact = () => {
           </div>
         </div>
       </section>
+      
+      <PublicFooter />
     </div>
   );
 };

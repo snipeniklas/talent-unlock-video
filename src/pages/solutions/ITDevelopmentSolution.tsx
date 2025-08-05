@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Code, Server, Smartphone, Database, Cloud, GitBranch, CheckCircle, Target, Users, Phone } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
+import PublicFooter from "@/components/PublicFooter";
 
 const ITDevelopmentSolution = () => {
   const targetAudience = [
@@ -264,6 +265,8 @@ const ITDevelopmentSolution = () => {
           </div>
         </div>
       </section>
+      
+      <PublicFooter />
     </div>
   );
 };

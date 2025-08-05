@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Search, Users, Rocket, TrendingUp, CheckCircle } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
+import PublicFooter from "@/components/PublicFooter";
 
 const HowWeWork = () => {
   const steps = [
@@ -161,6 +162,8 @@ const HowWeWork = () => {
           </Button>
         </div>
       </section>
+      
+      <PublicFooter />
     </div>
   );
 };
