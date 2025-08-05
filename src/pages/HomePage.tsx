@@ -84,20 +84,19 @@ const HomePage = () => {
               <img src={heyTalentLogo} alt="HeyTalent" className="h-8 md:h-10 hover:scale-105 transition-transform duration-300" />
             </div>
             <div className="hidden md:flex space-x-8">
-              <a href="#services" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Services</a>
-              <a href="#about" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Über uns</a>
-              <a href="#testimonials" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Referenzen</a>
+              <a href="#solutions" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Lösungen</a>
+              <a href="#working-method" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">So arbeiten wir</a>
+              <a href="#resources" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Resource Hub</a>
+              <a href="#use-cases" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Use Cases</a>
+              <a href="#about" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Über HeyTalent</a>
               <a href="#contact" className="text-brand-dark/80 hover:text-brand-dark transition-colors font-medium">Kontakt</a>
             </div>
             <div className="flex items-center space-x-4">
               <Button variant="outline" asChild className="hidden md:inline-flex">
-                <a href="/landing">Landing Page</a>
-              </Button>
-              <Button variant="outline" asChild className="hidden md:inline-flex">
                 <a href="/auth">Login</a>
               </Button>
               <Button className="bg-primary hover:bg-primary-hover">
-                Kostenlose Beratung
+                Kostenloses Strategiegespräch
               </Button>
             </div>
           </div>
@@ -108,28 +107,75 @@ const HomePage = () => {
       <section className="py-16 lg:py-24 overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6 animate-fade-in">
-              <Star className="w-4 h-4 mr-2 text-primary" />
-              Vertrauenspartner für KI-Entwicklung
-            </Badge>
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
-              Ihre Experten für
-              <br />
-              <span className="text-primary bg-gradient-to-r from-primary to-primary-hover bg-clip-text animate-shimmer bg-shimmer bg-200%">
-                KI-Entwickler
-              </span>
+              Ihr Engpass. Unsere Lösung.
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in-delay-1">
-              Wir verbinden Unternehmen mit den besten KI-Entwicklern aus Deutschland und Europa. 
-              Von der ersten Beratung bis zur erfolgreichen Projektumsetzung.
+            <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in-delay-1">
+              Remote-Teams, die genau dort ansetzen, wo Sie sie brauchen.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-2">
+            <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto animate-fade-in-delay-2">
+              Wählen Sie Ihr Thema und finden Sie Experten aus Backoffice, IT oder KI, 
+              die Ihre Herausforderung präzise und schnell lösen.
+            </p>
+            
+            {/* Segment Tiles */}
+            <div className="grid md:grid-cols-3 gap-6 mb-12 animate-slide-up-delay-3">
+              <Card className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
+                    <Users className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                    Operative Rückendeckung im Tagesgeschäft
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className="text-muted-foreground group-hover:text-brand-dark transition-colors">
+                    Prozessoptimierung, Automation und virtuelle Assistenz für mehr Effizienz
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
+                    <Code className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                    Skalierbare Entwicklung, wenn Ihr IT-Team am Limit ist
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className="text-muted-foreground group-hover:text-brand-dark transition-colors">
+                    Full-Stack Development, DevOps und Architektur-Expertise
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
+                    <Shield className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                    KI-Projekte, die wirklich liefern
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className="text-muted-foreground group-hover:text-brand-dark transition-colors">
+                    MLOps, Datenstrategie und produktive KI-Implementierungen
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-4">
               <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-                Projekt starten
+                Kostenloses Strategiegespräch buchen
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button variant="outline" size="lg" className="text-lg px-8 border-primary text-primary hover:bg-primary hover:text-white">
-                Mehr erfahren
+                Lösungen entdecken
               </Button>
             </div>
           </div>
