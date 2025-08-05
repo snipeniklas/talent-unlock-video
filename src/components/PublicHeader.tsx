@@ -15,7 +15,7 @@ const PublicHeader = () => {
             <div className="flex items-center animate-slide-in-left">
               <img 
                 src={heyTalentLogo} 
-                alt="HeyTalent" 
+                alt="HejTalent" 
                 className="h-8 md:h-10 hover:scale-105 transition-transform duration-300 cursor-pointer" 
                 onClick={() => navigate('/')}
               />

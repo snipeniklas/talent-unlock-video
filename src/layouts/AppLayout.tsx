@@ -63,7 +63,7 @@ const AppLayout = () => {
         <header className="fixed top-0 left-0 right-0 h-12 flex items-center border-b bg-background/95 backdrop-blur-sm z-40">
           <SidebarTrigger className="ml-2" />
           <div className="flex-1 text-center">
-            <span className="font-semibold text-brand-dark">HeyTalent Platform</span>
+            <span className="font-semibold text-brand-dark">HejTalent Platform</span>
           </div>
         </header>
 

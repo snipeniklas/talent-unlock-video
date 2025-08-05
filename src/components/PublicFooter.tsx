@@ -11,7 +11,7 @@ const PublicFooter = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-bold mb-6">HeyTalent</h3>
+            <h3 className="text-2xl font-bold mb-6">HejTalent</h3>
             <p className="text-white/80 mb-6">
               Ihr vertrauensvoller Partner für qualifizierte internationale Remote-Fachkräfte.
             </p>
@@ -118,7 +118,7 @@ const PublicFooter = () => {
         <div className="border-t border-white/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-white/60 mb-4 md:mb-0">
-              © 2024 HeyTalent. Alle Rechte vorbehalten.
+              © 2024 HejTalent. Alle Rechte vorbehalten.
             </div>
             <div className="flex space-x-6">
               <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">

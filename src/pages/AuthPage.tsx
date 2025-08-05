@@ -183,12 +183,12 @@ const AuthPage = () => {
           <div className="flex justify-center mb-4">
             <img 
               src={heyTalentLogo} 
-              alt="HeyTalent" 
+              alt="HejTalent" 
               className="h-12 md:h-14 hover:scale-105 transition-transform duration-300" 
             />
           </div>
           <h1 className="text-3xl font-bold text-brand-dark mb-2">
-            Willkommen bei HeyTalent
+            Willkommen bei HejTalent
           </h1>
           <p className="text-muted-foreground mb-4">
             Ihre Plattform für erstklassige KI-Entwickler

@@ -68,13 +68,13 @@ const HomePage = () => {
     {
       name: "Dr. Marcus Weber",
       company: "TechCorp GmbH",
-      text: "HeyTalent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.",
+      text: "HejTalent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.",
       rating: 5
     },
     {
       name: "Sarah Mueller",
       company: "StartupTech GmbH",
-      text: "Unser Remote-Entwicklungsteam von HeyTalent arbeitet seit 6 Monaten perfekt mit uns zusammen. Top Qualität!",
+      text: "Unser Remote-Entwicklungsteam von HejTalent arbeitet seit 6 Monaten perfekt mit uns zusammen. Top Qualität!",
       rating: 5
     }
   ];
@@ -436,7 +436,7 @@ const HomePage = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">Über HeyTalent</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">Über HejTalent</h2>
               <p className="text-lg text-muted-foreground mb-6">
                 Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach 
                 erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und 
