@@ -251,7 +251,7 @@ const AuthPage = () => {
                   </div>
                   <Button 
                     type="submit" 
-                    className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-3 animate-pulse-glow" 
+                    className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-3" 
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Anmelden..." : "Anmelden"}
@@ -410,7 +410,7 @@ const AuthPage = () => {
                       </Button>
                       <Button 
                         type="submit" 
-                        className="flex-1 bg-primary hover:bg-primary-hover text-white font-medium py-3 animate-pulse-glow" 
+                        className="flex-1 bg-primary hover:bg-primary-hover text-white font-medium py-3" 
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? "Registrieren..." : "Jetzt registrieren"}
