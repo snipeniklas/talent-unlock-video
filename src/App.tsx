@@ -21,6 +21,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import CandidateManagement from "./pages/admin/CandidateManagement";
 import AdminSearchRequests from "./pages/admin/AdminSearchRequests";
 import CompanyManagement from "./pages/admin/CompanyManagement";
+import AdminSettings from "./pages/admin/AdminSettings";
 import SolutionsOverview from "./pages/SolutionsOverview";
 import HowWeWork from "./pages/HowWeWork";
 import ResourceHub from "./pages/ResourceHub";
@@ -62,6 +63,7 @@ const App = () => (
             <Route path="candidates" element={<CandidateManagement />} />
             <Route path="search-requests" element={<AdminSearchRequests />} />
             <Route path="companies" element={<CompanyManagement />} />
+            <Route path="settings" element={<AdminSettings />} />
           </Route>
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
