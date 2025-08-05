@@ -5,9 +5,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
+import { Star, Users, Shield, ArrowLeft } from 'lucide-react';
+import heyTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
 const AuthPage = () => {
   const navigate = useNavigate();
@@ -175,23 +178,51 @@ const AuthPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold gradient-text mb-2">HeyTalent</h1>
-          <p className="text-muted-foreground">Willkommen zurück</p>
+        {/* Header with Logo and Welcome Text */}
+        <div className="text-center mb-8 animate-fade-in">
+          <div className="flex justify-center mb-4">
+            <img 
+              src={heyTalentLogo} 
+              alt="HeyTalent" 
+              className="h-12 md:h-14 hover:scale-105 transition-transform duration-300" 
+            />
+          </div>
+          <h1 className="text-3xl font-bold text-brand-dark mb-2">
+            Willkommen bei HeyTalent
+          </h1>
+          <p className="text-muted-foreground mb-4">
+            Ihre Plattform für erstklassige KI-Entwickler
+          </p>
+          
+          {/* Trust indicators */}
+          <div className="flex justify-center items-center gap-4 mb-6">
+            <Badge variant="secondary" className="animate-slide-in-left">
+              <Star className="w-3 h-3 mr-1 text-primary" />
+              500+ Entwickler
+            </Badge>
+            <Badge variant="secondary" className="animate-slide-in-right">
+              <Shield className="w-3 h-3 mr-1 text-primary" />
+              Geprüfte Qualität
+            </Badge>
+          </div>
         </div>
 
-        <Card className="border-border/50 shadow-2xl backdrop-blur-sm">
+        <Card className="border-border/50 shadow-2xl backdrop-blur-sm animate-scale-in">
           <Tabs defaultValue="login" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="login">Anmelden</TabsTrigger>
-              <TabsTrigger value="signup">Registrieren</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-muted/50">
+              <TabsTrigger value="login" className="data-[state=active]:bg-primary data-[state=active]:text-white">
+                Anmelden
+              </TabsTrigger>
+              <TabsTrigger value="signup" className="data-[state=active]:bg-primary data-[state=active]:text-white">
+                Registrieren
+              </TabsTrigger>
             </TabsList>
             
-            <TabsContent value="login">
-              <CardHeader>
-                <CardTitle>Anmelden</CardTitle>
-                <CardDescription>
-                  Melden Sie sich mit Ihrem Account an
+            <TabsContent value="login" className="animate-fade-in">
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl text-brand-dark">Willkommen zurück</CardTitle>
+                <CardDescription className="text-base">
+                  Melden Sie sich an und verwalten Sie Ihre KI-Projekte
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -220,26 +251,40 @@ const AuthPage = () => {
                   </div>
                   <Button 
                     type="submit" 
-                    className="w-full" 
+                    className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-3 animate-pulse-glow" 
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Anmelden..." : "Anmelden"}
                   </Button>
+                  
+                  <div className="text-center text-sm text-muted-foreground mt-4">
+                    Noch kein Account? Wechseln Sie zum Tab "Registrieren"
+                  </div>
                 </form>
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="signup">
-              <CardHeader>
-                <CardTitle>
+            <TabsContent value="signup" className="animate-fade-in">
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl text-brand-dark">
                   Unternehmen registrieren - Schritt {registrationStep} von 2
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-base">
                   {registrationStep === 1 
-                    ? "Ihre persönlichen Daten"
-                    : "Unternehmensinformationen"
+                    ? "Starten Sie jetzt und finden Sie die besten KI-Entwickler für Ihr Unternehmen"
+                    : "Vervollständigen Sie Ihr Unternehmensprofil"
                   }
                 </CardDescription>
+                
+                {/* Progress indicator */}
+                <div className="flex justify-center gap-2 mt-4">
+                  <div className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                    registrationStep >= 1 ? 'bg-primary' : 'bg-muted'
+                  }`}></div>
+                  <div className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                    registrationStep >= 2 ? 'bg-primary' : 'bg-muted'
+                  }`}></div>
+                </div>
               </CardHeader>
               <CardContent>
                 {registrationStep === 1 ? (
@@ -306,9 +351,10 @@ const AuthPage = () => {
                     
                     <Button 
                       type="submit" 
-                      className="w-full" 
+                      className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-3" 
                       disabled={isSubmitting}
                     >
+                      <Users className="w-4 h-4 mr-2" />
                       Weiter zu Schritt 2
                     </Button>
                   </form>
@@ -355,18 +401,19 @@ const AuthPage = () => {
                       <Button 
                         type="button" 
                         variant="outline"
-                        className="flex-1" 
+                        className="flex-1 border-primary text-primary hover:bg-primary hover:text-white" 
                         onClick={goBackToPersonalData}
                         disabled={isSubmitting}
                       >
+                        <ArrowLeft className="w-4 h-4 mr-2" />
                         Zurück
                       </Button>
                       <Button 
                         type="submit" 
-                        className="flex-1" 
+                        className="flex-1 bg-primary hover:bg-primary-hover text-white font-medium py-3 animate-pulse-glow" 
                         disabled={isSubmitting}
                       >
-                        {isSubmitting ? "Registrieren..." : "Unternehmen registrieren"}
+                        {isSubmitting ? "Registrieren..." : "Jetzt registrieren"}
                       </Button>
                     </div>
                   </form>
@@ -376,13 +423,32 @@ const AuthPage = () => {
           </Tabs>
         </Card>
         
-        <div className="text-center mt-6">
+        {/* Benefits Section */}
+        <div className="text-center mt-8 animate-fade-in-delay-1">
+          <div className="grid grid-cols-1 gap-3 max-w-sm mx-auto">
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <Star className="w-4 h-4 text-primary" />
+              <span>Über 500 geprüfte KI-Entwickler</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <Shield className="w-4 h-4 text-primary" />
+              <span>98% Kundenzufriedenheit</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <Users className="w-4 h-4 text-primary" />
+              <span>Persönliche Betreuung garantiert</span>
+            </div>
+          </div>
+        </div>
+        
+        <div className="text-center mt-8">
           <Button 
             variant="ghost" 
             onClick={() => navigate('/')}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-brand-dark hover:bg-transparent group"
           >
-            ← Zurück zur Startseite
+            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
+            Zurück zur Startseite
           </Button>
         </div>
       </div>
