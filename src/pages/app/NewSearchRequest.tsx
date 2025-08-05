@@ -113,12 +113,35 @@ const NewSearchRequest = () => {
       }
 
       // Create search request
+      // Map old values to new format for backward compatibility
+      const mapEmploymentType = (value: string) => {
+        const mapping: { [key: string]: string } = {
+          'fulltime': 'full_time',
+          'parttime': 'part_time',
+          'full_time': 'full_time',
+          'part_time': 'part_time',
+          'contract': 'contract',
+          'freelance': 'freelance'
+        };
+        return mapping[value] || null;
+      };
+
+      const mapExperienceLevel = (value: string) => {
+        const mapping: { [key: string]: string } = {
+          'junior': 'junior',
+          'mid': 'mid', 
+          'senior': 'senior',
+          'lead': 'lead'
+        };
+        return mapping[value] || null;
+      };
+
       const insertData = {
         title: formData.title,
         description: formData.description || null,
         location: formData.location || null,
-        employment_type: formData.workType || null,
-        experience_level: formData.experienceLevel || null,
+        employment_type: mapEmploymentType(formData.workType),
+        experience_level: mapExperienceLevel(formData.experienceLevel),
         salary_min,
         salary_max,
         requirements: formData.requirements || null,
@@ -129,7 +152,7 @@ const NewSearchRequest = () => {
       };
       
       console.log('Insert data:', insertData);
-      console.log('Employment type value:', formData.workType, 'type:', typeof formData.workType);
+      console.log('Employment type value:', formData.workType, 'mapped to:', mapEmploymentType(formData.workType));
       
       const { error } = await supabase
         .from('search_requests')
