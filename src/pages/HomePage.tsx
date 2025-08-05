@@ -93,6 +93,9 @@ const HomePage = () => {
               <Button variant="outline" asChild className="hidden md:inline-flex">
                 <a href="/landing">Landing Page</a>
               </Button>
+              <Button variant="outline" asChild className="hidden md:inline-flex">
+                <a href="/auth">Login</a>
+              </Button>
               <Button className="bg-primary hover:bg-primary-hover">
                 Kostenlose Beratung
               </Button>
