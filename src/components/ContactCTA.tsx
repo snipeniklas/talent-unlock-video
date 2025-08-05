@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -86,9 +87,11 @@ const ContactCTA = () => {
               <Input placeholder="Unternehmen" />
               <Input placeholder="Telefon" />
               <Textarea placeholder="Beschreiben Sie Ihren Remote-Fachkräfte-Bedarf..." className="h-32" />
-              <Button className="w-full bg-gradient-primary hover:shadow-xl transition-all duration-300 text-lg py-6 border-0">
-                Jetzt kostenfrei Suchauftrag einstellen
-                <ArrowRight className="w-5 h-5 ml-2" />
+              <Button asChild className="w-full bg-gradient-primary hover:shadow-xl transition-all duration-300 text-lg py-6 border-0">
+                <Link to="/app/search-requests/new">
+                  Jetzt kostenfrei Suchauftrag einstellen
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
               </Button>
             </CardContent>
           </Card>

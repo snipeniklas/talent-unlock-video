@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Search, Users, Rocket, TrendingUp, CheckCircle } from "lucide-react";
@@ -157,9 +158,11 @@ const HowWeWork = () => {
             Lassen Sie uns in einem kostenlosen Beratungsgespräch über Ihre Anforderungen sprechen 
             und gemeinsam die passenden Remote-Fachkräfte für Ihr Unternehmen finden.
           </p>
-          <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-            Jetzt kostenfrei Suchauftrag einstellen
-            <ArrowRight className="w-5 h-5 ml-2" />
+          <Button asChild size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
+            <Link to="/app/search-requests/new">
+              Jetzt kostenfrei Suchauftrag einstellen
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Link>
           </Button>
         </div>
       </section>
