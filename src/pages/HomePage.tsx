@@ -421,55 +421,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="font-bold text-xl mb-4">HejTalent</h3>
-              <p className="text-gray-300 text-sm">
-                Ihr Partner für geprüfte KI-Entwickler aus Deutschland und Europa.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Rechtliches</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="https://hejtalent.de/imprint-de/" className="text-gray-300 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Impressum</a></li>
-                <li><a href="https://hejtalent.de/privacy-policy-de/" className="text-gray-300 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Datenschutz</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Kontakt</h4>
-              <ul className="space-y-2 text-sm text-gray-300">
-                <li>
-                  <a href="mailto:kontakt@hejcompany.de" className="hover:text-white transition-colors">
-                    kontakt@hejcompany.de
-                  </a>
-                </li>
-                <li>
-                  <a href="tel:+4989901762180" className="hover:text-white transition-colors">
-                    +49 89 9017 6218
-                  </a>
-                </li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Social Media</h4>
-              <a href="https://www.linkedin.com/company/hejtalent/?originalSubdomain=de" target="_blank" rel="noopener noreferrer" 
-                 className="text-gray-300 hover:text-white transition-colors">
-                <Linkedin className="w-6 h-6" />
-              </a>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-300">
-            © 2025 HejTalent. Alle Rechte vorbehalten.
-          </div>
-        </div>
-      </footer>
+      <PublicFooter />
     </div>
   );
 };
