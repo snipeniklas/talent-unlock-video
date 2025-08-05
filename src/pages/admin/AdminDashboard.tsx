@@ -32,30 +32,30 @@ export default function AdminDashboard() {
   const fetchDashboardStats = async () => {
     try {
       // Parallel queries für bessere Performance
-      const [candidatesResult, requestsResult, assignmentsResult, pendingResult] = await Promise.all([
-        supabase.from('candidates').select('id', { count: 'exact', head: true }),
+      const [resourcesResult, requestsResult, allocationsResult, pendingResult] = await Promise.all([
+        supabase.from('resources').select('id', { count: 'exact', head: true }),
         supabase.from('search_requests').select('id', { count: 'exact', head: true }),
-        supabase.from('candidate_assignments').select('id', { count: 'exact', head: true }),
-        supabase.from('candidate_assignments').select('id', { count: 'exact', head: true }).eq('status', 'proposed')
+        supabase.from('resource_allocations').select('id', { count: 'exact', head: true }),
+        supabase.from('resource_allocations').select('id', { count: 'exact', head: true }).eq('status', 'proposed')
       ]);
 
       // Aktuelle Aktivitäten laden
       const { data: recentActivity } = await supabase
-        .from('candidate_assignments')
+        .from('resource_allocations')
         .select(`
           id,
           status,
-          assigned_at,
+          allocated_at,
           search_request:search_requests(title, company:companies(name)),
-          candidate:candidates(first_name, last_name)
+          resource:resources(first_name, last_name)
         `)
-        .order('assigned_at', { ascending: false })
+        .order('allocated_at', { ascending: false })
         .limit(5);
 
       setStats({
-        totalCandidates: candidatesResult.count || 0,
+        totalCandidates: resourcesResult.count || 0,
         totalSearchRequests: requestsResult.count || 0,
-        totalAssignments: assignmentsResult.count || 0,
+        totalAssignments: allocationsResult.count || 0,
         pendingAssignments: pendingResult.count || 0,
         recentActivity: recentActivity || []
       });
@@ -97,12 +97,12 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Bewerber</CardTitle>
+            <CardTitle className="text-sm font-medium">Ressourcen</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.totalCandidates}</div>
-            <p className="text-xs text-muted-foreground">Gesamte Bewerber</p>
+            <p className="text-xs text-muted-foreground">Verfügbare Ressourcen</p>
           </CardContent>
         </Card>
 
@@ -148,26 +148,26 @@ export default function AdminDashboard() {
             <CardDescription>Profile erstellen und bearbeiten</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <Button onClick={() => navigate('/admin/candidates')} className="w-full">
-              Alle Bewerber anzeigen
+            <Button onClick={() => navigate('/admin/resources')} className="w-full">
+              Alle Ressourcen anzeigen
             </Button>
-            <Button onClick={() => navigate('/admin/candidates/new')} variant="outline" className="w-full">
-              Neuen Bewerber anlegen
+            <Button onClick={() => navigate('/admin/resources/new')} variant="outline" className="w-full">
+              Neue Ressource hinzufügen
             </Button>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>Suchaufträge</CardTitle>
-            <CardDescription>Kundenaufträge verwalten</CardDescription>
+            <CardTitle>Kundenprojekte</CardTitle>
+            <CardDescription>Kundenaufträge und Ressourcen-Zuweisungen</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <Button onClick={() => navigate('/admin/search-requests')} className="w-full">
-              Alle Aufträge anzeigen
+              Alle Projekte anzeigen
             </Button>
-            <Button onClick={() => navigate('/admin/assignments')} variant="outline" className="w-full">
-              Zuweisungen verwalten
+            <Button onClick={() => navigate('/admin/allocations')} variant="outline" className="w-full">
+              Ressourcen-Zuweisungen
             </Button>
           </CardContent>
         </Card>
@@ -207,7 +207,7 @@ export default function AdminDashboard() {
                     <Calendar className="h-4 w-4 text-muted-foreground" />
                     <div>
                       <p className="font-medium">
-                        {activity.candidate?.first_name} {activity.candidate?.last_name}
+                        {activity.resource?.first_name} {activity.resource?.last_name}
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {activity.search_request?.title} bei {activity.search_request?.company?.name}
@@ -219,7 +219,7 @@ export default function AdminDashboard() {
                       {activity.status}
                     </Badge>
                     <span className="text-xs text-muted-foreground">
-                      {new Date(activity.assigned_at).toLocaleDateString('de-DE')}
+                      {new Date(activity.allocated_at).toLocaleDateString('de-DE')}
                     </span>
                   </div>
                 </div>

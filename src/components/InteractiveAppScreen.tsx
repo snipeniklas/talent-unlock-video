@@ -22,7 +22,7 @@ import {
 interface InteractiveScreenProps {
   title: string;
   description: string;
-  screen: "dashboard" | "search-requests" | "candidates" | "admin";
+  screen: "dashboard" | "search-requests" | "resources" | "admin";
 }
 
 const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, description, screen }) => {
@@ -32,34 +32,34 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
   const mockSearchRequests = [
     {
       id: 1,
-      title: "Senior React Developer",
+      title: "Remote AI Entwickler (Python)",
       company: "TechCorp GmbH",
       location: "Remote",
       status: "active",
-      applicants: 12,
+      resources: 2,
       created: "vor 2 Tagen"
     },
     {
       id: 2,
-      title: "Buchhaltung Teilzeit",
+      title: "Buchhaltungs-Ressource Teilzeit",
       company: "StartupTech",
-      location: "Berlin",
-      status: "active",
-      applicants: 8,
+      location: "Remote",
+      status: "active", 
+      resources: 1,
       created: "vor 1 Woche"
     },
     {
       id: 3,
-      title: "KI-Spezialist",
+      title: "Data Science Spezialist",
       company: "DataCorp",
-      location: "München",
+      location: "Remote",
       status: "completed",
-      applicants: 15,
+      resources: 1,
       created: "vor 2 Wochen"
     }
   ];
 
-  const mockCandidates = [
+  const mockResources = [
     {
       id: 1,
       name: "Max Mustermann",
@@ -67,16 +67,18 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       location: "Berlin",
       rating: 5,
       skills: ["Python", "TensorFlow", "AWS"],
-      availability: "Sofort verfügbar"
+      availability: "Sofort verfügbar",
+      hourlyRate: "€45-65/h"
     },
     {
       id: 2,
       name: "Sarah Schmidt",
       position: "Buchhaltungsexpertin",
-      location: "Hamburg",
+      location: "Hamburg", 
       rating: 4,
       skills: ["SAP", "DATEV", "Excel"],
-      availability: "In 2 Wochen"
+      availability: "In 2 Wochen",
+      hourlyRate: "€25-35/h"
     },
     {
       id: 3,
@@ -85,7 +87,8 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       location: "München",
       rating: 5,
       skills: ["R", "SQL", "Machine Learning"],
-      availability: "In 1 Monat"
+      availability: "In 1 Monat",
+      hourlyRate: "€55-75/h"
     }
   ];
 
@@ -95,11 +98,11 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       <div className="flex justify-between items-center mb-6">
         <div>
           <h3 className="text-xl font-semibold">Dashboard</h3>
-          <p className="text-muted-foreground">Übersicht Ihrer Aktivitäten</p>
+          <p className="text-muted-foreground">Übersicht Ihrer RaaS-Aktivitäten</p>
         </div>
         <Button size="sm">
           <FileText className="w-4 h-4 mr-2" />
-          Neue Anfrage
+          Ressource anfragen
         </Button>
       </div>
 
@@ -107,19 +110,19 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       <div className="grid grid-cols-4 gap-3 mb-6">
         <div className="bg-blue-50 dark:bg-blue-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-blue-600">3</div>
-          <div className="text-xs text-muted-foreground">Aktive Suchaufträge</div>
+          <div className="text-xs text-muted-foreground">Aktive Projekte</div>
         </div>
         <div className="bg-green-50 dark:bg-green-950/20 p-3 rounded-lg">
-          <div className="text-2xl font-bold text-green-600">12</div>
-          <div className="text-xs text-muted-foreground">Verfügbare Experten</div>
+          <div className="text-2xl font-bold text-green-600">8</div>
+          <div className="text-xs text-muted-foreground">Zugeteilte Ressourcen</div>
         </div>
         <div className="bg-purple-50 dark:bg-purple-950/20 p-3 rounded-lg">
-          <div className="text-2xl font-bold text-purple-600">8</div>
-          <div className="text-xs text-muted-foreground">Erfolgreiche Projekte</div>
+          <div className="text-2xl font-bold text-purple-600">4</div>
+          <div className="text-xs text-muted-foreground">Abgeschlossene Projekte</div>
         </div>
         <div className="bg-orange-50 dark:bg-orange-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-orange-600">2</div>
-          <div className="text-xs text-muted-foreground">Wartende Bearbeitung</div>
+          <div className="text-xs text-muted-foreground">Wartende Ressourcen</div>
         </div>
       </div>
 
@@ -127,9 +130,9 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       <div className="space-y-2">
         <h4 className="font-medium text-sm">Aktuelle Aktivitäten</h4>
         {[
-          { icon: UserCheck, text: "Neuer Bewerber für React Developer Position", time: "vor 2h", color: "text-green-600" },
-          { icon: FileText, text: "Suchauftrag 'KI-Spezialist' aktualisiert", time: "vor 4h", color: "text-blue-600" },
-          { icon: CheckCircle, text: "Projekt 'Buchhaltung Teilzeit' erfolgreich abgeschlossen", time: "vor 1d", color: "text-purple-600" }
+          { icon: UserCheck, text: "Neue Ressource für AI-Entwickler Projekt zugewiesen", time: "vor 2h", color: "text-green-600" },
+          { icon: FileText, text: "Ressourcenanfrage 'Data Science Spezialist' aktualisiert", time: "vor 4h", color: "text-blue-600" },
+          { icon: CheckCircle, text: "Projekt 'Buchhaltungs-Ressource' erfolgreich abgeschlossen", time: "vor 1d", color: "text-purple-600" }
         ].map((activity, idx) => (
           <div 
             key={idx} 
@@ -197,7 +200,7 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
                 </Badge>
               </div>
               <div className="flex justify-between items-center text-xs text-muted-foreground">
-                <span>{request.applicants} Bewerber</span>
+                <span>{request.resources} Ressourcen</span>
                 <span>{request.created}</span>
               </div>
             </div>
@@ -206,38 +209,38 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
     </div>
   );
 
-  const renderCandidates = () => (
+  const renderResources = () => (
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold">Bewerber</h3>
+        <h3 className="text-xl font-semibold">Verfügbare Ressourcen</h3>
         <Button size="sm" variant="outline">
           <Eye className="w-4 h-4 mr-2" />
           Alle anzeigen
         </Button>
       </div>
 
-      {/* Candidates List */}
+      {/* Resources List */}
       <div className="space-y-3">
-        {mockCandidates.map((candidate, idx) => (
+        {mockResources.map((resource, idx) => (
           <div 
-            key={candidate.id}
+            key={resource.id}
             className={`p-3 border rounded-lg hover:shadow-md transition-all cursor-pointer ${hoveredItem === idx ? 'shadow-md border-primary/30' : ''}`}
             onMouseEnter={() => setHoveredItem(idx)}
             onMouseLeave={() => setHoveredItem(null)}
           >
             <div className="flex justify-between items-start mb-2">
               <div>
-                <div className="font-medium text-sm">{candidate.name}</div>
-                <div className="text-xs text-muted-foreground">{candidate.position}</div>
+                <div className="font-medium text-sm">{resource.name}</div>
+                <div className="text-xs text-muted-foreground">{resource.position}</div>
               </div>
               <div className="flex items-center gap-1">
-                {[...Array(candidate.rating)].map((_, i) => (
+                {[...Array(resource.rating)].map((_, i) => (
                   <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                 ))}
               </div>
             </div>
             <div className="flex flex-wrap gap-1 mb-2">
-              {candidate.skills.slice(0, 3).map((skill, skillIdx) => (
+              {resource.skills.slice(0, 3).map((skill, skillIdx) => (
                 <Badge key={skillIdx} variant="secondary" className="text-xs px-2 py-0">
                   {skill}
                 </Badge>
@@ -246,9 +249,9 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
             <div className="flex justify-between items-center text-xs text-muted-foreground">
               <span className="flex items-center gap-1">
                 <Clock className="w-3 h-3" />
-                {candidate.availability}
+                {resource.availability}
               </span>
-              <span>{candidate.location}</span>
+              <span className="font-medium text-primary">{resource.hourlyRate}</span>
             </div>
           </div>
         ))}
@@ -271,7 +274,7 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
         </div>
         <div className="bg-blue-50 dark:bg-blue-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-blue-600">423</div>
-          <div className="text-xs text-muted-foreground">Aktive Bewerber</div>
+          <div className="text-xs text-muted-foreground">Verfügbare Ressourcen</div>
         </div>
       </div>
 
@@ -281,7 +284,7 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
         {[
           { icon: Users, text: "Benutzerverwaltung", count: "1,234", color: "text-blue-600" },
           { icon: Building2, text: "Unternehmen verwalten", count: "156", color: "text-green-600" },
-          { icon: UserCheck, text: "Bewerber zuweisen", count: "42", color: "text-purple-600" },
+          { icon: UserCheck, text: "Ressourcen zuweisen", count: "42", color: "text-purple-600" },
           { icon: BarChart3, text: "Analytics & Reports", count: "", color: "text-orange-600" }
         ].map((item, idx) => (
           <div 
@@ -310,8 +313,8 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
         return renderDashboard();
       case "search-requests":
         return renderSearchRequests();
-      case "candidates":
-        return renderCandidates();
+      case "resources":
+        return renderResources();
       case "admin":
         return renderAdmin();
       default:

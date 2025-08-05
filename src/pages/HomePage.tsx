@@ -318,9 +318,9 @@ const HomePage = () => {
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Candidate Overview */}
             <InteractiveAppScreen
-              title="Bewerber-Übersicht"
-              description="Entdecken Sie vorgeschlagene Bewerber und ihre Qualifikationen"
-              screen="candidates"
+              title="Verfügbare Ressourcen"
+              description="Entdecken Sie unsere qualifizierten Remote-Ressourcen"
+              screen="resources"
             />
 
             {/* Admin Dashboard */}

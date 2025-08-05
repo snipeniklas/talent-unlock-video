@@ -18,7 +18,7 @@ import BackofficeSolution from "./pages/solutions/BackofficeSolution";
 import AIMlSolution from "./pages/solutions/AIMlSolution";
 import ITDevelopmentSolution from "./pages/solutions/ITDevelopmentSolution";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import CandidateManagement from "./pages/admin/CandidateManagement";
+import ResourceManagement from "./pages/admin/ResourceManagement";
 import AdminSearchRequests from "./pages/admin/AdminSearchRequests";
 import CompanyManagement from "./pages/admin/CompanyManagement";
 import AdminSettings from "./pages/admin/AdminSettings";
@@ -60,7 +60,7 @@ const App = () => (
           {/* Admin Routes mit AppLayout */}
           <Route path="/admin" element={<AppLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="candidates" element={<CandidateManagement />} />
+            <Route path="resources" element={<ResourceManagement />} />
             <Route path="search-requests" element={<AdminSearchRequests />} />
             <Route path="companies" element={<CompanyManagement />} />
             <Route path="settings" element={<AdminSettings />} />

@@ -14,132 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      candidate_assignments: {
-        Row: {
-          admin_notes: string | null
-          assigned_at: string
-          assigned_by: string
-          candidate_id: string
-          client_feedback: string | null
-          id: string
-          search_request_id: string
-          status: string
-          updated_at: string
-        }
-        Insert: {
-          admin_notes?: string | null
-          assigned_at?: string
-          assigned_by: string
-          candidate_id: string
-          client_feedback?: string | null
-          id?: string
-          search_request_id: string
-          status?: string
-          updated_at?: string
-        }
-        Update: {
-          admin_notes?: string | null
-          assigned_at?: string
-          assigned_by?: string
-          candidate_id?: string
-          client_feedback?: string | null
-          id?: string
-          search_request_id?: string
-          status?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "candidate_assignments_candidate_id_fkey"
-            columns: ["candidate_id"]
-            isOneToOne: false
-            referencedRelation: "candidates"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "candidate_assignments_search_request_id_fkey"
-            columns: ["search_request_id"]
-            isOneToOne: false
-            referencedRelation: "search_requests"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      candidates: {
-        Row: {
-          availability: string | null
-          created_at: string
-          created_by: string
-          current_position: string | null
-          cv_url: string | null
-          education: string | null
-          email: string
-          experience_years: number | null
-          first_name: string
-          id: string
-          languages: string[] | null
-          last_name: string
-          location: string | null
-          notes: string | null
-          phone: string | null
-          portfolio_url: string | null
-          rating: number | null
-          salary_expectation_max: number | null
-          salary_expectation_min: number | null
-          skills: string[] | null
-          status: string
-          updated_at: string
-        }
-        Insert: {
-          availability?: string | null
-          created_at?: string
-          created_by: string
-          current_position?: string | null
-          cv_url?: string | null
-          education?: string | null
-          email: string
-          experience_years?: number | null
-          first_name: string
-          id?: string
-          languages?: string[] | null
-          last_name: string
-          location?: string | null
-          notes?: string | null
-          phone?: string | null
-          portfolio_url?: string | null
-          rating?: number | null
-          salary_expectation_max?: number | null
-          salary_expectation_min?: number | null
-          skills?: string[] | null
-          status?: string
-          updated_at?: string
-        }
-        Update: {
-          availability?: string | null
-          created_at?: string
-          created_by?: string
-          current_position?: string | null
-          cv_url?: string | null
-          education?: string | null
-          email?: string
-          experience_years?: number | null
-          first_name?: string
-          id?: string
-          languages?: string[] | null
-          last_name?: string
-          location?: string | null
-          notes?: string | null
-          phone?: string | null
-          portfolio_url?: string | null
-          rating?: number | null
-          salary_expectation_max?: number | null
-          salary_expectation_min?: number | null
-          skills?: string[] | null
-          status?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       companies: {
         Row: {
           created_at: string
@@ -248,6 +122,144 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      resource_allocations: {
+        Row: {
+          admin_notes: string | null
+          allocated_at: string
+          allocated_by: string
+          client_feedback: string | null
+          end_date: string | null
+          estimated_hours_per_week: number | null
+          hourly_rate: number | null
+          id: string
+          resource_id: string
+          search_request_id: string
+          start_date: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          allocated_at?: string
+          allocated_by: string
+          client_feedback?: string | null
+          end_date?: string | null
+          estimated_hours_per_week?: number | null
+          hourly_rate?: number | null
+          id?: string
+          resource_id: string
+          search_request_id: string
+          start_date?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          allocated_at?: string
+          allocated_by?: string
+          client_feedback?: string | null
+          end_date?: string | null
+          estimated_hours_per_week?: number | null
+          hourly_rate?: number | null
+          id?: string
+          resource_id?: string
+          search_request_id?: string
+          start_date?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resource_allocations_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "resources"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "resource_allocations_search_request_id_fkey"
+            columns: ["search_request_id"]
+            isOneToOne: false
+            referencedRelation: "search_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      resources: {
+        Row: {
+          availability: string | null
+          created_at: string
+          created_by: string
+          current_position: string | null
+          cv_url: string | null
+          education: string | null
+          email: string
+          experience_years: number | null
+          first_name: string
+          hourly_rate_max: number | null
+          hourly_rate_min: number | null
+          id: string
+          languages: string[] | null
+          last_name: string
+          location: string | null
+          notes: string | null
+          phone: string | null
+          portfolio_url: string | null
+          rating: number | null
+          skills: string[] | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          availability?: string | null
+          created_at?: string
+          created_by: string
+          current_position?: string | null
+          cv_url?: string | null
+          education?: string | null
+          email: string
+          experience_years?: number | null
+          first_name: string
+          hourly_rate_max?: number | null
+          hourly_rate_min?: number | null
+          id?: string
+          languages?: string[] | null
+          last_name: string
+          location?: string | null
+          notes?: string | null
+          phone?: string | null
+          portfolio_url?: string | null
+          rating?: number | null
+          skills?: string[] | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          availability?: string | null
+          created_at?: string
+          created_by?: string
+          current_position?: string | null
+          cv_url?: string | null
+          education?: string | null
+          email?: string
+          experience_years?: number | null
+          first_name?: string
+          hourly_rate_max?: number | null
+          hourly_rate_min?: number | null
+          id?: string
+          languages?: string[] | null
+          last_name?: string
+          location?: string | null
+          notes?: string | null
+          phone?: string | null
+          portfolio_url?: string | null
+          rating?: number | null
+          skills?: string[] | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       search_requests: {
         Row: {

@@ -6,11 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Search, Edit, Eye, Mail, Phone, MapPin, Star } from "lucide-react";
+import { Plus, Search, Edit, Eye, Mail, Phone, MapPin, Star, Clock, Euro } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 
-interface Candidate {
+interface Resource {
   id: string;
   first_name: string;
   last_name: string;
@@ -22,49 +22,49 @@ interface Candidate {
   skills?: string[];
   languages?: string[];
   availability?: string;
-  salary_expectation_min?: number;
-  salary_expectation_max?: number;
+  hourly_rate_min?: number;
+  hourly_rate_max?: number;
   rating?: number;
   status: string;
   created_at: string;
 }
 
-export default function CandidateManagement() {
-  const [candidates, setCandidates] = useState<Candidate[]>([]);
+export default function ResourceManagement() {
+  const [resources, setResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchCandidates();
+    fetchResources();
   }, []);
 
-  const fetchCandidates = async () => {
+  const fetchResources = async () => {
     try {
       const { data, error } = await supabase
-        .from('candidates')
+        .from('resources')
         .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setCandidates(data || []);
+      setResources(data || []);
     } catch (error) {
-      console.error('Error fetching candidates:', error);
+      console.error('Error fetching resources:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const filteredCandidates = candidates.filter(candidate => {
+  const filteredResources = resources.filter(resource => {
     const matchesSearch = 
-      candidate.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      candidate.last_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      candidate.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      candidate.current_position?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      candidate.skills?.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));
+      resource.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.last_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.current_position?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.skills?.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    const matchesStatus = statusFilter === "all" || candidate.status === statusFilter;
+    const matchesStatus = statusFilter === "all" || resource.status === statusFilter;
 
     return matchesSearch && matchesStatus;
   });
@@ -72,11 +72,21 @@ export default function CandidateManagement() {
   const getStatusColor = (status: string) => {
     const colors = {
       available: "default",
-      interviewing: "secondary", 
-      placed: "outline",
+      allocated: "secondary", 
+      busy: "outline",
       unavailable: "destructive"
     };
     return colors[status as keyof typeof colors] || "default";
+  };
+
+  const getStatusText = (status: string) => {
+    const texts = {
+      available: "Verfügbar",
+      allocated: "Zugeteilt",
+      busy: "Beschäftigt",
+      unavailable: "Nicht verfügbar"
+    };
+    return texts[status as keyof typeof texts] || status;
   };
 
   const getAvailabilityText = (availability?: string) => {
@@ -125,12 +135,12 @@ export default function CandidateManagement() {
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Bewerberverwaltung</h1>
-          <p className="text-muted-foreground">Alle Bewerberprofile verwalten</p>
+          <h1 className="text-3xl font-bold">RaaS - Ressourcenverwaltung</h1>
+          <p className="text-muted-foreground">Verwalten Sie alle verfügbaren Remote-Ressourcen</p>
         </div>
-        <Button onClick={() => navigate('/admin/candidates/new')}>
+        <Button onClick={() => navigate('/admin/resources/new')}>
           <Plus className="w-4 h-4 mr-2" />
-          Neuen Bewerber anlegen
+          Neue Ressource hinzufügen
         </Button>
       </div>
 
@@ -157,8 +167,8 @@ export default function CandidateManagement() {
               <SelectContent>
                 <SelectItem value="all">Alle Status</SelectItem>
                 <SelectItem value="available">Verfügbar</SelectItem>
-                <SelectItem value="interviewing">Im Gespräch</SelectItem>
-                <SelectItem value="placed">Vermittelt</SelectItem>
+                <SelectItem value="allocated">Zugeteilt</SelectItem>
+                <SelectItem value="busy">Beschäftigt</SelectItem>
                 <SelectItem value="unavailable">Nicht verfügbar</SelectItem>
               </SelectContent>
             </Select>
@@ -166,29 +176,29 @@ export default function CandidateManagement() {
         </CardContent>
       </Card>
 
-      {/* Kandidaten Übersicht */}
+      {/* Ressourcen Übersicht */}
       <Card>
         <CardHeader>
-          <CardTitle>Bewerber ({filteredCandidates.length})</CardTitle>
+          <CardTitle>Ressourcen ({filteredResources.length})</CardTitle>
           <CardDescription>
-            Verwalten Sie alle Bewerberprofile und deren Informationen
+            Verwalten Sie alle Remote-Ressourcen und deren Verfügbarkeit
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {filteredCandidates.length === 0 ? (
+          {filteredResources.length === 0 ? (
             <div className="text-center py-8">
               <p className="text-muted-foreground">
                 {searchTerm || statusFilter !== "all" 
-                  ? "Keine Bewerber gefunden, die den Filterkriterien entsprechen."
-                  : "Noch keine Bewerber angelegt."
+                  ? "Keine Ressourcen gefunden, die den Filterkriterien entsprechen."
+                  : "Noch keine Ressourcen hinzugefügt."
                 }
               </p>
               {!searchTerm && statusFilter === "all" && (
                 <Button 
-                  onClick={() => navigate('/admin/candidates/new')} 
+                  onClick={() => navigate('/admin/resources/new')} 
                   className="mt-4"
                 >
-                  Ersten Bewerber anlegen
+                  Erste Ressource hinzufügen
                 </Button>
               )}
             </div>
@@ -202,21 +212,22 @@ export default function CandidateManagement() {
                     <TableHead>Position</TableHead>
                     <TableHead>Erfahrung</TableHead>
                     <TableHead>Verfügbarkeit</TableHead>
+                    <TableHead>Stundensatz</TableHead>
                     <TableHead>Bewertung</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Aktionen</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredCandidates.map((candidate) => (
-                    <TableRow key={candidate.id}>
+                  {filteredResources.map((resource) => (
+                    <TableRow key={resource.id}>
                       <TableCell>
                         <div>
-                          <p className="font-medium">{candidate.first_name} {candidate.last_name}</p>
-                          {candidate.location && (
+                          <p className="font-medium">{resource.first_name} {resource.last_name}</p>
+                          {resource.location && (
                             <p className="text-sm text-muted-foreground flex items-center gap-1">
                               <MapPin className="h-3 w-3" />
-                              {candidate.location}
+                              {resource.location}
                             </p>
                           )}
                         </div>
@@ -225,50 +236,60 @@ export default function CandidateManagement() {
                         <div className="space-y-1">
                           <p className="text-sm flex items-center gap-1">
                             <Mail className="h-3 w-3" />
-                            {candidate.email}
+                            {resource.email}
                           </p>
-                          {candidate.phone && (
+                          {resource.phone && (
                             <p className="text-sm flex items-center gap-1 text-muted-foreground">
                               <Phone className="h-3 w-3" />
-                              {candidate.phone}
+                              {resource.phone}
                             </p>
                           )}
                         </div>
                       </TableCell>
                       <TableCell>
-                        <p className="text-sm">{candidate.current_position || "Nicht angegeben"}</p>
-                        {candidate.skills && candidate.skills.length > 0 && (
+                        <p className="text-sm">{resource.current_position || "Nicht angegeben"}</p>
+                        {resource.skills && resource.skills.length > 0 && (
                           <div className="flex flex-wrap gap-1 mt-1">
-                            {candidate.skills.slice(0, 3).map((skill, index) => (
+                            {resource.skills.slice(0, 3).map((skill, index) => (
                               <Badge key={index} variant="secondary" className="text-xs">
                                 {skill}
                               </Badge>
                             ))}
-                            {candidate.skills.length > 3 && (
+                            {resource.skills.length > 3 && (
                               <Badge variant="outline" className="text-xs">
-                                +{candidate.skills.length - 3}
+                                +{resource.skills.length - 3}
                               </Badge>
                             )}
                           </div>
                         )}
                       </TableCell>
                       <TableCell>
-                        {candidate.experience_years ? `${candidate.experience_years} Jahre` : "Nicht angegeben"}
+                        {resource.experience_years ? `${resource.experience_years} Jahre` : "Nicht angegeben"}
                       </TableCell>
                       <TableCell>
-                        <p className="text-sm">{getAvailabilityText(candidate.availability)}</p>
-                        {candidate.salary_expectation_min && candidate.salary_expectation_max && (
-                          <p className="text-xs text-muted-foreground">
-                            €{candidate.salary_expectation_min.toLocaleString()} - €{candidate.salary_expectation_max.toLocaleString()}
-                          </p>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3 text-muted-foreground" />
+                          <p className="text-sm">{getAvailabilityText(resource.availability)}</p>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        {resource.hourly_rate_min && resource.hourly_rate_max ? (
+                          <div className="flex items-center gap-1">
+                            <Euro className="h-3 w-3" />
+                            <span className="text-sm">
+                              {resource.hourly_rate_min}-{resource.hourly_rate_max}/h
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="text-sm text-muted-foreground">Nicht angegeben</span>
                         )}
                       </TableCell>
                       <TableCell>
-                        {renderStars(candidate.rating)}
+                        {renderStars(resource.rating)}
                       </TableCell>
                       <TableCell>
-                        <Badge variant={getStatusColor(candidate.status) as any}>
-                          {candidate.status}
+                        <Badge variant={getStatusColor(resource.status) as any}>
+                          {getStatusText(resource.status)}
                         </Badge>
                       </TableCell>
                       <TableCell>
@@ -276,14 +297,14 @@ export default function CandidateManagement() {
                           <Button 
                             size="sm" 
                             variant="outline"
-                            onClick={() => navigate(`/admin/candidates/${candidate.id}`)}
+                            onClick={() => navigate(`/admin/resources/${resource.id}`)}
                           >
                             <Eye className="w-4 h-4" />
                           </Button>
                           <Button 
                             size="sm" 
                             variant="outline"
-                            onClick={() => navigate(`/admin/candidates/${candidate.id}/edit`)}
+                            onClick={() => navigate(`/admin/resources/${resource.id}/edit`)}
                           >
                             <Edit className="w-4 h-4" />
                           </Button>

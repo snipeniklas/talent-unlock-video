@@ -105,9 +105,9 @@ export function AppSidebar() {
   const adminItems = [
     { title: "Admin Dashboard", url: "/admin/dashboard", icon: Shield },
     { title: "Alle Unternehmen", url: "/admin/companies", icon: Building2 },
-    { title: "Alle Spezialisten", url: "/admin/candidates", icon: UserCheck },
-    { title: "Suchaufträge", url: "/admin/search-requests", icon: FileText },
-    { title: "System Einstellungen", url: "/admin/settings", icon: Settings },
+    { title: "RaaS Ressourcen", url: "/admin/resources", icon: UserCheck },
+    { title: "Kundenprojekte", url: "/admin/search-requests", icon: FileText },
+    { title: "Benutzerverwaltung", url: "/admin/settings", icon: Settings },
   ];
 
   if (loading) {

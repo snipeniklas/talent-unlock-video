@@ -24,7 +24,7 @@ interface SearchRequest {
   company: {
     name: string;
   };
-  candidate_assignments: {
+  resource_allocations: {
     id: string;
     status: string;
   }[];
@@ -48,7 +48,7 @@ export default function AdminSearchRequests() {
         .select(`
           *,
           company:companies(name),
-          candidate_assignments(id, status)
+          resource_allocations:resource_allocations(id, status)
         `)
         .order('created_at', { ascending: false });
 
@@ -103,11 +103,11 @@ export default function AdminSearchRequests() {
     return level ? levels[level as keyof typeof levels] : "Nicht angegeben";
   };
 
-  const getAssignmentStats = (assignments: any[]) => {
-    const total = assignments.length;
-    const pending = assignments.filter(a => a.status === 'proposed').length;
-    const active = assignments.filter(a => ['reviewed', 'shortlisted', 'interview_scheduled'].includes(a.status)).length;
-    const completed = assignments.filter(a => ['accepted', 'rejected'].includes(a.status)).length;
+  const getAssignmentStats = (allocations: any[]) => {
+    const total = allocations.length;
+    const pending = allocations.filter(a => a.status === 'proposed').length;
+    const active = allocations.filter(a => ['reviewed', 'allocated', 'active'].includes(a.status)).length;
+    const completed = allocations.filter(a => ['completed', 'cancelled'].includes(a.status)).length;
 
     return { total, pending, active, completed };
   };
@@ -131,8 +131,8 @@ export default function AdminSearchRequests() {
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Suchaufträge verwalten</h1>
-          <p className="text-muted-foreground">Alle Kundenaufträge im Überblick</p>
+          <h1 className="text-3xl font-bold">Kundenprojekte verwalten</h1>
+          <p className="text-muted-foreground">Alle Kundenaufträge und Ressourcen-Zuweisungen im Überblick</p>
         </div>
       </div>
 
@@ -171,9 +171,9 @@ export default function AdminSearchRequests() {
       {/* Suchaufträge Übersicht */}
       <Card>
         <CardHeader>
-          <CardTitle>Suchaufträge ({filteredRequests.length})</CardTitle>
+          <CardTitle>Kundenprojekte ({filteredRequests.length})</CardTitle>
           <CardDescription>
-            Übersicht aller Kundenaufträge und deren Status
+            Übersicht aller Kundenaufträge und deren Ressourcen-Zuweisungen
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -181,8 +181,8 @@ export default function AdminSearchRequests() {
             <div className="text-center py-8">
               <p className="text-muted-foreground">
                 {searchTerm || statusFilter !== "all" 
-                  ? "Keine Suchaufträge gefunden, die den Filterkriterien entsprechen."
-                  : "Noch keine Suchaufträge vorhanden."
+                  ? "Keine Kundenprojekte gefunden, die den Filterkriterien entsprechen."
+                  : "Noch keine Kundenprojekte vorhanden."
                 }
               </p>
             </div>
@@ -195,7 +195,7 @@ export default function AdminSearchRequests() {
                     <TableHead>Unternehmen</TableHead>
                     <TableHead>Details</TableHead>
                     <TableHead>Gehalt</TableHead>
-                    <TableHead>Zuweisungen</TableHead>
+                    <TableHead>Ressourcen-Zuweisungen</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Erstellt</TableHead>
                     <TableHead>Aktionen</TableHead>
@@ -203,7 +203,7 @@ export default function AdminSearchRequests() {
                 </TableHeader>
                 <TableBody>
                   {filteredRequests.map((request) => {
-                    const stats = getAssignmentStats(request.candidate_assignments);
+                    const stats = getAssignmentStats(request.resource_allocations);
                     return (
                       <TableRow key={request.id}>
                         <TableCell>
@@ -249,12 +249,12 @@ export default function AdminSearchRequests() {
                             </div>
                             {stats.pending > 0 && (
                               <Badge variant="secondary" className="text-xs">
-                                {stats.pending} ausstehend
+                                {stats.pending} vorgeschlagen
                               </Badge>
                             )}
                             {stats.active > 0 && (
                               <Badge variant="default" className="text-xs">
-                                {stats.active} aktiv
+                                {stats.active} zugeteilt
                               </Badge>
                             )}
                             {stats.completed > 0 && (
@@ -289,10 +289,10 @@ export default function AdminSearchRequests() {
                             <Button 
                               size="sm" 
                               variant="outline"
-                              onClick={() => navigate(`/admin/search-requests/${request.id}/assignments`)}
+                              onClick={() => navigate(`/admin/search-requests/${request.id}/allocations`)}
                             >
                               <UserCheck className="w-4 h-4 mr-1" />
-                              Zuweisungen
+                              Ressourcen zuweisen
                             </Button>
                           </div>
                         </TableCell>

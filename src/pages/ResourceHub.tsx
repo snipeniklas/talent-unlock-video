@@ -84,11 +84,11 @@ const ResourceHub = () => {
             </div>
 
             <div className="grid lg:grid-cols-1 gap-8 max-w-2xl mx-auto">
-              {/* Candidate Preview */}
+              {/* Resource Preview */}
               <InteractiveAppScreen
-                title="Vorgeschlagene Bewerber"
-                description="Entdecken Sie von HeyTalent sorgfältig ausgewählte Bewerber für Ihre Projekte"
-                screen="candidates"
+                title="Verfügbare Ressourcen"
+                description="Entdecken Sie von HeyTalent bereitgestellte Remote-Ressourcen für Ihre Projekte"
+                screen="resources"
               />
             </div>
 
