@@ -61,7 +61,7 @@ const HomePage = () => {
     { label: "Vermittelte Remote-Fachkräfte", value: "500+" },
     { label: "Erfolgreiche Vermittlungen", value: "150+" },
     { label: "Zufriedene Unternehmen", value: "98%" },
-    { label: "Durchschnittliche Besetzungszeit", value: "2 Wochen" }
+    { label: "Durchschnittliche Besetzungszeit", value: "2" }
   ];
 
   const testimonials = [
