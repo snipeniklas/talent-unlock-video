@@ -84,7 +84,7 @@ const HomePage = () => {
       <PublicHeader />
 
       {/* Hero Section */}
-      <section className="relative py-12 md:py-20 lg:py-32 overflow-hidden">
+      <section className="relative py-8 md:py-12 lg:py-20 overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-hero opacity-10"></div>
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
@@ -125,27 +125,28 @@ const HomePage = () => {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slide-up-delay-3">
-                  <Button asChild size="lg" className="text-base md:text-lg px-6 md:px-8 py-4 md:py-5 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
+                <div className="space-y-4 justify-center lg:justify-start animate-slide-up-delay-3">
+                  <Button asChild size="lg" className="w-full sm:w-auto text-base md:text-lg px-8 md:px-10 py-5 md:py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
                     <Link to="/app/search-requests/new">
                       <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
                         KOSTENFREI
                       </span>
-                      <Phone className="w-4 h-4 md:w-5 md:h-5 mr-2" />
-                      <span className="hidden sm:inline">Unverbindliche RaaS Anfrage</span>
-                      <span className="sm:hidden">RaaS Anfrage</span>
-                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                      <Phone className="w-5 h-5 mr-3" />
+                      <span>Unverbindliche RaaS Anfrage starten</span>
+                      <ArrowRight className="w-5 h-5 ml-3" />
                     </Link>
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    size="lg" 
-                    className="text-base md:text-lg px-6 md:px-8 py-4 md:py-5 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
-                    onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
-                  >
-                    <span className="hidden sm:inline">Unsere Expertise entdecken</span>
-                    <span className="sm:hidden">Expertise entdecken</span>
-                  </Button>
+                  
+                  <div className="flex justify-center lg:justify-start">
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="text-sm text-primary hover:bg-primary/10 px-4 py-2"
+                      onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
+                    >
+                      Oder entdecken Sie unsere Expertise →
+                    </Button>
+                  </div>
                 </div>
               </div>
 
