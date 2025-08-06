@@ -90,67 +90,62 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              {/* Left Column - Text Content */}
-              <div className="text-center lg:text-left">
-                {/* Expert Status Badges */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-4 mb-6 md:mb-8">
-                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">8+ Jahre Remote-Expertise</span>
-                  </div>
-                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">500+ vetted Fachkräfte</span>
-                  </div>
-                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">98% Erfolgsquote</span>
-                  </div>
-                </div>
-
-                <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-brand-dark mb-6 md:mb-8 leading-tight animate-fade-in">
-                  <span className="text-primary">RaaS</span> - Resources as a Service
-                </h1>
-                <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-4 md:mb-6 animate-fade-in-delay-1 font-light">
-                  <span className="font-semibold text-brand-dark">Die Remote-Experten,</span> die Ihre Herausforderungen verstehen und lösen.
-                </p>
-                <p className="text-base md:text-lg text-muted-foreground mb-4 md:mb-6 animate-fade-in-delay-2">
-                  Als <span className="font-semibold text-primary">Marktführer für Remote-Recruiting</span> verbinden wir Sie seit 8 Jahren mit den besten Talenten. 
-                  Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir finden die perfekte Lösung.
-                </p>
-                
-                {/* Risk-Free Highlight */}
-                <div className="bg-gradient-primary/10 border border-primary/20 rounded-2xl p-4 md:p-6 mb-8 md:mb-12">
-                  <p className="text-base md:text-lg font-semibold text-brand-dark mb-2">
-                    ✅ 100% kostenfrei & unverbindlich starten
-                  </p>
-                  <p className="text-sm md:text-base text-muted-foreground">
-                    Erhalten Sie maßgeschneiderte Ressourcen-Vorschläge ohne jegliche Verpflichtung. 
-                    Erst bei Ihrer Zustimmung beginnt die Zusammenarbeit.
-                  </p>
-                </div>
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Expert Status Badges */}
+            <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-8">
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-xs md:text-sm font-medium text-brand-dark">8+ Jahre Remote-Expertise</span>
               </div>
-
-              {/* Right Column - Video */}
-              <div className="relative">
-                <div className="aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm border border-primary/20">
-                  <iframe 
-                    src="https://hejcompanyde-my.sharepoint.com/personal/joachim_kalff_hejcompany_de/_layouts/15/embed.aspx?UniqueId=7cd68a6d-417a-4027-8508-b394d09d7132&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" 
-                    className="w-full h-full border-0"
-                    scrolling="no" 
-                    allowFullScreen 
-                    title="HejTalent Intro Video"
-                  />
-                </div>
-                {/* Video accent border */}
-                <div className="absolute -inset-1 bg-gradient-primary rounded-2xl lg:rounded-3xl opacity-50 -z-10"></div>
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <span className="text-xs md:text-sm font-medium text-brand-dark">500+ vetted Fachkräfte</span>
+              </div>
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
+                <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                <span className="text-xs md:text-sm font-medium text-brand-dark">98% Erfolgsquote</span>
               </div>
             </div>
+
+            <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-brand-dark mb-6 md:mb-8 leading-tight animate-fade-in">
+              <span className="text-primary">RaaS</span> - Resources as a Service
+            </h1>
+            <p className="text-lg md:text-2xl lg:text-3xl text-muted-foreground mb-4 md:mb-6 max-w-4xl mx-auto animate-fade-in-delay-1 font-light">
+              <span className="font-semibold text-brand-dark">Die Remote-Experten,</span> die Ihre Herausforderungen verstehen und lösen.
+            </p>
+            <p className="text-base md:text-xl text-muted-foreground mb-8 md:mb-12 max-w-4xl mx-auto animate-fade-in-delay-2">
+              Als <span className="font-semibold text-primary">Marktführer für Remote-Recruiting</span> verbinden wir Sie seit 8 Jahren mit den besten Talenten. 
+              Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir finden die perfekte Lösung.
+            </p>
+
+            {/* Video */}
+            <div className="relative max-w-4xl mx-auto mb-8 md:mb-12">
+              <div className="aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm border border-primary/20">
+                <iframe 
+                  src="https://hejcompanyde-my.sharepoint.com/personal/joachim_kalff_hejcompany_de/_layouts/15/embed.aspx?UniqueId=7cd68a6d-417a-4027-8508-b394d09d7132&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" 
+                  className="w-full h-full border-0"
+                  scrolling="no" 
+                  allowFullScreen 
+                  title="HejTalent Intro Video"
+                />
+              </div>
+              {/* Video accent border */}
+              <div className="absolute -inset-1 bg-gradient-primary rounded-2xl lg:rounded-3xl opacity-50 -z-10"></div>
+            </div>
             
-            {/* Primary CTA - moved below the two column layout */}
-            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center mt-12 md:mt-16 animate-slide-up-delay-3">
+            {/* Risk-Free Highlight */}
+            <div className="bg-gradient-primary/10 border border-primary/20 rounded-2xl p-4 md:p-6 mb-8 md:mb-12 max-w-3xl mx-auto">
+              <p className="text-base md:text-lg font-semibold text-brand-dark mb-2">
+                ✅ 100% kostenfrei & unverbindlich starten
+              </p>
+              <p className="text-sm md:text-base text-muted-foreground">
+                Erhalten Sie maßgeschneiderte Ressourcen-Vorschläge ohne jegliche Verpflichtung. 
+                Erst bei Ihrer Zustimmung beginnt die Zusammenarbeit.
+              </p>
+            </div>
+            
+            {/* Primary CTA */}
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center mb-12 md:mb-16 animate-slide-up-delay-3">
               <Button asChild size="lg" className="text-base md:text-xl px-6 md:px-12 py-4 md:py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
                 <Link to="/app/search-requests/new">
                   <span className="absolute -top-2 -right-2 md:-top-3 md:-right-3 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
