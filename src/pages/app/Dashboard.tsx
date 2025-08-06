@@ -19,6 +19,8 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [userRole, setUserRole] = useState<string | null>(null);
   const [companyName, setCompanyName] = useState<string>('');
+  const [recentSearchRequests, setRecentSearchRequests] = useState<any[]>([]);
+  const [recommendedSpecialists, setRecommendedSpecialists] = useState<any[]>([]);
   const [stats, setStats] = useState({
     activeSearchRequests: 0,
     totalSpecialists: 0,
@@ -55,17 +57,23 @@ const Dashboard = () => {
           setCompanyName(profileData.data.companies.name);
         }
 
-        // Fetch actual stats from the database
+        // Fetch actual stats and recent data from the database
         const { data: { user: currentUser } } = await supabase.auth.getUser();
         if (currentUser && profileData.data?.company_id) {
-          const [searchRequestsData, resourcesData] = await Promise.all([
+          const [searchRequestsData, resourcesData, recentRequestsData] = await Promise.all([
             supabase
               .from('search_requests')
               .select('status')
               .eq('company_id', profileData.data.company_id),
             supabase
               .from('resources')
-              .select('id')
+              .select('id'),
+            supabase
+              .from('search_requests')
+              .select('id, title, status, created_at')
+              .eq('company_id', profileData.data.company_id)
+              .order('created_at', { ascending: false })
+              .limit(3)
           ]);
 
           const activeRequests = searchRequestsData.data?.filter(r => r.status === 'active').length || 0;
@@ -79,6 +87,19 @@ const Dashboard = () => {
             completedProjects: completedRequests,
             pendingRequests
           });
+
+          // Set recent search requests
+          setRecentSearchRequests(recentRequestsData.data || []);
+
+          // Fetch recommended specialists (top rated and available)
+          const { data: specialistsData } = await supabase
+            .from('resources')
+            .select('id, first_name, last_name, current_position, experience_years, rating, status')
+            .eq('status', 'available')
+            .order('rating', { ascending: false })
+            .limit(3);
+
+          setRecommendedSpecialists(specialistsData || []);
         }
 
       } catch (error) {
@@ -186,27 +207,51 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="flex items-center justify-between border-b pb-3">
-                <div>
-                  <p className="font-medium">Senior AI Engineer gesucht</p>
-                  <p className="text-sm text-muted-foreground">Erstellt vor 2 Tagen</p>
+              {recentSearchRequests.length > 0 ? (
+                recentSearchRequests.map((request, index) => (
+                  <div 
+                    key={request.id} 
+                    className={`flex items-center justify-between ${index < recentSearchRequests.length - 1 ? 'border-b pb-3' : ''}`}
+                  >
+                    <div>
+                      <p className="font-medium">{request.title}</p>
+                      <p className="text-sm text-muted-foreground">
+                        Erstellt {new Date(request.created_at).toLocaleDateString('de-DE', {
+                          day: 'numeric',
+                          month: 'long'
+                        })}
+                      </p>
+                    </div>
+                    <Badge 
+                      variant={
+                        request.status === 'active' ? 'secondary' : 
+                        request.status === 'completed' ? 'default' : 
+                        'outline'
+                      }
+                      className={
+                        request.status === 'completed' ? 'bg-green-100 text-green-800 hover:bg-green-100' : ''
+                      }
+                    >
+                      {request.status === 'active' ? 'Aktiv' : 
+                       request.status === 'completed' ? 'Abgeschlossen' : 
+                       request.status === 'pending' ? 'Ausstehend' : 
+                       'In Bearbeitung'}
+                    </Badge>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-muted-foreground">Noch keine Suchaufträge erstellt</p>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="mt-2"
+                    onClick={() => navigate('/app/search-requests/new')}
+                  >
+                    Ersten Auftrag erstellen
+                  </Button>
                 </div>
-                <Badge variant="secondary">Aktiv</Badge>
-              </div>
-              <div className="flex items-center justify-between border-b pb-3">
-                <div>
-                  <p className="font-medium">Machine Learning Spezialist</p>
-                  <p className="text-sm text-muted-foreground">Erstellt vor 1 Woche</p>
-                </div>
-                <Badge variant="outline">In Bearbeitung</Badge>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">Data Scientist - Remote</p>
-                  <p className="text-sm text-muted-foreground">Erstellt vor 2 Wochen</p>
-                </div>
-                <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Abgeschlossen</Badge>
-              </div>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -223,33 +268,43 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="flex items-center justify-between border-b pb-3">
-                <div>
-                  <p className="font-medium">Max Mustermann</p>
-                  <p className="text-sm text-muted-foreground">Senior AI Engineer • 8 Jahre Erfahrung</p>
+              {recommendedSpecialists.length > 0 ? (
+                recommendedSpecialists.map((specialist, index) => (
+                  <div 
+                    key={specialist.id} 
+                    className={`flex items-center justify-between ${index < recommendedSpecialists.length - 1 ? 'border-b pb-3' : ''}`}
+                  >
+                    <div>
+                      <p className="font-medium">{specialist.first_name} {specialist.last_name}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {specialist.current_position || 'Spezialist'} • {specialist.experience_years || 0} Jahre Erfahrung
+                        {specialist.rating && (
+                          <span className="ml-2">⭐ {specialist.rating}/5</span>
+                        )}
+                      </p>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => navigate(`/app/specialists/${specialist.id}`)}
+                    >
+                      Profil ansehen
+                    </Button>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-muted-foreground">Noch keine Spezialisten verfügbar</p>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="mt-2"
+                    onClick={() => navigate('/app/specialists')}
+                  >
+                    Spezialisten durchsuchen
+                  </Button>
                 </div>
-                <Button variant="outline" size="sm">
-                  Profil ansehen
-                </Button>
-              </div>
-              <div className="flex items-center justify-between border-b pb-3">
-                <div>
-                  <p className="font-medium">Sarah Schmidt</p>
-                  <p className="text-sm text-muted-foreground">ML Spezialist • 6 Jahre Erfahrung</p>
-                </div>
-                <Button variant="outline" size="sm">
-                  Profil ansehen
-                </Button>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">Dr. Anna Weber</p>
-                  <p className="text-sm text-muted-foreground">Data Scientist • 10 Jahre Erfahrung</p>
-                </div>
-                <Button variant="outline" size="sm">
-                  Profil ansehen
-                </Button>
-              </div>
+              )}
             </div>
           </CardContent>
         </Card>
