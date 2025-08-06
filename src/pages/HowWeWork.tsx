@@ -112,8 +112,8 @@ const HowWeWork = () => {
                     </p>
                     <div className="bg-primary/5 border-l-4 border-primary p-4 rounded-r-lg">
                       <p className="text-muted-foreground text-lg font-medium">
-                        Die Vorteile sind messbar: <span className="font-bold text-primary">Bis zu 60% Kosteneinsparung</span> 
-                        gegenüber lokalen Vollzeitkräften, <span className="font-bold">100% planbare Budgets</span> 
+                        Die Vorteile sind messbar: <span className="font-bold text-primary">Bis zu 60% Kosteneinsparung 
+                        gegenüber lokalen Vollzeitkräften</span>, <span className="font-bold">100% planbare Budgets</span>
                         ohne versteckte Personalkosten und die Möglichkeit, 
                         <span className="font-bold text-primary"> sofort zu skalieren</span> – nach oben oder unten.
                       </p>
