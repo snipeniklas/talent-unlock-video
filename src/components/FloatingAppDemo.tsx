@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -24,6 +25,7 @@ interface FloatingAppDemoProps {
 
 const FloatingAppDemo: React.FC<FloatingAppDemoProps> = ({ title, description }) => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   return (
     <div className="relative">
@@ -227,6 +229,7 @@ const FloatingAppDemo: React.FC<FloatingAppDemoProps> = ({ title, description })
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-gradient-primary border-0 shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 z-40 px-8 py-6 text-lg"
           onMouseEnter={() => setHoveredCard('cta')}
           onMouseLeave={() => setHoveredCard(null)}
+          onClick={() => navigate('/app/search-requests/new')}
         >
           <Zap className="w-5 h-5 mr-2" />
           RaaS Anfrage starten
