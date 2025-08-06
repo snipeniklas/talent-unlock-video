@@ -90,86 +90,97 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto text-center">
-            {/* Expert Status Badges */}
-            <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-8">
-              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-xs md:text-sm font-medium text-brand-dark">8+ Jahre Remote-Expertise</span>
-              </div>
-              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                <span className="text-xs md:text-sm font-medium text-brand-dark">500+ vetted Fachkräfte</span>
-              </div>
-              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
-                <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-                <span className="text-xs md:text-sm font-medium text-brand-dark">98% Erfolgsquote</span>
-              </div>
-            </div>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-start">
+              {/* Left Column - Content */}
+              <div className="space-y-6 lg:space-y-8">
+                {/* Expert Status Badges */}
+                <div className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
+                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs md:text-sm font-medium text-brand-dark">8+ Jahre Remote-Expertise</span>
+                  </div>
+                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs md:text-sm font-medium text-brand-dark">500+ vetted Fachkräfte</span>
+                  </div>
+                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs md:text-sm font-medium text-brand-dark">98% Erfolgsquote</span>
+                  </div>
+                </div>
 
-            <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-brand-dark mb-6 md:mb-8 leading-tight animate-fade-in">
-              <span className="text-primary">RaaS</span> - Resources as a Service
-            </h1>
-            <p className="text-lg md:text-2xl lg:text-3xl text-muted-foreground mb-4 md:mb-6 max-w-4xl mx-auto animate-fade-in-delay-1 font-light">
-              <span className="font-semibold text-brand-dark">Die Remote-Experten,</span> die Ihre Herausforderungen verstehen und lösen.
-            </p>
-            <p className="text-base md:text-xl text-muted-foreground mb-8 md:mb-12 max-w-4xl mx-auto animate-fade-in-delay-2">
-              Als <span className="font-semibold text-primary">Marktführer für Remote-Recruiting</span> verbinden wir Sie seit 8 Jahren mit den besten Talenten. 
-              Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir finden die perfekte Lösung.
-            </p>
+                {/* Main Title */}
+                <div className="text-center lg:text-left">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-brand-dark mb-4 lg:mb-6 leading-tight animate-fade-in">
+                    <span className="text-primary">RaaS</span> - Resources as a Service
+                  </h1>
+                  <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-4 lg:mb-6 animate-fade-in-delay-1 font-light">
+                    <span className="font-semibold text-brand-dark">Die Remote-Experten,</span> die Ihre Herausforderungen verstehen und lösen.
+                  </p>
+                  <p className="text-base md:text-lg text-muted-foreground mb-6 lg:mb-8 animate-fade-in-delay-2">
+                    Als <span className="font-semibold text-primary">Marktführer für Remote-Recruiting</span> verbinden wir Sie seit 8 Jahren mit den besten Talenten. 
+                    Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir finden die perfekte Lösung.
+                  </p>
+                </div>
 
-            {/* Video */}
-            <div className="relative max-w-4xl mx-auto mb-8 md:mb-12">
-              <div className="aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm border border-primary/20">
-                <iframe 
-                  src="https://hejcompanyde-my.sharepoint.com/personal/joachim_kalff_hejcompany_de/_layouts/15/embed.aspx?UniqueId=7cd68a6d-417a-4027-8508-b394d09d7132&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" 
-                  className="w-full h-full border-0"
-                  scrolling="no" 
-                  allowFullScreen 
-                  title="HejTalent Intro Video"
-                />
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slide-up-delay-3">
+                  <Button asChild size="lg" className="text-base md:text-lg px-6 md:px-8 py-4 md:py-5 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
+                    <Link to="/app/search-requests/new">
+                      <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                        KOSTENFREI
+                      </span>
+                      <Phone className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+                      <span className="hidden sm:inline">Unverbindliche RaaS Anfrage</span>
+                      <span className="sm:hidden">RaaS Anfrage</span>
+                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                    </Link>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="text-base md:text-lg px-6 md:px-8 py-4 md:py-5 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
+                    onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    <span className="hidden sm:inline">Unsere Expertise entdecken</span>
+                    <span className="sm:hidden">Expertise entdecken</span>
+                  </Button>
+                </div>
               </div>
-              {/* Video accent border */}
-              <div className="absolute -inset-1 bg-gradient-primary rounded-2xl lg:rounded-3xl opacity-50 -z-10"></div>
-            </div>
-            
-            {/* Risk-Free Highlight */}
-            <div className="bg-gradient-primary/10 border border-primary/20 rounded-2xl p-4 md:p-6 mb-8 md:mb-12 max-w-3xl mx-auto">
-              <p className="text-base md:text-lg font-semibold text-brand-dark mb-2">
-                ✅ 100% kostenfrei & unverbindlich starten
-              </p>
-              <p className="text-sm md:text-base text-muted-foreground">
-                Erhalten Sie maßgeschneiderte Ressourcen-Vorschläge ohne jegliche Verpflichtung. 
-                Erst bei Ihrer Zustimmung beginnt die Zusammenarbeit.
-              </p>
-            </div>
-            
-            {/* Primary CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center mb-12 md:mb-16 animate-slide-up-delay-3">
-              <Button asChild size="lg" className="text-base md:text-xl px-6 md:px-12 py-4 md:py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
-                <Link to="/app/search-requests/new">
-                  <span className="absolute -top-2 -right-2 md:-top-3 md:-right-3 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
-                    KOSTENFREI
-                  </span>
-                  <Phone className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
-                  <span className="hidden sm:inline">Unverbindliche RaaS Anfrage</span>
-                  <span className="sm:hidden">RaaS Anfrage</span>
-                  <ArrowRight className="w-4 h-4 md:w-6 md:h-6 ml-2 md:ml-3" />
-                </Link>
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="text-base md:text-xl px-6 md:px-12 py-4 md:py-6 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
-                onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                <span className="hidden sm:inline">Unsere Expertise entdecken</span>
-                <span className="sm:hidden">Expertise entdecken</span>
-              </Button>
+
+              {/* Right Column - Video & CTA Box */}
+              <div className="space-y-6 lg:space-y-8">
+                {/* Video */}
+                <div className="relative">
+                  <div className="aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm border border-primary/20">
+                    <iframe 
+                      src="https://hejcompanyde-my.sharepoint.com/personal/joachim_kalff_hejcompany_de/_layouts/15/embed.aspx?UniqueId=7cd68a6d-417a-4027-8508-b394d09d7132&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" 
+                      className="w-full h-full border-0"
+                      scrolling="no" 
+                      allowFullScreen 
+                      title="HejTalent Intro Video"
+                    />
+                  </div>
+                  {/* Video accent border */}
+                  <div className="absolute -inset-1 bg-gradient-primary rounded-2xl lg:rounded-3xl opacity-50 -z-10"></div>
+                </div>
+                
+                {/* Risk-Free Highlight */}
+                <div className="bg-gradient-primary/10 border border-primary/20 rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <p className="text-base md:text-lg font-semibold text-brand-dark mb-2">
+                    ✅ 100% kostenfrei & unverbindlich starten
+                  </p>
+                  <p className="text-sm md:text-base text-muted-foreground">
+                    Erhalten Sie maßgeschneiderte Ressourcen-Vorschläge ohne jegliche Verpflichtung. 
+                    Erst bei Ihrer Zustimmung beginnt die Zusammenarbeit.
+                  </p>
+                </div>
+              </div>
             </div>
             
             {/* Trust Indicators */}
-            <div className="text-center mb-6 md:mb-8">
+            <div className="text-center mt-12 lg:mt-16">
               <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">Vertrauen Sie auf 8+ Jahre Expertise:</p>
               <div className="flex flex-wrap justify-center gap-2 md:gap-8 items-center opacity-60">
                 <span className="text-xs md:text-sm font-medium">Fortune 500 Kunden</span>
@@ -183,7 +194,7 @@ const HomePage = () => {
             </div>
             
             {/* Solution Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 animate-slide-up-delay-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 lg:mt-16 animate-slide-up-delay-4">
               <Card 
                 className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative h-full flex flex-col"
                 onClick={() => navigate('/solutions/backoffice')}
