@@ -15,11 +15,11 @@ const Contact = () => {
       
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-16">
+          <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
               <span className="text-primary">Kontakt</span> & Erstgespräch
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground mb-12">
               Lassen Sie uns über Ihre Remote-Fachkräfte-Anforderungen sprechen
             </p>
           </div>
