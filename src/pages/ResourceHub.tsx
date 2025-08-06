@@ -49,10 +49,10 @@ const ResourceHub = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              <span className="text-primary">RaaS Hub</span> - Ihr intelligentes Dashboard
+              <span className="text-primary">RaaS Hub</span> - Ihre Service-Zentrale
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Der zentrale Ort für alle Ihre Remote-Ressourcen, Projekte und Erfolgsmetriken
+              Verwalten Sie Ihre Remote-Services, Projekte und Deliverables in einer intelligenten Plattform
             </p>
             
             {/* Feature Badges */}
@@ -69,298 +69,404 @@ const ResourceHub = () => {
             </div>
           </div>
 
-          {/* Premium Software Demo Area - Asana Inspired */}
-          <div className="relative min-h-[700px] bg-gradient-subtle rounded-3xl p-8 mb-16 overflow-hidden">
-            {/* Enhanced Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
-              <div className="absolute top-10 left-10 w-40 h-40 bg-primary rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-10 right-10 w-32 h-32 bg-blue-500 rounded-full blur-2xl animate-pulse delay-1000"></div>
-              <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-purple-500 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 animate-pulse delay-500"></div>
+          {/* Service Overview Section */}
+          <div className="mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark">
+                Ihre RaaS Services im Überblick
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Verwalten Sie alle Ihre Remote-Services zentral - von der Anfrage bis zur Delivery
+              </p>
             </div>
 
-            {/* Main Dashboard Interface */}
-            <Card 
-              className="absolute top-8 left-8 w-96 bg-white/95 backdrop-blur-xl border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 z-30"
-              onMouseEnter={() => setHoveredCard('dashboard')}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h4 className="font-bold text-lg">RaaS Dashboard</h4>
-                  <Badge className="bg-green-100 text-green-700">Live</Badge>
-                </div>
-                
-                {/* Mock Dashboard Interface */}
-                <div className="bg-gray-50 rounded-lg p-4 mb-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-medium">Aktive Projekte</span>
-                    <span className="text-xs text-muted-foreground">12 von 15</span>
-                  </div>
-                  <div className="space-y-2">
-                    {/* Project List Mock */}
-                    <div className="flex items-center gap-3 p-2 bg-white rounded">
-                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                      <span className="text-sm flex-1">KI-Entwicklung Projekt</span>
-                      <Badge variant="secondary" className="text-xs">Python</Badge>
-                    </div>
-                    <div className="flex items-center gap-3 p-2 bg-white rounded">
-                      <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                      <span className="text-sm flex-1">Backoffice Automation</span>
-                      <Badge variant="secondary" className="text-xs">Excel</Badge>
-                    </div>
-                    <div className="flex items-center gap-3 p-2 bg-white rounded">
-                      <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                      <span className="text-sm flex-1">Mobile App Development</span>
-                      <Badge variant="secondary" className="text-xs">React</Badge>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="text-center p-2 bg-green-50 rounded">
-                    <div className="text-lg font-bold text-green-600">98%</div>
-                    <div className="text-xs text-muted-foreground">Erfolgsrate</div>
-                  </div>
-                  <div className="text-center p-2 bg-blue-50 rounded">
-                    <div className="text-lg font-bold text-blue-600">2.1d</div>
-                    <div className="text-xs text-muted-foreground">Ø Match-Zeit</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Talent Management Interface */}
-            <Card 
-              className="absolute top-12 right-8 w-80 bg-white/95 backdrop-blur-xl border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 z-30"
-              onMouseEnter={() => setHoveredCard('talent')}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              <CardContent className="p-5">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                    <Users className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Talent Pool</h4>
-                    <p className="text-sm text-muted-foreground">479 verfügbare Experten</p>
-                  </div>
-                </div>
-                
-                {/* Mock Talent Interface */}
-                <div className="bg-gray-50 rounded-lg p-3 mb-3">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Search className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">Python, AI, Machine Learning</span>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-3 p-2 bg-white rounded">
-                      <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                        <Code className="w-4 h-4 text-blue-600" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-sm font-medium">Max M.</div>
-                        <div className="text-xs text-muted-foreground">Senior AI Engineer</div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                        <span className="text-xs">5.0</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 p-2 bg-white rounded">
-                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                        <Brain className="w-4 h-4 text-green-600" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-sm font-medium">Sarah K.</div>
-                        <div className="text-xs text-muted-foreground">ML Specialist</div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                        <span className="text-xs">4.9</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <Button size="sm" className="w-full bg-gradient-primary border-0">
-                  Alle Talente ansehen
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Search Request Creation Interface */}
-            <Card 
-              className="absolute bottom-16 left-12 w-72 bg-white/95 backdrop-blur-xl border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 z-25"
-              onMouseEnter={() => setHoveredCard('search')}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              <CardContent className="p-5">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Search className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Neue RaaS Anfrage</h4>
-                    <p className="text-sm text-muted-foreground">Intelligente Suche</p>
-                  </div>
-                </div>
-                
-                {/* Mock Search Form */}
-                <div className="bg-gray-50 rounded-lg p-3 mb-3">
-                  <div className="space-y-2">
-                    <div className="text-xs text-muted-foreground">Gesuchte Rolle</div>
-                    <div className="bg-white rounded p-2 text-sm">Senior React Developer</div>
-                    
-                    <div className="text-xs text-muted-foreground">Skills</div>
-                    <div className="flex gap-1 flex-wrap">
-                      <Badge variant="secondary" className="text-xs">React</Badge>
-                      <Badge variant="secondary" className="text-xs">TypeScript</Badge>
-                      <Badge variant="secondary" className="text-xs">Node.js</Badge>
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16">
+              {/* Service Dashboard Mock */}
+              <div className="order-2 lg:order-1">
+                <Card className="bg-white/95 backdrop-blur-xl border-0 shadow-2xl overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h4 className="font-bold text-lg">Service Dashboard</h4>
+                      <Badge className="bg-green-100 text-green-700">12 Aktive Services</Badge>
                     </div>
                     
-                    <div className="text-xs text-muted-foreground">Verfügbarkeit</div>
-                    <div className="bg-white rounded p-2 text-sm">Vollzeit, remote</div>
-                  </div>
-                </div>
-                
-                <Button size="sm" className="w-full bg-gradient-primary border-0">
-                  <Target className="w-3 h-3 mr-1" />
-                  Suche starten
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Analytics & Performance Interface */}
-            <Card 
-              className="absolute bottom-20 right-12 w-80 bg-white/95 backdrop-blur-xl border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 z-25"
-              onMouseEnter={() => setHoveredCard('analytics')}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              <CardContent className="p-5">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <BarChart className="w-5 h-5 text-purple-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Performance Analytics</h4>
-                    <p className="text-sm text-muted-foreground">Letzte 30 Tage</p>
-                  </div>
-                </div>
-                
-                {/* Mock Analytics Interface */}
-                <div className="bg-gray-50 rounded-lg p-3 mb-3">
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Erfolgreiche Matches</span>
-                      <div className="flex items-center gap-2">
-                        <div className="w-16 h-2 bg-gray-200 rounded-full">
-                          <div className="w-14 h-2 bg-green-500 rounded-full"></div>
+                    <div className="space-y-3 mb-4">
+                      <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                        <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                        <div className="flex-1">
+                          <div className="font-medium">KI-Datenanalyse Service</div>
+                          <div className="text-sm text-muted-foreground">Vollzeit • 2 Data Scientists</div>
                         </div>
-                        <span className="text-sm font-bold text-green-600">87%</span>
+                        <Badge variant="secondary">In Progress</Badge>
+                      </div>
+                      
+                      <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <div className="flex-1">
+                          <div className="font-medium">Cloud Migration Service</div>
+                          <div className="text-sm text-muted-foreground">Projekt • 3 DevOps Engineers</div>
+                        </div>
+                        <Badge className="bg-green-100 text-green-700">Delivered</Badge>
+                      </div>
+                      
+                      <div className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg">
+                        <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                        <div className="flex-1">
+                          <div className="font-medium">Buchhaltungs-Automation</div>
+                          <div className="text-sm text-muted-foreground">Teilzeit • 1 Backoffice Expert</div>
+                        </div>
+                        <Badge variant="outline">Starting</Badge>
                       </div>
                     </div>
                     
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Ø Besetzungszeit</span>
-                      <span className="text-sm font-bold">2.3 Tage</span>
-                    </div>
-                    
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Kundenzufriedenheit</span>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm font-bold">4.9</span>
+                    <div className="grid grid-cols-3 gap-3 pt-3 border-t">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-primary">€47k</div>
+                        <div className="text-xs text-muted-foreground">Monatl. Services</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-green-600">98%</div>
+                        <div className="text-xs text-muted-foreground">SLA Erfüllung</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-blue-600">24h</div>
+                        <div className="text-xs text-muted-foreground">Avg. Response</div>
                       </div>
                     </div>
-                    
-                    <div className="border-t pt-2">
-                      <div className="flex items-center gap-2 text-green-600">
-                        <TrendingUp className="w-4 h-4" />
-                        <span className="text-sm">+15% vs. Vormonat</span>
-                      </div>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              {/* Explanation */}
+              <div className="order-1 lg:order-2">
+                <h3 className="text-2xl font-bold mb-4 text-brand-dark">Service-Management leicht gemacht</h3>
+                <p className="text-lg text-muted-foreground mb-6">
+                  Behalten Sie den Überblick über alle Ihre Remote-Services. Von KI-Projekten bis hin zu 
+                  Backoffice-Automation - alles zentral verwaltet mit Echtzeit-Status und Performance-Metriken.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Service-Portfolio Übersicht</div>
+                      <div className="text-sm text-muted-foreground">Alle laufenden Services auf einen Blick</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Echtzeit Performance</div>
+                      <div className="text-sm text-muted-foreground">SLA-Tracking und Delivery-Status</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Kosten-Transparenz</div>
+                      <div className="text-sm text-muted-foreground">Klare Aufschlüsselung aller Service-Kosten</div>
                     </div>
                   </div>
                 </div>
-                
-                <Button size="sm" variant="outline" className="w-full">
-                  Detailbericht anzeigen
-                </Button>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
+          </div>
 
-            {/* Security & Compliance Interface */}
-            <Card 
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-20 w-84 bg-white/95 backdrop-blur-xl border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 z-35"
-              onMouseEnter={() => setHoveredCard('security')}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              <CardContent className="p-5">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                    <Shield className="w-5 h-5 text-green-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Sicherheit & Compliance</h4>
-                    <p className="text-sm text-muted-foreground">Enterprise Standards</p>
-                  </div>
-                </div>
-                
-                {/* Mock Security Dashboard */}
-                <div className="bg-gray-50 rounded-lg p-3 mb-3">
-                  <div className="grid grid-cols-3 gap-2 mb-3">
-                    <div className="bg-white rounded p-2 text-center">
-                      <Lock className="w-4 h-4 text-blue-600 mx-auto mb-1" />
-                      <div className="text-xs font-medium">DSGVO</div>
-                      <div className="w-2 h-2 bg-green-500 rounded-full mx-auto mt-1"></div>
-                    </div>
-                    <div className="bg-white rounded p-2 text-center">
-                      <Globe className="w-4 h-4 text-purple-600 mx-auto mb-1" />
-                      <div className="text-xs font-medium">ISO 27001</div>
-                      <div className="w-2 h-2 bg-green-500 rounded-full mx-auto mt-1"></div>
-                    </div>
-                    <div className="bg-white rounded p-2 text-center">
-                      <CheckCircle className="w-4 h-4 text-green-600 mx-auto mb-1" />
-                      <div className="text-xs font-medium">SOC 2</div>
-                      <div className="w-2 h-2 bg-green-500 rounded-full mx-auto mt-1"></div>
+          {/* Service Request Section */}
+          <div className="mb-20">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              {/* Explanation */}
+              <div>
+                <h3 className="text-2xl font-bold mb-4 text-brand-dark">Neue RaaS Services anfragen</h3>
+                <p className="text-lg text-muted-foreground mb-6">
+                  Beschreiben Sie Ihr Business-Problem und erhalten Sie maßgeschneiderte Service-Lösungen. 
+                  Unser KI-System matched Sie automatisch mit den passenden Experten-Teams.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Target className="w-5 h-5 text-blue-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Problem-zu-Lösung Matching</div>
+                      <div className="text-sm text-muted-foreground">KI-gestützte Service-Empfehlungen</div>
                     </div>
                   </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-sm">
-                      <span>Datenverschlüsselung</span>
-                      <CheckCircle className="w-4 h-4 text-green-500" />
+                  <div className="flex items-start gap-3">
+                    <Clock className="w-5 h-5 text-orange-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Schnelle Service-Aktivierung</div>
+                      <div className="text-sm text-muted-foreground">Services starten binnen 48h</div>
                     </div>
-                    <div className="flex items-center justify-between text-sm">
-                      <span>2FA Authentifizierung</span>
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                    </div>
-                    <div className="flex items-center justify-between text-sm">
-                      <span>Audit Logs</span>
-                      <CheckCircle className="w-4 h-4 text-green-500" />
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Shield className="w-5 h-5 text-green-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Garantierte Qualität</div>
+                      <div className="text-sm text-muted-foreground">SLA-backed Service Delivery</div>
                     </div>
                   </div>
                 </div>
-                
-                <div className="flex gap-2">
-                  <Button size="sm" className="flex-1 bg-gradient-primary border-0">
-                    <UserCheck className="w-3 h-3 mr-1" />
-                    Zugang erhalten
-                  </Button>
-                  <Button size="sm" variant="ghost">
-                    Details
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+              
+              {/* Service Request Mock */}
+              <div>
+                <Card className="bg-white/95 backdrop-blur-xl border-0 shadow-2xl overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+                        <Zap className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">Neue Service-Anfrage</h4>
+                        <p className="text-sm text-muted-foreground">Problem beschreiben</p>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <label className="text-sm font-medium text-gray-700">Was möchten Sie erreichen?</label>
+                        <div className="mt-1 p-3 bg-gray-50 rounded-lg text-sm">
+                          Automatisierung unserer Rechnungsverarbeitung mit KI-basierter Datenextraktion
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label className="text-sm font-medium text-gray-700">Gewünschter Service-Typ</label>
+                        <div className="mt-1 flex gap-2">
+                          <Badge className="bg-blue-100 text-blue-700">Backoffice Automation</Badge>
+                          <Badge variant="outline">KI/ML</Badge>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label className="text-sm font-medium text-gray-700">Timeline & Budget</label>
+                        <div className="mt-1 p-3 bg-gray-50 rounded-lg text-sm">
+                          Start: Innerhalb 2 Wochen • Budget: €15-25k/Monat
+                        </div>
+                      </div>
+                      
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+                        <div className="flex items-center gap-2 text-green-700">
+                          <Brain className="w-4 h-4" />
+                          <span className="text-sm font-medium">KI-Empfehlung</span>
+                        </div>
+                        <div className="text-sm text-green-600 mt-1">
+                          3 passende Experten-Teams gefunden • Geschätzte Implementierung: 4-6 Wochen
+                        </div>
+                      </div>
+                      
+                      <Button className="w-full bg-gradient-primary border-0">
+                        Service-Match starten
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
 
-            {/* Floating Main CTA */}
+          {/* Analytics & ROI Section */}
+          <div className="mb-20">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              {/* Analytics Mock */}
+              <div>
+                <Card className="bg-white/95 backdrop-blur-xl border-0 shadow-2xl overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <BarChart className="w-5 h-5 text-purple-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">Service Performance & ROI</h4>
+                        <p className="text-sm text-muted-foreground">Letzte 90 Tage</p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                      <div className="bg-green-50 rounded-lg p-3 text-center">
+                        <div className="text-2xl font-bold text-green-600">312%</div>
+                        <div className="text-sm text-muted-foreground">ROI Steigerung</div>
+                      </div>
+                      <div className="bg-blue-50 rounded-lg p-3 text-center">
+                        <div className="text-2xl font-bold text-blue-600">-67%</div>
+                        <div className="text-sm text-muted-foreground">Kosteneinsparung</div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Service Delivery Rate</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-16 h-2 bg-green-100 rounded-full">
+                            <div className="w-15 h-2 bg-green-500 rounded-full"></div>
+                          </div>
+                          <span className="text-sm font-bold text-green-600">97%</span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Ø Problem-zu-Lösung Zeit</span>
+                        <span className="text-sm font-bold">3.2 Tage</span>
+                      </div>
+                      
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Service-Qualität Score</span>
+                        <div className="flex items-center gap-1">
+                          <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                          <span className="text-sm font-bold">4.8/5</span>
+                        </div>
+                      </div>
+                      
+                      <div className="border-t pt-3 mt-3">
+                        <div className="bg-blue-50 rounded-lg p-3">
+                          <div className="text-sm font-medium text-blue-700">Top Service-Impact</div>
+                          <div className="text-xs text-blue-600">Backoffice Automation: 45% Effizienzsteigerung</div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              {/* Explanation */}
+              <div>
+                <h3 className="text-2xl font-bold mb-4 text-brand-dark">Messbare Business-Erfolge</h3>
+                <p className="text-lg text-muted-foreground mb-6">
+                  Verfolgen Sie den ROI Ihrer RaaS Services mit detaillierten Performance-Metriken. 
+                  Sehen Sie, wie Remote-Services Ihr Business transformieren.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <TrendingUp className="w-5 h-5 text-green-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">ROI-Tracking</div>
+                      <div className="text-sm text-muted-foreground">Messbare Kosteneinsparungen und Effizienzsteigerungen</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <BarChart className="w-5 h-5 text-purple-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Performance Analytics</div>
+                      <div className="text-sm text-muted-foreground">Detaillierte Service-Leistungsbewertungen</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Target className="w-5 h-5 text-blue-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Business Impact</div>
+                      <div className="text-sm text-muted-foreground">Konkrete Verbesserungen Ihrer Geschäftsprozesse</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Service Security Section */}
+          <div className="mb-20">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              {/* Explanation */}
+              <div>
+                <h3 className="text-2xl font-bold mb-4 text-brand-dark">Enterprise-Grade Service Security</h3>
+                <p className="text-lg text-muted-foreground mb-6">
+                  Ihre sensiblen Business-Daten sind bei unseren RaaS Services in sichersten Händen. 
+                  Vollständige Compliance und höchste Sicherheitsstandards.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Lock className="w-5 h-5 text-blue-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Datensicherheit</div>
+                      <div className="text-sm text-muted-foreground">End-to-End Verschlüsselung aller Service-Daten</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Shield className="w-5 h-5 text-green-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Compliance & Zertifizierung</div>
+                      <div className="text-sm text-muted-foreground">ISO 27001, DSGVO, SOC 2 Type II</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Globe className="w-5 h-5 text-purple-500 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Service Continuity</div>
+                      <div className="text-sm text-muted-foreground">99.9% Uptime SLA für kritische Services</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Security Mock */}
+              <div>
+                <Card className="bg-white/95 backdrop-blur-xl border-0 shadow-2xl overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                        <Shield className="w-5 h-5 text-green-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">Security & Compliance Status</h4>
+                        <p className="text-sm text-muted-foreground">Alle Services überwacht</p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-2 mb-4">
+                      <div className="bg-green-50 rounded-lg p-3 text-center">
+                        <Lock className="w-6 h-6 text-green-600 mx-auto mb-2" />
+                        <div className="text-xs font-medium">DSGVO</div>
+                        <div className="w-2 h-2 bg-green-500 rounded-full mx-auto mt-1"></div>
+                      </div>
+                      <div className="bg-green-50 rounded-lg p-3 text-center">
+                        <Globe className="w-6 h-6 text-green-600 mx-auto mb-2" />
+                        <div className="text-xs font-medium">ISO 27001</div>
+                        <div className="w-2 h-2 bg-green-500 rounded-full mx-auto mt-1"></div>
+                      </div>
+                      <div className="bg-green-50 rounded-lg p-3 text-center">
+                        <CheckCircle className="w-6 h-6 text-green-600 mx-auto mb-2" />
+                        <div className="text-xs font-medium">SOC 2</div>
+                        <div className="w-2 h-2 bg-green-500 rounded-full mx-auto mt-1"></div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between p-2 bg-green-50 rounded">
+                        <span className="text-sm">Service-Datenverschlüsselung</span>
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                      </div>
+                      <div className="flex items-center justify-between p-2 bg-green-50 rounded">
+                        <span className="text-sm">Multi-Factor Authentication</span>
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                      </div>
+                      <div className="flex items-center justify-between p-2 bg-green-50 rounded">
+                        <span className="text-sm">Audit Logs & Monitoring</span>
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                      </div>
+                      <div className="flex items-center justify-between p-2 bg-green-50 rounded">
+                        <span className="text-sm">Service SLA Monitoring</span>
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                      </div>
+                    </div>
+                    
+                    <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                      <div className="text-sm font-medium text-blue-700">Service Uptime</div>
+                      <div className="text-2xl font-bold text-blue-600">99.97%</div>
+                      <div className="text-xs text-blue-600">Letzte 12 Monate</div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+
+          {/* Main CTA */}
+          <div className="text-center">
             <Button 
-              className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-gradient-primary border-0 shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 z-40 px-10 py-6 text-lg"
+              size="lg" 
+              className="text-xl px-12 py-8 bg-gradient-primary border-0 hover:scale-105 transition-transform shadow-2xl"
               onClick={() => navigate('/auth')}
             >
-              <UserCheck className="w-5 h-5 mr-2" />
+              <UserCheck className="w-6 h-6 mr-3" />
               RaaS Hub jetzt öffnen
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-6 h-6 ml-3" />
             </Button>
           </div>
 
