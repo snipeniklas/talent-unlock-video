@@ -49,6 +49,7 @@ export type Database = {
           expires_at: string
           id: string
           invited_by: string
+          invited_role: Database["public"]["Enums"]["app_role"] | null
           status: string
           updated_at: string
         }
@@ -59,6 +60,7 @@ export type Database = {
           expires_at?: string
           id?: string
           invited_by: string
+          invited_role?: Database["public"]["Enums"]["app_role"] | null
           status?: string
           updated_at?: string
         }
@@ -69,6 +71,7 @@ export type Database = {
           expires_at?: string
           id?: string
           invited_by?: string
+          invited_role?: Database["public"]["Enums"]["app_role"] | null
           status?: string
           updated_at?: string
         }

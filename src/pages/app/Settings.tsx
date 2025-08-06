@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { User, Building2, UserPlus, Lock, Mail, Trash2 } from "lucide-react";
@@ -49,7 +50,9 @@ const Settings = () => {
     website: ''
   });
   const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteRole, setInviteRole] = useState<'user' | 'admin' | 'company_admin'>('user');
   const [isCompanyAdmin, setIsCompanyAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -75,7 +78,9 @@ const Settings = () => {
       return { 
         user, 
         profile,
-        isCompanyAdmin: userRoles?.some((ur: any) => ur.role === 'company_admin')
+        isCompanyAdmin: userRoles?.some((ur: any) => ur.role === 'company_admin'),
+        isAdmin: userRoles?.some((ur: any) => ur.role === 'admin'),
+        roles: userRoles?.map((ur: any) => ur.role) || []
       };
     }
   });
@@ -113,7 +118,7 @@ const Settings = () => {
       if (error) throw error;
       return data;
     },
-    enabled: !!currentUser?.profile?.company_id && currentUser?.isCompanyAdmin
+    enabled: !!currentUser?.profile?.company_id && (currentUser?.isCompanyAdmin || currentUser?.isAdmin)
   });
 
   // Set initial data when loaded
@@ -127,6 +132,9 @@ const Settings = () => {
     }
     if (currentUser?.isCompanyAdmin) {
       setIsCompanyAdmin(true);
+    }
+    if (currentUser?.isAdmin) {
+      setIsAdmin(true);
     }
   }, [company, currentUser]);
 
@@ -207,6 +215,7 @@ const Settings = () => {
           email: inviteEmail.toLowerCase().trim(),
           company_id: currentUser.profile.company_id,
           invited_by: currentUser.user.id,
+          invited_role: isAdmin ? inviteRole : 'user',
           status: 'pending',
           expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString() // 7 days
         })
@@ -234,6 +243,7 @@ const Settings = () => {
     },
     onSuccess: (data) => {
       setInviteEmail('');
+      setInviteRole('user');
       queryClient.invalidateQueries({ queryKey: ['companyInvitations'] });
       
       const successMessage = data.emailData?.inviteUrl 
@@ -324,7 +334,7 @@ const Settings = () => {
               <Building2 className="w-4 h-4" />
               Unternehmen
             </TabsTrigger>
-            <TabsTrigger value="team" className="flex items-center gap-2" disabled={!isCompanyAdmin}>
+            <TabsTrigger value="team" className="flex items-center gap-2" disabled={!(isCompanyAdmin || isAdmin)}>
               <UserPlus className="w-4 h-4" />
               Team-Verwaltung
             </TabsTrigger>
@@ -488,6 +498,23 @@ const Settings = () => {
                       placeholder="mitarbeiter@beispiel.de"
                     />
                   </div>
+                  
+                  {/* Role selector - only show for admins */}
+                  {isAdmin && (
+                    <div>
+                      <Label htmlFor="inviteRole">Rolle</Label>
+                      <Select value={inviteRole} onValueChange={(value: 'user' | 'admin' | 'company_admin') => setInviteRole(value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Rolle auswählen" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="user">Benutzer</SelectItem>
+                          <SelectItem value="company_admin">Unternehmens-Administrator</SelectItem>
+                          <SelectItem value="admin">Administrator</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  )}
                   <Button 
                     onClick={() => sendInvitationMutation.mutate()}
                     disabled={!inviteEmail.trim() || sendInvitationMutation.isPending}

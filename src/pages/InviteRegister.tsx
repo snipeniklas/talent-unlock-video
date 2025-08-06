@@ -142,12 +142,13 @@ const InviteRegister = () => {
 
         if (profileError) throw profileError;
 
-        // Assign user role
+        // Assign user role based on invitation
+        const role = invitation.invited_role || 'user';
         const { error: roleError } = await supabase
           .from('user_roles')
           .insert({
             user_id: authData.user.id,
-            role: 'user'
+            role: role
           });
 
         if (roleError) throw roleError;
