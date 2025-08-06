@@ -59,11 +59,11 @@ const ResourceHub = () => {
           <div className="mt-20 mb-16">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark">
-                Vorschau: Ihre Plattform-Oberfläche
+                Vorschau: Ihr RaaS Hub Interface
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Werfen Sie einen Blick auf die intuitive Benutzeroberfläche, 
-                die Sie nach dem Login erwartet.
+                Werfen Sie einen Blick auf das intuitive Interface, 
+                das Sie nach dem Login erwartet.
               </p>
             </div>
 

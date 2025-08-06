@@ -191,7 +191,7 @@ const AuthPage = () => {
             Willkommen bei HejTalent
           </h1>
           <p className="text-muted-foreground mb-4">
-            Ihre Plattform für erstklassige KI-Entwickler
+            Ihr RaaS Hub für erstklassige Remote-Fachkräfte
           </p>
           
           {/* Trust indicators */}

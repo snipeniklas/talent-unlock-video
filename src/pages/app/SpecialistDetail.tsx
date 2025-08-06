@@ -62,7 +62,7 @@ const SpecialistDetail = () => {
         portfolio: [
           {
             title: "E-Commerce Platform",
-            description: "Vollständige Entwicklung einer modernen E-Commerce-Plattform mit React, TypeScript und Stripe Integration.",
+            description: "Vollständige Entwicklung eines modernen E-Commerce-Hubs mit React, TypeScript und Stripe Integration.",
             technologies: ["React", "TypeScript", "Stripe", "Node.js"]
           },
           {

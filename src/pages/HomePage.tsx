@@ -291,10 +291,10 @@ const HomePage = () => {
         <div className="container mx-auto max-w-7xl px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark">
-              Erleben Sie unsere <span className="text-primary">RaaS</span> Plattform
+              Erleben Sie unseren <span className="text-primary">RaaS</span> Hub
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Entdecken Sie, wie unsere intuitive Plattform Ihren gesamten RaaS-Prozess vereinfacht - 
+              Entdecken Sie, wie unser intuitiver Hub Ihren gesamten RaaS-Prozess vereinfacht - 
               von der Anfrage bis zur erfolgreichen Zusammenarbeit.
             </p>
           </div>
@@ -422,7 +422,7 @@ const HomePage = () => {
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link to="/resource-hub">
-                    Zur Plattform
+                    Zum RaaS Hub
                   </Link>
                 </Button>
               </div>

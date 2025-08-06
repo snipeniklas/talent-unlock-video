@@ -237,7 +237,7 @@ const HowWeWork = () => {
                       <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
                         <InteractiveAppScreen
                           title={`Schritt ${step.step}: ${step.title}`}
-                          description={`Sehen Sie hier, wie ${step.title.toLowerCase()} in unserer Plattform funktioniert`}
+                          description={`Sehen Sie hier, wie ${step.title.toLowerCase()} in unserem RaaS Hub funktioniert`}
                           screen={stepScreens[index]}
                         />
                       </div>
