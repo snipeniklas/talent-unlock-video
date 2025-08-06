@@ -94,7 +94,7 @@ const HomePage = () => {
             {/* Trust Badge */}
             <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 mb-8 shadow-lg">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-brand-dark">Über 500+ erfolgreiche Vermittlungen</span>
+              <span className="text-sm font-medium text-brand-dark">Über 500+ erfolgreiche Projekte</span>
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-bold text-brand-dark mb-8 leading-tight animate-fade-in">
