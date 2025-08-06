@@ -123,23 +123,24 @@ const Dashboard = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-brand-dark">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">
+          <h1 className="text-2xl md:text-3xl font-bold text-brand-dark">Dashboard</h1>
+          <p className="text-muted-foreground mt-1 text-sm md:text-base">
             {userRole === 'company_admin' ? `Willkommen zurück bei ${companyName}` : 'Übersicht Ihrer Aktivitäten'}
           </p>
         </div>
         {userRole !== 'admin' && (
-          <Button onClick={() => navigate('/app/search-requests/new')} className="bg-primary hover:bg-primary-hover">
+          <Button onClick={() => navigate('/app/search-requests/new')} className="bg-primary hover:bg-primary-hover w-full md:w-auto">
             <Plus className="w-4 h-4 mr-2" />
-            Neue Anfrage
+            <span className="md:hidden">RaaS Anfrage</span>
+            <span className="hidden md:inline">Neue Anfrage</span>
           </Button>
         )}
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         <Card className="hover:shadow-lg transition-shadow duration-300">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Aktive Suchaufträge</CardTitle>
@@ -320,30 +321,30 @@ const Dashboard = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <Button 
                 variant="outline" 
-                className="h-20 flex flex-col items-center justify-center gap-2"
+                className="h-16 md:h-20 flex flex-col items-center justify-center gap-2"
                 onClick={() => navigate('/app/search-requests/new')}
               >
-                <Plus className="w-6 h-6" />
-                <span>Neue Anfrage erstellen</span>
+                <Plus className="w-5 h-5 md:w-6 md:h-6" />
+                <span className="text-sm md:text-base">Neue Anfrage erstellen</span>
               </Button>
               <Button 
                 variant="outline" 
-                className="h-20 flex flex-col items-center justify-center gap-2"
+                className="h-16 md:h-20 flex flex-col items-center justify-center gap-2"
                 onClick={() => navigate('/app/specialists')}
               >
-                <Users className="w-6 h-6" />
-                <span>Spezialisten durchsuchen</span>
+                <Users className="w-5 h-5 md:w-6 md:h-6" />
+                <span className="text-sm md:text-base">Spezialisten durchsuchen</span>
               </Button>
               <Button 
                 variant="outline" 
-                className="h-20 flex flex-col items-center justify-center gap-2"
+                className="h-16 md:h-20 flex flex-col items-center justify-center gap-2 sm:col-span-2 lg:col-span-1"
                 onClick={() => navigate('/app/search-requests')}
               >
-                <Search className="w-6 h-6" />
-                <span>Anfragen verwalten</span>
+                <Search className="w-5 h-5 md:w-6 md:h-6" />
+                <span className="text-sm md:text-base">Anfragen verwalten</span>
               </Button>
             </div>
           </CardContent>

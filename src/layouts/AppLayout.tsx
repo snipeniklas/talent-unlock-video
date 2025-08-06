@@ -60,17 +60,17 @@ const AppLayout = () => {
     <SidebarProvider>
       <div className="min-h-screen flex w-full">
         {/* Global header with trigger */}
-        <header className="fixed top-0 left-0 right-0 h-12 flex items-center border-b bg-background/95 backdrop-blur-sm z-40">
-          <SidebarTrigger className="ml-2" />
+        <header className="fixed top-0 left-0 right-0 h-12 flex items-center border-b bg-background/95 backdrop-blur-sm z-40 px-4">
+          <SidebarTrigger className="md:ml-2" />
           <div className="flex-1 text-center">
-            <span className="font-semibold text-brand-dark">HejTalent Platform</span>
+            <span className="font-semibold text-brand-dark text-sm md:text-base">HejTalent Platform</span>
           </div>
         </header>
 
         <AppSidebar />
 
         <main className="flex-1 pt-12 overflow-auto">
-          <div className="container mx-auto p-6">
+          <div className="container mx-auto p-4 md:p-6 max-w-full">
             <Outlet />
           </div>
         </main>

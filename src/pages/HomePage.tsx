@@ -84,7 +84,7 @@ const HomePage = () => {
       <PublicHeader />
 
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
+      <section className="relative py-12 md:py-20 lg:py-32 overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-hero opacity-10"></div>
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
@@ -92,81 +92,83 @@ const HomePage = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             {/* Expert Status Badges */}
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 shadow-lg">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-8">
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-brand-dark">8+ Jahre Remote-Expertise</span>
+                <span className="text-xs md:text-sm font-medium text-brand-dark">8+ Jahre Remote-Expertise</span>
               </div>
-              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 shadow-lg">
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
                 <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-brand-dark">500+ vetted Fachkräfte</span>
+                <span className="text-xs md:text-sm font-medium text-brand-dark">500+ vetted Fachkräfte</span>
               </div>
-              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 shadow-lg">
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-6 py-2 md:py-3 shadow-lg">
                 <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-brand-dark">98% Erfolgsquote</span>
+                <span className="text-xs md:text-sm font-medium text-brand-dark">98% Erfolgsquote</span>
               </div>
             </div>
 
-            <h1 className="text-5xl lg:text-7xl font-bold text-brand-dark mb-8 leading-tight animate-fade-in">
+            <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-brand-dark mb-6 md:mb-8 leading-tight animate-fade-in">
               <span className="text-primary">RaaS</span> - Resources as a Service
             </h1>
-            <p className="text-2xl lg:text-3xl text-muted-foreground mb-6 max-w-4xl mx-auto animate-fade-in-delay-1 font-light">
+            <p className="text-lg md:text-2xl lg:text-3xl text-muted-foreground mb-4 md:mb-6 max-w-4xl mx-auto animate-fade-in-delay-1 font-light">
               <span className="font-semibold text-brand-dark">Die Remote-Experten,</span> die Ihre Herausforderungen verstehen und lösen.
             </p>
-            <p className="text-xl text-muted-foreground mb-6 max-w-4xl mx-auto animate-fade-in-delay-2">
+            <p className="text-base md:text-xl text-muted-foreground mb-4 md:mb-6 max-w-4xl mx-auto animate-fade-in-delay-2">
               Als <span className="font-semibold text-primary">Marktführer für Remote-Recruiting</span> verbinden wir Sie seit 8 Jahren mit den besten Talenten. 
               Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir finden die perfekte Lösung.
             </p>
             
             {/* Risk-Free Highlight */}
-            <div className="bg-gradient-primary/10 border border-primary/20 rounded-2xl p-6 mb-12 max-w-3xl mx-auto">
-              <p className="text-lg font-semibold text-brand-dark mb-2">
+            <div className="bg-gradient-primary/10 border border-primary/20 rounded-2xl p-4 md:p-6 mb-8 md:mb-12 max-w-3xl mx-auto">
+              <p className="text-base md:text-lg font-semibold text-brand-dark mb-2">
                 ✅ 100% kostenfrei & unverbindlich starten
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-sm md:text-base text-muted-foreground">
                 Erhalten Sie maßgeschneiderte Ressourcen-Vorschläge ohne jegliche Verpflichtung. 
                 Erst bei Ihrer Zustimmung beginnt die Zusammenarbeit.
               </p>
             </div>
             
             {/* Primary CTA */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-slide-up-delay-3">
-              <Button asChild size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center mb-12 md:mb-16 animate-slide-up-delay-3">
+              <Button asChild size="lg" className="text-base md:text-xl px-6 md:px-12 py-4 md:py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
                 <Link to="/app/search-requests/new">
-                  <span className="absolute -top-3 -right-3 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                  <span className="absolute -top-2 -right-2 md:-top-3 md:-right-3 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
                     KOSTENFREI
                   </span>
-                  <Phone className="w-6 h-6 mr-3" />
-                  Unverbindliche RaaS Anfrage
-                  <ArrowRight className="w-6 h-6 ml-3" />
+                  <Phone className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
+                  <span className="hidden sm:inline">Unverbindliche RaaS Anfrage</span>
+                  <span className="sm:hidden">RaaS Anfrage</span>
+                  <ArrowRight className="w-4 h-4 md:w-6 md:h-6 ml-2 md:ml-3" />
                 </Link>
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="text-xl px-12 py-6 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
+                className="text-base md:text-xl px-6 md:px-12 py-4 md:py-6 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
                 onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Unsere Expertise entdecken
+                <span className="hidden sm:inline">Unsere Expertise entdecken</span>
+                <span className="sm:hidden">Expertise entdecken</span>
               </Button>
             </div>
             
             {/* Trust Indicators */}
-            <div className="text-center mb-8">
-              <p className="text-sm text-muted-foreground mb-4">Vertrauen Sie auf 8+ Jahre Expertise:</p>
-              <div className="flex flex-wrap justify-center gap-8 items-center opacity-60">
-                <span className="text-sm font-medium">Fortune 500 Kunden</span>
-                <span className="text-sm font-medium">•</span>
-                <span className="text-sm font-medium">DSGVO-konform</span>
-                <span className="text-sm font-medium">•</span>
-                <span className="text-sm font-medium">ISO 27001</span>
-                <span className="text-sm font-medium">•</span>
-                <span className="text-sm font-medium">Geld-zurück-Garantie</span>
+            <div className="text-center mb-6 md:mb-8">
+              <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">Vertrauen Sie auf 8+ Jahre Expertise:</p>
+              <div className="flex flex-wrap justify-center gap-2 md:gap-8 items-center opacity-60">
+                <span className="text-xs md:text-sm font-medium">Fortune 500 Kunden</span>
+                <span className="text-xs md:text-sm font-medium hidden md:inline">•</span>
+                <span className="text-xs md:text-sm font-medium">DSGVO-konform</span>
+                <span className="text-xs md:text-sm font-medium hidden md:inline">•</span>
+                <span className="text-xs md:text-sm font-medium">ISO 27001</span>
+                <span className="text-xs md:text-sm font-medium hidden md:inline">•</span>
+                <span className="text-xs md:text-sm font-medium">Geld-zurück-Garantie</span>
               </div>
             </div>
             
             {/* Solution Cards */}
-            <div className="grid md:grid-cols-3 gap-8 animate-slide-up-delay-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 animate-slide-up-delay-4">
               <Card 
                 className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative h-full flex flex-col"
                 onClick={() => navigate('/solutions/backoffice')}
@@ -245,30 +247,30 @@ const HomePage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-subtle overflow-hidden relative">
+      <section className="py-12 md:py-20 bg-gradient-subtle overflow-hidden relative">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-brand-dark mb-4">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-2xl md:text-4xl font-bold text-brand-dark mb-4">
                 <span className="text-primary">Marktführer</span> für Remote-Recruiting seit 2016
               </h2>
-              <p className="text-xl text-muted-foreground mb-8">Zahlen, die unsere Expertise beweisen</p>
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 max-w-4xl mx-auto border border-primary/10">
-                <p className="text-lg font-semibold text-brand-dark mb-2">
+              <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8">Zahlen, die unsere Expertise beweisen</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 max-w-4xl mx-auto border border-primary/10">
+                <p className="text-base md:text-lg font-semibold text-brand-dark mb-2">
                   🏆 Ausgezeichnet als "Best Remote Recruiting Platform 2023"
                 </p>
-                <p className="text-muted-foreground">
+                <p className="text-sm md:text-base text-muted-foreground">
                   Über 150 Unternehmen vertrauen bereits auf unsere bewährte RaaS-Methodik. 
                   Von Startups bis DAX-Konzerne - wir finden die passenden Remote-Experten.
                 </p>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
               {stats.map((stat, index) => (
-                <div key={index} className="text-center group hover:scale-110 transition-all duration-500 bg-white/50 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/80 hover:shadow-xl">
-                  <div className="text-4xl md:text-5xl font-bold text-primary mb-3 group-hover:animate-bounce">{stat.value}</div>
-                  <div className="text-brand-dark font-semibold text-lg">{stat.label}</div>
+                <div key={index} className="text-center group hover:scale-110 transition-all duration-500 bg-white/50 backdrop-blur-sm rounded-2xl p-4 md:p-8 hover:bg-white/80 hover:shadow-xl">
+                  <div className="text-2xl md:text-4xl lg:text-5xl font-bold text-primary mb-2 md:mb-3 group-hover:animate-bounce">{stat.value}</div>
+                  <div className="text-brand-dark font-semibold text-sm md:text-lg">{stat.label}</div>
                 </div>
               ))}
             </div>
