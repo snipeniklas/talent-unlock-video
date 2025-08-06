@@ -8,6 +8,7 @@ import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
 import InteractiveAppScreen from "@/components/InteractiveAppScreen";
+import FloatingAppDemo from "@/components/FloatingAppDemo";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -466,31 +467,11 @@ const HomePage = () => {
             </div>
           </div>
 
-          {/* Interactive App Demo */}
-          <div className="grid lg:grid-cols-2 gap-8 mb-12">
-            {/* Customer Dashboard */}
-            <InteractiveAppScreen
-              title="Kunden-Dashboard"
-              description="Verwalten Sie Ihre RaaS-Projekte und verfolgen Sie den Fortschritt in Echtzeit"
-              screen="dashboard"
-            />
-
-            {/* Search Requests Management */}
-            <InteractiveAppScreen
-              title="RaaS Anfragen verwalten"
-              description="Erstellen und verwalten Sie Ihre Anfragen für Remote-Ressourcen"
-              screen="search-requests"
-            />
-          </div>
-
-          <div className="grid lg:grid-cols-1 gap-8 max-w-2xl mx-auto">
-            {/* Resource Overview */}
-            <InteractiveAppScreen
-              title="Ressourcen-Übersicht"
-              description="Entdecken Sie verfügbare Remote-Ressourcen und deren Expertise"
-              screen="resources"
-            />
-          </div>
+          {/* Floating App Demo */}
+          <FloatingAppDemo
+            title="Erleben Sie RaaS in Aktion"
+            description="Sehen Sie, wie unser intelligentes System Ihre Ressourcen-Anfragen in Echtzeit bearbeitet und die perfekten Remote-Experten für Sie findet."
+          />
 
           {/* Call to Action */}
           <div className="text-center mt-16">
