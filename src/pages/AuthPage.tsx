@@ -10,7 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
 import { Star, Users, Shield, ArrowLeft } from 'lucide-react';
-import heyTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
 const AuthPage = () => {
   const navigate = useNavigate();
@@ -182,8 +182,8 @@ const AuthPage = () => {
         <div className="text-center mb-8 animate-fade-in">
           <div className="flex justify-center mb-4">
             <img 
-              src={heyTalentLogo} 
-              alt="HejTalent" 
+              src={hejTalentLogo} 
+              alt="HejTalent"
               className="h-12 md:h-14 hover:scale-105 transition-transform duration-300" 
             />
           </div>

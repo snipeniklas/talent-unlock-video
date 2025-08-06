@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
-import HeyTalentLanding from "./pages/HeyTalentLanding";
+import HejTalentLanding from "./pages/HejTalentLanding";
 import AuthPage from "./pages/AuthPage";
 import AppLayout from "./layouts/AppLayout";
 import Dashboard from "./pages/app/Dashboard";
@@ -44,7 +44,7 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/landing" element={<HeyTalentLanding />} />
+          <Route path="/landing" element={<HejTalentLanding />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/solutions" element={<SolutionsOverview />} />
           <Route path="/solutions/backoffice" element={<BackofficeSolution />} />

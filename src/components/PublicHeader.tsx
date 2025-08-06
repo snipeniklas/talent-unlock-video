@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X } from "lucide-react";
 import BenefitBanner from "@/components/BenefitBanner";
-import heyTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
 const PublicHeader = () => {
   const navigate = useNavigate();
@@ -31,8 +31,8 @@ const PublicHeader = () => {
             {/* Logo */}
             <div className="flex items-center animate-slide-in-left">
               <img 
-                src={heyTalentLogo} 
-                alt="HejTalent" 
+                src={hejTalentLogo} 
+                alt="HejTalent"
                 className="h-8 md:h-10 hover:scale-105 transition-transform duration-300 cursor-pointer" 
                 onClick={() => navigate('/')}
               />
@@ -78,8 +78,8 @@ const PublicHeader = () => {
                     {/* Header */}
                     <div className="flex items-center justify-between pb-4 border-b">
                       <img 
-                        src={heyTalentLogo} 
-                        alt="HejTalent" 
+                        src={hejTalentLogo} 
+                        alt="HejTalent"
                         className="h-8" 
                       />
                       <Button 

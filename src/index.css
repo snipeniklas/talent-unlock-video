@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* HeyTalent Brand Colors */
+    /* HejTalent Brand Colors */
     --background: 0 0% 100%;
     --foreground: 230 55% 18%;
     
@@ -42,7 +42,7 @@ All colors MUST be HSL.
     
     --radius: 0.75rem;
     
-    /* Custom HeyTalent tokens */
+    /* Custom HejTalent tokens */
     --brand-blue: 235 77% 62%;
     --brand-dark: 230 55% 18%;
     --brand-light: 228 33% 97%;

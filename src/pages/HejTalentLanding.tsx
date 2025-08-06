@@ -8,9 +8,9 @@ import { Play, Star, CheckCircle, Users, Clock, Shield, Calendar, Linkedin } fro
 import videoThumbnail from '@/assets/video-thumbnail.jpg';
 import customerLogos from '@/assets/customer-logos.png';
 import verifiedBadge from '@/assets/verified-badge.png';
-import heyTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
-const HeyTalentLanding = () => {
+const HejTalentLanding = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isVideoUnlocked, setIsVideoUnlocked] = useState(false);
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
@@ -56,7 +56,7 @@ const HeyTalentLanding = () => {
             {/* Just Logo */}
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center animate-slide-in-left">
-                <img src={heyTalentLogo} alt="HeyTalent" className="h-8 md:h-10 hover:scale-105 transition-transform duration-300" />
+                <img src={hejTalentLogo} alt="HejTalent" className="h-8 md:h-10 hover:scale-105 transition-transform duration-300" />
               </div>
             </div>
         </div>
@@ -174,7 +174,7 @@ const HeyTalentLanding = () => {
                   <div className="aspect-video bg-black flex items-center justify-center animate-scale-in">
                     <iframe
                       src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
-                      title="HeyTalent Video"
+                      title="HejTalent Video"
                       className="w-full h-full"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -271,7 +271,7 @@ const HeyTalentLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-brand-dark mb-12 animate-fade-in">
-              Über 50 Unternehmen vertrauen bereits auf HeyTalent
+              Über 50 Unternehmen vertrauen bereits auf HejTalent
             </h2>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -464,4 +464,4 @@ const HeyTalentLanding = () => {
   );
 };
 
-export default HeyTalentLanding;
+export default HejTalentLanding;

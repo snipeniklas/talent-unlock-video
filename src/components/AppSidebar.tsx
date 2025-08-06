@@ -28,7 +28,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import heyTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
 interface UserRole {
   role: 'admin' | 'company_admin' | 'user';
@@ -137,8 +137,8 @@ export function AppSidebar() {
         {!isCollapsed && (
           <div className="flex items-center justify-center p-4 border-b bg-card">
             <img 
-              src={heyTalentLogo} 
-              alt="HejTalent" 
+              src={hejTalentLogo} 
+              alt="HejTalent"
               className="h-8 hover:scale-105 transition-transform duration-300" 
             />
           </div>
