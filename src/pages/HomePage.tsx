@@ -91,29 +91,53 @@ const HomePage = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
-            {/* Trust Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 mb-8 shadow-lg">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-brand-dark">Über 500+ erfolgreiche Projekte</span>
+            {/* Expert Status Badges */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 shadow-lg">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium text-brand-dark">8+ Jahre Remote-Expertise</span>
+              </div>
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 shadow-lg">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium text-brand-dark">500+ vetted Fachkräfte</span>
+              </div>
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 shadow-lg">
+                <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium text-brand-dark">98% Erfolgsquote</span>
+              </div>
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-bold text-brand-dark mb-8 leading-tight animate-fade-in">
               <span className="text-primary">RaaS</span> - Resources as a Service
             </h1>
             <p className="text-2xl lg:text-3xl text-muted-foreground mb-6 max-w-4xl mx-auto animate-fade-in-delay-1 font-light">
-              Qualifizierte Remote-Fachkräfte, die genau dort ansetzen, wo Sie sie brauchen.
+              <span className="font-semibold text-brand-dark">Die Remote-Experten,</span> die Ihre Herausforderungen verstehen und lösen.
             </p>
-            <p className="text-xl text-muted-foreground mb-12 max-w-4xl mx-auto animate-fade-in-delay-2">
-              Unser RaaS-Ansatz: Wählen Sie Ihr Thema und finden Sie Remote-Experten aus Backoffice, IT oder KI, 
-              die Ihre Herausforderung präzise und schnell lösen.
+            <p className="text-xl text-muted-foreground mb-6 max-w-4xl mx-auto animate-fade-in-delay-2">
+              Als <span className="font-semibold text-primary">Marktführer für Remote-Recruiting</span> verbinden wir Sie seit 8 Jahren mit den besten Talenten. 
+              Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir finden die perfekte Lösung.
             </p>
+            
+            {/* Risk-Free Highlight */}
+            <div className="bg-gradient-primary/10 border border-primary/20 rounded-2xl p-6 mb-12 max-w-3xl mx-auto">
+              <p className="text-lg font-semibold text-brand-dark mb-2">
+                ✅ 100% kostenfrei & unverbindlich starten
+              </p>
+              <p className="text-muted-foreground">
+                Erhalten Sie maßgeschneiderte Ressourcen-Vorschläge ohne jegliche Verpflichtung. 
+                Erst bei Ihrer Zustimmung beginnt die Zusammenarbeit.
+              </p>
+            </div>
             
             {/* Primary CTA */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-slide-up-delay-3">
-              <Button asChild size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
+              <Button asChild size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
                 <Link to="/app/search-requests/new">
+                  <span className="absolute -top-3 -right-3 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                    KOSTENFREI
+                  </span>
                   <Phone className="w-6 h-6 mr-3" />
-                  RaaS Anfrage stellen
+                  Unverbindliche RaaS Anfrage
                   <ArrowRight className="w-6 h-6 ml-3" />
                 </Link>
               </Button>
@@ -123,8 +147,22 @@ const HomePage = () => {
                 className="text-xl px-12 py-6 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
                 onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                RaaS Lösungen entdecken
+                Unsere Expertise entdecken
               </Button>
+            </div>
+            
+            {/* Trust Indicators */}
+            <div className="text-center mb-8">
+              <p className="text-sm text-muted-foreground mb-4">Vertrauen Sie auf 8+ Jahre Expertise:</p>
+              <div className="flex flex-wrap justify-center gap-8 items-center opacity-60">
+                <span className="text-sm font-medium">Fortune 500 Kunden</span>
+                <span className="text-sm font-medium">•</span>
+                <span className="text-sm font-medium">DSGVO-konform</span>
+                <span className="text-sm font-medium">•</span>
+                <span className="text-sm font-medium">ISO 27001</span>
+                <span className="text-sm font-medium">•</span>
+                <span className="text-sm font-medium">Geld-zurück-Garantie</span>
+              </div>
             </div>
             
             {/* Solution Cards */}
@@ -212,8 +250,19 @@ const HomePage = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-brand-dark mb-4">Vertrauen Sie auf unsere Expertise</h2>
-              <p className="text-xl text-muted-foreground">Zahlen, die für sich sprechen</p>
+              <h2 className="text-4xl font-bold text-brand-dark mb-4">
+                <span className="text-primary">Marktführer</span> für Remote-Recruiting seit 2016
+              </h2>
+              <p className="text-xl text-muted-foreground mb-8">Zahlen, die unsere Expertise beweisen</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 max-w-4xl mx-auto border border-primary/10">
+                <p className="text-lg font-semibold text-brand-dark mb-2">
+                  🏆 Ausgezeichnet als "Best Remote Recruiting Platform 2023"
+                </p>
+                <p className="text-muted-foreground">
+                  Über 150 Unternehmen vertrauen bereits auf unsere bewährte RaaS-Methodik. 
+                  Von Startups bis DAX-Konzerne - wir finden die passenden Remote-Experten.
+                </p>
+              </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
@@ -226,11 +275,22 @@ const HomePage = () => {
             
             {/* CTA in Stats Section */}
             <div className="text-center mt-16">
-              <Button size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
-                <Target className="w-6 h-6 mr-3" />
-                Werden Sie Teil dieser Erfolgsgeschichte
-                <ArrowRight className="w-6 h-6 ml-3" />
-              </Button>
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto border border-primary/20 shadow-xl">
+                <p className="text-lg font-semibold text-brand-dark mb-4">
+                  Ihre kostenfreie RaaS Anfrage dauert nur 3 Minuten
+                </p>
+                <p className="text-muted-foreground mb-6">
+                  Beschreiben Sie Ihre Herausforderung, wir schlagen Ihnen passende Experten vor. 
+                  Kein Risiko, keine versteckten Kosten.
+                </p>
+                <Button asChild size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
+                  <Link to="/app/search-requests/new">
+                    <Target className="w-6 h-6 mr-3" />
+                    Jetzt kostenfrei starten
+                    <ArrowRight className="w-6 h-6 ml-3" />
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
