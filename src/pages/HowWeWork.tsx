@@ -79,12 +79,7 @@ const HowWeWork = () => {
               unser bewährter 4-Stufen-Prozess garantiert Ihnen die besten Kandidaten.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* Detailed RaaS Explanation */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
+          
           <div className="max-w-6xl mx-auto">
             <Card className="border-0 shadow-xl bg-gradient-to-r from-white via-gray-50/50 to-white">
               <CardContent className="p-8 lg:p-12">

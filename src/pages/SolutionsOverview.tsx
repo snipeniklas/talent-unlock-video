@@ -52,12 +52,7 @@ const SolutionsOverview = () => {
               bis hin zu komplexen IT- und KI-Projekten.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* Solutions Grid */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
+          
           <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {solutions.map((solution, index) => (
               <Card 
