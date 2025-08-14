@@ -11,7 +11,8 @@ import {
   Plus,
   FileText,
   Shield,
-  MessageCircle
+  MessageCircle,
+  UserCog
 } from "lucide-react";
 import {
   Sidebar,
@@ -108,6 +109,7 @@ export function AppSidebar() {
     { title: "Admin Dashboard", url: "/admin/dashboard", icon: Shield },
     { title: "Alle Unternehmen", url: "/admin/companies", icon: Building2 },
     { title: "RaaS Ressourcen", url: "/admin/resources", icon: UserCheck },
+    { title: "Kandidaten", url: "/admin/candidates", icon: UserCog },
     { title: "Kundenprojekte", url: "/admin/search-requests", icon: FileText },
     { title: "Support Chat", url: "/admin/support", icon: MessageCircle },
     { title: "Benutzerverwaltung", url: "/admin/settings", icon: Settings },

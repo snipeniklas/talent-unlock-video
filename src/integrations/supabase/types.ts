@@ -14,6 +14,203 @@ export type Database = {
   }
   public: {
     Tables: {
+      candidate_experience: {
+        Row: {
+          candidate_id: string | null
+          end_date: string | null
+          id: string
+          org_name: string | null
+          start_date: string | null
+          summary: string | null
+          tech_stack: Json | null
+          title: string | null
+        }
+        Insert: {
+          candidate_id?: string | null
+          end_date?: string | null
+          id?: string
+          org_name?: string | null
+          start_date?: string | null
+          summary?: string | null
+          tech_stack?: Json | null
+          title?: string | null
+        }
+        Update: {
+          candidate_id?: string | null
+          end_date?: string | null
+          id?: string
+          org_name?: string | null
+          start_date?: string | null
+          summary?: string | null
+          tech_stack?: Json | null
+          title?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "candidate_experience_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "candidates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      candidate_identity: {
+        Row: {
+          candidate_id: string
+          city: string | null
+          country: string | null
+          first_name: string | null
+          last_name: string | null
+        }
+        Insert: {
+          candidate_id: string
+          city?: string | null
+          country?: string | null
+          first_name?: string | null
+          last_name?: string | null
+        }
+        Update: {
+          candidate_id?: string
+          city?: string | null
+          country?: string | null
+          first_name?: string | null
+          last_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "candidate_identity_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: true
+            referencedRelation: "candidates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      candidate_languages: {
+        Row: {
+          candidate_id: string
+          lang_code: string
+          proficiency: Database["public"]["Enums"]["proficiency"] | null
+        }
+        Insert: {
+          candidate_id: string
+          lang_code: string
+          proficiency?: Database["public"]["Enums"]["proficiency"] | null
+        }
+        Update: {
+          candidate_id?: string
+          lang_code?: string
+          proficiency?: Database["public"]["Enums"]["proficiency"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "candidate_languages_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "candidates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      candidate_links: {
+        Row: {
+          candidate_id: string | null
+          id: string
+          label: string | null
+          url: string | null
+        }
+        Insert: {
+          candidate_id?: string | null
+          id?: string
+          label?: string | null
+          url?: string | null
+        }
+        Update: {
+          candidate_id?: string | null
+          id?: string
+          label?: string | null
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "candidate_links_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "candidates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      candidates: {
+        Row: {
+          attributes: Json
+          availability:
+            | Database["public"]["Enums"]["availability_status"]
+            | null
+          bio: string | null
+          created_at: string
+          currency: string | null
+          headline: string | null
+          hours_per_week_pref: number | null
+          id: string
+          notice_period_days: number | null
+          primary_role: string | null
+          rate_hourly_target: number | null
+          rate_monthly_target: number | null
+          seniority: Database["public"]["Enums"]["seniority"] | null
+          skills: Json
+          start_earliest: string | null
+          tenant_id: string | null
+          updated_at: string
+          years_experience: number | null
+        }
+        Insert: {
+          attributes?: Json
+          availability?:
+            | Database["public"]["Enums"]["availability_status"]
+            | null
+          bio?: string | null
+          created_at?: string
+          currency?: string | null
+          headline?: string | null
+          hours_per_week_pref?: number | null
+          id?: string
+          notice_period_days?: number | null
+          primary_role?: string | null
+          rate_hourly_target?: number | null
+          rate_monthly_target?: number | null
+          seniority?: Database["public"]["Enums"]["seniority"] | null
+          skills?: Json
+          start_earliest?: string | null
+          tenant_id?: string | null
+          updated_at?: string
+          years_experience?: number | null
+        }
+        Update: {
+          attributes?: Json
+          availability?:
+            | Database["public"]["Enums"]["availability_status"]
+            | null
+          bio?: string | null
+          created_at?: string
+          currency?: string | null
+          headline?: string | null
+          hours_per_week_pref?: number | null
+          id?: string
+          notice_period_days?: number | null
+          primary_role?: string | null
+          rate_hourly_target?: number | null
+          rate_monthly_target?: number | null
+          seniority?: Database["public"]["Enums"]["seniority"] | null
+          skills?: Json
+          start_earliest?: string | null
+          tenant_id?: string | null
+          updated_at?: string
+          years_experience?: number | null
+        }
+        Relationships: []
+      }
       companies: {
         Row: {
           created_at: string
@@ -496,6 +693,9 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "company_admin" | "user"
+      availability_status: "immediately" | "notice_period" | "booked" | "paused"
+      proficiency: "basic" | "conversational" | "fluent" | "native"
+      seniority: "junior" | "mid" | "senior" | "lead"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -624,6 +824,9 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "company_admin", "user"],
+      availability_status: ["immediately", "notice_period", "booked", "paused"],
+      proficiency: ["basic", "conversational", "fluent", "native"],
+      seniority: ["junior", "mid", "senior", "lead"],
     },
   },
 } as const
