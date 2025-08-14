@@ -30,6 +30,7 @@ import NotFound from "./pages/NotFound";
 import Support from "./pages/app/Support";
 import AdminSupport from "./pages/admin/AdminSupport";
 import CandidateManagement from "./pages/admin/CandidateManagement";
+import CandidateDetail from "./pages/admin/CandidateDetail";
 import NewCandidate from "./pages/admin/NewCandidate";
 import Settings from "./pages/app/Settings";
 import InviteRegister from "./pages/InviteRegister";
@@ -71,6 +72,7 @@ const App = () => (
           <Route path="/admin" element={<AppLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="candidates" element={<CandidateManagement />} />
+            <Route path="candidates/:id" element={<CandidateDetail />} />
             <Route path="candidates/new" element={<NewCandidate />} />
             <Route path="search-requests" element={<AdminSearchRequests />} />
             <Route path="companies" element={<CompanyManagement />} />

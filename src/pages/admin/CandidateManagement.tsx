@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Users, Eye, Edit, Search } from 'lucide-react';
+import { Plus, Users, Edit, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -204,15 +204,10 @@ export default function CandidateManagement() {
                       variant="outline" 
                       size="sm"
                       onClick={() => navigate(`/admin/candidates/${candidate.id}`)}
-                    >
-                      <Eye className="h-4 w-4" />
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={() => navigate(`/admin/candidates/${candidate.id}/edit`)}
+                      className="flex items-center gap-1"
                     >
                       <Edit className="h-4 w-4" />
+                      Bearbeiten
                     </Button>
                   </div>
                 </div>
