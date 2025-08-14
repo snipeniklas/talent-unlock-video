@@ -466,11 +466,11 @@ export default function NewCandidate() {
                   value={formData.rate_monthly_target}
                   onChange={(e) => {
                     const monthlyRate = e.target.value;
-                    const hourlyRate = monthlyRate ? (parseFloat(monthlyRate) / 160).toFixed(2) : '';
+                    const hourlyRate = monthlyRate ? Math.round((parseFloat(monthlyRate) / 160) * 100) / 100 : '';
                     setFormData({ 
                       ...formData, 
                       rate_monthly_target: monthlyRate,
-                      rate_hourly_target: hourlyRate
+                      rate_hourly_target: hourlyRate.toString()
                     });
                   }}
                   placeholder="z.B. 8000"
