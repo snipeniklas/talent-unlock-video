@@ -6,9 +6,21 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Eye, Building2, MapPin, Clock, Euro, UserCheck, Users } from "lucide-react";
+import { Search, Eye, Building2, MapPin, Clock, Euro, UserCheck, Users, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useToast } from '@/hooks/use-toast';
 
 interface SearchRequest {
   id: string;
@@ -36,6 +48,7 @@ export default function AdminSearchRequests() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     fetchSearchRequests();
@@ -81,6 +94,40 @@ export default function AdminSearchRequests() {
       cancelled: "destructive"
     };
     return colors[status as keyof typeof colors] || "default";
+  };
+
+  const handleDeleteRequest = async (requestId: string) => {
+    try {
+      const { error } = await supabase
+        .from('search_requests')
+        .delete()
+        .eq('id', requestId);
+
+      if (error) {
+        console.error('Error deleting search request:', error);
+        toast({
+          title: "Fehler",
+          description: "Suchauftrag konnte nicht gelöscht werden.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Remove from local state
+      setSearchRequests(prev => prev.filter(req => req.id !== requestId));
+
+      toast({
+        title: "Erfolg",
+        description: "Suchauftrag wurde erfolgreich gelöscht.",
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Fehler",
+        description: "Ein unerwarteter Fehler ist aufgetreten.",
+        variant: "destructive",
+      });
+    }
   };
 
   const getEmploymentTypeText = (type?: string) => {
@@ -294,6 +341,31 @@ export default function AdminSearchRequests() {
                               <UserCheck className="w-4 h-4 mr-1" />
                               Ressourcen zuweisen
                             </Button>
+                            <AlertDialog>
+                              <AlertDialogTrigger asChild>
+                                <Button 
+                                  size="sm" 
+                                  variant="outline"
+                                  className="text-red-600 hover:text-red-700"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent>
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>Suchauftrag löschen</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    Sind Sie sicher, dass Sie diesen Suchauftrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+                                  <AlertDialogAction onClick={() => handleDeleteRequest(request.id)}>
+                                    Löschen
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
                           </div>
                         </TableCell>
                       </TableRow>

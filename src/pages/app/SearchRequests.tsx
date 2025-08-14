@@ -12,7 +12,8 @@ import {
   Users, 
   Edit,
   Eye,
-  MoreHorizontal
+  MoreHorizontal,
+  Trash2
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -20,6 +21,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -37,6 +49,7 @@ interface SearchRequest {
   skills_required: string[];
   created_at: string;
   company_id: string;
+  created_by: string;
 }
 
 const SearchRequests = () => {
@@ -47,6 +60,8 @@ const SearchRequests = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [loading, setLoading] = useState(true);
+  const [userRoles, setUserRoles] = useState<string[]>([]);
+  const [currentUserId, setCurrentUserId] = useState<string>('');
 
   useEffect(() => {
     const fetchSearchRequests = async () => {
@@ -57,12 +72,21 @@ const SearchRequests = () => {
           return;
         }
 
-        // Get user's company
+        setCurrentUserId(user.id);
+
+        // Get user's company and roles
         const { data: profile } = await supabase
           .from('profiles')
           .select('company_id')
           .eq('user_id', user.id)
           .single();
+
+        const { data: roles } = await supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', user.id);
+
+        setUserRoles(roles?.map(r => r.role) || []);
 
         if (!profile?.company_id) {
           toast({
@@ -76,7 +100,7 @@ const SearchRequests = () => {
         // Fetch search requests for the company
         const { data: requests, error } = await supabase
           .from('search_requests')
-          .select('*')
+          .select('id, title, description, status, location, employment_type, experience_level, salary_min, salary_max, skills_required, created_at, company_id, created_by')
           .eq('company_id', profile.company_id)
           .order('created_at', { ascending: false });
 
@@ -128,6 +152,50 @@ const SearchRequests = () => {
 
     setFilteredRequests(filtered);
   }, [searchTerm, statusFilter, searchRequests]);
+
+  const canDeleteRequest = (request: SearchRequest) => {
+    // Admins can delete all
+    if (userRoles.includes('admin')) return true;
+    // Company admins can delete all from their company
+    if (userRoles.includes('company_admin')) return true;
+    // Users can only delete their own
+    return request.created_by === currentUserId;
+  };
+
+  const handleDeleteRequest = async (requestId: string) => {
+    try {
+      const { error } = await supabase
+        .from('search_requests')
+        .delete()
+        .eq('id', requestId);
+
+      if (error) {
+        console.error('Error deleting search request:', error);
+        toast({
+          title: "Fehler",
+          description: "Suchauftrag konnte nicht gelöscht werden.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Remove from local state
+      setSearchRequests(prev => prev.filter(req => req.id !== requestId));
+      setFilteredRequests(prev => prev.filter(req => req.id !== requestId));
+
+      toast({
+        title: "Erfolg",
+        description: "Suchauftrag wurde erfolgreich gelöscht.",
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Fehler",
+        description: "Ein unerwarteter Fehler ist aufgetreten.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -242,7 +310,7 @@ const SearchRequests = () => {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                      <DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => navigate(`/app/search-requests/${request.id}`)}>
                         <Eye className="w-4 h-4 mr-2" />
                         Ansehen
                       </DropdownMenuItem>
@@ -250,6 +318,30 @@ const SearchRequests = () => {
                         <Edit className="w-4 h-4 mr-2" />
                         Bearbeiten
                       </DropdownMenuItem>
+                      {canDeleteRequest(request) && (
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                              <Trash2 className="w-4 h-4 mr-2" />
+                              Löschen
+                            </DropdownMenuItem>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Suchauftrag löschen</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                Sind Sie sicher, dass Sie diesen Suchauftrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+                              <AlertDialogAction onClick={() => handleDeleteRequest(request.id)}>
+                                Löschen
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      )}
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
