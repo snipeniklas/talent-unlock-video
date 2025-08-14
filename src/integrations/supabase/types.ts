@@ -269,52 +269,85 @@ export type Database = {
           company_id: string
           created_at: string
           created_by: string
+          customer_industry: string | null
           description: string | null
           employment_type: string | null
+          end_date: string | null
           experience_level: string | null
+          experience_level_new: string | null
           id: string
+          job_title: string | null
           location: string | null
+          main_tasks: string[] | null
+          number_of_workers: number | null
           requirements: string | null
+          requirements_list: string[] | null
           salary_max: number | null
           salary_min: number | null
+          skills_list: string[] | null
           skills_required: string[] | null
+          start_date: string | null
           status: string
           title: string
           updated_at: string
+          weekly_hours: number | null
+          work_areas: string[] | null
         }
         Insert: {
           company_id: string
           created_at?: string
           created_by: string
+          customer_industry?: string | null
           description?: string | null
           employment_type?: string | null
+          end_date?: string | null
           experience_level?: string | null
+          experience_level_new?: string | null
           id?: string
+          job_title?: string | null
           location?: string | null
+          main_tasks?: string[] | null
+          number_of_workers?: number | null
           requirements?: string | null
+          requirements_list?: string[] | null
           salary_max?: number | null
           salary_min?: number | null
+          skills_list?: string[] | null
           skills_required?: string[] | null
+          start_date?: string | null
           status?: string
           title: string
           updated_at?: string
+          weekly_hours?: number | null
+          work_areas?: string[] | null
         }
         Update: {
           company_id?: string
           created_at?: string
           created_by?: string
+          customer_industry?: string | null
           description?: string | null
           employment_type?: string | null
+          end_date?: string | null
           experience_level?: string | null
+          experience_level_new?: string | null
           id?: string
+          job_title?: string | null
           location?: string | null
+          main_tasks?: string[] | null
+          number_of_workers?: number | null
           requirements?: string | null
+          requirements_list?: string[] | null
           salary_max?: number | null
           salary_min?: number | null
+          skills_list?: string[] | null
           skills_required?: string[] | null
+          start_date?: string | null
           status?: string
           title?: string
           updated_at?: string
+          weekly_hours?: number | null
+          work_areas?: string[] | null
         }
         Relationships: [
           {

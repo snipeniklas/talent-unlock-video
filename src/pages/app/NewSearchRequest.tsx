@@ -32,51 +32,53 @@ const NewSearchRequest = () => {
   
   // Form state
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    location: '',
-    workType: '',
+    customerIndustry: '',
+    numberOfWorkers: 1,
+    jobTitle: '',
+    workAreas: [] as string[],
     experienceLevel: '',
-    budget: '',
-    deadline: undefined as Date | undefined,
-    requiredSkills: [] as string[],
-    preferredSkills: [] as string[],
-    requirements: '',
-    benefits: '',
-    projectDuration: '',
+    weeklyHours: 40,
     startDate: undefined as Date | undefined,
+    endDate: undefined as Date | undefined,
+    requirements: [] as string[],
+    skills: [] as string[],
+    mainTasks: [] as string[],
   });
 
+  const [newWorkArea, setNewWorkArea] = useState('');
+  const [newRequirement, setNewRequirement] = useState('');
   const [newSkill, setNewSkill] = useState('');
-  const [skillType, setSkillType] = useState<'required' | 'preferred'>('required');
+  const [newMainTask, setNewMainTask] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const predefinedSkills = [
-    'Python', 'TensorFlow', 'PyTorch', 'Scikit-learn', 'Keras',
-    'Computer Vision', 'Natural Language Processing', 'Deep Learning',
-    'Machine Learning', 'Data Science', 'Big Data', 'SQL', 'NoSQL',
-    'AWS', 'Azure', 'Google Cloud', 'Docker', 'Kubernetes',
-    'R', 'Java', 'JavaScript', 'React', 'Node.js'
+  const predefinedWorkAreas = [
+    'IT-Support', 'Mahnwesen', 'Buchhaltung', 'Kundenservice', 'Datenverarbeitung',
+    'Qualitätssicherung', 'Projektmanagement', 'Marketing', 'Vertrieb'
   ];
 
-  const addSkill = (skill: string, type: 'required' | 'preferred') => {
-    if (skill.trim() && !formData[type === 'required' ? 'requiredSkills' : 'preferredSkills'].includes(skill.trim())) {
+  const predefinedSkills = [
+    'Python', 'JavaScript', 'React', 'Node.js', 'SQL', 'NoSQL',
+    'AWS', 'Azure', 'Docker', 'Kubernetes', 'Git', 'Agile', 'Scrum'
+  ];
+
+  const addItem = (item: string, type: 'workAreas' | 'requirements' | 'skills' | 'mainTasks') => {
+    if (item.trim() && !formData[type].includes(item.trim())) {
       setFormData(prev => ({
         ...prev,
-        [type === 'required' ? 'requiredSkills' : 'preferredSkills']: [
-          ...prev[type === 'required' ? 'requiredSkills' : 'preferredSkills'],
-          skill.trim()
-        ]
+        [type]: [...prev[type], item.trim()]
       }));
     }
-    setNewSkill('');
+    // Reset the appropriate input
+    if (type === 'workAreas') setNewWorkArea('');
+    if (type === 'requirements') setNewRequirement('');
+    if (type === 'skills') setNewSkill('');
+    if (type === 'mainTasks') setNewMainTask('');
   };
 
-  const removeSkill = (skill: string, type: 'required' | 'preferred') => {
+  const removeItem = (item: string, type: 'workAreas' | 'requirements' | 'skills' | 'mainTasks') => {
     setFormData(prev => ({
       ...prev,
-      [type === 'required' ? 'requiredSkills' : 'preferredSkills']: 
-        prev[type === 'required' ? 'requiredSkills' : 'preferredSkills'].filter(s => s !== skill)
+      [type]: prev[type].filter(i => i !== item)
     }));
   };
 
@@ -101,58 +103,27 @@ const NewSearchRequest = () => {
         throw new Error('No company found for user');
       }
 
-      // Parse budget into salary_min and salary_max
-      let salary_min = null;
-      let salary_max = null;
-      if (formData.budget) {
-        const budgetMatch = formData.budget.match(/(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)/);
-        if (budgetMatch) {
-          salary_min = parseInt(budgetMatch[1].replace(/\./g, ''));
-          salary_max = parseInt(budgetMatch[2].replace(/\./g, ''));
-        }
-      }
-
-      // Create search request
-      // Map old values to new format for backward compatibility
-      const mapEmploymentType = (value: string) => {
-        const mapping: { [key: string]: string } = {
-          'fulltime': 'full_time',
-          'parttime': 'part_time',
-          'full_time': 'full_time',
-          'part_time': 'part_time',
-          'contract': 'contract',
-          'freelance': 'freelance'
-        };
-        return mapping[value] || null;
-      };
-
-      const mapExperienceLevel = (value: string) => {
-        const mapping: { [key: string]: string } = {
-          'junior': 'junior',
-          'mid': 'mid', 
-          'senior': 'senior',
-          'lead': 'lead'
-        };
-        return mapping[value] || null;
-      };
-
+      // Create search request with new structure
       const insertData = {
-        title: formData.title,
-        description: formData.description || null,
-        location: formData.location || null,
-        employment_type: mapEmploymentType(formData.workType),
-        experience_level: mapExperienceLevel(formData.experienceLevel),
-        salary_min,
-        salary_max,
-        requirements: formData.requirements || null,
-        skills_required: formData.requiredSkills.length > 0 ? formData.requiredSkills : null,
+        title: `${formData.jobTitle} - ${formData.numberOfWorkers} Remote-Mitarbeiter`,
+        description: `Benötigte Arbeitsbereiche: ${formData.workAreas.join(', ')}`,
+        customer_industry: formData.customerIndustry || null,
+        number_of_workers: formData.numberOfWorkers,
+        job_title: formData.jobTitle || null,
+        work_areas: formData.workAreas.length > 0 ? formData.workAreas : null,
+        experience_level_new: formData.experienceLevel || null,
+        weekly_hours: formData.weeklyHours,
+        start_date: formData.startDate ? formData.startDate.toISOString().split('T')[0] : null,
+        end_date: formData.endDate ? formData.endDate.toISOString().split('T')[0] : null,
+        requirements_list: formData.requirements.length > 0 ? formData.requirements : null,
+        skills_list: formData.skills.length > 0 ? formData.skills : null,
+        main_tasks: formData.mainTasks.length > 0 ? formData.mainTasks : null,
         company_id: profile.company_id,
         created_by: user.id,
         status: 'active'
       };
       
       console.log('Insert data:', insertData);
-      console.log('Employment type value:', formData.workType, 'mapped to:', mapEmploymentType(formData.workType));
       
       const { error } = await supabase
         .from('search_requests')
@@ -196,7 +167,7 @@ const NewSearchRequest = () => {
         <div>
           <h1 className="text-3xl font-bold text-brand-dark">Neuen Suchauftrag erstellen</h1>
           <p className="text-muted-foreground mt-1">
-            Beschreiben Sie Ihre Anforderungen und finden Sie den perfekten KI-Entwickler
+            Finden Sie die perfekten Remote-Mitarbeiter für Ihr Unternehmen
           </p>
         </div>
       </div>
@@ -207,55 +178,44 @@ const NewSearchRequest = () => {
           <CardHeader>
             <CardTitle>Grundinformationen</CardTitle>
             <CardDescription>
-              Allgemeine Details zu Ihrer Stellenausschreibung
+              Allgemeine Details zu Ihrem Personalbedarf
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="title">Titel der Position *</Label>
+              <Label htmlFor="customerIndustry">Ihre Branche *</Label>
               <Input
-                id="title"
-                value={formData.title}
-                onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                placeholder="z.B. Senior AI Engineer für Computer Vision"
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="description">Beschreibung *</Label>
-              <Textarea
-                id="description"
-                value={formData.description}
-                onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                placeholder="Beschreiben Sie das Projekt und die Aufgaben..."
-                rows={4}
+                id="customerIndustry"
+                value={formData.customerIndustry}
+                onChange={(e) => setFormData(prev => ({ ...prev, customerIndustry: e.target.value }))}
+                placeholder="z.B. E-Commerce, Finanzdienstleistungen, Healthcare"
                 required
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="location">Arbeitsort</Label>
+                <Label htmlFor="numberOfWorkers">Anzahl der benötigten Remote-Mitarbeiter *</Label>
                 <Input
-                  id="location"
-                  value={formData.location}
-                  onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                  placeholder="z.B. München, Remote, Hybrid"
+                  id="numberOfWorkers"
+                  type="number"
+                  min="1"
+                  value={formData.numberOfWorkers}
+                  onChange={(e) => setFormData(prev => ({ ...prev, numberOfWorkers: parseInt(e.target.value) || 1 }))}
+                  required
                 />
               </div>
               
               <div className="space-y-2">
-                <Label>Arbeitstyp</Label>
-                <Select value={formData.workType} onValueChange={(value) => setFormData(prev => ({ ...prev, workType: value }))}>
+                <Label>Jobtitel *</Label>
+                <Select value={formData.jobTitle} onValueChange={(value) => setFormData(prev => ({ ...prev, jobTitle: value }))}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Art der Anstellung wählen" />
+                    <SelectValue placeholder="Jobtitel wählen" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="full_time">Vollzeit</SelectItem>
-                    <SelectItem value="part_time">Teilzeit</SelectItem>
-                    <SelectItem value="freelance">Freelance</SelectItem>
-                    <SelectItem value="contract">Vertrag</SelectItem>
+                    <SelectItem value="backoffice">Backoffice</SelectItem>
+                    <SelectItem value="software_developer">Software-Developer</SelectItem>
+                    <SelectItem value="ki_developer">KI-Developer</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -263,73 +223,48 @@ const NewSearchRequest = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Erfahrungslevel</Label>
+                <Label>Berufserfahrung</Label>
                 <Select value={formData.experienceLevel} onValueChange={(value) => setFormData(prev => ({ ...prev, experienceLevel: value }))}>
                   <SelectTrigger>
                     <SelectValue placeholder="Erfahrungslevel wählen" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="junior">Junior (1-3 Jahre)</SelectItem>
-                    <SelectItem value="mid">Mid-Level (3-5 Jahre)</SelectItem>
-                    <SelectItem value="senior">Senior (5+ Jahre)</SelectItem>
-                    <SelectItem value="lead">Lead/Principal (8+ Jahre)</SelectItem>
+                    <SelectItem value="junior_ba">Junior (BA): 1-5 Jahre</SelectItem>
+                    <SelectItem value="senior_ba">Senior (BA): 5+ Jahre</SelectItem>
+                    <SelectItem value="senior_ma">Senior (MA): 10+ Jahre</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="budget">Budget/Gehalt</Label>
-                <Input
-                  id="budget"
-                  value={formData.budget}
-                  onChange={(e) => setFormData(prev => ({ ...prev, budget: e.target.value }))}
-                  placeholder="z.B. 80.000 - 120.000 € oder 150 €/Stunde"
-                />
+                <Label>Wöchentliche Arbeitszeit</Label>
+                <Select value={formData.weeklyHours.toString()} onValueChange={(value) => setFormData(prev => ({ ...prev, weeklyHours: parseInt(value) }))}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Arbeitszeit wählen" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="20">20 Stunden</SelectItem>
+                    <SelectItem value="30">30 Stunden</SelectItem>
+                    <SelectItem value="40">40 Stunden</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Zeitrahmen */}
+        {/* Arbeitszeitraum */}
         <Card>
           <CardHeader>
-            <CardTitle>Zeitrahmen</CardTitle>
+            <CardTitle>Arbeitszeitraum</CardTitle>
             <CardDescription>
-              Wann soll das Projekt starten und wie lange dauern?
+              Wann sollen die Remote-Mitarbeiter starten und wie lange arbeiten?
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Bewerbungsschluss</Label>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className={cn(
-                        "w-full justify-start text-left font-normal",
-                        !formData.deadline && "text-muted-foreground"
-                      )}
-                    >
-                      <CalendarIcon className="mr-2 h-4 w-4" />
-                      {formData.deadline ? format(formData.deadline, "dd.MM.yyyy", { locale: de }) : "Datum auswählen"}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={formData.deadline}
-                      onSelect={(date) => setFormData(prev => ({ ...prev, deadline: date }))}
-                      disabled={(date) => date < new Date()}
-                      initialFocus
-                      className="p-3 pointer-events-auto"
-                    />
-                  </PopoverContent>
-                </Popover>
-              </div>
-
-              <div className="space-y-2">
-                <Label>Projektstart</Label>
+                <Label>Wunschdatum Start</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -355,41 +290,164 @@ const NewSearchRequest = () => {
                   </PopoverContent>
                 </Popover>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="projectDuration">Projektdauer</Label>
-              <Input
-                id="projectDuration"
-                value={formData.projectDuration}
-                onChange={(e) => setFormData(prev => ({ ...prev, projectDuration: e.target.value }))}
-                placeholder="z.B. 6 Monate, 1 Jahr, Dauerhaft"
-              />
+              <div className="space-y-2">
+                <Label>Datum Ende (optional)</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !formData.endDate && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {formData.endDate ? format(formData.endDate, "dd.MM.yyyy", { locale: de }) : "Unbegrenzt"}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={formData.endDate}
+                      onSelect={(date) => setFormData(prev => ({ ...prev, endDate: date }))}
+                      disabled={(date) => date < new Date()}
+                      initialFocus
+                      className="p-3 pointer-events-auto"
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Skills */}
+        {/* Benötigte Arbeitsbereiche */}
         <Card>
           <CardHeader>
-            <CardTitle>Erforderliche Skills</CardTitle>
+            <CardTitle>Benötigte Arbeitsbereiche</CardTitle>
             <CardDescription>
-              Welche Fähigkeiten und Technologien sind wichtig?
+              In welchen Bereichen sollen die Remote-Mitarbeiter tätig sein?
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex gap-2">
+              <Input
+                value={newWorkArea}
+                onChange={(e) => setNewWorkArea(e.target.value)}
+                placeholder="Arbeitsbereich eingeben..."
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addItem(newWorkArea, 'workAreas');
+                  }
+                }}
+              />
+              <Button 
+                type="button" 
+                onClick={() => addItem(newWorkArea, 'workAreas')}
+                disabled={!newWorkArea.trim()}
+              >
+                <Plus className="w-4 h-4" />
+              </Button>
+            </div>
+
+            {/* Predefined Work Areas */}
+            <div>
+              <Label className="text-sm font-medium mb-2 block">Häufige Arbeitsbereiche:</Label>
+              <div className="flex flex-wrap gap-2">
+                {predefinedWorkAreas.map((area) => (
+                  <Button
+                    key={area}
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => addItem(area, 'workAreas')}
+                    className="text-xs"
+                  >
+                    + {area}
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Work Areas Display */}
+            {formData.workAreas.length > 0 && (
+              <div>
+                <Label className="text-sm font-medium mb-2 block">Ausgewählte Arbeitsbereiche:</Label>
+                <div className="flex flex-wrap gap-2">
+                  {formData.workAreas.map((area) => (
+                    <Badge key={area} variant="default">
+                      {area}
+                      <button
+                        type="button"
+                        onClick={() => removeItem(area, 'workAreas')}
+                        className="ml-2 hover:text-red-600"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Anforderungen, Skills und Hauptaufgaben */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Detaillierte Anforderungen</CardTitle>
+            <CardDescription>
+              Spezifizieren Sie Anforderungen, Skills und Hauptaufgaben
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Skill Input */}
+            {/* Anforderungen */}
             <div className="space-y-4">
+              <Label className="text-sm font-medium">Anforderungen</Label>
               <div className="flex gap-2">
-                <Select value={skillType} onValueChange={(value: 'required' | 'preferred') => setSkillType(value)}>
-                  <SelectTrigger className="w-40">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="required">Erforderlich</SelectItem>
-                    <SelectItem value="preferred">Bevorzugt</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Input
+                  value={newRequirement}
+                  onChange={(e) => setNewRequirement(e.target.value)}
+                  placeholder="Anforderung eingeben..."
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      addItem(newRequirement, 'requirements');
+                    }
+                  }}
+                />
+                <Button 
+                  type="button" 
+                  onClick={() => addItem(newRequirement, 'requirements')}
+                  disabled={!newRequirement.trim()}
+                >
+                  <Plus className="w-4 h-4" />
+                </Button>
+              </div>
+              {formData.requirements.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {formData.requirements.map((req) => (
+                    <Badge key={req} variant="default" className="bg-orange-100 text-orange-800">
+                      {req}
+                      <button
+                        type="button"
+                        onClick={() => removeItem(req, 'requirements')}
+                        className="ml-2 hover:text-orange-600"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </Badge>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Skills */}
+            <div className="space-y-4">
+              <Label className="text-sm font-medium">Skills</Label>
+              <div className="flex gap-2">
                 <Input
                   value={newSkill}
                   onChange={(e) => setNewSkill(e.target.value)}
@@ -397,19 +455,19 @@ const NewSearchRequest = () => {
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
-                      addSkill(newSkill, skillType);
+                      addItem(newSkill, 'skills');
                     }
                   }}
                 />
                 <Button 
                   type="button" 
-                  onClick={() => addSkill(newSkill, skillType)}
+                  onClick={() => addItem(newSkill, 'skills')}
                   disabled={!newSkill.trim()}
                 >
                   <Plus className="w-4 h-4" />
                 </Button>
               </div>
-
+              
               {/* Predefined Skills */}
               <div>
                 <Label className="text-sm font-medium mb-2 block">Häufige Skills:</Label>
@@ -420,7 +478,7 @@ const NewSearchRequest = () => {
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={() => addSkill(skill, skillType)}
+                      onClick={() => addItem(skill, 'skills')}
                       className="text-xs"
                     >
                       + {skill}
@@ -428,40 +486,15 @@ const NewSearchRequest = () => {
                   ))}
                 </div>
               </div>
-            </div>
-
-            {/* Required Skills Display */}
-            {formData.requiredSkills.length > 0 && (
-              <div>
-                <Label className="text-sm font-medium mb-2 block">Erforderliche Skills:</Label>
+              
+              {formData.skills.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {formData.requiredSkills.map((skill) => (
-                    <Badge key={skill} variant="default" className="bg-red-100 text-red-800 hover:bg-red-100">
+                  {formData.skills.map((skill) => (
+                    <Badge key={skill} variant="default" className="bg-blue-100 text-blue-800">
                       {skill}
                       <button
                         type="button"
-                        onClick={() => removeSkill(skill, 'required')}
-                        className="ml-2 hover:text-red-600"
-                      >
-                        <X className="w-3 h-3" />
-                      </button>
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Preferred Skills Display */}
-            {formData.preferredSkills.length > 0 && (
-              <div>
-                <Label className="text-sm font-medium mb-2 block">Bevorzugte Skills:</Label>
-                <div className="flex flex-wrap gap-2">
-                  {formData.preferredSkills.map((skill) => (
-                    <Badge key={skill} variant="secondary" className="bg-blue-100 text-blue-800 hover:bg-blue-100">
-                      {skill}
-                      <button
-                        type="button"
-                        onClick={() => removeSkill(skill, 'preferred')}
+                        onClick={() => removeItem(skill, 'skills')}
                         className="ml-2 hover:text-blue-600"
                       >
                         <X className="w-3 h-3" />
@@ -469,40 +502,48 @@ const NewSearchRequest = () => {
                     </Badge>
                   ))}
                 </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Zusätzliche Anforderungen */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Zusätzliche Details</CardTitle>
-            <CardDescription>
-              Weitere Anforderungen und Benefits für Kandidaten
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="requirements">Weitere Anforderungen</Label>
-              <Textarea
-                id="requirements"
-                value={formData.requirements}
-                onChange={(e) => setFormData(prev => ({ ...prev, requirements: e.target.value }))}
-                placeholder="z.B. Deutsch und Englisch fließend, Reisebereitschaft, etc."
-                rows={3}
-              />
+              )}
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="benefits">Benefits und Vorteile</Label>
-              <Textarea
-                id="benefits"
-                value={formData.benefits}
-                onChange={(e) => setFormData(prev => ({ ...prev, benefits: e.target.value }))}
-                placeholder="z.B. Homeoffice, Weiterbildungen, Firmenwagen, etc."
-                rows={3}
-              />
+            {/* Hauptaufgaben */}
+            <div className="space-y-4">
+              <Label className="text-sm font-medium">Hauptaufgaben</Label>
+              <div className="flex gap-2">
+                <Input
+                  value={newMainTask}
+                  onChange={(e) => setNewMainTask(e.target.value)}
+                  placeholder="Hauptaufgabe eingeben..."
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      addItem(newMainTask, 'mainTasks');
+                    }
+                  }}
+                />
+                <Button 
+                  type="button" 
+                  onClick={() => addItem(newMainTask, 'mainTasks')}
+                  disabled={!newMainTask.trim()}
+                >
+                  <Plus className="w-4 h-4" />
+                </Button>
+              </div>
+              {formData.mainTasks.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {formData.mainTasks.map((task) => (
+                    <Badge key={task} variant="default" className="bg-green-100 text-green-800">
+                      {task}
+                      <button
+                        type="button"
+                        onClick={() => removeItem(task, 'mainTasks')}
+                        className="ml-2 hover:text-green-600"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </Badge>
+                  ))}
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -520,7 +561,7 @@ const NewSearchRequest = () => {
           <Button 
             type="submit" 
             className="bg-primary hover:bg-primary-hover"
-            disabled={isSubmitting || !formData.title || !formData.description}
+            disabled={isSubmitting || !formData.customerIndustry || !formData.jobTitle}
           >
             <Save className="w-4 h-4 mr-2" />
             {isSubmitting ? "Wird erstellt..." : "Suchauftrag erstellen"}
