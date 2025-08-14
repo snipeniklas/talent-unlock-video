@@ -170,7 +170,12 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
                   </div>
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  {activity.duration === 0.5 ? '0.5' : activity.duration} Woche{activity.duration !== 1 ? 'n' : ''}
+                  {activity.duration === 0.2 ? 'max. 1 Tag' : 
+                   activity.duration === 0.5 ? 'max. 3 Tage' :
+                   activity.duration === 0.8 ? 'max. 6 Tage' :
+                   activity.duration === 1 ? 'max. 7 Tage' :
+                   activity.duration === 1.5 ? 'max. 10 Tage' :
+                   `max. ${Math.ceil(activity.duration * 7)} Tage`}
                 </div>
               </div>
 
