@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import AvatarUpload from '@/components/AvatarUpload';
 
 interface Skill {
   name: string;
@@ -63,6 +64,7 @@ export default function NewCandidate() {
     last_name: '',
     country: '',
     city: '',
+    avatar_url: '',
   });
 
   // Skills
@@ -291,6 +293,14 @@ export default function NewCandidate() {
                   onChange={(e) => setIdentity({ ...identity, last_name: e.target.value })}
                 />
               </div>
+            </div>
+            
+            <div className="col-span-2">
+              <AvatarUpload
+                firstName={identity.first_name}
+                lastName={identity.last_name}
+                onAvatarChange={(url) => setIdentity({ ...identity, avatar_url: url || '' })}
+              />
             </div>
 
             <div>

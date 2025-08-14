@@ -3,6 +3,7 @@ import { ArrowLeft, Edit, Mail, MapPin, Calendar, Clock, DollarSign, Globe, Exte
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -57,6 +58,7 @@ interface Identity {
   last_name: string;
   country: string;
   city: string;
+  avatar_url: string;
 }
 
 export default function CandidateView() {
@@ -169,6 +171,13 @@ export default function CandidateView() {
     }
   };
 
+  const getInitials = () => {
+    if (!identity?.first_name && !identity?.last_name) return '?';
+    const first = identity?.first_name?.charAt(0).toUpperCase() || '';
+    const last = identity?.last_name?.charAt(0).toUpperCase() || '';
+    return `${first}${last}`;
+  };
+  
   const getProficiencyLabel = (proficiency: string) => {
     const labels = {
       'basic': 'Grundkenntnisse',
@@ -220,6 +229,12 @@ export default function CandidateView() {
             <ArrowLeft className="h-4 w-4" />
             Zurück
           </Button>
+          <Avatar className="h-16 w-16">
+            <AvatarImage src={identity?.avatar_url || undefined} alt="Profilbild" />
+            <AvatarFallback className="text-xl font-semibold bg-primary/10">
+              {getInitials()}
+            </AvatarFallback>
+          </Avatar>
           <div>
             <h1 className="text-2xl font-bold">
               {identity ? `${identity.first_name} ${identity.last_name}` : 'RaaS Ressource'}

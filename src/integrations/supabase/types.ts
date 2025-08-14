@@ -57,6 +57,7 @@ export type Database = {
       }
       candidate_identity: {
         Row: {
+          avatar_url: string | null
           candidate_id: string
           city: string | null
           country: string | null
@@ -64,6 +65,7 @@ export type Database = {
           last_name: string | null
         }
         Insert: {
+          avatar_url?: string | null
           candidate_id: string
           city?: string | null
           country?: string | null
@@ -71,6 +73,7 @@ export type Database = {
           last_name?: string | null
         }
         Update: {
+          avatar_url?: string | null
           candidate_id?: string
           city?: string | null
           country?: string | null

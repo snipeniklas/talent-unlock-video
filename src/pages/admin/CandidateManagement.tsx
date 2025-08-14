@@ -190,9 +190,16 @@ export default function CandidateManagement() {
                       {candidate.years_experience && (
                         <span>{candidate.years_experience} Jahre Erfahrung</span>
                       )}
-                      {candidate.rate_monthly_target && (
-                        <span>{candidate.rate_monthly_target} {candidate.currency}/Monat ({(candidate.rate_monthly_target / 160).toFixed(0)} {candidate.currency}/Std.)</span>
-                      )}
+                       {candidate.rate_monthly_target && (
+                         <div>
+                           <div className="text-lg font-semibold text-primary">
+                             {Math.round(candidate.rate_monthly_target).toLocaleString()} {candidate.currency}/Monat
+                           </div>
+                           <div className="text-sm text-muted-foreground">
+                             ({Math.round(candidate.rate_hourly_target || 0)} {candidate.currency}/Std.)
+                           </div>
+                         </div>
+                       )}
                       {candidate.candidate_identity?.city && (
                         <span>{candidate.candidate_identity.city}, {candidate.candidate_identity.country}</span>
                       )}
