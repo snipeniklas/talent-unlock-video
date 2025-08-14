@@ -202,6 +202,8 @@ export default function NewCandidate() {
           .map(exp => ({
             candidate_id: candidate.id,
             ...exp,
+            start_date: exp.start_date || null,
+            end_date: exp.end_date || null,
             tech_stack: exp.tech_stack.length > 0 ? exp.tech_stack : null,
           }));
 
