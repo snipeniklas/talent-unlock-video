@@ -9,6 +9,7 @@ import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
 import InteractiveAppScreen from "@/components/InteractiveAppScreen";
 import FloatingAppDemo from "@/components/FloatingAppDemo";
+import ProjectTimeline from "@/components/ProjectTimeline";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -195,8 +196,16 @@ const HomePage = () => {
               </div>
             </div>
             
+            {/* Project Timeline */}
+            <div className="mt-12 lg:mt-16 animate-slide-up-delay-4">
+              <ProjectTimeline 
+                onActivityClick={(activity) => navigate('/app/search-requests/new')}
+                className="max-w-4xl mx-auto"
+              />
+            </div>
+
             {/* Solution Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 lg:mt-16 animate-slide-up-delay-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 lg:mt-16 animate-slide-up-delay-5">
               <Card 
                 className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative h-full flex flex-col"
                 onClick={() => navigate('/solutions/backoffice')}
