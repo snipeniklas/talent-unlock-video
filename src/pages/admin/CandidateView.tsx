@@ -369,10 +369,10 @@ export default function CandidateView() {
               <div>
                 <h3 className="font-medium text-sm text-muted-foreground">Monatssatz</h3>
                 <p className="text-xl font-bold text-primary">
-                  {candidate.rate_monthly_target?.toLocaleString()} {candidate.currency}
+                  {Math.round(candidate.rate_monthly_target || 0).toLocaleString()} {candidate.currency}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  ({candidate.rate_hourly_target} {candidate.currency}/Std.)
+                  ({Math.round(candidate.rate_hourly_target || 0)} {candidate.currency}/Std.)
                 </p>
               </div>
               
