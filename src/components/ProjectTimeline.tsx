@@ -42,16 +42,16 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
     {
       id: '3a',
       title: 'Kandidatenvorschlag',
-      duration: 1.5,
-      startWeek: 1.5,
+      duration: 1,
+      startWeek: 1.2,
       status: 'upcoming',
       description: 'Präsentation passender Remote-Experten'
     },
     {
       id: '3b',
       title: 'Auswahlprozess',
-      duration: 1,
-      startWeek: 2,
+      duration: 0.8,
+      startWeek: 2.2,
       status: 'upcoming',
       description: 'Interviews und finale Kandidatenauswahl'
     },
