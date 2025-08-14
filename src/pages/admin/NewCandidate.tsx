@@ -455,23 +455,33 @@ export default function NewCandidate() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="rate_hourly_target">Stundensatz (Ziel)</Label>
-                <Input
-                  id="rate_hourly_target"
-                  type="number"
-                  step="0.01"
-                  value={formData.rate_hourly_target}
-                  onChange={(e) => setFormData({ ...formData, rate_hourly_target: e.target.value })}
-                />
-              </div>
-              <div>
-                <Label htmlFor="rate_monthly_target">Monatssatz (Ziel)</Label>
+                <Label htmlFor="rate_monthly_target">Monatssatz (Ziel) *</Label>
                 <Input
                   id="rate_monthly_target"
                   type="number"
                   step="0.01"
                   value={formData.rate_monthly_target}
-                  onChange={(e) => setFormData({ ...formData, rate_monthly_target: e.target.value })}
+                  onChange={(e) => {
+                    const monthlyRate = e.target.value;
+                    const hourlyRate = monthlyRate ? (parseFloat(monthlyRate) / 160).toFixed(2) : '';
+                    setFormData({ 
+                      ...formData, 
+                      rate_monthly_target: monthlyRate,
+                      rate_hourly_target: hourlyRate
+                    });
+                  }}
+                  placeholder="z.B. 8000"
+                />
+              </div>
+              <div>
+                <Label htmlFor="rate_hourly_target">Stundensatz (automatisch berechnet)</Label>
+                <Input
+                  id="rate_hourly_target"
+                  type="number"
+                  step="0.01"
+                  value={formData.rate_hourly_target}
+                  disabled
+                  placeholder="Wird automatisch berechnet (Monatssatz ÷ 160h)"
                 />
               </div>
             </div>
@@ -580,6 +590,95 @@ export default function NewCandidate() {
                   </Button>
                 </div>
               ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Experience & Projects */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between">
+              Berufserfahrung & Projekte
+              <Button type="button" variant="outline" size="sm" onClick={addExperience}>
+                <Plus className="h-4 w-4" />
+              </Button>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              {experiences.map((experience, index) => (
+                <div key={index} className="border rounded-lg p-4 space-y-4">
+                  <div className="flex justify-between items-start">
+                    <h4 className="font-medium">Erfahrung #{index + 1}</h4>
+                    <Button type="button" variant="outline" size="sm" onClick={() => removeExperience(index)}>
+                      <Minus className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label>Position/Rolle *</Label>
+                      <Input
+                        value={experience.title}
+                        onChange={(e) => updateExperience(index, 'title', e.target.value)}
+                        placeholder="z.B. Senior Developer, Customer Support Manager"
+                      />
+                    </div>
+                    <div>
+                      <Label>Unternehmen/Organisation</Label>
+                      <Input
+                        value={experience.org_name}
+                        onChange={(e) => updateExperience(index, 'org_name', e.target.value)}
+                        placeholder="z.B. Tech GmbH, Freelance"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label>Start Datum</Label>
+                      <Input
+                        type="date"
+                        value={experience.start_date}
+                        onChange={(e) => updateExperience(index, 'start_date', e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <Label>End Datum (leer = aktuell)</Label>
+                      <Input
+                        type="date"
+                        value={experience.end_date}
+                        onChange={(e) => updateExperience(index, 'end_date', e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label>Beschreibung & Aufgaben</Label>
+                    <Textarea
+                      value={experience.summary}
+                      onChange={(e) => updateExperience(index, 'summary', e.target.value)}
+                      placeholder="Kurze Beschreibung der Tätigkeiten und Verantwortlichkeiten..."
+                      rows={3}
+                    />
+                  </div>
+
+                  <div>
+                    <Label>Tech Stack / Verwendete Tools</Label>
+                    <Input
+                      value={experience.tech_stack.join(', ')}
+                      onChange={(e) => updateExperience(index, 'tech_stack', e.target.value.split(',').map(s => s.trim()).filter(s => s))}
+                      placeholder="z.B. React, Node.js, PostgreSQL, Docker (kommagetrennt)"
+                    />
+                  </div>
+                </div>
+              ))}
+              
+              {experiences.length === 0 && (
+                <p className="text-muted-foreground text-center py-4">
+                  Noch keine Berufserfahrung hinzugefügt. Klicken Sie auf das Plus-Symbol, um zu beginnen.
+                </p>
+              )}
             </div>
           </CardContent>
         </Card>

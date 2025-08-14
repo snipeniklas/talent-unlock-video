@@ -16,6 +16,7 @@ interface Candidate {
   headline: string;
   availability: 'immediately' | 'notice_period' | 'booked' | 'paused';
   rate_hourly_target: number;
+  rate_monthly_target: number;
   currency: string;
   created_at: string;
   candidate_identity?: {
@@ -39,18 +40,24 @@ export default function CandidateManagement() {
 
   const fetchCandidates = async () => {
     try {
-      const { data, error } = await supabase
-        .from('candidates')
-        .select(`
-          *,
-          candidate_identity (
-            first_name,
-            last_name,
-            country,
-            city
-          )
-        `)
-        .order('created_at', { ascending: false });
+        const { data, error } = await supabase
+          .from('candidates')
+          .select(`
+            *,
+            candidate_identity (
+              first_name,
+              last_name,
+              country,
+              city
+            ),
+            candidate_experience (
+              title,
+              org_name,
+              start_date,
+              end_date
+            )
+          `)
+          .order('created_at', { ascending: false });
 
       if (error) throw error;
       setCandidates(data || []);
@@ -183,8 +190,8 @@ export default function CandidateManagement() {
                       {candidate.years_experience && (
                         <span>{candidate.years_experience} Jahre Erfahrung</span>
                       )}
-                      {candidate.rate_hourly_target && (
-                        <span>{candidate.rate_hourly_target} {candidate.currency}/Std.</span>
+                      {candidate.rate_monthly_target && (
+                        <span>{candidate.rate_monthly_target} {candidate.currency}/Monat ({(candidate.rate_monthly_target / 160).toFixed(0)} {candidate.currency}/Std.)</span>
                       )}
                       {candidate.candidate_identity?.city && (
                         <span>{candidate.candidate_identity.city}, {candidate.candidate_identity.country}</span>
