@@ -207,17 +207,14 @@ const NewSearchRequest = () => {
               </div>
               
               <div className="space-y-2">
-                <Label>Jobtitel *</Label>
-                <Select value={formData.jobTitle} onValueChange={(value) => setFormData(prev => ({ ...prev, jobTitle: value }))}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Jobtitel wählen" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="backoffice">Backoffice</SelectItem>
-                    <SelectItem value="software_developer">Software-Developer</SelectItem>
-                    <SelectItem value="ki_developer">KI-Developer</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="jobTitle">Jobtitel *</Label>
+                <Input
+                  id="jobTitle"
+                  value={formData.jobTitle}
+                  onChange={(e) => setFormData(prev => ({ ...prev, jobTitle: e.target.value }))}
+                  placeholder="z.B. Software-Developer, Backoffice-Mitarbeiter, KI-Spezialist"
+                  required
+                />
               </div>
             </div>
 
