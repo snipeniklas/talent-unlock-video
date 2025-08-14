@@ -34,7 +34,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
     {
       id: '2',
       title: 'Aufnahme Anforderungen',
-      duration: 1,
+      duration: 0.2,
       startWeek: 1,
       status: 'active',
       description: 'Detaillierte Spezifikation der benötigten Expertise'
