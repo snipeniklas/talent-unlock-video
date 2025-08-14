@@ -35,7 +35,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
       id: '2',
       title: 'Aufnahme Anforderungen',
       duration: 0.2,
-      startWeek: 1,
+      startWeek: 0.5,
       status: 'active',
       description: 'Detaillierte Spezifikation der benötigten Expertise'
     },
@@ -43,7 +43,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
       id: '3a',
       title: 'Kandidatenvorschlag',
       duration: 1,
-      startWeek: 1.2,
+      startWeek: 0.7,
       status: 'upcoming',
       description: 'Präsentation passender Remote-Experten'
     },
@@ -51,22 +51,22 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
       id: '3b',
       title: 'Auswahlprozess',
       duration: 0.8,
-      startWeek: 2.2,
+      startWeek: 1.7,
       status: 'upcoming',
       description: 'Interviews und finale Kandidatenauswahl'
     },
     {
       id: '4',
       title: 'Umsetzungsbetreuung',
-      duration: 1,
-      startWeek: 3,
+      duration: 0.5,
+      startWeek: 2.5,
       status: 'upcoming',
       description: 'Onboarding und kontinuierliche Unterstützung'
     }
   ];
 
-  const totalWeeks = 4;
-  const weekLabels = ['Opt. Woche 1', 'Opt. Woche 2', 'Opt. Woche 3', 'Woche 1', 'Woche 2', 'Woche 3', 'Woche 4'];
+  const totalWeeks = 3;
+  const weekLabels = ['Opt. Woche 1', 'Opt. Woche 2', 'Woche 1', 'Woche 2', 'Woche 3'];
 
   const getActivityBarStyle = (activity: TimelineActivity) => {
     const startPercent = (activity.startWeek / totalWeeks) * 100;
@@ -124,18 +124,18 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
           </CardTitle>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Clock className="w-4 h-4" />
-            <span>4 Wochen Prozess</span>
+            <span>3 Wochen Prozess</span>
           </div>
         </div>
       </CardHeader>
       
       <CardContent className="space-y-6">
         {/* Timeline Header */}
-        <div className="grid grid-cols-7 gap-1 text-xs font-medium text-muted-foreground border-b border-border pb-2">
+        <div className="grid grid-cols-5 gap-1 text-xs font-medium text-muted-foreground border-b border-border pb-2">
           {weekLabels.map((week, index) => (
             <div 
               key={index} 
-              className={`text-center ${index < 3 ? 'text-muted-foreground/60' : 'text-brand-dark'}`}
+              className={`text-center ${index < 2 ? 'text-muted-foreground/60' : 'text-brand-dark'}`}
             >
               {week}
             </div>
@@ -195,7 +195,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
                 </div>
                 
                 {/* Week separators */}
-                {[1, 2, 3].map((week) => (
+                {[1, 2].map((week) => (
                   <div 
                     key={week}
                     className="absolute top-0 bottom-0 w-px bg-border"
