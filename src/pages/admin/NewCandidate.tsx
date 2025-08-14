@@ -153,6 +153,7 @@ export default function NewCandidate() {
         notice_period_days: formData.notice_period_days ? parseInt(formData.notice_period_days) : null,
         rate_hourly_target: formData.rate_hourly_target ? parseFloat(formData.rate_hourly_target) : null,
         rate_monthly_target: formData.rate_monthly_target ? parseFloat(formData.rate_monthly_target) : null,
+        start_earliest: formData.start_earliest || null,
         skills: skills.length > 0 ? JSON.parse(JSON.stringify(skills)) : [],
         attributes: {},
       };
