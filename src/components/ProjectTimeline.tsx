@@ -66,7 +66,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
   ];
 
   const totalWeeks = 3;
-  const weekLabels = ['Opt. Woche 1', 'Opt. Woche 2', 'Woche 1', 'Woche 2', 'Woche 3'];
+  const weekLabels = ['Opt. Woche 1', 'Woche 1', 'Woche 2', 'Woche 3'];
 
   const getActivityBarStyle = (activity: TimelineActivity) => {
     const startPercent = (activity.startWeek / totalWeeks) * 100;
@@ -131,11 +131,11 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
       
       <CardContent className="space-y-6">
         {/* Timeline Header */}
-        <div className="grid grid-cols-5 gap-1 text-xs font-medium text-muted-foreground border-b border-border pb-2">
+        <div className="grid grid-cols-4 gap-1 text-xs font-medium text-muted-foreground border-b border-border pb-2">
           {weekLabels.map((week, index) => (
             <div 
               key={index} 
-              className={`text-center ${index < 2 ? 'text-muted-foreground/60' : 'text-brand-dark'}`}
+              className={`text-center ${index < 1 ? 'text-muted-foreground/60' : 'text-brand-dark'}`}
             >
               {week}
             </div>
