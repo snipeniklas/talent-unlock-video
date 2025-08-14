@@ -196,16 +196,8 @@ const HomePage = () => {
               </div>
             </div>
             
-            {/* Project Timeline */}
-            <div className="mt-12 lg:mt-16 animate-slide-up-delay-4">
-              <ProjectTimeline 
-                onActivityClick={(activity) => navigate('/app/search-requests/new')}
-                className="max-w-4xl mx-auto"
-              />
-            </div>
-
             {/* Solution Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 lg:mt-16 animate-slide-up-delay-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 lg:mt-16 animate-slide-up-delay-4">
               <Card 
                 className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative h-full flex flex-col"
                 onClick={() => navigate('/solutions/backoffice')}
@@ -481,6 +473,22 @@ const HomePage = () => {
             title="Erleben Sie RaaS in Aktion"
             description="Sehen Sie, wie unser intelligentes System Ihre Ressourcen-Anfragen in Echtzeit bearbeitet und die perfekten Remote-Experten für Sie findet."
           />
+
+          {/* Project Timeline */}
+          <div className="mt-16 animate-slide-up-delay-4">
+            <div className="text-center mb-12">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4 text-brand-dark">
+                Ihr Weg zu den perfekten <span className="text-primary">Remote-Experten</span>
+              </h3>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Unser bewährter 4-Wochen-Prozess bringt Sie sicher und strukturiert zu Ihrer idealen Remote-Fachkraft.
+              </p>
+            </div>
+            <ProjectTimeline 
+              onActivityClick={(activity) => navigate('/app/search-requests/new')}
+              className="max-w-4xl mx-auto"
+            />
+          </div>
 
           {/* Call to Action */}
           <div className="text-center mt-16">
