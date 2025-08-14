@@ -234,7 +234,7 @@ export default function NewCandidate() {
 
       toast({
         title: "Erfolg",
-        description: "Kandidat wurde erfolgreich angelegt.",
+        description: "RaaS Ressource wurde erfolgreich angelegt.",
       });
 
       navigate('/admin/candidates');
@@ -242,7 +242,7 @@ export default function NewCandidate() {
       console.error('Error creating candidate:', error);
       toast({
         title: "Fehler",
-        description: "Kandidat konnte nicht angelegt werden.",
+        description: "RaaS Ressource konnte nicht angelegt werden.",
         variant: "destructive",
       });
     } finally {
@@ -261,7 +261,7 @@ export default function NewCandidate() {
           <ArrowLeft className="h-4 w-4" />
           Zurück
         </Button>
-        <h1 className="text-2xl font-bold">Neuen Kandidaten anlegen</h1>
+        <h1 className="text-2xl font-bold">Neue RaaS Ressource anlegen</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -347,7 +347,7 @@ export default function NewCandidate() {
                 id="bio"
                 value={formData.bio}
                 onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                placeholder="Längere Beschreibung des Kandidaten"
+                placeholder="Längere Beschreibung der RaaS Ressource"
                 rows={4}
               />
             </div>
@@ -632,7 +632,7 @@ export default function NewCandidate() {
             Abbrechen
           </Button>
           <Button type="submit" disabled={loading}>
-            {loading ? 'Wird angelegt...' : 'Kandidaten anlegen'}
+            {loading ? 'Wird angelegt...' : 'RaaS Ressource anlegen'}
           </Button>
         </div>
       </form>

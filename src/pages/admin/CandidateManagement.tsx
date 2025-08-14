@@ -58,7 +58,7 @@ export default function CandidateManagement() {
       console.error('Error fetching candidates:', error);
       toast({
         title: "Fehler",
-        description: "Kandidaten konnten nicht geladen werden.",
+        description: "RaaS Ressourcen konnten nicht geladen werden.",
         variant: "destructive",
       });
     } finally {
@@ -114,14 +114,14 @@ export default function CandidateManagement() {
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-2">
           <Users className="h-6 w-6" />
-          <h1 className="text-2xl font-bold">Kandidaten-Management</h1>
+          <h1 className="text-2xl font-bold">RaaS Ressourcen-Management</h1>
         </div>
         <Button 
           onClick={() => navigate('/admin/candidates/new')}
           className="flex items-center gap-2"
         >
           <Plus className="h-4 w-4" />
-          Neuen Kandidaten anlegen
+          Neue RaaS Ressource anlegen
         </Button>
       </div>
 
@@ -129,7 +129,7 @@ export default function CandidateManagement() {
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
-            placeholder="Kandidaten durchsuchen..."
+            placeholder="RaaS Ressourcen durchsuchen..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -141,12 +141,12 @@ export default function CandidateManagement() {
         <Card>
           <CardContent className="p-8 text-center">
             <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Keine Kandidaten gefunden</h3>
+            <h3 className="text-lg font-semibold mb-2">Keine RaaS Ressourcen gefunden</h3>
             <p className="text-gray-600 mb-4">
-              {searchTerm ? 'Keine Kandidaten entsprechen Ihrer Suche.' : 'Noch keine Kandidaten angelegt.'}
+              {searchTerm ? 'Keine RaaS Ressourcen entsprechen Ihrer Suche.' : 'Noch keine RaaS Ressourcen angelegt.'}
             </p>
             <Button onClick={() => navigate('/admin/candidates/new')}>
-              Ersten Kandidaten anlegen
+              Erste RaaS Ressource anlegen
             </Button>
           </CardContent>
         </Card>
