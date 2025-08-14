@@ -27,6 +27,7 @@ const AuthPage = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [position, setPosition] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companyEmail, setCompanyEmail] = useState('');
   const [companyWebsite, setCompanyWebsite] = useState('');
@@ -101,7 +102,7 @@ const AuthPage = () => {
 
   const handlePersonalDataSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (firstName && lastName && position && signupEmail && signupPassword) {
+    if (firstName && lastName && position && phoneNumber && signupEmail && signupPassword) {
       setRegistrationStep(2);
     }
   };
@@ -122,6 +123,7 @@ const AuthPage = () => {
             first_name: firstName,
             last_name: lastName,
             position: position,
+            phone: phoneNumber,
             company: {
               name: companyName,
               email: companyEmail,
@@ -321,6 +323,19 @@ const AuthPage = () => {
                         required
                         disabled={isSubmitting}
                         placeholder="z.B. Geschäftsführer, IT-Leiter, CTO"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="phone-number">Telefonnummer *</Label>
+                      <Input
+                        id="phone-number"
+                        type="tel"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        required
+                        disabled={isSubmitting}
+                        placeholder="+49 123 456789"
                       />
                     </div>
                     
