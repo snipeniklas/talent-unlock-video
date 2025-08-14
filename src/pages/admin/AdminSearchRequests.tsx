@@ -36,10 +36,6 @@ interface SearchRequest {
   company: {
     name: string;
   };
-  resource_allocations: {
-    id: string;
-    status: string;
-  }[];
 }
 
 export default function AdminSearchRequests() {
@@ -60,8 +56,7 @@ export default function AdminSearchRequests() {
         .from('search_requests')
         .select(`
           *,
-          company:companies(name),
-          resource_allocations:resource_allocations(id, status)
+          company:companies(name)
         `)
         .order('created_at', { ascending: false });
 
@@ -150,13 +145,9 @@ export default function AdminSearchRequests() {
     return level ? levels[level as keyof typeof levels] : "Nicht angegeben";
   };
 
-  const getAssignmentStats = (allocations: any[]) => {
-    const total = allocations.length;
-    const pending = allocations.filter(a => a.status === 'proposed').length;
-    const active = allocations.filter(a => ['reviewed', 'allocated', 'active'].includes(a.status)).length;
-    const completed = allocations.filter(a => ['completed', 'cancelled'].includes(a.status)).length;
-
-    return { total, pending, active, completed };
+  const getAssignmentStats = () => {
+    // Since we removed resource_allocations, return empty stats for now
+    return { total: 0, pending: 0, active: 0, completed: 0 };
   };
 
   if (loading) {
@@ -250,7 +241,7 @@ export default function AdminSearchRequests() {
                 </TableHeader>
                 <TableBody>
                   {filteredRequests.map((request) => {
-                    const stats = getAssignmentStats(request.resource_allocations);
+                    const stats = getAssignmentStats();
                     return (
                       <TableRow key={request.id}>
                         <TableCell>

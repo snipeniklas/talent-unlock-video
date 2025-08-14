@@ -66,7 +66,7 @@ const Dashboard = () => {
               .select('status')
               .eq('company_id', profileData.data.company_id),
             supabase
-              .from('resources')
+              .from('candidates')
               .select('id'),
             supabase
               .from('search_requests')
@@ -93,10 +93,8 @@ const Dashboard = () => {
 
           // Fetch recommended specialists (top rated and available)
           const { data: specialistsData } = await supabase
-            .from('resources')
-            .select('id, first_name, last_name, current_position, experience_years, rating, status')
-            .eq('status', 'available')
-            .order('rating', { ascending: false })
+            .from('candidates')
+            .select('id')
             .limit(3);
 
           setRecommendedSpecialists(specialistsData || []);

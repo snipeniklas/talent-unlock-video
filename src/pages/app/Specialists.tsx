@@ -56,8 +56,11 @@ const Specialists = () => {
     const fetchSpecialists = async () => {
       try {
         const { data: resources, error } = await supabase
-          .from('resources')
-          .select('*')
+          .from('candidates')
+          .select(`
+            *,
+            candidate_identity (first_name, last_name, country, city)
+          `)
           .order('created_at', { ascending: false });
 
         if (error) {
@@ -70,8 +73,27 @@ const Specialists = () => {
           return;
         }
 
-        setSpecialists(resources || []);
-        setFilteredSpecialists(resources || []);
+        // Transform candidate data to match specialist interface
+        const transformedData = (resources || []).map((candidate: any) => ({
+          ...candidate,
+          first_name: candidate.candidate_identity?.first_name || '',
+          last_name: candidate.candidate_identity?.last_name || '',
+          email: candidate.email || '',
+          phone: candidate.phone,
+          location: candidate.candidate_identity?.city || '',
+          current_position: candidate.primary_role || '',
+          experience_years: candidate.years_experience,
+          skills: [], // We'll need to extract from skills JSON
+          languages: [], // We'll need to get from candidate_languages
+          availability: candidate.availability,
+          hourly_rate_min: candidate.rate_hourly_target,
+          hourly_rate_max: candidate.rate_hourly_target,
+          rating: 5, // Default rating
+          status: candidate.availability === 'immediately' ? 'available' : 'unavailable'
+        }));
+
+        setSpecialists(transformedData);
+        setFilteredSpecialists(transformedData);
       } catch (error) {
         console.error('Error:', error);
         toast({
