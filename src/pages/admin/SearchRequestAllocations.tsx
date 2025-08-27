@@ -48,7 +48,12 @@ interface Candidate {
   years_experience: number;
   rate_hourly_target: number;
   currency: string;
-  skills: string[];
+  skills: Array<{
+    name: string;
+    level?: string;
+    last_used?: string;
+    years_used?: number;
+  }> | string[];
   candidate_identity: {
     first_name: string;
     last_name: string;
@@ -646,11 +651,14 @@ const SearchRequestAllocations = () => {
                         
                         {candidate?.skills && candidate.skills.length > 0 && (
                           <div className="flex flex-wrap gap-1">
-                            {candidate.skills.slice(0, 5).map((skill: string, index: number) => (
-                              <Badge key={index} variant="outline" className="text-xs">
-                                {skill}
-                              </Badge>
-                            ))}
+                            {candidate.skills.slice(0, 5).map((skill: any, index: number) => {
+                              const skillName = typeof skill === 'string' ? skill : skill?.name || 'Unknown Skill';
+                              return (
+                                <Badge key={index} variant="outline" className="text-xs">
+                                  {skillName}
+                                </Badge>
+                              );
+                            })}
                             {candidate.skills.length > 5 && (
                               <Badge variant="outline" className="text-xs">
                                 +{candidate.skills.length - 5} weitere
