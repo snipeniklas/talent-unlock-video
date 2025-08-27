@@ -329,22 +329,33 @@ const CandidateKanbanBoard = () => {
                       )}
 
                       {/* Action Buttons */}
-                      <div className="flex flex-wrap gap-1">
-                        {Object.entries(statusConfig).map(([status, config]) => {
-                          if (status === allocation.client_status) return null;
-                          
-                          return (
-                            <Button
-                              key={status}
-                              size="sm"
-                              variant="outline"
-                              className="text-xs h-7"
-                              onClick={() => updateCandidateStatus(allocation.id, status)}
-                            >
-                              {config.title}
-                            </Button>
-                          );
-                        })}
+                      <div className="space-y-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="w-full text-xs h-7"
+                          onClick={() => navigate(`/app/candidate/${candidate.id}`)}
+                        >
+                          Details anzeigen
+                        </Button>
+                        
+                        <div className="flex flex-wrap gap-1">
+                          {Object.entries(statusConfig).map(([status, config]) => {
+                            if (status === allocation.client_status) return null;
+                            
+                            return (
+                              <Button
+                                key={status}
+                                size="sm"
+                                variant="outline"
+                                className="text-xs h-7 flex-1"
+                                onClick={() => updateCandidateStatus(allocation.id, status)}
+                              >
+                                {config.title}
+                              </Button>
+                            );
+                          })}
+                        </div>
                       </div>
 
                       {/* Notes */}
