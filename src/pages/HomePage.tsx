@@ -121,8 +121,8 @@ const HomePage = () => {
                     <span className="font-semibold text-brand-dark">Die Remote-Experten,</span> die Ihre Herausforderungen verstehen und lösen.
                   </p>
                   <p className="text-base md:text-lg text-muted-foreground mb-6 lg:mb-8 animate-fade-in-delay-2">
-                    Als <span className="font-semibold text-primary">Marktführer für Remote-Recruiting</span> verbinden wir Sie seit 9 Jahren mit den besten Talenten. 
-                    Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir finden die perfekte Lösung.
+                    Als <span className="font-semibold text-primary">führender Dienstleister für internationale Fachkräfte</span> stellen wir Ihnen seit 9 Jahren die besten Talente zur Verfügung. 
+                    Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir liefern die perfekte Fachkraft-Lösung.
                   </p>
                 </div>
 
