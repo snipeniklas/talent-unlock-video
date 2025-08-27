@@ -75,16 +75,23 @@ const SearchRequestAllocations = () => {
 
   const fetchData = async () => {
     try {
+      console.log('Fetching data for search request ID:', id);
+      
       // Search Request Details
       const { data: searchRequestData, error: srError } = await supabase
         .from('search_requests')
         .select(`
           *,
-          companies (name)
+          companies!inner (
+            name
+          )
         `)
         .eq('id', id)
         .single();
 
+      console.log('Search request data:', searchRequestData);
+      console.log('Search request error:', srError);
+      
       if (srError) throw srError;
       setSearchRequest(searchRequestData);
 
@@ -258,7 +265,7 @@ const SearchRequestAllocations = () => {
         </Button>
         <div>
           <h1 className="text-2xl font-bold">{searchRequest.title}</h1>
-          <p className="text-muted-foreground">{searchRequest.companies.name}</p>
+          <p className="text-muted-foreground">{searchRequest.companies?.name || 'Unbekanntes Unternehmen'}</p>
         </div>
       </div>
 
