@@ -173,11 +173,10 @@ const HejTalentLanding = () => {
                 ) : (
                   <div className="aspect-video bg-black flex items-center justify-center animate-scale-in">
                     <iframe
-                      src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
+                      src="https://drive.google.com/file/d/1YPJcKaFDr4BNvHxAOKd3obYIpWVuljbH/preview"
                       title="Hej Talent Video"
                       className="w-full h-full"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allow="autoplay"
                       allowFullScreen
                     />
                   </div>

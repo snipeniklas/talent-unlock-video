@@ -158,9 +158,9 @@ const HomePage = () => {
                 <div className="relative">
                   <div className="aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm border border-primary/20">
                     <iframe 
-                      src="https://hejcompanyde-my.sharepoint.com/personal/joachim_kalff_hejcompany_de/_layouts/15/embed.aspx?UniqueId=7cd68a6d-417a-4027-8508-b394d09d7132&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" 
+                      src="https://drive.google.com/file/d/1YPJcKaFDr4BNvHxAOKd3obYIpWVuljbH/preview" 
                       className="w-full h-full border-0"
-                      scrolling="no" 
+                      allow="autoplay"
                       allowFullScreen 
                       title="Hej Talent Intro Video"
                     />
