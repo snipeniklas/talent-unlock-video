@@ -45,7 +45,7 @@ const SolutionsOverview = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              Unsere <span className="text-primary">Remote</span>-Fachkräfte
+              Unsere <span className="text-primary">internationalen</span> Fachkräfte
             </h1>
             <p className="text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
               Qualifizierte Remote-Experten für jeden Bereich - von administrativer Unterstützung 
@@ -103,16 +103,16 @@ const SolutionsOverview = () => {
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-brand-dark mb-6">
-            Nicht sicher, welche Remote-Fachkräfte Sie benötigen?
+            Nicht sicher, welche internationalen Fachkräfte Sie benötigen?
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Lassen Sie uns in einem kostenlosen Beratungsgespräch gemeinsam die passenden Remote-Experten für Ihre Herausforderungen finden.
           </p>
           <Button asChild size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-            <Link to="/app/search-requests/new">
-              Suchauftrag kostenlos erstellen
+            <a href="https://calendly.com/joachim-kalff" target="_blank" rel="noopener noreferrer">
+              Beratungstermin jetzt buchen
               <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
+            </a>
           </Button>
         </div>
       </section>

@@ -56,7 +56,7 @@ const HowWeWork = () => {
   };
 
   const benefits = [
-    "Schneller Start: Qualifizierte Remote-Fachkraft in unter 2 Wochen",
+    "Schneller Start: Qualifizierte Remote-Fachkraft in 2-4 Wochen",
     "Geprüfte Qualität: Alle Kandidaten durchlaufen unseren Screening-Prozess",
     "Flexible Arbeitsmodelle: Vollzeit, Teilzeit oder projektbasiert",
     "Transparente Kommunikation: Regelmäßige Updates und Feedback",

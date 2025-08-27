@@ -3,15 +3,14 @@ import React from 'react';
 const BenefitBanner = () => {
   const benefits = [
     "30 % günstiger",
-    "Start in 7 Tagen", 
+    "Onboarding in 2-4 Wochen", 
     "Geprüfte Remote-Fachkräfte",
-    "Geld-zurück-Garantie",
     "Keine Headhunter-Fee",
     "Remote & DSGVO-konform",
     "Skalierung jederzeit möglich",
     "Kein Recruiting-Aufwand",
     "Zeitzonen-kompatibel (+/-2 h)",
-    "Onboarding in < 1 Tag"
+    "Dienstleistungen 24/7 an 365 Tagen möglich"
   ];
 
   return (

@@ -35,6 +35,7 @@ import CandidateDetail from "./pages/admin/CandidateDetail";
 import NewCandidate from "./pages/admin/NewCandidate";
 import Settings from "./pages/app/Settings";
 import InviteRegister from "./pages/InviteRegister";
+import AboutUs from "./pages/AboutUs";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ const App = () => (
           <Route path="/solutions/it-development" element={<ITDevelopmentSolution />} />
           <Route path="/solutions/ai-ml" element={<AIMlSolution />} />
           <Route path="/how-we-work" element={<HowWeWork />} />
+          <Route path="/about-us" element={<AboutUs />} />
           <Route path="/resource-hub" element={<ResourceHub />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/invite" element={<InviteRegister />} />

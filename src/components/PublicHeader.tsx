@@ -14,6 +14,7 @@ const PublicHeader = () => {
     { title: "Startseite", path: "/" },
     { title: "RaaS Lösungen", path: "/solutions" },
     { title: "So arbeiten wir", path: "/how-we-work" },
+    { title: "Über uns", path: "/about-us" },
     { title: "RaaS Hub", path: "/resource-hub" },
     { title: "Kontakt", path: "/contact" },
   ];
@@ -32,7 +33,7 @@ const PublicHeader = () => {
             <div className="flex items-center animate-slide-in-left">
               <img 
                 src={hejTalentLogo} 
-                alt="HejTalent"
+                alt="Hej Talent"
                 className="h-8 md:h-10 hover:scale-105 transition-transform duration-300 cursor-pointer" 
                 onClick={() => navigate('/')}
               />
@@ -79,7 +80,7 @@ const PublicHeader = () => {
                     <div className="flex items-center justify-between pb-4 border-b">
                       <img 
                         src={hejTalentLogo} 
-                        alt="HejTalent"
+                        alt="Hej Talent"
                         className="h-8" 
                       />
                       <Button 

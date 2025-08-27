@@ -63,7 +63,7 @@ const HomePage = () => {
     { label: "Vermittelte Remote-Fachkräfte", value: "500+" },
     { label: "Erfolgreiche Vermittlungen", value: "150+" },
     { label: "Zufriedene Unternehmen", value: "98%" },
-    { label: "Wochen Besetzungszeit", value: "∅ 2" }
+    { label: "Wochen Besetzungszeit", value: "2-4" }
   ];
 
   const testimonials = [
@@ -100,11 +100,11 @@ const HomePage = () => {
                 <div className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
                   <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">8+ Jahre Remote-Expertise</span>
+                    <span className="text-xs md:text-sm font-medium text-brand-dark">9+ Jahre Remote-Expertise</span>
                   </div>
                   <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
                     <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">500+ vetted Fachkräfte</span>
+                    <span className="text-xs md:text-sm font-medium text-brand-dark">500+ geprüfte Fachkräfte</span>
                   </div>
                   <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
                     <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
@@ -121,7 +121,7 @@ const HomePage = () => {
                     <span className="font-semibold text-brand-dark">Die Remote-Experten,</span> die Ihre Herausforderungen verstehen und lösen.
                   </p>
                   <p className="text-base md:text-lg text-muted-foreground mb-6 lg:mb-8 animate-fade-in-delay-2">
-                    Als <span className="font-semibold text-primary">Marktführer für Remote-Recruiting</span> verbinden wir Sie seit 8 Jahren mit den besten Talenten. 
+                    Als <span className="font-semibold text-primary">Marktführer für Remote-Recruiting</span> verbinden wir Sie seit 9 Jahren mit den besten Talenten. 
                     Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir finden die perfekte Lösung.
                   </p>
                 </div>
@@ -184,15 +184,13 @@ const HomePage = () => {
             
             {/* Trust Indicators */}
             <div className="text-center mt-12 lg:mt-16">
-              <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">Vertrauen Sie auf 8+ Jahre Expertise:</p>
+              <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">Vertrauen Sie auf 9+ Jahre Expertise:</p>
               <div className="flex flex-wrap justify-center gap-2 md:gap-8 items-center opacity-60">
-                <span className="text-xs md:text-sm font-medium">Fortune 500 Kunden</span>
+                <span className="text-xs md:text-sm font-medium">Internationale Kunden</span>
                 <span className="text-xs md:text-sm font-medium hidden md:inline">•</span>
                 <span className="text-xs md:text-sm font-medium">DSGVO-konform</span>
                 <span className="text-xs md:text-sm font-medium hidden md:inline">•</span>
                 <span className="text-xs md:text-sm font-medium">ISO 27001</span>
-                <span className="text-xs md:text-sm font-medium hidden md:inline">•</span>
-                <span className="text-xs md:text-sm font-medium">Geld-zurück-Garantie</span>
               </div>
             </div>
             
@@ -282,7 +280,7 @@ const HomePage = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12 md:mb-16">
               <h2 className="text-2xl md:text-4xl font-bold text-brand-dark mb-4">
-                <span className="text-primary">Marktführer</span> für Remote-Recruiting seit 2016
+                <span className="text-primary">Marktführer</span> für Remote-Recruiting seit 2020
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8">Zahlen, die unsere Expertise beweisen</p>
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 max-w-4xl mx-auto border border-primary/10">
@@ -331,7 +329,7 @@ const HomePage = () => {
       <section id="solutions" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Unsere Remote-Fachkräfte</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Unsere internationalen Fachkräfte</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-delay-1">
               Maßgeschneiderte Remote-Teams für Ihre spezifischen Anforderungen
             </p>
@@ -481,7 +479,7 @@ const HomePage = () => {
                 Ihr Weg zu den perfekten <span className="text-primary">Remote-Experten</span>
               </h3>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Unser bewährter 4-Wochen-Prozess bringt Sie sicher und strukturiert zu Ihrer idealen Remote-Fachkraft.
+                Unser bewährter 3-Wochen-Prozess bringt Sie sicher und strukturiert zu Ihrer idealen Remote-Fachkraft.
               </p>
             </div>
             <ProjectTimeline 
@@ -523,7 +521,7 @@ const HomePage = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">Über HejTalent</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">Über Hej Talent</h2>
               <p className="text-lg text-muted-foreground mb-6">
                 Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach 
                 erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und 
