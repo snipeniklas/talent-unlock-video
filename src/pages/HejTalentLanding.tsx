@@ -91,7 +91,7 @@ const HejTalentLanding = () => {
             Kein Recruiting-Aufwand <span className="text-primary text-lg">•</span>
           </span>
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Zeitzonen-kompatibel (+/-2 h) <span className="text-primary text-lg">•</span>
+            Zeitzonen-kompatibel <span className="text-primary text-lg">•</span>
           </span>
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
             Onboarding in &lt; 1 Tag <span className="text-primary text-lg">•</span>
@@ -123,7 +123,7 @@ const HejTalentLanding = () => {
             Kein Recruiting-Aufwand <span className="text-primary text-lg">•</span>
           </span>
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Zeitzonen-kompatibel (+/-2 h) <span className="text-primary text-lg">•</span>
+            Zeitzonen-kompatibel <span className="text-primary text-lg">•</span>
           </span>
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
             Onboarding in &lt; 1 Tag <span className="text-primary text-lg">•</span>

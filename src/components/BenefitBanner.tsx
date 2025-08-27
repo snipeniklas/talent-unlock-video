@@ -9,7 +9,7 @@ const BenefitBanner = () => {
     "Remote & DSGVO-konform",
     "Skalierung jederzeit möglich",
     "Kein Recruiting-Aufwand",
-    "Zeitzonen-kompatibel (+/-2 h)",
+    "Zeitzonen-kompatibel",
     "Dienstleistungen 24/7 an 365 Tagen möglich"
   ];
 
