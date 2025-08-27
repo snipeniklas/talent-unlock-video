@@ -290,11 +290,11 @@ const CandidateKanbanBoard = () => {
       </div>
 
       {/* Kanban Board */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4 overflow-x-auto">
+      <div className="flex gap-4 overflow-x-auto pb-4">
         {kanbanColumns.map((column) => (
           <Card 
             key={column.id} 
-            className={`min-w-[300px] h-fit transition-colors ${
+            className={`flex-shrink-0 w-80 h-fit transition-colors ${
               dragOverColumn === column.status ? 'bg-blue-50 border-blue-300' : ''
             }`}
             onDragOver={(e) => handleDragOver(e, column.status)}
