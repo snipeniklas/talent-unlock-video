@@ -50,6 +50,7 @@ interface SearchRequest {
   created_at: string;
   company_id: string;
   created_by: string;
+  candidate_count?: number;
 }
 
 const SearchRequests = () => {
@@ -114,8 +115,23 @@ const SearchRequests = () => {
           return;
         }
 
-        setSearchRequests(requests || []);
-        setFilteredRequests(requests || []);
+        // Fetch allocations count for each search request
+        const requestsWithCounts = await Promise.all(
+          (requests || []).map(async (request) => {
+            const { data: allocations } = await supabase
+              .from('search_request_allocations')
+              .select('id')
+              .eq('search_request_id', request.id);
+            
+            return {
+              ...request,
+              candidate_count: allocations?.length || 0
+            };
+          })
+        );
+
+        setSearchRequests(requestsWithCounts || []);
+        setFilteredRequests(requestsWithCounts || []);
       } catch (error) {
         console.error('Error:', error);
         toast({
@@ -357,7 +373,7 @@ const SearchRequests = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="w-4 h-4 text-muted-foreground" />
-                    <span>0 Bewerber</span>
+                    <span>{request.candidate_count || 0} Kandidaten</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4 text-muted-foreground" />
@@ -407,7 +423,7 @@ const SearchRequests = () => {
                     variant="outline"
                     onClick={() => navigate(`/app/search-requests/${request.id}/candidates`)}
                   >
-                    Kandidaten verwalten (0)
+                    Kandidaten verwalten ({request.candidate_count || 0})
                   </Button>
                   {request.status === 'active' && (
                     <Button size="sm" variant="outline">
