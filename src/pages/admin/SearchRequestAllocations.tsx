@@ -77,17 +77,17 @@ const SearchRequestAllocations = () => {
     try {
       console.log('Fetching data for search request ID:', id);
       
-      // Search Request Details
+      // Search Request Details - use maybeSingle instead of single for better error handling
       const { data: searchRequestData, error: srError } = await supabase
         .from('search_requests')
         .select(`
           *,
-          companies!inner (
+          companies (
             name
           )
         `)
         .eq('id', id)
-        .single();
+        .maybeSingle();
 
       console.log('Search request data:', searchRequestData);
       console.log('Search request error:', srError);
