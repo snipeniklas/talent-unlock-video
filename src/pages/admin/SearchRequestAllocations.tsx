@@ -110,20 +110,35 @@ const SearchRequestAllocations = () => {
       if (srError) throw srError;
       setSearchRequest(searchRequestData);
 
-      // Allocations
+      // Allocations (without candidates relation)
       const { data: allocationsData, error: allocError } = await supabase
         .from('search_request_allocations')
-        .select(`
-          *,
-          candidates (
-            *,
-            candidate_identity (*)
-          )
-        `)
+        .select('*')
         .eq('search_request_id', id);
 
       if (allocError) throw allocError;
-      setAllocations((allocationsData as any) || []);
+
+      // Get candidate details for each allocation
+      const allocationsWithCandidates = [];
+      if (allocationsData && allocationsData.length > 0) {
+        for (const allocation of allocationsData) {
+          const { data: candidateData } = await supabase
+            .from('candidates')
+            .select(`
+              *,
+              candidate_identity (*)
+            `)
+            .eq('id', allocation.candidate_id)
+            .single();
+          
+          allocationsWithCandidates.push({
+            ...allocation,
+            candidates: candidateData
+          });
+        }
+      }
+      
+      setAllocations(allocationsWithCandidates);
 
       // Available candidates (not yet allocated)
       const allocatedCandidateIds = allocationsData?.map(a => a.candidate_id) || [];
