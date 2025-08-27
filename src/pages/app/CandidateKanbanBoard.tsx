@@ -69,6 +69,8 @@ const CandidateKanbanBoard = () => {
   const [searchRequest, setSearchRequest] = useState<any>(null);
   const [allocations, setAllocations] = useState<Allocation[]>([]);
   const [loading, setLoading] = useState(true);
+  const [draggedItem, setDraggedItem] = useState<string | null>(null);
+  const [dragOverColumn, setDragOverColumn] = useState<string | null>(null);
 
   useEffect(() => {
     if (id) {
@@ -194,6 +196,46 @@ const CandidateKanbanBoard = () => {
     }
   };
 
+  // Drag and Drop handlers
+  const handleDragStart = (e: React.DragEvent, allocationId: string) => {
+    setDraggedItem(allocationId);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', allocationId);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedItem(null);
+    setDragOverColumn(null);
+  };
+
+  const handleDragOver = (e: React.DragEvent, columnStatus: string) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    setDragOverColumn(columnStatus);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    // Only clear drag over state if we're actually leaving the drop zone
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setDragOverColumn(null);
+    }
+  };
+
+  const handleDrop = async (e: React.DragEvent, newStatus: string) => {
+    e.preventDefault();
+    const allocationId = e.dataTransfer.getData('text/plain');
+    
+    if (allocationId && draggedItem === allocationId) {
+      const allocation = allocations.find(a => a.id === allocationId);
+      if (allocation && allocation.client_status !== newStatus) {
+        await updateCandidateStatus(allocationId, newStatus);
+      }
+    }
+    
+    setDraggedItem(null);
+    setDragOverColumn(null);
+  };
+
   const getInitials = (firstName: string, lastName: string) => {
     return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
   };
@@ -250,7 +292,15 @@ const CandidateKanbanBoard = () => {
       {/* Kanban Board */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4 overflow-x-auto">
         {kanbanColumns.map((column) => (
-          <Card key={column.id} className="min-w-[300px] h-fit">
+          <Card 
+            key={column.id} 
+            className={`min-w-[300px] h-fit transition-colors ${
+              dragOverColumn === column.status ? 'bg-blue-50 border-blue-300' : ''
+            }`}
+            onDragOver={(e) => handleDragOver(e, column.status)}
+            onDragLeave={handleDragLeave}
+            onDrop={(e) => handleDrop(e, column.status)}
+          >
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center justify-between text-sm">
                 <div className="flex items-center gap-2">
@@ -262,13 +312,22 @@ const CandidateKanbanBoard = () => {
                 <Badge variant="secondary">{column.count}</Badge>
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-3 min-h-[200px]">
               {column.candidates.map((allocation) => {
                 const candidate = allocation.candidates;
                 const identity = candidate?.candidate_identity;
+                const isDragging = draggedItem === allocation.id;
                 
                 return (
-                  <Card key={allocation.id} className="p-4 hover:shadow-md transition-shadow">
+                  <Card 
+                    key={allocation.id} 
+                    className={`p-4 transition-all cursor-move ${
+                      isDragging ? 'opacity-50 rotate-3 scale-105' : 'hover:shadow-md'
+                    }`}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, allocation.id)}
+                    onDragEnd={handleDragEnd}
+                  >
                     <div className="space-y-3">
                       {/* Candidate Header */}
                       <div className="flex items-start gap-3">
@@ -370,8 +429,10 @@ const CandidateKanbanBoard = () => {
               })}
               
               {column.candidates.length === 0 && (
-                <div className="text-center py-8 text-muted-foreground text-sm">
-                  Keine Kandidaten in diesem Status
+                <div className={`text-center py-8 text-muted-foreground text-sm border-2 border-dashed rounded-lg transition-colors ${
+                  dragOverColumn === column.status ? 'border-blue-400 bg-blue-50/50' : 'border-gray-200'
+                }`}>
+                  {dragOverColumn === column.status ? 'Hier ablegen' : 'Keine Kandidaten in diesem Status'}
                 </div>
               )}
             </CardContent>
