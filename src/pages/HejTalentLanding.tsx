@@ -67,7 +67,7 @@ const HejTalentLanding = () => {
         <div className="animate-slide-text hover:animate-none flex items-center gap-12 whitespace-nowrap min-w-max">
           {/* First set */}
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            30 % günstiger <span className="text-primary text-lg">•</span>
+            30-60% günstiger <span className="text-primary text-lg">•</span>
           </span>
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
             Start in 7 Tagen <span className="text-primary text-lg">•</span>
@@ -99,7 +99,7 @@ const HejTalentLanding = () => {
           
           {/* Second set for seamless loop */}
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            30 % günstiger <span className="text-primary text-lg">•</span>
+            30-60% günstiger <span className="text-primary text-lg">•</span>
           </span>
           <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
             Start in 7 Tagen <span className="text-primary text-lg">•</span>
@@ -138,7 +138,7 @@ const HejTalentLanding = () => {
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
               Wie Sie in 7 Tagen geprüfte KI-Entwickler{' '}
               <span className="text-primary bg-gradient-to-r from-primary to-primary-hover bg-clip-text animate-shimmer bg-shimmer bg-200% animate-bounce-in-delay-1">
-                30% günstiger
+                30-60% günstiger
               </span> bekommen
             </h1>
             
