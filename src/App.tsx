@@ -13,6 +13,7 @@ import SearchRequests from "./pages/app/SearchRequests";
 import NewSearchRequest from "./pages/app/NewSearchRequest";
 import SearchRequestDetail from "./pages/app/SearchRequestDetail";
 import ApplicantManagement from "./pages/app/ApplicantManagement";
+import CandidateKanbanBoard from "./pages/app/CandidateKanbanBoard";
 import Specialists from "./pages/app/Specialists";
 import SpecialistDetail from "./pages/app/SpecialistDetail";
 import BackofficeSolution from "./pages/solutions/BackofficeSolution";
@@ -66,6 +67,7 @@ const App = () => (
             <Route path="search-requests" element={<SearchRequests />} />
             <Route path="search-requests/new" element={<NewSearchRequest />} />
             <Route path="search-requests/:id" element={<SearchRequestDetail />} />
+            <Route path="search-requests/:id/candidates" element={<CandidateKanbanBoard />} />
             <Route path="search-requests/:id/applicants" element={<ApplicantManagement />} />
             <Route path="specialists" element={<Specialists />} />
             <Route path="specialists/:id" element={<SpecialistDetail />} />

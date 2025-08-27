@@ -405,9 +405,9 @@ const SearchRequests = () => {
                   <Button 
                     size="sm" 
                     variant="outline"
-                    onClick={() => navigate(`/app/search-requests/${request.id}/applicants`)}
+                    onClick={() => navigate(`/app/search-requests/${request.id}/candidates`)}
                   >
-                    Bewerber verwalten (0)
+                    Kandidaten verwalten (0)
                   </Button>
                   {request.status === 'active' && (
                     <Button size="sm" variant="outline">

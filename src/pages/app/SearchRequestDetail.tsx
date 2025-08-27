@@ -266,9 +266,9 @@ const SearchRequestDetail = () => {
               <div className="space-y-2">
                 <Button 
                   className="w-full"
-                  onClick={() => navigate(`/app/search-requests/${id}/applicants`)}
+                  onClick={() => navigate(`/app/search-requests/${id}/candidates`)}
                 >
-                  Bewerber verwalten
+                  Kandidaten verwalten
                 </Button>
                 <Button variant="outline" className="w-full">
                   Kontakt aufnehmen

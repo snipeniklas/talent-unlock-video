@@ -335,6 +335,7 @@ export type Database = {
           allocated_by: string
           candidate_id: string
           client_feedback: string | null
+          client_status: string | null
           created_at: string
           feedback_date: string | null
           id: string
@@ -348,6 +349,7 @@ export type Database = {
           allocated_by: string
           candidate_id: string
           client_feedback?: string | null
+          client_status?: string | null
           created_at?: string
           feedback_date?: string | null
           id?: string
@@ -361,6 +363,7 @@ export type Database = {
           allocated_by?: string
           candidate_id?: string
           client_feedback?: string | null
+          client_status?: string | null
           created_at?: string
           feedback_date?: string | null
           id?: string

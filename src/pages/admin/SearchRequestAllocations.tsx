@@ -68,9 +68,11 @@ interface Allocation {
   id: string;
   candidate_id: string;
   status: string;
+  client_status: string;
   notes: string;
   client_feedback: string;
   allocated_at: string;
+  updated_at: string;
   candidates: Candidate;
 }
 
@@ -280,6 +282,32 @@ const SearchRequestAllocations = () => {
       case 'accepted': return 'Akzeptiert';
       case 'rejected': return 'Abgelehnt';
       case 'hired': return 'Eingestellt';
+      default: return status;
+    }
+  };
+
+  const getClientStatusBadgeVariant = (status: string): "default" | "destructive" | "secondary" | "outline" => {
+    switch (status) {
+      case 'proposed': return 'secondary';
+      case 'reviewed': return 'outline';
+      case 'interested': return 'default';
+      case 'not_interested': return 'destructive';
+      case 'interview_scheduled': return 'default';
+      case 'hired': return 'default';
+      case 'rejected': return 'destructive';
+      default: return 'secondary';
+    }
+  };
+
+  const getClientStatusLabel = (status: string) => {
+    switch (status) {
+      case 'proposed': return 'Vorgeschlagen';
+      case 'reviewed': return 'Geprüft';
+      case 'interested': return 'Interessant';
+      case 'not_interested': return 'Nicht interessant';
+      case 'interview_scheduled': return 'Interview geplant';
+      case 'hired': return 'Eingestellt';
+      case 'rejected': return 'Abgelehnt';
       default: return status;
     }
   };
@@ -680,9 +708,17 @@ const SearchRequestAllocations = () => {
                     </div>
                     
                     <div className="flex flex-col items-end gap-3">
-                      <Badge variant={getStatusBadgeVariant(allocation.status)}>
-                        {getStatusLabel(allocation.status)}
-                      </Badge>
+                      <div className="space-y-2">
+                        <div className="text-xs font-medium text-muted-foreground">Admin Status:</div>
+                        <Badge variant={getStatusBadgeVariant(allocation.status)}>
+                          {getStatusLabel(allocation.status)}
+                        </Badge>
+                        
+                        <div className="text-xs font-medium text-muted-foreground">Kunden Status:</div>
+                        <Badge variant={getClientStatusBadgeVariant(allocation.client_status || 'proposed')}>
+                          {getClientStatusLabel(allocation.client_status || 'proposed')}
+                        </Badge>
+                      </div>
                       
                       <div className="flex gap-2">
                         <Select 
