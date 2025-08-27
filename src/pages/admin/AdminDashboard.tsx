@@ -85,7 +85,7 @@ export default function AdminDashboard() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-          <p className="text-muted-foreground">HejTalent Verwaltungsbereich</p>
+          <p className="text-muted-foreground">Hej Talent Verwaltungsbereich</p>
         </div>
       </div>
 

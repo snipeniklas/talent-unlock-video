@@ -56,7 +56,7 @@ const HejTalentLanding = () => {
             {/* Just Logo */}
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center animate-slide-in-left">
-                <img src={hejTalentLogo} alt="HejTalent" className="h-8 md:h-10 hover:scale-105 transition-transform duration-300" />
+                <img src={hejTalentLogo} alt="Hej Talent" className="h-8 md:h-10 hover:scale-105 transition-transform duration-300" />
               </div>
             </div>
         </div>
@@ -174,7 +174,7 @@ const HejTalentLanding = () => {
                   <div className="aspect-video bg-black flex items-center justify-center animate-scale-in">
                     <iframe
                       src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
-                      title="HejTalent Video"
+                      title="Hej Talent Video"
                       className="w-full h-full"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -271,7 +271,7 @@ const HejTalentLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-brand-dark mb-12 animate-fade-in">
-              Über 50 Unternehmen vertrauen bereits auf HejTalent
+              Über 50 Unternehmen vertrauen bereits auf Hej Talent
             </h2>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -408,7 +408,7 @@ const HejTalentLanding = () => {
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-4 gap-8 mb-8">
               <div>
-                <h3 className="font-bold text-xl mb-4">HejTalent</h3>
+                <h3 className="font-bold text-xl mb-4">Hej Talent</h3>
                 <p className="text-gray-300 text-sm">
                   Ihr Partner für geprüfte internationale Remote-KI-Entwickler.
                 </p>
@@ -448,7 +448,7 @@ const HejTalentLanding = () => {
             </div>
             
             <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-300">
-              © 2025 HejTalent. Alle Rechte vorbehalten.
+              © 2025 Hej Talent. Alle Rechte vorbehalten.
             </div>
           </div>
         </div>

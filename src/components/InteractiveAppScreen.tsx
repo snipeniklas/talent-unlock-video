@@ -263,7 +263,7 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-xl font-semibold">Admin Dashboard</h3>
-        <Badge variant="destructive" className="text-xs">HejTalent Admin</Badge>
+        <Badge variant="destructive" className="text-xs">Hej Talent Admin</Badge>
       </div>
 
       {/* Admin Stats */}

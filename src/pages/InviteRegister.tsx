@@ -196,7 +196,7 @@ const InviteRegister = () => {
           <div className="mx-auto mb-4 w-12 h-12 bg-primary rounded-full flex items-center justify-center">
             <UserPlus className="w-6 h-6 text-white" />
           </div>
-          <CardTitle className="text-2xl">Willkommen bei HejTalent</CardTitle>
+          <CardTitle className="text-2xl">Willkommen bei Hej Talent</CardTitle>
           <CardDescription>
             Sie wurden zu <strong>{invitation?.companies?.name}</strong> eingeladen
           </CardDescription>

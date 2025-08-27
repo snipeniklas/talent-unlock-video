@@ -139,7 +139,7 @@ export function AppSidebar() {
           <div className="flex items-center justify-center p-4 border-b bg-card">
             <img 
               src={hejTalentLogo} 
-              alt="HejTalent"
+              alt="Hej Talent"
               className="h-8 hover:scale-105 transition-transform duration-300" 
             />
           </div>

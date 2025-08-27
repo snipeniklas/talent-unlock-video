@@ -213,7 +213,7 @@ export default function AdminSettings() {
 
   const getRoleText = (role: string) => {
     const texts = {
-      admin: "HejTalent Admin",
+      admin: "Hej Talent Admin",
       company_admin: "Unternehmens-Admin",
       user: "Benutzer"
     };
@@ -264,7 +264,7 @@ export default function AdminSettings() {
             <div className="text-2xl font-bold">
               {users.filter(u => getUserRole(u.user_roles) === 'admin').length}
             </div>
-            <p className="text-xs text-muted-foreground">HejTalent Admins</p>
+            <p className="text-xs text-muted-foreground">Hej Talent Admins</p>
           </CardContent>
         </Card>
 
@@ -330,7 +330,7 @@ export default function AdminSettings() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Alle Rollen</SelectItem>
-                <SelectItem value="admin">HejTalent Admin</SelectItem>
+                <SelectItem value="admin">Hej Talent Admin</SelectItem>
                 <SelectItem value="company_admin">Unternehmens-Admin</SelectItem>
                 <SelectItem value="user">Benutzer</SelectItem>
               </SelectContent>

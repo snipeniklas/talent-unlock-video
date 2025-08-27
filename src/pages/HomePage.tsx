@@ -70,13 +70,13 @@ const HomePage = () => {
     {
       name: "Dr. Marcus Weber",
       company: "TechCorp GmbH",
-      text: "HejTalent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.",
+      text: "Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.",
       rating: 5
     },
     {
       name: "Sarah Mueller",
       company: "StartupTech GmbH",
-      text: "Unser Remote-Entwicklungsteam von HejTalent arbeitet seit 6 Monaten perfekt mit uns zusammen. Top Qualität!",
+      text: "Unser Remote-Entwicklungsteam von Hej Talent arbeitet seit 6 Monaten perfekt mit uns zusammen. Top Qualität!",
       rating: 5
     }
   ];
@@ -162,7 +162,7 @@ const HomePage = () => {
                       className="w-full h-full border-0"
                       scrolling="no" 
                       allowFullScreen 
-                      title="HejTalent Intro Video"
+                      title="Hej Talent Intro Video"
                     />
                   </div>
                   {/* Video accent border */}
