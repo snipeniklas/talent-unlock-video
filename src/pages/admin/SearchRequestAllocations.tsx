@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Plus, User, Mail, MapPin, Calendar, Star, TrendingUp, MessageSquare, Trash2 } from "lucide-react";
+import { ArrowLeft, Plus, User, Mail, MapPin, Calendar, Star, TrendingUp, MessageSquare, Trash2, Euro, Clock, Building2, Users, Briefcase, Target } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -19,6 +19,21 @@ interface SearchRequest {
   description: string;
   status: string;
   company_id: string;
+  location?: string;
+  employment_type?: string;
+  experience_level?: string;
+  salary_min?: number;
+  salary_max?: number;
+  number_of_workers?: number;
+  start_date?: string;
+  end_date?: string;
+  weekly_hours?: number;
+  customer_industry?: string;
+  job_title?: string;
+  skills_required?: string[];
+  requirements?: string;
+  main_tasks?: string[];
+  work_areas?: string[];
   companies: {
     name: string;
   };
@@ -272,19 +287,209 @@ const SearchRequestAllocations = () => {
       {/* Search Request Info */}
       <Card>
         <CardHeader>
-          <CardTitle>Suchauftrag Details</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <Briefcase className="w-5 h-5" />
+            Suchauftrag Details
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <Label className="text-sm font-medium">Beschreibung</Label>
-              <p className="text-sm text-muted-foreground mt-1">
-                {searchRequest.description || 'Keine Beschreibung verfügbar'}
-              </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Grundlegende Informationen */}
+            <div className="space-y-4">
+              <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Grundinformationen</h4>
+              
+              <div>
+                <Label className="text-sm font-medium">Beschreibung</Label>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {searchRequest.description || 'Keine Beschreibung verfügbar'}
+                </p>
+              </div>
+              
+              {searchRequest.location && (
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-muted-foreground" />
+                  <div>
+                    <Label className="text-sm font-medium">Standort</Label>
+                    <p className="text-sm text-muted-foreground">{searchRequest.location}</p>
+                  </div>
+                </div>
+              )}
+              
+              <div className="flex items-center gap-2">
+                <Building2 className="w-4 h-4 text-muted-foreground" />
+                <div>
+                  <Label className="text-sm font-medium">Status</Label>
+                  <div className="mt-1">
+                    <Badge variant={searchRequest.status === 'active' ? 'default' : 'secondary'}>
+                      {searchRequest.status}
+                    </Badge>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <Label className="text-sm font-medium">Status</Label>
-              <Badge className="mt-1">{searchRequest.status}</Badge>
+
+            {/* Anstellungsdetails */}
+            <div className="space-y-4">
+              <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Anstellungsdetails</h4>
+              
+              {searchRequest.employment_type && (
+                <div className="flex items-center gap-2">
+                  <Briefcase className="w-4 h-4 text-muted-foreground" />
+                  <div>
+                    <Label className="text-sm font-medium">Arbeitstyp</Label>
+                    <p className="text-sm text-muted-foreground">{searchRequest.employment_type}</p>
+                  </div>
+                </div>
+              )}
+              
+              {searchRequest.experience_level && (
+                <div className="flex items-center gap-2">
+                  <Star className="w-4 h-4 text-muted-foreground" />
+                  <div>
+                    <Label className="text-sm font-medium">Erfahrungslevel</Label>
+                    <p className="text-sm text-muted-foreground">{searchRequest.experience_level}</p>
+                  </div>
+                </div>
+              )}
+              
+              {(searchRequest.salary_min || searchRequest.salary_max) && (
+                <div className="flex items-center gap-2">
+                  <Euro className="w-4 h-4 text-muted-foreground" />
+                  <div>
+                    <Label className="text-sm font-medium">Gehaltsspanne</Label>
+                    <p className="text-sm text-muted-foreground">
+                      {searchRequest.salary_min && searchRequest.salary_max 
+                        ? `€${searchRequest.salary_min?.toLocaleString()} - €${searchRequest.salary_max?.toLocaleString()}`
+                        : searchRequest.salary_min 
+                          ? `ab €${searchRequest.salary_min?.toLocaleString()}`
+                          : `bis €${searchRequest.salary_max?.toLocaleString()}`
+                      }
+                    </p>
+                  </div>
+                </div>
+              )}
+              
+              {searchRequest.number_of_workers && (
+                <div className="flex items-center gap-2">
+                  <Users className="w-4 h-4 text-muted-foreground" />
+                  <div>
+                    <Label className="text-sm font-medium">Anzahl Mitarbeiter</Label>
+                    <p className="text-sm text-muted-foreground">{searchRequest.number_of_workers}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Zeitplan & Umfang */}
+            <div className="space-y-4">
+              <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Zeitplan & Umfang</h4>
+              
+              {searchRequest.start_date && (
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-muted-foreground" />
+                  <div>
+                    <Label className="text-sm font-medium">Startdatum</Label>
+                    <p className="text-sm text-muted-foreground">
+                      {new Date(searchRequest.start_date).toLocaleDateString('de-DE')}
+                    </p>
+                  </div>
+                </div>
+              )}
+              
+              {searchRequest.end_date && (
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-muted-foreground" />
+                  <div>
+                    <Label className="text-sm font-medium">Enddatum</Label>
+                    <p className="text-sm text-muted-foreground">
+                      {new Date(searchRequest.end_date).toLocaleDateString('de-DE')}
+                    </p>
+                  </div>
+                </div>
+              )}
+              
+              {searchRequest.weekly_hours && (
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-muted-foreground" />
+                  <div>
+                    <Label className="text-sm font-medium">Wochenstunden</Label>
+                    <p className="text-sm text-muted-foreground">{searchRequest.weekly_hours}h/Woche</p>
+                  </div>
+                </div>
+              )}
+              
+              {searchRequest.customer_industry && (
+                <div className="flex items-center gap-2">
+                  <Building2 className="w-4 h-4 text-muted-foreground" />
+                  <div>
+                    <Label className="text-sm font-medium">Branche</Label>
+                    <p className="text-sm text-muted-foreground">{searchRequest.customer_industry}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Zusätzliche Details */}
+          <Separator className="my-6" />
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Skills & Anforderungen */}
+            <div className="space-y-4">
+              {searchRequest.skills_required && searchRequest.skills_required.length > 0 && (
+                <div>
+                  <Label className="text-sm font-medium flex items-center gap-2 mb-2">
+                    <Target className="w-4 h-4" />
+                    Benötigte Skills
+                  </Label>
+                  <div className="flex flex-wrap gap-1">
+                    {searchRequest.skills_required.map((skill: string, index: number) => (
+                      <Badge key={index} variant="outline" className="text-xs">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {searchRequest.requirements && (
+                <div>
+                  <Label className="text-sm font-medium mb-2 block">Anforderungen</Label>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {searchRequest.requirements}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Aufgaben & Arbeitsbereiche */}
+            <div className="space-y-4">
+              {searchRequest.main_tasks && searchRequest.main_tasks.length > 0 && (
+                <div>
+                  <Label className="text-sm font-medium mb-2 block">Hauptaufgaben</Label>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    {searchRequest.main_tasks.map((task: string, index: number) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <span className="text-primary mt-1">•</span>
+                        <span>{task}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {searchRequest.work_areas && searchRequest.work_areas.length > 0 && (
+                <div>
+                  <Label className="text-sm font-medium mb-2 block">Arbeitsbereiche</Label>
+                  <div className="flex flex-wrap gap-1">
+                    {searchRequest.work_areas.map((area: string, index: number) => (
+                      <Badge key={index} variant="secondary" className="text-xs">
+                        {area}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </CardContent>
