@@ -37,6 +37,7 @@ import Settings from "./pages/app/Settings";
 import InviteRegister from "./pages/InviteRegister";
 import AboutUs from "./pages/AboutUs";
 import SearchRequestAllocations from "./pages/admin/SearchRequestAllocations";
+import AdminSearchRequestDetail from "./pages/admin/AdminSearchRequestDetail";
 
 const queryClient = new QueryClient();
 
@@ -80,6 +81,7 @@ const App = () => (
             <Route path="candidates/:id/edit" element={<CandidateDetail />} />
             <Route path="candidates/new" element={<NewCandidate />} />
             <Route path="search-requests" element={<AdminSearchRequests />} />
+            <Route path="search-requests/:id" element={<AdminSearchRequestDetail />} />
             <Route path="search-requests/:id/allocations" element={<SearchRequestAllocations />} />
             <Route path="companies" element={<CompanyManagement />} />
             <Route path="support" element={<AdminSupport />} />
