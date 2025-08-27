@@ -329,6 +329,48 @@ export type Database = {
           },
         ]
       }
+      search_request_allocations: {
+        Row: {
+          allocated_at: string
+          allocated_by: string
+          candidate_id: string
+          client_feedback: string | null
+          created_at: string
+          feedback_date: string | null
+          id: string
+          notes: string | null
+          search_request_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          allocated_at?: string
+          allocated_by: string
+          candidate_id: string
+          client_feedback?: string | null
+          created_at?: string
+          feedback_date?: string | null
+          id?: string
+          notes?: string | null
+          search_request_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          allocated_at?: string
+          allocated_by?: string
+          candidate_id?: string
+          client_feedback?: string | null
+          created_at?: string
+          feedback_date?: string | null
+          id?: string
+          notes?: string | null
+          search_request_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       search_requests: {
         Row: {
           company_id: string

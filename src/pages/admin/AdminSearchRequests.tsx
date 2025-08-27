@@ -317,20 +317,20 @@ export default function AdminSearchRequests() {
                         </TableCell>
                         <TableCell>
                           <div className="flex gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => navigate(`/admin/search-requests/${request.id}/allocations`)}
+                            >
+                              <UserCheck className="h-4 w-4 mr-1" />
+                              Ressourcen
+                            </Button>
                             <Button 
                               size="sm" 
                               variant="outline"
                               onClick={() => navigate(`/admin/search-requests/${request.id}`)}
                             >
                               <Eye className="w-4 h-4" />
-                            </Button>
-                            <Button 
-                              size="sm" 
-                              variant="outline"
-                              onClick={() => navigate(`/admin/search-requests/${request.id}/allocations`)}
-                            >
-                              <UserCheck className="w-4 h-4 mr-1" />
-                              Ressourcen zuweisen
                             </Button>
                             <AlertDialog>
                               <AlertDialogTrigger asChild>
