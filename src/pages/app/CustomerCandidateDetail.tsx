@@ -90,19 +90,67 @@ const CustomerCandidateDetail: React.FC = () => {
       setLoading(true);
 
       // Check if user has access to this candidate through allocations
-      const { data: allocation, error: allocationError } = await supabase
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        navigate('/auth');
+        return;
+      }
+
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('company_id')
+        .eq('user_id', user.id)
+        .single();
+
+      if (!profile?.company_id) {
+        toast({
+          title: "Fehler",
+          description: "Keine Firma gefunden.",
+          variant: "destructive",
+        });
+        navigate('/app/dashboard');
+        return;
+      }
+
+      // Check if this candidate is allocated to any search request of the user's company
+      const { data: allocations, error: allocationError } = await supabase
         .from('search_request_allocations')
         .select(`
           candidate_id,
-          search_requests!inner(
-            company_id
-          )
+          search_request_id
         `)
-        .eq('candidate_id', id)
-        .single();
+        .eq('candidate_id', id);
 
       if (allocationError) {
         console.error('Error checking allocation:', allocationError);
+        toast({
+          title: "Zugriff verweigert",
+          description: "Sie haben keinen Zugriff auf diesen Kandidaten.",
+          variant: "destructive",
+        });
+        navigate('/app/dashboard');
+        return;
+      }
+
+      if (!allocations || allocations.length === 0) {
+        toast({
+          title: "Zugriff verweigert", 
+          description: "Sie haben keinen Zugriff auf diesen Kandidaten.",
+          variant: "destructive",
+        });
+        navigate('/app/dashboard');
+        return;
+      }
+
+      // Verify at least one allocation belongs to a search request from user's company
+      const searchRequestIds = allocations.map(a => a.search_request_id);
+      const { data: searchRequests, error: searchError } = await supabase
+        .from('search_requests')
+        .select('id')
+        .in('id', searchRequestIds)
+        .eq('company_id', profile.company_id);
+
+      if (searchError || !searchRequests || searchRequests.length === 0) {
         toast({
           title: "Zugriff verweigert",
           description: "Sie haben keinen Zugriff auf diesen Kandidaten.",
