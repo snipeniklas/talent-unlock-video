@@ -143,13 +143,19 @@ const SearchRequestAllocations = () => {
       // Available candidates (not yet allocated)
       const allocatedCandidateIds = allocationsData?.map(a => a.candidate_id) || [];
       
-      const { data: candidatesData, error: candError } = await supabase
+      let candidatesQuery = supabase
         .from('candidates')
-         .select(`
-           *,
-           candidate_identity!inner (*)
-         `)
-        .not('id', 'in', `(${allocatedCandidateIds.length ? allocatedCandidateIds.join(',') : 'null'})`);
+        .select(`
+          *,
+          candidate_identity!inner (*)
+        `);
+
+      // Only add the not-in filter if there are allocated candidates
+      if (allocatedCandidateIds.length > 0) {
+        candidatesQuery = candidatesQuery.not('id', 'in', `(${allocatedCandidateIds.join(',')})`);
+      }
+
+      const { data: candidatesData, error: candError } = await candidatesQuery;
 
       if (candError) throw candError;
       setAvailableCandidates((candidatesData as any) || []);
