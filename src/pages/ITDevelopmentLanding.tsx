@@ -239,6 +239,734 @@ const ITDevelopmentLanding = () => {
         </div>
       </section>
 
+      {/* Problem Section */}
+      <section className="py-16 bg-red-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
+              Kennen Sie diese IT-Herausforderungen?
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                <div className="text-red-500 mb-4">
+                  <Clock className="w-8 h-8 mx-auto" />
+                </div>
+                <h3 className="font-bold mb-3">Monatelange Suche</h3>
+                <p className="text-muted-foreground text-sm">
+                  6+ Monate Recruiting für einen Senior-Entwickler – Projekte verzögern sich, Deadlines platzen
+                </p>
+              </Card>
+
+              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                <div className="text-red-500 mb-4">
+                  <Users className="w-8 h-8 mx-auto" />
+                </div>
+                <h3 className="font-bold mb-3">Überteuerte Freelancer</h3>
+                <p className="text-muted-foreground text-sm">
+                  €120+/h für mittelmäßige Freelancer – Budget explodiert, Qualität enttäuscht
+                </p>
+              </Card>
+
+              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                <div className="text-red-500 mb-4">
+                  <Shield className="w-8 h-8 mx-auto" />
+                </div>
+                <h3 className="font-bold mb-3">Unzuverlässige Agenturen</h3>
+                <p className="text-muted-foreground text-sm">
+                  Hohe Headhunter-Fees, schlechte Matches, keine Garantien – Geld weg, Problem bleibt
+                </p>
+              </Card>
+            </div>
+
+            <div className="mt-12 p-6 bg-white rounded-xl border-l-4 border-red-500">
+              <p className="text-lg font-semibold text-brand-dark mb-2">
+                Das Resultat: Verpasste Opportunities, frustrierte Teams, explodierende Kosten
+              </p>
+              <p className="text-muted-foreground">
+                Während Sie nach dem perfekten Entwickler suchen, überholt Sie die Konkurrenz mit fertigen Produkten.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Solution Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
+              Die Lösung: Geprüfte Senior-Entwickler in 48 Stunden
+            </h2>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-3">48h Perfect Match</h3>
+                <p className="text-muted-foreground">
+                  Aus 1.000+ geprüften Entwicklern finden wir in 48h den perfekten Match für Ihr Projekt
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Gauge className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-3">97% Erfolgsquote</h3>
+                <p className="text-muted-foreground">
+                  Unser 3-stufiger Prüfprozess garantiert höchste Qualität – nur 3% aller Bewerber bestehen
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Zap className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-3">Start in 7 Tagen</h3>
+                <p className="text-muted-foreground">
+                  Nach dem Match: Onboarding, Setup und produktive Arbeit binnen einer Woche
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How it Works */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
+              So funktioniert's: Ihr Entwickler in 3 einfachen Schritten
+            </h2>
+            
+            <div className="space-y-8">
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  1
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">Anforderungen definieren (15 Min)</h3>
+                  <p className="text-muted-foreground mb-4">
+                    In einem kurzen Gespräch verstehen wir Ihre Technologie-Anforderungen, Team-Kultur und Projektziele. 
+                    Sie beschreiben den idealen Kandidaten – wir kümmern uns um den Rest.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Beispiel:</strong> "React-Entwickler mit 5+ Jahren, TypeScript, Node.js Backend-Erfahrung, 
+                    Deutsch sprechend, für 6-Monats-Projekt E-Commerce-Platform"
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  2
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">Perfect Match in 48h</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Unser KI-gestütztes Matching durchsucht 1.000+ geprüfte Profile. Wir präsentieren Ihnen 2-3 
+                    Top-Kandidaten mit Techstack-Match, Verfügbarkeit und Kultur-Fit.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Sie erhalten:</strong> Detaillierte Profile, Code-Samples, Projekt-Referenzen, 
+                    Video-Vorstellung und sofortige Verfügbarkeit
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  3
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">Interview & Produktiver Start</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Sie führen ein Technical Interview (wir helfen bei den Fragen). Bei Zusage übernehmen wir Verträge, 
+                    Onboarding und Setup. Ihr Entwickler startet binnen 7 Tagen produktiv.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Garantie:</strong> 14 Tage Geld-zurück-Garantie. Passt es nicht? 
+                    Vollständige Rückerstattung + kostenloser Ersatz-Kandidat.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technologies Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
+              Alle Technologien, die Sie brauchen
+            </h2>
+            
+            <div className="grid md:grid-cols-4 gap-6">
+              <Card className="p-6 text-center hover:shadow-lg transition-all duration-300">
+                <h3 className="font-bold mb-4">Frontend</h3>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <div>React.js & Next.js</div>
+                  <div>Vue.js & Nuxt.js</div>
+                  <div>Angular</div>
+                  <div>TypeScript</div>
+                  <div>Tailwind CSS</div>
+                </div>
+              </Card>
+
+              <Card className="p-6 text-center hover:shadow-lg transition-all duration-300">
+                <h3 className="font-bold mb-4">Backend</h3>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <div>Node.js & Express</div>
+                  <div>Python & Django</div>
+                  <div>.NET & C#</div>
+                  <div>Java & Spring</div>
+                  <div>PHP & Laravel</div>
+                </div>
+              </Card>
+
+              <Card className="p-6 text-center hover:shadow-lg transition-all duration-300">
+                <h3 className="font-bold mb-4">Mobile</h3>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <div>React Native</div>
+                  <div>Flutter</div>
+                  <div>Swift (iOS)</div>
+                  <div>Kotlin (Android)</div>
+                  <div>Xamarin</div>
+                </div>
+              </Card>
+
+              <Card className="p-6 text-center hover:shadow-lg transition-all duration-300">
+                <h3 className="font-bold mb-4">Cloud & DevOps</h3>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <div>AWS & Azure</div>
+                  <div>Docker & Kubernetes</div>
+                  <div>CI/CD Pipelines</div>
+                  <div>Terraform</div>
+                  <div>Monitoring & Logging</div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-6 animate-fade-in">
+              Transparente Preise – Keine versteckten Kosten
+            </h2>
+            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+              Zahlen Sie nur für die Arbeitszeit Ihres Entwicklers. Keine Setup-Fees, keine Headhunter-Gebühren, 
+              keine langfristigen Verträge.
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card className="p-6 border hover:shadow-lg transition-all duration-300">
+                <h3 className="font-bold text-lg mb-2">Junior Developer</h3>
+                <div className="text-3xl font-bold text-primary mb-4">€35<span className="text-lg text-muted-foreground">/h</span></div>
+                <div className="space-y-2 text-sm mb-6">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>2-4 Jahre Erfahrung</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>Moderne Frameworks</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>Deutsch B2+</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>Agile Arbeitsweise</span>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground">Statt €70+/h lokal</p>
+              </Card>
+
+              <Card className="p-6 border-2 border-primary hover:shadow-lg transition-all duration-300 relative">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-sm font-medium">
+                  Beliebteste Wahl
+                </div>
+                <h3 className="font-bold text-lg mb-2">Senior Developer</h3>
+                <div className="text-3xl font-bold text-primary mb-4">€55<span className="text-lg text-muted-foreground">/h</span></div>
+                <div className="space-y-2 text-sm mb-6">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>5+ Jahre Erfahrung</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>Tech Lead Erfahrung</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>Architecture Skills</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>Fließend Deutsch</span>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground">Statt €120+/h lokal</p>
+              </Card>
+
+              <Card className="p-6 border hover:shadow-lg transition-all duration-300">
+                <h3 className="font-bold text-lg mb-2">Expert/Architect</h3>
+                <div className="text-3xl font-bold text-primary mb-4">€75<span className="text-lg text-muted-foreground">/h</span></div>
+                <div className="space-y-2 text-sm mb-6">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>8+ Jahre Erfahrung</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>System Architecture</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>Team Leadership</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>Consulting Erfahrung</span>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground">Statt €150+/h lokal</p>
+              </Card>
+            </div>
+
+            <div className="mt-8 p-6 bg-white rounded-lg border">
+              <h4 className="font-bold mb-4 text-center">Zusätzliche Vorteile inklusive:</h4>
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span>Keine Setup-Gebühren</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span>Flexible Laufzeit</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span>14 Tage Geld-zurück</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span>Kostenloser Ersatz</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span>DSGVO-konform</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span>Deutscher Support</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
+              Erfolgsgeschichten unserer Kunden
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="p-8 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span className="font-bold text-blue-600">FT</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold">FinTech Startup München</h3>
+                    <p className="text-sm text-muted-foreground">Series A, 50 Mitarbeiter</p>
+                  </div>
+                </div>
+                
+                <h4 className="font-bold mb-3">Challenge:</h4>
+                <p className="text-muted-foreground mb-4 text-sm">
+                  Dringende Erweiterung der Trading-Platform. React Frontend + Node.js Backend. 
+                  Lokale Entwickler: 8 Monate Wartezeit, €140/h.
+                </p>
+                
+                <h4 className="font-bold mb-3">Lösung:</h4>
+                <p className="text-muted-foreground mb-4 text-sm">
+                  2 Senior React-Entwickler + 1 Backend-Spezialist in 3 Tagen gefunden. 
+                  Start nach 1 Woche, €55/h.
+                </p>
+                
+                <h4 className="font-bold mb-3">Ergebnis:</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>€180.000 Kosteneinsparung/Jahr</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>6 Monate früher am Markt</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>MVP in 8 Wochen statt 6 Monaten</span>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-8 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                    <span className="font-bold text-green-600">EC</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold">E-Commerce Scaleup Berlin</h3>
+                    <p className="text-sm text-muted-foreground">€50M ARR, 200+ Mitarbeiter</p>
+                  </div>
+                </div>
+                
+                <h4 className="font-bold mb-3">Challenge:</h4>
+                <p className="text-muted-foreground mb-4 text-sm">
+                  Mobile App (React Native) + Microservices Migration. 
+                  Agentur wollte €300k, Freelancer nicht verfügbar.
+                </p>
+                
+                <h4 className="font-bold mb-3">Lösung:</h4>
+                <p className="text-muted-foreground mb-4 text-sm">
+                  4-köpfiges Team: React Native, Node.js, DevOps, QA. 
+                  Gesamtkosten: €75/h Blended Rate.
+                </p>
+                
+                <h4 className="font-bold mb-3">Ergebnis:</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>€150.000 vs. €300.000 Agentur</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>App Store Launch in 12 Wochen</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>Team übernommen nach Projekt</span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Guarantee Section */}
+      <section className="py-16 bg-green-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
+              Unsere 100% Erfolgs-Garantie
+            </h2>
+            
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <Card className="p-6 bg-white">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold mb-3">14 Tage Geld-zurück</h3>
+                <p className="text-muted-foreground text-sm">
+                  Nicht zufrieden? 100% Rückerstattung ohne Fragen in den ersten 14 Tagen
+                </p>
+              </Card>
+
+              <Card className="p-6 bg-white">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold mb-3">Kostenloser Ersatz</h3>
+                <p className="text-muted-foreground text-sm">
+                  Stimmt die Chemie nicht? Wir finden kostenfrei einen neuen Kandidaten
+                </p>
+              </Card>
+
+              <Card className="p-6 bg-white">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Clock className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold mb-3">48h Match-Garantie</h3>
+                <p className="text-muted-foreground text-sm">
+                  Kein passender Kandidat in 48h? Service komplett kostenfrei
+                </p>
+              </Card>
+            </div>
+
+            <div className="bg-white p-8 rounded-xl border-l-4 border-green-500">
+              <h3 className="font-bold text-lg mb-4">Warum können wir das garantieren?</h3>
+              <div className="grid md:grid-cols-2 gap-6 text-left">
+                <div>
+                  <h4 className="font-semibold mb-2">📊 97% Erfolgsquote</h4>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Über 850 erfolgreiche Matches in den letzten 2 Jahren
+                  </p>
+                  
+                  <h4 className="font-semibold mb-2">🔍 Rigoroser Screening</h4>
+                  <p className="text-muted-foreground text-sm">
+                    Nur 3% aller Bewerber bestehen unseren 3-stufigen Prüfprozess
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">🎯 KI-Matching</h4>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Algorithmus analysiert Techstack, Erfahrung und Kultur-Fit
+                  </p>
+                  
+                  <h4 className="font-semibold mb-2">📞 Persönlicher Support</h4>
+                  <p className="text-muted-foreground text-sm">
+                    Deutscher Account Manager betreut Sie während der gesamten Zusammenarbeit
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* More Testimonials */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
+              Das sagen unsere Kunden über uns
+            </h2>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card className="p-6">
+                <div className="flex text-yellow-400 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4 text-sm italic">
+                  "Nach 8 Monaten erfolgloser Suche hatten wir in 2 Tagen den perfekten React-Entwickler. 
+                  Unglaublich! Spart uns €4.000/Monat."
+                </p>
+                <div className="text-sm">
+                  <div className="font-semibold">Sarah Müller</div>
+                  <div className="text-muted-foreground">CTO, PropTech Startup</div>
+                </div>
+              </Card>
+
+              <Card className="p-6">
+                <div className="flex text-yellow-400 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4 text-sm italic">
+                  "Drei Senior-Entwickler für unser Scaling-Projekt. Alle top, alle schnell produktiv. 
+                  Besser als jede Agentur, die wir je hatten."
+                </p>
+                <div className="text-sm">
+                  <div className="font-semibold">Thomas Weber</div>
+                  <div className="text-muted-foreground">CEO, SaaS Scale-up</div>
+                </div>
+              </Card>
+
+              <Card className="p-6">
+                <div className="flex text-yellow-400 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4 text-sm italic">
+                  "Flutter-Experte für unsere Mobile App. Deutsche Kommunikation, internationale Qualität. 
+                  Genau was wir gesucht haben!"
+                </p>
+                <div className="text-sm">
+                  <div className="font-semibold">Lisa Schmidt</div>
+                  <div className="text-muted-foreground">Product Owner, HealthTech</div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Team */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-6 animate-fade-in">
+              Das Team hinter Ihrem Erfolg
+            </h2>
+            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+              Erfahrene Tech-Recruiter und ehemalige CTOs, die verstehen, was Sie brauchen
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card className="p-6 text-center">
+                <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold text-xl">MS</span>
+                </div>
+                <h3 className="font-bold mb-2">Michael Schmidt</h3>
+                <p className="text-sm text-muted-foreground mb-4">Founder & Head of Matching</p>
+                <p className="text-xs text-muted-foreground">
+                  Ex-CTO bei 3 Scale-ups. 15 Jahre Erfahrung im Tech-Recruiting. 
+                  Hat persönlich 500+ Entwickler gematcht.
+                </p>
+              </Card>
+
+              <Card className="p-6 text-center">
+                <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold text-xl">AK</span>
+                </div>
+                <h3 className="font-bold mb-2">Anna Kaufmann</h3>
+                <p className="text-sm text-muted-foreground mb-4">Head of Quality Assurance</p>
+                <p className="text-xs text-muted-foreground">
+                  Tech Lead bei FAANG-Unternehmen. Entwickelt unsere Screening-Prozesse. 
+                  Garantiert höchste Kandidaten-Qualität.
+                </p>
+              </Card>
+
+              <Card className="p-6 text-center">
+                <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold text-xl">DW</span>
+                </div>
+                <h3 className="font-bold mb-2">Daniel Wagner</h3>
+                <p className="text-sm text-muted-foreground mb-4">Customer Success Manager</p>
+                <p className="text-xs text-muted-foreground">
+                  Ihr persönlicher Ansprechpartner. Sorgt dafür, dass alles reibungslos läuft. 
+                  Antwortet binnen 2h.
+                </p>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Urgency Section */}
+      <section className="py-16 bg-red-50 border-l-4 border-red-500">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
+              ⚠️ Warum Sie JETZT handeln sollten
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <Card className="p-6 bg-white">
+                <h3 className="font-bold mb-4 text-red-600">Ohne Hej Talent:</h3>
+                <div className="space-y-3 text-left text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>6+ Monate Recruiting-Prozess</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>€120-150/h für mittelmäßige Qualität</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>Verpasste Market Windows</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>Überlastetes internes Team</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>Verzögerte Produktentwicklung</span>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 bg-white border-green-200">
+                <h3 className="font-bold mb-4 text-green-600">Mit Hej Talent:</h3>
+                <div className="space-y-3 text-left text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>Entwickler in 48h matched</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>€45-75/h für Senior-Qualität</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>Schneller am Markt</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>Team kann sich auf Kerngeschäft fokussieren</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>Kontinuierliche Innovation</span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <div className="bg-white p-8 rounded-xl border-l-4 border-orange-500">
+              <h3 className="font-bold text-lg mb-4">🔥 Begrenzte Verfügbarkeit</h3>
+              <p className="text-muted-foreground mb-4">
+                Wir arbeiten nur mit 50 Kunden gleichzeitig, um höchste Qualität zu garantieren. 
+                Aktuell sind noch <strong className="text-primary">7 Plätze</strong> verfügbar.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                <strong>Nächste freie Kapazitäten:</strong> Februar 2025
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 bg-primary text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-6 animate-bounce-in">
+            Starten Sie HEUTE mit Ihrem neuen Entwickler-Team
+          </h2>
+          <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90 animate-fade-in-delay-1">
+            Buchen Sie jetzt Ihr kostenloses 15-Minuten-Gespräch und bekommen Sie in 48h 
+            Ihren perfekten Senior-Entwickler präsentiert – garantiert.
+          </p>
+          
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-8">
+            <Button variant="secondary" size="xl" className="animate-scale-in-delay-2 hover:scale-110 transition-transform duration-300">
+              🚀 Kostenloses Gespräch buchen
+            </Button>
+            <Button variant="outline" size="xl" className="text-white border-white hover:bg-white hover:text-primary animate-scale-in-delay-3">
+              📋 Anforderungen schicken
+            </Button>
+          </div>
+
+          <div className="flex items-center justify-center gap-8 text-sm opacity-80">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4" />
+              <span>Keine Verpflichtung</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4" />
+              <span>Sofort verfügbar</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4" />
+              <span>14 Tage Garantie</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Trust Stack */}
       <section className="py-16 bg-gradient-subtle overflow-hidden">
         <div className="container mx-auto px-4">
