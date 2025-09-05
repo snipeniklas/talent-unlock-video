@@ -190,7 +190,7 @@ const BackofficeLanding = () => {
                   </div>
                   <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">Massive Kostenersparnis</h3>
                   <p className="text-muted-foreground">
-                    Sparen Sie bis zu €2.500 pro Monat bei Buchhaltung, Admin und Kundenservice
+                    Optimieren Sie Ihre Backoffice-Prozesse durch qualifizierte Remote-Fachkräfte
                   </p>
                 </CardContent>
               </Card>
@@ -239,6 +239,115 @@ const BackofficeLanding = () => {
         </div>
       </section>
 
+      {/* Problem Section */}
+      <section className="py-16 bg-red-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
+              Kennen Sie diese Backoffice-Herausforderungen?
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                <div className="text-red-500 mb-4">
+                  <Calculator className="w-8 h-8 mx-auto" />
+                </div>
+                <h3 className="font-bold mb-3">Explodierende Personalkosten</h3>
+                <p className="text-muted-foreground text-sm">
+                  Lokale Backoffice-Kräfte werden immer teurer bei gleichzeitig sinkender Verfügbarkeit
+                </p>
+              </Card>
+
+              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                <div className="text-red-500 mb-4">
+                  <Clock className="w-8 h-8 mx-auto" />
+                </div>
+                <h3 className="font-bold mb-3">Überlastete Teams</h3>
+                <p className="text-muted-foreground text-sm">
+                  Administrative Aufgaben fressen Zeit, die für Kerngeschäft und Wachstum fehlt
+                </p>
+              </Card>
+
+              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                <div className="text-red-500 mb-4">
+                  <Users className="w-8 h-8 mx-auto" />
+                </div>
+                <h3 className="font-bold mb-3">Schwierige Skalierung</h3>
+                <p className="text-muted-foreground text-sm">
+                  Bei Wachstum schnell qualifiziertes Personal zu finden wird zum Engpass
+                </p>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How it Works */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
+              So funktioniert's: Ihre Backoffice-Fachkraft in 3 einfachen Schritten
+            </h2>
+            
+            <div className="space-y-8">
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  1
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">Anfrage über unsere Platform erstellen</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Loggen Sie sich in unser System ein und definieren Sie Ihre Backoffice-Anforderungen. 
+                    Wählen Sie Aufgabenbereiche, Qualifikationen, Arbeitszeiten und Sprachkenntnisse 
+                    über unsere intuitive Benutzeroberfläche.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Platform-Features:</strong> Aufgaben-Templates (Buchhaltung, Admin, Kundenservice), 
+                    Qualifikations-Filter, Arbeitszeit-Planer, Sprachlevel-Auswahl
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  2
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">Automatisches Matching & Kandidatenauswahl</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Unser System matched automatisch passende Backoffice-Profis aus unserem Pool. 
+                    Sie erhalten binnen 48h eine Liste mit 3-5 qualifizierten Kandidaten zur Auswahl 
+                    direkt in der Platform.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Sie sehen:</strong> Detaillierte CV's, Referenzen, Sprachzertifikate, 
+                    Arbeitsproben, Verfügbarkeit und Motivation-Videos der Kandidaten
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  3
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">Interview & Produktiver Start</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Terminbuchung und Interview-Koordination laufen über die Platform. Nach Ihrer Entscheidung 
+                    übernehmen wir Verträge, Onboarding und Tool-Setup. Start binnen 2-4 Wochen.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Platform-Support:</strong> Kalender-Integration, Interview-Leitfäden, 
+                    automatische Verträge, Onboarding-Workflows und direkter Support-Chat
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Trust Stack */}
       <section className="py-16 bg-gradient-subtle overflow-hidden">
         <div className="container mx-auto px-4">
@@ -257,7 +366,7 @@ const BackofficeLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Unsere Buchhaltung läuft jetzt perfekt remote. Sparen monatlich €2.200 und haben endlich Zeit für Kerngeschäft."
+                      "Unsere Buchhaltung läuft jetzt perfekt remote. Effizienz gestiegen und haben endlich Zeit für Kerngeschäft."
                     </p>
                     <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Thomas Schmidt, Geschäftsführer MedTech Solutions</div>
                   </div>
@@ -343,15 +452,6 @@ const BackofficeLanding = () => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="cost" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-5 group">
-                <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Was kostet eine Backoffice-Fachkraft?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2">
-                  Je nach Qualifikation und Umfang ab €18/Stunde. Das sind 40-60% weniger Kosten 
-                  als bei lokalen Mitarbeitern - bei gleicher oder besserer Qualität.
-                </AccordionContent>
-              </AccordionItem>
             </Accordion>
           </div>
         </div>

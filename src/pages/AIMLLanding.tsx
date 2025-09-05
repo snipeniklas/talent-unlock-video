@@ -239,6 +239,116 @@ const AIMLLanding = () => {
         </div>
       </section>
 
+      {/* Problem Section */}
+      <section className="py-16 bg-red-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
+              Warum scheitern die meisten KI-Projekte?
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                <div className="text-red-500 mb-4">
+                  <Brain className="w-8 h-8 mx-auto" />
+                </div>
+                <h3 className="font-bold mb-3">Fehlendes KI-Know-how</h3>
+                <p className="text-muted-foreground text-sm">
+                  Interne Teams haben keine Erfahrung mit ML-Projekten und überschätzen die Komplexität
+                </p>
+              </Card>
+
+              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                <div className="text-red-500 mb-4">
+                  <Clock className="w-8 h-8 mx-auto" />
+                </div>
+                <h3 className="font-bold mb-3">Monatelange Suche</h3>
+                <p className="text-muted-foreground text-sm">
+                  Qualifizierte Data Scientists sind rar und überteuert – wenn überhaupt verfügbar
+                </p>
+              </Card>
+
+              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                <div className="text-red-500 mb-4">
+                  <Target className="w-8 h-8 mx-auto" />
+                </div>
+                <h3 className="font-bold mb-3">Kein Business-Fokus</h3>
+                <p className="text-muted-foreground text-sm">
+                  Projekte versanden in endloser Forschung ohne messbare Geschäftsergebnisse
+                </p>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How it Works */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
+              So funktioniert's: Ihr KI-Experte in 3 einfachen Schritten
+            </h2>
+            
+            <div className="space-y-8">
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  1
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">KI-Projekt über unsere Platform definieren</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Loggen Sie sich in unser System ein und beschreiben Sie Ihr KI-Use-Case. 
+                    Definieren Sie Geschäftsziele, Datenquellen, gewünschte KI-Technologien 
+                    und Projektumfang über unsere spezialisierte Eingabemaske.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Platform-Features:</strong> KI-Use-Case-Templates, ROI-Calculator, 
+                    Datenquellen-Assessment, Technologie-Wizard, Projektphasen-Planer
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  2
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">KI-Experten-Matching & Strategie-Review</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Unser System matched automatisch passende KI-Spezialisten basierend auf Ihrem Use-Case. 
+                    Sie erhalten binnen 48h eine kuratierte Auswahl von 2-3 Experten plus eine erste 
+                    Machbarkeitsbewertung direkt in der Platform.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Sie erhalten:</strong> Experten-Profile mit KI-Spezialisierung, 
+                    ähnliche Projekt-Referenzen, Machbarkeitsstudie, Zeitplan und erste Lösungsansätze
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  3
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">Strategy Call & Projekt-Start</h3>
+                  <p className="text-muted-foreground mb-4">
+                    30-minütiger Strategy Call mit Ihrem ausgewählten KI-Experten zur finalen Abstimmung. 
+                    Danach übernehmen wir Verträge, Projekt-Setup und Kick-off. Start der ersten 
+                    Projektphase binnen 1-2 Wochen.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Platform-Support:</strong> Strategy-Call-Templates, 
+                    automatische Verträge, Projekt-Dashboards, Milestone-Tracking und 24/7 Support
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Trust Stack */}
       <section className="py-16 bg-gradient-subtle overflow-hidden">
         <div className="container mx-auto px-4">
@@ -343,15 +453,6 @@ const AIMLLanding = () => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="investment" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-5 group">
-                <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Was kostet ein KI-Experte?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2">
-                  Je nach Spezialisierung ab €60/Stunde für Data Scientists, ab €80/Stunde für Senior ML Engineers. 
-                  40-60% günstiger als deutsche KI-Consulting-Firmen bei gleicher Expertise.
-                </AccordionContent>
-              </AccordionItem>
             </Accordion>
           </div>
         </div>
