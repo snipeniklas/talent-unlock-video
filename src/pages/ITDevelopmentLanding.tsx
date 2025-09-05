@@ -348,14 +348,15 @@ const ITDevelopmentLanding = () => {
                   1
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-3">Anforderungen definieren (15 Min)</h3>
+                  <h3 className="text-xl font-bold mb-3">Anfrage über unsere Platform erstellen</h3>
                   <p className="text-muted-foreground mb-4">
-                    In einem kurzen Gespräch verstehen wir Ihre Technologie-Anforderungen, Team-Kultur und Projektziele. 
-                    Sie beschreiben den idealen Kandidaten – wir kümmern uns um den Rest.
+                    Loggen Sie sich in unser System ein und erstellen Sie eine detaillierte Suchanfrage. 
+                    Definieren Sie Technologie-Stack, Erfahrungslevel, Projektdauer und spezielle Anforderungen 
+                    direkt in der Benutzeroberfläche.
                   </p>
                   <div className="bg-white p-4 rounded-lg border">
-                    <strong className="text-sm">Beispiel:</strong> "React-Entwickler mit 5+ Jahren, TypeScript, Node.js Backend-Erfahrung, 
-                    Deutsch sprechend, für 6-Monats-Projekt E-Commerce-Platform"
+                    <strong className="text-sm">Platform-Features:</strong> Drag & Drop Tech-Stack Auswahl, 
+                    Erfahrungslevel-Slider, Zeitzone-Präferenzen, Projektbeschreibung mit Templates
                   </div>
                 </div>
               </div>
@@ -365,14 +366,14 @@ const ITDevelopmentLanding = () => {
                   2
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-3">Perfect Match in 48h</h3>
+                  <h3 className="text-xl font-bold mb-3">KI-Matching & Kandidaten-Review</h3>
                   <p className="text-muted-foreground mb-4">
-                    Unser KI-gestütztes Matching durchsucht 1.000+ geprüfte Profile. Wir präsentieren Ihnen 2-3 
-                    Top-Kandidaten mit Techstack-Match, Verfügbarkeit und Kultur-Fit.
+                    Unser System analysiert Ihre Anfrage und matched automatisch passende Kandidaten aus unserem 
+                    Talent-Pool. Sie erhalten binnen 48h eine kuratierte Liste mit 3-5 Top-Matches direkt in der Platform.
                   </p>
                   <div className="bg-white p-4 rounded-lg border">
-                    <strong className="text-sm">Sie erhalten:</strong> Detaillierte Profile, Code-Samples, Projekt-Referenzen, 
-                    Video-Vorstellung und sofortige Verfügbarkeit
+                    <strong className="text-sm">Sie sehen:</strong> Detaillierte Profile, Portfolio-Links, Skill-Assessment-Scores, 
+                    Verfügbarkeit, Hourly-Rate und Video-Präsentationen der Kandidaten
                   </div>
                 </div>
               </div>
@@ -382,14 +383,14 @@ const ITDevelopmentLanding = () => {
                   3
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-3">Interview & Produktiver Start</h3>
+                  <h3 className="text-xl font-bold mb-3">Interview-Management & Onboarding</h3>
                   <p className="text-muted-foreground mb-4">
-                    Sie führen ein Technical Interview (wir helfen bei den Fragen). Bei Zusage übernehmen wir Verträge, 
-                    Onboarding und Setup. Ihr Entwickler startet binnen 7 Tagen produktiv.
+                    Terminbuchung, Interview-Koordination und Vertragsabwicklung laufen komplett über die Platform. 
+                    Nach Ihrer Auswahl kümmern wir uns um das komplette Onboarding und Setup.
                   </p>
                   <div className="bg-white p-4 rounded-lg border">
-                    <strong className="text-sm">Garantie:</strong> 14 Tage Geld-zurück-Garantie. Passt es nicht? 
-                    Vollständige Rückerstattung + kostenloser Ersatz-Kandidat.
+                    <strong className="text-sm">Platform-Support:</strong> Integrierter Kalender, Interview-Templates, 
+                    automatische Verträge, Onboarding-Checklisten und 24/7 Support-Chat
                   </div>
                 </div>
               </div>
@@ -455,127 +456,6 @@ const ITDevelopmentLanding = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-16 bg-gradient-subtle">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center text-brand-dark mb-6 animate-fade-in">
-              Transparente Preise – Keine versteckten Kosten
-            </h2>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Zahlen Sie nur für die Arbeitszeit Ihres Entwicklers. Keine Setup-Fees, keine Headhunter-Gebühren, 
-              keine langfristigen Verträge.
-            </p>
-            
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card className="p-6 border hover:shadow-lg transition-all duration-300">
-                <h3 className="font-bold text-lg mb-2">Junior Developer</h3>
-                <div className="text-3xl font-bold text-primary mb-4">€35<span className="text-lg text-muted-foreground">/h</span></div>
-                <div className="space-y-2 text-sm mb-6">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>2-4 Jahre Erfahrung</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>Moderne Frameworks</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>Deutsch B2+</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>Agile Arbeitsweise</span>
-                  </div>
-                </div>
-                <p className="text-xs text-muted-foreground">Statt €70+/h lokal</p>
-              </Card>
-
-              <Card className="p-6 border-2 border-primary hover:shadow-lg transition-all duration-300 relative">
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-sm font-medium">
-                  Beliebteste Wahl
-                </div>
-                <h3 className="font-bold text-lg mb-2">Senior Developer</h3>
-                <div className="text-3xl font-bold text-primary mb-4">€55<span className="text-lg text-muted-foreground">/h</span></div>
-                <div className="space-y-2 text-sm mb-6">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>5+ Jahre Erfahrung</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>Tech Lead Erfahrung</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>Architecture Skills</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>Fließend Deutsch</span>
-                  </div>
-                </div>
-                <p className="text-xs text-muted-foreground">Statt €120+/h lokal</p>
-              </Card>
-
-              <Card className="p-6 border hover:shadow-lg transition-all duration-300">
-                <h3 className="font-bold text-lg mb-2">Expert/Architect</h3>
-                <div className="text-3xl font-bold text-primary mb-4">€75<span className="text-lg text-muted-foreground">/h</span></div>
-                <div className="space-y-2 text-sm mb-6">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>8+ Jahre Erfahrung</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>System Architecture</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>Team Leadership</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>Consulting Erfahrung</span>
-                  </div>
-                </div>
-                <p className="text-xs text-muted-foreground">Statt €150+/h lokal</p>
-              </Card>
-            </div>
-
-            <div className="mt-8 p-6 bg-white rounded-lg border">
-              <h4 className="font-bold mb-4 text-center">Zusätzliche Vorteile inklusive:</h4>
-              <div className="grid md:grid-cols-2 gap-4 text-sm">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
-                  <span>Keine Setup-Gebühren</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
-                  <span>Flexible Laufzeit</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
-                  <span>14 Tage Geld-zurück</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
-                  <span>Kostenloser Ersatz</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
-                  <span>DSGVO-konform</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
-                  <span>Deutscher Support</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Case Studies */}
       <section className="py-16">
@@ -872,7 +752,7 @@ const ITDevelopmentLanding = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                    <span>€120-150/h für mittelmäßige Qualität</span>
+                    <span>Überteuerte Agenturen</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-red-500 rounded-full"></div>
@@ -898,7 +778,7 @@ const ITDevelopmentLanding = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span>€45-75/h für Senior-Qualität</span>
+                    <span>Transparente Platform-Preise</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -1071,15 +951,6 @@ const ITDevelopmentLanding = () => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="pricing" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-5 group">
-                <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Was kostet ein Senior-Entwickler?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2">
-                  Je nach Technologie und Erfahrung ab €45/Stunde. Das sind 30-50% weniger als 
-                  lokale Freelancer oder Agenturen bei gleicher oder besserer Qualität.
-                </AccordionContent>
-              </AccordionItem>
             </Accordion>
           </div>
         </div>
