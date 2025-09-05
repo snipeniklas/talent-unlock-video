@@ -351,11 +351,11 @@ const HejTalentLanding = () => {
 
               <AccordionItem value="communication" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-3 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Sprechen die Entwickler fließend Deutsch?
+                  Wie funktioniert die Kommunikation?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Ja, alle unsere Entwickler haben mindestens B2-Niveau in Deutsch und arbeiten 
-                  in deutschen Zeitzonen. Kommunikation läuft reibungslos auf Deutsch.
+                  Alle unsere Entwickler arbeiten in europäischen Zeitzonen und kommunizieren 
+                  professionell über Ihre bevorzugten Tools.
                 </AccordionContent>
               </AccordionItem>
 

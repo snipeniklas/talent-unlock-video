@@ -669,7 +669,7 @@ const ITDevelopmentLanding = () => {
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4 text-sm italic">
-                  "Flutter-Experte für unsere Mobile App. Deutsche Kommunikation, internationale Qualität. 
+                  "Flutter-Experte für unsere Mobile App. Professionelle Kommunikation, internationale Qualität. 
                   Genau was wir gesucht haben!"
                 </p>
                 <div className="text-sm">
@@ -936,8 +936,8 @@ const ITDevelopmentLanding = () => {
                   Wie funktioniert die Zusammenarbeit remote?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Fließend Deutsch, Zeitzone EU/MEZ, tägliche Standups, Ihre Tools (Jira, Slack, GitLab). 
-                  Agile Arbeitsweise, 4-6h Überschneidung mit deutschen Arbeitszeiten garantiert.
+                  Zeitzone EU/MEZ, tägliche Standups, Ihre Tools (Jira, Slack, GitLab). 
+                  Agile Arbeitsweise, 4-6h Überschneidung mit europäischen Arbeitszeiten garantiert.
                 </AccordionContent>
               </AccordionItem>
 

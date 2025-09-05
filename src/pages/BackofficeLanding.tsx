@@ -228,9 +228,9 @@ const BackofficeLanding = () => {
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Headphones className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">Deutsche Kommunikation</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">Professionelle Kommunikation</h3>
                   <p className="text-muted-foreground">
-                    Alle unsere Backoffice-Profis sprechen fließend Deutsch und verstehen Ihre Arbeitsweise
+                    Alle unsere Backoffice-Profis kommunizieren professionell und verstehen Ihre Arbeitsweise
                   </p>
                 </CardContent>
               </Card>
@@ -437,8 +437,8 @@ const BackofficeLanding = () => {
                   Wie funktioniert die Kommunikation?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Alle Fachkräfte sprechen fließend Deutsch. Kommunikation läuft über Ihre bevorzugten 
-                  Tools (Teams, Slack, E-Mail). Überschneidung mit deutschen Arbeitszeiten garantiert.
+                  Kommunikation läuft über Ihre bevorzugten Tools (Teams, Slack, E-Mail). 
+                  Überschneidung mit europäischen Arbeitszeiten garantiert.
                 </AccordionContent>
               </AccordionItem>
 
