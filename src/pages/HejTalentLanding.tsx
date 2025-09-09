@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { VideoModal } from '@/components/VideoModal';
+
 import { Play, Star, CheckCircle, Users, Clock, Shield, Calendar, Linkedin } from 'lucide-react';
 import videoThumbnail from '@/assets/video-thumbnail.jpg';
 import customerLogos from '@/assets/customer-logos.png';
@@ -11,7 +11,7 @@ import verifiedBadge from '@/assets/verified-badge.png';
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
 const HejTalentLanding = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const [isVideoUnlocked, setIsVideoUnlocked] = useState(false);
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -44,9 +44,6 @@ const HejTalentLanding = () => {
     setIsVideoUnlocked(true);
   };
 
-  const handleCTAClick = () => {
-    setIsModalOpen(true);
-  };
 
   return (
     <div className="min-h-screen bg-background font-inter">
@@ -192,16 +189,15 @@ const HejTalentLanding = () => {
             <Button
               variant="cta"
               size="xl"
-              onClick={handleCTAClick}
+              asChild
               className="mb-16 animate-bounce-in-delay-3 hover:animate-pulse relative overflow-hidden"
-              disabled={isVideoUnlocked}
             >
-              <span className="relative z-10">
-                {isVideoUnlocked ? 'RaaS Anfrage bereits möglich' : 'RaaS Anfrage stellen'}
-              </span>
-              {!isVideoUnlocked && (
+              <Link to="/app/search-requests/new">
+                <span className="relative z-10">
+                  RaaS Anfrage stellen
+                </span>
                 <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>
-              )}
+              </Link>
             </Button>
 
             {/* 3-Bullet Preview */}
@@ -459,11 +455,6 @@ const HejTalentLanding = () => {
       </footer>
 
       {/* Video Modal */}
-      <VideoModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onVideoUnlock={handleVideoUnlock}
-      />
     </div>
   );
 };
