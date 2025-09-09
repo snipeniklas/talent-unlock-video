@@ -367,9 +367,9 @@ const BackofficeLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Unsere Buchhaltung läuft jetzt perfekt remote. Effizienz gestiegen und haben endlich Zeit für Kerngeschäft."
+                      "Dank Remote-Buchhaltung sparen wir monatlich €2.800 und haben endlich Zeit für unser Kerngeschäft. Top!"
                     </p>
-                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Thomas Schmidt, Geschäftsführer MedTech Solutions</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Niklas Clasen, CEO SNIPE Solutions</div>
                   </div>
                 </div>
               </Card>

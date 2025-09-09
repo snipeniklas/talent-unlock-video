@@ -368,9 +368,9 @@ const AIMLLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Unser KI-Chatbot verarbeitet jetzt 80% der Kundenanfragen automatisch. ROI nach 4 Monaten erreicht."
+                      "Unser KI-Entwickler hat in 3 Wochen ein Machine Learning System entwickelt, das uns monatlich €5.000 spart."
                     </p>
-                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Dr. Stefan Meyer, CEO InnovateTech</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Niklas Clasen, CEO SNIPE Solutions</div>
                   </div>
                 </div>
               </Card>

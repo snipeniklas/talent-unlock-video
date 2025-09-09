@@ -638,12 +638,12 @@ const ITDevelopmentLanding = () => {
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4 text-sm italic">
-                  "Nach 8 Monaten erfolgloser Suche hatten wir in 2 Tagen den perfekten React-Entwickler. 
-                  Unglaublich! Spart uns €4.000/Monat."
+                  "Binnen 5 Tagen hatten wir den perfekten Senior React-Entwickler. 
+                  Qualität übertrifft unsere Erwartungen und spart uns monatlich €3.200."
                 </p>
                 <div className="text-sm">
-                  <div className="font-semibold">Sarah Müller</div>
-                  <div className="text-muted-foreground">CTO, PropTech Startup</div>
+                  <div className="font-semibold">Niklas Clasen</div>
+                  <div className="text-muted-foreground">CEO, SNIPE Solutions</div>
                 </div>
               </Card>
 
