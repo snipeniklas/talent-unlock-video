@@ -286,7 +286,7 @@ const HejTalentLanding = () => {
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
                       "Binnen 5 Tagen hatte ich den perfekten KI-Entwickler. Spart uns monatlich €3.200 bei besserer Qualität."
                     </p>
-                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Marcus Weber, CTO TechStart GmbH</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Niklas Clasen, CEO SNIPE Solutions</div>
                   </div>
                 </div>
               </Card>

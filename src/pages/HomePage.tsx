@@ -68,8 +68,8 @@ const HomePage = () => {
 
   const testimonials = [
     {
-      name: "Dr. Marcus Weber",
-      company: "TechCorp GmbH",
+      name: "Niklas Clasen",
+      company: "SNIPE Solutions",
       text: "Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.",
       rating: 5
     },
