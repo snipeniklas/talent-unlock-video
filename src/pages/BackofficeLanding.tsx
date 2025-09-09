@@ -110,11 +110,16 @@ const BackofficeLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
-              Remote Backoffice-Fachkräfte{' '}
+              <span className="text-primary">RaaS</span> - Remote Backoffice-Fachkräfte{' '}
               <span className="text-primary bg-gradient-to-r from-primary to-primary-hover bg-clip-text animate-shimmer bg-shimmer bg-200% animate-bounce-in-delay-1">
                 40-60% günstiger
               </span> als lokale Mitarbeiter
             </h1>
+            
+            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto animate-fade-in-delay-1">
+              <strong>Resources as a Service</strong> – Unser bewährtes RaaS-System macht es einfach: 
+              Sie beschreiben Ihre Backoffice-Anforderungen, wir liefern die perfekte Fachkraft-Lösung.
+            </p>
             
             <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto animate-fade-in-delay-1">
               Entdecken Sie, wie Sie hochqualifizierte Backoffice-Profis für Buchhaltung, Admin und Kundenservice 
@@ -166,7 +171,7 @@ const BackofficeLanding = () => {
               disabled={isVideoUnlocked}
             >
               <span className="relative z-10">
-                {isVideoUnlocked ? 'Video bereits freigeschaltet' : 'Backoffice-Lösung entdecken'}
+                {isVideoUnlocked ? 'RaaS Anfrage bereits möglich' : 'RaaS Anfrage stellen'}
               </span>
               {!isVideoUnlocked && (
                 <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>

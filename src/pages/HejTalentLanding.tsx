@@ -136,14 +136,19 @@ const HejTalentLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
-              Wie Sie in 7 Tagen geprüfte KI-Entwickler{' '}
+              <span className="text-primary">RaaS</span> - Geprüfte KI-Entwickler{' '}
               <span className="text-primary bg-gradient-to-r from-primary to-primary-hover bg-clip-text animate-shimmer bg-shimmer bg-200% animate-bounce-in-delay-1">
                 30-60% günstiger
-              </span> bekommen
+              </span> in 7 Tagen
             </h1>
             
+            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto animate-fade-in-delay-1">
+              <strong>Resources as a Service</strong> – Unser bewährtes RaaS-System macht es einfach: 
+              Sie beschreiben Ihr KI-Projekt, wir liefern die perfekte Entwickler-Lösung.
+            </p>
+            
             <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto animate-fade-in-delay-1">
-              Exklusives Video zeigt Ihnen den bewährten 3-Schritte-Prozess für hochqualifizierte Entwickler 
+              Exklusives Video zeigt Ihnen den bewährten 3-Schritte RaaS-Prozess für hochqualifizierte Entwickler 
               aus unserem Netzwerk – ohne Risiko und mit Geld-zurück-Garantie.
             </p>
 
@@ -192,7 +197,7 @@ const HejTalentLanding = () => {
               disabled={isVideoUnlocked}
             >
               <span className="relative z-10">
-                {isVideoUnlocked ? 'Video bereits freigeschaltet' : 'Video jetzt freischalten'}
+                {isVideoUnlocked ? 'RaaS Anfrage bereits möglich' : 'RaaS Anfrage stellen'}
               </span>
               {!isVideoUnlocked && (
                 <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>

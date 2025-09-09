@@ -110,11 +110,16 @@ const ITDevelopmentLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
-              Senior IT-Entwickler{' '}
+              <span className="text-primary">RaaS</span> - Senior IT-Entwickler{' '}
               <span className="text-primary bg-gradient-to-r from-primary to-primary-hover bg-clip-text animate-shimmer bg-shimmer bg-200% animate-bounce-in-delay-1">
                 30-50% günstiger
               </span> als lokale Talente
             </h1>
+            
+            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto animate-fade-in-delay-1">
+              <strong>Resources as a Service</strong> – Unser bewährtes RaaS-System macht es einfach: 
+              Sie beschreiben Ihr IT-Projekt, wir liefern die perfekte Entwickler-Lösung.
+            </p>
             
             <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto animate-fade-in-delay-1">
               Entdecken Sie, wie Sie in 7-14 Tagen hochqualifizierte Senior-Entwickler für React, Node.js, 
@@ -166,7 +171,7 @@ const ITDevelopmentLanding = () => {
               disabled={isVideoUnlocked}
             >
               <span className="relative z-10">
-                {isVideoUnlocked ? 'Video bereits freigeschaltet' : 'Entwickler-Matching entdecken'}
+                {isVideoUnlocked ? 'RaaS Anfrage bereits möglich' : 'RaaS Anfrage stellen'}
               </span>
               {!isVideoUnlocked && (
                 <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>
