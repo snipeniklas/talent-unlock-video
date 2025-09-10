@@ -356,9 +356,9 @@ const BackofficeLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Unser Kundenservice ist jetzt 12h täglich besetzt – bei halben Kosten. Kundenzufriedenheit auf Allzeithoch!"
+                      "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen."
                     </p>
-                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Lisa Weber, COO ServicePlus GmbH</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Marc Palma, Geschäftsführer, ECO Containertrans</div>
                   </div>
                 </div>
               </Card>

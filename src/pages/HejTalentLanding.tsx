@@ -273,9 +273,9 @@ const HejTalentLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Deutschsprachige Kommunikation und Top-Skills. Unser MVP war in 3 Wochen fertig – unfassbar!"
+                      "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen."
                     </p>
-                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Sarah Müller, Gründerin InnovateLab</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Marc Palma, Geschäftsführer, ECO Containertrans</div>
                   </div>
                 </div>
               </Card>

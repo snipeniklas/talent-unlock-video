@@ -357,9 +357,9 @@ const AIMLLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Computer Vision für Qualitätskontrolle – 98% Genauigkeit, 50% weniger Ausschuss. Fantastisches Team!"
+                      "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen."
                     </p>
-                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Maria Hoffmann, CTO ManufacturingPro</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Marc Palma, Geschäftsführer, ECO Containertrans</div>
                   </div>
                 </div>
               </Card>
