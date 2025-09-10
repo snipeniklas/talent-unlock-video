@@ -149,7 +149,7 @@ const HejTalentLanding = () => {
               <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto group hover:shadow-3xl transition-all duration-700 hover:scale-[1.02]">
                 <div className="aspect-video bg-black flex items-center justify-center">
                   <iframe
-                    src="https://drive.google.com/file/d/PLACEHOLDER_HEJ_TALENT_VIDEO/preview"
+                    src="https://drive.google.com/file/d/1vMtWbY24d-ELZ8K76f4yF2zrngkkJLLW/preview"
                     title="Hej Talent RaaS Video"
                     className="w-full h-full"
                     allow="autoplay"

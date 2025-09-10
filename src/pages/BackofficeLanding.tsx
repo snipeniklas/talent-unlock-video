@@ -123,7 +123,7 @@ const BackofficeLanding = () => {
               <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto group hover:shadow-3xl transition-all duration-700 hover:scale-[1.02]">
                 <div className="aspect-video bg-black flex items-center justify-center">
                   <iframe
-                    src="https://drive.google.com/file/d/PLACEHOLDER_BACKOFFICE_VIDEO/preview"
+                    src="https://drive.google.com/file/d/1CMUsjBj2wilyk-9fS0aL7ehnBe5kxMpH/preview"
                     title="Backoffice-Fachkräfte RaaS Video"
                     className="w-full h-full"
                     allow="autoplay"

@@ -123,7 +123,7 @@ const AIMLLanding = () => {
               <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto group hover:shadow-3xl transition-all duration-700 hover:scale-[1.02]">
                 <div className="aspect-video bg-black flex items-center justify-center">
                   <iframe
-                    src="https://drive.google.com/file/d/PLACEHOLDER_AIML_VIDEO/preview"
+                    src="https://drive.google.com/file/d/1cEsLY4OzN42O1fEP2PQo3taGWXYtdVlR/preview"
                     title="KI & ML Experten RaaS Video"
                     className="w-full h-full"
                     allow="autoplay"
