@@ -121,9 +121,12 @@ const PublicFooter = () => {
               © 2024 HejTalent, a hej consulting GmbH brand. Alle Rechte vorbehalten.
             </div>
             <div className="flex space-x-6">
-              <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">
+              <button 
+                onClick={() => navigate('/datenschutz')}
+                className="text-white/60 hover:text-white transition-colors text-sm"
+              >
                 Datenschutz
-              </a>
+              </button>
               <button 
                 onClick={() => navigate('/impressum')}
                 className="text-white/60 hover:text-white transition-colors text-sm"
