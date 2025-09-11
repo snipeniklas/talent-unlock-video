@@ -615,8 +615,8 @@ const ITDevelopmentLanding = () => {
                   Qualität übertrifft unsere Erwartungen und spart uns monatlich €3.200."
                 </p>
                 <div className="text-sm">
-                  <div className="font-semibold">Niklas Clasen</div>
-                  <div className="text-muted-foreground">CEO, SNIPE Solutions</div>
+                  <div className="font-semibold">CEO aus der Tech-Branche</div>
+                  <div className="text-muted-foreground">SaaS-Unternehmen</div>
                 </div>
               </Card>
 
@@ -631,8 +631,8 @@ const ITDevelopmentLanding = () => {
                   Besser als jede Agentur, die wir je hatten."
                 </p>
                 <div className="text-sm">
-                  <div className="font-semibold">Thomas Weber</div>
-                  <div className="text-muted-foreground">CEO, SaaS Scale-up</div>
+                  <div className="font-semibold">CTO eines Scale-ups</div>
+                  <div className="text-muted-foreground">Fintech-Bereich</div>
                 </div>
               </Card>
 
@@ -647,8 +647,8 @@ const ITDevelopmentLanding = () => {
                   Genau was wir gesucht haben!"
                 </p>
                 <div className="text-sm">
-                  <div className="font-semibold">Lisa Schmidt</div>
-                  <div className="text-muted-foreground">Product Owner, HealthTech</div>
+                  <div className="font-semibold">Product Owner</div>
+                  <div className="text-muted-foreground">HealthTech-Unternehmen</div>
                 </div>
               </Card>
             </div>
