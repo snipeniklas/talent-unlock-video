@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ArrowRight, Users, Globe, TrendingUp, Award, Clock, CheckCircle } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
@@ -122,6 +123,67 @@ const AboutUs = () => {
                   </Card>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Über uns - Joachim & Pascal Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark text-center mb-12">
+              Über uns - Joachim & Pascal
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Joachim Kalff */}
+              <Card className="p-8 hover:shadow-lg transition-all duration-300 group">
+                <div className="flex flex-col items-center text-center mb-6">
+                  <Avatar className="w-24 h-24 mb-4">
+                    <AvatarFallback className="text-xl font-semibold bg-primary text-white">
+                      JK
+                    </AvatarFallback>
+                  </Avatar>
+                  <h3 className="text-2xl font-bold text-brand-dark mb-2">Joachim Kalff</h3>
+                  <p className="text-lg text-primary font-semibold">Gründer & Geschäftsführer</p>
+                </div>
+                <div className="text-muted-foreground leading-relaxed">
+                  <p className="mb-4">
+                    Mein Name ist Joachim Kalff, ich bin Gründer und Geschäftsführer von Hej Talent. Mit unserem „RaaS"-Konzept denken wir HR-Prozesse neu: frischer, smarter, einfach besser! "Hej" kommt aus dem Skandinavischen und bedeutet "hallo", eine Begrüßung mit "Wake Up"-Charakter. Es wirkte auf mich immer freundlich, erfrischend und sympathisch.
+                  </p>
+                  <p className="mb-4">
+                    Außerdem vereint "Hej" die Initialen meiner Kinder Henry und Emilia. Das "J" steht für meinen Vornamen. Ich möchte damit das positive Skandinavische mit Persönlichkeit verbinden und genauso gehe ich das Thema unserer internationalen Remote Mitarbeiter an: Ich übernehme Verantwortung.
+                  </p>
+                  <p>
+                    Mit Herzblut und Leidenschaft entwickele ich innovative und nachhaltige Lösungskonzepte. Down to earth, effizient, kreativ – out of the box.
+                  </p>
+                </div>
+              </Card>
+
+              {/* Pascal Spieß */}
+              <Card className="p-8 hover:shadow-lg transition-all duration-300 group">
+                <div className="flex flex-col items-center text-center mb-6">
+                  <Avatar className="w-24 h-24 mb-4">
+                    <AvatarFallback className="text-xl font-semibold bg-primary text-white">
+                      PS
+                    </AvatarFallback>
+                  </Avatar>
+                  <h3 className="text-2xl font-bold text-brand-dark mb-2">Pascal Spieß</h3>
+                  <p className="text-lg text-primary font-semibold">Consultant</p>
+                </div>
+                <div className="text-muted-foreground leading-relaxed">
+                  <p className="mb-4">
+                    Ich bin Pascal Spieß, Consultant bei Hej Talent, mit mehr als 11 Jahren Erfahrung in Beratung und Vertrieb. Schon immer hat mich die Frage angetrieben, wie Unternehmen effizienter, flexibler und erfolgreicher arbeiten können – und genau hier setze ich heute an.
+                  </p>
+                  <p className="mb-4">
+                    Es begeistert mich, gemeinsam mit meinen Kunden in unserem „RaaS"-Konzept zu arbeiten - schnell, flexibel und kostengünstig.
+                  </p>
+                  <p>
+                    Bei Hej Talent unterstütze ich Unternehmen, den Fachkräftemangel zu überwinden und Prozesse nachhaltig zu optimieren. Gemeinsam mit unseren Kunden integriere ich internationale Remote-Talente – von AI- und Tech-Talenten über Backoffice- und Buchhaltungsprofis bis hin zu IT- und Softwareentwicklern.
+                  </p>
+                </div>
+              </Card>
             </div>
           </div>
         </div>
