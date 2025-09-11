@@ -41,6 +41,7 @@ import NewCandidate from "./pages/admin/NewCandidate";
 import Settings from "./pages/app/Settings";
 import InviteRegister from "./pages/InviteRegister";
 import AboutUs from "./pages/AboutUs";
+import Impressum from "./pages/Impressum";
 import SearchRequestAllocations from "./pages/admin/SearchRequestAllocations";
 import AdminSearchRequestDetail from "./pages/admin/AdminSearchRequestDetail";
 
@@ -68,6 +69,7 @@ const App = () => (
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/resource-hub" element={<ResourceHub />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/impressum" element={<Impressum />} />
           <Route path="/invite" element={<InviteRegister />} />
           <Route path="/app" element={<AppLayout />}>
             <Route path="dashboard" element={<Dashboard />} />

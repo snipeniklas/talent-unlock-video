@@ -124,9 +124,12 @@ const PublicFooter = () => {
               <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">
                 Datenschutz
               </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">
+              <button 
+                onClick={() => navigate('/impressum')}
+                className="text-white/60 hover:text-white transition-colors text-sm"
+              >
                 Impressum
-              </a>
+              </button>
               <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">
                 AGB
               </a>
