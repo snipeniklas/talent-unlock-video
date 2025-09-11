@@ -32,21 +32,21 @@ const Contact = () => {
                   <Mail className="w-6 h-6 text-primary" />
                   <div>
                     <div className="font-medium">E-Mail</div>
-                    <div className="text-muted-foreground">kontakt@hejtalent.de</div>
+                    <div className="text-muted-foreground">kontakt@hejcompany.de</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <Phone className="w-6 h-6 text-primary" />
                   <div>
                     <div className="font-medium">Telefon</div>
-                    <div className="text-muted-foreground">+49 (0) 30 12345678</div>
+                    <div className="text-muted-foreground">+49 89 9017 6218</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <MapPin className="w-6 h-6 text-primary" />
                   <div>
                     <div className="font-medium">Adresse</div>
-                    <div className="text-muted-foreground">Berlin, Deutschland</div>
+                    <div className="text-muted-foreground">Nördliche Münchner Str. 9c, 82031 Grünwald, Germany</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">

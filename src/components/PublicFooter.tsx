@@ -11,7 +11,7 @@ const PublicFooter = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-bold mb-6">Hej Talent</h3>
+            <h3 className="text-2xl font-bold mb-6">HejTalent, a hej consulting GmbH brand</h3>
             <p className="text-white/80 mb-6">
               Ihr vertrauensvoller Partner für qualifizierte internationale Remote-Fachkräfte.
             </p>
@@ -96,19 +96,19 @@ const PublicFooter = () => {
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary" />
-                <a href="mailto:kontakt@hejtalent.de" className="text-white/80 hover:text-white transition-colors">
-                  kontakt@hejtalent.de
+                <a href="mailto:kontakt@hejcompany.de" className="text-white/80 hover:text-white transition-colors">
+                  kontakt@hejcompany.de
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary" />
-                <a href="tel:+4930123456789" className="text-white/80 hover:text-white transition-colors">
-                  +49 (0) 30 12345678
+                <a href="tel:+498990176218" className="text-white/80 hover:text-white transition-colors">
+                  +49 89 9017 6218
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-primary" />
-                <span className="text-white/80">Berlin, Deutschland</span>
+                <span className="text-white/80">Nördliche Münchner Str. 9c, 82031 Grünwald, Germany</span>
               </div>
             </div>
           </div>
@@ -118,7 +118,7 @@ const PublicFooter = () => {
         <div className="border-t border-white/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-white/60 mb-4 md:mb-0">
-              © 2024 Hej Talent. Alle Rechte vorbehalten.
+              © 2024 HejTalent, a hej consulting GmbH brand. Alle Rechte vorbehalten.
             </div>
             <div className="flex space-x-6">
               <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">
