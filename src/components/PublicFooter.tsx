@@ -133,9 +133,6 @@ const PublicFooter = () => {
               >
                 Impressum
               </button>
-              <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">
-                AGB
-              </a>
             </div>
           </div>
         </div>
