@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Users, Code, Shield } from "lucide-react";
@@ -9,6 +10,7 @@ import ContactCTA from "@/components/ContactCTA";
 
 const SolutionsOverview = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const solutions = [
     {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -11,17 +11,17 @@ import {
 import { Globe } from 'lucide-react';
 
 const LanguageSwitcher = () => {
-  const { i18n } = useTranslation();
+  const { language, setLanguage } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const currentLanguage = i18n.language || 'de';
+  const currentLanguage = language;
 
-  const changeLanguage = (lng: string) => {
+  const changeLanguage = (lng: 'de' | 'en') => {
     const pathWithoutLang = location.pathname.replace(/^\/(de|en)/, '') || '/';
     const newPath = `/${lng}${pathWithoutLang}`;
     
-    i18n.changeLanguage(lng);
+    setLanguage(lng);
     navigate(newPath);
   };
 

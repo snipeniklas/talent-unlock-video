@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import HejTalentLanding from "./pages/HejTalentLanding";
@@ -55,8 +56,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
+        <LanguageProvider>
+          <ScrollToTop />
+          <Routes>
             {/* Language route redirects */}
             <Route path="/" element={<Navigate to="/de" replace />} />
             <Route path="/de" element={<Index />} />
@@ -146,7 +148,8 @@ const App = () => (
            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
-        </Routes>
+          </Routes>
+        </LanguageProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

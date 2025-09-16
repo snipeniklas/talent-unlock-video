@@ -1,9 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from "lucide-react";
 
 const PublicFooter = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   return (
     <footer className="bg-brand-dark text-white py-16">
@@ -30,14 +32,14 @@ const PublicFooter = () => {
 
           {/* Solutions */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Unsere Lösungen</h4>
+            <h4 className="text-lg font-semibold mb-6">{t('footer.solutions')}</h4>
             <ul className="space-y-3">
               <li>
                 <button 
                   onClick={() => navigate('/solutions/backoffice')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  Remote Backoffice-Fachkräfte
+                  {t('footer.backoffice')}
                 </button>
               </li>
               <li>
@@ -45,7 +47,7 @@ const PublicFooter = () => {
                   onClick={() => navigate('/solutions/it-development')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  Remote IT-Entwickler
+                  {t('footer.itDevelopment')}
                 </button>
               </li>
               <li>
@@ -53,7 +55,7 @@ const PublicFooter = () => {
                   onClick={() => navigate('/solutions/ai-ml')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  Remote KI-Spezialisten
+                  {t('footer.aiml')}
                 </button>
               </li>
             </ul>
@@ -61,14 +63,14 @@ const PublicFooter = () => {
 
           {/* Company */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Unternehmen</h4>
+            <h4 className="text-lg font-semibold mb-6">{t('footer.company')}</h4>
             <ul className="space-y-3">
               <li>
                 <button 
                   onClick={() => navigate('/how-we-work')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  So arbeiten wir
+                  {t('footer.howWeWork')}
                 </button>
               </li>
               <li>
@@ -76,7 +78,7 @@ const PublicFooter = () => {
                   onClick={() => navigate('/resource-hub')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  Resource Hub
+                  {t('footer.resourceHub')}
                 </button>
               </li>
               <li>
@@ -84,7 +86,7 @@ const PublicFooter = () => {
                   onClick={() => navigate('/contact')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  Kontakt
+                  {t('footer.contact')}
                 </button>
               </li>
             </ul>
@@ -92,7 +94,7 @@ const PublicFooter = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Kontakt</h4>
+            <h4 className="text-lg font-semibold mb-6">{t('footer.contact')}</h4>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary" />
@@ -118,20 +120,20 @@ const PublicFooter = () => {
         <div className="border-t border-white/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-white/60 mb-4 md:mb-0">
-              © 2024 HejTalent, a hej consulting GmbH brand. Alle Rechte vorbehalten.
+              {t('footer.copyright')}
             </div>
             <div className="flex space-x-6">
               <button 
                 onClick={() => navigate('/datenschutz')}
                 className="text-white/60 hover:text-white transition-colors text-sm"
               >
-                Datenschutz
+                {t('footer.privacy')}
               </button>
               <button 
                 onClick={() => navigate('/impressum')}
                 className="text-white/60 hover:text-white transition-colors text-sm"
               >
-                Impressum
+                {t('footer.imprint')}
               </button>
             </div>
           </div>

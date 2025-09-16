@@ -1,8 +1,8 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const BenefitBanner = () => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   
   const benefits = [
     t('benefits.cheaper'),
