@@ -1,0 +1,41 @@
+{
+  "overview": {
+    "title": "Unsere RaaS Lösungen",
+    "subtitle": "Entdecken Sie die verschiedenen Kategorien von Remote-Fachkräften, die wir anbieten",
+    "backoffice": {
+      "title": "Remote Backoffice",
+      "description": "Professionelle Unterstützung für Ihre administrativen Aufgaben",
+      "benefits": [
+        "Buchhaltung & Controlling",
+        "Personalwesen",
+        "Kundenservice",
+        "Datenmanagement"
+      ]
+    },
+    "itDevelopment": {
+      "title": "IT Development",
+      "description": "Erfahrene Entwickler für Ihre digitalen Projekte",
+      "benefits": [
+        "Web & Mobile Development",
+        "Cloud Infrastructure",
+        "DevOps & Testing",
+        "IT Consulting"
+      ]
+    },
+    "aiml": {
+      "title": "AI/ML",
+      "description": "KI-Experten für innovative Lösungen",
+      "benefits": [
+        "Machine Learning",
+        "Data Science",
+        "AI Strategy",
+        "Automation"
+      ]
+    },
+    "cta": {
+      "title": "Bereit für den nächsten Schritt?",
+      "subtitle": "Buchen Sie eine kostenlose Beratung und erfahren Sie, wie unsere Remote-Talente Ihr Unternehmen voranbringen können.",
+      "button": "Kostenlose Beratung buchen"
+    }
+  }
+}

@@ -1,16 +1,19 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const BenefitBanner = () => {
+  const { t } = useTranslation();
+  
   const benefits = [
-    "30 % günstiger",
-    "Onboarding in 2-4 Wochen", 
-    "Geprüfte Remote-Fachkräfte",
-    "Keine Headhunter-Fee",
-    "Remote & DSGVO-konform",
-    "Skalierung jederzeit möglich",
-    "Kein Recruiting-Aufwand",
-    "Zeitzonen-kompatibel",
-    "Dienstleistungen 24/7 an 365 Tagen möglich"
+    t('benefits.cheaper'),
+    t('benefits.onboarding'),
+    t('benefits.verified'),
+    t('benefits.noHeadhunterFee'),
+    t('benefits.gdprCompliant'),
+    t('benefits.scalable'),
+    t('benefits.noRecruiting'),
+    t('benefits.timezoneCompatible'),
+    t('benefits.available247')
   ];
 
   return (

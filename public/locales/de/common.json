@@ -1,0 +1,40 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "solutions": "RaaS Lösungen",
+    "howWeWork": "So arbeiten wir",
+    "aboutUs": "Über uns",
+    "resourceHub": "RaaS Hub",
+    "contact": "Kontakt",
+    "login": "Login",
+    "createRequest": "RaaS Anfrage erstellen",
+    "createRequestShort": "RaaS Anfrage"
+  },
+  "footer": {
+    "company": "Unternehmen",
+    "solutions": "Lösungen",
+    "contact": "Kontakt",
+    "legal": "Rechtliches",
+    "followUs": "Folgen Sie uns",
+    "backoffice": "Remote Backoffice",
+    "itDevelopment": "IT Development",
+    "aiml": "AI/ML",
+    "aboutUs": "Über uns",
+    "howWeWork": "So arbeiten wir",
+    "resourceHub": "RaaS Hub",
+    "privacy": "Datenschutz",
+    "imprint": "Impressum",
+    "copyright": "© 2024 Hej Talent. Alle Rechte vorbehalten."
+  },
+  "benefits": {
+    "cheaper": "30 % günstiger",
+    "onboarding": "Onboarding in 2-4 Wochen",
+    "verified": "Geprüfte Remote-Fachkräfte",
+    "noHeadhunterFee": "Keine Headhunter-Fee",
+    "gdprCompliant": "Remote & DSGVO-konform",
+    "scalable": "Skalierung jederzeit möglich",
+    "noRecruiting": "Kein Recruiting-Aufwand",
+    "timezoneCompatible": "Zeitzonen-kompatibel",
+    "available247": "Dienstleistungen 24/7 an 365 Tagen möglich"
+  }
+}
