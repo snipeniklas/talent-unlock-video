@@ -110,7 +110,7 @@ const PublicFooter = () => {
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-primary" />
-                <span className="text-white/80">Nördliche Münchner Str. 9c, 82031 Grünwald, Germany</span>
+                <span className="text-white/80">Herzogstrasse 19, 80803 München, Germany</span>
               </div>
             </div>
           </div>

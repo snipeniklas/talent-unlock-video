@@ -150,8 +150,8 @@ const Datenschutz = () => {
                     </p>
                     <p className="text-muted-foreground mb-4">
                       hej consulting GmbH<br />
-                      Nördliche Münchner Str. 9c<br />
-                      82031 Grünwald<br />
+                      Herzogstrasse 19<br />
+                      80803 München<br />
                       Tel: +49 89 9017 6218<br />
                       Email: kontakt@hejcompany.de
                     </p>
