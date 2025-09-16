@@ -839,9 +839,9 @@ const ITDevelopmentLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Unser React-Entwickler war ab Tag 1 produktiv. Qualität wie ein Senior aus München, aber 40% günstiger."
+                      "Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig."
                     </p>
-                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Michael Klein, CTO FinanceApp</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Niklas Clasen, CEO SNIPE Solutions</div>
                   </div>
                 </div>
               </Card>

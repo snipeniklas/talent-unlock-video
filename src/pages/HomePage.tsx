@@ -74,9 +74,9 @@ const HomePage = () => {
       rating: 5
     },
     {
-      name: "Sarah Mueller",
-      company: "StartupTech GmbH",
-      text: "Unser Remote-Entwicklungsteam von Hej Talent arbeitet seit 6 Monaten perfekt mit uns zusammen. Top Qualität!",
+      name: "Marc Palma",
+      company: "ECO Containertrans",
+      text: "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen.",
       rating: 5
     }
   ];
