@@ -53,14 +53,14 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <Suspense fallback={<div>Loading...</div>}>
-      <I18nextProvider i18n={i18n}>
-        <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <Suspense fallback={<div>Loading translations...</div>}>
+        <I18nextProvider i18n={i18n}>
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
             {/* Language route redirects */}
             <Route path="/" element={<Navigate to="/de" replace />} />
             <Route path="/de" element={<Index />} />
@@ -147,17 +147,14 @@ const App = () => (
             <Route path="support" element={<AdminSupport />} />
             <Route path="settings" element={<AdminSettings />} />
           </Route>
-          
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-          
+           
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </I18nextProvider>
-    </Suspense>
+            </Routes>
+          </BrowserRouter>
+        </I18nextProvider>
+      </Suspense>
+    </TooltipProvider>
   </QueryClientProvider>
 );
 
