@@ -41,7 +41,7 @@ const HejTalentLanding = () => {
 
 
   return (
-    <div className="min-h-screen bg-background font-inter">
+    <div className="min-h-screen bg-landing font-inter">
       {/* Sticky Trust Bar */}
       <div className="sticky top-0 z-40 bg-white border-b shadow-sm backdrop-blur-sm bg-white/95">
         <div className="container mx-auto px-4 py-3">

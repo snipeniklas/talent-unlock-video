@@ -117,7 +117,7 @@ const AIMlSolution = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background font-inter">
+    <div className="min-h-screen bg-landing font-inter">
       <PublicHeader />
       
       {/* Hero Section */}
