@@ -182,11 +182,20 @@ const AuthPage = () => {
       <div className="w-full max-w-md">
         {/* Header with Logo and Welcome Text */}
         <div className="text-center mb-8 animate-fade-in">
-          <div className="flex justify-center mb-4">
+          <div className="flex justify-center items-center gap-4 mb-4">
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate('/')}
+              className="text-muted-foreground hover:text-primary"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Zur Startseite
+            </Button>
             <img 
               src={hejTalentLogo} 
               alt="Hej Talent"
-              className="h-12 md:h-14 hover:scale-105 transition-transform duration-300" 
+              className="h-12 md:h-14 hover:scale-105 transition-transform duration-300 cursor-pointer" 
+              onClick={() => navigate('/')}
             />
           </div>
           <h1 className="text-3xl font-bold text-brand-dark mb-2">
