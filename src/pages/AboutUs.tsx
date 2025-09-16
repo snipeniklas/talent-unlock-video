@@ -149,14 +149,30 @@ const AboutUs = () => {
                 </div>
                 <div className="text-muted-foreground leading-relaxed">
                   <p className="mb-4">
-                    Mein Name ist Joachim Kalff, ich bin Gründer und Geschäftsführer von Hej Talent. Mit unserem „RaaS"-Konzept denken wir HR-Prozesse neu: frischer, smarter, einfach besser! "Hej" kommt aus dem Skandinavischen und bedeutet "hallo", eine Begrüßung mit "Wake Up"-Charakter. Es wirkte auf mich immer freundlich, erfrischend und sympathisch.
+                    Mein Name ist Joachim Kalff, Gründer und Geschäftsführer von Hej Talent. Mit unserem „RaaS"-Konzept denken wir HR-Prozesse neu: frischer, smarter, einfach besser! „Hej" kommt aus dem Skandinavischen und bedeutet „hallo" – eine Begrüßung mit „Wake-up"-Charakter. Für mich steht es für Freundlichkeit, Leichtigkeit und Sympathie.
                   </p>
                   <p className="mb-4">
-                    Außerdem vereint "Hej" die Initialen meiner Kinder Henry und Emilia. Das "J" steht für meinen Vornamen. Ich möchte damit das positive Skandinavische mit Persönlichkeit verbinden und genauso gehe ich das Thema unserer internationalen Remote Mitarbeiter an: Ich übernehme Verantwortung.
+                    Gleichzeitig vereint „Hej" die Initialen meiner Kinder Henry und Emilia – das „J" steht für meinen Vornamen. So verbinde ich die positive skandinavische Haltung mit meiner persönlichen Handschrift. Genauso gehe ich auch mit unserem internationalen Remote-Team um: verantwortungsbewusst, wertschätzend und nahbar.
                   </p>
-                  <p>
-                    Mit Herzblut und Leidenschaft entwickele ich innovative und nachhaltige Lösungskonzepte. Down to earth, effizient, kreativ – out of the box.
+                  <p className="mb-6">
+                    Mit Begeisterung und unternehmerischem Antrieb entwickle ich Lösungen, die nachhaltig wirken und echten Mehrwert schaffen – pragmatisch, kreativ und immer mit Blick nach vorn.
                   </p>
+                  
+                  {/* Q&A Section for Joachim */}
+                  <div className="space-y-4 border-t pt-6">
+                    <div>
+                      <h4 className="font-semibold text-brand-dark mb-2">Warum ist das Thema Personal wichtig für mich?</h4>
+                      <p className="text-sm">Weil Unternehmen nicht durch Produkte, sondern durch Menschen wachsen. Hinter jedem Erfolg stehen Talente, die ihre Persönlichkeit, Ideen und Energie einbringen.</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-brand-dark mb-2">Was treibt mich bei hejTalent an?</h4>
+                      <p className="text-sm">Verbindungen zu schaffen, die über KI hinausgehen – echte Begegnungen, die auf Vertrauen, Authentizität und gemeinsamen Werten beruhen. Denn Technologie kann vieles, aber menschliche Tiefe und Vertrauen niemals ersetzen.</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-brand-dark mb-2">Meine schönsten Momente bei hejTalent sind…</h4>
+                      <p className="text-sm">…wenn Talente und Unternehmen merken, dass sie nicht nur fachlich, sondern auch menschlich zusammenpassen. Dann wird aus einem Job eine echte Chance fürs Leben.</p>
+                    </div>
+                  </div>
                 </div>
               </Card>
 
@@ -178,9 +194,25 @@ const AboutUs = () => {
                   <p className="mb-4">
                     Es begeistert mich, gemeinsam mit meinen Kunden in unserem „RaaS"-Konzept zu arbeiten - schnell, flexibel und kostengünstig.
                   </p>
-                  <p>
+                  <p className="mb-6">
                     Bei Hej Talent unterstütze ich Unternehmen, den Fachkräftemangel zu überwinden und Prozesse nachhaltig zu optimieren. Gemeinsam mit unseren Kunden integriere ich internationale Remote-Talente – von AI- und Tech-Talenten über Backoffice- und Buchhaltungsprofis bis hin zu IT- und Softwareentwicklern.
                   </p>
+                  
+                  {/* Q&A Section for Pascal */}
+                  <div className="space-y-4 border-t pt-6">
+                    <div>
+                      <h4 className="font-semibold text-brand-dark mb-2">Warum ist das Thema Personal wichtig für mich?</h4>
+                      <p className="text-sm">Weil die richtige Person am richtigen Ort mehr bewirken kann als jede Strategie. Personal ist nicht nur eine Ressource, sondern das Herzstück jeder Organisation.</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-brand-dark mb-2">Was treibt mich bei hejTalent an?</h4>
+                      <p className="text-sm">Die Überzeugung, dass Karrieren nicht von Zufällen oder Algorithmen abhängen sollten. Sondern von Begegnungen, die Sinn stiften und Türen öffnen.</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-brand-dark mb-2">Meine schönsten Momente bei hejTalent sind…</h4>
+                      <p className="text-sm">…wenn Menschen merken: „Hier werde ich gesehen – so wie ich bin." Genau dann entstehen Chancen, die weit über den nächsten Job hinausgehen.</p>
+                    </div>
+                  </div>
                 </div>
               </Card>
             </div>
