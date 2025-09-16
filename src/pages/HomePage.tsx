@@ -10,9 +10,11 @@ import ContactCTA from "@/components/ContactCTA";
 import InteractiveAppScreen from "@/components/InteractiveAppScreen";
 import FloatingAppDemo from "@/components/FloatingAppDemo";
 import ProjectTimeline from "@/components/ProjectTimeline";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [activeService, setActiveService] = useState(0);
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -43,27 +45,27 @@ const HomePage = () => {
 
   const services = [
     {
-      title: "Remote Backoffice-Kräfte",
-      description: "Qualifizierte Remote-Mitarbeiter für administrative Aufgaben und operative Unterstützung",
-      features: ["Büroorganisation & Administration", "Buchhaltung & Controlling", "Kundenservice & Support"]
+      title: t('services.backoffice.title'),
+      description: t('services.backoffice.description'),
+      features: ["Office Organization & Administration", "Accounting & Controlling", "Customer Service & Support"]
     },
     {
-      title: "Remote IT-Entwickler",
-      description: "Erfahrene Remote-Entwickler für alle Bereiche der Softwareentwicklung",
-      features: ["Full-Stack Entwicklung", "DevOps & Cloud", "Mobile & Web Apps"]
+      title: t('services.it.title'),
+      description: t('services.it.description'),
+      features: ["Full-Stack Development", "DevOps & Cloud", "Mobile & Web Apps"]
     },
     {
-      title: "Remote KI-Spezialisten",
-      description: "KI-Experten und Data Scientists für Machine Learning und AI-Projekte",
-      features: ["Machine Learning", "Data Science", "KI-Strategieberatung"]
+      title: t('services.aiml.title'),
+      description: t('services.aiml.description'),
+      features: ["Machine Learning", "Data Science", "AI Strategy Consulting"]
     }
   ];
 
   const stats = [
-    { label: "Vermittelte Remote-Fachkräfte", value: "500+" },
-    { label: "Erfolgreiche Vermittlungen", value: "150+" },
-    { label: "Zufriedene Unternehmen", value: "98%" },
-    { label: "Wochen Besetzungszeit", value: "2-4" }
+    { label: t('stats.specialists'), value: "500+" },
+    { label: t('stats.placements'), value: "150+" },
+    { label: t('stats.satisfaction'), value: "98%" },
+    { label: t('stats.time'), value: "2-4" }
   ];
 
   const testimonials = [
@@ -100,29 +102,28 @@ const HomePage = () => {
                 <div className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
                   <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">9+ Jahre Remote-Expertise</span>
+                    <span className="text-xs md:text-sm font-medium text-brand-dark">{t('hero.badge.expertise')}</span>
                   </div>
                   <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
                     <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">500+ geprüfte Fachkräfte</span>
+                    <span className="text-xs md:text-sm font-medium text-brand-dark">{t('hero.badge.specialists')}</span>
                   </div>
                   <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
                     <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">98% Erfolgsquote</span>
+                    <span className="text-xs md:text-sm font-medium text-brand-dark">{t('hero.badge.success')}</span>
                   </div>
                 </div>
 
                 {/* Main Title */}
                 <div className="text-center lg:text-left">
                   <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-brand-dark mb-4 lg:mb-6 leading-tight animate-fade-in">
-                    <span className="text-primary">RaaS</span> - Resources as a Service
+                    <span className="text-primary">RaaS</span> - {t('hero.title')}
                   </h1>
                   <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-4 lg:mb-6 animate-fade-in-delay-1 font-light">
-                    <span className="font-semibold text-brand-dark">Die Remote-Experten,</span> die Ihre Herausforderungen verstehen und lösen.
+                    <span className="font-semibold text-brand-dark">{t('hero.subtitle')}</span>
                   </p>
                   <p className="text-base md:text-lg text-muted-foreground mb-6 lg:mb-8 animate-fade-in-delay-2">
-                    Als <span className="font-semibold text-primary">führender Dienstleister für internationale Fachkräfte</span> stellen wir Ihnen seit 9 Jahren die besten Talente zur Verfügung. 
-                    Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir liefern die perfekte Fachkraft-Lösung.
+                    {t('hero.description')}
                   </p>
                 </div>
 
@@ -131,10 +132,10 @@ const HomePage = () => {
                   <Button asChild size="lg" className="w-full sm:w-auto text-base md:text-lg px-8 md:px-10 py-5 md:py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
                     <Link to="/app/search-requests/new">
                       <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
-                        KOSTENFREI
+                        {t('cta.free')}
                       </span>
                       <Phone className="w-5 h-5 mr-3" />
-                      <span>Unverbindliche RaaS Anfrage starten</span>
+                      <span>{t('hero.cta.main')}</span>
                       <ArrowRight className="w-5 h-5 ml-3" />
                     </Link>
                   </Button>
@@ -146,7 +147,7 @@ const HomePage = () => {
                       className="text-sm text-primary hover:bg-primary/10 px-4 py-2"
                       onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
                     >
-                      Oder entdecken Sie unsere Expertise →
+                      {t('hero.cta.secondary')}
                     </Button>
                   </div>
                 </div>
@@ -162,7 +163,7 @@ const HomePage = () => {
                       className="w-full h-full border-0"
                       allow="autoplay"
                       allowFullScreen 
-                      title="Hej Talent Intro Video"
+                      title={t('hero.video.title')}
                     />
                   </div>
                   {/* Video accent border */}
@@ -172,11 +173,10 @@ const HomePage = () => {
                 {/* Risk-Free Highlight */}
                 <div className="bg-gradient-primary/10 border border-primary/20 rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <p className="text-base md:text-lg font-semibold text-brand-dark mb-2">
-                    ✅ 100% kostenfrei & unverbindlich starten
+                    {t('hero.riskFree.title')}
                   </p>
                   <p className="text-sm md:text-base text-muted-foreground">
-                    Erhalten Sie maßgeschneiderte Ressourcen-Vorschläge ohne jegliche Verpflichtung. 
-                    Erst bei Ihrer Zustimmung beginnt die Zusammenarbeit.
+                    {t('hero.riskFree.description')}
                   </p>
                 </div>
               </div>
@@ -184,13 +184,13 @@ const HomePage = () => {
             
             {/* Trust Indicators */}
             <div className="text-center mt-12 lg:mt-16">
-              <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">Vertrauen Sie auf 9+ Jahre Expertise:</p>
+              <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">{t('hero.trust.text')}</p>
               <div className="flex flex-wrap justify-center gap-2 md:gap-8 items-center opacity-60">
-                <span className="text-xs md:text-sm font-medium">Internationale Kunden</span>
+                <span className="text-xs md:text-sm font-medium">{t('hero.trust.international')}</span>
                 <span className="text-xs md:text-sm font-medium hidden md:inline">•</span>
-                <span className="text-xs md:text-sm font-medium">DSGVO-konform</span>
+                <span className="text-xs md:text-sm font-medium">{t('hero.trust.gdpr')}</span>
                 <span className="text-xs md:text-sm font-medium hidden md:inline">•</span>
-                <span className="text-xs md:text-sm font-medium">ISO 27001</span>
+                <span className="text-xs md:text-sm font-medium">{t('hero.trust.iso')}</span>
               </div>
             </div>
             
@@ -208,15 +208,15 @@ const HomePage = () => {
                     <Users className="w-10 h-10 text-white" />
                   </div>
                   <CardTitle className="text-2xl group-hover:text-primary transition-colors mb-4">
-                    Remote Backoffice-Fachkräfte
+                    {t('services.backoffice.title')}
                   </CardTitle>
                   <p className="text-muted-foreground group-hover:text-brand-dark transition-colors text-lg">
-                    Qualifizierte Remote-Mitarbeiter für Administration, Buchhaltung und operative Unterstützung
+                    {t('services.backoffice.description')}
                   </p>
                 </CardHeader>
                 <CardContent className="pt-0 relative z-10 mt-auto">
                   <Button className="w-full bg-gradient-primary hover:shadow-lg transition-all duration-300 border-0">
-                    Jetzt starten <ArrowRight className="w-4 h-4 ml-2" />
+                    {t('services.cta.button')} <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </CardContent>
               </Card>
@@ -232,15 +232,15 @@ const HomePage = () => {
                     <Code className="w-10 h-10 text-white" />
                   </div>
                   <CardTitle className="text-2xl group-hover:text-primary transition-colors mb-4">
-                    Remote IT-Entwickler & Tech-Experten
+                    {t('services.it.title')}
                   </CardTitle>
                   <p className="text-muted-foreground group-hover:text-brand-dark transition-colors text-lg">
-                    Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur
+                    {t('services.it.description')}
                   </p>
                 </CardHeader>
                 <CardContent className="pt-0 relative z-10 mt-auto">
                   <Button className="w-full bg-gradient-primary hover:shadow-lg transition-all duration-300 border-0">
-                    Jetzt starten <ArrowRight className="w-4 h-4 ml-2" />
+                    {t('services.cta.button')} <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </CardContent>
               </Card>
@@ -256,15 +256,15 @@ const HomePage = () => {
                     <Shield className="w-10 h-10 text-white" />
                   </div>
                   <CardTitle className="text-2xl group-hover:text-primary transition-colors mb-4">
-                    Remote KI & ML-Spezialisten
+                    {t('services.aiml.title')}
                   </CardTitle>
                   <p className="text-muted-foreground group-hover:text-brand-dark transition-colors text-lg">
-                    KI-Experten und Data Scientists für Machine Learning und AI-Projekte
+                    {t('services.aiml.description')}
                   </p>
                 </CardHeader>
                 <CardContent className="pt-0 relative z-10 mt-auto">
                   <Button className="w-full bg-gradient-primary hover:shadow-lg transition-all duration-300 border-0">
-                    Jetzt starten <ArrowRight className="w-4 h-4 ml-2" />
+                    {t('services.cta.button')} <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </CardContent>
               </Card>
@@ -280,16 +280,15 @@ const HomePage = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12 md:mb-16">
               <h2 className="text-2xl md:text-4xl font-bold text-brand-dark mb-4">
-                <span className="text-primary">Marktführer</span> für Remote-Recruiting seit 2020
+                <span className="text-primary">{t('stats.title').split(' ')[0]}</span> {t('stats.title').split(' ').slice(1).join(' ')}
               </h2>
-              <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8">Zahlen, die unsere Expertise beweisen</p>
+              <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8">{t('stats.subtitle')}</p>
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 max-w-4xl mx-auto border border-primary/10">
                 <p className="text-base md:text-lg font-semibold text-brand-dark mb-2">
-                  🏆 Ausgezeichnet als "Best Remote Recruiting Platform 2023"
+                  {t('stats.award')}
                 </p>
                 <p className="text-sm md:text-base text-muted-foreground">
-                  Über 150 Unternehmen vertrauen bereits auf unsere bewährte RaaS-Methodik. 
-                  Von Startups bis DAX-Konzerne - wir finden die passenden Remote-Experten.
+                  {t('stats.awardDescription')}
                 </p>
               </div>
             </div>
@@ -306,16 +305,15 @@ const HomePage = () => {
             <div className="text-center mt-16">
               <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto border border-primary/20 shadow-xl">
                 <p className="text-lg font-semibold text-brand-dark mb-4">
-                  Ihre kostenfreie RaaS Anfrage dauert nur 3 Minuten
+                  {t('stats.cta.title')}
                 </p>
                 <p className="text-muted-foreground mb-6">
-                  Beschreiben Sie Ihre Herausforderung, wir schlagen Ihnen passende Experten vor. 
-                  Kein Risiko, keine versteckten Kosten.
+                  {t('stats.cta.description')}
                 </p>
                 <Button asChild size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
                   <Link to="/app/search-requests/new">
                     <Target className="w-6 h-6 mr-3" />
-                    Jetzt kostenfrei starten
+                    {t('stats.cta.button')}
                     <ArrowRight className="w-6 h-6 ml-3" />
                   </Link>
                 </Button>

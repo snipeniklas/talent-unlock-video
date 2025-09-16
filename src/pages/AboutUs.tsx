@@ -7,8 +7,11 @@ import { ArrowRight, Users, Globe, TrendingUp, Award, Clock, CheckCircle } from 
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const AboutUs = () => {
+  const { t } = useLanguage();
+  
   const milestones = [
     {
       year: "2020",
@@ -40,23 +43,23 @@ const AboutUs = () => {
   const values = [
     {
       icon: Globe,
-      title: "Internationale Expertise",
-      description: "Wir verbinden deutsche Unternehmen mit den besten internationalen Talenten weltweit."
+      title: t('about.values.international.title'),
+      description: t('about.values.international.description')
     },
     {
       icon: CheckCircle,
-      title: "Geprüfte Qualität",
-      description: "Jede Remote-Fachkraft durchläuft unseren mehrstufigen Qualifizierungsprozess."
+      title: t('about.values.quality.title'),
+      description: t('about.values.quality.description')
     },
     {
       icon: Clock,
-      title: "Schnelle Vermittlung",
-      description: "Von der Anfrage bis zur Integration in nur 2-4 Wochen."
+      title: t('about.values.speed.title'),
+      description: t('about.values.speed.description')
     },
     {
       icon: TrendingUp,
-      title: "Messbare Erfolge",
-      description: "98% Kundenzufriedenheit und über 90% Projektfortführungsrate."
+      title: t('about.values.success.title'),
+      description: t('about.values.success.description')
     }
   ];
 
@@ -69,11 +72,10 @@ const AboutUs = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              Über <span className="text-primary">Hej Talent</span>
+              {t('about.title')}
             </h1>
             <p className="text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-              Seit 2020 sind wir Deutschlands führende Plattform für internationale Remote-Fachkräfte. 
-              Wir verbinden Unternehmen mit den besten Talenten weltweit.
+              {t('about.subtitle')}
             </p>
           </div>
         </div>
@@ -86,29 +88,26 @@ const AboutUs = () => {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-6">
-                  Unsere Mission
+                  {t('about.mission.title')}
                 </h2>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Wir machen internationale Expertise für deutsche Unternehmen zugänglich. 
-                  Unser <span className="font-semibold text-primary">Resources as a Service (RaaS)</span> Modell 
-                  revolutioniert die Art, wie Unternehmen auf Fachkräfte zugreifen.
+                  {t('about.mission.description1')}
                 </p>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Statt langwieriger Einstellungsprozesse bieten wir flexible Dienstleistungsverträge 
-                  mit geprüften Remote-Experten aus über 15 Ländern.
+                  {t('about.mission.description2')}
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-primary rounded-full"></div>
-                    <span className="font-medium">500+ internationale Fachkräfte</span>
+                    <span className="font-medium">{t('about.mission.specialists')}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-secondary rounded-full"></div>
-                    <span className="font-medium">150+ erfolgreiche Projekte</span>
+                    <span className="font-medium">{t('about.mission.projects')}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-accent rounded-full"></div>
-                    <span className="font-medium">98% Kundenzufriedenheit</span>
+                    <span className="font-medium">{t('about.mission.satisfaction')}</span>
                   </div>
                 </div>
               </div>
