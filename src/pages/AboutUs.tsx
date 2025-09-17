@@ -8,9 +8,51 @@ import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
 import { useTranslation } from '@/i18n/i18n';
+import { TeamCard } from '@/components/TeamCard';
 
 const AboutUs = () => {
   const { t, get } = useTranslation();
+
+  const teamMembers = [
+    {
+      name: "Joachim Kalff",
+      role: t('aboutUs.team.joachim.role', 'Gründer & Geschäftsführer'),
+      image: "/lovable-uploads/joachim-kalff.jpg",
+      initials: "JK",
+      bio: {
+        p1: `Mein Name ist Joachim Kalff, Gründer und Geschäftsführer von Hej Talent. Mit unserem „RaaS"-Konzept denken wir HR-Prozesse neu: frischer, smarter, einfach besser! „Hej" kommt aus dem Skandinavischen und bedeutet „hallo" – eine Begrüßung mit „Wake-up"-Charakter. Für mich steht es für Freundlichkeit, Leichtigkeit und Sympathie.`,
+        p2: `Gleichzeitig vereint „Hej" die Initialen meiner Kinder Henry und Emilia – das „J" steht für meinen Vornamen. So verbinde ich die positive skandinavische Haltung mit meiner persönlichen Handschrift. Genauso gehe ich auch mit unserem internationalen Remote-Team um: verantwortungsbewusst, wertschätzend und nahbar.`,
+        p3: `Mit Begeisterung und unternehmerischem Antrieb entwickle ich Lösungen, die nachhaltig wirken und echten Mehrwert schaffen – pragmatisch, kreativ und immer mit Blick nach vorn.`
+      },
+      qa: {
+        q1: `Warum ist das Thema Personal wichtig für mich?`,
+        a1: `Weil Unternehmen nicht durch Produkte, sondern durch Menschen wachsen. Hinter jedem Erfolg stehen Talente, die ihre Persönlichkeit, Ideen und Energie einbringen.`,
+        q2: `Was treibt mich bei hejTalent an?`,
+        a2: `Verbindungen zu schaffen, die über KI hinausgehen – echte Begegnungen, die auf Vertrauen, Authentizität und gemeinsamen Werten beruhen. Denn Technologie kann vieles, aber menschliche Tiefe und Vertrauen niemals ersetzen.`,
+        q3: `Meine schönsten Momente bei hejTalent sind…`,
+        a3: `…wenn Talente und Unternehmen merken, dass sie nicht nur fachlich, sondern auch menschlich zusammenpassen. Dann wird aus einem Job eine echte Chance fürs Leben.`
+      }
+    },
+    {
+      name: "Pascal Spieß",
+      role: t('aboutUs.team.pascal.role', 'Consultant'),
+      image: "/lovable-uploads/pascal-spiess.jpg",
+      initials: "PS",
+      bio: {
+        p1: "Ich bin Pascal Spieß, Consultant bei Hej Talent, mit mehr als 11 Jahren Erfahrung in Beratung und Vertrieb. Schon immer hat mich die Frage angetrieben, wie Unternehmen effizienter, flexibler und erfolgreicher arbeiten können – und genau hier setze ich heute an.",
+        p2: "Es begeistert mich, gemeinsam mit meinen Kunden in unserem „RaaS"-Konzept zu arbeiten - schnell, flexibel und kostengünstig.",
+        p3: "Bei Hej Talent unterstütze ich Unternehmen, den Fachkräftemangel zu überwinden und Prozesse nachhaltig zu optimieren. Gemeinsam mit unseren Kunden integriere ich internationale Remote-Talente – von AI- und Tech-Talenten über Backoffice- und Buchhaltungsprofis bis hin zu IT- und Softwareentwicklern."
+      },
+      qa: {
+        q1: "Warum ist das Thema Personal wichtig für mich?",
+        a1: "Weil die richtige Person am richtigen Ort mehr bewirken kann als jede Strategie. Personal ist nicht nur eine Ressource, sondern das Herzstück jeder Organisation.",
+        q2: "Was treibt mich bei hejTalent an?",
+        a2: "Die Überzeugung, dass Karrieren nicht von Zufällen oder Algorithmen abhängen sollten. Sondern von Begegnungen, die Sinn stiften und Türen öffnen.",
+        q3: "Meine schönsten Momente bei hejTalent sind…",
+        a3: "…wenn Menschen merken: „Hier werde ich gesehen – so wie ich bin." Genau dann entstehen Chancen, die weit über den nächsten Job hinausgehen."
+      }
+    }
+  ];
 
   const milestones = [
     {
@@ -130,53 +172,9 @@ const AboutUs = () => {
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Joachim Kalff */}
-              <Card className="p-8 hover:shadow-lg transition-all duration-300 group">
-                <div className="flex flex-col items-center text-center mb-6">
-                  <Avatar className="w-24 h-24 mb-4">
-                    <AvatarFallback className="text-xl font-semibold bg-primary text-white">
-                      JK
-                    </AvatarFallback>
-                  </Avatar>
-                  <h3 className="text-2xl font-bold text-brand-dark mb-2">Joachim Kalff</h3>
-                  <p className="text-lg text-primary font-semibold">{t('aboutUs.team.joachim.role', 'Gründer & Geschäftsführer')}</p>
-                </div>
-                <div className="text-muted-foreground leading-relaxed">
-                  <p className="mb-4">
-                    {t('aboutUs.team.joachim.p1', 'Mein Name ist Joachim Kalff, ich bin Gründer und Geschäftsführer von Hej Talent. Mit unserem „RaaS"-Konzept denken wir HR-Prozesse neu: frischer, smarter, einfach besser! "Hej" kommt aus dem Skandinavischen und bedeutet "hallo", eine Begrüßung mit "Wake Up"-Charakter. Es wirkte auf mich immer freundlich, erfrischend und sympathisch.')}
-                  </p>
-                  <p className="mb-4">
-                    {t('aboutUs.team.joachim.p2', 'Außerdem vereint "Hej" die Initialen meiner Kinder Henry und Emilia. Das "J" steht für meinen Vornamen. Ich möchte damit das positive Skandinavische mit Persönlichkeit verbinden und genauso gehe ich das Thema unserer internationalen Remote Mitarbeiter an: Ich übernehme Verantwortung.')}
-                  </p>
-                  <p>
-                    {t('aboutUs.team.joachim.p3', 'Mit Herzblut und Leidenschaft entwickele ich innovative und nachhaltige Lösungskonzepte. Down to earth, effizient, kreativ – out of the box.')}
-                  </p>
-                </div>
-              </Card>
-
-              {/* Pascal Spieß */}
-              <Card className="p-8 hover:shadow-lg transition-all duration-300 group">
-                <div className="flex flex-col items-center text-center mb-6">
-                  <Avatar className="w-24 h-24 mb-4">
-                    <AvatarFallback className="text-xl font-semibold bg-primary text-white">
-                      PS
-                    </AvatarFallback>
-                  </Avatar>
-                  <h3 className="text-2xl font-bold text-brand-dark mb-2">Pascal Spieß</h3>
-                  <p className="text-lg text-primary font-semibold">{t('aboutUs.team.pascal.role', 'Consultant')}</p>
-                </div>
-                <div className="text-muted-foreground leading-relaxed">
-                  <p className="mb-4">
-                    {t('aboutUs.team.pascal.p1', 'Ich bin Pascal Spieß, Consultant bei Hej Talent, mit mehr als 11 Jahren Erfahrung in Beratung und Vertrieb. Schon immer hat mich die Frage angetrieben, wie Unternehmen effizienter, flexibler und erfolgreicher arbeiten können – und genau hier setze ich heute an.')}
-                  </p>
-                  <p className="mb-4">
-                    {t('aboutUs.team.pascal.p2', 'Es begeistert mich, gemeinsam mit meinen Kunden in unserem „RaaS"-Konzept zu arbeiten - schnell, flexibel und kostengünstig.')}
-                  </p>
-                  <p>
-                    {t('aboutUs.team.pascal.p3', 'Bei Hej Talent unterstütze ich Unternehmen, den Fachkräftemangel zu überwinden und Prozesse nachhaltig zu optimieren. Gemeinsam mit unseren Kunden integriere ich internationale Remote-Talente – von AI- und Tech-Talenten über Backoffice- und Buchhaltungsprofis bis hin zu IT- und Softwareentwicklern.')}
-                  </p>
-                </div>
-              </Card>
+              {teamMembers.map((member, index) => (
+                <TeamCard key={index} member={member} />
+              ))}
             </div>
           </div>
         </div>
