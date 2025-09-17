@@ -12,7 +12,6 @@ import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434
 
 const HejTalentLanding = () => {
   
-  const [isVideoUnlocked, setIsVideoUnlocked] = useState(false);
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -39,10 +38,6 @@ const HejTalentLanding = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  const handleVideoUnlock = () => {
-    setIsVideoUnlocked(true);
-  };
 
 
   return (
@@ -149,40 +144,18 @@ const HejTalentLanding = () => {
               aus unserem Netzwerk – ohne Risiko und mit Geld-zurück-Garantie.
             </p>
 
-            {/* Video Thumbnail/Player */}
+            {/* Video Player */}
             <div className="relative mb-12 animate-slide-up-delay-2">
               <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto group hover:shadow-3xl transition-all duration-700 hover:scale-[1.02]">
-                {!isVideoUnlocked ? (
-                  <>
-                    <div className="relative">
-                      <img 
-                        src={videoThumbnail} 
-                        alt="Video Thumbnail" 
-                        className="w-full h-auto filter blur-sm opacity-80 group-hover:blur-none group-hover:opacity-90 transition-all duration-500"
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-30 transition-all duration-500">
-                        <div className="text-center animate-float">
-                          <div className="w-24 h-24 bg-white bg-opacity-90 rounded-full flex items-center justify-center mb-4 mx-auto shadow-xl hover:bg-opacity-100 transition-all duration-300 animate-pulse-glow hover:scale-110">
-                            <Play className="w-12 h-12 text-primary ml-1 animate-bounce" />
-                          </div>
-                          <p className="text-white text-lg font-semibold animate-fade-in-delay-3">
-                            Video ansehen & Methode erfahren
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <div className="aspect-video bg-black flex items-center justify-center animate-scale-in">
-                    <iframe
-                      src="https://drive.google.com/file/d/1YPJcKaFDr4BNvHxAOKd3obYIpWVuljbH/preview"
-                      title="Hej Talent Video"
-                      className="w-full h-full"
-                      allow="autoplay"
-                      allowFullScreen
-                    />
-                  </div>
-                )}
+                <div className="aspect-video bg-black flex items-center justify-center">
+                  <iframe
+                    src="https://drive.google.com/file/d/1vMtWbY24d-ELZ8K76f4yF2zrngkkJLLW/preview"
+                    title="Hej Talent RaaS Video"
+                    className="w-full h-full"
+                    allow="autoplay"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             </div>
 
@@ -286,7 +259,7 @@ const HejTalentLanding = () => {
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
                       "Binnen 5 Tagen hatte ich den perfekten KI-Entwickler. Spart uns monatlich €3.200 bei besserer Qualität."
                     </p>
-                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Marcus Weber, CTO TechStart GmbH</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Niklas Clasen, CEO SNIPE Solutions</div>
                   </div>
                 </div>
               </Card>
@@ -300,9 +273,9 @@ const HejTalentLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Deutschsprachige Kommunikation und Top-Skills. Unser MVP war in 3 Wochen fertig – unfassbar!"
+                      "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen."
                     </p>
-                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Sarah Müller, Gründerin InnovateLab</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Marc Palma, Geschäftsführer, ECO Containertrans</div>
                   </div>
                 </div>
               </Card>
@@ -374,33 +347,6 @@ const HejTalentLanding = () => {
         </div>
       </section>
 
-      {/* Secondary CTA - Only visible after video unlock */}
-      {isVideoUnlocked && (
-        <section className="py-16 bg-gradient-primary animate-fade-in">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto text-center text-white">
-              <h2 className="text-3xl font-bold mb-4 animate-slide-up">
-                Bereit für Ihren KI-Entwickler?
-              </h2>
-              <p className="text-xl mb-8 opacity-90 animate-slide-up-delay-1">
-                Buchen Sie jetzt Ihr 15-minütiges Beratungsgespräch und erfahren Sie, 
-                wie wir Ihnen helfen können.
-              </p>
-              <Button
-                asChild
-                variant="secondary"
-                size="xl"
-                className="bg-white text-primary hover:bg-gray-100 animate-bounce-in-delay-2 hover:scale-105 transition-all duration-300"
-              >
-                <Link to="/app/search-requests/new">
-                  <Calendar className="w-5 h-5 mr-2 animate-bounce" />
-                  Suchauftrag kostenlos erstellen
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Footer */}
       <footer className="py-12 bg-brand-dark text-white">

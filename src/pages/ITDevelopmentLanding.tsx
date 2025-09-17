@@ -12,7 +12,6 @@ import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434
 
 const ITDevelopmentLanding = () => {
   
-  const [isVideoUnlocked, setIsVideoUnlocked] = useState(false);
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -39,10 +38,6 @@ const ITDevelopmentLanding = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  const handleVideoUnlock = () => {
-    setIsVideoUnlocked(true);
-  };
 
 
   return (
@@ -123,40 +118,18 @@ const ITDevelopmentLanding = () => {
               Python & mehr aus unserem geprüften Netzwerk bekommen – remote und sofort produktiv.
             </p>
 
-            {/* Video Thumbnail/Player */}
+            {/* Video Player */}
             <div className="relative mb-12 animate-slide-up-delay-2">
               <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto group hover:shadow-3xl transition-all duration-700 hover:scale-[1.02]">
-                {!isVideoUnlocked ? (
-                  <>
-                    <div className="relative">
-                      <img 
-                        src={videoThumbnail} 
-                        alt="Video Thumbnail" 
-                        className="w-full h-auto filter blur-sm opacity-80 group-hover:blur-none group-hover:opacity-90 transition-all duration-500"
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-30 transition-all duration-500">
-                        <div className="text-center animate-float">
-                          <div className="w-24 h-24 bg-white bg-opacity-90 rounded-full flex items-center justify-center mb-4 mx-auto shadow-xl hover:bg-opacity-100 transition-all duration-300 animate-pulse-glow hover:scale-110">
-                            <Play className="w-12 h-12 text-primary ml-1 animate-bounce" />
-                          </div>
-                          <p className="text-white text-lg font-semibold animate-fade-in-delay-3">
-                            IT-Entwickler Matching kennenlernen
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <div className="aspect-video bg-black flex items-center justify-center animate-scale-in">
-                    <iframe
-                      src="https://drive.google.com/file/d/1YPJcKaFDr4BNvHxAOKd3obYIpWVuljbH/preview"
-                      title="IT Entwickler Remote Video"
-                      className="w-full h-full"
-                      allow="autoplay"
-                      allowFullScreen
-                    />
-                  </div>
-                )}
+                <div className="aspect-video bg-black flex items-center justify-center">
+                  <iframe
+                    src="https://drive.google.com/file/d/1UafXr5rs1cjntZ4cuAzSSk5D_lpwP-Mp/preview"
+                    title="IT-Entwickler RaaS Video"
+                    className="w-full h-full"
+                    allow="autoplay"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             </div>
 
@@ -622,118 +595,7 @@ const ITDevelopmentLanding = () => {
         </div>
       </section>
 
-      {/* More Testimonials */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
-              Das sagen unsere Kunden über uns
-            </h2>
-            
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card className="p-6">
-                <div className="flex text-yellow-400 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4 text-sm italic">
-                  "Nach 8 Monaten erfolgloser Suche hatten wir in 2 Tagen den perfekten React-Entwickler. 
-                  Unglaublich! Spart uns €4.000/Monat."
-                </p>
-                <div className="text-sm">
-                  <div className="font-semibold">Sarah Müller</div>
-                  <div className="text-muted-foreground">CTO, PropTech Startup</div>
-                </div>
-              </Card>
 
-              <Card className="p-6">
-                <div className="flex text-yellow-400 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4 text-sm italic">
-                  "Drei Senior-Entwickler für unser Scaling-Projekt. Alle top, alle schnell produktiv. 
-                  Besser als jede Agentur, die wir je hatten."
-                </p>
-                <div className="text-sm">
-                  <div className="font-semibold">Thomas Weber</div>
-                  <div className="text-muted-foreground">CEO, SaaS Scale-up</div>
-                </div>
-              </Card>
-
-              <Card className="p-6">
-                <div className="flex text-yellow-400 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4 text-sm italic">
-                  "Flutter-Experte für unsere Mobile App. Professionelle Kommunikation, internationale Qualität. 
-                  Genau was wir gesucht haben!"
-                </p>
-                <div className="text-sm">
-                  <div className="font-semibold">Lisa Schmidt</div>
-                  <div className="text-muted-foreground">Product Owner, HealthTech</div>
-                </div>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Team */}
-      <section className="py-16 bg-gradient-subtle">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center text-brand-dark mb-6 animate-fade-in">
-              Das Team hinter Ihrem Erfolg
-            </h2>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Erfahrene Tech-Recruiter und ehemalige CTOs, die verstehen, was Sie brauchen
-            </p>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="p-6 text-center">
-                <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-xl">MS</span>
-                </div>
-                <h3 className="font-bold mb-2">Michael Schmidt</h3>
-                <p className="text-sm text-muted-foreground mb-4">Founder & Head of Matching</p>
-                <p className="text-xs text-muted-foreground">
-                  Ex-CTO bei 3 Scale-ups. 15 Jahre Erfahrung im Tech-Recruiting. 
-                  Hat persönlich 500+ Entwickler gematcht.
-                </p>
-              </Card>
-
-              <Card className="p-6 text-center">
-                <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-xl">AK</span>
-                </div>
-                <h3 className="font-bold mb-2">Anna Kaufmann</h3>
-                <p className="text-sm text-muted-foreground mb-4">Head of Quality Assurance</p>
-                <p className="text-xs text-muted-foreground">
-                  Tech Lead bei FAANG-Unternehmen. Entwickelt unsere Screening-Prozesse. 
-                  Garantiert höchste Kandidaten-Qualität.
-                </p>
-              </Card>
-
-              <Card className="p-6 text-center">
-                <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-xl">DW</span>
-                </div>
-                <h3 className="font-bold mb-2">Daniel Wagner</h3>
-                <p className="text-sm text-muted-foreground mb-4">Customer Success Manager</p>
-                <p className="text-xs text-muted-foreground">
-                  Ihr persönlicher Ansprechpartner. Sorgt dafür, dass alles reibungslos läuft. 
-                  Antwortet binnen 2h.
-                </p>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Urgency Section */}
       <section className="py-16 bg-red-50 border-l-4 border-red-500">
@@ -866,9 +728,9 @@ const ITDevelopmentLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Unser React-Entwickler war ab Tag 1 produktiv. Qualität wie ein Senior aus München, aber 40% günstiger."
+                      "Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig."
                     </p>
-                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Michael Klein, CTO FinanceApp</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Niklas Clasen, CEO SNIPE Solutions</div>
                   </div>
                 </div>
               </Card>
@@ -882,9 +744,9 @@ const ITDevelopmentLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Backend in Node.js und Python – beide Entwickler top. Unser MVP war in 6 Wochen fertig statt 4 Monaten."
+                      "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen."
                     </p>
-                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Anna Krause, Gründerin TechStartup</div>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Marc Palma, Geschäftsführer, ECO Containertrans</div>
                   </div>
                 </div>
               </Card>
@@ -957,23 +819,6 @@ const ITDevelopmentLanding = () => {
         </div>
       </section>
 
-      {/* Secondary CTA Section (Only shown after video unlock) */}
-      {isVideoUnlocked && (
-        <section className="py-16 bg-primary text-white overflow-hidden animate-fade-in">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-6 animate-bounce-in">
-              Bereit für Ihren perfekten Entwickler-Match?
-            </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90 animate-fade-in-delay-1">
-              Lassen Sie uns in einem 15-minütigen Gespräch Ihre Anforderungen besprechen 
-              und den perfekten Senior-Entwickler für Ihr Projekt finden.
-            </p>
-            <Button variant="secondary" size="xl" className="animate-scale-in-delay-2 hover:scale-110 transition-transform duration-300">
-              Kostenlose Beratung buchen
-            </Button>
-          </div>
-        </section>
-      )}
 
       {/* Footer */}
       <footer className="py-12 bg-brand-dark text-white">
