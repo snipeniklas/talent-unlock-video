@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X } from "lucide-react";
 import BenefitBanner from "@/components/BenefitBanner";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
 const PublicHeader = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigationItems = [
-    { title: t('navigation.home'), path: "/" },
-    { title: t('navigation.solutions'), path: "/solutions" },
-    { title: t('navigation.howWeWork'), path: "/how-we-work" },
-    { title: t('navigation.aboutUs'), path: "/about-us" },
-    { title: t('navigation.resourceHub'), path: "/resource-hub" },
-    { title: t('navigation.contact'), path: "/contact" },
+    { title: "Startseite", path: "/" },
+    { title: "RaaS Lösungen", path: "/solutions" },
+    { title: "So arbeiten wir", path: "/how-we-work" },
+    { title: "Über uns", path: "/about-us" },
+    { title: "RaaS Hub", path: "/resource-hub" },
+    { title: "Kontakt", path: "/contact" },
   ];
 
   const handleNavigation = (path: string) => {
@@ -57,20 +54,18 @@ const PublicHeader = () => {
 
             {/* Desktop Actions */}
             <div className="hidden md:flex items-center space-x-4">
-              <LanguageSwitcher />
               <Button variant="outline" asChild>
-                <a href="/auth">{t('navigation.login')}</a>
+                <a href="/auth">Login</a>
               </Button>
               <Button asChild className="bg-primary hover:bg-primary-hover">
-                <Link to="/app/search-requests/new">{t('navigation.createRequest')}</Link>
+                <Link to="/app/search-requests/new">RaaS Anfrage erstellen</Link>
               </Button>
             </div>
 
             {/* Mobile Menu */}
             <div className="flex items-center space-x-2 md:hidden">
-              <LanguageSwitcher />
               <Button asChild size="sm" className="bg-primary hover:bg-primary-hover">
-                <Link to="/app/search-requests/new">{t('navigation.createRequestShort')}</Link>
+                <Link to="/app/search-requests/new">RaaS Anfrage</Link>
               </Button>
               
               <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
@@ -116,10 +111,10 @@ const PublicHeader = () => {
                     {/* Mobile Actions */}
                     <div className="border-t pt-4 space-y-3">
                       <Button variant="outline" asChild className="w-full">
-                        <a href="/auth">{t('navigation.login')}</a>
+                        <a href="/auth">Login</a>
                       </Button>
                       <Button asChild className="w-full bg-primary hover:bg-primary-hover">
-                        <Link to="/app/search-requests/new">{t('navigation.createRequest')}</Link>
+                        <Link to="/app/search-requests/new">RaaS Anfrage erstellen</Link>
                       </Button>
                     </div>
                   </div>

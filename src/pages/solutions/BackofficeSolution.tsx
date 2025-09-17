@@ -74,7 +74,7 @@ const BackofficeSolution = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-landing font-inter">
+    <div className="min-h-screen bg-background font-inter">
       <PublicHeader />
       
       {/* Hero Section */}

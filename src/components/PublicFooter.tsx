@@ -1,11 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from "lucide-react";
 
 const PublicFooter = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
 
   return (
     <footer className="bg-brand-dark text-white py-16">
@@ -13,7 +11,7 @@ const PublicFooter = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-bold mb-6">HejTalent, a hej consulting GmbH brand</h3>
+            <h3 className="text-2xl font-bold mb-6">Hej Talent</h3>
             <p className="text-white/80 mb-6">
               Ihr vertrauensvoller Partner für qualifizierte internationale Remote-Fachkräfte.
             </p>
@@ -32,14 +30,14 @@ const PublicFooter = () => {
 
           {/* Solutions */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">{t('footer.solutions')}</h4>
+            <h4 className="text-lg font-semibold mb-6">Unsere Lösungen</h4>
             <ul className="space-y-3">
               <li>
                 <button 
                   onClick={() => navigate('/solutions/backoffice')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  {t('footer.backoffice')}
+                  Remote Backoffice-Fachkräfte
                 </button>
               </li>
               <li>
@@ -47,7 +45,7 @@ const PublicFooter = () => {
                   onClick={() => navigate('/solutions/it-development')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  {t('footer.itDevelopment')}
+                  Remote IT-Entwickler
                 </button>
               </li>
               <li>
@@ -55,7 +53,7 @@ const PublicFooter = () => {
                   onClick={() => navigate('/solutions/ai-ml')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  {t('footer.aiml')}
+                  Remote KI-Spezialisten
                 </button>
               </li>
             </ul>
@@ -63,14 +61,14 @@ const PublicFooter = () => {
 
           {/* Company */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">{t('footer.company')}</h4>
+            <h4 className="text-lg font-semibold mb-6">Unternehmen</h4>
             <ul className="space-y-3">
               <li>
                 <button 
                   onClick={() => navigate('/how-we-work')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  {t('footer.howWeWork')}
+                  So arbeiten wir
                 </button>
               </li>
               <li>
@@ -78,7 +76,7 @@ const PublicFooter = () => {
                   onClick={() => navigate('/resource-hub')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  {t('footer.resourceHub')}
+                  Resource Hub
                 </button>
               </li>
               <li>
@@ -86,7 +84,7 @@ const PublicFooter = () => {
                   onClick={() => navigate('/contact')}
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  {t('footer.contact')}
+                  Kontakt
                 </button>
               </li>
             </ul>
@@ -94,23 +92,23 @@ const PublicFooter = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">{t('footer.contact')}</h4>
+            <h4 className="text-lg font-semibold mb-6">Kontakt</h4>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary" />
-                <a href="mailto:kontakt@hejcompany.de" className="text-white/80 hover:text-white transition-colors">
-                  kontakt@hejcompany.de
+                <a href="mailto:kontakt@hejtalent.de" className="text-white/80 hover:text-white transition-colors">
+                  kontakt@hejtalent.de
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary" />
-                <a href="tel:+498990176218" className="text-white/80 hover:text-white transition-colors">
-                  +49 89 9017 6218
+                <a href="tel:+4930123456789" className="text-white/80 hover:text-white transition-colors">
+                  +49 (0) 30 12345678
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-primary" />
-                <span className="text-white/80">Herzogstrasse 19, 80803 München, Germany</span>
+                <span className="text-white/80">Berlin, Deutschland</span>
               </div>
             </div>
           </div>
@@ -120,21 +118,18 @@ const PublicFooter = () => {
         <div className="border-t border-white/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-white/60 mb-4 md:mb-0">
-              {t('footer.copyright')}
+              © 2024 Hej Talent. Alle Rechte vorbehalten.
             </div>
             <div className="flex space-x-6">
-              <button 
-                onClick={() => navigate('/datenschutz')}
-                className="text-white/60 hover:text-white transition-colors text-sm"
-              >
-                {t('footer.privacy')}
-              </button>
-              <button 
-                onClick={() => navigate('/impressum')}
-                className="text-white/60 hover:text-white transition-colors text-sm"
-              >
-                {t('footer.imprint')}
-              </button>
+              <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">
+                Datenschutz
+              </a>
+              <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">
+                Impressum
+              </a>
+              <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">
+                AGB
+              </a>
             </div>
           </div>
         </div>
