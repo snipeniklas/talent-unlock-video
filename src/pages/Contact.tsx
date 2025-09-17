@@ -49,7 +49,7 @@ const Contact = () => {
                   <MapPin className="w-6 h-6 text-primary" />
                   <div>
                     <div className="font-medium">{t('contact.labels.address')}</div>
-                    <div className="text-muted-foreground">Nördliche Münchner Str. 9c, 82031 Grünwald, Germany</div>
+                    <div className="text-muted-foreground">Herzogstrasse 19, 80803 München, Germany</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">

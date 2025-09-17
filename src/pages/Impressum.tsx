@@ -38,8 +38,8 @@ const Impressum = () => {
                     <div className="flex items-start gap-3 text-muted-foreground">
                       <MapPin className="w-5 h-5 text-primary mt-1" />
                       <div>
-                        <p>Northern Munich Str. 9c</p>
-                        <p>82031 Grünwald</p>
+                        <p>Herzogstrasse 19</p>
+                        <p>80803 München</p>
                         <p>Germany</p>
                       </div>
                     </div>

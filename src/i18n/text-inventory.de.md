@@ -29,7 +29,7 @@ Hinweis: Diese Inventur listet alle sichtbaren, deutschsprachigen Texte aus Head
 - Kontakt
   - kontakt@hejtalent.de
   - +49 89 9017 6218
-  - Nördliche Münchner Str. 9c, 82031 Grünwald, Germany
+  - Herzogstrasse 19, 80803 München, Germany
 - © 2024 HejTalent, a hej consulting GmbH brand. Alle Rechte vorbehalten.
 - Datenschutz
 - Impressum
@@ -259,7 +259,7 @@ Hinweis: Diese Inventur listet alle sichtbaren, deutschsprachigen Texte aus Head
 
 ### `pages/Impressum.tsx`
 - Impressum — Rechtliche Informationen gemäß §5 TMG
-- Firmeninformationen — Hej Consulting GmbH — Northern Munich Str. 9c — 82031 Grünwald — Germany
+- Firmeninformationen — Hej Consulting GmbH — Herzogstrasse 19 — 80803 München — Germany
 - Handelsregister — Register Court: Munich Local Court — Registration number: HRB 263357
 - Umsatzsteuer-Identifikationsnummer — Sales tax identification number according to §27a UStG: DE342933121
 - Still Have Some Questions Left? — Call us — Tel: +49 89 9017 6218 — Feel free to contact our support team ... (englischer Absatz wie im Code)
