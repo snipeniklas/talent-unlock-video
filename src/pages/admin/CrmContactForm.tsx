@@ -6,10 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Save } from "lucide-react";
+import { ArrowLeft, Save, Plus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "@/i18n/i18n";
 import { useToast } from "@/hooks/use-toast";
+import CreateCompanyDialog from "@/components/CreateCompanyDialog";
 
 interface ContactFormData {
   first_name: string;
@@ -58,6 +59,7 @@ export default function CrmContactForm() {
   const [loading, setLoading] = useState(false);
   const [companies, setCompanies] = useState<CrmCompany[]>([]);
   const [formData, setFormData] = useState<ContactFormData>(initialFormData);
+  const [createCompanyDialogOpen, setCreateCompanyDialogOpen] = useState(false);
   const isEdit = Boolean(id);
 
   useEffect(() => {
@@ -182,6 +184,13 @@ export default function CrmContactForm() {
     }
   };
 
+  const handleCompanyCreated = (companyId: string, companyName: string) => {
+    // Add new company to the list
+    setCompanies(prev => [...prev, { id: companyId, name: companyName }]);
+    // Select the new company
+    setFormData(prev => ({ ...prev, crm_company_id: companyId }));
+  };
+
   const handleInputChange = (field: keyof ContactFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
@@ -284,19 +293,32 @@ export default function CrmContactForm() {
 
                 <div className="space-y-2">
                   <Label htmlFor="company">{t('crm.contacts.fields.company')}</Label>
-                  <Select value={formData.crm_company_id} onValueChange={(value) => handleInputChange('crm_company_id', value)}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select company" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="none">No company</SelectItem>
-                      {companies.map((company) => (
-                        <SelectItem key={company.id} value={company.id}>
-                          {company.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <div className="flex gap-2">
+                    <div className="flex-1">
+                      <Select value={formData.crm_company_id} onValueChange={(value) => handleInputChange('crm_company_id', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select company" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="none">No company</SelectItem>
+                          {companies.map((company) => (
+                            <SelectItem key={company.id} value={company.id}>
+                              {company.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setCreateCompanyDialogOpen(true)}
+                      className="px-3"
+                    >
+                      <Plus className="h-4 w-4" />
+                      <span className="sr-only">Create new company</span>
+                    </Button>
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -416,6 +438,13 @@ export default function CrmContactForm() {
           </form>
         </CardContent>
       </Card>
+
+      {/* Create Company Dialog */}
+      <CreateCompanyDialog
+        open={createCompanyDialogOpen}
+        onOpenChange={setCreateCompanyDialogOpen}
+        onCompanyCreated={handleCompanyCreated}
+      />
     </div>
   );
 }
