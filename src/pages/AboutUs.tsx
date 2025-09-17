@@ -91,7 +91,7 @@ const AboutUs = () => {
                   {t('aboutUs.mission.title', 'Unsere Mission')}
                 </h2>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  {t('aboutUs.mission.p1', 'Wir machen internationale Expertise für deutsche Unternehmen zugänglich. Unser ')}<span className="font-semibold text-primary">Resources as a Service (RaaS)</span>{t('aboutUs.mission.p1b', ' Modell revolutioniert die Art, wie Unternehmen auf Fachkräfte zugreifen.')}
+                  {t('aboutUs.mission.p1', 'Wir machen internationale Expertise für deutsche Unternehmen zugänglich. Mit unserem Resources as a Service (RaaS) Modell revolutionieren wir die Art, wie Unternehmen auf Fachkräfte zugreifen – flexibel, effizient und ohne Grenzen.')}
                 </p>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                   {t('aboutUs.mission.p2', 'Statt langwieriger Einstellungsprozesse bieten wir flexible Dienstleistungsverträge mit geprüften Remote-Experten aus über 15 Ländern.')}

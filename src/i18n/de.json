@@ -220,9 +220,8 @@
     },
     "mission": {
       "title": "Unsere Mission",
-      "p1": "Wir machen internationale Expertise für deutsche Unternehmen zugänglich. Unser ",
-      "p1b": " Modell revolutioniert die Art, wie Unternehmen auf Fachkräfte zugreifen.",
-      "p2": "Statt langwieriger Einstellungsprozesse bieten wir flexible Dienstleistungsverträge mit geprüften Remote-Experten aus über 15 Ländern.",
+      "p1": "Wir machen internationale Expertise für deutsche Unternehmen zugänglich. Mit unserem Resources as a Service (RaaS) Modell revolutionieren wir die Art, wie Unternehmen auf Fachkräfte zugreifen – flexibel, effizient und ohne Grenzen.",
+      "p2": "Statt klassischer Anstellungen stellen wir Remote-Ressourcen über Dienstleistungsverträge bereit und schaffen so sofortigen Zugang zu qualifizierten Spezialisten weltweit.",
       "stats": ["500+ internationale Fachkräfte", "150+ erfolgreiche Projekte", "98% Kundenzufriedenheit"]
     },
     "values": {},

@@ -220,9 +220,8 @@
     },
     "mission": {
       "title": "Our mission",
-      "p1": "We make international expertise accessible to German companies. Our ",
-      "p1b": " model revolutionizes how companies access talent.",
-      "p2": "Instead of lengthy hiring processes, we offer flexible service contracts with vetted remote experts from over 15 countries.",
+      "p1": "We make international expertise accessible to German companies. With our Resources as a Service (RaaS) model, we revolutionize how companies access talent – flexible, efficient, and without borders.",
+      "p2": "Instead of traditional employment, we provide remote resources through service contracts and create immediate access to qualified specialists worldwide.",
       "stats": ["500+ international professionals", "150+ successful projects", "98% customer satisfaction"]
     },
     "values": {},
