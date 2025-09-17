@@ -326,8 +326,8 @@ const HejTalentLanding = () => {
                 <h4 className="font-semibold mb-4">{t('landing.hejTalent.footer.contact', 'Kontakt')}</h4>
                 <ul className="space-y-2 text-sm text-gray-300">
                   <li>
-                    <a href="mailto:kontakt@hejcompany.de" className="hover:text-white transition-colors">
-                      kontakt@hejcompany.de
+                    <a href="mailto:kontakt@hejtalent.de" className="hover:text-white transition-colors">
+                      kontakt@hejtalent.de
                     </a>
                   </li>
                   <li>

@@ -27,7 +27,7 @@ Hinweis: Diese Inventur listet alle sichtbaren, deutschsprachigen Texte aus Head
   - Resource Hub
   - Kontakt
 - Kontakt
-  - kontakt@hejcompany.de
+  - kontakt@hejtalent.de
   - +49 89 9017 6218
   - Nördliche Münchner Str. 9c, 82031 Grünwald, Germany
 - © 2024 HejTalent, a hej consulting GmbH brand. Alle Rechte vorbehalten.

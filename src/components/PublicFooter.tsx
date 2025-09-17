@@ -98,8 +98,8 @@ const PublicFooter = () => {
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary" />
-                <a href="mailto:kontakt@hejcompany.de" className="text-white/80 hover:text-white transition-colors">
-                  kontakt@hejcompany.de
+                <a href="mailto:kontakt@hejtalent.de" className="text-white/80 hover:text-white transition-colors">
+                  kontakt@hejtalent.de
                 </a>
               </div>
               <div className="flex items-center gap-3">

@@ -154,7 +154,7 @@ const Datenschutz = () => {
                       Nördliche Münchner Str. 9c<br />
                       82031 Grünwald<br />
                       Tel: +49 89 9017 6218<br />
-                      Email: kontakt@hejcompany.de
+                      Email: kontakt@hejtalent.de
                     </p>
                     <p className="text-muted-foreground">
                       {t('legal.privacy.notes.controller.text2', 'The controller is the natural or legal person who alone or jointly with others determines the purposes and means of the processing of personal data (e.g. names, e-mail addresses or similar).')}
