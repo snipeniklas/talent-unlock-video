@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { MiniTeamSection } from '@/components/MiniTeamSection';
 
 import { Play, Star, CheckCircle, Users, Clock, Shield, Calendar, Linkedin, Calculator, Clock3, Headphones } from 'lucide-react';
 import videoThumbnail from '@/assets/video-thumbnail.jpg';
@@ -318,6 +319,9 @@ const BackofficeLanding = () => {
           </div>
         </div>
       </section>
+
+      {/* Mini Team Section */}
+      <MiniTeamSection />
 
       {/* FAQ Section */}
       <section className="py-16">

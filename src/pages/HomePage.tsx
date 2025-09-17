@@ -10,6 +10,7 @@ import ContactCTA from "@/components/ContactCTA";
 import InteractiveAppScreen from "@/components/InteractiveAppScreen";
 import FloatingAppDemo from "@/components/FloatingAppDemo";
 import ProjectTimeline from "@/components/ProjectTimeline";
+import { MiniTeamSection } from '@/components/MiniTeamSection';
 import { useTranslation } from '@/i18n/i18n';
 
 const HomePage = () => {
@@ -555,6 +556,8 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Mini Team Section */}
+      <MiniTeamSection />
 
       <ContactCTA />
       <PublicFooter />
