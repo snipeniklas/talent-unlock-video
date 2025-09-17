@@ -101,17 +101,17 @@ const translations = {
     'solutions.learnMore': 'Mehr erfahren',
 
     // HomePage - Services
-    'services.backoffice.title': 'Remote Backoffice Specialists',
+    'services.backoffice.title': 'Remote Backoffice Fachkräfte',
     'services.backoffice.description': 'Qualifizierte Remote-Mitarbeiter für Verwaltung, Buchhaltung und operative Unterstützung',
     'services.backoffice.features.organization': 'Administrative Aufgaben',
     'services.backoffice.features.accounting': 'Buchhaltung',
     'services.backoffice.features.support': 'Kundenservice',
-    'services.it.title': 'Remote IT Developers & Tech Experts',
+    'services.it.title': 'Remote IT-Entwickler & Tech-Experten',
     'services.it.description': 'Erfahrene Remote-Entwickler für Full-Stack, DevOps und Software-Architektur',
     'services.it.features.fullstack': 'Full-Stack Development',
     'services.it.features.devops': 'DevOps & Cloud',
     'services.it.features.mobile': 'Mobile Apps',
-    'services.aiml.title': 'Remote AI & ML Specialists',
+    'services.aiml.title': 'Remote AI & ML Fachkräfte',
     'services.aiml.description': 'KI-Experten und Data Scientists für Machine Learning und AI-Projekte',
     'services.aiml.features.ml': 'Machine Learning',
     'services.aiml.features.datascience': 'Data Science',
@@ -142,17 +142,8 @@ const translations = {
     // HomePage - Testimonials
     'testimonials.title': 'Was unsere Kunden sagen',
     'testimonials.subtitle': 'Echte Erfahrungen von zufriedenen Unternehmen',
-    'testimonials.customer1.text': 'Hej Talent hat uns dabei geholfen, erstklassige Remote-Entwickler zu finden. Der Prozess war effizient und die Qualität der Kandidaten übertraf unsere Erwartungen.',
-    'testimonials.customer1.name': 'Sarah Weber',
-    'testimonials.customer1.company': 'TechStart GmbH',
-    'testimonials.customer2.text': 'Dank der Remote-Backoffice-Lösung konnten wir unsere Kosten um 40% senken und gleichzeitig die Effizienz steigern. Absolute Empfehlung!',
-    'testimonials.customer2.name': 'Michael Braun',
-    'testimonials.customer2.company': 'InnovateCorp',
-    'testimonials.customer3.text': 'Die AI-Experten, die wir über Hej Talent gefunden haben, haben unser Machine Learning-Projekt zum Erfolg geführt. Professionell und kompetent.',
-    'testimonials.customer3.name': 'Dr. Lisa Müller',
-    'testimonials.customer3.company': 'DataTech Solutions',
     
-    // Testimonials with correct naming for HomePage
+    // Testimonials with correct naming for HomePage (original German content)
     'testimonials.niklas.text': 'Hej Talent hat uns dabei geholfen, erstklassige Remote-Entwickler zu finden. Der Prozess war effizient und die Qualität der Kandidaten übertraf unsere Erwartungen.',
     'testimonials.niklas.name': 'Niklas Weber',
     'testimonials.niklas.company': 'TechStart GmbH',
@@ -378,17 +369,8 @@ const translations = {
     // HomePage - Testimonials
     'testimonials.title': 'What our customers say',
     'testimonials.subtitle': 'Real experiences from satisfied companies',
-    'testimonials.customer1.text': 'Hej Talent helped us find top-notch remote developers. The process was efficient and the quality of candidates exceeded our expectations.',
-    'testimonials.customer1.name': 'Sarah Weber',
-    'testimonials.customer1.company': 'TechStart GmbH',
-    'testimonials.customer2.text': 'Thanks to the remote backoffice solution, we were able to reduce our costs by 40% while increasing efficiency. Absolute recommendation!',
-    'testimonials.customer2.name': 'Michael Braun',
-    'testimonials.customer2.company': 'InnovateCorp',
-    'testimonials.customer3.text': 'The AI experts we found through Hej Talent led our machine learning project to success. Professional and competent.',
-    'testimonials.customer3.name': 'Dr. Lisa Müller',
-    'testimonials.customer3.company': 'DataTech Solutions',
     
-    // Testimonials with correct naming for HomePage
+    // Testimonials with correct naming for HomePage (English translations)
     'testimonials.niklas.text': 'Hej Talent helped us find top-notch remote developers. The process was efficient and the quality of candidates exceeded our expectations.',
     'testimonials.niklas.name': 'Niklas Weber',
     'testimonials.niklas.company': 'TechStart GmbH',
