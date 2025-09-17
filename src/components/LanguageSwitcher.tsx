@@ -5,7 +5,18 @@ import { Globe } from "lucide-react";
 import { useTranslation } from "@/i18n/i18n";
 
 export default function LanguageSwitcher() {
-  const { lang, setLang } = useTranslation();
+  // Add error handling for translation context
+  let lang = 'de';
+  let setLang = (newLang: string) => {};
+  
+  try {
+    const translation = useTranslation();
+    lang = translation.lang;
+    setLang = translation.setLang;
+  } catch (error) {
+    // If translation context is not available yet, use defaults
+    console.warn('Translation context not available, using defaults');
+  }
 
   const languages = [
     { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
