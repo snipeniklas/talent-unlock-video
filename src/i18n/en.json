@@ -861,6 +861,23 @@
         "low": "Low",
         "medium": "Medium",
         "high": "High"
+      },
+      "detail": {
+        "title": "Contact Details",
+        "contactInfo": "Contact Information",
+        "company": "Company",
+        "timeline": "Timeline",
+        "created": "Created",
+        "lastUpdated": "Last Updated",
+        "notFound": "Contact not found",
+        "fetchError": "Error loading contact data",
+        "noPosition": "No position specified",
+        "viewCompany": "View Company"
+      },
+      "csvImport": {
+        "importBtnText": "CSV Import",
+        "newContactBtnText": "New Contact",
+        "companyFieldsNote": "Note: If you have company data in your CSV file, corresponding companies will be automatically created or found."
       }
     },
     "actions": {
@@ -875,25 +892,8 @@
     "kanban": {
       "noContacts": "No contacts in this stage",
       "contactsCount": "contacts"
-    },
-      "csvImport": {
-        "importBtnText": "CSV Import",
-        "newContactBtnText": "New Contact",
-        "companyFieldsNote": "Note: If you have company data in your CSV file, corresponding companies will be automatically created or found."
-      },
-      "detail": {
-        "title": "Contact Details",
-        "contactInfo": "Contact Information",
-        "company": "Company",
-        "timeline": "Timeline",
-        "created": "Created",
-        "lastUpdated": "Last Updated",
-        "notFound": "Contact not found",
-        "fetchError": "Error loading contact data",
-        "noPosition": "No position specified",
-        "viewCompany": "View Company"
-      }
-    },
+    }
+  },
   "companies": {
     "title": "Companies",
     "subtitle": "Manage all CRM companies",
