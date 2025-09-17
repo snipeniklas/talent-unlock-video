@@ -1,5 +1,6 @@
 {
   "common": {
+    "error": "Error",
     "actions": {
       "login": "Login",
       "create": "Create",
@@ -7,7 +8,8 @@
       "delete": "Delete",
       "cancel": "Cancel",
       "save": "Save",
-      "view": "View"
+      "view": "View",
+      "back": "Back"
     }
   },
   "header": {
