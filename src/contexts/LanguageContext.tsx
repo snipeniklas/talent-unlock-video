@@ -158,6 +158,90 @@ const translations = {
     'about.cta.subtitle': 'Entdecken Sie, wie unsere internationalen Remote-Fachkräfte Ihr Unternehmen voranbringen können.',
     'about.cta.button': 'Kostenlose RaaS Anfrage starten',
     
+    // HomePage - Service Features
+    'services.backoffice.features.organization': 'Office Organization & Administration',
+    'services.backoffice.features.accounting': 'Accounting & Controlling',
+    'services.backoffice.features.support': 'Customer Service & Support',
+    'services.it.features.fullstack': 'Full-Stack Development',
+    'services.it.features.devops': 'DevOps & Cloud',
+    'services.it.features.mobile': 'Mobile & Web Apps',
+    'services.aiml.features.ml': 'Machine Learning',
+    'services.aiml.features.datascience': 'Data Science',
+    'services.aiml.features.strategy': 'AI Strategy Consulting',
+
+    // HomePage - Testimonials
+    'testimonials.niklas.name': 'Niklas Clasen',
+    'testimonials.niklas.company': 'SNIPE Solutions',
+    'testimonials.niklas.text': 'Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.',
+    'testimonials.marc.name': 'Marc Palma',
+    'testimonials.marc.company': 'ECO Containertrans',
+    'testimonials.marc.text': 'Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen.',
+
+    // HomePage - Interactive Section
+    'interactive.title': 'Erleben Sie die RaaS Hub Plattform interaktiv',
+    'interactive.subtitle': 'Entdecken Sie, wie einfach es ist, internationale Remote-Fachkräfte zu finden und zu verwalten',
+    'interactive.feature1.title': 'Erstelle eine Suchanfrage',
+    'interactive.feature1.description': 'Beschreibe deine Anforderungen in nur wenigen Minuten',
+    'interactive.feature2.title': 'Durchsuche Profile',
+    'interactive.feature2.description': 'Entdecke passende Remote-Talente aus unserem Pool',
+    'interactive.feature3.title': 'Verwalte dein Team',
+    'interactive.feature3.description': 'Organisiere und überwache deine Remote-Mitarbeiter',
+
+    // HomePage - Timeline Section
+    'timeline.title': 'Von der Anfrage bis zur Integration',
+    'timeline.subtitle': 'So einfach ist unser bewährter Onboarding-Prozess',
+
+    // HomePage - Method Section
+    'method.title': 'Unsere bewährte Arbeitsweise',
+    'method.subtitle': 'Von der Anfrage bis zur erfolgreichen Integration - so funktioniert es',
+    'method.step1.title': 'Kostenlose Anfrage',
+    'method.step1.description': 'Beschreiben Sie Ihre Anforderungen in unserem unverbindlichen Formular',
+    'method.step2.title': 'Matching & Vorauswahl',
+    'method.step2.description': 'Wir finden die passenden Kandidaten aus unserem geprüften Talent Pool',
+    'method.step3.title': 'Interview & Auswahl',
+    'method.step3.description': 'Sie führen Gespräche und treffen die finale Entscheidung',
+    'method.step4.title': 'Onboarding & Start',
+    'method.step4.description': 'Wir kümmern uns um die Integration und den reibungslosen Start',
+    'method.cta.title': 'Bereit für den ersten Schritt?',
+    'method.cta.subtitle': 'Starten Sie Ihre kostenlose RaaS Anfrage und entdecken Sie die Möglichkeiten internationaler Remote-Expertise.',
+    'method.cta.button': 'Kostenlose Anfrage starten',
+
+    // HomePage - Testimonials Section
+    'testimonials.title': 'Was unsere Kunden sagen',
+    'testimonials.subtitle': 'Erfahrungen von Unternehmen, die bereits mit unseren Remote-Fachkräften arbeiten',
+
+    // HomePage - Solutions Section
+    'solutions.title': 'Unsere internationalen Fachkräfte',
+    'solutions.subtitle': 'Maßgeschneiderte Remote-Teams für Ihre spezifischen Anforderungen',
+
+    // HomePage - Platform Experience Section  
+    'platform.title': 'Erleben Sie unseren',
+    'platform.titleHighlight': 'RaaS',
+    'platform.titleEnd': 'Hub',
+    'platform.subtitle': 'Entdecken Sie, wie unser intuitiver Hub Ihren gesamten RaaS-Prozess vereinfacht - von der Anfrage bis zur erfolgreichen Zusammenarbeit.',
+    'platform.request.title': 'RaaS Anfrage erstellen',
+    'platform.request.description': 'Definieren Sie Ihre Anforderungen in nur wenigen Klicks. Unser intelligentes System erfasst automatisch alle relevanten Details für Ihre RaaS-Lösung.',
+    'platform.matching.title': 'Ressourcen-Matching',
+    'platform.matching.description': 'KI-gestütztes Matching verbindet Sie mit den passenden Remote-Experten aus unserem vorqualifizierten Pool von über 500+ Fachkräften.',
+    'platform.management.title': 'Projekt-Management',
+    'platform.management.description': 'Verfolgen Sie Ihre RaaS-Projekte in Echtzeit. Von der Auswahl bis zur erfolgreichen Umsetzung behalten Sie jederzeit den Überblick.',
+    'platform.demo.title': 'Erleben Sie RaaS in Aktion',
+    'platform.demo.description': 'Sehen Sie, wie unser intelligentes System Ihre Ressourcen-Anfragen in Echtzeit bearbeitet und die perfekten Remote-Experten für Sie findet.',
+    'platform.timeline.title': 'Ihr Weg zu den perfekten',
+    'platform.timeline.highlight': 'Remote-Experten',
+    'platform.timeline.subtitle': 'Unser bewährter 3-Wochen-Prozess bringt Sie sicher und strukturiert zu Ihrer idealen Remote-Fachkraft.',
+    'platform.cta.title': 'Bereit, Ihre Remote-Fachkräfte zu finden?',
+    'platform.cta.subtitle': 'Starten Sie noch heute und erleben Sie, wie schnell und effizient Sie die besten Remote-Talente für Ihr Unternehmen finden können.',
+    'platform.cta.button': 'Kostenlos testen',
+    'platform.cta.buttonSecondary': 'Zum RaaS Hub',
+
+    // HomePage - About Section
+    'about.section.title': 'Über Hej Talent',
+    'about.section.description': 'Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und Vermittlung von internationalen Remote-Talenten.',
+    'about.section.feature1': 'Umfassende Background-Checks',
+    'about.section.feature2': 'Persönliche Betreuung',
+    'about.section.feature3': 'Qualitätsgarantie',
+
     // Common CTAs
     'cta.free': 'KOSTENFREI',
     'common.startNow': 'Jetzt starten',
@@ -308,6 +392,90 @@ const translations = {
     'about.cta.subtitle': 'Discover how our international remote specialists can advance your business.',
     'about.cta.button': 'Start free RaaS request',
     
+    // HomePage - Service Features
+    'services.backoffice.features.organization': 'Office Organization & Administration',
+    'services.backoffice.features.accounting': 'Accounting & Controlling',
+    'services.backoffice.features.support': 'Customer Service & Support',
+    'services.it.features.fullstack': 'Full-Stack Development',
+    'services.it.features.devops': 'DevOps & Cloud',
+    'services.it.features.mobile': 'Mobile & Web Apps',
+    'services.aiml.features.ml': 'Machine Learning',
+    'services.aiml.features.datascience': 'Data Science',
+    'services.aiml.features.strategy': 'AI Strategy Consulting',
+
+    // HomePage - Testimonials
+    'testimonials.niklas.name': 'Niklas Clasen',
+    'testimonials.niklas.company': 'SNIPE Solutions',
+    'testimonials.niklas.text': 'Hej Talent provided us with the perfect remote accountant within 2 weeks. Professional and reliable.',
+    'testimonials.marc.name': 'Marc Palma',
+    'testimonials.marc.company': 'ECO Containertrans',
+    'testimonials.marc.text': 'The excellent work of a new colleague convinced us to bring a second HejTalent specialist into the team.',
+
+    // HomePage - Interactive Section
+    'interactive.title': 'Experience the RaaS Hub Platform Interactively',
+    'interactive.subtitle': 'Discover how easy it is to find and manage international remote specialists',
+    'interactive.feature1.title': 'Create a Search Request',
+    'interactive.feature1.description': 'Describe your requirements in just a few minutes',
+    'interactive.feature2.title': 'Browse Profiles',
+    'interactive.feature2.description': 'Discover suitable remote talents from our pool',
+    'interactive.feature3.title': 'Manage Your Team',
+    'interactive.feature3.description': 'Organize and monitor your remote employees',
+
+    // HomePage - Timeline Section
+    'timeline.title': 'From Request to Integration',
+    'timeline.subtitle': 'This is how our proven onboarding process works',
+
+    // HomePage - Method Section
+    'method.title': 'Our Proven Working Method',
+    'method.subtitle': 'From request to successful integration - this is how it works',
+    'method.step1.title': 'Free Request',
+    'method.step1.description': 'Describe your requirements in our non-binding form',
+    'method.step2.title': 'Matching & Pre-selection',
+    'method.step2.description': 'We find the right candidates from our verified talent pool',
+    'method.step3.title': 'Interview & Selection',
+    'method.step3.description': 'You conduct interviews and make the final decision',
+    'method.step4.title': 'Onboarding & Start',
+    'method.step4.description': 'We take care of integration and smooth start',
+    'method.cta.title': 'Ready for the first step?',
+    'method.cta.subtitle': 'Start your free RaaS request and discover the possibilities of international remote expertise.',
+    'method.cta.button': 'Start Free Request',
+
+    // HomePage - Testimonials Section
+    'testimonials.title': 'What Our Customers Say',
+    'testimonials.subtitle': 'Experiences from companies already working with our remote specialists',
+
+    // HomePage - Solutions Section
+    'solutions.title': 'Our International Specialists',
+    'solutions.subtitle': 'Tailored remote teams for your specific requirements',
+
+    // HomePage - Platform Experience Section  
+    'platform.title': 'Experience our',
+    'platform.titleHighlight': 'RaaS',
+    'platform.titleEnd': 'Hub',
+    'platform.subtitle': 'Discover how our intuitive hub simplifies your entire RaaS process - from request to successful collaboration.',
+    'platform.request.title': 'Create RaaS Request',
+    'platform.request.description': 'Define your requirements in just a few clicks. Our intelligent system automatically captures all relevant details for your RaaS solution.',
+    'platform.matching.title': 'Resource Matching',
+    'platform.matching.description': 'AI-powered matching connects you with the right remote experts from our pre-qualified pool of 500+ specialists.',
+    'platform.management.title': 'Project Management',
+    'platform.management.description': 'Track your RaaS projects in real-time. From selection to successful implementation, you always stay in control.',
+    'platform.demo.title': 'Experience RaaS in Action',
+    'platform.demo.description': 'See how our intelligent system processes your resource requests in real-time and finds the perfect remote experts for you.',
+    'platform.timeline.title': 'Your path to the perfect',
+    'platform.timeline.highlight': 'Remote Experts',
+    'platform.timeline.subtitle': 'Our proven 3-week process guides you safely and structured to your ideal remote specialist.',
+    'platform.cta.title': 'Ready to find your remote specialists?',
+    'platform.cta.subtitle': 'Start today and experience how quickly and efficiently you can find the best remote talents for your company.',
+    'platform.cta.button': 'Try for Free',
+    'platform.cta.buttonSecondary': 'To RaaS Hub',
+
+    // HomePage - About Section
+    'about.section.title': 'About Hej Talent',
+    'about.section.description': 'Since 2020, we have been the trusted partner for companies looking for first-class remote specialists. Our focus is on thorough screening and placement of international remote talents.',
+    'about.section.feature1': 'Comprehensive Background Checks',
+    'about.section.feature2': 'Personal Support',
+    'about.section.feature3': 'Quality Guarantee',
+
     // Common CTAs
     'cta.free': 'FREE',
     'common.startNow': 'Get Started',

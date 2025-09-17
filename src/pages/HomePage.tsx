@@ -47,17 +47,17 @@ const HomePage = () => {
     {
       title: t('services.backoffice.title'),
       description: t('services.backoffice.description'),
-      features: ["Office Organization & Administration", "Accounting & Controlling", "Customer Service & Support"]
+      features: [t('services.backoffice.features.organization'), t('services.backoffice.features.accounting'), t('services.backoffice.features.support')]
     },
     {
       title: t('services.it.title'),
       description: t('services.it.description'),
-      features: ["Full-Stack Development", "DevOps & Cloud", "Mobile & Web Apps"]
+      features: [t('services.it.features.fullstack'), t('services.it.features.devops'), t('services.it.features.mobile')]
     },
     {
       title: t('services.aiml.title'),
       description: t('services.aiml.description'),
-      features: ["Machine Learning", "Data Science", "AI Strategy Consulting"]
+      features: [t('services.aiml.features.ml'), t('services.aiml.features.datascience'), t('services.aiml.features.strategy')]
     }
   ];
 
@@ -70,15 +70,15 @@ const HomePage = () => {
 
   const testimonials = [
     {
-      name: "Niklas Clasen",
-      company: "SNIPE Solutions",
-      text: "Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.",
+      name: t('testimonials.niklas.name'),
+      company: t('testimonials.niklas.company'),
+      text: t('testimonials.niklas.text'),
       rating: 5
     },
     {
-      name: "Marc Palma",
-      company: "ECO Containertrans",
-      text: "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen.",
+      name: t('testimonials.marc.name'),
+      company: t('testimonials.marc.company'),
+      text: t('testimonials.marc.text'),
       rating: 5
     }
   ];
@@ -331,9 +331,9 @@ const HomePage = () => {
       <section id="solutions" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Unsere internationalen Fachkräfte</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">{t('solutions.title')}</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-delay-1">
-              Maßgeschneiderte Remote-Teams für Ihre spezifischen Anforderungen
+              {t('solutions.subtitle')}
             </p>
           </div>
 
@@ -382,11 +382,10 @@ const HomePage = () => {
         <div className="container mx-auto max-w-7xl px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark">
-              Erleben Sie unseren <span className="text-primary">RaaS</span> Hub
+              {t('platform.title')} <span className="text-primary">{t('platform.titleHighlight')}</span> {t('platform.titleEnd')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Entdecken Sie, wie unser intuitiver Hub Ihren gesamten RaaS-Prozess vereinfacht - 
-              von der Anfrage bis zur erfolgreichen Zusammenarbeit.
+              {t('platform.subtitle')}
             </p>
           </div>
 
@@ -396,10 +395,9 @@ const HomePage = () => {
               <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
                 <Search className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-brand-dark mb-3">RaaS Anfrage erstellen</h3>
+              <h3 className="text-xl font-bold text-brand-dark mb-3">{t('platform.request.title')}</h3>
               <p className="text-muted-foreground mb-4">
-                Definieren Sie Ihre Anforderungen in nur wenigen Klicks. Unser intelligentes System 
-                erfasst automatisch alle relevanten Details für Ihre RaaS-Lösung.
+                {t('platform.request.description')}
               </p>
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li className="flex items-center gap-2">
@@ -421,10 +419,9 @@ const HomePage = () => {
               <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
                 <Users className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-brand-dark mb-3">Ressourcen-Matching</h3>
+              <h3 className="text-xl font-bold text-brand-dark mb-3">{t('platform.matching.title')}</h3>
               <p className="text-muted-foreground mb-4">
-                KI-gestütztes Matching verbindet Sie mit den passenden Remote-Experten aus unserem 
-                vorqualifizierten Pool von über 500+ Fachkräften.
+                {t('platform.matching.description')}
               </p>
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li className="flex items-center gap-2">
@@ -446,10 +443,9 @@ const HomePage = () => {
               <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
                 <TrendingUp className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-brand-dark mb-3">Projekt-Management</h3>
+              <h3 className="text-xl font-bold text-brand-dark mb-3">{t('platform.management.title')}</h3>
               <p className="text-muted-foreground mb-4">
-                Verfolgen Sie Ihre RaaS-Projekte in Echtzeit. Von der Auswahl bis zur erfolgreichen 
-                Umsetzung behalten Sie jederzeit den Überblick.
+                {t('platform.management.description')}
               </p>
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li className="flex items-center gap-2">
@@ -470,18 +466,18 @@ const HomePage = () => {
 
           {/* Floating App Demo */}
           <FloatingAppDemo
-            title="Erleben Sie RaaS in Aktion"
-            description="Sehen Sie, wie unser intelligentes System Ihre Ressourcen-Anfragen in Echtzeit bearbeitet und die perfekten Remote-Experten für Sie findet."
+            title={t('platform.demo.title')}
+            description={t('platform.demo.description')}
           />
 
           {/* Project Timeline */}
           <div className="mt-16 animate-slide-up-delay-4">
             <div className="text-center mb-12">
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-brand-dark">
-                Ihr Weg zu den perfekten <span className="text-primary">Remote-Experten</span>
+                {t('platform.timeline.title')} <span className="text-primary">{t('platform.timeline.highlight')}</span>
               </h3>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Unser bewährter 3-Wochen-Prozess bringt Sie sicher und strukturiert zu Ihrer idealen Remote-Fachkraft.
+                {t('platform.timeline.subtitle')}
               </p>
             </div>
             <ProjectTimeline 
@@ -494,22 +490,21 @@ const HomePage = () => {
           <div className="text-center mt-16">
             <div className="bg-gradient-subtle rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-4 text-brand-dark">
-                Bereit, Ihre Remote-Fachkräfte zu finden?
+                {t('platform.cta.title')}
               </h3>
               <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Starten Sie noch heute und erleben Sie, wie schnell und effizient 
-                Sie die besten Remote-Talente für Ihr Unternehmen finden können.
+                {t('platform.cta.subtitle')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" className="bg-gradient-primary hover:shadow-lg border-0">
                   <Link to="/app/search-requests/new">
-                    Kostenlos testen
+                    {t('platform.cta.button')}
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link to="/resource-hub">
-                    Zum RaaS Hub
+                    {t('platform.cta.buttonSecondary')}
                   </Link>
                 </Button>
               </div>
@@ -523,30 +518,28 @@ const HomePage = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">Über Hej Talent</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">{t('about.section.title')}</h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach 
-                erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und 
-                Vermittlung von internationalen Remote-Talenten.
+                {t('about.section.description')}
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 group hover:scale-105 transition-transform duration-200">
                   <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center group-hover:animate-bounce">
                     <Shield className="w-5 h-5 text-white" />
                   </div>
-                  <span className="text-brand-dark font-medium">Umfassende Background-Checks</span>
+                  <span className="text-brand-dark font-medium">{t('about.section.feature1')}</span>
                 </div>
                 <div className="flex items-center gap-3 group hover:scale-105 transition-transform duration-200">
                   <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center group-hover:animate-bounce">
                     <Users className="w-5 h-5 text-white" />
                   </div>
-                  <span className="text-brand-dark font-medium">Persönliche Betreuung</span>
+                  <span className="text-brand-dark font-medium">{t('about.section.feature2')}</span>
                 </div>
                 <div className="flex items-center gap-3 group hover:scale-105 transition-transform duration-200">
                   <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center group-hover:animate-bounce">
                     <CheckCircle className="w-5 h-5 text-white" />
                   </div>
-                  <span className="text-brand-dark font-medium">Qualitätsgarantie</span>
+                  <span className="text-brand-dark font-medium">{t('about.section.feature3')}</span>
                 </div>
               </div>
             </div>
@@ -563,9 +556,9 @@ const HomePage = () => {
       <section id="testimonials" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">Was unsere Kunden sagen</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark animate-fade-in">{t('testimonials.title')}</h2>
             <p className="text-xl text-muted-foreground animate-fade-in-delay-1">
-              Vertrauen Sie auf die Erfahrungen unserer zufriedenen Kunden
+              {t('testimonials.subtitle')}
             </p>
           </div>
 
