@@ -355,8 +355,7 @@ const AIMLLanding = () => {
                   {t('landing.aiMl.faq.expertise', 'Welche KI-Bereiche decken Ihre Experten ab?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  {t('landing.aiMl.faq.expertise.desc', 'Machine Learning, Deep Learning, Computer Vision, NLP, Predictive Analytics, 
-                  Recommendation Systems, Chatbots, Automatisierung und Custom AI Solutions.')}
+                  {t('landing.aiMl.faq.expertise.desc', 'Machine Learning, Deep Learning, Computer Vision, NLP, Predictive Analytics, Recommendation Systems, Chatbots, Automatisierung und Custom AI Solutions.')}
                 </AccordionContent>
               </AccordionItem>
 
@@ -365,8 +364,7 @@ const AIMLLanding = () => {
                   {t('landing.aiMl.faq.qualifications', 'Welche Qualifikationen haben Ihre KI-Experten?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  {t('landing.aiMl.faq.qualifications.desc', 'PhD/Master in Data Science, KI oder verwandten Bereichen. 5+ Jahre Praxiserfahrung, 
-                  Expertise in Python, TensorFlow, PyTorch. Viele kommen aus Tech-Konzernen oder Research.')}
+                  {t('landing.aiMl.faq.qualifications.desc', 'PhD/Master in Data Science, KI oder verwandten Bereichen. 5+ Jahre Praxiserfahrung, Expertise in Python, TensorFlow, PyTorch. Viele kommen aus Tech-Konzernen oder Research.')}
                 </AccordionContent>
               </AccordionItem>
 
@@ -375,8 +373,7 @@ const AIMLLanding = () => {
                   {t('landing.aiMl.faq.projects', 'Welche Art von KI-Projekten wurden bereits umgesetzt?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  {t('landing.aiMl.faq.projects.desc', 'Chatbots für E-Commerce, Predictive Maintenance, Dokumentenanalyse, Computer Vision für 
-                  Qualitätskontrolle, Fraud Detection, Personalisierung, Sprachassistenten und mehr.')}
+                  {t('landing.aiMl.faq.projects.desc', 'Chatbots für E-Commerce, Predictive Maintenance, Dokumentenanalyse, Computer Vision für Qualitätskontrolle, Fraud Detection, Personalisierung, Sprachassistenten und mehr.')}
                 </AccordionContent>
               </AccordionItem>
 
@@ -385,8 +382,7 @@ const AIMLLanding = () => {
                   {t('landing.aiMl.faq.timeline', 'Wie lange dauert ein typisches KI-Projekt?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  {t('landing.aiMl.faq.timeline.desc', 'Proof of Concept: 4-8 Wochen. MVP: 3-6 Monate. Produktive Lösung: 6-12 Monate. 
-                  Wir arbeiten agil mit regelmäßigen Deliveries und Feedback-Schleifen.')}
+                  {t('landing.aiMl.faq.timeline.desc', 'Proof of Concept: 4-8 Wochen. MVP: 3-6 Monate. Produktive Lösung: 6-12 Monate. Wir arbeiten agil mit regelmäßigen Deliveries und Feedback-Schleifen.')}
                 </AccordionContent>
               </AccordionItem>
 
