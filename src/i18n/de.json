@@ -876,6 +876,11 @@
     "kanban": {
       "noContacts": "Keine Kontakte in dieser Phase",
       "contactsCount": "Kontakte"
+    },
+    "csvImport": {
+      "importBtnText": "CSV-Import",
+      "newContactBtnText": "Neuer Kontakt",
+      "companyFieldsNote": "Hinweis: Wenn Sie Unternehmensdaten in Ihrer CSV-Datei haben, werden automatisch entsprechende Unternehmen erstellt oder gefunden."
     }
   }
 }

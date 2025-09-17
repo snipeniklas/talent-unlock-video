@@ -53,7 +53,20 @@ const contactFields = {
   lead_source: "Lead Source",
   notes: "Notes",
   next_follow_up: "Next Follow-up (YYYY-MM-DD)",
-  last_contact_date: "Last Contact Date (YYYY-MM-DD)"
+  last_contact_date: "Last Contact Date (YYYY-MM-DD)",
+  // Company fields for automatic company creation
+  company_name: "Company Name",
+  company_website: "Company Website",
+  company_industry: "Company Industry",
+  company_size_category: "Company Size",
+  company_annual_revenue: "Company Annual Revenue",
+  company_phone: "Company Phone",
+  company_email: "Company Email",
+  company_address_street: "Company Street Address",
+  company_address_city: "Company City",
+  company_address_postal_code: "Company Postal Code",
+  company_address_country: "Company Country",
+  company_notes: "Company Notes"
 };
 
 export default function CsvImportDialog({ open, onOpenChange, type, onImportComplete }: CsvImportDialogProps) {
@@ -136,11 +149,24 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
     for (const row of csvData) {
       try {
         const mappedData: any = {};
+        const companyData: any = {};
         
         // Map CSV fields to database fields
         Object.entries(fieldMapping).forEach(([csvField, dbField]) => {
           if (dbField && dbField !== "skip" && row[csvField]) {
             let value = row[csvField].trim();
+            
+            // Handle company fields for contact import
+            if (type === "contacts" && dbField.startsWith('company_')) {
+              const companyField = dbField.replace('company_', '');
+              if (companyField === 'annual_revenue' && value) {
+                const numericValue = parseFloat(value.replace(/[^0-9.-]/g, ''));
+                companyData[companyField] = isNaN(numericValue) ? null : numericValue;
+              } else {
+                companyData[companyField] = value;
+              }
+              return;
+            }
             
             // Handle special field types
             if (dbField === 'annual_revenue' && value) {
@@ -172,6 +198,34 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
         }
         if (type === "contacts" && (!mappedData.first_name || !mappedData.last_name)) {
           throw new Error("First name and last name are required");
+        }
+
+        // Handle company creation for contacts
+        if (type === "contacts" && companyData.name) {
+          // Check if company already exists
+          const { data: existingCompany } = await (supabase as any)
+            .from('crm_companies')
+            .select('id')
+            .eq('name', companyData.name)
+            .maybeSingle();
+
+          let companyId;
+          if (existingCompany) {
+            companyId = existingCompany.id;
+          } else {
+            // Create new company
+            companyData.status = companyData.status || "prospect";
+            const { data: newCompany, error: companyError } = await (supabase as any)
+              .from('crm_companies')
+              .insert([companyData])
+              .select('id')
+              .single();
+
+            if (companyError) throw companyError;
+            companyId = newCompany.id;
+          }
+
+          mappedData.crm_company_id = companyId;
         }
 
         const { error } = await (supabase as any)
@@ -287,6 +341,14 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
                 <p className="text-muted-foreground mb-4">
                   Found {csvData.length} rows. Map your CSV columns to database fields:
                 </p>
+                
+                {type === "contacts" && (
+                  <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+                    <p className="text-sm text-blue-700">
+                      {t('crm.csvImport.companyFieldsNote')}
+                    </p>
+                  </div>
+                )}
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {csvHeaders.map((header) => (

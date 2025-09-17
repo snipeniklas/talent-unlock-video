@@ -873,6 +873,11 @@
     "kanban": {
       "noContacts": "No contacts in this stage",
       "contactsCount": "contacts"
+    },
+    "csvImport": {
+      "importBtnText": "CSV Import",
+      "newContactBtnText": "New Contact",
+      "companyFieldsNote": "Note: If you have company data in your CSV file, corresponding companies will be automatically created or found."
     }
   }
 }
