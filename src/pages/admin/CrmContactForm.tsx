@@ -107,7 +107,7 @@ export default function CrmContactForm() {
           notes: data.notes || "",
           next_follow_up: data.next_follow_up || "",
           last_contact_date: data.last_contact_date || "",
-          crm_company_id: data.crm_company_id || ""
+          crm_company_id: data.crm_company_id || "none"
         });
       }
     } catch (error) {
@@ -139,7 +139,7 @@ export default function CrmContactForm() {
       
       const submitData = {
         ...formData,
-        crm_company_id: formData.crm_company_id || null,
+        crm_company_id: formData.crm_company_id === "none" ? null : formData.crm_company_id || null,
         next_follow_up: formData.next_follow_up || null,
         last_contact_date: formData.last_contact_date || null
       };
@@ -289,7 +289,7 @@ export default function CrmContactForm() {
                       <SelectValue placeholder="Select company" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">No company</SelectItem>
+                      <SelectItem value="none">No company</SelectItem>
                       {companies.map((company) => (
                         <SelectItem key={company.id} value={company.id}>
                           {company.name}

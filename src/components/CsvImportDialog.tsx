@@ -139,7 +139,7 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
         
         // Map CSV fields to database fields
         Object.entries(fieldMapping).forEach(([csvField, dbField]) => {
-          if (dbField && row[csvField]) {
+          if (dbField && dbField !== "skip" && row[csvField]) {
             let value = row[csvField].trim();
             
             // Handle special field types
@@ -300,7 +300,7 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
                           <SelectValue placeholder="Select database field" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">Skip this field</SelectItem>
+                          <SelectItem value="skip">Skip this field</SelectItem>
                           {Object.entries(fields).map(([key, label]) => (
                             <SelectItem key={key} value={key}>
                               {label}
