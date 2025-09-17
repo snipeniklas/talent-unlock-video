@@ -5,6 +5,7 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
 import { useTranslation } from '@/i18n/i18n';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const AppLayout = () => {
   const navigate = useNavigate();
@@ -66,6 +67,9 @@ const AppLayout = () => {
           <SidebarTrigger className="md:ml-2" />
           <div className="flex-1 text-center">
             <span className="font-semibold text-brand-dark text-sm md:text-base">{t('app.layout.title', 'Hej Talent Platform')}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
           </div>
         </header>
 
