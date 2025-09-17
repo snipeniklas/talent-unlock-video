@@ -112,6 +112,10 @@ const HomePage = () => {
                     <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
                     <span className="text-xs md:text-sm font-medium text-brand-dark">98% Erfolgsquote</span>
                   </div>
+                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs md:text-sm font-medium text-brand-dark">Qualitätsgarantie</span>
+                  </div>
                 </div>
 
                 {/* Main Title */}
