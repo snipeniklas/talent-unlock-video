@@ -13,6 +13,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { MessageCircle, Plus, Send, Clock, AlertCircle, CheckCircle2, User, Settings } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from '@/i18n/i18n';
 
 interface SupportTicket {
   id: string;
@@ -59,6 +60,7 @@ const Support = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   // Fetch current user data including roles
   const { data: currentUser } = useQuery({
@@ -95,14 +97,12 @@ const Support = () => {
       
       if (error) throw error;
 
-      // Get related profiles separately
       const creatorIds = [...new Set(ticketsData?.map(t => t.created_by) || [])];
       const { data: profiles } = await supabase
         .from('profiles')
         .select('user_id, first_name, last_name')
         .in('user_id', creatorIds);
 
-      // Combine data
       const ticketsWithProfiles = ticketsData?.map(ticket => ({
         ...ticket,
         profiles: profiles?.find(p => p.user_id === ticket.created_by)
@@ -118,7 +118,6 @@ const Support = () => {
     queryFn: async () => {
       if (!selectedTicket) return [];
       
-      // First get messages
       const { data: messagesData, error: messagesError } = await supabase
         .from('support_messages')
         .select('*')
@@ -127,7 +126,6 @@ const Support = () => {
       
       if (messagesError) throw messagesError;
 
-      // Then get sender profiles with roles
       const senderIds = [...new Set(messagesData?.map(m => m.sender_id) || [])];
       const { data: profiles } = await supabase
         .from('profiles')
@@ -139,7 +137,6 @@ const Support = () => {
         .select('user_id, role')
         .in('user_id', senderIds);
 
-      // Combine data
       const messagesWithProfiles = messagesData?.map(message => {
         const profile = profiles?.find(p => p.user_id === message.sender_id);
         const roles = userRoles?.filter(ur => ur.user_id === message.sender_id) || [];
@@ -191,8 +188,8 @@ const Support = () => {
         priority: 'medium'
       });
       toast({
-        title: "Ticket erstellt",
-        description: "Ihr Support-Ticket wurde erfolgreich erstellt.",
+        title: t('app.support.toasts.createdTitle', 'Ticket erstellt'),
+        description: t('app.support.toasts.createdDesc', 'Ihr Support-Ticket wurde erfolgreich erstellt.'),
       });
     }
   });
@@ -240,18 +237,16 @@ const Support = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['supportTickets'] });
       toast({
-        title: "Status aktualisiert",
-        description: "Der Ticket-Status wurde erfolgreich aktualisiert.",
+        title: t('app.support.toasts.statusUpdatedTitle', 'Status aktualisiert'),
+        description: t('app.support.toasts.statusUpdatedDesc', 'Der Ticket-Status wurde erfolgreich aktualisiert.'),
       });
     }
   });
 
-  // Scroll to bottom when new messages arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Real-time subscriptions
   useEffect(() => {
     const ticketsChannel = supabase
       .channel('support_tickets_changes')
@@ -316,18 +311,18 @@ const Support = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items_center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-brand-dark mb-2">
-            <span className="text-primary">Support</span> Chat
+            <span className="text-primary">{t('app.support.title', 'Support Chat')}</span>
           </h1>
           <p className="text-muted-foreground">
-            Direkter Kontakt zu unserem Support-Team
+            {t('app.support.subtitle', 'Direkter Kontakt zu unserem Support-Team')}
           </p>
         </div>
         <Button onClick={() => setShowCreateForm(true)} className="bg-primary hover:bg-primary/90">
           <Plus className="w-4 h-4 mr-2" />
-          Neues Ticket
+          {t('app.support.newTicket', 'Neues Ticket')}
         </Button>
       </div>
 
@@ -337,18 +332,18 @@ const Support = () => {
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2">
               <MessageCircle className="w-5 h-5" />
-              Support Tickets
+              {t('app.support.listTitle', 'Support Tickets')}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0">
             <ScrollArea className="h-[calc(100vh-320px)] min-h-[400px]">
               {ticketsLoading ? (
                 <div className="p-4 text-center text-muted-foreground">
-                  Tickets werden geladen...
+                  {t('app.support.loading', 'Tickets werden geladen...')}
                 </div>
               ) : tickets.length === 0 ? (
                 <div className="p-4 text-center text-muted-foreground">
-                  Noch keine Tickets vorhanden
+                  {t('app.support.none', 'Noch keine Tickets vorhanden')}
                 </div>
               ) : (
                 <div className="space-y-2 p-3">
@@ -363,7 +358,7 @@ const Support = () => {
                       <div className="flex justify-between items-start mb-2">
                         <h4 className="font-medium text-sm line-clamp-1">{ticket.title}</h4>
                         <Badge variant={getStatusColor(ticket.status)} className="text-xs">
-                          {ticket.status}
+                          {t(`app.status.${ticket.status}`, ticket.status)}
                         </Badge>
                       </div>
                       <p className="text-xs text-muted-foreground line-clamp-2 mb-2">
@@ -371,7 +366,7 @@ const Support = () => {
                       </p>
                       <div className="flex justify-between items-center">
                         <Badge variant={getPriorityColor(ticket.priority)} className="text-xs">
-                          {ticket.priority}
+                          {t(`app.support.priority.${ticket.priority}`, ticket.priority)}
                         </Badge>
                         <span className="text-xs text-muted-foreground">
                           {new Date(ticket.created_at).toLocaleDateString('de-DE')}
@@ -390,14 +385,14 @@ const Support = () => {
           {selectedTicket && selectedTicketData ? (
             <>
               <CardHeader className="pb-3">
-                <div className="flex justify-between items-start">
+                <div className="flex justify_between items-start">
                   <div>
                     <CardTitle className="text-lg">{selectedTicketData.title}</CardTitle>
                     <CardDescription>{selectedTicketData.description}</CardDescription>
                   </div>
                   <div className="flex gap-2">
                     <Badge variant={getPriorityColor(selectedTicketData.priority)}>
-                      {selectedTicketData.priority}
+                      {t(`app.support.priority.${selectedTicketData.priority}`, selectedTicketData.priority)}
                     </Badge>
                     {isAdmin && (
                       <Select
@@ -410,10 +405,10 @@ const Support = () => {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="open">Offen</SelectItem>
-                          <SelectItem value="in_progress">In Bearbeitung</SelectItem>
-                          <SelectItem value="resolved">Gelöst</SelectItem>
-                          <SelectItem value="closed">Geschlossen</SelectItem>
+                          <SelectItem value="open">{t('app.status.open', 'Offen')}</SelectItem>
+                          <SelectItem value="in_progress">{t('app.status.in_progress', 'In Bearbeitung')}</SelectItem>
+                          <SelectItem value="resolved">{t('app.status.resolved', 'Gelöst')}</SelectItem>
+                          <SelectItem value="closed">{t('app.status.closed', 'Geschlossen')}</SelectItem>
                         </SelectContent>
                       </Select>
                     )}
@@ -422,7 +417,7 @@ const Support = () => {
               </CardHeader>
               <Separator />
               <CardContent className="p-0">
-                <ScrollArea className="h-[calc(100vh-420px)] min-h-[300px] p-4">
+                <ScrollArea className="h-[calc(100vh-420px)] min-h_[300px] p-4">
                   <div className="space-y-4">
                     {messages.map((message: any) => {
                       const isAdmin = message.user_roles?.some((ur: any) => ur.role === 'admin');
@@ -444,7 +439,7 @@ const Support = () => {
                             <div className="flex items-center gap-2 mb-1">
                               <span className="text-sm font-medium">
                                 {isCurrentUser 
-                                  ? 'Sie' 
+                                  ? t('app.support.you', 'Sie') 
                                   : `${message.profiles?.first_name} ${message.profiles?.last_name}`
                                 }
                               </span>
@@ -480,7 +475,7 @@ const Support = () => {
                 <div className="p-4">
                   <div className="flex gap-2">
                     <Input
-                      placeholder="Nachricht eingeben..."
+                      placeholder={t('app.support.inputPlaceholder', 'Nachricht eingeben...')}
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
@@ -501,7 +496,7 @@ const Support = () => {
             <div className="h-full flex items-center justify-center text-muted-foreground">
               <div className="text-center">
                 <MessageCircle className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                <p>Wählen Sie ein Ticket aus, um den Chat zu starten</p>
+                <p>{t('app.support.selectTicket', 'Wählen Sie ein Ticket aus, um den Chat zu starten')}</p>
               </div>
             </div>
           )}
@@ -513,24 +508,24 @@ const Support = () => {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <Card className="w-full max-w-md mx-4">
             <CardHeader>
-              <CardTitle>Neues Support-Ticket</CardTitle>
+              <CardTitle>{t('app.support.modal.title', 'Neues Support-Ticket')}</CardTitle>
               <CardDescription>
-                Beschreiben Sie Ihr Anliegen so detailliert wie möglich
+                {t('app.support.modal.desc', 'Beschreiben Sie Ihr Anliegen so detailliert wie möglich')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="text-sm font-medium">Titel</label>
+                <label className="text-sm font-medium">{t('app.support.modal.fields.title', 'Titel')}</label>
                 <Input
-                  placeholder="Kurze Beschreibung des Problems"
+                  placeholder={t('app.support.modal.fields.title', 'Kurze Beschreibung des Problems')}
                   value={newTicketData.title}
                   onChange={(e) => setNewTicketData(prev => ({...prev, title: e.target.value}))}
                 />
               </div>
               <div>
-                <label className="text-sm font-medium">Beschreibung</label>
+                <label className="text-sm font-medium">{t('app.support.modal.fields.desc', 'Beschreibung')}</label>
                 <Textarea
-                  placeholder="Detaillierte Beschreibung des Problems oder der Anfrage"
+                  placeholder={t('app.support.modal.fields.desc', 'Detaillierte Beschreibung des Problems oder der Anfrage')}
                   rows={4}
                   value={newTicketData.description}
                   onChange={(e) => setNewTicketData(prev => ({...prev, description: e.target.value}))}
@@ -538,7 +533,7 @@ const Support = () => {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium">Kategorie</label>
+                  <label className="text-sm font-medium">{t('app.support.modal.fields.category', 'Kategorie')}</label>
                   <Select
                     value={newTicketData.category}
                     onValueChange={(value: any) => setNewTicketData(prev => ({...prev, category: value}))}
@@ -547,15 +542,15 @@ const Support = () => {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="general">Allgemein</SelectItem>
-                      <SelectItem value="technical">Technisch</SelectItem>
-                      <SelectItem value="billing">Abrechnung</SelectItem>
-                      <SelectItem value="resource_request">Ressourcen-Anfrage</SelectItem>
+                      <SelectItem value="general">{t('app.support.modal.categories.general', 'Allgemein')}</SelectItem>
+                      <SelectItem value="technical">{t('app.support.modal.categories.technical', 'Technisch')}</SelectItem>
+                      <SelectItem value="billing">{t('app.support.modal.categories.billing', 'Abrechnung')}</SelectItem>
+                      <SelectItem value="resource_request">{t('app.support.modal.categories.resource_request', 'Ressourcen-Anfrage')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div>
-                  <label className="text-sm font-medium">Priorität</label>
+                  <label className="text-sm font-medium">{t('app.support.modal.fields.priority', 'Priorität')}</label>
                   <Select
                     value={newTicketData.priority}
                     onValueChange={(value: any) => setNewTicketData(prev => ({...prev, priority: value}))}
@@ -564,10 +559,10 @@ const Support = () => {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="low">Niedrig</SelectItem>
-                      <SelectItem value="medium">Mittel</SelectItem>
-                      <SelectItem value="high">Hoch</SelectItem>
-                      <SelectItem value="urgent">Dringend</SelectItem>
+                      <SelectItem value="low">{t('app.support.priority.low', 'Niedrig')}</SelectItem>
+                      <SelectItem value="medium">{t('app.support.priority.medium', 'Mittel')}</SelectItem>
+                      <SelectItem value="high">{t('app.support.priority.high', 'Hoch')}</SelectItem>
+                      <SelectItem value="urgent">{t('app.support.priority.urgent', 'Dringend')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -577,14 +572,14 @@ const Support = () => {
                   variant="outline" 
                   onClick={() => setShowCreateForm(false)}
                 >
-                  Abbrechen
+                  {t('app.support.modal.cancel', 'Abbrechen')}
                 </Button>
                 <Button 
                   onClick={() => createTicketMutation.mutate(newTicketData)}
                   disabled={!newTicketData.title.trim() || createTicketMutation.isPending}
                   className="bg-primary hover:bg-primary/90"
                 >
-                  Ticket erstellen
+                  {t('app.support.modal.create', 'Ticket erstellen')}
                 </Button>
               </div>
             </CardContent>

@@ -21,6 +21,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from '@/i18n/i18n';
 
 interface SearchRequest {
   id: string;
@@ -45,6 +46,7 @@ export default function AdminSearchRequests() {
   const [statusFilter, setStatusFilter] = useState("all");
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchSearchRequests();
@@ -101,52 +103,50 @@ export default function AdminSearchRequests() {
       if (error) {
         console.error('Error deleting search request:', error);
         toast({
-          title: "Fehler",
-          description: "Suchauftrag konnte nicht gelöscht werden.",
-          variant: "destructive",
+          title: t('app.adminSearchRequests.toasts.error', 'Fehler'),
+          description: t('app.adminSearchRequests.toasts.deleteFailed', 'Suchauftrag konnte nicht gelöscht werden.'),
+          variant: 'destructive',
         });
         return;
       }
 
-      // Remove from local state
       setSearchRequests(prev => prev.filter(req => req.id !== requestId));
 
       toast({
-        title: "Erfolg",
-        description: "Suchauftrag wurde erfolgreich gelöscht.",
+        title: t('app.adminSearchRequests.toasts.deleteSuccessTitle', 'Erfolg'),
+        description: t('app.adminSearchRequests.toasts.deleteSuccess', 'Suchauftrag wurde erfolgreich gelöscht.'),
       });
     } catch (error) {
       console.error('Error:', error);
       toast({
-        title: "Fehler",
-        description: "Ein unerwarteter Fehler ist aufgetreten.",
-        variant: "destructive",
+        title: t('app.adminSearchRequests.toasts.error', 'Fehler'),
+        description: t('app.adminSearchRequests.toasts.unexpected', 'Ein unerwarteter Fehler ist aufgetreten.'),
+        variant: 'destructive',
       });
     }
   };
 
   const getEmploymentTypeText = (type?: string) => {
-    const types = {
-      full_time: "Vollzeit",
-      part_time: "Teilzeit",
-      contract: "Vertrag",
-      freelance: "Freelance"
+    const types: any = {
+      full_time: t('app.adminSearchRequests.table.employmentType.full_time', 'Vollzeit'),
+      part_time: t('app.adminSearchRequests.table.employmentType.part_time', 'Teilzeit'),
+      contract: t('app.adminSearchRequests.table.employmentType.contract', 'Vertrag'),
+      freelance: t('app.adminSearchRequests.table.employmentType.freelance', 'Freelance')
     };
-    return type ? types[type as keyof typeof types] : "Nicht angegeben";
+    return type ? types[type] : t('app.adminSearchRequests.table.employmentType.unknown', 'Nicht angegeben');
   };
 
   const getExperienceLevelText = (level?: string) => {
-    const levels = {
-      junior: "Junior",
-      mid: "Mid-Level",
-      senior: "Senior",
-      lead: "Lead"
+    const levels: any = {
+      junior: t('app.adminSearchRequests.table.experience.junior', 'Junior'),
+      mid: t('app.adminSearchRequests.table.experience.mid', 'Mid-Level'),
+      senior: t('app.adminSearchRequests.table.experience.senior', 'Senior'),
+      lead: t('app.adminSearchRequests.table.experience.lead', 'Lead')
     };
-    return level ? levels[level as keyof typeof levels] : "Nicht angegeben";
+    return level ? levels[level] : t('app.adminSearchRequests.table.experience.unknown', 'Nicht angegeben');
   };
 
   const getAssignmentStats = () => {
-    // Since we removed resource_allocations, return empty stats for now
     return { total: 0, pending: 0, active: 0, completed: 0 };
   };
 
@@ -169,22 +169,22 @@ export default function AdminSearchRequests() {
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Kundenprojekte verwalten</h1>
-          <p className="text-muted-foreground">Alle Kundenaufträge und Ressourcen-Zuweisungen im Überblick</p>
+          <h1 className="text-3xl font-bold">{t('app.adminSearchRequests.title', 'Kundenprojekte verwalten')}</h1>
+          <p className="text-muted-foreground">{t('app.adminSearchRequests.subtitle', 'Alle Kundenaufträge und Ressourcen-Zuweisungen im Überblick')}</p>
         </div>
       </div>
 
       {/* Filter und Suche */}
       <Card>
         <CardHeader>
-          <CardTitle>Filter</CardTitle>
+          <CardTitle>{t('app.adminSearchRequests.filters.title', 'Filter')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Nach Titel, Unternehmen oder Standort suchen..."
+                placeholder={t('app.adminSearchRequests.filters.search', 'Nach Titel, Unternehmen oder Standort suchen...')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
@@ -192,14 +192,14 @@ export default function AdminSearchRequests() {
             </div>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger>
-                <SelectValue placeholder="Status filtern" />
+                <SelectValue placeholder={t('app.adminSearchRequests.filters.status', 'Status filtern')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Alle Status</SelectItem>
-                <SelectItem value="active">Aktiv</SelectItem>
-                <SelectItem value="paused">Pausiert</SelectItem>
-                <SelectItem value="completed">Abgeschlossen</SelectItem>
-                <SelectItem value="cancelled">Abgebrochen</SelectItem>
+                <SelectItem value="all">{t('app.adminSearchRequests.filters.all', 'Alle Status')}</SelectItem>
+                <SelectItem value="active">{t('app.adminSearchRequests.filters.active', 'Aktiv')}</SelectItem>
+                <SelectItem value="paused">{t('app.adminSearchRequests.filters.paused', 'Pausiert')}</SelectItem>
+                <SelectItem value="completed">{t('app.adminSearchRequests.filters.completed', 'Abgeschlossen')}</SelectItem>
+                <SelectItem value="cancelled">{t('app.adminSearchRequests.filters.cancelled', 'Abgebrochen')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -209,9 +209,9 @@ export default function AdminSearchRequests() {
       {/* Suchaufträge Übersicht */}
       <Card>
         <CardHeader>
-          <CardTitle>Kundenprojekte ({filteredRequests.length})</CardTitle>
+          <CardTitle>{t('app.adminSearchRequests.table.requests', 'Kundenprojekte ({count})').replace('{count}', String(filteredRequests.length))}</CardTitle>
           <CardDescription>
-            Übersicht aller Kundenaufträge und deren Ressourcen-Zuweisungen
+            {t('app.adminSearchRequests.table.desc', 'Übersicht aller Kundenaufträge und deren Ressourcen-Zuweisungen')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -219,8 +219,8 @@ export default function AdminSearchRequests() {
             <div className="text-center py-8">
               <p className="text-muted-foreground">
                 {searchTerm || statusFilter !== "all" 
-                  ? "Keine Kundenprojekte gefunden, die den Filterkriterien entsprechen."
-                  : "Noch keine Kundenprojekte vorhanden."
+                  ? t('app.adminSearchRequests.empty.filtered', 'Keine Kundenprojekte gefunden, die den Filterkriterien entsprechen.')
+                  : t('app.adminSearchRequests.empty.none', 'Noch keine Kundenprojekte vorhanden.')
                 }
               </p>
             </div>
@@ -229,14 +229,14 @@ export default function AdminSearchRequests() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Auftrag</TableHead>
-                    <TableHead>Unternehmen</TableHead>
-                    <TableHead>Details</TableHead>
-                    <TableHead>Gehalt</TableHead>
-                    <TableHead>Ressourcen-Zuweisungen</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Erstellt</TableHead>
-                    <TableHead>Aktionen</TableHead>
+                    <TableHead>{t('app.adminSearchRequests.table.cols.request', 'Auftrag')}</TableHead>
+                    <TableHead>{t('app.adminSearchRequests.table.cols.company', 'Unternehmen')}</TableHead>
+                    <TableHead>{t('app.adminSearchRequests.table.cols.details', 'Details')}</TableHead>
+                    <TableHead>{t('app.adminSearchRequests.table.cols.salary', 'Gehalt')}</TableHead>
+                    <TableHead>{t('app.adminSearchRequests.table.cols.allocations', 'Ressourcen-Zuweisungen')}</TableHead>
+                    <TableHead>{t('app.adminSearchRequests.table.cols.status', 'Status')}</TableHead>
+                    <TableHead>{t('app.adminSearchRequests.table.cols.created', 'Erstellt')}</TableHead>
+                    <TableHead>{t('app.adminSearchRequests.table.cols.actions', 'Aktionen')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -271,33 +271,33 @@ export default function AdminSearchRequests() {
                           {request.salary_min && request.salary_max ? (
                             <div className="flex items-center gap-1">
                               <Euro className="h-3 w-3" />
-                              <span className="text-sm">
-                                {request.salary_min.toLocaleString()} - {request.salary_max.toLocaleString()}
+                              <span className="text_sm">
+                                {t('app.adminSearchRequests.table.euroRange', '{min} - {max}').replace('{min}', request.salary_min.toLocaleString()).replace('{max}', request.salary_max.toLocaleString())}
                               </span>
                             </div>
                           ) : (
-                            <span className="text-sm text-muted-foreground">Nicht angegeben</span>
+                            <span className="text-sm text-muted-foreground">{t('app.adminSearchRequests.table.notProvided', 'Nicht angegeben')}</span>
                           )}
                         </TableCell>
                         <TableCell>
                           <div className="space-y-1">
                             <div className="flex items-center gap-1">
                               <Users className="h-3 w-3" />
-                              <span className="text-sm font-medium">{stats.total} gesamt</span>
+                              <span className="text-sm font-medium">{t('app.adminSearchRequests.table.stats.total', '{count} gesamt').replace('{count}', String(stats.total))}</span>
                             </div>
                             {stats.pending > 0 && (
                               <Badge variant="secondary" className="text-xs">
-                                {stats.pending} vorgeschlagen
+                                {t('app.adminSearchRequests.table.stats.pending', '{count} vorgeschlagen').replace('{count}', String(stats.pending))}
                               </Badge>
                             )}
                             {stats.active > 0 && (
                               <Badge variant="default" className="text-xs">
-                                {stats.active} zugeteilt
+                                {t('app.adminSearchRequests.table.stats.active', '{count} zugeteilt').replace('{count}', String(stats.active))}
                               </Badge>
                             )}
                             {stats.completed > 0 && (
                               <Badge variant="outline" className="text-xs">
-                                {stats.completed} abgeschlossen
+                                {t('app.adminSearchRequests.table.stats.completed', '{count} abgeschlossen').replace('{count}', String(stats.completed))}
                               </Badge>
                             )}
                           </div>
@@ -323,7 +323,7 @@ export default function AdminSearchRequests() {
                               onClick={() => navigate(`/admin/search-requests/${request.id}/allocations`)}
                             >
                               <UserCheck className="h-4 w-4 mr-1" />
-                              Ressourcen
+                              {t('app.adminSearchRequests.buttons.resources', 'Ressourcen')}
                             </Button>
                             <Button 
                               size="sm" 
@@ -331,6 +331,7 @@ export default function AdminSearchRequests() {
                               onClick={() => navigate(`/admin/search-requests/${request.id}`)}
                             >
                               <Eye className="w-4 h-4" />
+                              {t('common.actions.view', 'Ansehen')}
                             </Button>
                             <AlertDialog>
                               <AlertDialogTrigger asChild>
@@ -344,15 +345,15 @@ export default function AdminSearchRequests() {
                               </AlertDialogTrigger>
                               <AlertDialogContent>
                                 <AlertDialogHeader>
-                                  <AlertDialogTitle>Suchauftrag löschen</AlertDialogTitle>
+                                  <AlertDialogTitle>{t('app.adminSearchRequests.confirmDelete.title', 'Suchauftrag löschen')}</AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    Sind Sie sicher, dass Sie diesen Suchauftrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.
+                                    {t('app.adminSearchRequests.confirmDelete.desc', 'Sind Sie sicher, dass Sie diesen Suchauftrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.')}
                                   </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
-                                  <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+                                  <AlertDialogCancel>{t('common.actions.cancel', 'Abbrechen')}</AlertDialogCancel>
                                   <AlertDialogAction onClick={() => handleDeleteRequest(request.id)}>
-                                    Löschen
+                                    {t('common.actions.delete', 'Löschen')}
                                   </AlertDialogAction>
                                 </AlertDialogFooter>
                               </AlertDialogContent>

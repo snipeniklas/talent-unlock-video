@@ -4,7 +4,7 @@ import {
   Home, 
   Search, 
   Users, 
-  Settings, 
+  Settings as SettingsIcon, 
   LogOut, 
   Building2, 
   UserCheck,
@@ -30,6 +30,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import { useTranslation } from '@/i18n/i18n';
 
 interface UserRole {
   role: 'admin' | 'company_admin' | 'user';
@@ -42,6 +43,7 @@ export function AppSidebar() {
   const { toast } = useToast();
   const [userRole, setUserRole] = useState<UserRole | null>(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getCurrentUserRole = async () => {
@@ -75,15 +77,15 @@ export function AppSidebar() {
     const { error } = await supabase.auth.signOut();
     if (error) {
       toast({
-        title: "Fehler beim Abmelden",
+        title: t('app.sidebar.logout.errorTitle', 'Fehler beim Abmelden'),
         description: error.message,
         variant: "destructive",
       });
     } else {
       navigate('/');
       toast({
-        title: "Erfolgreich abgemeldet",
-        description: "Sie wurden erfolgreich abgemeldet.",
+        title: t('app.sidebar.logout.successTitle', 'Erfolgreich abgemeldet'),
+        description: t('app.sidebar.logout.successDesc', 'Sie wurden erfolgreich abgemeldet.'),
       });
     }
   };
@@ -97,21 +99,21 @@ export function AppSidebar() {
 
   // Company Admin/User Navigation Items
   const companyItems = [
-    { title: "Dashboard", url: "/app/dashboard", icon: Home },
-    { title: "Suchaufträge", url: "/app/search-requests", icon: Search },
-    { title: "Spezialisten", url: "/app/specialists", icon: Users },
-    { title: "Support Chat", url: "/app/support", icon: MessageCircle },
-    { title: "Einstellungen", url: "/app/settings", icon: Settings },
+    { title: t('app.sidebar.company.dashboard', 'Dashboard'), url: "/app/dashboard", icon: Home },
+    { title: t('app.sidebar.company.requests', 'Suchaufträge'), url: "/app/search-requests", icon: Search },
+    { title: t('app.sidebar.company.specialists', 'Spezialisten'), url: "/app/specialists", icon: Users },
+    { title: t('app.sidebar.company.support', 'Support Chat'), url: "/app/support", icon: MessageCircle },
+    { title: t('app.sidebar.company.settings', 'Einstellungen'), url: "/app/settings", icon: SettingsIcon },
   ];
 
   // Admin Navigation Items
   const adminItems = [
-    { title: "Admin Dashboard", url: "/admin/dashboard", icon: Shield },
-    { title: "Alle Unternehmen", url: "/admin/companies", icon: Building2 },
-    { title: "RaaS Ressourcen", url: "/admin/candidates", icon: UserCog },
-    { title: "Kundenprojekte", url: "/admin/search-requests", icon: FileText },
-    { title: "Support Chat", url: "/admin/support", icon: MessageCircle },
-    { title: "Benutzerverwaltung", url: "/admin/settings", icon: Settings },
+    { title: t('app.sidebar.admin.dashboard', 'Admin Dashboard'), url: "/admin/dashboard", icon: Shield },
+    { title: t('app.sidebar.admin.companies', 'Alle Unternehmen'), url: "/admin/companies", icon: Building2 },
+    { title: t('app.sidebar.admin.resources', 'RaaS Ressourcen'), url: "/admin/candidates", icon: UserCog },
+    { title: t('app.sidebar.admin.projects', 'Kundenprojekte'), url: "/admin/search-requests", icon: FileText },
+    { title: t('app.sidebar.admin.support', 'Support Chat'), url: "/admin/support", icon: MessageCircle },
+    { title: t('app.sidebar.admin.settings', 'Benutzerverwaltung'), url: "/admin/settings", icon: SettingsIcon },
   ];
 
   if (loading) {
@@ -127,7 +129,6 @@ export function AppSidebar() {
   }
 
   const navigationItems = userRole?.role === 'admin' ? adminItems : companyItems;
-  const isExpanded = navigationItems.some((item) => isActive(item.url));
 
   return (
     <Sidebar className={isCollapsed ? "w-14" : "w-60"}>
@@ -147,7 +148,7 @@ export function AppSidebar() {
 
         <SidebarGroup>
           <SidebarGroupLabel className="text-foreground font-semibold">
-            {userRole?.role === 'admin' ? 'Admin Bereich' : 'Hauptmenü'}
+            {userRole?.role === 'admin' ? t('app.sidebar.section.admin', 'Admin Bereich') : t('app.sidebar.section.main', 'Hauptmenü')}
           </SidebarGroupLabel>
           
           <SidebarGroupContent>
@@ -173,7 +174,7 @@ export function AppSidebar() {
         {/* Quick Actions */}
         {userRole?.role !== 'admin' && (
           <SidebarGroup>
-            <SidebarGroupLabel className="text-foreground font-semibold">Schnellzugriff</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-foreground font-semibold">{t('app.sidebar.quick', 'Schnellzugriff')}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem>
@@ -183,7 +184,7 @@ export function AppSidebar() {
                       className={({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${getNavCls({ isActive })}`}
                     >
                       <Plus className="h-4 w-4 flex-shrink-0" />
-                      {!isCollapsed && <span className="flex-1">Neue Anfrage</span>}
+                      {!isCollapsed && <span className="flex-1">{t('app.sidebar.quick.new', 'Neue Anfrage')}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -200,7 +201,7 @@ export function AppSidebar() {
             onClick={handleLogout}
           >
             <LogOut className="h-4 w-4 flex-shrink-0" />
-            {!isCollapsed && <span className="ml-2">Abmelden</span>}
+            {!isCollapsed && <span className="ml-2">{t('app.sidebar.logout.label', 'Abmelden')}</span>}
           </Button>
         </div>
       </SidebarContent>

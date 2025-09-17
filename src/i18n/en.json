@@ -1,0 +1,788 @@
+{
+  "common": {
+    "actions": {
+      "login": "Login",
+      "create": "Create",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "save": "Save",
+      "view": "View"
+    }
+  },
+  "header": {
+    "nav": {
+      "home": "Home",
+      "solutions": "RaaS Solutions",
+      "howWeWork": "How we work",
+      "aboutUs": "About us",
+      "hub": "RaaS Hub",
+      "contact": "Contact"
+    },
+    "cta": {
+      "login": "Login",
+      "createRequest": "Create RaaS request",
+      "createRequestShort": "RaaS request"
+    }
+  },
+  "footer": {
+    "brand": "HejTalent, a hej consulting GmbH brand",
+    "tagline": "Your trusted partner for qualified international remote professionals.",
+    "sections": {
+      "solutions": "Our solutions",
+      "company": "Company",
+      "contact": "Contact"
+    },
+    "links": {
+      "backoffice": "Remote backoffice professionals",
+      "it": "Remote IT developers",
+      "ai": "Remote AI specialists",
+      "howWeWork": "How we work",
+      "hub": "Resource Hub",
+      "contact": "Contact",
+      "privacy": "Privacy policy",
+      "imprint": "Imprint"
+    },
+    "copyright": "© 2024 HejTalent, a hej consulting GmbH brand. All rights reserved.",
+    "address": "Nördliche Münchner Str. 9c, 82031 Grünwald, Germany"
+  },
+  "benefitBanner": {
+    "items": [
+      "30% cheaper",
+      "Onboarding in 2-4 weeks",
+      "Vetted remote professionals",
+      "No headhunter fee",
+      "Remote & GDPR-compliant",
+      "Scalable at any time",
+      "No recruiting effort",
+      "Time zone compatible",
+      "24/7 services possible all year"
+    ]
+  },
+  "home": {
+    "hero": {
+      "title": "RaaS - Resources as a Service",
+      "tagline": "The remote experts who understand and solve your challenges.",
+      "ctaBadge": "FREE",
+      "ctaPrimary": "Start a non-binding RaaS request",
+      "ctaSecondary": "Or explore our expertise →",
+      "riskFreeTitle": "✅ 100% free & non-binding to start",
+      "riskFreeText": "Receive tailored resource suggestions without any obligation. Work starts only after your approval.",
+      "description": "As a leading provider of international professionals, we have been delivering the best talent for 9 years. Our proven RaaS system makes it easy: you describe your problem, we deliver the perfect professional solution.",
+      "tagline.prefix": "The remote experts,"
+    },
+    "trust": {
+      "line": "Trust in 9+ years of expertise:",
+      "items": ["International clients", "GDPR-compliant", "ISO 27001"]
+    },
+    "cards": {
+      "backoffice": {
+        "title": "Remote backoffice professionals",
+        "desc": "Qualified remote staff for admin, accounting and operations",
+        "cta": "Get started"
+      },
+      "it": {
+        "title": "Remote IT developers & tech experts",
+        "desc": "Experienced remote developers for full stack, DevOps and software architecture",
+        "cta": "Get started"
+      },
+      "ai": {
+        "title": "Remote AI & ML specialists",
+        "desc": "AI experts and data scientists for machine learning and AI projects",
+        "cta": "Get started"
+      }
+    },
+    "stats": {
+      "headline": "Market leader",
+      "headlineSuffix": "in remote recruiting since 2020",
+      "sub": "Numbers that prove our expertise",
+      "award": "🏆 Awarded 'Best Remote Recruiting Platform 2023'",
+      "more": "Over 150 companies already trust our proven RaaS methodology. From startups to enterprises – we find the right remote experts.",
+      "ctaTitle": "Your free RaaS request takes just 3 minutes",
+      "ctaText": "Describe your challenge and we’ll propose suitable experts. No risk, no hidden costs.",
+      "ctaButton": "Start for free now",
+      "items": {
+        "placed": "Placed remote professionals",
+        "successful": "Successful placements",
+        "satisfaction": "Satisfied companies",
+        "weeks": "Weeks to fill"
+      }
+    },
+    "solutions": {
+      "title": "Our international professionals",
+      "subtitle": "Tailored remote teams for your specific requirements"
+    },
+    "hub": {
+      "title": "Experience our",
+      "titleSuffix": "Hub",
+      "text": "Discover how our intuitive hub streamlines your entire RaaS process – from request to successful collaboration.",
+      "features": {
+        "request": {
+          "title": "Create a RaaS request",
+          "points": ["Skill-based selection", "Budget & timeline", "Project specification"]
+        },
+        "matching": {
+          "title": "Resource matching",
+          "text": "AI-powered matching connects you with the right remote experts from our pre-qualified pool of 500+ professionals.",
+          "points": ["Automatic matching", "Profile ratings", "Availability check"]
+        },
+        "pm": {
+          "title": "Project management",
+          "text": "Track your RaaS projects in real time. From selection to successful delivery, you always stay in control.",
+          "points": ["Live dashboard", "Progress tracking", "Communication hub"]
+        }
+      },
+      "floatingDemo": {
+        "title": "Experience RaaS in action",
+        "description": "See how our intelligent system processes your resource requests in real time and finds the perfect remote experts for you."
+      },
+      "timeline": {
+        "title": "Your path to the perfect remote experts",
+        "text": "Our proven 3-week process gets you to your ideal remote professional safely and systematically."
+      },
+      "cta": {
+        "title": "Ready to find your remote professionals?",
+        "text": "Start today and experience how quickly and efficiently you can find the best remote talent for your company.",
+        "primary": "Try for free",
+        "secondary": "Go to RaaS Hub"
+      }
+    },
+    "about": {
+      "title": "About Hej Talent",
+      "text": "Since 2020, we’ve been the trusted partner for companies seeking top remote professionals. We focus on thoroughly vetting and placing international remote talent.",
+      "bullets": ["Comprehensive background checks", "Personal support", "Quality guarantee"]
+    },
+    "testimonials": {
+      "title": "What our clients say",
+      "subtitle": "Rely on the experiences of our satisfied customers"
+    }
+  },
+  "solutionsOverview": {
+    "title": "Our international professionals",
+    "subtitle": "Qualified remote experts for every area – from admin support to complex IT and AI projects.",
+    "ctaTitle": "Not sure which international professionals you need?",
+    "ctaText": "Let’s find the right remote experts for your challenges in a free consultation.",
+    "ctaButton": "Book a consultation now"
+  },
+  "contact": {
+    "title": "Contact & initial consultation",
+    "subtitle": "Let’s discuss your remote workforce needs",
+    "talkToUs": "Get in touch",
+    "labels": {
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "hours": "Business hours"
+    },
+    "form": {
+      "title": "Create a search request for free",
+      "subtitle": "Tell us about your project – we’ll get back within 24 hours",
+      "placeholders": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email address",
+        "company": "Company",
+        "phone": "Phone",
+        "description": "Describe your remote talent needs..."
+      },
+      "submit": "Create search request for free"
+    }
+  },
+  "contactCTA": {
+    "title": "Get in touch",
+    "subtitle": "Let’s find the right remote professionals for your company together",
+    "talkToUs": "Talk to us",
+    "labels": {
+      "email": "Email",
+      "phone": "Phone",
+      "linkedin": "LinkedIn profile",
+      "location": "Location"
+    },
+    "location": "Munich, Germany",
+    "form": {
+      "title": "Create a search request for free",
+      "subtitle": "Tell us about your project – we’ll get back within 24 hours",
+      "placeholders": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email address",
+        "company": "Company",
+        "phone": "Phone",
+        "description": "Describe your remote talent needs..."
+      },
+      "submit": "Post search request for free now"
+    }
+  },
+  "aboutUs": {
+    "hero": {
+      "title": "About ",
+      "subtitle": "Since 2020, we have been Germany’s leading platform for international remote professionals. We connect companies with the best talent worldwide."
+    },
+    "mission": {
+      "title": "Our mission",
+      "p1": "We make international expertise accessible to German companies. Our ",
+      "p1b": " model revolutionizes how companies access talent.",
+      "p2": "Instead of lengthy hiring processes, we offer flexible service contracts with vetted remote experts from over 15 countries.",
+      "stats": ["500+ international professionals", "150+ successful projects", "98% customer satisfaction"]
+    },
+    "values": {},
+    "team": {
+      "title": "About us - Joachim & Pascal",
+      "joachim": {
+        "role": "Founder & Managing Director",
+        "p1": "My name is Joachim Kalff, founder and managing director of Hej Talent. With our 'RaaS' concept, we rethink HR processes: fresher, smarter, simply better! 'Hej' comes from Scandinavian and means 'hello', a greeting with a 'wake up' character. It has always felt friendly, refreshing and sympathetic to me.",
+        "p2": "Moreover, 'Hej' combines the initials of my children Henry and Emilia. The 'J' stands for my first name. I want to combine the positive Scandinavian spirit with personality – and that’s how I approach our international remote staff: I take responsibility.",
+        "p3": "With passion and dedication, I develop innovative and sustainable solution concepts. Down to earth, efficient, creative – out of the box."
+      },
+      "pascal": {
+        "role": "Consultant",
+        "p1": "I am Pascal Spieß, Consultant at Hej Talent, with more than 11 years of experience in consulting and sales. I have always been driven by how companies can work more efficiently, flexibly and successfully – and that’s exactly where I focus today.",
+        "p2": "I enjoy working with our clients within our 'RaaS' concept – fast, flexible and cost-effective.",
+        "p3": "At Hej Talent, I help companies overcome the skills shortage and sustainably optimize processes. Together with our clients, I integrate international remote talent – from AI and tech talent to backoffice and accounting professionals to IT and software developers."
+      }
+    },
+    "development": {
+      "title": "Our development since 2020"
+    },
+    "why": {
+      "title": "Why international professionals?",
+      "subtitle": "Germany’s skills shortage requires new solutions. Our international remote experts not only offer cost-effective alternatives but also fresh perspectives and expertise from global markets.",
+      "cards": [
+        {"title": "Cost savings", "desc": "Average savings compared to local full-time staff"},
+        {"title": "Countries", "desc": "International expertise from different time zones"},
+        {"title": "Availability", "desc": "Continuous productivity through global time zone coverage"}
+      ]
+    },
+    "cta": {
+      "title": "Ready for international support?",
+      "subtitle": "Discover how our international remote professionals can drive your business forward.",
+      "button": "Start a free RaaS request"
+    }
+  },
+  "howWeWork": {
+    "hero": {
+      "title": "How ",
+      "subtitle": "From the first RaaS request to the successful integration of your remote resource – our proven 4-step process guarantees the best candidates."
+    },
+    "left": {
+      "title": "RaaS – a revolutionary service concept",
+      "p1": "is more than just a modern term – it is a fundamentally different approach to providing professionals. Unlike traditional recruitment or temp agencies, with us you don’t sign ",
+      "p1b": " an employment contract",
+      "p1c": ", but a flexible ",
+      "p1d": " service contract",
+      "p1e": ".",
+      "p2": "This distinction is crucial: while employment relationships bring rigid structures, notice periods and extensive legal obligations, our RaaS model offers ",
+      "p2b": "maximum flexibility",
+      "p2c": ". You get exactly the expertise you need – when you need it.",
+      "p3": "Our remote professionals are not your employees but specialized ",
+      "p3b": " service partners",
+      "p3c": ", seamlessly integrated into your project structures. This means: no ancillary wage costs, no social security contributions, no vacation entitlements or sick leave on your side.",
+      "highlight": "The advantages are measurable: ",
+      "highlightA": "Up to 60% cost savings compared to local full-time staff",
+      "highlightB": "100% plannable budgets",
+      "highlightC": " without hidden personnel costs and the ability to ",
+      "highlightD": " scale immediately",
+      "highlightE": " – up or down."
+    },
+    "right": {
+      "title": "International expertise without borders",
+      "p1": "Our global network includes over ",
+      "p1b": "500+ vetted remote professionals",
+      "p1c": " from different time zones and cultures. This diversity is no coincidence but a strategic advantage: access to talent and perspectives not available locally.",
+      "p2": "Each of our remote resources goes through a ",
+      "p2b": "multi-stage qualification process",
+      "p2c": ": technical skills tests, language proficiency checks, reference validation and cultural compatibility assessment. The result: ",
+      "p2d": "98% customer satisfaction",
+      "p2e": " and an average project continuation rate of over 90%.",
+      "p3": "Particularly valuable is our ",
+      "p3b": "24/7 availability",
+      "p3c": " thanks to international time zone coverage. While your local team sleeps, our resources continue working – continuous productivity gains.",
+      "highlight": "The legal structure is crystal clear: ",
+      "highlightB": "We take full responsibility",
+      "highlightC": " for our remote professionals – from contract design to quality assurance to backup planning in case of failures. You focus solely on your core business while we ensure the ",
+      "highlightD": "operational excellence",
+      "highlightE": " of your extended remote teams."
+    },
+    "process": {
+      "title": "Our ",
+      "titleSuffix": "process in 4 steps",
+      "subtitle": "Click on a step to see the corresponding app view"
+    },
+    "steps": [],
+    "appScreen": {
+      "step": "Step",
+      "desc": "See here how {step} works in our RaaS Hub"
+    },
+    "benefits": {
+      "title": "Why our process works",
+      "items": [
+        "Fast start: qualified remote professional in 2-4 weeks",
+        "Vetted quality: all candidates pass our screening process",
+        "Flexible work models: full-time, part-time or project-based",
+        "Transparent communication: regular updates and feedback",
+        "Cultural fit: international remote candidates with the right work culture",
+        "Legal certainty: all labor law aspects are covered"
+      ]
+    },
+    "cta": {
+      "title": "Ready for remote reinforcement?",
+      "subtitle": "Let’s discuss your requirements in a free consultation and find the right remote professionals for your company together.",
+      "button": "Create a free RaaS request"
+    }
+  },
+  "resourceHub": {
+    "hero": {
+      "title": "RaaS Hub",
+      "titleSuffix": " - your service center",
+      "subtitle": "Manage your remote services, projects and deliverables in an intelligent platform",
+      "badges": ["✨ Real-time updates", "🔒 GDPR-compliant", "📊 Advanced analytics"]
+    },
+    "overview": {
+      "title": "Your RaaS services at a glance",
+      "subtitle": "Manage all your remote services centrally – from request to delivery"
+    },
+    "dashboard": {
+      "title": "Service Dashboard",
+      "active": "12 active services",
+      "items": [
+        {"title": "AI data analysis service", "desc": "Full-time • 2 data scientists", "status": "In Progress"},
+        {"title": "Cloud migration service", "desc": "Project • 3 DevOps engineers", "status": "Delivered"},
+        {"title": "Accounting automation", "desc": "Part-time • 1 backoffice expert", "status": "Starting"}
+      ],
+      "kpis": {"mrr": "Monthly services", "sla": "SLA fulfillment", "response": "Avg. response"}
+    },
+    "management": {
+      "title": "Service management made easy",
+      "text": "Keep track of all your remote services. From AI projects to backoffice automation – everything centrally managed with real-time status and performance metrics.",
+      "bullets": [
+        {"title": "Service portfolio overview", "desc": "All running services at a glance"},
+        {"title": "Real-time performance", "desc": "SLA tracking and delivery status"},
+        {"title": "Cost transparency", "desc": "Clear breakdown of all service costs"}
+      ]
+    },
+    "request": {
+      "title": "Request new RaaS services",
+      "text": "Describe your business problem and receive tailored service solutions. Our AI system automatically matches you with the right expert teams.",
+      "bullets": [
+        {"title": "Problem-to-solution matching", "desc": "AI-powered service recommendations"},
+        {"title": "Fast service activation", "desc": "Services start within 48h"},
+        {"title": "Guaranteed quality", "desc": "SLA-backed service delivery"}
+      ],
+      "mock": {
+        "title": "New service request",
+        "subtitle": "Describe the problem",
+        "example": "Automate our invoice processing with AI-based data extraction",
+        "type": "Desired service type",
+        "tags": ["Backoffice automation", "AI/ML"],
+        "timeline": "Timeline & budget",
+        "timelineValue": "Start: within 2 weeks • Budget: €15-25k/month",
+        "ai": "AI recommendation",
+        "aiResult": "Found 3 suitable expert teams • Estimated implementation: 4-6 weeks",
+        "cta": "Start service match"
+      }
+    },
+    "analytics": {
+      "title": "Service performance & ROI",
+      "subtitle": "Last 90 days",
+      "roi": "ROI increase",
+      "savings": "Cost savings",
+      "deliveryRate": "Service delivery rate",
+      "avgTime": "Avg. problem-to-solution time",
+      "quality": "Service quality score",
+      "impactTitle": "Top service impact",
+      "impactDetail": "Backoffice automation: 45% efficiency increase"
+    },
+    "security": {
+      "title": "Enterprise-grade service security",
+      "subtitle": "Your sensitive business data is in the safest hands with our RaaS services. Full compliance and the highest security standards.",
+      "bullets": [
+        {"title": "Data security", "desc": "End-to-end encryption of all service data"},
+        {"title": "Compliance & certification", "desc": "ISO 27001, GDPR, SOC 2 Type II"},
+        {"title": "Service continuity", "desc": "99.9% uptime SLA for critical services"}
+      ],
+      "status": {
+        "title": "Security & compliance status",
+        "subtitle": "All services monitored",
+        "badges": ["GDPR", "ISO 27001", "SOC 2"],
+        "uptime": {"title": "Service uptime", "value": "99.97%", "caption": "Last 12 months"}
+      }
+    },
+    "mainCta": {
+      "open": "Open RaaS Hub now"
+    },
+    "features": {
+      "cards": [
+        {"title": "Intelligent management", "desc": "AI-powered automation for effortless remote team management"},
+        {"title": "Enterprise security", "desc": "Bank-level security with ISO 27001 certification and GDPR compliance"},
+        {"title": "Global availability", "desc": "24/7 support and a worldwide talent network for your success"}
+      ]
+    },
+    "premium": {
+      "title": "Ready for the future of remote recruiting?",
+      "subtitle": "Enter a new era of intelligent talent acquisition and experience how AI revolutionizes your recruiting.",
+      "open": "Open hub now",
+      "demo": "Request demo"
+    }
+  },
+  "landing": {
+    "hejTalent": {
+      "ticker": ["30-60% cheaper","Start in 7 days","Vetted AI developers","Money-back guarantee","No headhunter fee","Remote & GDPR-compliant","Scalable anytime","No recruiting effort","Time zone compatible","Onboarding in < 1 day"],
+      "hero": {"title": "- Vetted AI developers", "badge": "30-60% cheaper", "trailing": "in 7 days", "p1": "Our proven RaaS system makes it simple: describe your AI project, we deliver the perfect developer solution.", "p2": "Exclusive video shows the proven 3-step RaaS process ...", "cta": "Submit RaaS request"},
+      "bullets": {"0": {"title": "30-50% cost savings","text": "Save up to €4,000 per month ..."}, "1": {"title": "48h matching","text": "From request to perfect developer in 2 days – start within 7 days"}, "2": {"title": "100% money-back guarantee","text": "Not satisfied? Full refund within the first 14 days"}},
+      "trust": {"title": "50+ companies already trust Hej Talent"},
+      "testimonials": {"0": "\"Within 5 days I had the perfect AI developer. Saves us €3,200/month with better quality.\"", "1": "\"Great work by a new colleague convinced us to add a second HejTalent professional.\""},
+      "reviews": {"caption": "from 57 reviews"},
+      "faq": {"title": "Frequently asked questions", "items": {"0": {"q": "How do you ensure developer quality?","a": "Each developer passes a 3-stage assessment ..."}, "1": {"q": "How is data privacy ensured?","a": "GDPR-compliant, German servers and NDAs ..."}, "2": {"q": "How does communication work?","a": "Our developers work in European time zones ..."}, "3": {"q": "What contract models do you offer?","a": "Flexible: full-time, part-time or project-based ..."}}},
+      "footer": {"tagline": "Your partner for vetted international remote AI developers.", "legal": "Legal", "contact": "Contact", "rights": "All rights reserved."}
+    },
+    "backoffice": {
+      "ticker": ["40-60% cheaper","Start in 2-4 weeks","Vetted backoffice pros","No headhunter fee","Remote & GDPR-compliant","Scalable anytime"],
+      "hero": {"title": "- Remote backoffice professionals", "badge": "40-60% cheaper", "trailing": "than local staff", "p1": "Our proven RaaS system ...", "p2": "Discover how to get vetted backoffice pros ...", "cta": "Submit RaaS request"},
+      "bullets": {"0": {"title": "Massive cost savings","text": "Optimize backoffice processes with vetted remote professionals"}, "1": {"title": "Flexible scaling","text": "From 10h/week to full-time – adjust capacity anytime"}, "2": {"title": "Professional communication","text": "All our backoffice pros communicate professionally and know your workflows"}},
+      "problem": {"title": "Do these backoffice challenges sound familiar?", "items": []},
+      "how": {"title": "How it works: your backoffice professional in 3 steps", "0": {"title": "Create a request in our platform", "text": "Log in and define your backoffice needs ..."}, "1": {"title": "Automatic matching & candidate selection", "text": "Our system matches suitable pros ..."}, "2": {"title": "Interview & productive start", "text": "Scheduling and interviews via platform ..."}},
+      "trust": {"title": "30+ companies are already optimizing their backoffice"},
+      "testimonials": {"0": "\"Thanks to remote accounting we save €2,800 monthly ...\"", "1": "\"Great work convinced us to add a second HejTalent pro.\""},
+      "reviews": {"caption": "from 42 reviews"},
+      "faq": {"title": "Frequently asked questions", "items": {"0": {"q": "Which backoffice tasks can be covered?","a": "Accounting, data entry, customer service ..."}, "1": {"q": "How is work quality ensured?","a": "Min. 3 years experience, vetted by us ..."}, "2": {"q": "How does communication work?","a": "Via your preferred tools (Teams, Slack, email) ..."}, "3": {"q": "Can I adjust working hours flexibly?","a": "Yes, from 10h/week to full-time ..."}}},
+      "footer": {"tagline": "Remote backoffice professionals for German companies", "solutions": "Solutions", "solutionItems": ["Remote accounting","Customer service","Administrative support","Data entry"], "company": "Company", "companyItems": ["About us","Careers","Become a partner","Contact"], "contact": "Contact", "rights": "All rights reserved.", "terms": "Terms"}
+    },
+    "itDev": {
+      "ticker": ["30-50% cheaper","Start in 7-14 days","Senior developers","All technologies","No headhunter fee","Money-back guarantee"],
+      "hero": {"title": "- Senior IT developers", "badge": "30-50% cheaper", "trailing": "than local talent", "p1": "Our proven RaaS system ...", "p2": "Get vetted senior developers for React, Node.js, Python & more ...", "cta": "Submit RaaS request"},
+      "bullets": {"0": {"title": "Senior-level expertise","text": "Only developers with 5+ years and proven skills"}, "1": {"title": "Fast start","text": "Perfect match in 48h, onboarding in 7-14 days"}, "2": {"title": "Proven matching","text": "97% success rate via technical screening and culture fit"}},
+      "problem": {"title": "Do these IT challenges sound familiar?", "resultTitle": "The result: missed opportunities, frustrated teams, exploding costs", "resultText": "While you search for the perfect developer, competitors ship products."},
+      "solution": {"title": "The solution: vetted senior developers in 48 hours", "0": {"title": "48h perfect match","text": "From 1,000+ vetted developers ..."}, "1": {"title": "97% success rate","text": "Our 3-stage screening guarantees quality"}, "2": {"title": "Start in 7 days","text": "After the match: onboarding and productive work within a week"}},
+      "how": {"title": "How it works: your developer in 3 steps", "0": {"title": "Create request in our platform","text": "Log in and define tech stack, seniority, duration ..."}, "1": {"title": "AI matching & review","text": "We analyze your request and present 3-5 top matches"}, "2": {"title": "Interview & onboarding","text": "Scheduling, interviews and contracts via platform"}},
+      "tech": {"title": "All the technologies you need", "frontend": "Frontend", "backend": "Backend", "mobile": "Mobile", "devops": "Cloud & DevOps"},
+      "cases": {"title": "Customer success stories"},
+      "guarantee": {"title": "Our 100% success guarantee"},
+      "urgency": {"title": "⚠️ Why you should act NOW"},
+      "finalCta": {"title": "Start TODAY with your new developer team", "text": "Book your free 15-minute call and get your perfect senior developer within 48h – guaranteed.", "badges": ["No commitment","Immediately available","14-day guarantee"]},
+      "trust": {"title": "80+ tech companies trust our developers"},
+      "faq": {"title": "Frequently asked questions", "items": {"0": {"q": "Which technologies do your developers cover?","a": "Frontend: React ..."}, "1": {"q": "How experienced are the developers?","a": "Min. 5 years experience ..."}, "2": {"q": "How does remote collaboration work?","a": "EU time zones, daily standups, your tools ..."}, "3": {"q": "Can I test the developer first?","a": "Yes – technical interview and 14-day trial with money-back guarantee."}}},
+      "footer": {"tagline": "Senior IT developers for German companies", "tech": "Technologies", "company": "Company", "contact": "Contact", "rights": "All rights reserved.", "terms": "Terms"}
+    },
+    "aiMl": {
+      "ticker": ["AI experts from 3 months","40-60% cheaper","Proven AI solutions","From concept to deployment","ML, deep learning, NLP","No headhunter fee"],
+      "hero": {"title": "- AI & ML experts", "badge": "40-60% cheaper", "trailing": "for your AI transformation", "p1": "Our proven RaaS system ...", "p2": "From AI strategy to production: data scientists, ML engineers and AI developers ...", "cta": "Submit RaaS request"},
+      "bullets": {"0": {"title": "AI specialists","text": "Data scientists, ML engineers and AI developers with PhD/Master and 5+ years experience"}, "1": {"title": "Proven AI solutions","text": "From computer vision to NLP – battle-tested"}, "2": {"title": "ROI focus","text": "Measurable business results in 3-6 months"}},
+      "problem": {"title": "Why do most AI projects fail?", "items": []},
+      "how": {"title": "How it works: your AI expert in 3 steps"},
+      "trust": {"title": "Leading companies trust our AI experts"},
+      "faq": {"title": "Frequently asked questions"},
+      "footer": {"tagline": "AI & ML experts for German companies", "areas": "AI areas", "company": "Company", "contact": "Contact", "rights": "All rights reserved.", "terms": "Terms"}
+    }
+  },
+  "solutions": {
+    "backoffice": {
+      "hero": {"badge": "Remote backoffice professionals", "title": "Qualified ", "titleSuffix": " support ", "highlight": " for your backoffice", "text": "Relieve your team with experienced remote professionals ...", "ctaPrimary": "Create RaaS request", "ctaSecondary": "Explore remote backoffice"},
+      "audience": [],
+      "audienceTitle": "For whom?",
+      "problems": [],
+      "problemsTitle": "Core problems",
+      "talents": [],
+      "talentsTitle": "Our remote professionals",
+      "benefits": [],
+      "benefitsTitle": "Your benefits",
+      "results": [],
+      "resultsTitle": "Measurable results",
+      "cta": {"title": "Ready for remote backoffice support?", "text": "Talk to us about your needs. We’ll find the right remote professionals.", "primary": "Create RaaS request", "secondary": "Meet remote professionals"}
+    }
+  },
+  "app": {
+    "layout": {
+      "title": "Hej Talent Platform"
+    },
+    "sidebar": {
+      "section": {"admin": "Admin area", "main": "Main menu"},
+      "company": {
+        "dashboard": "Dashboard",
+        "requests": "Search requests",
+        "specialists": "Specialists",
+        "support": "Support chat",
+        "settings": "Settings"
+      },
+      "admin": {
+        "dashboard": "Admin dashboard",
+        "companies": "All companies",
+        "resources": "RaaS resources",
+        "projects": "Customer projects",
+        "support": "Support chat",
+        "settings": "User management"
+      },
+      "quick": "Quick actions",
+      "quickItems": {"new": "New request"},
+      "logout": {
+        "label": "Log out",
+        "errorTitle": "Error signing out",
+        "successTitle": "Signed out",
+        "successDesc": "You have been signed out successfully."
+      }
+    },
+    "status": {
+      "active": "Active",
+      "pending": "Pending",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "in_progress": "In progress",
+      "paused": "Paused",
+      "open": "Open",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "welcomePrefix": "Welcome back at",
+      "subtitle": "Overview of your activities",
+      "cta": {"newShort": "RaaS request", "new": "New request"},
+      "cards": {
+        "active": {"title": "Active search requests", "delta": "+2 since last month"},
+        "specialists": {"title": "Specialists", "caption": "Available experts"},
+        "completed": {"title": "Completed", "caption": "Successful projects"},
+        "pending": {"title": "Pending", "caption": "Waiting for processing"}
+      },
+      "recent": {
+        "title": "Recent activity",
+        "desc": "Your latest search requests and updates",
+        "created": "Created",
+        "empty": {
+          "text": "No search requests yet",
+          "btn": "Create first request"
+        }
+      },
+      "recommended": {
+        "title": "Recommended specialists",
+        "desc": "New experts for your needs",
+        "fallbackRole": "Specialist",
+        "years": "years experience",
+        "viewProfile": "View profile",
+        "empty": {"text": "No specialists available yet", "btn": "Browse specialists"}
+      },
+      "quick": {
+        "title": "Quick actions",
+        "desc": "Frequently used actions for efficient work",
+        "create": "Create new request",
+        "browse": "Browse specialists",
+        "manage": "Manage requests"
+      }
+    },
+    "searchRequests": {
+      "title": "Search requests",
+      "subtitle": "Manage your job postings and find the best candidates",
+      "new": "New request",
+      "filters": {
+        "status": "Status",
+        "all": "All statuses",
+        "active": "Active",
+        "pending": "Pending",
+        "completed": "Completed"
+      },
+      "searchPlaceholder": "Search search requests...",
+      "details": {
+        "locationUnknown": "Not provided",
+        "candidates": "candidates",
+        "created": "Created:",
+        "budget": "Budget:",
+        "notProvided": "Not provided",
+        "requiredSkills": "Required skills:",
+        "noSkills": "No skills provided",
+        "view": "View details",
+        "manageCandidates": "Manage candidates"
+      },
+      "empty": {
+        "title": "No search requests found",
+        "filtered": "Try different search terms or filters.",
+        "start": "Create your first search request to get started.",
+        "btn": "Create first request"
+      },
+      "actions": {"edit": "Edit", "delete": "Delete"},
+      "confirmDelete": {
+        "title": "Delete search request",
+        "desc": "Are you sure you want to delete this search request? This action cannot be undone."
+      },
+      "toasts": {
+        "error": "Error",
+        "errorCompany": "No company found. Please contact support.",
+        "loadFailed": "Search requests could not be loaded.",
+        "unexpected": "An unexpected error occurred.",
+        "deleteSuccessTitle": "Success",
+        "deleteSuccess": "Search request deleted successfully.",
+        "deleteFailed": "Failed to delete search request."
+      }
+    },
+    "newRequest": {
+      "back": "Back",
+      "title": "Create new search request",
+      "subtitle": "Find the perfect remote staff for your company",
+      "sections": {
+        "basic": {"title": "Basic information", "desc": "General details about your staffing needs"},
+        "period": {"title": "Work period", "desc": "When should remote staff start and how long should they work?"},
+        "areas": {"title": "Required work areas", "desc": "In which areas should remote staff work?"},
+        "details": {"title": "Detailed requirements", "desc": "Specify requirements, skills and main tasks"}
+      },
+      "labels": {
+        "customerIndustry": "Your industry *",
+        "numberOfWorkers": "Number of required remote staff *",
+        "jobTitle": "Job title *",
+        "experience": "Experience level",
+        "weeklyHours": "Weekly hours",
+        "startDate": "Desired start date",
+        "endDate": "End date (optional)",
+        "workAreaInput": "Enter work area...",
+        "commonAreas": "Common work areas:",
+        "selectedAreas": "Selected work areas:",
+        "requirements": "Requirements",
+        "requirementInput": "Enter requirement...",
+        "skills": "Skills",
+        "skillInput": "Enter skill...",
+        "commonSkills": "Common skills:",
+        "mainTasks": "Main tasks",
+        "mainTaskInput": "Enter main task..."
+      },
+      "placeholders": {
+        "industry": "e.g., e-commerce, financial services, healthcare",
+        "jobTitle": "e.g., software developer, backoffice staff, AI specialist",
+        "experiencePlaceholder": "Select experience level",
+        "hoursPlaceholder": "Select working hours",
+        "datePick": "Select date",
+        "noEnd": "No end",
+        "passwordMin": "At least 6 characters"
+      },
+      "experienceLevels": {
+        "junior_ba": "Junior (BA): 1-5 years",
+        "senior_ba": "Senior (BA): 5+ years",
+        "senior_ma": "Senior (MA): 10+ years"
+      },
+      "hours": {"h20": "20 hours", "h30": "30 hours", "h40": "40 hours"},
+      "buttons": {
+        "add": "Add",
+        "cancel": "Cancel",
+        "create": "Create search request",
+        "creating": "Creating..."
+      },
+      "toasts": {
+        "createdTitle": "Search request created",
+        "createdDesc": "Your search request has been created successfully and is now active.",
+        "errorTitle": "Error",
+        "errorDesc": "An error occurred while creating the search request."
+      },
+      "predefinedWorkAreas": ["IT support","Dunning","Accounting","Customer service","Data processing","Quality assurance","Project management","Marketing","Sales"],
+      "predefinedSkills": ["Python","JavaScript","React","Node.js","SQL","NoSQL","AWS","Azure","Docker","Kubernetes","Git","Agile","Scrum"]
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Manage your profile, company and staff",
+      "tabs": {"profile": "Profile & password", "company": "Company", "team": "Team management"},
+      "profile": {
+        "title": "Profile information",
+        "desc": "Your personal information (read-only)",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email address",
+        "companyAdmin": "Company administrator"
+      },
+      "password": {
+        "title": "Change password",
+        "desc": "Change your password for more security",
+        "new": "New password",
+        "confirm": "Confirm password",
+        "change": "Change password",
+        "changing": "Changing...",
+        "min": "At least 6 characters"
+      },
+      "company": {
+        "title": "Company data",
+        "desc": "Manage your company information",
+        "name": "Company name",
+        "email": "Company email",
+        "website": "Website",
+        "save": "Save changes",
+        "saving": "Saving...",
+        "updatedTitle": "Company updated",
+        "updatedDesc": "Company data updated successfully."
+      },
+      "team": {
+        "invite": {
+          "title": "Invite team member",
+          "desc": "Invite new staff to your company",
+          "email": "Email address",
+          "role": "Role",
+          "send": "Send invitation",
+          "sending": "Sending...",
+          "sentTitle": "Invitation sent",
+          "sentDesc": "The invitation was sent successfully.",
+          "deletedTitle": "Invitation deleted",
+          "deletedDesc": "The invitation was deleted successfully."
+        },
+        "roles": {"user": "User", "company_admin": "Company administrator", "admin": "Administrator"},
+        "list": {
+          "title": "Sent invitations",
+          "desc": "Overview of all sent invitations",
+          "none": "No invitations sent yet",
+          "sentOn": "Sent on",
+          "expires": "Expires on",
+          "status": {"pending": "Pending", "accepted": "Accepted", "expired": "Expired"}
+        }
+      },
+      "toasts": {"error": "Error", "unexpected": "An unexpected error occurred.", "passwordChanged": {"title": "Password changed", "desc": "Your password has been changed successfully."}}
+    },
+    "support": {
+      "title": "Support chat",
+      "subtitle": "Direct contact with our support team",
+      "newTicket": "New ticket",
+      "listTitle": "Support tickets",
+      "loading": "Loading tickets...",
+      "none": "No tickets yet",
+      "created": "Sent on",
+      "priority": {"low": "Low", "medium": "Medium", "high": "High", "urgent": "Urgent"},
+      "selectTicket": "Select a ticket to start the chat",
+      "you": "You",
+      "inputPlaceholder": "Enter message...",
+      "modal": {
+        "title": "New support ticket",
+        "desc": "Describe your issue as detailed as possible",
+        "fields": {"title": "Title", "desc": "Description", "category": "Category", "priority": "Priority"},
+        "categories": {"general": "General", "technical": "Technical", "billing": "Billing", "resource_request": "Resource request"},
+        "cancel": "Cancel",
+        "create": "Create ticket"
+      },
+      "toasts": {"createdTitle": "Ticket created", "createdDesc": "Your support ticket was created successfully.", "statusUpdatedTitle": "Status updated", "statusUpdatedDesc": "Ticket status updated successfully."}
+    },
+    "adminDashboard": {
+      "title": "Admin dashboard",
+      "subtitle": "Hej Talent administration",
+      "cards": {
+        "resources": {"title": "RaaS resources", "caption": "Available resources"},
+        "requests": {"title": "Search requests", "caption": "Customer projects"},
+        "companies": {"title": "Companies", "caption": "Registered companies"},
+        "tickets": {"title": "Support tickets", "caption": "Open tickets"}
+      },
+      "quick": {
+        "resources": {"title": "RaaS resources", "desc": "Manage and add resources", "all": "View all resources", "new": "Add new resource"},
+        "projects": {"title": "Customer projects", "desc": "Manage customer projects", "all": "View all projects", "companies": "Manage companies"},
+        "support": {"title": "Support & settings", "desc": "Support and system settings", "support": "Support chat", "settings": "Settings"}
+      },
+      "recent": {"title": "Latest search requests", "none": "No recent activity"}
+    },
+    "adminSearchRequests": {
+      "title": "Manage customer projects",
+      "subtitle": "All customer projects and resource allocations at a glance",
+      "filters": {"title": "Filters", "search": "Search by title, company or location...", "status": "Filter by status", "all": "All statuses", "active": "Active", "paused": "Paused", "completed": "Completed", "cancelled": "Cancelled"},
+      "table": {
+        "requests": "Customer projects ({count})",
+        "desc": "Overview of all customer projects and their resource allocations",
+        "cols": {"request": "Project", "company": "Company", "details": "Details", "salary": "Salary", "allocations": "Resource allocations", "status": "Status", "created": "Created", "actions": "Actions"},
+        "employmentType": {"full_time": "Full-time", "part_time": "Part-time", "contract": "Contract", "freelance": "Freelance", "unknown": "Not provided"},
+        "experience": {"junior": "Junior", "mid": "Mid-level", "senior": "Senior", "lead": "Lead", "unknown": "Not provided"},
+        "notProvided": "Not provided",
+        "stats": {"total": "{count} total", "pending": "{count} proposed", "active": "{count} assigned", "completed": "{count} completed"},
+        "euroRange": "{min} - {max}"
+      },
+      "buttons": {"resources": "Resources", "view": "View"},
+      "empty": {"filtered": "No customer projects match the filters.", "none": "No customer projects yet."},
+      "confirmDelete": {"title": "Delete search request", "desc": "Are you sure you want to delete this search request? This action cannot be undone."},
+      "toasts": {"error": "Error", "deleteSuccessTitle": "Success", "deleteSuccess": "Search request deleted successfully.", "unexpected": "An unexpected error occurred.", "deleteFailed": "Failed to delete search request."}
+    }
+  }
+}

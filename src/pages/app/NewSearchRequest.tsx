@@ -20,15 +20,17 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { format } from 'date-fns';
-import { de } from 'date-fns/locale';
+import { de as deLocale, enUS as enLocale } from 'date-fns/locale';
 import { CalendarIcon, X, Plus, ArrowLeft, Save } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
+import { useTranslation } from '@/i18n/i18n';
 
 const NewSearchRequest = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t, get, lang } = useTranslation();
   
   // Form state
   const [formData, setFormData] = useState({
@@ -51,15 +53,15 @@ const NewSearchRequest = () => {
   const [newMainTask, setNewMainTask] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const predefinedWorkAreas = [
+  const predefinedWorkAreas = get<string[]>('app.newRequest.predefinedWorkAreas', [
     'IT-Support', 'Mahnwesen', 'Buchhaltung', 'Kundenservice', 'Datenverarbeitung',
     'Qualitätssicherung', 'Projektmanagement', 'Marketing', 'Vertrieb'
-  ];
+  ]);
 
-  const predefinedSkills = [
+  const predefinedSkills = get<string[]>('app.newRequest.predefinedSkills', [
     'Python', 'JavaScript', 'React', 'Node.js', 'SQL', 'NoSQL',
     'AWS', 'Azure', 'Docker', 'Kubernetes', 'Git', 'Agile', 'Scrum'
-  ];
+  ]);
 
   const addItem = (item: string, type: 'workAreas' | 'requirements' | 'skills' | 'mainTasks') => {
     if (item.trim() && !formData[type].includes(item.trim())) {
@@ -68,7 +70,6 @@ const NewSearchRequest = () => {
         [type]: [...prev[type], item.trim()]
       }));
     }
-    // Reset the appropriate input
     if (type === 'workAreas') setNewWorkArea('');
     if (type === 'requirements') setNewRequirement('');
     if (type === 'skills') setNewSkill('');
@@ -87,7 +88,6 @@ const NewSearchRequest = () => {
     setIsSubmitting(true);
 
     try {
-      // Get current user and their company
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         throw new Error('Not authenticated');
@@ -103,7 +103,6 @@ const NewSearchRequest = () => {
         throw new Error('No company found for user');
       }
 
-      // Create search request with new structure
       const insertData = {
         title: `${formData.jobTitle} - ${formData.numberOfWorkers} Remote-Mitarbeiter`,
         description: `Benötigte Arbeitsbereiche: ${formData.workAreas.join(', ')}`,
@@ -123,8 +122,6 @@ const NewSearchRequest = () => {
         status: 'active'
       };
       
-      console.log('Insert data:', insertData);
-      
       const { error } = await supabase
         .from('search_requests')
         .insert(insertData);
@@ -135,22 +132,24 @@ const NewSearchRequest = () => {
       }
       
       toast({
-        title: "Suchauftrag erstellt",
-        description: "Ihr Suchauftrag wurde erfolgreich erstellt und ist jetzt aktiv.",
+        title: t('app.newRequest.toasts.createdTitle', 'Suchauftrag erstellt'),
+        description: t('app.newRequest.toasts.createdDesc', 'Ihr Suchauftrag wurde erfolgreich erstellt und ist jetzt aktiv.'),
       });
       
       navigate('/app/search-requests');
     } catch (error) {
       console.error('Error creating search request:', error);
       toast({
-        title: "Fehler",
-        description: "Beim Erstellen des Suchauftrags ist ein Fehler aufgetreten.",
-        variant: "destructive",
+        title: t('app.newRequest.toasts.errorTitle', 'Fehler'),
+        description: t('app.newRequest.toasts.errorDesc', 'Beim Erstellen des Suchauftrags ist ein Fehler aufgetreten.'),
+        variant: 'destructive',
       });
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  const dateLocale = lang === 'en' ? enLocale : deLocale;
 
   return (
     <div className="space-y-6">
@@ -162,12 +161,12 @@ const NewSearchRequest = () => {
           className="text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Zurück
+          {t('app.newRequest.back', 'Zurück')}
         </Button>
         <div>
-          <h1 className="text-3xl font-bold text-brand-dark">Neuen Suchauftrag erstellen</h1>
+          <h1 className="text-3xl font-bold text-brand-dark">{t('app.newRequest.title', 'Neuen Suchauftrag erstellen')}</h1>
           <p className="text-muted-foreground mt-1">
-            Finden Sie die perfekten Remote-Mitarbeiter für Ihr Unternehmen
+            {t('app.newRequest.subtitle', 'Finden Sie die perfekten Remote-Mitarbeiter für Ihr Unternehmen')}
           </p>
         </div>
       </div>
@@ -176,26 +175,26 @@ const NewSearchRequest = () => {
         {/* Grundinformationen */}
         <Card>
           <CardHeader>
-            <CardTitle>Grundinformationen</CardTitle>
+            <CardTitle>{t('app.newRequest.sections.basic.title', 'Grundinformationen')}</CardTitle>
             <CardDescription>
-              Allgemeine Details zu Ihrem Personalbedarf
+              {t('app.newRequest.sections.basic.desc', 'Allgemeine Details zu Ihrem Personalbedarf')}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="customerIndustry">Ihre Branche *</Label>
+              <Label htmlFor="customerIndustry">{t('app.newRequest.labels.customerIndustry', 'Ihre Branche *')}</Label>
               <Input
                 id="customerIndustry"
                 value={formData.customerIndustry}
                 onChange={(e) => setFormData(prev => ({ ...prev, customerIndustry: e.target.value }))}
-                placeholder="z.B. E-Commerce, Finanzdienstleistungen, Healthcare"
+                placeholder={t('app.newRequest.placeholders.industry', 'z.B. E-Commerce, Finanzdienstleistungen, Healthcare')}
                 required
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="numberOfWorkers">Anzahl der benötigten Remote-Mitarbeiter *</Label>
+                <Label htmlFor="numberOfWorkers">{t('app.newRequest.labels.numberOfWorkers', 'Anzahl der benötigten Remote-Mitarbeiter *')}</Label>
                 <Input
                   id="numberOfWorkers"
                   type="number"
@@ -207,12 +206,12 @@ const NewSearchRequest = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="jobTitle">Jobtitel *</Label>
+                <Label htmlFor="jobTitle">{t('app.newRequest.labels.jobTitle', 'Jobtitel *')}</Label>
                 <Input
                   id="jobTitle"
                   value={formData.jobTitle}
                   onChange={(e) => setFormData(prev => ({ ...prev, jobTitle: e.target.value }))}
-                  placeholder="z.B. Software-Developer, Backoffice-Mitarbeiter, KI-Spezialist"
+                  placeholder={t('app.newRequest.placeholders.jobTitle', 'z.B. Software-Developer, Backoffice-Mitarbeiter, KI-Spezialist')}
                   required
                 />
               </div>
@@ -220,29 +219,29 @@ const NewSearchRequest = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Berufserfahrung</Label>
+                <Label>{t('app.newRequest.labels.experience', 'Berufserfahrung')}</Label>
                 <Select value={formData.experienceLevel} onValueChange={(value) => setFormData(prev => ({ ...prev, experienceLevel: value }))}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Erfahrungslevel wählen" />
+                    <SelectValue placeholder={t('app.newRequest.placeholders.experiencePlaceholder', 'Erfahrungslevel wählen')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="junior_ba">Junior (BA): 1-5 Jahre</SelectItem>
-                    <SelectItem value="senior_ba">Senior (BA): 5+ Jahre</SelectItem>
-                    <SelectItem value="senior_ma">Senior (MA): 10+ Jahre</SelectItem>
+                    <SelectItem value="junior_ba">{t('app.newRequest.experienceLevels.junior_ba', 'Junior (BA): 1-5 Jahre')}</SelectItem>
+                    <SelectItem value="senior_ba">{t('app.newRequest.experienceLevels.senior_ba', 'Senior (BA): 5+ Jahre')}</SelectItem>
+                    <SelectItem value="senior_ma">{t('app.newRequest.experienceLevels.senior_ma', 'Senior (MA): 10+ Jahre')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               
               <div className="space-y-2">
-                <Label>Wöchentliche Arbeitszeit</Label>
+                <Label>{t('app.newRequest.labels.weeklyHours', 'Wöchentliche Arbeitszeit')}</Label>
                 <Select value={formData.weeklyHours.toString()} onValueChange={(value) => setFormData(prev => ({ ...prev, weeklyHours: parseInt(value) }))}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Arbeitszeit wählen" />
+                    <SelectValue placeholder={t('app.newRequest.placeholders.hoursPlaceholder', 'Arbeitszeit wählen')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="20">20 Stunden</SelectItem>
-                    <SelectItem value="30">30 Stunden</SelectItem>
-                    <SelectItem value="40">40 Stunden</SelectItem>
+                    <SelectItem value="20">{t('app.newRequest.hours.h20', '20 Stunden')}</SelectItem>
+                    <SelectItem value="30">{t('app.newRequest.hours.h30', '30 Stunden')}</SelectItem>
+                    <SelectItem value="40">{t('app.newRequest.hours.h40', '40 Stunden')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -253,15 +252,15 @@ const NewSearchRequest = () => {
         {/* Arbeitszeitraum */}
         <Card>
           <CardHeader>
-            <CardTitle>Arbeitszeitraum</CardTitle>
+            <CardTitle>{t('app.newRequest.sections.period.title', 'Arbeitszeitraum')}</CardTitle>
             <CardDescription>
-              Wann sollen die Remote-Mitarbeiter starten und wie lange arbeiten?
+              {t('app.newRequest.sections.period.desc', 'Wann sollen die Remote-Mitarbeiter starten und wie lange arbeiten?')}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Wunschdatum Start</Label>
+                <Label>{t('app.newRequest.labels.startDate', 'Wunschdatum Start')}</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -272,7 +271,7 @@ const NewSearchRequest = () => {
                       )}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
-                      {formData.startDate ? format(formData.startDate, "dd.MM.yyyy", { locale: de }) : "Datum auswählen"}
+                      {formData.startDate ? format(formData.startDate, 'dd.MM.yyyy', { locale: dateLocale }) : t('app.newRequest.placeholders.datePick', 'Datum auswählen')}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
@@ -289,7 +288,7 @@ const NewSearchRequest = () => {
               </div>
 
               <div className="space-y-2">
-                <Label>Datum Ende (optional)</Label>
+                <Label>{t('app.newRequest.labels.endDate', 'Datum Ende (optional)')}</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -300,7 +299,7 @@ const NewSearchRequest = () => {
                       )}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
-                      {formData.endDate ? format(formData.endDate, "dd.MM.yyyy", { locale: de }) : "Unbegrenzt"}
+                      {formData.endDate ? format(formData.endDate, 'dd.MM.yyyy', { locale: dateLocale }) : t('app.newRequest.placeholders.noEnd', 'Unbegrenzt')}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
@@ -322,9 +321,9 @@ const NewSearchRequest = () => {
         {/* Benötigte Arbeitsbereiche */}
         <Card>
           <CardHeader>
-            <CardTitle>Benötigte Arbeitsbereiche</CardTitle>
+            <CardTitle>{t('app.newRequest.sections.areas.title', 'Benötigte Arbeitsbereiche')}</CardTitle>
             <CardDescription>
-              In welchen Bereichen sollen die Remote-Mitarbeiter tätig sein?
+              {t('app.newRequest.sections.areas.desc', 'In welchen Bereichen sollen die Remote-Mitarbeiter tätig sein?')}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -332,7 +331,7 @@ const NewSearchRequest = () => {
               <Input
                 value={newWorkArea}
                 onChange={(e) => setNewWorkArea(e.target.value)}
-                placeholder="Arbeitsbereich eingeben..."
+                placeholder={t('app.newRequest.labels.workAreaInput', 'Arbeitsbereich eingeben...')}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
@@ -351,7 +350,7 @@ const NewSearchRequest = () => {
 
             {/* Predefined Work Areas */}
             <div>
-              <Label className="text-sm font-medium mb-2 block">Häufige Arbeitsbereiche:</Label>
+              <Label className="text-sm font-medium mb-2 block">{t('app.newRequest.labels.commonAreas', 'Häufige Arbeitsbereiche:')}</Label>
               <div className="flex flex-wrap gap-2">
                 {predefinedWorkAreas.map((area) => (
                   <Button
@@ -371,7 +370,7 @@ const NewSearchRequest = () => {
             {/* Work Areas Display */}
             {formData.workAreas.length > 0 && (
               <div>
-                <Label className="text-sm font-medium mb-2 block">Ausgewählte Arbeitsbereiche:</Label>
+                <Label className="text-sm font-medium mb-2 block">{t('app.newRequest.labels.selectedAreas', 'Ausgewählte Arbeitsbereiche:')}</Label>
                 <div className="flex flex-wrap gap-2">
                   {formData.workAreas.map((area) => (
                     <Badge key={area} variant="default">
@@ -394,20 +393,20 @@ const NewSearchRequest = () => {
         {/* Anforderungen, Skills und Hauptaufgaben */}
         <Card>
           <CardHeader>
-            <CardTitle>Detaillierte Anforderungen</CardTitle>
+            <CardTitle>{t('app.newRequest.sections.details.title', 'Detaillierte Anforderungen')}</CardTitle>
             <CardDescription>
-              Spezifizieren Sie Anforderungen, Skills und Hauptaufgaben
+              {t('app.newRequest.sections.details.desc', 'Spezifizieren Sie Anforderungen, Skills und Hauptaufgaben')}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Anforderungen */}
             <div className="space-y-4">
-              <Label className="text-sm font-medium">Anforderungen</Label>
+              <Label className="text-sm font-medium">{t('app.newRequest.labels.requirements', 'Anforderungen')}</Label>
               <div className="flex gap-2">
                 <Input
                   value={newRequirement}
                   onChange={(e) => setNewRequirement(e.target.value)}
-                  placeholder="Anforderung eingeben..."
+                  placeholder={t('app.newRequest.labels.requirementInput', 'Anforderung eingeben...')}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
@@ -443,12 +442,12 @@ const NewSearchRequest = () => {
 
             {/* Skills */}
             <div className="space-y-4">
-              <Label className="text-sm font-medium">Skills</Label>
+              <Label className="text-sm font-medium">{t('app.newRequest.labels.skills', 'Skills')}</Label>
               <div className="flex gap-2">
                 <Input
                   value={newSkill}
                   onChange={(e) => setNewSkill(e.target.value)}
-                  placeholder="Skill eingeben..."
+                  placeholder={t('app.newRequest.labels.skillInput', 'Skill eingeben...')}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
@@ -467,7 +466,7 @@ const NewSearchRequest = () => {
               
               {/* Predefined Skills */}
               <div>
-                <Label className="text-sm font-medium mb-2 block">Häufige Skills:</Label>
+                <Label className="text-sm font-medium mb-2 block">{t('app.newRequest.labels.commonSkills', 'Häufige Skills:')}</Label>
                 <div className="flex flex-wrap gap-2">
                   {predefinedSkills.map((skill) => (
                     <Button
@@ -504,12 +503,12 @@ const NewSearchRequest = () => {
 
             {/* Hauptaufgaben */}
             <div className="space-y-4">
-              <Label className="text-sm font-medium">Hauptaufgaben</Label>
+              <Label className="text-sm font-medium">{t('app.newRequest.labels.mainTasks', 'Hauptaufgaben')}</Label>
               <div className="flex gap-2">
                 <Input
                   value={newMainTask}
                   onChange={(e) => setNewMainTask(e.target.value)}
-                  placeholder="Hauptaufgabe eingeben..."
+                  placeholder={t('app.newRequest.labels.mainTaskInput', 'Hauptaufgabe eingeben...')}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
@@ -553,7 +552,7 @@ const NewSearchRequest = () => {
             onClick={() => navigate('/app/search-requests')}
             disabled={isSubmitting}
           >
-            Abbrechen
+            {t('app.newRequest.buttons.cancel', 'Abbrechen')}
           </Button>
           <Button 
             type="submit" 
@@ -561,7 +560,7 @@ const NewSearchRequest = () => {
             disabled={isSubmitting || !formData.customerIndustry || !formData.jobTitle}
           >
             <Save className="w-4 h-4 mr-2" />
-            {isSubmitting ? "Wird erstellt..." : "Suchauftrag erstellen"}
+            {isSubmitting ? t('app.newRequest.buttons.creating', 'Wird erstellt...') : t('app.newRequest.buttons.create', 'Suchauftrag erstellen')}
           </Button>
         </div>
       </form>

@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { User, Building2, UserPlus, Lock, Mail, Trash2 } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from '@/i18n/i18n';
 
 interface UserProfile {
   id: string;
@@ -56,6 +57,7 @@ const Settings = () => {
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   // Fetch current user and profile
   const { data: currentUser } = useQuery({
@@ -142,10 +144,10 @@ const Settings = () => {
   const changePasswordMutation = useMutation({
     mutationFn: async () => {
       if (passwordData.newPassword !== passwordData.confirmPassword) {
-        throw new Error('Neue Passwörter stimmen nicht überein');
+        throw new Error(t('app.settings.toasts.error', 'Fehler'));
       }
       if (passwordData.newPassword.length < 6) {
-        throw new Error('Neues Passwort muss mindestens 6 Zeichen lang sein');
+        throw new Error(t('app.settings.password.min', 'Mindestens 6 Zeichen'));
       }
 
       const { error } = await supabase.auth.updateUser({
@@ -157,15 +159,15 @@ const Settings = () => {
     onSuccess: () => {
       setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
       toast({
-        title: "Passwort geändert",
-        description: "Ihr Passwort wurde erfolgreich geändert.",
+        title: t('app.settings.toasts.passwordChanged.title', 'Passwort geändert'),
+        description: t('app.settings.toasts.passwordChanged.desc', 'Ihr Passwort wurde erfolgreich geändert.'),
       });
     },
     onError: (error: any) => {
       toast({
-        title: "Fehler",
+        title: t('app.settings.toasts.error', 'Fehler'),
         description: error.message,
-        variant: "destructive",
+        variant: 'destructive',
       });
     }
   });
@@ -173,7 +175,7 @@ const Settings = () => {
   // Update company mutation
   const updateCompanyMutation = useMutation({
     mutationFn: async () => {
-      if (!currentUser?.profile?.company_id) throw new Error('Keine Firma gefunden');
+      if (!currentUser?.profile?.company_id) throw new Error(t('app.searchRequests.toasts.errorCompany', 'Keine Firma gefunden. Bitte kontaktieren Sie den Support.'));
       
       const { error } = await supabase
         .from('companies')
@@ -189,15 +191,15 @@ const Settings = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userCompany'] });
       toast({
-        title: "Unternehmen aktualisiert",
-        description: "Die Unternehmensdaten wurden erfolgreich aktualisiert.",
+        title: t('app.settings.company.updatedTitle', 'Unternehmen aktualisiert'),
+        description: t('app.settings.company.updatedDesc', 'Die Unternehmensdaten wurden erfolgreich aktualisiert.'),
       });
     },
     onError: (error: any) => {
       toast({
-        title: "Fehler",
+        title: t('app.settings.toasts.error', 'Fehler'),
         description: error.message,
-        variant: "destructive",
+        variant: 'destructive',
       });
     }
   });
@@ -205,10 +207,9 @@ const Settings = () => {
   // Send invitation mutation
   const sendInvitationMutation = useMutation({
     mutationFn: async () => {
-      if (!inviteEmail.trim()) throw new Error('E-Mail-Adresse erforderlich');
-      if (!currentUser?.profile?.company_id) throw new Error('Keine Firma gefunden');
+      if (!inviteEmail.trim()) throw new Error(t('app.settings.team.invite.email', 'E-Mail-Adresse') + ' ' + t('app.settings.toasts.error', 'Fehler'));
+      if (!currentUser?.profile?.company_id) throw new Error(t('app.searchRequests.toasts.errorCompany', 'Keine Firma gefunden. Bitte kontaktieren Sie den Support.'));
 
-      // First create the invitation in the database
       const { data: invitation, error } = await supabase
         .from('invitations')
         .insert({
@@ -217,26 +218,23 @@ const Settings = () => {
           invited_by: currentUser.user.id,
           invited_role: isAdmin ? inviteRole : 'user',
           status: 'pending',
-          expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString() // 7 days
+          expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
         })
         .select()
         .single();
 
       if (error) throw error;
 
-      // Then send the invitation email
       const { data, error: emailError } = await supabase.functions.invoke('send-invitation', {
         body: {
           email: inviteEmail.toLowerCase().trim(),
-          companyName: company?.name || 'Ihr Unternehmen',
+          companyName: company?.name || t('app.settings.company.title', 'Unternehmensdaten'),
           inviteToken: invitation.id
         }
       });
 
       if (emailError) {
         console.error('Email sending failed:', emailError);
-        // Don't throw error here - invitation was created successfully
-        // Just log the issue for now
       }
 
       return { invitation, emailData: data };
@@ -247,20 +245,20 @@ const Settings = () => {
       queryClient.invalidateQueries({ queryKey: ['companyInvitations'] });
       
       const successMessage = data.emailData?.inviteUrl 
-        ? `Einladung erstellt! Einladungslink: ${data.emailData.inviteUrl}`
-        : "Die Einladung wurde erfolgreich versendet.";
+        ? `Invitation created! Link: ${data.emailData.inviteUrl}`
+        : t('app.settings.team.invite.sentDesc', 'Die Einladung wurde erfolgreich versendet.');
       
       toast({
-        title: "Einladung versendet",
+        title: t('app.settings.team.invite.sentTitle', 'Einladung versendet'),
         description: successMessage,
-        duration: data.emailData?.inviteUrl ? 10000 : 4000, // Longer duration if showing URL
+        duration: data.emailData?.inviteUrl ? 10000 : 4000,
       });
     },
     onError: (error: any) => {
       toast({
-        title: "Fehler",
+        title: t('app.settings.toasts.error', 'Fehler'),
         description: error.message,
-        variant: "destructive",
+        variant: 'destructive',
       });
     }
   });
@@ -278,8 +276,8 @@ const Settings = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['companyInvitations'] });
       toast({
-        title: "Einladung gelöscht",
-        description: "Die Einladung wurde erfolgreich gelöscht.",
+        title: t('app.settings.team.invite.deletedTitle', 'Einladung gelöscht'),
+        description: t('app.settings.team.invite.deletedDesc', 'Die Einladung wurde erfolgreich gelöscht.'),
       });
     }
   });
@@ -295,9 +293,9 @@ const Settings = () => {
 
   const getInvitationStatusText = (status: string) => {
     switch (status) {
-      case 'pending': return 'Ausstehend';
-      case 'accepted': return 'Angenommen';
-      case 'expired': return 'Abgelaufen';
+      case 'pending': return t('app.settings.team.list.status.pending', 'Ausstehend');
+      case 'accepted': return t('app.settings.team.list.status.accepted', 'Angenommen');
+      case 'expired': return t('app.settings.team.list.status.expired', 'Abgelaufen');
       default: return status;
     }
   };
@@ -317,10 +315,10 @@ const Settings = () => {
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-brand-dark mb-2">
-            <span className="text-primary">Einstellungen</span>
+            <span className="text-primary">{t('app.settings.title', 'Einstellungen')}</span>
           </h1>
           <p className="text-muted-foreground">
-            Verwalten Sie Ihr Profil, Unternehmen und Mitarbeiter
+            {t('app.settings.subtitle', 'Verwalten Sie Ihr Profil, Unternehmen und Mitarbeiter')}
           </p>
         </div>
 
@@ -328,15 +326,15 @@ const Settings = () => {
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="profile" className="flex items-center gap-2">
               <User className="w-4 h-4" />
-              Profil & Passwort
+              {t('app.settings.tabs.profile', 'Profil & Passwort')}
             </TabsTrigger>
             <TabsTrigger value="company" className="flex items-center gap-2" disabled={!isCompanyAdmin}>
               <Building2 className="w-4 h-4" />
-              Unternehmen
+              {t('app.settings.tabs.company', 'Unternehmen')}
             </TabsTrigger>
             <TabsTrigger value="team" className="flex items-center gap-2" disabled={!(isCompanyAdmin || isAdmin)}>
               <UserPlus className="w-4 h-4" />
-              Team-Verwaltung
+              {t('app.settings.tabs.team', 'Team-Verwaltung')}
             </TabsTrigger>
           </TabsList>
 
@@ -348,30 +346,30 @@ const Settings = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <User className="w-5 h-5" />
-                    Profil-Informationen
+                    {t('app.settings.profile.title', 'Profil-Informationen')}
                   </CardTitle>
                   <CardDescription>
-                    Ihre persönlichen Informationen (nur lesbar)
+                    {t('app.settings.profile.desc', 'Ihre persönlichen Informationen (nur lesbar)')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label>Vorname</Label>
+                      <Label>{t('app.settings.profile.firstName', 'Vorname')}</Label>
                       <Input value={currentUser.profile?.first_name || ''} disabled />
                     </div>
                     <div>
-                      <Label>Nachname</Label>
+                      <Label>{t('app.settings.profile.lastName', 'Nachname')}</Label>
                       <Input value={currentUser.profile?.last_name || ''} disabled />
                     </div>
                   </div>
                   <div>
-                    <Label>E-Mail-Adresse</Label>
+                    <Label>{t('app.settings.profile.email', 'E-Mail-Adresse')}</Label>
                     <Input value={currentUser.user?.email || ''} disabled />
                   </div>
                   {isCompanyAdmin && (
                     <Badge variant="secondary" className="mt-2">
-                      Unternehmens-Administrator
+                      {t('app.settings.profile.companyAdmin', 'Unternehmens-Administrator')}
                     </Badge>
                   )}
                 </CardContent>
@@ -382,31 +380,31 @@ const Settings = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Lock className="w-5 h-5" />
-                    Passwort ändern
+                    {t('app.settings.password.title', 'Passwort ändern')}
                   </CardTitle>
                   <CardDescription>
-                    Ändern Sie Ihr Passwort für mehr Sicherheit
+                    {t('app.settings.password.desc', 'Ändern Sie Ihr Passwort für mehr Sicherheit')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <Label htmlFor="newPassword">Neues Passwort</Label>
+                    <Label htmlFor="newPassword">{t('app.settings.password.new', 'Neues Passwort')}</Label>
                     <Input
                       id="newPassword"
                       type="password"
                       value={passwordData.newPassword}
                       onChange={(e) => setPasswordData(prev => ({...prev, newPassword: e.target.value}))}
-                      placeholder="Mindestens 6 Zeichen"
+                      placeholder={t('app.settings.password.min', 'Mindestens 6 Zeichen')}
                     />
                   </div>
                   <div>
-                    <Label htmlFor="confirmPassword">Passwort bestätigen</Label>
+                    <Label htmlFor="confirmPassword">{t('app.settings.password.confirm', 'Passwort bestätigen')}</Label>
                     <Input
                       id="confirmPassword"
                       type="password"
                       value={passwordData.confirmPassword}
                       onChange={(e) => setPasswordData(prev => ({...prev, confirmPassword: e.target.value}))}
-                      placeholder="Neues Passwort wiederholen"
+                      placeholder={t('app.settings.password.confirm', 'Neues Passwort wiederholen')}
                     />
                   </div>
                   <Button 
@@ -414,7 +412,7 @@ const Settings = () => {
                     disabled={!passwordData.newPassword || !passwordData.confirmPassword || changePasswordMutation.isPending}
                     className="bg-primary hover:bg-primary/90"
                   >
-                    {changePasswordMutation.isPending ? 'Wird geändert...' : 'Passwort ändern'}
+                    {changePasswordMutation.isPending ? t('app.settings.password.changing', 'Wird geändert...') : t('app.settings.password.change', 'Passwort ändern')}
                   </Button>
                 </CardContent>
               </Card>
@@ -427,24 +425,24 @@ const Settings = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Building2 className="w-5 h-5" />
-                  Unternehmensdaten
+                  {t('app.settings.company.title', 'Unternehmensdaten')}
                 </CardTitle>
                 <CardDescription>
-                  Verwalten Sie die Informationen Ihres Unternehmens
+                  {t('app.settings.company.desc', 'Verwalten Sie die Informationen Ihres Unternehmens')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label htmlFor="companyName">Firmenname</Label>
+                  <Label htmlFor="companyName">{t('app.settings.company.name', 'Firmenname')}</Label>
                   <Input
                     id="companyName"
                     value={companyData.name}
                     onChange={(e) => setCompanyData(prev => ({...prev, name: e.target.value}))}
-                    placeholder="Name Ihres Unternehmens"
+                    placeholder={t('app.settings.company.name', 'Name Ihres Unternehmens')}
                   />
                 </div>
                 <div>
-                  <Label htmlFor="companyEmail">Firmen-E-Mail</Label>
+                  <Label htmlFor="companyEmail">{t('app.settings.company.email', 'Firmen-E-Mail')}</Label>
                   <Input
                     id="companyEmail"
                     type="email"
@@ -454,7 +452,7 @@ const Settings = () => {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="companyWebsite">Website</Label>
+                  <Label htmlFor="companyWebsite">{t('app.settings.company.website', 'Website')}</Label>
                   <Input
                     id="companyWebsite"
                     value={companyData.website}
@@ -467,7 +465,7 @@ const Settings = () => {
                   disabled={updateCompanyMutation.isPending}
                   className="bg-primary hover:bg-primary/90"
                 >
-                  {updateCompanyMutation.isPending ? 'Wird gespeichert...' : 'Änderungen speichern'}
+                  {updateCompanyMutation.isPending ? t('app.settings.company.saving', 'Wird gespeichert...') : t('app.settings.company.save', 'Änderungen speichern')}
                 </Button>
               </CardContent>
             </Card>
@@ -481,15 +479,15 @@ const Settings = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Mail className="w-5 h-5" />
-                    Mitarbeiter einladen
+                    {t('app.settings.team.invite.title', 'Mitarbeiter einladen')}
                   </CardTitle>
                   <CardDescription>
-                    Laden Sie neue Mitarbeiter zu Ihrem Unternehmen ein
+                    {t('app.settings.team.invite.desc', 'Laden Sie neue Mitarbeiter zu Ihrem Unternehmen ein')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <Label htmlFor="inviteEmail">E-Mail-Adresse</Label>
+                    <Label htmlFor="inviteEmail">{t('app.settings.team.invite.email', 'E-Mail-Adresse')}</Label>
                     <Input
                       id="inviteEmail"
                       type="email"
@@ -502,15 +500,15 @@ const Settings = () => {
                   {/* Role selector - only show for admins */}
                   {isAdmin && (
                     <div>
-                      <Label htmlFor="inviteRole">Rolle</Label>
+                      <Label htmlFor="inviteRole">{t('app.settings.team.invite.role', 'Rolle')}</Label>
                       <Select value={inviteRole} onValueChange={(value: 'user' | 'admin' | 'company_admin') => setInviteRole(value)}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Rolle auswählen" />
+                          <SelectValue placeholder={t('app.settings.team.invite.role', 'Rolle auswählen')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="user">Benutzer</SelectItem>
-                          <SelectItem value="company_admin">Unternehmens-Administrator</SelectItem>
-                          <SelectItem value="admin">Administrator</SelectItem>
+                          <SelectItem value="user">{t('app.settings.team.roles.user', 'Benutzer')}</SelectItem>
+                          <SelectItem value="company_admin">{t('app.settings.team.roles.company_admin', 'Unternehmens-Administrator')}</SelectItem>
+                          <SelectItem value="admin">{t('app.settings.team.roles.admin', 'Administrator')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -520,7 +518,7 @@ const Settings = () => {
                     disabled={!inviteEmail.trim() || sendInvitationMutation.isPending}
                     className="bg-primary hover:bg-primary/90"
                   >
-                    {sendInvitationMutation.isPending ? 'Wird versendet...' : 'Einladung senden'}
+                    {sendInvitationMutation.isPending ? t('app.settings.team.invite.sending', 'Wird versendet...') : t('app.settings.team.invite.send', 'Einladung senden')}
                   </Button>
                 </CardContent>
               </Card>
@@ -530,28 +528,28 @@ const Settings = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <UserPlus className="w-5 h-5" />
-                    Gesendete Einladungen
+                    {t('app.settings.team.list.title', 'Gesendete Einladungen')}
                   </CardTitle>
                   <CardDescription>
-                    Übersicht über alle gesendeten Einladungen
+                    {t('app.settings.team.list.desc', 'Übersicht über alle gesendeten Einladungen')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   {invitations.length === 0 ? (
                     <div className="text-center py-8 text-muted-foreground">
-                      Noch keine Einladungen versendet
+                      {t('app.settings.team.list.none', 'Noch keine Einladungen versendet')}
                     </div>
                   ) : (
                     <div className="space-y-4">
                       {invitations.map((invitation: any) => (
-                        <div key={invitation.id} className="flex items-center justify-between p-4 border rounded-lg">
+                        <div key={invitation.id} className="flex items-center justify_between p-4 border rounded-lg">
                           <div>
                             <div className="font-medium">{invitation.email}</div>
                             <div className="text-sm text-muted-foreground">
-                              Gesendet am {new Date(invitation.created_at).toLocaleDateString('de-DE')}
+                              {t('app.settings.team.list.sentOn', 'Gesendet am')} {new Date(invitation.created_at).toLocaleDateString('de-DE')}
                             </div>
                             <div className="text-sm text-muted-foreground">
-                              Läuft ab am {new Date(invitation.expires_at).toLocaleDateString('de-DE')}
+                              {t('app.settings.team.list.expires', 'Läuft ab am')} {new Date(invitation.expires_at).toLocaleDateString('de-DE')}
                             </div>
                           </div>
                           <div className="flex items-center gap-2">

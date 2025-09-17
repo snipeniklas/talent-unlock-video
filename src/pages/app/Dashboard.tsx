@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '@/i18n/i18n';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const Dashboard = () => {
     pendingRequests: 0
   });
   const [loading, setLoading] = useState(true);
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -94,7 +96,7 @@ const Dashboard = () => {
           // Fetch recommended specialists (top rated and available)
           const { data: specialistsData } = await supabase
             .from('candidates')
-            .select('id')
+            .select('id, first_name, last_name, current_position, experience_years, rating')
             .limit(3);
 
           setRecommendedSpecialists(specialistsData || []);
@@ -110,6 +112,8 @@ const Dashboard = () => {
     fetchDashboardData();
   }, []);
 
+  const locale = lang === 'en' ? 'en-US' : 'de-DE';
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
@@ -123,16 +127,16 @@ const Dashboard = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-brand-dark">Dashboard</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-brand-dark">{t('app.dashboard.title', 'Dashboard')}</h1>
           <p className="text-muted-foreground mt-1 text-sm md:text-base">
-            {userRole === 'company_admin' ? `Willkommen zurück bei ${companyName}` : 'Übersicht Ihrer Aktivitäten'}
+            {userRole === 'company_admin' ? `${t('app.dashboard.welcomePrefix', 'Willkommen zurück bei')} ${companyName}` : t('app.dashboard.subtitle', 'Übersicht Ihrer Aktivitäten')}
           </p>
         </div>
         {userRole !== 'admin' && (
           <Button onClick={() => navigate('/app/search-requests/new')} className="bg-primary hover:bg-primary-hover w-full md:w-auto">
             <Plus className="w-4 h-4 mr-2" />
-            <span className="md:hidden">RaaS Anfrage</span>
-            <span className="hidden md:inline">Neue Anfrage</span>
+            <span className="md:hidden">{t('app.dashboard.cta.newShort', 'RaaS Anfrage')}</span>
+            <span className="hidden md:inline">{t('app.dashboard.cta.new', 'Neue Anfrage')}</span>
           </Button>
         )}
       </div>
@@ -141,52 +145,52 @@ const Dashboard = () => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         <Card className="hover:shadow-lg transition-shadow duration-300">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Aktive Suchaufträge</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('app.dashboard.cards.active.title', 'Aktive Suchaufträge')}</CardTitle>
             <Search className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-primary">{stats.activeSearchRequests}</div>
             <p className="text-xs text-muted-foreground">
-              +2 seit letztem Monat
+              {t('app.dashboard.cards.active.delta', '+2 seit letztem Monat')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="hover:shadow-lg transition-shadow duration-300">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Spezialisten</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('app.dashboard.cards.specialists.title', 'Spezialisten')}</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-primary">{stats.totalSpecialists}</div>
             <p className="text-xs text-muted-foreground">
-              Verfügbare Experten
+              {t('app.dashboard.cards.specialists.caption', 'Verfügbare Experten')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="hover:shadow-lg transition-shadow duration-300">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Abgeschlossen</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('app.dashboard.cards.completed.title', 'Abgeschlossen')}</CardTitle>
             <CheckCircle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-green-600">{stats.completedProjects}</div>
             <p className="text-xs text-muted-foreground">
-              Erfolgreiche Projekte
+              {t('app.dashboard.cards.completed.caption', 'Erfolgreiche Projekte')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="hover:shadow-lg transition-shadow duration-300">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Ausstehend</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('app.dashboard.cards.pending.title', 'Ausstehend')}</CardTitle>
             <Clock className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-orange-600">{stats.pendingRequests}</div>
             <p className="text-xs text-muted-foreground">
-              Warten auf Bearbeitung
+              {t('app.dashboard.cards.pending.caption', 'Warten auf Bearbeitung')}
             </p>
           </CardContent>
         </Card>
@@ -198,10 +202,10 @@ const Dashboard = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-primary" />
-              Aktuelle Aktivitäten
+              {t('app.dashboard.recent.title', 'Aktuelle Aktivitäten')}
             </CardTitle>
             <CardDescription>
-              Ihre neuesten Suchaufträge und Updates
+              {t('app.dashboard.recent.desc', 'Ihre neuesten Suchaufträge und Updates')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -215,7 +219,7 @@ const Dashboard = () => {
                     <div>
                       <p className="font-medium">{request.title}</p>
                       <p className="text-sm text-muted-foreground">
-                        Erstellt {new Date(request.created_at).toLocaleDateString('de-DE', {
+                        {t('app.dashboard.recent.created', 'Erstellt')} {new Date(request.created_at).toLocaleDateString(locale, {
                           day: 'numeric',
                           month: 'long'
                         })}
@@ -231,23 +235,23 @@ const Dashboard = () => {
                         request.status === 'completed' ? 'bg-green-100 text-green-800 hover:bg-green-100' : ''
                       }
                     >
-                      {request.status === 'active' ? 'Aktiv' : 
-                       request.status === 'completed' ? 'Abgeschlossen' : 
-                       request.status === 'pending' ? 'Ausstehend' : 
-                       'In Bearbeitung'}
+                      {request.status === 'active' ? t('app.status.active', 'Aktiv') : 
+                       request.status === 'completed' ? t('app.status.completed', 'Abgeschlossen') : 
+                       request.status === 'pending' ? t('app.status.pending', 'Ausstehend') : 
+                       t('app.status.in_progress', 'In Bearbeitung')}
                     </Badge>
                   </div>
                 ))
               ) : (
                 <div className="text-center py-8">
-                  <p className="text-muted-foreground">Noch keine Suchaufträge erstellt</p>
+                  <p className="text-muted-foreground">{t('app.dashboard.recent.empty.text', 'Noch keine Suchaufträge erstellt')}</p>
                   <Button 
                     variant="outline" 
                     size="sm" 
                     className="mt-2"
                     onClick={() => navigate('/app/search-requests/new')}
                   >
-                    Ersten Auftrag erstellen
+                    {t('app.dashboard.recent.empty.btn', 'Ersten Auftrag erstellen')}
                   </Button>
                 </div>
               )}
@@ -259,10 +263,10 @@ const Dashboard = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <UserCheck className="w-5 h-5 text-primary" />
-              Empfohlene Spezialisten
+              {t('app.dashboard.recommended.title', 'Empfohlene Spezialisten')}
             </CardTitle>
             <CardDescription>
-              Neue Experten für Ihre Anforderungen
+              {t('app.dashboard.recommended.desc', 'Neue Experten für Ihre Anforderungen')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -276,7 +280,7 @@ const Dashboard = () => {
                     <div>
                       <p className="font-medium">{specialist.first_name} {specialist.last_name}</p>
                       <p className="text-sm text-muted-foreground">
-                        {specialist.current_position || 'Spezialist'} • {specialist.experience_years || 0} Jahre Erfahrung
+                        {specialist.current_position || t('app.dashboard.recommended.fallbackRole', 'Spezialist')} • {specialist.experience_years || 0} {t('app.dashboard.recommended.years', 'Jahre Erfahrung')}
                         {specialist.rating && (
                           <span className="ml-2">⭐ {specialist.rating}/5</span>
                         )}
@@ -287,20 +291,20 @@ const Dashboard = () => {
                       size="sm"
                       onClick={() => navigate(`/app/specialists/${specialist.id}`)}
                     >
-                      Profil ansehen
+                      {t('app.dashboard.recommended.viewProfile', 'Profil ansehen')}
                     </Button>
                   </div>
                 ))
               ) : (
                 <div className="text-center py-8">
-                  <p className="text-muted-foreground">Noch keine Spezialisten verfügbar</p>
+                  <p className="text-muted-foreground">{t('app.dashboard.recommended.empty.text', 'Noch keine Spezialisten verfügbar')}</p>
                   <Button 
                     variant="outline" 
                     size="sm" 
                     className="mt-2"
                     onClick={() => navigate('/app/specialists')}
                   >
-                    Spezialisten durchsuchen
+                    {t('app.dashboard.recommended.empty.btn', 'Spezialisten durchsuchen')}
                   </Button>
                 </div>
               )}
@@ -313,9 +317,9 @@ const Dashboard = () => {
       {userRole !== 'admin' && (
         <Card>
           <CardHeader>
-            <CardTitle>Schnellzugriff</CardTitle>
+            <CardTitle>{t('app.dashboard.quick.title', 'Schnellzugriff')}</CardTitle>
             <CardDescription>
-              Häufig verwendete Aktionen für effizientes Arbeiten
+              {t('app.dashboard.quick.desc', 'Häufig verwendete Aktionen für effizientes Arbeiten')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -326,7 +330,7 @@ const Dashboard = () => {
                 onClick={() => navigate('/app/search-requests/new')}
               >
                 <Plus className="w-5 h-5 md:w-6 md:h-6" />
-                <span className="text-sm md:text-base">Neue Anfrage erstellen</span>
+                <span className="text-sm md:text-base">{t('app.dashboard.quick.create', 'Neue Anfrage erstellen')}</span>
               </Button>
               <Button 
                 variant="outline" 
@@ -334,7 +338,7 @@ const Dashboard = () => {
                 onClick={() => navigate('/app/specialists')}
               >
                 <Users className="w-5 h-5 md:w-6 md:h-6" />
-                <span className="text-sm md:text-base">Spezialisten durchsuchen</span>
+                <span className="text-sm md:text-base">{t('app.dashboard.quick.browse', 'Spezialisten durchsuchen')}</span>
               </Button>
               <Button 
                 variant="outline" 
@@ -342,7 +346,7 @@ const Dashboard = () => {
                 onClick={() => navigate('/app/search-requests')}
               >
                 <Search className="w-5 h-5 md:w-6 md:h-6" />
-                <span className="text-sm md:text-base">Anfragen verwalten</span>
+                <span className="text-sm md:text-base">{t('app.dashboard.quick.manage', 'Anfragen verwalten')}</span>
               </Button>
             </div>
           </CardContent>

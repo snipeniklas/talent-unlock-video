@@ -35,6 +35,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from '@/i18n/i18n';
 
 interface SearchRequest {
   id: string;
@@ -63,6 +64,7 @@ const SearchRequests = () => {
   const [loading, setLoading] = useState(true);
   const [userRoles, setUserRoles] = useState<string[]>([]);
   const [currentUserId, setCurrentUserId] = useState<string>('');
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
     const fetchSearchRequests = async () => {
@@ -91,9 +93,9 @@ const SearchRequests = () => {
 
         if (!profile?.company_id) {
           toast({
-            title: "Fehler",
-            description: "Keine Firma gefunden. Bitte kontaktieren Sie den Support.",
-            variant: "destructive",
+            title: t('app.searchRequests.toasts.error', 'Fehler'),
+            description: t('app.searchRequests.toasts.errorCompany', 'Keine Firma gefunden. Bitte kontaktieren Sie den Support.'),
+            variant: 'destructive',
           });
           return;
         }
@@ -108,9 +110,9 @@ const SearchRequests = () => {
         if (error) {
           console.error('Error fetching search requests:', error);
           toast({
-            title: "Fehler",
-            description: "Suchaufträge konnten nicht geladen werden.",
-            variant: "destructive",
+            title: t('app.searchRequests.toasts.error', 'Fehler'),
+            description: t('app.searchRequests.toasts.loadFailed', 'Suchaufträge konnten nicht geladen werden.'),
+            variant: 'destructive',
           });
           return;
         }
@@ -135,9 +137,9 @@ const SearchRequests = () => {
       } catch (error) {
         console.error('Error:', error);
         toast({
-          title: "Fehler",
-          description: "Ein unerwarteter Fehler ist aufgetreten.",
-          variant: "destructive",
+          title: t('app.searchRequests.toasts.error', 'Fehler'),
+          description: t('app.searchRequests.toasts.unexpected', 'Ein unerwarteter Fehler ist aufgetreten.'),
+          variant: 'destructive',
         });
       } finally {
         setLoading(false);
@@ -145,7 +147,7 @@ const SearchRequests = () => {
     };
 
     fetchSearchRequests();
-  }, [navigate, toast]);
+  }, [navigate, toast, t]);
 
   useEffect(() => {
     let filtered = searchRequests;
@@ -170,11 +172,8 @@ const SearchRequests = () => {
   }, [searchTerm, statusFilter, searchRequests]);
 
   const canDeleteRequest = (request: SearchRequest) => {
-    // Admins can delete all
     if (userRoles.includes('admin')) return true;
-    // Company admins can delete all from their company
     if (userRoles.includes('company_admin')) return true;
-    // Users can only delete their own
     return request.created_by === currentUserId;
   };
 
@@ -188,27 +187,26 @@ const SearchRequests = () => {
       if (error) {
         console.error('Error deleting search request:', error);
         toast({
-          title: "Fehler",
-          description: "Suchauftrag konnte nicht gelöscht werden.",
-          variant: "destructive",
+          title: t('app.searchRequests.toasts.error', 'Fehler'),
+          description: t('app.searchRequests.toasts.deleteFailed', 'Suchauftrag konnte nicht gelöscht werden.'),
+          variant: 'destructive',
         });
         return;
       }
 
-      // Remove from local state
       setSearchRequests(prev => prev.filter(req => req.id !== requestId));
       setFilteredRequests(prev => prev.filter(req => req.id !== requestId));
 
       toast({
-        title: "Erfolg",
-        description: "Suchauftrag wurde erfolgreich gelöscht.",
+        title: t('app.searchRequests.toasts.deleteSuccessTitle', 'Erfolg'),
+        description: t('app.searchRequests.toasts.deleteSuccess', 'Suchauftrag wurde erfolgreich gelöscht.'),
       });
     } catch (error) {
       console.error('Error:', error);
       toast({
-        title: "Fehler",
-        description: "Ein unerwarteter Fehler ist aufgetreten.",
-        variant: "destructive",
+        title: t('app.searchRequests.toasts.error', 'Fehler'),
+        description: t('app.searchRequests.toasts.unexpected', 'Ein unerwarteter Fehler ist aufgetreten.'),
+        variant: 'destructive',
       });
     }
   };
@@ -231,13 +229,13 @@ const SearchRequests = () => {
   const getStatusText = (status: string) => {
     switch (status) {
       case 'active':
-        return 'Aktiv';
+        return t('app.status.active', 'Aktiv');
       case 'pending':
-        return 'Ausstehend';
+        return t('app.status.pending', 'Ausstehend');
       case 'completed':
-        return 'Abgeschlossen';
+        return t('app.status.completed', 'Abgeschlossen');
       case 'cancelled':
-        return 'Abgebrochen';
+        return t('app.status.cancelled', 'Abgebrochen');
       default:
         return status;
     }
@@ -251,19 +249,21 @@ const SearchRequests = () => {
     );
   }
 
+  const locale = lang === 'en' ? 'en-US' : 'de-DE';
+
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-brand-dark">Suchaufträge</h1>
+          <h1 className="text-3xl font-bold text-brand-dark">{t('app.searchRequests.title', 'Suchaufträge')}</h1>
           <p className="text-muted-foreground mt-1">
-            Verwalten Sie Ihre Stellenausschreibungen und finden Sie die besten Kandidaten
+            {t('app.searchRequests.subtitle', 'Verwalten Sie Ihre Stellenausschreibungen und finden Sie die besten Kandidaten')}
           </p>
         </div>
         <Button onClick={() => navigate('/app/search-requests/new')} className="bg-primary hover:bg-primary-hover">
           <Plus className="w-4 h-4 mr-2" />
-          Neue Anfrage
+          {t('app.searchRequests.new', 'Neue Anfrage')}
         </Button>
       </div>
 
@@ -272,7 +272,7 @@ const SearchRequests = () => {
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
           <Input
-            placeholder="Suchaufträge durchsuchen..."
+            placeholder={t('app.searchRequests.searchPlaceholder', 'Suchaufträge durchsuchen...')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -283,21 +283,21 @@ const SearchRequests = () => {
           <DropdownMenuTrigger asChild>
             <Button variant="outline">
               <Filter className="w-4 h-4 mr-2" />
-              Status
+              {t('app.searchRequests.filters.status', 'Status')}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onClick={() => setStatusFilter('all')}>
-              Alle Status
+              {t('app.searchRequests.filters.all', 'Alle Status')}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setStatusFilter('active')}>
-              Aktiv
+              {t('app.searchRequests.filters.active', 'Aktiv')}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setStatusFilter('pending')}>
-              Ausstehend
+              {t('app.searchRequests.filters.pending', 'Ausstehend')}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setStatusFilter('completed')}>
-              Abgeschlossen
+              {t('app.searchRequests.filters.completed', 'Abgeschlossen')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -328,31 +328,31 @@ const SearchRequests = () => {
                     <DropdownMenuContent>
                       <DropdownMenuItem onClick={() => navigate(`/app/search-requests/${request.id}`)}>
                         <Eye className="w-4 h-4 mr-2" />
-                        Ansehen
+                        {t('common.actions.view', 'Ansehen')}
                       </DropdownMenuItem>
                       <DropdownMenuItem>
                         <Edit className="w-4 h-4 mr-2" />
-                        Bearbeiten
+                        {t('common.actions.edit', 'Bearbeiten')}
                       </DropdownMenuItem>
                       {canDeleteRequest(request) && (
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
                             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                               <Trash2 className="w-4 h-4 mr-2" />
-                              Löschen
+                              {t('common.actions.delete', 'Löschen')}
                             </DropdownMenuItem>
                           </AlertDialogTrigger>
                           <AlertDialogContent>
                             <AlertDialogHeader>
-                              <AlertDialogTitle>Suchauftrag löschen</AlertDialogTitle>
+                              <AlertDialogTitle>{t('app.searchRequests.confirmDelete.title', 'Suchauftrag löschen')}</AlertDialogTitle>
                               <AlertDialogDescription>
-                                Sind Sie sicher, dass Sie diesen Suchauftrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.
+                                {t('app.searchRequests.confirmDelete.desc', 'Sind Sie sicher, dass Sie diesen Suchauftrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.')}
                               </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                              <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+                              <AlertDialogCancel>{t('common.actions.cancel', 'Abbrechen')}</AlertDialogCancel>
                               <AlertDialogAction onClick={() => handleDeleteRequest(request.id)}>
-                                Löschen
+                                {t('common.actions.delete', 'Löschen')}
                               </AlertDialogAction>
                             </AlertDialogFooter>
                           </AlertDialogContent>
@@ -369,32 +369,32 @@ const SearchRequests = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-muted-foreground" />
-                    <span>{request.location || 'Nicht angegeben'}</span>
+                    <span>{request.location || t('app.searchRequests.details.locationUnknown', 'Nicht angegeben')}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="w-4 h-4 text-muted-foreground" />
-                    <span>{request.candidate_count || 0} Kandidaten</span>
+                    <span>{request.candidate_count || 0} {t('app.searchRequests.details.candidates', 'Kandidaten')}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4 text-muted-foreground" />
-                    <span>Erstellt: {new Date(request.created_at).toLocaleDateString('de-DE')}</span>
+                    <span>{t('app.searchRequests.details.created', 'Erstellt:')} {new Date(request.created_at).toLocaleDateString(locale)}</span>
                   </div>
                 </div>
 
                 {/* Budget */}
                 <div>
-                  <span className="font-medium">Budget: </span>
+                  <span className="font-medium">{t('app.searchRequests.details.budget', 'Budget:')} </span>
                   <span className="text-primary font-semibold">
                     {request.salary_min && request.salary_max 
                       ? `${request.salary_min.toLocaleString()} - ${request.salary_max.toLocaleString()} €`
-                      : 'Nicht angegeben'
+                      : t('app.searchRequests.details.notProvided', 'Nicht angegeben')
                     }
                   </span>
                 </div>
 
                 {/* Required Skills */}
                 <div>
-                  <span className="font-medium mb-2 block">Erforderliche Skills:</span>
+                  <span className="font-medium mb-2 block">{t('app.searchRequests.details.requiredSkills', 'Erforderliche Skills:')}</span>
                   <div className="flex flex-wrap gap-2">
                     {request.skills_required && request.skills_required.length > 0 ? (
                       request.skills_required.map((skill, index) => (
@@ -403,7 +403,7 @@ const SearchRequests = () => {
                         </Badge>
                       ))
                     ) : (
-                      <span className="text-muted-foreground text-sm">Keine Skills angegeben</span>
+                      <span className="text-muted-foreground text-sm">{t('app.searchRequests.details.noSkills', 'Keine Skills angegeben')}</span>
                     )}
                   </div>
                 </div>
@@ -416,19 +416,19 @@ const SearchRequests = () => {
                     onClick={() => navigate(`/app/search-requests/${request.id}`)}
                   >
                     <Eye className="w-4 h-4 mr-2" />
-                    Details ansehen
+                    {t('app.searchRequests.details.view', 'Details ansehen')}
                   </Button>
                   <Button 
                     size="sm" 
                     variant="outline"
                     onClick={() => navigate(`/app/search-requests/${request.id}/candidates`)}
                   >
-                    Kandidaten verwalten ({request.candidate_count || 0})
+                    {t('app.searchRequests.details.manageCandidates', 'Kandidaten verwalten')} ({request.candidate_count || 0})
                   </Button>
                   {request.status === 'active' && (
                     <Button size="sm" variant="outline">
                       <Edit className="w-4 h-4 mr-2" />
-                      Bearbeiten
+                      {t('common.actions.edit', 'Bearbeiten')}
                     </Button>
                   )}
                 </div>
@@ -441,16 +441,16 @@ const SearchRequests = () => {
       {filteredRequests.length === 0 && (
         <div className="text-center py-12">
           <Search className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-brand-dark mb-2">Keine Suchaufträge gefunden</h3>
+          <h3 className="text-lg font-semibold text-brand-dark mb-2">{t('app.searchRequests.empty.title', 'Keine Suchaufträge gefunden')}</h3>
           <p className="text-muted-foreground mb-4">
             {searchTerm || statusFilter !== 'all' 
-              ? 'Versuchen Sie andere Suchbegriffe oder Filter.'
-              : 'Erstellen Sie Ihren ersten Suchauftrag, um loszulegen.'
+              ? t('app.searchRequests.empty.filtered', 'Versuchen Sie andere Suchbegriffe oder Filter.')
+              : t('app.searchRequests.empty.start', 'Erstellen Sie Ihren ersten Suchauftrag, um loszulegen.')
             }
           </p>
           <Button onClick={() => navigate('/app/search-requests/new')} className="bg-primary hover:bg-primary-hover">
             <Plus className="w-4 h-4 mr-2" />
-            Erste Anfrage erstellen
+            {t('app.searchRequests.empty.btn', 'Erste Anfrage erstellen')}
           </Button>
         </div>
       )}

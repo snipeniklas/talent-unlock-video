@@ -5,18 +5,20 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X } from "lucide-react";
 import BenefitBanner from "@/components/BenefitBanner";
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import { useTranslation } from '@/i18n/i18n';
 
 const PublicHeader = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t, lang, setLang } = useTranslation();
 
   const navigationItems = [
-    { title: "Startseite", path: "/" },
-    { title: "RaaS Lösungen", path: "/solutions" },
-    { title: "So arbeiten wir", path: "/how-we-work" },
-    { title: "Über uns", path: "/about-us" },
-    { title: "RaaS Hub", path: "/resource-hub" },
-    { title: "Kontakt", path: "/contact" },
+    { title: t('header.nav.home'), path: "/" },
+    { title: t('header.nav.solutions'), path: "/solutions" },
+    { title: t('header.nav.howWeWork'), path: "/how-we-work" },
+    { title: t('header.nav.aboutUs'), path: "/about-us" },
+    { title: t('header.nav.hub'), path: "/resource-hub" },
+    { title: t('header.nav.contact'), path: "/contact" },
   ];
 
   const handleNavigation = (path: string) => {
@@ -53,19 +55,25 @@ const PublicHeader = () => {
             </div>
 
             {/* Desktop Actions */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-2">
               <Button variant="outline" asChild>
-                <a href="/auth">Login</a>
+                <a href="/auth">{t('header.cta.login')}</a>
               </Button>
               <Button asChild className="bg-primary hover:bg-primary-hover">
-                <Link to="/app/search-requests/new">RaaS Anfrage erstellen</Link>
+                <Link to="/app/search-requests/new">{t('header.cta.createRequest')}</Link>
+              </Button>
+              <Button variant="ghost" onClick={() => setLang(lang === 'de' ? 'en' : 'de')}>
+                {lang === 'de' ? 'EN' : 'DE'}
               </Button>
             </div>
 
             {/* Mobile Menu */}
             <div className="flex items-center space-x-2 md:hidden">
               <Button asChild size="sm" className="bg-primary hover:bg-primary-hover">
-                <Link to="/app/search-requests/new">RaaS Anfrage</Link>
+                <Link to="/app/search-requests/new">{t('header.cta.createRequestShort')}</Link>
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => setLang(lang === 'de' ? 'en' : 'de')}>
+                {lang === 'de' ? 'EN' : 'DE'}
               </Button>
               
               <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
@@ -111,10 +119,10 @@ const PublicHeader = () => {
                     {/* Mobile Actions */}
                     <div className="border-t pt-4 space-y-3">
                       <Button variant="outline" asChild className="w-full">
-                        <a href="/auth">Login</a>
+                        <a href="/auth">{t('header.cta.login')}</a>
                       </Button>
                       <Button asChild className="w-full bg-primary hover:bg-primary-hover">
-                        <Link to="/app/search-requests/new">RaaS Anfrage erstellen</Link>
+                        <Link to="/app/search-requests/new">{t('header.cta.createRequest')}</Link>
                       </Button>
                     </div>
                   </div>

@@ -9,8 +9,10 @@ import videoThumbnail from '@/assets/video-thumbnail.jpg';
 import customerLogos from '@/assets/customer-logos.png';
 import verifiedBadge from '@/assets/verified-badge.png';
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import { useTranslation } from '@/i18n/i18n';
 
 const BackofficeLanding = () => {
+  const { t, get } = useTranslation();
   
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -56,44 +58,23 @@ const BackofficeLanding = () => {
       {/* Benefit Ticker */}
       <div className="bg-neutral-50 h-12 flex items-center overflow-hidden border-b">
         <div className="animate-slide-text hover:animate-none flex items-center gap-12 whitespace-nowrap min-w-max">
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            40-60% günstiger <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Start in 2-4 Wochen <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Geprüfte Backoffice-Profis <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Keine Headhunter-Fee <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Remote & DSGVO-konform <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Skalierung jederzeit möglich <span className="text-primary text-lg">•</span>
-          </span>
-          
-          {/* Second set for seamless loop */}
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            40-60% günstiger <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Start in 2-4 Wochen <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Geprüfte Backoffice-Profis <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Keine Headhunter-Fee <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Remote & DSGVO-konform <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Skalierung jederzeit möglich <span className="text-primary text-lg">•</span>
-          </span>
+          {get<string[]>('landing.backoffice.ticker', [
+            '40-60% günstiger',
+            'Start in 2-4 Wochen',
+            'Geprüfte Backoffice-Profis',
+            'Keine Headhunter-Fee',
+            'Remote & DSGVO-konform',
+            'Skalierung jederzeit möglich'
+          ]).map((text, idx) => (
+            <span key={`ticker-a-${idx}`} className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+              {text} <span className="text-primary text-lg">•</span>
+            </span>
+          ))}
+          {get<string[]>('landing.backoffice.ticker', []).map((text, idx) => (
+            <span key={`ticker-b-${idx}`} className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+              {text} <span className="text-primary text-lg">•</span>
+            </span>
+          ))}
         </div>
       </div>
 
@@ -102,20 +83,18 @@ const BackofficeLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
-              <span className="text-primary">RaaS</span> - Remote Backoffice-Fachkräfte{' '}
+              <span className="text-primary">RaaS</span> {t('landing.backoffice.hero.title', '- Remote Backoffice-Fachkräfte')}{' '}
               <span className="text-primary bg-gradient-to-r from-primary to-primary-hover bg-clip-text animate-shimmer bg-shimmer bg-200% animate-bounce-in-delay-1">
-                40-60% günstiger
-              </span> als lokale Mitarbeiter
+                {t('landing.backoffice.hero.badge', '40-60% günstiger')}
+              </span> {t('landing.backoffice.hero.trailing', 'als lokale Mitarbeiter')}
             </h1>
             
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto animate-fade-in-delay-1">
-              <strong>Resources as a Service</strong> – Unser bewährtes RaaS-System macht es einfach: 
-              Sie beschreiben Ihre Backoffice-Anforderungen, wir liefern die perfekte Fachkraft-Lösung.
+              <strong>Resources as a Service</strong> – {t('landing.backoffice.hero.p1', 'Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihre Backoffice-Anforderungen, wir liefern die perfekte Fachkraft-Lösung.')}
             </p>
             
             <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto animate-fade-in-delay-1">
-              Entdecken Sie, wie Sie hochqualifizierte Backoffice-Profis für Buchhaltung, Admin und Kundenservice 
-              aus unserem geprüften Netzwerk bekommen – remote, zuverlässig und DSGVO-konform.
+              {t('landing.backoffice.hero.p2', 'Entdecken Sie, wie Sie hochqualifizierte Backoffice-Profis für Buchhaltung, Admin und Kundenservice aus unserem geprüften Netzwerk bekommen – remote, zuverlässig und DSGVO-konform.')}
             </p>
 
             {/* Video Player */}
@@ -141,7 +120,7 @@ const BackofficeLanding = () => {
             >
               <Link to="/app/search-requests/new">
                 <span className="relative z-10">
-                  RaaS Anfrage stellen
+                  {t('landing.backoffice.hero.cta', 'RaaS Anfrage stellen')}
                 </span>
                 <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>
               </Link>
@@ -162,9 +141,9 @@ const BackofficeLanding = () => {
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Calculator className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">Massive Kostenersparnis</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.backoffice.bullets.0.title', 'Massive Kostenersparnis')}</h3>
                   <p className="text-muted-foreground">
-                    Optimieren Sie Ihre Backoffice-Prozesse durch qualifizierte Remote-Fachkräfte
+                    {t('landing.backoffice.bullets.0.text', 'Optimieren Sie Ihre Backoffice-Prozesse durch qualifizierte Remote-Fachkräfte')}
                   </p>
                 </CardContent>
               </Card>
@@ -182,9 +161,9 @@ const BackofficeLanding = () => {
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Clock3 className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">Flexibel skalieren</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.backoffice.bullets.1.title', 'Flexibel skalieren')}</h3>
                   <p className="text-muted-foreground">
-                    Von 10h/Woche bis Vollzeit – passen Sie die Kapazität jederzeit an Ihre Bedürfnisse an
+                    {t('landing.backoffice.bullets.1.text', 'Von 10h/Woche bis Vollzeit – passen Sie die Kapazität jederzeit an Ihre Bedürfnisse an')}
                   </p>
                 </CardContent>
               </Card>
@@ -202,9 +181,9 @@ const BackofficeLanding = () => {
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Headphones className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">Professionelle Kommunikation</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.backoffice.bullets.2.title', 'Professionelle Kommunikation')}</h3>
                   <p className="text-muted-foreground">
-                    Alle unsere Backoffice-Profis kommunizieren professionell und verstehen Ihre Arbeitsweise
+                    {t('landing.backoffice.bullets.2.text', 'Alle unsere Backoffice-Profis kommunizieren professionell und verstehen Ihre Arbeitsweise')}
                   </p>
                 </CardContent>
               </Card>
@@ -218,39 +197,23 @@ const BackofficeLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
-              Kennen Sie diese Backoffice-Herausforderungen?
+              {t('landing.backoffice.problem.title', 'Kennen Sie diese Backoffice-Herausforderungen?')}
             </h2>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
-                <div className="text-red-500 mb-4">
-                  <Calculator className="w-8 h-8 mx-auto" />
-                </div>
-                <h3 className="font-bold mb-3">Explodierende Personalkosten</h3>
-                <p className="text-muted-foreground text-sm">
-                  Lokale Backoffice-Kräfte werden immer teurer bei gleichzeitig sinkender Verfügbarkeit
-                </p>
-              </Card>
-
-              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
-                <div className="text-red-500 mb-4">
-                  <Clock className="w-8 h-8 mx-auto" />
-                </div>
-                <h3 className="font-bold mb-3">Überlastete Teams</h3>
-                <p className="text-muted-foreground text-sm">
-                  Administrative Aufgaben fressen Zeit, die für Kerngeschäft und Wachstum fehlt
-                </p>
-              </Card>
-
-              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
-                <div className="text-red-500 mb-4">
-                  <Users className="w-8 h-8 mx-auto" />
-                </div>
-                <h3 className="font-bold mb-3">Schwierige Skalierung</h3>
-                <p className="text-muted-foreground text-sm">
-                  Bei Wachstum schnell qualifiziertes Personal zu finden wird zum Engpass
-                </p>
-              </Card>
+              {get<Array<{icon?: string; title: string; desc: string}>>('landing.backoffice.problem.items', [
+                { title: 'Explodierende Personalkosten', desc: 'Lokale Backoffice-Kräfte werden immer teurer bei gleichzeitig sinkender Verfügbarkeit' },
+                { title: 'Überlastete Teams', desc: 'Administrative Aufgaben fressen Zeit, die für Kerngeschäft und Wachstum fehlt' },
+                { title: 'Schwierige Skalierung', desc: 'Bei Wachstum schnell qualifiziertes Personal zu finden wird zum Engpass' }
+              ]).map((p, i) => (
+                <Card key={i} className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                  <div className="text-red-500 mb-4">
+                    {i===0 ? <Calculator className="w-8 h-8 mx-auto" /> : i===1 ? <Clock className="w-8 h-8 mx-auto" /> : <Users className="w-8 h-8 mx-auto" />}
+                  </div>
+                  <h3 className="font-bold mb-3">{p.title}</h3>
+                  <p className="text-muted-foreground text-sm">{p.desc}</p>
+                </Card>
+              ))}
             </div>
           </div>
         </div>
@@ -261,60 +224,37 @@ const BackofficeLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
-              So funktioniert's: Ihre Backoffice-Fachkraft in 3 einfachen Schritten
+              {t('landing.backoffice.how.title', "So funktioniert's: Ihre Backoffice-Fachkraft in 3 einfachen Schritten")}
             </h2>
             
             <div className="space-y-8">
               <div className="flex items-start gap-6">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                  1
-                </div>
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">1</div>
                 <div>
-                  <h3 className="text-xl font-bold mb-3">Anfrage über unsere Platform erstellen</h3>
+                  <h3 className="text-xl font-bold mb-3">{t('landing.backoffice.how.0.title', 'Anfrage über unsere Platform erstellen')}</h3>
                   <p className="text-muted-foreground mb-4">
-                    Loggen Sie sich in unser System ein und definieren Sie Ihre Backoffice-Anforderungen. 
-                    Wählen Sie Aufgabenbereiche, Qualifikationen, Arbeitszeiten und Sprachkenntnisse 
-                    über unsere intuitive Benutzeroberfläche.
+                    {t('landing.backoffice.how.0.text', 'Loggen Sie sich in unser System ein und definieren Sie Ihre Backoffice-Anforderungen. Wählen Sie Aufgabenbereiche, Qualifikationen, Arbeitszeiten und Sprachkenntnisse über unsere intuitive Benutzeroberfläche.')}
                   </p>
-                  <div className="bg-white p-4 rounded-lg border">
-                    <strong className="text-sm">Platform-Features:</strong> Aufgaben-Templates (Buchhaltung, Admin, Kundenservice), 
-                    Qualifikations-Filter, Arbeitszeit-Planer, Sprachlevel-Auswahl
-                  </div>
                 </div>
               </div>
 
               <div className="flex items-start gap-6">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                  2
-                </div>
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">2</div>
                 <div>
-                  <h3 className="text-xl font-bold mb-3">Automatisches Matching & Kandidatenauswahl</h3>
+                  <h3 className="text-xl font-bold mb-3">{t('landing.backoffice.how.1.title', 'Automatisches Matching & Kandidatenauswahl')}</h3>
                   <p className="text-muted-foreground mb-4">
-                    Unser System matched automatisch passende Backoffice-Profis aus unserem Pool. 
-                    Sie erhalten binnen 48h eine Liste mit 3-5 qualifizierten Kandidaten zur Auswahl 
-                    direkt in der Platform.
+                    {t('landing.backoffice.how.1.text', 'Unser System matched automatisch passende Backoffice-Profis aus unserem Pool. Sie erhalten binnen 48h eine Liste mit 3-5 qualifizierten Kandidaten zur Auswahl direkt in der Platform.')}
                   </p>
-                  <div className="bg-white p-4 rounded-lg border">
-                    <strong className="text-sm">Sie sehen:</strong> Detaillierte CV's, Referenzen, Sprachzertifikate, 
-                    Arbeitsproben, Verfügbarkeit und Motivation-Videos der Kandidaten
-                  </div>
                 </div>
               </div>
 
               <div className="flex items-start gap-6">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                  3
-                </div>
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">3</div>
                 <div>
-                  <h3 className="text-xl font-bold mb-3">Interview & Produktiver Start</h3>
+                  <h3 className="text-xl font-bold mb-3">{t('landing.backoffice.how.2.title', 'Interview & Produktiver Start')}</h3>
                   <p className="text-muted-foreground mb-4">
-                    Terminbuchung und Interview-Koordination laufen über die Platform. Nach Ihrer Entscheidung 
-                    übernehmen wir Verträge, Onboarding und Tool-Setup. Start binnen 2-4 Wochen.
+                    {t('landing.backoffice.how.2.text', 'Terminbuchung und Interview-Koordination laufen über die Platform. Nach Ihrer Entscheidung übernehmen wir Verträge, Onboarding und Tool-Setup. Start binnen 2-4 Wochen.')}
                   </p>
-                  <div className="bg-white p-4 rounded-lg border">
-                    <strong className="text-sm">Platform-Support:</strong> Kalender-Integration, Interview-Leitfäden, 
-                    automatische Verträge, Onboarding-Workflows und direkter Support-Chat
-                  </div>
                 </div>
               </div>
             </div>
@@ -327,7 +267,7 @@ const BackofficeLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-brand-dark mb-12 animate-fade-in">
-              Über 30 Unternehmen optimieren bereits ihr Backoffice
+              {t('landing.backoffice.trust.title', 'Über 30 Unternehmen optimieren bereits ihr Backoffice')}
             </h2>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -340,7 +280,7 @@ const BackofficeLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Dank Remote-Buchhaltung sparen wir monatlich €2.800 und haben endlich Zeit für unser Kerngeschäft. Top!"
+                      {t('landing.backoffice.testimonials.0', '"Dank Remote-Buchhaltung sparen wir monatlich €2.800 und haben endlich Zeit für unser Kerngeschäft. Top!"')}
                     </p>
                     <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Niklas Clasen, CEO SNIPE Solutions</div>
                   </div>
@@ -356,7 +296,7 @@ const BackofficeLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen."
+                      {t('landing.backoffice.testimonials.1', '"Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen."')}
                     </p>
                     <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Marc Palma, Geschäftsführer, ECO Containertrans</div>
                   </div>
@@ -371,7 +311,7 @@ const BackofficeLanding = () => {
                 ))}
               </div>
               <span className="font-semibold text-lg hover:scale-110 transition-transform duration-300">4,8 / 5</span>
-              <span className="text-muted-foreground hover:text-foreground transition-colors duration-300">aus 42 Bewertungen</span>
+              <span className="text-muted-foreground hover:text-foreground transition-colors duration-300">{t('landing.backoffice.reviews.caption', 'aus 42 Bewertungen')}</span>
             </div>
           </div>
         </div>
@@ -382,47 +322,43 @@ const BackofficeLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
-              Häufig gestellte Fragen
+              {t('landing.backoffice.faq.title', 'Häufig gestellte Fragen')}
             </h2>
 
             <Accordion type="single" collapsible className="space-y-4">
               <AccordionItem value="tasks" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-1 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Welche Backoffice-Aufgaben können übernommen werden?
+                  {t('landing.backoffice.faq.items.0.q', 'Welche Backoffice-Aufgaben können übernommen werden?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Buchhaltung, Rechnungswesen, Dateneingabe, Kundenservice, Administrative Tätigkeiten, 
-                  CRM-Pflege, E-Mail-Support, Terminkoordination und vieles mehr.
+                  {t('landing.backoffice.faq.items.0.a', 'Buchhaltung, Rechnungswesen, Dateneingabe, Kundenservice, Administrative Tätigkeiten, CRM-Pflege, E-Mail-Support, Terminkoordination und vieles mehr.')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="quality" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-2 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Wie wird die Qualität der Arbeit sichergestellt?
+                  {t('landing.backoffice.faq.items.1.q', 'Wie wird die Qualität der Arbeit sichergestellt?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Alle Fachkräfte haben mind. 3 Jahre Berufserfahrung, werden durch uns geprüft und 
-                  erhalten ein strukturiertes Onboarding. Regelmäßige Qualitätskontrollen inklusive.
+                  {t('landing.backoffice.faq.items.1.a', 'Alle Fachkräfte haben mind. 3 Jahre Berufserfahrung, werden durch uns geprüft und erhalten ein strukturiertes Onboarding. Regelmäßige Qualitätskontrollen inklusive.')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="communication" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-3 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Wie funktioniert die Kommunikation?
+                  {t('landing.backoffice.faq.items.2.q', 'Wie funktioniert die Kommunikation?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Kommunikation läuft über Ihre bevorzugten Tools (Teams, Slack, E-Mail). 
-                  Überschneidung mit europäischen Arbeitszeiten garantiert.
+                  {t('landing.backoffice.faq.items.2.a', 'Kommunikation läuft über Ihre bevorzugten Tools (Teams, Slack, E-Mail). Überschneidung mit europäischen Arbeitszeiten garantiert.')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="scaling" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-4 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Kann ich die Arbeitszeit flexibel anpassen?
+                  {t('landing.backoffice.faq.items.3.q', 'Kann ich die Arbeitszeit flexibel anpassen?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Ja, von 10 Stunden pro Woche bis Vollzeit. Sie können jederzeit nach oben oder 
-                  unten skalieren, je nach Ihren aktuellen Bedürfnissen.
+                  {t('landing.backoffice.faq.items.3.a', 'Ja, von 10 Stunden pro Woche bis Vollzeit. Sie können jederzeit nach oben oder unten skalieren, je nach Ihren aktuellen Bedürfnissen.')}
                 </AccordionContent>
               </AccordionItem>
 
@@ -439,32 +375,30 @@ const BackofficeLanding = () => {
             <div>
               <img src={hejTalentLogo} alt="Hej Talent" className="h-8 mb-4 filter brightness-0 invert" />
               <p className="text-sm opacity-80">
-                Remote Backoffice-Fachkräfte für deutsche Unternehmen
+                {t('landing.backoffice.footer.tagline', 'Remote Backoffice-Fachkräfte für deutsche Unternehmen')}
               </p>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Lösungen</h4>
+              <h4 className="font-semibold mb-4">{t('landing.backoffice.footer.solutions', 'Lösungen')}</h4>
               <div className="space-y-2 text-sm opacity-80">
-                <div>Buchhaltung Remote</div>
-                <div>Kundenservice</div>
-                <div>Administrative Unterstützung</div>
-                <div>Dateneingabe</div>
+                {get<string[]>('landing.backoffice.footer.solutionItems', ['Buchhaltung Remote','Kundenservice','Administrative Unterstützung','Dateneingabe']).map((s, i) => (
+                  <div key={i}>{s}</div>
+                ))}
               </div>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Unternehmen</h4>
+              <h4 className="font-semibold mb-4">{t('landing.backoffice.footer.company', 'Unternehmen')}</h4>
               <div className="space-y-2 text-sm opacity-80">
-                <div>Über uns</div>
-                <div>Karriere</div>
-                <div>Partner werden</div>
-                <div>Kontakt</div>
+                {get<string[]>('landing.backoffice.footer.companyItems', ['Über uns','Karriere','Partner werden','Kontakt']).map((s, i) => (
+                  <div key={i}>{s}</div>
+                ))}
               </div>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Kontakt</h4>
+              <h4 className="font-semibold mb-4">{t('landing.backoffice.footer.contact', 'Kontakt')}</h4>
               <div className="space-y-2 text-sm opacity-80">
                 <div>hello@hejtalent.de</div>
                 <div>+49 30 12345678</div>
@@ -477,11 +411,11 @@ const BackofficeLanding = () => {
           </div>
           
           <div className="border-t border-white/20 mt-8 pt-8 text-center text-sm opacity-60">
-            <p>&copy; 2024 Hej Talent. Alle Rechte vorbehalten.</p>
+            <p>© 2024 Hej Talent. {t('landing.backoffice.footer.rights', 'Alle Rechte vorbehalten.')}</p>
             <div className="flex justify-center gap-6 mt-2">
-              <span className="hover:opacity-100 transition-opacity duration-300">Datenschutz</span>
-              <span className="hover:opacity-100 transition-opacity duration-300">Impressum</span>
-              <span className="hover:opacity-100 transition-opacity duration-300">AGB</span>
+              <span className="hover:opacity-100 transition-opacity duration-300">{t('footer.links.privacy', 'Datenschutz')}</span>
+              <span className="hover:opacity-100 transition-opacity duration-300">{t('footer.links.imprint', 'Impressum')}</span>
+              <span className="hover:opacity-100 transition-opacity duration-300">{t('landing.backoffice.footer.terms', 'AGB')}</span>
             </div>
           </div>
         </div>

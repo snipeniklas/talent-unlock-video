@@ -4,12 +4,14 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
+import { useTranslation } from '@/i18n/i18n';
 
 const AppLayout = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     // Set up auth state listener
@@ -63,7 +65,7 @@ const AppLayout = () => {
         <header className="fixed top-0 left-0 right-0 h-12 flex items-center border-b bg-background/95 backdrop-blur-sm z-40 px-4">
           <SidebarTrigger className="md:ml-2" />
           <div className="flex-1 text-center">
-            <span className="font-semibold text-brand-dark text-sm md:text-base">Hej Talent Platform</span>
+            <span className="font-semibold text-brand-dark text-sm md:text-base">{t('app.layout.title', 'Hej Talent Platform')}</span>
           </div>
         </header>
 

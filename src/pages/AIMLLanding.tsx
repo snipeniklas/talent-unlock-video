@@ -9,8 +9,10 @@ import videoThumbnail from '@/assets/video-thumbnail.jpg';
 import customerLogos from '@/assets/customer-logos.png';
 import verifiedBadge from '@/assets/verified-badge.png';
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import { useTranslation } from '@/i18n/i18n';
 
 const AIMLLanding = () => {
+  const { t, get } = useTranslation();
   
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -56,44 +58,23 @@ const AIMLLanding = () => {
       {/* Benefit Ticker */}
       <div className="bg-neutral-50 h-12 flex items-center overflow-hidden border-b">
         <div className="animate-slide-text hover:animate-none flex items-center gap-12 whitespace-nowrap min-w-max">
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            KI-Experten ab 3 Monaten <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            40-60% günstiger <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Bewährte KI-Lösungen <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Von Konzept bis Deployment <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            ML, Deep Learning, NLP <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Keine Headhunter-Fee <span className="text-primary text-lg">•</span>
-          </span>
-          
-          {/* Second set for seamless loop */}
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            KI-Experten ab 3 Monaten <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            40-60% günstiger <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Bewährte KI-Lösungen <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Von Konzept bis Deployment <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            ML, Deep Learning, NLP <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Keine Headhunter-Fee <span className="text-primary text-lg">•</span>
-          </span>
+          {get<string[]>('landing.aiMl.ticker', [
+            'KI-Experten ab 3 Monaten',
+            '40-60% günstiger',
+            'Bewährte KI-Lösungen',
+            'Von Konzept bis Deployment',
+            'ML, Deep Learning, NLP',
+            'Keine Headhunter-Fee'
+          ]).map((text, idx) => (
+            <span key={`ticker-a-${idx}`} className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+              {text} <span className="text-primary text-lg">•</span>
+            </span>
+          ))}
+          {get<string[]>('landing.aiMl.ticker', []).map((text, idx) => (
+            <span key={`ticker-b-${idx}`} className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+              {text} <span className="text-primary text-lg">•</span>
+            </span>
+          ))}
         </div>
       </div>
 
@@ -102,20 +83,18 @@ const AIMLLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
-              <span className="text-primary">RaaS</span> - KI & ML Experten{' '}
+              <span className="text-primary">RaaS</span> {t('landing.aiMl.hero.title', '- KI & ML Experten')}{' '}
               <span className="text-primary bg-gradient-to-r from-primary to-primary-hover bg-clip-text animate-shimmer bg-shimmer bg-200% animate-bounce-in-delay-1">
-                40-60% günstiger
-              </span> für Ihre KI-Transformation
+                {t('landing.aiMl.hero.badge', '40-60% günstiger')}
+              </span> {t('landing.aiMl.hero.trailing', 'für Ihre KI-Transformation')}
             </h1>
             
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto animate-fade-in-delay-1">
-              <strong>Resources as a Service</strong> – Unser bewährtes RaaS-System macht es einfach: 
-              Sie beschreiben Ihr KI-Problem, wir liefern die perfekte Experten-Lösung.
+              <strong>Resources as a Service</strong> – {t('landing.aiMl.hero.p1', 'Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr KI-Problem, wir liefern die perfekte Experten-Lösung.')}
             </p>
             
             <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto animate-fade-in-delay-1">
-              Von der KI-Strategie bis zur produktiven Lösung: Holen Sie sich spezialisierte Data Scientists, 
-              ML Engineers und KI-Entwickler aus unserem geprüften Expertenpool – remote und sofort einsatzbereit.
+              {t('landing.aiMl.hero.p2', 'Von der KI-Strategie bis zur produktiven Lösung: Holen Sie sich spezialisierte Data Scientists, ML Engineers und KI-Entwickler aus unserem geprüften Expertenpool – remote und sofort einsatzbereit.')}
             </p>
 
             {/* Video Player */}
@@ -141,7 +120,7 @@ const AIMLLanding = () => {
             >
               <Link to="/app/search-requests/new">
                 <span className="relative z-10">
-                  RaaS Anfrage stellen
+                  {t('landing.aiMl.hero.cta', 'RaaS Anfrage stellen')}
                 </span>
                 <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>
               </Link>
@@ -162,9 +141,9 @@ const AIMLLanding = () => {
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Brain className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">KI-Spezialisten</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.aiMl.bullets.0.title', 'KI-Spezialisten')}</h3>
                   <p className="text-muted-foreground">
-                    Data Scientists, ML Engineers und KI-Entwickler mit PhD/Master und 5+ Jahren Praxiserfahrung
+                    {t('landing.aiMl.bullets.0.text', 'Data Scientists, ML Engineers und KI-Entwickler mit PhD/Master und 5+ Jahren Praxiserfahrung')}
                   </p>
                 </CardContent>
               </Card>
@@ -182,9 +161,9 @@ const AIMLLanding = () => {
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Sparkles className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">Bewährte KI-Lösungen</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.aiMl.bullets.1.title', 'Bewährte KI-Lösungen')}</h3>
                   <p className="text-muted-foreground">
-                    Von Computer Vision bis NLP – praxiserprobte Lösungen für Ihr Geschäftsmodell
+                    {t('landing.aiMl.bullets.1.text', 'Von Computer Vision bis NLP – praxiserprobte Lösungen für Ihr Geschäftsmodell')}
                   </p>
                 </CardContent>
               </Card>
@@ -202,9 +181,9 @@ const AIMLLanding = () => {
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Target className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">ROI-Fokus</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.aiMl.bullets.2.title', 'ROI-Fokus')}</h3>
                   <p className="text-muted-foreground">
-                    Messbare Geschäftsergebnisse in 3-6 Monaten statt jahrelanger Forschung
+                    {t('landing.aiMl.bullets.2.text', 'Messbare Geschäftsergebnisse in 3-6 Monaten statt jahrelanger Forschung')}
                   </p>
                 </CardContent>
               </Card>
@@ -218,39 +197,23 @@ const AIMLLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
-              Warum scheitern die meisten KI-Projekte?
+              {t('landing.aiMl.problem.title', 'Warum scheitern die meisten KI-Projekte?')}
             </h2>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
-                <div className="text-red-500 mb-4">
-                  <Brain className="w-8 h-8 mx-auto" />
-                </div>
-                <h3 className="font-bold mb-3">Fehlendes KI-Know-how</h3>
-                <p className="text-muted-foreground text-sm">
-                  Interne Teams haben keine Erfahrung mit ML-Projekten und überschätzen die Komplexität
-                </p>
-              </Card>
-
-              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
-                <div className="text-red-500 mb-4">
-                  <Clock className="w-8 h-8 mx-auto" />
-                </div>
-                <h3 className="font-bold mb-3">Monatelange Suche</h3>
-                <p className="text-muted-foreground text-sm">
-                  Qualifizierte Data Scientists sind rar und überteuert – wenn überhaupt verfügbar
-                </p>
-              </Card>
-
-              <Card className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
-                <div className="text-red-500 mb-4">
-                  <Target className="w-8 h-8 mx-auto" />
-                </div>
-                <h3 className="font-bold mb-3">Kein Business-Fokus</h3>
-                <p className="text-muted-foreground text-sm">
-                  Projekte versanden in endloser Forschung ohne messbare Geschäftsergebnisse
-                </p>
-              </Card>
+              {get<Array<{title: string; desc: string}>>('landing.aiMl.problem.items', [
+                { title: 'Fehlendes KI-Know-how', desc: 'Interne Teams haben keine Erfahrung mit ML-Projekten und überschätzen die Komplexität' },
+                { title: 'Monatelange Suche', desc: 'Qualifizierte Data Scientists sind rar und überteuert – wenn überhaupt verfügbar' },
+                { title: 'Kein Business-Fokus', desc: 'Projekte versanden in endloser Forschung ohne messbare Geschäftsergebnisse' }
+              ]).map((p, i) => (
+                <Card key={i} className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                  <div className="text-red-500 mb-4">
+                    {i===0 ? <Brain className="w-8 h-8 mx-auto" /> : i===1 ? <Clock className="w-8 h-8 mx-auto" /> : <Target className="w-8 h-8 mx-auto" />}
+                  </div>
+                  <h3 className="font-bold mb-3">{p.title}</h3>
+                  <p className="text-muted-foreground text-sm">{p.desc}</p>
+                </Card>
+              ))}
             </div>
           </div>
         </div>
@@ -261,7 +224,7 @@ const AIMLLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
-              So funktioniert's: Ihr KI-Experte in 3 einfachen Schritten
+              {t('landing.aiMl.how.title', "So funktioniert's: Ihr KI-Experte in 3 einfachen Schritten")}
             </h2>
             
             <div className="space-y-8">
@@ -328,7 +291,7 @@ const AIMLLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-brand-dark mb-12 animate-fade-in">
-              Führende Unternehmen vertrauen unseren KI-Experten
+              {t('landing.aiMl.trust.title', 'Führende Unternehmen vertrauen unseren KI-Experten')}
             </h2>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -383,47 +346,47 @@ const AIMLLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
-              Häufig gestellte Fragen
+              {t('landing.aiMl.faq.title', 'Häufig gestellte Fragen')}
             </h2>
 
             <Accordion type="single" collapsible className="space-y-4">
               <AccordionItem value="expertise" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-1 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Welche KI-Bereiche decken Ihre Experten ab?
+                  {t('landing.aiMl.faq.expertise', 'Welche KI-Bereiche decken Ihre Experten ab?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Machine Learning, Deep Learning, Computer Vision, NLP, Predictive Analytics, 
-                  Recommendation Systems, Chatbots, Automatisierung und Custom AI Solutions.
+                  {t('landing.aiMl.faq.expertise.desc', 'Machine Learning, Deep Learning, Computer Vision, NLP, Predictive Analytics, 
+                  Recommendation Systems, Chatbots, Automatisierung und Custom AI Solutions.')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="qualifications" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-2 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Welche Qualifikationen haben Ihre KI-Experten?
+                  {t('landing.aiMl.faq.qualifications', 'Welche Qualifikationen haben Ihre KI-Experten?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  PhD/Master in Data Science, KI oder verwandten Bereichen. 5+ Jahre Praxiserfahrung, 
-                  Expertise in Python, TensorFlow, PyTorch. Viele kommen aus Tech-Konzernen oder Research.
+                  {t('landing.aiMl.faq.qualifications.desc', 'PhD/Master in Data Science, KI oder verwandten Bereichen. 5+ Jahre Praxiserfahrung, 
+                  Expertise in Python, TensorFlow, PyTorch. Viele kommen aus Tech-Konzernen oder Research.')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="projects" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-3 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Welche Art von KI-Projekten wurden bereits umgesetzt?
+                  {t('landing.aiMl.faq.projects', 'Welche Art von KI-Projekten wurden bereits umgesetzt?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Chatbots für E-Commerce, Predictive Maintenance, Dokumentenanalyse, Computer Vision für 
-                  Qualitätskontrolle, Fraud Detection, Personalisierung, Sprachassistenten und mehr.
+                  {t('landing.aiMl.faq.projects.desc', 'Chatbots für E-Commerce, Predictive Maintenance, Dokumentenanalyse, Computer Vision für 
+                  Qualitätskontrolle, Fraud Detection, Personalisierung, Sprachassistenten und mehr.')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="timeline" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-4 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Wie lange dauert ein typisches KI-Projekt?
+                  {t('landing.aiMl.faq.timeline', 'Wie lange dauert ein typisches KI-Projekt?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Proof of Concept: 4-8 Wochen. MVP: 3-6 Monate. Produktive Lösung: 6-12 Monate. 
-                  Wir arbeiten agil mit regelmäßigen Deliveries und Feedback-Schleifen.
+                  {t('landing.aiMl.faq.timeline.desc', 'Proof of Concept: 4-8 Wochen. MVP: 3-6 Monate. Produktive Lösung: 6-12 Monate. 
+                  Wir arbeiten agil mit regelmäßigen Deliveries und Feedback-Schleifen.')}
                 </AccordionContent>
               </AccordionItem>
 
@@ -440,12 +403,12 @@ const AIMLLanding = () => {
             <div>
               <img src={hejTalentLogo} alt="Hej Talent" className="h-8 mb-4 filter brightness-0 invert" />
               <p className="text-sm opacity-80">
-                KI & ML Experten für deutsche Unternehmen
+                {t('landing.aiMl.footer.tagline', 'KI & ML Experten für deutsche Unternehmen')}
               </p>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">KI-Bereiche</h4>
+              <h4 className="font-semibold mb-4">{t('landing.aiMl.footer.areas', 'KI-Bereiche')}</h4>
               <div className="space-y-2 text-sm opacity-80">
                 <div>Machine Learning</div>
                 <div>Computer Vision</div>
@@ -455,7 +418,7 @@ const AIMLLanding = () => {
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Unternehmen</h4>
+              <h4 className="font-semibold mb-4">{t('landing.aiMl.footer.company', 'Unternehmen')}</h4>
               <div className="space-y-2 text-sm opacity-80">
                 <div>Über uns</div>
                 <div>Karriere</div>
@@ -465,7 +428,7 @@ const AIMLLanding = () => {
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Kontakt</h4>
+              <h4 className="font-semibold mb-4">{t('landing.aiMl.footer.contact', 'Kontakt')}</h4>
               <div className="space-y-2 text-sm opacity-80">
                 <div>hello@hejtalent.de</div>
                 <div>+49 30 12345678</div>
@@ -478,11 +441,11 @@ const AIMLLanding = () => {
           </div>
           
           <div className="border-t border-white/20 mt-8 pt-8 text-center text-sm opacity-60">
-            <p>&copy; 2024 Hej Talent. Alle Rechte vorbehalten.</p>
+            <p>© 2024 Hej Talent. {t('landing.aiMl.footer.rights', 'Alle Rechte vorbehalten.')}</p>
             <div className="flex justify-center gap-6 mt-2">
-              <span className="hover:opacity-100 transition-opacity duration-300">Datenschutz</span>
-              <span className="hover:opacity-100 transition-opacity duration-300">Impressum</span>
-              <span className="hover:opacity-100 transition-opacity duration-300">AGB</span>
+              <span className="hover:opacity-100 transition-opacity duration-300">{t('footer.links.privacy', 'Datenschutz')}</span>
+              <span className="hover:opacity-100 transition-opacity duration-300">{t('footer.links.imprint', 'Impressum')}</span>
+              <span className="hover:opacity-100 transition-opacity duration-300">{t('landing.aiMl.footer.terms', 'AGB')}</span>
             </div>
           </div>
         </div>

@@ -7,71 +7,46 @@ import { ArrowRight, Users, Calculator, FileText, Clock, Target, CheckCircle, St
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
+import { useTranslation } from '@/i18n/i18n';
 
 const BackofficeSolution = () => {
-  const targetAudience = [
-    "Geschäftsführer kleiner und mittlerer Unternehmen",
-    "Office-Manager und Assistenzteams",
-    "Buchhalter und Controlling-Verantwortliche",
-    "HR-Verantwortliche"
-  ];
+  const { t, get } = useTranslation();
 
-  const coreProblems = [
-    {
-      title: "Hohe Personalkosten im administrativen Bereich",
-      description: "Vollzeit-Backoffice-Kräfte vor Ort sind teuer und oft nicht voll ausgelastet",
-      icon: Calculator
-    },
-    {
-      title: "Zeitaufwändige Routine-Aufgaben",
-      description: "Administration und Buchhaltung binden wertvolle Ressourcen, die für Kerngeschäft fehlen",
-      icon: Clock
-    },
-    {
-      title: "Schwankende Arbeitsbelastung",
-      description: "Saisonale oder projektbedingte Spitzen schwer mit festem Personal abzudecken",
-      icon: FileText
-    }
-  ];
+  const targetAudience = get<string[]>('solutions.backoffice.audience', [
+    'Geschäftsführer kleiner und mittlerer Unternehmen',
+    'Office-Manager und Assistenzteams',
+    'Buchhalter und Controlling-Verantwortliche',
+    'HR-Verantwortliche'
+  ]);
 
-  const remoteTalents = [
-    {
-      role: "Virtuelle Assistenten",
-      skills: "E-Mail-Management, Terminplanung, Kundenkommunikation, Datenerfassung",
-      experience: "3+ Jahre Erfahrung"
-    },
-    {
-      role: "Remote Buchhalter",
-      skills: "Finanzbuchhaltung, Lohnabrechnung, Controlling, Steuervorbereitungen",
-      experience: "5+ Jahre Erfahrung, DATEV-zertifiziert"
-    },
-    {
-      role: "Administrative Spezialisten",
-      skills: "Projektmanagement, Qualitätsmanagement, Compliance, Dokumentation",
-      experience: "4+ Jahre Branchenerfahrung"
-    },
-    {
-      role: "Customer Service Agents",
-      skills: "Kundenbetreuung, Beschwerdemanagement, CRM-Systeme, Verkaufsunterstützung",
-      experience: "3+ Jahre im Kundenservice"
-    }
-  ];
+  const coreProblems = get<Array<{ title: string; description: string; icon?: string }>>('solutions.backoffice.problems', [
+    { title: 'Hohe Personalkosten im administrativen Bereich', description: 'Vollzeit-Backoffice-Kräfte vor Ort sind teuer und oft nicht voll ausgelastet' },
+    { title: 'Zeitaufwändige Routine-Aufgaben', description: 'Administration und Buchhaltung binden wertvolle Ressourcen, die für Kerngeschäft fehlen' },
+    { title: 'Schwankende Arbeitsbelastung', description: 'Saisonale oder projektbedingte Spitzen schwer mit festem Personal abdecken' }
+  ]);
 
-  const benefits = [
-    "Bis zu 60% Kosteneinsparung gegenüber lokalen Vollzeitkräften",
-    "Flexible Skalierung je nach Bedarf (Stunden, Tage, Monate)",
-    "Internationale Remote-Fachkräfte mit optimaler Zeitzone-Abdeckung",
-    "Schneller Start: Einsatzbereit in 1-2 Wochen",
-    "Keine HR-Aufwände: Wir übernehmen Recruiting und Betreuung",
-    "Backup-Lösungen bei Ausfall verfügbar"
-  ];
+  const remoteTalents = get<Array<{ role: string; skills: string; experience: string }>>('solutions.backoffice.talents', [
+    { role: 'Virtuelle Assistenten', skills: 'E-Mail-Management, Terminplanung, Kundenkommunikation, Datenerfassung', experience: '3+ Jahre Erfahrung' },
+    { role: 'Remote Buchhalter', skills: 'Finanzbuchhaltung, Lohnabrechnung, Controlling, Steuervorbereitungen', experience: '5+ Jahre Erfahrung, DATEV-zertifiziert' },
+    { role: 'Administrative Spezialisten', skills: 'Projektmanagement, Qualitätsmanagement, Compliance, Dokumentation', experience: '4+ Jahre Branchenerfahrung' },
+    { role: 'Customer Service Agents', skills: 'Kundenbetreuung, Beschwerdemanagement, CRM-Systeme, Verkaufsunterstützung', experience: '3+ Jahre im Kundenservice' }
+  ]);
 
-  const results = [
-    { metric: "60%", description: "Kosteneinsparung im Backoffice" },
-    { metric: "40h/Woche", description: "Freigesetzte Zeit für Kerngeschäft" },
-    { metric: "98%", description: "Kundenzufriedenheit mit Remote-Kräften" },
-    { metric: "2 Wochen", description: "Durchschnittliche Einarbeitungszeit" }
-  ];
+  const benefits = get<string[]>('solutions.backoffice.benefits', [
+    'Bis zu 60% Kosteneinsparung gegenüber lokalen Vollzeitkräften',
+    'Flexible Skalierung je nach Bedarf (Stunden, Tage, Monate)',
+    'Internationale Remote-Fachkräfte mit optimaler Zeitzone-Abdeckung',
+    'Schneller Start: Einsatzbereit in 1-2 Wochen',
+    'Keine HR-Aufwände: Wir übernehmen Recruiting und Betreuung',
+    'Backup-Lösungen bei Ausfall verfügbar'
+  ]);
+
+  const results = get<Array<{ metric: string; description: string }>>('solutions.backoffice.results', [
+    { metric: '60%', description: 'Kosteneinsparung im Backoffice' },
+    { metric: '40h/Woche', description: 'Freigesetzte Zeit für Kerngeschäft' },
+    { metric: '98%', description: 'Kundenzufriedenheit mit Remote-Kräften' },
+    { metric: '2 Wochen', description: 'Durchschnittliche Einarbeitungszeit' }
+  ]);
 
   return (
     <div className="min-h-screen bg-background font-inter">
@@ -83,26 +58,25 @@ const BackofficeSolution = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             <Badge className="mb-8 bg-gradient-primary text-white px-8 py-3 text-xl font-semibold shadow-lg border-0">
-              Remote Backoffice-Fachkräfte
+              {t('solutions.backoffice.hero.badge', 'Remote Backoffice-Fachkräfte')}
             </Badge>
             <h1 className="text-5xl lg:text-7xl font-bold text-brand-dark mb-8 leading-tight">
-              Qualifizierte <span className="text-primary">Remote</span>-Unterstützung 
-              <span className="bg-gradient-hero bg-clip-text text-transparent"> für Ihr Backoffice</span>
+              {t('solutions.backoffice.hero.title', 'Qualifizierte ')}<span className="text-primary">Remote</span>{t('solutions.backoffice.hero.titleSuffix', '-Unterstützung ')}
+              <span className="bg-gradient-hero bg-clip-text text-transparent">{t('solutions.backoffice.hero.highlight', ' für Ihr Backoffice')}</span>
             </h1>
             <p className="text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto font-light">
-              Entlasten Sie Ihr Team mit erfahrenen Remote-Fachkräften für Administration, 
-              Buchhaltung und operative Aufgaben. Flexibel, kostengünstig und sofort einsatzbereit.
+              {t('solutions.backoffice.hero.text', 'Entlasten Sie Ihr Team mit erfahrenen Remote-Fachkräften für Administration, Buchhaltung und operative Aufgaben. Flexibel, kostengünstig und sofort einsatzbereit.')}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button asChild size="lg" className="text-xl px-12 py-6 bg-primary text-white hover:bg-primary-hover hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
                 <Link to="/app/search-requests/new">
                   <Phone className="w-6 h-6 mr-3" />
-                  RaaS Anfrage erstellen
+                  {t('solutions.backoffice.hero.ctaPrimary', 'RaaS Anfrage erstellen')}
                   <ArrowRight className="w-6 h-6 ml-3" />
                 </Link>
               </Button>
               <Button variant="outline" size="lg" className="text-xl px-12 py-6 border-2 border-primary bg-white text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105">
-                Remote Backoffice-Kräfte entdecken
+                {t('solutions.backoffice.hero.ctaSecondary', 'Remote Backoffice-Kräfte entdecken')}
               </Button>
             </div>
           </div>
@@ -113,7 +87,7 @@ const BackofficeSolution = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Für wen?</h2>
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.audienceTitle', 'Für wen?')}</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {targetAudience.map((audience, index) => (
                 <div key={index} className="flex items-center gap-3 p-4 bg-gradient-subtle rounded-lg">
@@ -130,13 +104,13 @@ const BackofficeSolution = () => {
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Kernprobleme</h2>
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.problemsTitle', 'Kernprobleme')}</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {coreProblems.map((problem, index) => (
                 <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                      <problem.icon className="w-8 h-8 text-white" />
+                      {index===0 ? <Calculator className="w-8 h-8 text-white" /> : index===1 ? <Clock className="w-8 h-8 text-white" /> : <FileText className="w-8 h-8 text-white" />}
                     </div>
                     <CardTitle className="text-xl">{problem.title}</CardTitle>
                   </CardHeader>
@@ -154,7 +128,7 @@ const BackofficeSolution = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Unsere Remote-Fachkräfte</h2>
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.talentsTitle', 'Unsere Remote-Fachkräfte')}</h2>
             <div className="grid md:grid-cols-2 gap-8">
               {remoteTalents.map((talent, index) => (
                 <Card key={index} className="hover:shadow-lg transition-shadow">
@@ -176,7 +150,7 @@ const BackofficeSolution = () => {
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Ihre Vorteile</h2>
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.benefitsTitle', 'Ihre Vorteile')}</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-start gap-3">
@@ -193,7 +167,7 @@ const BackofficeSolution = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">Messbare Ergebnisse</h2>
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.resultsTitle', 'Messbare Ergebnisse')}</h2>
             <div className="grid md:grid-cols-4 gap-8">
               {results.map((result, index) => (
                 <div key={index} className="text-center">
@@ -211,20 +185,20 @@ const BackofficeSolution = () => {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8">
-            Bereit für Remote Backoffice-Unterstützung?
+            {t('solutions.backoffice.cta.title', 'Bereit für Remote Backoffice-Unterstützung?')}
           </h2>
           <p className="text-2xl text-white/90 mb-12 max-w-3xl mx-auto font-light">
-            Sprechen Sie mit uns über Ihre Anforderungen. Wir finden die passenden Remote-Fachkräfte für Ihr Backoffice.
+            {t('solutions.backoffice.cta.text', 'Sprechen Sie mit uns über Ihre Anforderungen. Wir finden die passenden Remote-Fachkräfte für Ihr Backoffice.')}
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button asChild size="lg" className="text-xl px-12 py-6 bg-white text-primary hover:bg-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
               <Link to="/app/search-requests/new">
                 <Phone className="w-6 h-6 mr-3" />
-                RaaS Anfrage erstellen
+                {t('solutions.backoffice.cta.primary', 'RaaS Anfrage erstellen')}
               </Link>
             </Button>
             <Button variant="outline" size="lg" className="text-xl px-12 py-6 border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105">
-              Remote-Fachkräfte kennenlernen
+              {t('solutions.backoffice.cta.secondary', 'Remote-Fachkräfte kennenlernen')}
             </Button>
           </div>
         </div>

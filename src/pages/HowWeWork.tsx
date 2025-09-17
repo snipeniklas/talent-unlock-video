@@ -8,41 +8,44 @@ import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
 import InteractiveAppScreen from "@/components/InteractiveAppScreen";
+import { useTranslation } from '@/i18n/i18n';
 
 const HowWeWork = () => {
+  const { t, get } = useTranslation();
   const [openSteps, setOpenSteps] = useState<{[key: number]: boolean}>({});
+
   const steps = [
     {
-      step: "01",
-      title: "Bedarfsanalyse",
-      description: "Verstehen Ihrer Anforderungen",
-      details: "In einem ausführlichen Gespräch analysieren wir Ihre aktuellen Herausforderungen, gewünschten Skills und Budget. Wir identifizieren die Art der Remote-Fachkräfte, die Sie benötigen.",
+      step: t('howWeWork.steps.0.step', '01'),
+      title: t('howWeWork.steps.0.title', 'Bedarfsanalyse'),
+      description: t('howWeWork.steps.0.description', 'Verstehen Ihrer Anforderungen'),
+      details: t('howWeWork.steps.0.details', 'In einem ausführlichen Gespräch analysieren wir Ihre aktuellen Herausforderungen, gewünschten Skills und Budget. Wir identifizieren die Art der Remote-Fachkräfte, die Sie benötigen.'),
       icon: Search,
-      timeline: "1-2 Tage"
+      timeline: t('howWeWork.steps.0.timeline', '1-2 Tage')
     },
     {
-      step: "02", 
-      title: "Kandidaten-Matching",
-      description: "Passende Remote-Experten finden",
-      details: "Basierend auf Ihrer Bedarfsanalyse präsentieren wir Ihnen 3-5 vorqualifizierte Remote-Kandidaten aus unserem Netzwerk. Jeder Kandidat wird sorgfältig auf Ihre Anforderungen abgestimmt.",
+      step: t('howWeWork.steps.1.step', '02'),
+      title: t('howWeWork.steps.1.title', 'Kandidaten-Matching'),
+      description: t('howWeWork.steps.1.description', 'Passende Remote-Experten finden'),
+      details: t('howWeWork.steps.1.details', 'Basierend auf Ihrer Bedarfsanalyse präsentieren wir Ihnen 3-5 vorqualifizierte Remote-Kandidaten aus unserem Netzwerk. Jeder Kandidat wird sorgfältig auf Ihre Anforderungen abgestimmt.'),
       icon: Users,
-      timeline: "3-5 Tage"
+      timeline: t('howWeWork.steps.1.timeline', '3-5 Tage')
     },
     {
-      step: "03",
-      title: "Interview & Auswahl", 
-      description: "Kennenlernen und Entscheidung",
-      details: "Sie führen Interviews mit den vorgeschlagenen Kandidaten durch. Wir unterstützen Sie beim gesamten Auswahlprozess und bei Vertragsverhandlungen.",
+      step: t('howWeWork.steps.2.step', '03'),
+      title: t('howWeWork.steps.2.title', 'Interview & Auswahl'),
+      description: t('howWeWork.steps.2.description', 'Kennenlernen und Entscheidung'),
+      details: t('howWeWork.steps.2.details', 'Sie führen Interviews mit den vorgeschlagenen Kandidaten durch. Wir unterstützen Sie beim gesamten Auswahlprozess und bei Vertragsverhandlungen.'),
       icon: Rocket,
-      timeline: "1 Woche"
+      timeline: t('howWeWork.steps.2.timeline', '1 Woche')
     },
     {
-      step: "04",
-      title: "Onboarding & Support",
-      description: "Erfolgreiche Integration sicherstellen", 
-      details: "Wir begleiten das Onboarding Ihrer neuen Remote-Fachkraft und stehen bei Fragen zur Verfügung. Regelmäßige Check-ins sorgen für eine reibungslose Zusammenarbeit.",
+      step: t('howWeWork.steps.3.step', '04'),
+      title: t('howWeWork.steps.3.title', 'Onboarding & Support'),
+      description: t('howWeWork.steps.3.description', 'Erfolgreiche Integration sicherstellen'),
+      details: t('howWeWork.steps.3.details', 'Wir begleiten das Onboarding Ihrer neuen Remote-Fachkraft und stehen bei Fragen zur Verfügung. Regelmäßige Check-ins sorgen für eine reibungslose Zusammenarbeit.'),
       icon: TrendingUp,
-      timeline: "Laufend"
+      timeline: t('howWeWork.steps.3.timeline', 'Laufend')
     }
   ];
 
@@ -55,14 +58,14 @@ const HowWeWork = () => {
     }));
   };
 
-  const benefits = [
-    "Schneller Start: Qualifizierte Remote-Fachkraft in 2-4 Wochen",
-    "Geprüfte Qualität: Alle Kandidaten durchlaufen unseren Screening-Prozess",
-    "Flexible Arbeitsmodelle: Vollzeit, Teilzeit oder projektbasiert",
-    "Transparente Kommunikation: Regelmäßige Updates und Feedback",
-    "Kultureller Fit: Internationale Remote-Kandidaten mit passender Arbeitskultur",
-    "Rechtssicherheit: Alle arbeitsrechtlichen Aspekte sind abgedeckt"
-  ];
+  const benefits = get<string[]>('howWeWork.benefits.items', [
+    'Schneller Start: Qualifizierte Remote-Fachkraft in 2-4 Wochen',
+    'Geprüfte Qualität: Alle Kandidaten durchlaufen unseren Screening-Prozess',
+    'Flexible Arbeitsmodelle: Vollzeit, Teilzeit oder projektbasiert',
+    'Transparente Kommunikation: Regelmäßige Updates und Feedback',
+    'Kultureller Fit: Internationale Remote-Kandidaten mit passender Arbeitskultur',
+    'Rechtssicherheit: Alle arbeitsrechtlichen Aspekte sind abgedeckt'
+  ]);
 
   return (
     <div className="min-h-screen bg-background font-inter">
@@ -72,11 +75,10 @@ const HowWeWork = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              So funktioniert <span className="text-primary">RaaS</span>
+              {t('howWeWork.hero.title', 'So funktioniert ')}<span className="text-primary">RaaS</span>
             </h1>
             <p className="text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-              Von der ersten RaaS-Anfrage bis zur erfolgreichen Integration Ihrer Remote-Ressource - 
-              unser bewährter 4-Stufen-Prozess garantiert Ihnen die besten Kandidaten.
+              {t('howWeWork.hero.subtitle', 'Von der ersten RaaS-Anfrage bis zur erfolgreichen Integration Ihrer Remote-Ressource - unser bewährter 4-Stufen-Prozess garantiert Ihnen die besten Kandidaten.')}
             </p>
           </div>
           
@@ -88,34 +90,26 @@ const HowWeWork = () => {
                   <div className="space-y-6">
                     <h3 className="text-2xl font-bold text-brand-dark mb-6 flex items-center gap-3">
                       <div className="w-1 h-8 bg-gradient-primary rounded-full"></div>
-                      RaaS - Ein revolutionäres Servicekonzept
+                      {t('howWeWork.left.title', 'RaaS - Ein revolutionäres Servicekonzept')}
                     </h3>
                     <p className="text-muted-foreground text-lg leading-relaxed">
-                      <span className="font-semibold text-primary">Resources as a Service (RaaS)</span> ist mehr als nur eine 
-                      moderne Bezeichnung – es ist ein grundlegend anderer Ansatz zur Bereitstellung von Fachkräften. 
-                      Im Gegensatz zu traditionellen Personalvermittlungen oder Zeitarbeitsfirmen schließen Sie bei uns 
-                      <span className="font-semibold"> keinen Arbeitsvertrag</span>, sondern einen flexiblen 
-                      <span className="font-semibold text-primary"> Dienstleistungsvertrag</span>.
+                      <span className="font-semibold text-primary">Resources as a Service (RaaS)</span> {t('howWeWork.left.p1', 'ist mehr als nur eine moderne Bezeichnung – es ist ein grundlegend anderer Ansatz zur Bereitstellung von Fachkräften. Im Gegensatz zu traditionellen Personalvermittlungen oder Zeitarbeitsfirmen schließen Sie bei uns ')}
+                      <span className="font-semibold">{t('howWeWork.left.p1b', ' keinen Arbeitsvertrag')}</span>{t('howWeWork.left.p1c', ', sondern einen flexiblen ')}
+                      <span className="font-semibold text-primary">{t('howWeWork.left.p1d', ' Dienstleistungsvertrag')}</span>{t('howWeWork.left.p1e', '.')}
                     </p>
                     <p className="text-muted-foreground text-lg leading-relaxed">
-                      Diese Unterscheidung ist entscheidend: Während Arbeitsverhältnisse starre Strukturen, 
-                      Kündigungsfristen und umfangreiche arbeitsrechtliche Verpflichtungen mit sich bringen, 
-                      bietet unser RaaS-Modell <span className="font-semibold">maximale Flexibilität</span>. 
-                      Sie erhalten genau die Expertise, die Sie benötigen – wann Sie sie benötigen.
+                      {t('howWeWork.left.p2', 'Diese Unterscheidung ist entscheidend: Während Arbeitsverhältnisse starre Strukturen, Kündigungsfristen und umfangreiche arbeitsrechtliche Verpflichtungen mit sich bringen, bietet unser RaaS-Modell ')}
+                      <span className="font-semibold">{t('howWeWork.left.p2b', 'maximale Flexibilität')}</span>{t('howWeWork.left.p2c', '. Sie erhalten genau die Expertise, die Sie benötigen – wann Sie sie benötigen.')}
                     </p>
                     <p className="text-muted-foreground text-lg leading-relaxed">
-                      Unsere Remote-Fachkräfte sind nicht Ihre Angestellten, sondern spezialisierte 
-                      <span className="font-semibold text-primary"> Dienstleistungspartner</span>, die nahtlos 
-                      in Ihre Projektstrukturen integriert werden. Das bedeutet: keine Lohnnebenkosten, 
-                      keine Sozialversicherungsbeiträge, keine Urlaubsansprüche oder Krankheitsausfälle 
-                      auf Ihrer Seite.
+                      {t('howWeWork.left.p3', 'Unsere Remote-Fachkräfte sind nicht Ihre Angestellten, sondern spezialisierte ')}
+                      <span className="font-semibold text-primary">{t('howWeWork.left.p3b', ' Dienstleistungspartner')}</span>{t('howWeWork.left.p3c', ', die nahtlos in Ihre Projektstrukturen integriert werden. Das bedeutet: keine Lohnnebenkosten, keine Sozialversicherungsbeiträge, keine Urlaubsansprüche oder Krankheitsausfälle auf Ihrer Seite.')}
                     </p>
                     <div className="bg-primary/5 border-l-4 border-primary p-4 rounded-r-lg">
                       <p className="text-muted-foreground text-lg font-medium">
-                        Die Vorteile sind messbar: <span className="font-bold text-primary">Bis zu 60% Kosteneinsparung 
-                        gegenüber lokalen Vollzeitkräften</span>, <span className="font-bold">100% planbare Budgets</span>
-                        ohne versteckte Personalkosten und die Möglichkeit, 
-                        <span className="font-bold text-primary"> sofort zu skalieren</span> – nach oben oder unten.
+                        {t('howWeWork.left.highlight', 'Die Vorteile sind messbar: ')}<span className="font-bold text-primary">{t('howWeWork.left.highlightA', 'Bis zu 60% Kosteneinsparung gegenüber lokalen Vollzeitkräften')}</span>, <span className="font-bold">{t('howWeWork.left.highlightB', '100% planbare Budgets')}</span>
+                        {t('howWeWork.left.highlightC', ' ohne versteckte Personalkosten und die Möglichkeit, ')}
+                        <span className="font-bold text-primary">{t('howWeWork.left.highlightD', ' sofort zu skalieren')}</span>{t('howWeWork.left.highlightE', ' – nach oben oder unten.')}
                       </p>
                     </div>
                   </div>
@@ -124,35 +118,22 @@ const HowWeWork = () => {
                   <div className="space-y-6">
                     <h3 className="text-2xl font-bold text-brand-dark mb-6 flex items-center gap-3">
                       <div className="w-1 h-8 bg-gradient-primary rounded-full"></div>
-                      Internationale Expertise ohne Grenzen
+                      {t('howWeWork.right.title', 'Internationale Expertise ohne Grenzen')}
                     </h3>
                     <p className="text-muted-foreground text-lg leading-relaxed">
-                      Unser globales Netzwerk umfasst über <span className="font-semibold text-primary">500+ 
-                      geprüfte Remote-Fachkräfte</span> aus verschiedenen Zeitzonen und Kulturen. 
-                      Diese Vielfalt ist kein Zufall, sondern strategischer Vorteil: Sie erhalten Zugang 
-                      zu Talenten und Perspektiven, die lokal nicht verfügbar wären.
+                      {t('howWeWork.right.p1', 'Unser globales Netzwerk umfasst über ')}<span className="font-semibold text-primary">{t('howWeWork.right.p1b', '500+ geprüfte Remote-Fachkräfte')}</span>{t('howWeWork.right.p1c', ' aus verschiedenen Zeitzonen und Kulturen. Diese Vielfalt ist kein Zufall, sondern strategischer Vorteil: Sie erhalten Zugang zu Talenten und Perspektiven, die lokal nicht verfügbar wären.')}
                     </p>
                     <p className="text-muted-foreground text-lg leading-relaxed">
-                      Jede unserer Remote-Ressourcen durchläuft einen <span className="font-semibold">
-                      mehrstufigen Qualifizierungsprozess</span>: Technische Skills-Tests, 
-                      Sprachkompetenz-Prüfungen, Referenz-Validierung und kulturelle Kompatibilitäts-Bewertung. 
-                      Das Ergebnis: <span className="font-semibold text-primary">98% Kundenzufriedenheit</span> 
-                      und eine durchschnittliche Projektfortführungsrate von über 90%.
+                      {t('howWeWork.right.p2', 'Jede unserer Remote-Ressourcen durchläuft einen ')}<span className="font-semibold">{t('howWeWork.right.p2b', 'mehrstufigen Qualifizierungsprozess')}</span>{t('howWeWork.right.p2c', ': Technische Skills-Tests, Sprachkompetenz-Prüfungen, Referenz-Validierung und kulturelle Kompatibilitäts-Bewertung. Das Ergebnis: ')}
+                      <span className="font-semibold text-primary">{t('howWeWork.right.p2d', '98% Kundenzufriedenheit')}</span>{t('howWeWork.right.p2e', ' und eine durchschnittliche Projektfortführungsrate von über 90%.')}
                     </p>
                     <p className="text-muted-foreground text-lg leading-relaxed">
-                      Besonders wertvoll ist unsere <span className="font-semibold text-primary">
-                      24/7-Verfügbarkeit</span> durch internationale Zeitzonen-Abdeckung. 
-                      Während Ihr deutsches Team schläft, arbeiten unsere Ressourcen in anderen 
-                      Zeitzonen weiter an Ihren Projekten – ein kontinuierlicher Produktivitätsgewinn.
+                      {t('howWeWork.right.p3', 'Besonders wertvoll ist unsere ')}<span className="font-semibold text-primary">{t('howWeWork.right.p3b', '24/7-Verfügbarkeit')}</span>{t('howWeWork.right.p3c', ' durch internationale Zeitzonen-Abdeckung. Während Ihr deutsches Team schläft, arbeiten unsere Ressourcen in anderen Zeitzonen weiter an Ihren Projekten – ein kontinuierlicher Produktivitätsgewinn.')}
                     </p>
                     <div className="bg-secondary/5 border-l-4 border-secondary p-4 rounded-r-lg">
                       <p className="text-muted-foreground text-lg font-medium">
-                        Die rechtliche Struktur ist dabei kristallklar: <span className="font-bold">
-                        Wir übernehmen die vollständige Verantwortung</span> für unsere Remote-Fachkräfte – 
-                        von der Vertragsgestaltung über die Qualitätssicherung bis hin zur Backup-Planung 
-                        bei Ausfällen. Sie konzentrieren sich ausschließlich auf Ihr Kerngeschäft, 
-                        während wir die <span className="font-bold text-primary">operative Exzellenz</span> 
-                        Ihrer erweiterten Remote-Teams gewährleisten.
+                        {t('howWeWork.right.highlight', 'Die rechtliche Struktur ist dabei kristallklar: ')}<span className="font-bold">{t('howWeWork.right.highlightB', 'Wir übernehmen die vollständige Verantwortung')}</span>{t('howWeWork.right.highlightC', ' für unsere Remote-Fachkräfte – von der Vertragsgestaltung über die Qualitätssicherung bis hin zur Backup-Planung bei Ausfällen. Sie konzentrieren sich ausschließlich auf Ihr Kerngeschäft, während wir die ')}
+                        <span className="font-bold text-primary">{t('howWeWork.right.highlightD', 'operative Exzellenz')}</span>{t('howWeWork.right.highlightE', ' Ihrer erweiterten Remote-Teams gewährleisten.')}
                       </p>
                     </div>
                   </div>
@@ -169,10 +150,10 @@ const HowWeWork = () => {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
-                Unser <span className="text-primary">RaaS</span> Prozess in 4 Schritten
+                {t('howWeWork.process.title', 'Unser ')}<span className="text-primary">RaaS</span> {t('howWeWork.process.titleSuffix', 'Prozess in 4 Schritten')}
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Klicken Sie auf einen Schritt, um die entsprechende App-Ansicht zu sehen
+                {t('howWeWork.process.subtitle', 'Klicken Sie auf einen Schritt, um die entsprechende App-Ansicht zu sehen')}
               </p>
             </div>
 
@@ -231,8 +212,8 @@ const HowWeWork = () => {
                     <CollapsibleContent className="mt-6">
                       <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
                         <InteractiveAppScreen
-                          title={`Schritt ${step.step}: ${step.title}`}
-                          description={`Sehen Sie hier, wie ${step.title.toLowerCase()} in unserem RaaS Hub funktioniert`}
+                          title={`${t('howWeWork.appScreen.step', 'Schritt')} ${step.step}: ${step.title}`}
+                          description={t('howWeWork.appScreen.desc', `Sehen Sie hier, wie ${step.title.toLowerCase()} in unserem RaaS Hub funktioniert`)}
                           screen={stepScreens[index]}
                         />
                       </div>
@@ -250,7 +231,7 @@ const HowWeWork = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">
-              Warum unser Prozess funktioniert
+              {t('howWeWork.benefits.title', 'Warum unser Prozess funktioniert')}
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {benefits.map((benefit, index) => (
@@ -272,15 +253,14 @@ const HowWeWork = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-brand-dark mb-6">
-            Bereit für Remote-Verstärkung?
+            {t('howWeWork.cta.title', 'Bereit für Remote-Verstärkung?')}
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Lassen Sie uns in einem kostenlosen Beratungsgespräch über Ihre Anforderungen sprechen 
-            und gemeinsam die passenden Remote-Fachkräfte für Ihr Unternehmen finden.
+            {t('howWeWork.cta.subtitle', 'Lassen Sie uns in einem kostenlosen Beratungsgespräch über Ihre Anforderungen sprechen und gemeinsam die passenden Remote-Fachkräfte für Ihr Unternehmen finden.')}
           </p>
           <Button asChild size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
             <Link to="/app/search-requests/new">
-              RaaS Anfrage kostenlos erstellen
+              {t('howWeWork.cta.button', 'RaaS Anfrage kostenlos erstellen')}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </Button>

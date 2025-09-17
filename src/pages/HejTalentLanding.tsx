@@ -9,8 +9,10 @@ import videoThumbnail from '@/assets/video-thumbnail.jpg';
 import customerLogos from '@/assets/customer-logos.png';
 import verifiedBadge from '@/assets/verified-badge.png';
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import { useTranslation } from '@/i18n/i18n';
 
 const HejTalentLanding = () => {
+  const { t, get } = useTranslation();
   
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -57,69 +59,27 @@ const HejTalentLanding = () => {
       {/* Benefit Ticker */}
       <div className="bg-neutral-50 h-12 flex items-center overflow-hidden border-b">
         <div className="animate-slide-text hover:animate-none flex items-center gap-12 whitespace-nowrap min-w-max">
-          {/* First set */}
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            30-60% günstiger <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Start in 7 Tagen <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Geprüfte KI-Entwickler <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Geld-zurück-Garantie <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Keine Headhunter-Fee <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Remote & DSGVO-konform <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Skalierung jederzeit möglich <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Kein Recruiting-Aufwand <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Zeitzonen-kompatibel <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Onboarding in &lt; 1 Tag <span className="text-primary text-lg">•</span>
-          </span>
-          
-          {/* Second set for seamless loop */}
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            30-60% günstiger <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Start in 7 Tagen <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Geprüfte KI-Entwickler <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Geld-zurück-Garantie <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Keine Headhunter-Fee <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Remote & DSGVO-konform <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Skalierung jederzeit möglich <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Kein Recruiting-Aufwand <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Zeitzonen-kompatibel <span className="text-primary text-lg">•</span>
-          </span>
-          <span className="flex items-center gap-3 text-sm font-medium text-brand-dark">
-            Onboarding in &lt; 1 Tag <span className="text-primary text-lg">•</span>
-          </span>
+          {get<string[]>('landing.hejTalent.ticker', [
+            '30-60% günstiger',
+            'Start in 7 Tagen',
+            'Geprüfte KI-Entwickler',
+            'Geld-zurück-Garantie',
+            'Keine Headhunter-Fee',
+            'Remote & DSGVO-konform',
+            'Skalierung jederzeit möglich',
+            'Kein Recruiting-Aufwand',
+            'Zeitzonen-kompatibel',
+            'Onboarding in < 1 Tag'
+          ]).map((text, idx) => (
+            <span key={`ticker-a-${idx}`} className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+              {text} <span className="text-primary text-lg">•</span>
+            </span>
+          ))}
+          {get<string[]>('landing.hejTalent.ticker', []).map((text, idx) => (
+            <span key={`ticker-b-${idx}`} className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+              {text} <span className="text-primary text-lg">•</span>
+            </span>
+          ))}
         </div>
       </div>
 
@@ -128,20 +88,18 @@ const HejTalentLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
-              <span className="text-primary">RaaS</span> - Geprüfte KI-Entwickler{' '}
+              <span className="text-primary">RaaS</span> {t('landing.hejTalent.hero.title', '- Geprüfte KI-Entwickler')} {' '}
               <span className="text-primary bg-gradient-to-r from-primary to-primary-hover bg-clip-text animate-shimmer bg-shimmer bg-200% animate-bounce-in-delay-1">
-                30-60% günstiger
-              </span> in 7 Tagen
+                {t('landing.hejTalent.hero.badge', '30-60% günstiger')}
+              </span> {t('landing.hejTalent.hero.trailing', 'in 7 Tagen')}
             </h1>
             
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto animate-fade-in-delay-1">
-              <strong>Resources as a Service</strong> – Unser bewährtes RaaS-System macht es einfach: 
-              Sie beschreiben Ihr KI-Projekt, wir liefern die perfekte Entwickler-Lösung.
+              <strong>Resources as a Service</strong> – {t('landing.hejTalent.hero.p1', 'Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr KI-Projekt, wir liefern die perfekte Entwickler-Lösung.')}
             </p>
             
             <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto animate-fade-in-delay-1">
-              Exklusives Video zeigt Ihnen den bewährten 3-Schritte RaaS-Prozess für hochqualifizierte Entwickler 
-              aus unserem Netzwerk – ohne Risiko und mit Geld-zurück-Garantie.
+              {t('landing.hejTalent.hero.p2', 'Exklusives Video zeigt Ihnen den bewährten 3-Schritte RaaS-Prozess für hochqualifizierte Entwickler aus unserem Netzwerk – ohne Risiko und mit Geld-zurück-Garantie.')}
             </p>
 
             {/* Video Player */}
@@ -167,7 +125,7 @@ const HejTalentLanding = () => {
             >
               <Link to="/app/search-requests/new">
                 <span className="relative z-10">
-                  RaaS Anfrage stellen
+                  {t('landing.hejTalent.hero.cta', 'RaaS Anfrage stellen')}
                 </span>
                 <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>
               </Link>
@@ -188,9 +146,9 @@ const HejTalentLanding = () => {
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <CheckCircle className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">30-50% Kostenersparnis</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.hejTalent.bullets.0.title', '30-50% Kostenersparnis')}</h3>
                   <p className="text-muted-foreground">
-                    Sparen Sie bis zu €4.000 pro Monat bei gleicher Qualität durch unser direktes Netzwerk
+                    {t('landing.hejTalent.bullets.0.text', 'Sparen Sie bis zu €4.000 pro Monat bei gleicher Qualität durch unser direktes Netzwerk')}
                   </p>
                 </CardContent>
               </Card>
@@ -208,9 +166,9 @@ const HejTalentLanding = () => {
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Clock className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">48h Matching-Prozess</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.hejTalent.bullets.1.title', '48h Matching-Prozess')}</h3>
                   <p className="text-muted-foreground">
-                    Von der Anfrage zum perfekten Entwickler in nur 2 Tagen – Start bereits nach 7 Tagen
+                    {t('landing.hejTalent.bullets.1.text', 'Von der Anfrage zum perfekten Entwickler in nur 2 Tagen – Start bereits nach 7 Tagen')}
                   </p>
                 </CardContent>
               </Card>
@@ -228,9 +186,9 @@ const HejTalentLanding = () => {
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
                     <Shield className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">100% Geld-zurück-Garantie</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.hejTalent.bullets.2.title', '100% Geld-zurück-Garantie')}</h3>
                   <p className="text-muted-foreground">
-                    Nicht zufrieden? Volle Rückerstattung in den ersten 14 Tagen – ohne Fragen
+                    {t('landing.hejTalent.bullets.2.text', 'Nicht zufrieden? Volle Rückerstattung in den ersten 14 Tagen – ohne Fragen')}
                   </p>
                 </CardContent>
               </Card>
@@ -244,7 +202,7 @@ const HejTalentLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-brand-dark mb-12 animate-fade-in">
-              Über 50 Unternehmen vertrauen bereits auf Hej Talent
+              {t('landing.hejTalent.trust.title', 'Über 50 Unternehmen vertrauen bereits auf Hej Talent')}
             </h2>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -257,7 +215,7 @@ const HejTalentLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Binnen 5 Tagen hatte ich den perfekten KI-Entwickler. Spart uns monatlich €3.200 bei besserer Qualität."
+                      {t('landing.hejTalent.testimonials.0', '"Binnen 5 Tagen hatte ich den perfekten KI-Entwickler. Spart uns monatlich €3.200 bei besserer Qualität."')}
                     </p>
                     <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Niklas Clasen, CEO SNIPE Solutions</div>
                   </div>
@@ -273,7 +231,7 @@ const HejTalentLanding = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                      "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen."
+                      {t('landing.hejTalent.testimonials.1', '"Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen."')}
                     </p>
                     <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Marc Palma, Geschäftsführer, ECO Containertrans</div>
                   </div>
@@ -288,7 +246,7 @@ const HejTalentLanding = () => {
                 ))}
               </div>
               <span className="font-semibold text-lg hover:scale-110 transition-transform duration-300">4,9 / 5</span>
-              <span className="text-muted-foreground hover:text-foreground transition-colors duration-300">aus 57 Bewertungen</span>
+              <span className="text-muted-foreground hover:text-foreground transition-colors duration-300">{t('landing.hejTalent.reviews.caption', 'aus 57 Bewertungen')}</span>
             </div>
           </div>
         </div>
@@ -299,47 +257,43 @@ const HejTalentLanding = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
-              Häufig gestellte Fragen
+              {t('landing.hejTalent.faq.title', 'Häufig gestellte Fragen')}
             </h2>
 
             <Accordion type="single" collapsible className="space-y-4">
               <AccordionItem value="quality" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-1 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Wie stellen Sie die Qualität der Entwickler sicher?
+                  {t('landing.hejTalent.faq.items.0.q', 'Wie stellen Sie die Qualität der Entwickler sicher?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Jeder Entwickler durchläuft einen 3-stufigen Prüfprozess: Technische Skills-Tests, 
-                  Live-Coding-Session und Referenzcheck. Nur 8% aller Bewerber bestehen unsere Standards.
+                  {t('landing.hejTalent.faq.items.0.a', 'Jeder Entwickler durchläuft einen 3-stufigen Prüfprozess: Technische Skills-Tests, Live-Coding-Session und Referenzcheck. Nur 8% aller Bewerber bestehen unsere Standards.')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="privacy" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-2 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Wie wird der Datenschutz gewährleistet?
+                  {t('landing.hejTalent.faq.items.1.q', 'Wie wird der Datenschutz gewährleistet?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  DSGVO-konform, deutsche Server und NDAs mit allen Entwicklern. 
-                  Ihre Projektdaten bleiben zu 100% vertraulich und sicher.
+                  {t('landing.hejTalent.faq.items.1.a', 'DSGVO-konform, deutsche Server und NDAs mit allen Entwicklern. Ihre Projektdaten bleiben zu 100% vertraulich und sicher.')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="communication" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-3 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Wie funktioniert die Kommunikation?
+                  {t('landing.hejTalent.faq.items.2.q', 'Wie funktioniert die Kommunikation?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Alle unsere Entwickler arbeiten in europäischen Zeitzonen und kommunizieren 
-                  professionell über Ihre bevorzugten Tools.
+                  {t('landing.hejTalent.faq.items.2.a', 'Alle unsere Entwickler arbeiten in europäischen Zeitzonen und kommunizieren professionell über Ihre bevorzugten Tools.')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="contract" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-4 group">
                 <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
-                  Welche Vertragsmodelle bieten Sie an?
+                  {t('landing.hejTalent.faq.items.3.q', 'Welche Vertragsmodelle bieten Sie an?')}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pt-2">
-                  Flexibel nach Ihren Bedürfnissen: Vollzeit, Teilzeit oder projektbasiert. 
-                  Monatliche Kündigung möglich, keine langfristigen Bindungen.
+                  {t('landing.hejTalent.faq.items.3.a', 'Flexibel nach Ihren Bedürfnissen: Vollzeit, Teilzeit oder projektbasiert. Monatliche Kündigung möglich, keine langfristigen Bindungen.')}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -356,20 +310,20 @@ const HejTalentLanding = () => {
               <div>
                 <h3 className="font-bold text-xl mb-4">Hej Talent</h3>
                 <p className="text-gray-300 text-sm">
-                  Ihr Partner für geprüfte internationale Remote-KI-Entwickler.
+                  {t('landing.hejTalent.footer.tagline', 'Ihr Partner für geprüfte internationale Remote-KI-Entwickler.')}
                 </p>
               </div>
               
               <div>
-                <h4 className="font-semibold mb-4">Rechtliches</h4>
+                <h4 className="font-semibold mb-4">{t('landing.hejTalent.footer.legal', 'Rechtliches')}</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="https://hejtalent.de/imprint-de/" className="text-gray-300 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Impressum</a></li>
-                  <li><a href="https://hejtalent.de/privacy-policy-de/" className="text-gray-300 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Datenschutz</a></li>
+                  <li><a href="https://hejtalent.de/imprint-de/" className="text-gray-300 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">{t('footer.links.imprint', 'Impressum')}</a></li>
+                  <li><a href="https://hejtalent.de/privacy-policy-de/" className="text-gray-300 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">{t('footer.links.privacy', 'Datenschutz')}</a></li>
                 </ul>
               </div>
               
               <div>
-                <h4 className="font-semibold mb-4">Kontakt</h4>
+                <h4 className="font-semibold mb-4">{t('landing.hejTalent.footer.contact', 'Kontakt')}</h4>
                 <ul className="space-y-2 text-sm text-gray-300">
                   <li>
                     <a href="mailto:kontakt@hejcompany.de" className="hover:text-white transition-colors">
@@ -394,7 +348,7 @@ const HejTalentLanding = () => {
             </div>
             
             <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-300">
-              © 2025 Hej Talent. Alle Rechte vorbehalten.
+              © 2025 Hej Talent. {t('landing.hejTalent.footer.rights', 'Alle Rechte vorbehalten.')}
             </div>
           </div>
         </div>

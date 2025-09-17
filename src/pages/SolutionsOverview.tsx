@@ -6,9 +6,11 @@ import { ArrowRight, Users, Code, Shield } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
+import { useTranslation } from '@/i18n/i18n';
 
 const SolutionsOverview = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const solutions = [
     {
@@ -45,11 +47,10 @@ const SolutionsOverview = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              Unsere <span className="text-primary">internationalen</span> Fachkräfte
+              {t('solutionsOverview.title')}
             </h1>
             <p className="text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-              Qualifizierte Remote-Experten für jeden Bereich - von administrativer Unterstützung 
-              bis hin zu komplexen IT- und KI-Projekten.
+              {t('solutionsOverview.subtitle')}
             </p>
           </div>
           
@@ -103,14 +104,14 @@ const SolutionsOverview = () => {
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-brand-dark mb-6">
-            Nicht sicher, welche internationalen Fachkräfte Sie benötigen?
+            {t('solutionsOverview.ctaTitle')}
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Lassen Sie uns in einem kostenlosen Beratungsgespräch gemeinsam die passenden Remote-Experten für Ihre Herausforderungen finden.
+            {t('solutionsOverview.ctaText')}
           </p>
           <Button asChild size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
             <a href="https://calendly.com/joachim-kalff" target="_blank" rel="noopener noreferrer">
-              Beratungstermin jetzt buchen
+              {t('solutionsOverview.ctaButton')}
               <ArrowRight className="w-5 h-5 ml-2" />
             </a>
           </Button>
