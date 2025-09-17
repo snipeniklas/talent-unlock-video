@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -54,6 +54,7 @@ interface CrmCompany {
 export default function CrmContactForm() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -67,7 +68,13 @@ export default function CrmContactForm() {
     if (isEdit && id) {
       fetchContact(id);
     }
-  }, [id, isEdit]);
+    
+    // Check if a company was preselected when navigating from company detail page
+    const preselectedCompanyId = location.state?.preselectedCompanyId;
+    if (preselectedCompanyId && !isEdit) {
+      setFormData(prev => ({ ...prev, crm_company_id: preselectedCompanyId }));
+    }
+  }, [id, isEdit, location.state]);
 
   const fetchCompanies = async () => {
     try {

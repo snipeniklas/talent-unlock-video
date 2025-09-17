@@ -878,6 +878,63 @@
       "importBtnText": "CSV Import",
       "newContactBtnText": "New Contact",
       "companyFieldsNote": "Note: If you have company data in your CSV file, corresponding companies will be automatically created or found."
+    },
+    "detail": {
+      "title": "Contact Details",
+      "contactInfo": "Contact Information",
+      "company": "Company",
+      "timeline": "Timeline",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "notFound": "Contact not found",
+      "fetchError": "Error loading contact data",
+      "noPosition": "No position specified",
+      "viewCompany": "View Company"
+    }
+  },
+  "companies": {
+    "title": "Companies",
+    "subtitle": "Manage all CRM companies",
+    "addNew": "Add New Company",
+    "editCompany": "Edit Company",
+    "viewCompany": "View Company",
+    "fields": {
+      "name": "Company Name",
+      "website": "Website",
+      "industry": "Industry",
+      "sizeCategory": "Company Size",
+      "annualRevenue": "Annual Revenue",
+      "phone": "Phone",
+      "email": "Email",
+      "addressStreet": "Street",
+      "addressCity": "City",
+      "addressPostalCode": "Postal Code",
+      "addressCountry": "Country",
+      "notes": "Notes",
+      "status": "Status"
+    },
+    "status": {
+      "prospect": "Prospect",
+      "qualified": "Qualified",
+      "customer": "Customer",
+      "inactive": "Inactive"
+    },
+    "detail": {
+      "title": "Company Details",
+      "contactInfo": "Contact Information",
+      "address": "Address",
+      "contacts": "Contacts",
+      "stats": "Statistics",
+      "timeline": "Timeline",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "notFound": "Company not found",
+      "fetchError": "Error loading company data",
+      "noIndustry": "No industry specified",
+      "totalContacts": "Total Contacts",
+      "addContact": "Add Contact",
+      "addFirstContact": "Add First Contact",
+      "noContacts": "No contacts yet"
     }
   }
 }
