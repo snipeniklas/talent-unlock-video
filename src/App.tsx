@@ -45,6 +45,9 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import SearchRequestAllocations from "./pages/admin/SearchRequestAllocations";
 import AdminSearchRequestDetail from "./pages/admin/AdminSearchRequestDetail";
+import CrmOverview from "./pages/admin/CrmOverview";
+import CrmCompanies from "./pages/admin/CrmCompanies";
+import CrmContacts from "./pages/admin/CrmContacts";
 
 const queryClient = new QueryClient();
 
@@ -98,6 +101,9 @@ const App = () => (
             <Route path="search-requests/:id" element={<AdminSearchRequestDetail />} />
             <Route path="search-requests/:id/allocations" element={<SearchRequestAllocations />} />
             <Route path="companies" element={<CompanyManagement />} />
+            <Route path="crm" element={<CrmOverview />} />
+            <Route path="crm/companies" element={<CrmCompanies />} />
+            <Route path="crm/contacts" element={<CrmContacts />} />
             <Route path="support" element={<AdminSupport />} />
             <Route path="settings" element={<AdminSettings />} />
           </Route>

@@ -112,6 +112,7 @@ export function AppSidebar() {
     { title: t('app.sidebar.admin.companies', 'Alle Unternehmen'), url: "/admin/companies", icon: Building2 },
     { title: t('app.sidebar.admin.resources', 'RaaS Ressourcen'), url: "/admin/candidates", icon: UserCog },
     { title: t('app.sidebar.admin.projects', 'Kundenprojekte'), url: "/admin/search-requests", icon: FileText },
+    { title: t('crm.title', 'CRM System'), url: "/admin/crm", icon: Users },
     { title: t('app.sidebar.admin.support', 'Support Chat'), url: "/admin/support", icon: MessageCircle },
     { title: t('app.sidebar.admin.settings', 'Benutzerverwaltung'), url: "/admin/settings", icon: SettingsIcon },
   ];
