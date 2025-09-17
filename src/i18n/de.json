@@ -879,24 +879,24 @@
       "noContacts": "Keine Kontakte in dieser Phase",
       "contactsCount": "Kontakte"
     },
-    "csvImport": {
-      "importBtnText": "CSV-Import",
-      "newContactBtnText": "Neuer Kontakt",
-      "companyFieldsNote": "Hinweis: Wenn Sie Unternehmensdaten in Ihrer CSV-Datei haben, werden automatisch entsprechende Unternehmen erstellt oder gefunden."
+      "csvImport": {
+        "importBtnText": "CSV-Import",
+        "newContactBtnText": "Neuer Kontakt",
+        "companyFieldsNote": "Hinweis: Wenn Sie Unternehmensdaten in Ihrer CSV-Datei haben, werden automatisch entsprechende Unternehmen erstellt oder gefunden."
+      },
+      "detail": {
+        "title": "Kontakt Details",
+        "contactInfo": "Kontaktinformationen",
+        "company": "Unternehmen",
+        "timeline": "Zeitverlauf",
+        "created": "Erstellt",
+        "lastUpdated": "Zuletzt aktualisiert",
+        "notFound": "Kontakt nicht gefunden",
+        "fetchError": "Fehler beim Laden der Kontaktdaten",
+        "noPosition": "Keine Position angegeben",
+        "viewCompany": "Unternehmen ansehen"
+      }
     },
-    "detail": {
-      "title": "Kontakt Details",
-      "contactInfo": "Kontaktinformationen",
-      "company": "Unternehmen",
-      "timeline": "Zeitverlauf",
-      "created": "Erstellt",
-      "lastUpdated": "Zuletzt aktualisiert",
-      "notFound": "Kontakt nicht gefunden",
-      "fetchError": "Fehler beim Laden der Kontaktdaten",
-      "noPosition": "Keine Position angegeben",
-      "viewCompany": "Unternehmen ansehen"
-    }
-  },
   "companies": {
     "title": "Unternehmen",
     "subtitle": "Verwalten Sie alle CRM Unternehmen",
