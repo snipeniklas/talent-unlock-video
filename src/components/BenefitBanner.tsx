@@ -2,8 +2,8 @@ import React from 'react';
 import { useTranslation } from '@/i18n/i18n';
 
 const BenefitBanner = () => {
-  const { t } = useTranslation();
-  const items = (t('benefitBanner.items') as unknown as string[]) || [];
+  const { get } = useTranslation();
+  const items = get<string[]>('benefitBanner.items', []);
 
   return (
     <div className="bg-neutral-50 h-12 flex items-center overflow-hidden border-b">
