@@ -43,8 +43,9 @@ const SolutionsOverview = () => {
     <div className="min-h-screen bg-background font-inter">
       <PublicHeader />
       {/* Hero Section */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4">
+      <section className="py-16 lg:py-24 relative">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
               Unsere <span className="text-primary">internationalen</span> Fachkräfte

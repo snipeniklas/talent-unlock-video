@@ -102,8 +102,9 @@ const ITDevelopmentSolution = () => {
       <PublicHeader />
       
       {/* Hero Section */}
-      <section className="py-16 lg:py-24 bg-gradient-subtle">
-        <div className="container mx-auto px-4">
+      <section className="py-16 lg:py-24 bg-gradient-subtle relative">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-6 bg-primary text-white px-6 py-2 text-lg">Remote IT-Entwickler</Badge>
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
