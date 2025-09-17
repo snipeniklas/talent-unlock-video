@@ -163,7 +163,7 @@ const HomePage = () => {
                 <div className="relative">
                   <div className="aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm border border-primary/20">
                     <iframe 
-                      src="https://drive.google.com/file/d/1YPJcKaFDr4BNvHxAOKd3obYIpWVuljbH/preview" 
+                      src="https://drive.google.com/file/d/1vMtWbY24d-ELZ8K76f4yF2zrngkkJLLW/preview" 
                       className="w-full h-full border-0"
                       allow="autoplay"
                       allowFullScreen 
