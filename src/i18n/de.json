@@ -786,5 +786,215 @@
       "confirmDelete": {"title": "Suchauftrag löschen", "desc": "Sind Sie sicher, dass Sie diesen Suchauftrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."},
       "toasts": {"error": "Fehler", "deleteSuccessTitle": "Erfolg", "deleteSuccess": "Suchauftrag wurde erfolgreich gelöscht.", "unexpected": "Ein unerwarteter Fehler ist aufgetreten.", "deleteFailed": "Suchauftrag konnte nicht gelöscht werden."}
     }
+  },
+  "crm": {
+    "title": "CRM System",
+    "subtitle": "Verwalten Sie Ihre Unternehmen und Kontakte",
+    "companies": {
+      "title": "Unternehmen",
+      "newCompany": "Neues Unternehmen",
+      "editCompany": "Unternehmen bearbeiten",
+      "deleteCompany": "Unternehmen löschen",
+      "deleteConfirm": "Sind Sie sicher, dass Sie dieses Unternehmen löschen möchten?",
+      "noCompanies": "Noch keine Unternehmen vorhanden",
+      "createFirst": "Erstellen Sie Ihr erstes Unternehmen",
+      "fields": {
+        "name": "Firmenname",
+        "website": "Website",
+        "industry": "Branche",
+        "sizeCategory": "Unternehmensgröße",
+        "annualRevenue": "Jahresumsatz",
+        "phone": "Telefon",
+        "email": "E-Mail",
+        "address": "Adresse",
+        "street": "Straße",
+        "city": "Stadt",
+        "postalCode": "PLZ",
+        "country": "Land",
+        "notes": "Notizen",
+        "status": "Status"
+      },
+      "sizeCategories": {
+        "startup": "Startup",
+        "small": "Klein (1-50)",
+        "medium": "Mittel (51-250)",
+        "large": "Groß (251-1000)",
+        "enterprise": "Konzern (1000+)"
+      },
+      "statuses": {
+        "prospect": "Interessent",
+        "qualified": "Qualifiziert",
+        "customer": "Kunde",
+        "inactive": "Inaktiv"
+      }
+    },
+    "contacts": {
+      "title": "Kontakte",
+      "newContact": "Neuer Kontakt",
+      "editContact": "Kontakt bearbeiten",
+      "deleteContact": "Kontakt löschen",
+      "deleteConfirm": "Sind Sie sicher, dass Sie diesen Kontakt löschen möchten?",
+      "noContacts": "Noch keine Kontakte vorhanden",
+      "createFirst": "Erstellen Sie Ihren ersten Kontakt",
+      "kanbanBoard": "Kanban Board",
+      "listView": "Listenansicht",
+      "viewModes": {
+        "kanban": "Kanban",
+        "list": "Liste"
+      },
+      "fields": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "mobile": "Mobil",
+        "position": "Position",
+        "department": "Abteilung",
+        "company": "Unternehmen",
+        "status": "Status",
+        "priority": "Priorität",
+        "leadSource": "Lead-Quelle",
+        "notes": "Notizen",
+        "nextFollowUp": "Nächste Nachfass-Aktion",
+        "lastContactDate": "Letzter Kontakt"
+      },
+      "statuses": {
+        "new": "Neu",
+        "qualified": "Qualifiziert",
+        "proposal_sent": "Angebot gesendet",
+        "negotiation": "Verhandlung",
+        "won": "Gewonnen",
+        "lost": "Verloren",
+        "follow_up": "Nachfassen"
+      },
+      "priorities": {
+        "low": "Niedrig",
+        "medium": "Mittel",
+        "high": "Hoch",
+        "urgent": "Dringend"
+      }
+    },
+    "actions": {
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "view": "Anzeigen",
+      "create": "Erstellen",
+      "search": "Suchen...",
+      "filter": "Filter",
+      "export": "Exportieren"
+    },
+    "tabs": {
+      "overview": "Übersicht",
+      "contacts": "Kontakte",
+      "notes": "Notizen",
+      "activities": "Aktivitäten"
+    }
+  },
+  "crm": {
+    "title": "CRM System",
+    "subtitle": "Verwalten Sie Ihre Unternehmen und Kontakte",
+    "companies": {
+      "title": "Unternehmen",
+      "newCompany": "Neues Unternehmen",
+      "editCompany": "Unternehmen bearbeiten",
+      "deleteCompany": "Unternehmen löschen",
+      "deleteConfirm": "Sind Sie sicher, dass Sie dieses Unternehmen löschen möchten?",
+      "noCompanies": "Noch keine Unternehmen vorhanden",
+      "createFirst": "Erstellen Sie Ihr erstes Unternehmen",
+      "fields": {
+        "name": "Firmenname",
+        "website": "Website",
+        "industry": "Branche",
+        "sizeCategory": "Unternehmensgröße",
+        "annualRevenue": "Jahresumsatz",
+        "phone": "Telefon",
+        "email": "E-Mail",
+        "address": "Adresse",
+        "street": "Straße",
+        "city": "Stadt",
+        "postalCode": "PLZ",
+        "country": "Land",
+        "notes": "Notizen",
+        "status": "Status"
+      },
+      "sizeCategories": {
+        "startup": "Startup",
+        "small": "Klein (1-50)",
+        "medium": "Mittel (51-250)",
+        "large": "Groß (251-1000)",
+        "enterprise": "Konzern (1000+)"
+      },
+      "statuses": {
+        "prospect": "Interessent",
+        "qualified": "Qualifiziert",
+        "customer": "Kunde",
+        "inactive": "Inaktiv"
+      }
+    },
+    "contacts": {
+      "title": "Kontakte",
+      "newContact": "Neuer Kontakt",
+      "editContact": "Kontakt bearbeiten",
+      "deleteContact": "Kontakt löschen",
+      "deleteConfirm": "Sind Sie sicher, dass Sie diesen Kontakt löschen möchten?",
+      "noContacts": "Noch keine Kontakte vorhanden",
+      "createFirst": "Erstellen Sie Ihren ersten Kontakt",
+      "kanbanBoard": "Kanban Board",
+      "listView": "Listenansicht",
+      "viewModes": {
+        "kanban": "Kanban",
+        "list": "Liste"
+      },
+      "fields": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "mobile": "Mobil",
+        "position": "Position",
+        "department": "Abteilung",
+        "company": "Unternehmen",
+        "status": "Status",
+        "priority": "Priorität",
+        "leadSource": "Lead-Quelle",
+        "notes": "Notizen",
+        "nextFollowUp": "Nächste Nachfass-Aktion",
+        "lastContactDate": "Letzter Kontakt"
+      },
+      "statuses": {
+        "new": "Neu",
+        "qualified": "Qualifiziert",
+        "proposal_sent": "Angebot gesendet",
+        "negotiation": "Verhandlung",
+        "won": "Gewonnen",
+        "lost": "Verloren",
+        "follow_up": "Nachfassen"
+      },
+      "priorities": {
+        "low": "Niedrig",
+        "medium": "Mittel",
+        "high": "Hoch",
+        "urgent": "Dringend"
+      }
+    },
+    "actions": {
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "view": "Anzeigen",
+      "create": "Erstellen",
+      "search": "Suchen...",
+      "filter": "Filter",
+      "export": "Exportieren"
+    },
+    "tabs": {
+      "overview": "Übersicht",
+      "contacts": "Kontakte",
+      "notes": "Notizen",
+      "activities": "Aktivitäten"
+    }
   }
 }

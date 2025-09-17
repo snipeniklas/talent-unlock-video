@@ -116,6 +116,13 @@ export function AppSidebar() {
     { title: t('app.sidebar.admin.settings', 'Benutzerverwaltung'), url: "/admin/settings", icon: SettingsIcon },
   ];
 
+  // CRM Navigation Items
+  const crmItems = [
+    { title: 'CRM Übersicht', url: "/admin/crm", icon: Home },
+    { title: 'Unternehmen', url: "/admin/crm/companies", icon: Building2 },
+    { title: 'Kontakte', url: "/admin/crm/contacts", icon: Users },
+  ];
+
   if (loading) {
     return (
     <Sidebar className={`${isCollapsed ? "w-14" : "w-60"} bg-card border-r`}>
@@ -170,6 +177,31 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {/* CRM Section for Admins */}
+        {userRole?.role === 'admin' && (
+          <SidebarGroup>
+            <SidebarGroupLabel className="text-foreground font-semibold">CRM System</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {crmItems.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <NavLink 
+                        to={item.url} 
+                        end 
+                        className={({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${getNavCls({ isActive })}`}
+                      >
+                        <item.icon className="h-4 w-4 flex-shrink-0" />
+                        {!isCollapsed && <span className="flex-1">{item.title}</span>}
+                      </NavLink>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
 
         {/* Quick Actions */}
         {userRole?.role !== 'admin' && (
