@@ -62,6 +62,29 @@ const translations = {
     'hero.riskFreeDesc': 'Keine Kosten bei erfolgloser Vermittlung',
     'hero.trustBadge': 'Vertraut von 150+ Unternehmen',
     'hero.watchDemo': 'Demo ansehen',
+    
+    // Hero badges
+    'hero.badge.expertise': '5+ Jahre Expertise',
+    'hero.badge.specialists': '500+ Fachkräfte',
+    'hero.badge.success': '98% Erfolgsrate',
+    'hero.badge.guarantee': '100% Garantie',
+    
+    // Hero CTAs
+    'hero.cta.main': 'Kostenlose RaaS-Anfrage stellen',
+    'hero.cta.secondary': 'Erfahren Sie mehr über RaaS',
+    
+    // Hero video
+    'hero.video.title': 'Sehen Sie RaaS in Aktion',
+    
+    // Hero risk-free section
+    'hero.riskFree.title': 'Risikofrei',
+    'hero.riskFree.description': 'Keine Kosten bei erfolgloser Vermittlung',
+    
+    // Hero trust indicators
+    'hero.trust.text': 'Vertraut von 150+ Unternehmen weltweit',
+    'hero.trust.international': 'International',
+    'hero.trust.gdpr': 'DSGVO-konform',
+    'hero.trust.iso': 'ISO-zertifiziert',
 
     // HomePage - Solutions Preview
     'solutions.title': 'Unsere RaaS Lösungen',
@@ -79,11 +102,20 @@ const translations = {
 
     // HomePage - Services
     'services.backoffice.title': 'Remote Backoffice Specialists',
-    'services.backoffice.description': 'Qualified remote employees for administration, accounting and operational support',
+    'services.backoffice.description': 'Qualifizierte Remote-Mitarbeiter für Verwaltung, Buchhaltung und operative Unterstützung',
+    'services.backoffice.features.organization': 'Administrative Aufgaben',
+    'services.backoffice.features.accounting': 'Buchhaltung',
+    'services.backoffice.features.support': 'Kundenservice',
     'services.it.title': 'Remote IT Developers & Tech Experts',
-    'services.it.description': 'Experienced remote developers for full-stack, DevOps and software architecture',
+    'services.it.description': 'Erfahrene Remote-Entwickler für Full-Stack, DevOps und Software-Architektur',
+    'services.it.features.fullstack': 'Full-Stack Development',
+    'services.it.features.devops': 'DevOps & Cloud',
+    'services.it.features.mobile': 'Mobile Apps',
     'services.aiml.title': 'Remote AI & ML Specialists',
-    'services.aiml.description': 'AI experts and data scientists for machine learning and AI projects',
+    'services.aiml.description': 'KI-Experten und Data Scientists für Machine Learning und AI-Projekte',
+    'services.aiml.features.ml': 'Machine Learning',
+    'services.aiml.features.datascience': 'Data Science',
+    'services.aiml.features.strategy': 'KI-Strategieberatung',
     'services.cta.button': 'Jetzt starten',
     
     // HomePage - Stats
@@ -119,6 +151,14 @@ const translations = {
     'testimonials.customer3.text': 'Die AI-Experten, die wir über Hej Talent gefunden haben, haben unser Machine Learning-Projekt zum Erfolg geführt. Professionell und kompetent.',
     'testimonials.customer3.name': 'Dr. Lisa Müller',
     'testimonials.customer3.company': 'DataTech Solutions',
+    
+    // Testimonials with correct naming for HomePage
+    'testimonials.niklas.text': 'Hej Talent hat uns dabei geholfen, erstklassige Remote-Entwickler zu finden. Der Prozess war effizient und die Qualität der Kandidaten übertraf unsere Erwartungen.',
+    'testimonials.niklas.name': 'Niklas Weber',
+    'testimonials.niklas.company': 'TechStart GmbH',
+    'testimonials.marc.text': 'Dank der Remote-Backoffice-Lösung konnten wir unsere Kosten um 40% senken und gleichzeitig die Effizienz steigern. Absolute Empfehlung!',
+    'testimonials.marc.name': 'Marc Braun',
+    'testimonials.marc.company': 'InnovateCorp',
 
     // HomePage - Platform Experience Section
     'platform.title': 'Erleben Sie unseren',
@@ -258,6 +298,29 @@ const translations = {
     'hero.riskFreeDesc': 'No costs for unsuccessful placements',
     'hero.trustBadge': 'Trusted by 150+ companies',
     'hero.watchDemo': 'Watch Demo',
+    
+    // Hero badges
+    'hero.badge.expertise': '5+ Years Expertise',
+    'hero.badge.specialists': '500+ Specialists',
+    'hero.badge.success': '98% Success Rate',
+    'hero.badge.guarantee': '100% Guarantee',
+    
+    // Hero CTAs
+    'hero.cta.main': 'Create Free RaaS Request',
+    'hero.cta.secondary': 'Learn more about RaaS',
+    
+    // Hero video
+    'hero.video.title': 'See RaaS in Action',
+    
+    // Hero risk-free section
+    'hero.riskFree.title': 'Risk-free',
+    'hero.riskFree.description': 'No costs for unsuccessful placements',
+    
+    // Hero trust indicators
+    'hero.trust.text': 'Trusted by 150+ companies worldwide',
+    'hero.trust.international': 'International',
+    'hero.trust.gdpr': 'GDPR compliant',
+    'hero.trust.iso': 'ISO certified',
 
     // HomePage - Solutions Preview
     'solutions.title': 'Our RaaS Solutions',
@@ -276,10 +339,19 @@ const translations = {
     // HomePage - Services
     'services.backoffice.title': 'Remote Backoffice Specialists',
     'services.backoffice.description': 'Qualified remote employees for administration, accounting and operational support',
+    'services.backoffice.features.organization': 'Administrative Tasks',
+    'services.backoffice.features.accounting': 'Accounting',
+    'services.backoffice.features.support': 'Customer Service',
     'services.it.title': 'Remote IT Developers & Tech Experts',
     'services.it.description': 'Experienced remote developers for full-stack, DevOps and software architecture',
+    'services.it.features.fullstack': 'Full-Stack Development',
+    'services.it.features.devops': 'DevOps & Cloud',
+    'services.it.features.mobile': 'Mobile Apps',
     'services.aiml.title': 'Remote AI & ML Specialists',
     'services.aiml.description': 'AI experts and data scientists for machine learning and AI projects',
+    'services.aiml.features.ml': 'Machine Learning',
+    'services.aiml.features.datascience': 'Data Science',
+    'services.aiml.features.strategy': 'AI Strategy Consulting',
     'services.cta.button': 'Get Started',
     
     // HomePage - Stats
@@ -315,6 +387,14 @@ const translations = {
     'testimonials.customer3.text': 'The AI experts we found through Hej Talent led our machine learning project to success. Professional and competent.',
     'testimonials.customer3.name': 'Dr. Lisa Müller',
     'testimonials.customer3.company': 'DataTech Solutions',
+    
+    // Testimonials with correct naming for HomePage
+    'testimonials.niklas.text': 'Hej Talent helped us find top-notch remote developers. The process was efficient and the quality of candidates exceeded our expectations.',
+    'testimonials.niklas.name': 'Niklas Weber',
+    'testimonials.niklas.company': 'TechStart GmbH',
+    'testimonials.marc.text': 'Thanks to the remote backoffice solution, we were able to reduce our costs by 40% while increasing efficiency. Absolute recommendation!',
+    'testimonials.marc.name': 'Marc Braun',
+    'testimonials.marc.company': 'InnovateCorp',
 
     // HomePage - Platform Experience Section  
     'platform.title': 'Experience our',
