@@ -3,10 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Building2, Plus, Search, Edit, Eye } from "lucide-react";
+import { Building2, Plus, Search, Edit, Eye, Upload } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/i18n";
+import CsvImportDialog from "@/components/CsvImportDialog";
 
 interface CrmCompany {
   id: string;
@@ -25,6 +26,7 @@ export default function CrmCompanies() {
   const [companies, setCompanies] = useState<CrmCompany[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [csvDialogOpen, setCsvDialogOpen] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -79,10 +81,22 @@ export default function CrmCompanies() {
           <h1 className="text-3xl font-bold text-foreground">{t('crm.companies.title')}</h1>
           <p className="text-muted-foreground">{t('crm.companies.subtitle')}</p>
         </div>
-        <Button onClick={() => navigate("/admin/crm/companies/new")}>
-          <Plus className="h-4 w-4 mr-2" />
-          {t('crm.companies.addNew')}
-        </Button>
+        <div className="flex gap-2">
+          <CsvImportDialog 
+            open={csvDialogOpen}
+            onOpenChange={setCsvDialogOpen}
+            type="companies"
+            onImportComplete={fetchCompanies}
+          />
+          <Button variant="outline" onClick={() => setCsvDialogOpen(true)}>
+            <Upload className="h-4 w-4 mr-2" />
+            CSV Import
+          </Button>
+          <Button onClick={() => navigate("/admin/crm/companies/new")}>
+            <Plus className="h-4 w-4 mr-2" />
+            {t('crm.companies.addNew')}
+          </Button>
+        </div>
       </div>
 
       {/* Search */}

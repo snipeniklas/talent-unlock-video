@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Users, Plus, Search, Edit, Eye, LayoutGrid, List } from "lucide-react";
+import { Users, Plus, Search, Edit, Eye, LayoutGrid, List, Upload } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/i18n";
+import CsvImportDialog from "@/components/CsvImportDialog";
 
 interface CrmContact {
   id: string;
@@ -35,6 +36,7 @@ export default function CrmContacts() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeView, setActiveView] = useState("kanban");
+  const [csvDialogOpen, setCsvDialogOpen] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -190,10 +192,22 @@ export default function CrmContacts() {
           <h1 className="text-3xl font-bold text-foreground">{t('crm.contacts.title')}</h1>
           <p className="text-muted-foreground">{t('crm.contacts.subtitle')}</p>
         </div>
-        <Button onClick={() => navigate("/admin/crm/contacts/new")}>
-          <Plus className="h-4 w-4 mr-2" />
-          {t('crm.contacts.addNew')}
-        </Button>
+        <div className="flex gap-2">
+          <CsvImportDialog 
+            open={csvDialogOpen}
+            onOpenChange={setCsvDialogOpen}
+            type="contacts"
+            onImportComplete={fetchContacts}
+          />
+          <Button variant="outline" onClick={() => setCsvDialogOpen(true)}>
+            <Upload className="h-4 w-4 mr-2" />
+            CSV Import
+          </Button>
+          <Button onClick={() => navigate("/admin/crm/contacts/new")}>
+            <Plus className="h-4 w-4 mr-2" />
+            {t('crm.contacts.addNew')}
+          </Button>
+        </div>
       </div>
 
       {/* Search and View Toggle */}

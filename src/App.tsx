@@ -48,6 +48,8 @@ import AdminSearchRequestDetail from "./pages/admin/AdminSearchRequestDetail";
 import CrmOverview from "./pages/admin/CrmOverview";
 import CrmCompanies from "./pages/admin/CrmCompanies";
 import CrmContacts from "./pages/admin/CrmContacts";
+import CrmCompanyForm from "./pages/admin/CrmCompanyForm";
+import CrmContactForm from "./pages/admin/CrmContactForm";
 
 const queryClient = new QueryClient();
 
@@ -103,7 +105,11 @@ const App = () => (
             <Route path="companies" element={<CompanyManagement />} />
             <Route path="crm" element={<CrmOverview />} />
             <Route path="crm/companies" element={<CrmCompanies />} />
+            <Route path="crm/companies/new" element={<CrmCompanyForm />} />
+            <Route path="crm/companies/:id/edit" element={<CrmCompanyForm />} />
             <Route path="crm/contacts" element={<CrmContacts />} />
+            <Route path="crm/contacts/new" element={<CrmContactForm />} />
+            <Route path="crm/contacts/:id/edit" element={<CrmContactForm />} />
             <Route path="support" element={<AdminSupport />} />
             <Route path="settings" element={<AdminSettings />} />
           </Route>
