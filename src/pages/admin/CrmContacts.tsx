@@ -90,7 +90,7 @@ export default function CrmContacts() {
   };
 
   const ContactCard = ({ contact }: { contact: CrmContact }) => (
-    <Card className="hover:shadow-lg transition-all duration-200 mb-3 cursor-pointer group border-l-4 border-l-muted hover:border-l-primary">
+    <Card className="hover:shadow-lg transition-all duration-200 mb-3 cursor-pointer group border hover:border-primary/50 bg-card">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="min-w-0 flex-1">
@@ -111,19 +111,19 @@ export default function CrmContacts() {
       <CardContent className="space-y-2 pb-4">
         {contact.email && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <div className="w-1 h-1 bg-primary rounded-full"></div>
+            <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
             <span className="truncate">{contact.email}</span>
           </div>
         )}
         {contact.phone && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <div className="w-1 h-1 bg-primary rounded-full"></div>
+            <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
             <span className="truncate">{contact.phone}</span>
           </div>
         )}
         {contact.department && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <div className="w-1 h-1 bg-primary rounded-full"></div>
+            <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
             <span className="truncate">{contact.department}</span>
           </div>
         )}
@@ -136,7 +136,7 @@ export default function CrmContacts() {
               e.stopPropagation();
               navigate(`/admin/crm/contacts/${contact.id}`);
             }}
-            className="flex-1 h-8 text-xs hover:bg-primary/10 hover:text-primary"
+            className="flex-1 h-8 text-xs hover:bg-muted hover:text-foreground"
           >
             <Eye className="h-3 w-3 mr-1" />
             {t('common.actions.view')}
@@ -148,7 +148,7 @@ export default function CrmContacts() {
               e.stopPropagation();
               navigate(`/admin/crm/contacts/${contact.id}/edit`);
             }}
-            className="flex-1 h-8 text-xs hover:bg-primary/10 hover:text-primary"
+            className="flex-1 h-8 text-xs hover:bg-muted hover:text-foreground"
           >
             <Edit className="h-3 w-3 mr-1" />
             {t('common.actions.edit')}
@@ -164,20 +164,20 @@ export default function CrmContacts() {
         {statusOrder.map(status => {
           const statusContacts = filteredContacts.filter(contact => contact.status === status);
           const statusInfo = {
-            new: { color: 'bg-blue-50 border-blue-200', badgeColor: 'bg-blue-500', icon: '🆕' },
-            contacted: { color: 'bg-yellow-50 border-yellow-200', badgeColor: 'bg-yellow-500', icon: '📞' },
-            qualified: { color: 'bg-purple-50 border-purple-200', badgeColor: 'bg-purple-500', icon: '✅' },
-            proposal: { color: 'bg-orange-50 border-orange-200', badgeColor: 'bg-orange-500', icon: '📋' },
-            negotiation: { color: 'bg-indigo-50 border-indigo-200', badgeColor: 'bg-indigo-500', icon: '🤝' },
-            won: { color: 'bg-green-50 border-green-200', badgeColor: 'bg-green-500', icon: '🎉' },
-            lost: { color: 'bg-red-50 border-red-200', badgeColor: 'bg-red-500', icon: '❌' }
+            new: { icon: '🆕', color: 'border-border' },
+            contacted: { icon: '📞', color: 'border-border' },
+            qualified: { icon: '✅', color: 'border-border' },
+            proposal: { icon: '📋', color: 'border-border' },
+            negotiation: { icon: '🤝', color: 'border-border' },
+            won: { icon: '🎉', color: 'border-green-200 bg-green-50' },
+            lost: { icon: '❌', color: 'border-red-200 bg-red-50' }
           };
           
           return (
             <div key={status} className="flex-shrink-0 w-80">
-              <div className={`rounded-lg border-2 ${statusInfo[status as keyof typeof statusInfo]?.color || 'bg-gray-50 border-gray-200'} h-full`}>
+              <div className={`rounded-lg border-2 bg-card ${statusInfo[status as keyof typeof statusInfo]?.color || 'border-border'} h-full shadow-sm`}>
                 {/* Column Header */}
-                <div className="p-4 border-b border-border/50">
+                <div className="p-4 border-b border-border/50 bg-muted/30">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <span className="text-lg">{statusInfo[status as keyof typeof statusInfo]?.icon}</span>
@@ -185,10 +185,12 @@ export default function CrmContacts() {
                         <h3 className="font-semibold text-base text-foreground">
                           {t(`crm.contacts.status.${status}`)}
                         </h3>
-                        <p className="text-sm text-muted-foreground">{statusContacts.length} contacts</p>
+                        <p className="text-sm text-muted-foreground">
+                          {statusContacts.length} {t('crm.kanban.contactsCount', 'contacts')}
+                        </p>
                       </div>
                     </div>
-                    <div className={`w-8 h-8 rounded-full ${statusInfo[status as keyof typeof statusInfo]?.badgeColor} flex items-center justify-center text-white text-sm font-medium`}>
+                    <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-sm font-medium">
                       {statusContacts.length}
                     </div>
                   </div>
@@ -199,7 +201,7 @@ export default function CrmContacts() {
                   {statusContacts.length === 0 ? (
                     <div className="text-center py-8 text-muted-foreground">
                       <div className="text-4xl mb-2 opacity-50">📝</div>
-                      <p className="text-sm">No contacts in this stage</p>
+                      <p className="text-sm">{t('crm.kanban.noContacts', 'No contacts in this stage')}</p>
                     </div>
                   ) : (
                     statusContacts.map((contact) => (

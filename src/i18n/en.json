@@ -869,6 +869,10 @@
       "view": "View",
       "addCompany": "Add Company",
       "addContact": "Add Contact"
+    },
+    "kanban": {
+      "noContacts": "No contacts in this stage",
+      "contactsCount": "contacts"
     }
   }
 }
