@@ -1,0 +1,458 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+
+import { Play, Star, CheckCircle, Users, Clock, Shield, Calendar, Linkedin, Brain, Sparkles, Target } from 'lucide-react';
+import videoThumbnail from '@/assets/video-thumbnail.jpg';
+import customerLogos from '@/assets/customer-logos.png';
+import verifiedBadge from '@/assets/verified-badge.png';
+import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import { useTranslation } from '@/i18n/i18n';
+
+const AIMLLanding = () => {
+  const { t, get } = useTranslation();
+  
+  const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = cardRefs.current.indexOf(entry.target as HTMLDivElement);
+          if (index !== -1) {
+            setVisibleCards(prev => {
+              const newState = [...prev];
+              newState[index] = entry.isIntersecting;
+              return newState;
+            });
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: '50px' }
+    );
+
+    cardRefs.current.forEach(ref => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+
+  return (
+    <div className="min-h-screen bg-background font-inter">
+      {/* Sticky Trust Bar */}
+      <div className="sticky top-0 z-40 bg-white border-b shadow-sm backdrop-blur-sm bg-white/95">
+        <div className="container mx-auto px-4 py-3">
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center animate-slide-in-left">
+                <img src={hejTalentLogo} alt="Hej Talent" className="h-8 md:h-10 hover:scale-105 transition-transform duration-300" />
+              </div>
+            </div>
+        </div>
+      </div>
+
+      {/* Benefit Ticker */}
+      <div className="bg-neutral-50 h-12 flex items-center overflow-hidden border-b">
+        <div className="animate-slide-text hover:animate-none flex items-center gap-12 whitespace-nowrap min-w-max">
+          {get<string[]>('landing.aiMl.ticker', [
+            'KI-Experten ab 3 Monaten',
+            '40-60% günstiger',
+            'Bewährte KI-Lösungen',
+            'Von Konzept bis Deployment',
+            'ML, Deep Learning, NLP',
+            'Keine Headhunter-Fee'
+          ]).map((text, idx) => (
+            <span key={`ticker-a-${idx}`} className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+              {text} <span className="text-primary text-lg">•</span>
+            </span>
+          ))}
+          {get<string[]>('landing.aiMl.ticker', []).map((text, idx) => (
+            <span key={`ticker-b-${idx}`} className="flex items-center gap-3 text-sm font-medium text-brand-dark">
+              {text} <span className="text-primary text-lg">•</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Hero Section */}
+      <section className="py-16 lg:py-24 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-fade-in">
+              <span className="text-primary">RaaS</span> {t('landing.aiMl.hero.title', '- KI & ML Experten')}{' '}
+              <span className="text-primary bg-gradient-to-r from-primary to-primary-hover bg-clip-text animate-shimmer bg-shimmer bg-200% animate-bounce-in-delay-1">
+                {t('landing.aiMl.hero.badge', '40-60% günstiger')}
+              </span> {t('landing.aiMl.hero.trailing', 'für Ihre KI-Transformation')}
+            </h1>
+            
+            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto animate-fade-in-delay-1">
+              <strong>Resources as a Service</strong> – {t('landing.aiMl.hero.p1', 'Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr KI-Problem, wir liefern die perfekte Experten-Lösung.')}
+            </p>
+            
+            <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto animate-fade-in-delay-1">
+              {t('landing.aiMl.hero.p2', 'Von der KI-Strategie bis zur produktiven Lösung: Holen Sie sich spezialisierte Data Scientists, ML Engineers und KI-Entwickler aus unserem geprüften Expertenpool – remote und sofort einsatzbereit.')}
+            </p>
+
+            {/* Video Player */}
+            <div className="relative mb-12 animate-slide-up-delay-2">
+              <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto group hover:shadow-3xl transition-all duration-700 hover:scale-[1.02]">
+                <div className="aspect-video bg-black flex items-center justify-center">
+                  <iframe
+                    src="https://drive.google.com/file/d/1cEsLY4OzN42O1fEP2PQo3taGWXYtdVlR/preview"
+                    title="KI & ML Experten RaaS Video"
+                    className="w-full h-full"
+                    allow="autoplay"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            </div>
+
+            <Button
+              variant="cta"
+              size="xl"
+              asChild
+              className="mb-16 animate-bounce-in-delay-3 hover:animate-pulse relative overflow-hidden"
+            >
+              <Link to="/app/search-requests/new">
+                <span className="relative z-10">
+                  {t('landing.aiMl.hero.cta', 'RaaS Anfrage stellen')}
+                </span>
+                <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>
+              </Link>
+            </Button>
+
+            {/* 3-Bullet Preview */}
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              <Card 
+                ref={(el) => {cardRefs.current[0] = el;}}
+                className={`border-2 hover:border-primary transition-all duration-500 hover:shadow-xl hover:scale-105 group ${
+                  visibleCards[0] 
+                    ? 'animate-scale-in opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: '0.1s' }}
+              >
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
+                    <Brain className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.aiMl.bullets.0.title', 'KI-Spezialisten')}</h3>
+                  <p className="text-muted-foreground">
+                    {t('landing.aiMl.bullets.0.text', 'Data Scientists, ML Engineers und KI-Entwickler mit PhD/Master und 5+ Jahren Praxiserfahrung')}
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card 
+                ref={(el) => {cardRefs.current[1] = el;}}
+                className={`border-2 hover:border-primary transition-all duration-500 hover:shadow-xl hover:scale-105 group ${
+                  visibleCards[1] 
+                    ? 'animate-scale-in opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: '0.3s' }}
+              >
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
+                    <Sparkles className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.aiMl.bullets.1.title', 'Bewährte KI-Lösungen')}</h3>
+                  <p className="text-muted-foreground">
+                    {t('landing.aiMl.bullets.1.text', 'Von Computer Vision bis NLP – praxiserprobte Lösungen für Ihr Geschäftsmodell')}
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card 
+                ref={(el) => {cardRefs.current[2] = el;}}
+                className={`border-2 hover:border-primary transition-all duration-500 hover:shadow-xl hover:scale-105 group ${
+                  visibleCards[2] 
+                    ? 'animate-scale-in opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: '0.5s' }}
+              >
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-bounce">
+                    <Target className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors duration-300">{t('landing.aiMl.bullets.2.title', 'ROI-Fokus')}</h3>
+                  <p className="text-muted-foreground">
+                    {t('landing.aiMl.bullets.2.text', 'Messbare Geschäftsergebnisse in 3-6 Monaten statt jahrelanger Forschung')}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Problem Section */}
+      <section className="py-16 bg-red-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
+              {t('landing.aiMl.problem.title', 'Warum scheitern die meisten KI-Projekte?')}
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {get<Array<{title: string; desc: string}>>('landing.aiMl.problem.items', [
+                { title: 'Fehlendes KI-Know-how', desc: 'Interne Teams haben keine Erfahrung mit ML-Projekten und überschätzen die Komplexität' },
+                { title: 'Monatelange Suche', desc: 'Qualifizierte Data Scientists sind rar und überteuert – wenn überhaupt verfügbar' },
+                { title: 'Kein Business-Fokus', desc: 'Projekte versanden in endloser Forschung ohne messbare Geschäftsergebnisse' }
+              ]).map((p, i) => (
+                <Card key={i} className="p-6 border-red-200 hover:shadow-lg transition-all duration-300">
+                  <div className="text-red-500 mb-4">
+                    {i===0 ? <Brain className="w-8 h-8 mx-auto" /> : i===1 ? <Clock className="w-8 h-8 mx-auto" /> : <Target className="w-8 h-8 mx-auto" />}
+                  </div>
+                  <h3 className="font-bold mb-3">{p.title}</h3>
+                  <p className="text-muted-foreground text-sm">{p.desc}</p>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How it Works */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
+              {t('landing.aiMl.how.title', "So funktioniert's: Ihr KI-Experte in 3 einfachen Schritten")}
+            </h2>
+            
+            <div className="space-y-8">
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  1
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">KI-Projekt über unsere Platform definieren</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Loggen Sie sich in unser System ein und beschreiben Sie Ihr KI-Use-Case. 
+                    Definieren Sie Geschäftsziele, Datenquellen, gewünschte KI-Technologien 
+                    und Projektumfang über unsere spezialisierte Eingabemaske.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Platform-Features:</strong> KI-Use-Case-Templates, ROI-Calculator, 
+                    Datenquellen-Assessment, Technologie-Wizard, Projektphasen-Planer
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  2
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">KI-Experten-Matching & Strategie-Review</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Unser System matched automatisch passende KI-Spezialisten basierend auf Ihrem Use-Case. 
+                    Sie erhalten binnen 48h eine kuratierte Auswahl von 2-3 Experten plus eine erste 
+                    Machbarkeitsbewertung direkt in der Platform.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Sie erhalten:</strong> Experten-Profile mit KI-Spezialisierung, 
+                    ähnliche Projekt-Referenzen, Machbarkeitsstudie, Zeitplan und erste Lösungsansätze
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  3
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3">Strategy Call & Projekt-Start</h3>
+                  <p className="text-muted-foreground mb-4">
+                    30-minütiger Strategy Call mit Ihrem ausgewählten KI-Experten zur finalen Abstimmung. 
+                    Danach übernehmen wir Verträge, Projekt-Setup und Kick-off. Start der ersten 
+                    Projektphase binnen 1-2 Wochen.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg border">
+                    <strong className="text-sm">Platform-Support:</strong> Strategy-Call-Templates, 
+                    automatische Verträge, Projekt-Dashboards, Milestone-Tracking und 24/7 Support
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Stack */}
+      <section className="py-16 bg-gradient-subtle overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-12 animate-fade-in">
+              {t('landing.aiMl.trust.title', 'Führende Unternehmen vertrauen unseren KI-Experten')}
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <Card className="p-6 hover:shadow-xl transition-all duration-500 animate-slide-in-left hover:scale-105 group">
+                <div className="flex items-start gap-4">
+                  <div className="flex text-yellow-400 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-current hover:scale-110 transition-transform duration-200" style={{animationDelay: `${i * 0.1}s`}} />
+                    ))}
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
+                      "Unser KI-Entwickler hat in 3 Wochen ein Machine Learning System entwickelt, das uns monatlich €5.000 spart."
+                    </p>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Niklas Clasen, CEO SNIPE Solutions</div>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 hover:shadow-xl transition-all duration-500 animate-slide-in-right hover:scale-105 group">
+                <div className="flex items-start gap-4">
+                  <div className="flex text-yellow-400 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-current hover:scale-110 transition-transform duration-200" style={{animationDelay: `${i * 0.1}s`}} />
+                    ))}
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
+                      "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen."
+                    </p>
+                    <div className="text-sm font-semibold group-hover:text-primary transition-colors duration-300">Marc Palma, Geschäftsführer, ECO Containertrans</div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <div className="flex items-center justify-center gap-4 text-primary animate-bounce-in-delay-2">
+              <div className="flex text-yellow-400">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-current hover:scale-110 transition-transform duration-200" />
+                ))}
+              </div>
+              <span className="font-semibold text-lg hover:scale-110 transition-transform duration-300">4,9 / 5</span>
+              <span className="text-muted-foreground hover:text-foreground transition-colors duration-300">aus 28 KI-Projekten</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
+              {t('landing.aiMl.faq.title', 'Häufig gestellte Fragen')}
+            </h2>
+
+            <Accordion type="single" collapsible className="space-y-4">
+              <AccordionItem value="expertise" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-1 group">
+                <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
+                  {t('landing.aiMl.faq.expertise', 'Welche KI-Bereiche decken Ihre Experten ab?')}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pt-2">
+                  {t('landing.aiMl.faq.expertise.desc', 'Machine Learning, Deep Learning, Computer Vision, NLP, Predictive Analytics, 
+                  Recommendation Systems, Chatbots, Automatisierung und Custom AI Solutions.')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="qualifications" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-2 group">
+                <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
+                  {t('landing.aiMl.faq.qualifications', 'Welche Qualifikationen haben Ihre KI-Experten?')}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pt-2">
+                  {t('landing.aiMl.faq.qualifications.desc', 'PhD/Master in Data Science, KI oder verwandten Bereichen. 5+ Jahre Praxiserfahrung, 
+                  Expertise in Python, TensorFlow, PyTorch. Viele kommen aus Tech-Konzernen oder Research.')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="projects" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-3 group">
+                <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
+                  {t('landing.aiMl.faq.projects', 'Welche Art von KI-Projekten wurden bereits umgesetzt?')}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pt-2">
+                  {t('landing.aiMl.faq.projects.desc', 'Chatbots für E-Commerce, Predictive Maintenance, Dokumentenanalyse, Computer Vision für 
+                  Qualitätskontrolle, Fraud Detection, Personalisierung, Sprachassistenten und mehr.')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="timeline" className="border rounded-lg px-6 hover:border-primary hover:shadow-lg transition-all duration-300 animate-slide-up-delay-4 group">
+                <AccordionTrigger className="text-left group-hover:text-primary transition-colors duration-300">
+                  {t('landing.aiMl.faq.timeline', 'Wie lange dauert ein typisches KI-Projekt?')}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pt-2">
+                  {t('landing.aiMl.faq.timeline.desc', 'Proof of Concept: 4-8 Wochen. MVP: 3-6 Monate. Produktive Lösung: 6-12 Monate. 
+                  Wir arbeiten agil mit regelmäßigen Deliveries und Feedback-Schleifen.')}
+                </AccordionContent>
+              </AccordionItem>
+
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
+
+      {/* Footer */}
+      <footer className="py-12 bg-brand-dark text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <img src={hejTalentLogo} alt="Hej Talent" className="h-8 mb-4 filter brightness-0 invert" />
+              <p className="text-sm opacity-80">
+                {t('landing.aiMl.footer.tagline', 'KI & ML Experten für deutsche Unternehmen')}
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">{t('landing.aiMl.footer.areas', 'KI-Bereiche')}</h4>
+              <div className="space-y-2 text-sm opacity-80">
+                <div>Machine Learning</div>
+                <div>Computer Vision</div>
+                <div>Natural Language Processing</div>
+                <div>Predictive Analytics</div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">{t('landing.aiMl.footer.company', 'Unternehmen')}</h4>
+              <div className="space-y-2 text-sm opacity-80">
+                <div>Über uns</div>
+                <div>Karriere</div>
+                <div>Partner werden</div>
+                <div>Kontakt</div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">{t('landing.aiMl.footer.contact', 'Kontakt')}</h4>
+              <div className="space-y-2 text-sm opacity-80">
+                <div>hello@hejtalent.de</div>
+                <div>+49 30 12345678</div>
+                <div>Berlin, Deutschland</div>
+                <div className="flex gap-2 mt-4">
+                  <Linkedin className="w-5 h-5 hover:scale-110 transition-transform duration-300" />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="border-t border-white/20 mt-8 pt-8 text-center text-sm opacity-60">
+            <p>© 2024 Hej Talent. {t('landing.aiMl.footer.rights', 'Alle Rechte vorbehalten.')}</p>
+            <div className="flex justify-center gap-6 mt-2">
+              <span className="hover:opacity-100 transition-opacity duration-300">{t('footer.links.privacy', 'Datenschutz')}</span>
+              <span className="hover:opacity-100 transition-opacity duration-300">{t('footer.links.imprint', 'Impressum')}</span>
+              <span className="hover:opacity-100 transition-opacity duration-300">{t('landing.aiMl.footer.terms', 'AGB')}</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  );
+};
+
+export default AIMLLanding;

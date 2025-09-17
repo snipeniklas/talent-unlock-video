@@ -1,0 +1,4 @@
+project_id = "pcbpxhzaajbycxwompif"
+
+[functions.send-admin-notification]
+verify_jwt = false
