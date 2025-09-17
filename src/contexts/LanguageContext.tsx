@@ -52,10 +52,10 @@ const translations = {
     'benefits.available247': 'Dienstleistungen 24/7 an 365 Tagen möglich',
 
     // HomePage - Hero Section
-    'hero.title': 'Remote-Fachkräfte für',
+    'hero.title': 'RaaS - Resources as a Service',
     'hero.titleHighlight': 'jede Anforderung',
-    'hero.subtitle': 'Remote Recruiting as a Service',
-    'hero.description': 'Wir verbinden Ihr Unternehmen mit den besten Remote-Talenten weltweit. Von Backoffice über IT-Development bis hin zu AI & ML - finden Sie die perfekte Lösung für Ihre Bedürfnisse.',
+    'hero.subtitle': 'Die Remote-Experten, die Ihre HR-Herausforderungen verstehen und lösen',
+    'hero.description': 'Als führender Dienstleister für internationale Fachkräfte stellen wir Ihnen seit 9 Jahren die besten Talente zur Verfügung. Unser bewährtes RaaS-System macht es einfach: Statt klassischer Anstellungen stellen wir Remote-Ressourcen über Dienstleistungsverträge bereit und schaffen so sofortigen Zugang zu qualifizierten Spezialisten weltweit.',
     'hero.getStarted': 'Jetzt starten',
     'hero.learn': 'Mehr erfahren',
     'hero.riskFree': 'Risikofrei',
@@ -64,21 +64,21 @@ const translations = {
     'hero.watchDemo': 'Demo ansehen',
     
     // Hero badges
-    'hero.badge.expertise': '5+ Jahre Expertise',
-    'hero.badge.specialists': '500+ Fachkräfte',
-    'hero.badge.success': '98% Erfolgsrate',
-    'hero.badge.guarantee': '100% Garantie',
+    'hero.badge.expertise': '9+ Jahre Remote-Expertise',
+    'hero.badge.specialists': '500+ geprüfte Fachkräfte',
+    'hero.badge.success': '98% Erfolgsquote',
+    'hero.badge.guarantee': 'Qualitätsgarantie',
     
     // Hero CTAs
-    'hero.cta.main': 'Kostenlose RaaS-Anfrage stellen',
-    'hero.cta.secondary': 'Erfahren Sie mehr über RaaS',
+    'hero.cta.main': 'Unverbindliche RaaS Anfrage starten',
+    'hero.cta.secondary': 'Oder entdecken Sie unsere Expertise',
     
     // Hero video
     'hero.video.title': 'Sehen Sie RaaS in Aktion',
     
     // Hero risk-free section
-    'hero.riskFree.title': 'Risikofrei',
-    'hero.riskFree.description': 'Keine Kosten bei erfolgloser Vermittlung',
+    'hero.riskFree.title': '✅ 100% kostenfrei & unverbindlich starten',
+    'hero.riskFree.description': 'Erhalten Sie maßgeschneiderte Ressourcen-Vorschläge ohne jegliche Verpflichtung. Erst bei Ihrer Zustimmung beginnt die Zusammenarbeit.',
     
     // Hero trust indicators
     'hero.trust.text': 'Vertraut von 150+ Unternehmen weltweit',
