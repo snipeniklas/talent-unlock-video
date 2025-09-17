@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { 
   Search, 
   Users, 
@@ -28,66 +29,67 @@ interface InteractiveScreenProps {
 const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, description, screen }) => {
   const [activeTab, setActiveTab] = useState("all");
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   const mockSearchRequests = [
     {
       id: 1,
-      title: "Remote AI Entwickler (Python)",
-      company: "TechCorp GmbH",
+      title: t('mock.searchRequest1.title'),
+      company: t('mock.searchRequest1.company'),
       location: "Remote",
       status: "active",
       resources: 2,
-      created: "vor 2 Tagen"
+      created: t('mock.searchRequest1.created')
     },
     {
       id: 2,
-      title: "Buchhaltungs-Ressource Teilzeit",
-      company: "StartupTech",
+      title: t('mock.searchRequest2.title'),
+      company: t('mock.searchRequest2.company'),
       location: "Remote",
       status: "active", 
       resources: 1,
-      created: "vor 1 Woche"
+      created: t('mock.searchRequest2.created')
     },
     {
       id: 3,
-      title: "Data Science Spezialist",
-      company: "DataCorp",
+      title: t('mock.searchRequest3.title'),
+      company: t('mock.searchRequest3.company'),
       location: "Remote",
       status: "completed",
       resources: 1,
-      created: "vor 2 Wochen"
+      created: t('mock.searchRequest3.created')
     }
   ];
 
   const mockResources = [
     {
       id: 1,
-      name: "Max Mustermann",
-      position: "Senior AI Engineer",
-      location: "Berlin",
+      name: t('mock.resource1.name'),
+      position: t('mock.resource1.position'),
+      location: t('mock.resource1.location'),
       rating: 5,
       skills: ["Python", "TensorFlow", "AWS"],
-      availability: "Sofort verfügbar",
+      availability: t('interactive.resources.availableImmediately'),
       hourlyRate: "€45-65/h"
     },
     {
       id: 2,
-      name: "Sarah Schmidt",
-      position: "Buchhaltungsexpertin",
-      location: "Hamburg", 
+      name: t('mock.resource2.name'),
+      position: t('mock.resource2.position'),
+      location: t('mock.resource2.location'), 
       rating: 4,
       skills: ["SAP", "DATEV", "Excel"],
-      availability: "In 2 Wochen",
+      availability: t('interactive.resources.availableIn2Weeks'),
       hourlyRate: "€25-35/h"
     },
     {
       id: 3,
-      name: "Dr. Anna Weber",
-      position: "Data Scientist",
-      location: "München",
+      name: t('mock.resource3.name'),
+      position: t('mock.resource3.position'),
+      location: t('mock.resource3.location'),
       rating: 5,
       skills: ["R", "SQL", "Machine Learning"],
-      availability: "In 1 Monat",
+      availability: t('interactive.resources.availableIn1Month'),
       hourlyRate: "€55-75/h"
     }
   ];
@@ -97,12 +99,12 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       {/* Dashboard Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h3 className="text-xl font-semibold">Dashboard</h3>
-          <p className="text-muted-foreground">Übersicht Ihrer RaaS-Aktivitäten</p>
+          <h3 className="text-xl font-semibold">{t('interactive.dashboard.title')}</h3>
+          <p className="text-muted-foreground">{t('interactive.dashboard.subtitle')}</p>
         </div>
         <Button size="sm">
           <FileText className="w-4 h-4 mr-2" />
-          Ressource anfragen
+          {t('interactive.dashboard.requestResource')}
         </Button>
       </div>
 
@@ -110,29 +112,29 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       <div className="grid grid-cols-4 gap-3 mb-6">
         <div className="bg-blue-50 dark:bg-blue-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-blue-600">3</div>
-          <div className="text-xs text-muted-foreground">Aktive Projekte</div>
+          <div className="text-xs text-muted-foreground">{t('interactive.dashboard.activeProjects')}</div>
         </div>
         <div className="bg-green-50 dark:bg-green-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-green-600">8</div>
-          <div className="text-xs text-muted-foreground">Zugeteilte Ressourcen</div>
+          <div className="text-xs text-muted-foreground">{t('interactive.dashboard.assignedResources')}</div>
         </div>
         <div className="bg-purple-50 dark:bg-purple-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-purple-600">4</div>
-          <div className="text-xs text-muted-foreground">Abgeschlossene Projekte</div>
+          <div className="text-xs text-muted-foreground">{t('interactive.dashboard.completedProjects')}</div>
         </div>
         <div className="bg-orange-50 dark:bg-orange-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-orange-600">2</div>
-          <div className="text-xs text-muted-foreground">Wartende Ressourcen</div>
+          <div className="text-xs text-muted-foreground">{t('interactive.dashboard.waitingResources')}</div>
         </div>
       </div>
 
       {/* Recent Activity */}
       <div className="space-y-2">
-        <h4 className="font-medium text-sm">Aktuelle Aktivitäten</h4>
+        <h4 className="font-medium text-sm">{t('interactive.dashboard.recentActivities')}</h4>
         {[
-          { icon: UserCheck, text: "Neue Ressource für AI-Entwickler Projekt zugewiesen", time: "vor 2h", color: "text-green-600" },
-          { icon: FileText, text: "Ressourcenanfrage 'Data Science Spezialist' aktualisiert", time: "vor 4h", color: "text-blue-600" },
-          { icon: CheckCircle, text: "Projekt 'Buchhaltungs-Ressource' erfolgreich abgeschlossen", time: "vor 1d", color: "text-purple-600" }
+          { icon: UserCheck, text: t('interactive.dashboard.activity1'), time: t('interactive.dashboard.timeAgo2h'), color: "text-green-600" },
+          { icon: FileText, text: t('interactive.dashboard.activity2'), time: t('interactive.dashboard.timeAgo4h'), color: "text-blue-600" },
+          { icon: CheckCircle, text: t('interactive.dashboard.activity3'), time: t('interactive.dashboard.timeAgo1d'), color: "text-purple-600" }
         ].map((activity, idx) => (
           <div 
             key={idx} 
@@ -154,10 +156,10 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
   const renderSearchRequests = () => (
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold">Suchaufträge</h3>
+        <h3 className="text-xl font-semibold">{t('interactive.searchRequests.title')}</h3>
         <Button size="sm">
           <Search className="w-4 h-4 mr-2" />
-          Neuen Auftrag erstellen
+          {t('interactive.searchRequests.createNew')}
         </Button>
       </div>
 
@@ -171,7 +173,7 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
             onClick={() => setActiveTab(tab)}
             className="text-xs"
           >
-            {tab === "all" ? "Alle" : tab === "active" ? "Aktiv" : "Abgeschlossen"}
+            {tab === "all" ? t('interactive.searchRequests.all') : tab === "active" ? t('interactive.searchRequests.active') : t('interactive.searchRequests.completed')}
           </Button>
         ))}
       </div>
@@ -196,11 +198,11 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
                   </div>
                 </div>
                 <Badge variant={request.status === "active" ? "default" : "outline"} className="text-xs">
-                  {request.status === "active" ? "Aktiv" : "Abgeschlossen"}
+                  {request.status === "active" ? t('interactive.searchRequests.active') : t('interactive.searchRequests.completed')}
                 </Badge>
               </div>
               <div className="flex justify-between items-center text-xs text-muted-foreground">
-                <span>{request.resources} Ressourcen</span>
+                <span>{request.resources} {t('interactive.searchRequests.resources')}</span>
                 <span>{request.created}</span>
               </div>
             </div>
@@ -212,10 +214,10 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
   const renderResources = () => (
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold">Verfügbare Ressourcen</h3>
+        <h3 className="text-xl font-semibold">{t('interactive.resources.title')}</h3>
         <Button size="sm" variant="outline">
           <Eye className="w-4 h-4 mr-2" />
-          Alle anzeigen
+          {t('interactive.resources.viewAll')}
         </Button>
       </div>
 
@@ -262,30 +264,30 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
   const renderAdmin = () => (
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold">Admin Dashboard</h3>
-        <Badge variant="destructive" className="text-xs">Hej Talent Admin</Badge>
+        <h3 className="text-xl font-semibold">{t('interactive.admin.title')}</h3>
+        <Badge variant="destructive" className="text-xs">{t('interactive.admin.badge')}</Badge>
       </div>
 
       {/* Admin Stats */}
       <div className="grid grid-cols-2 gap-3 mb-6">
         <div className="bg-red-50 dark:bg-red-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-red-600">156</div>
-          <div className="text-xs text-muted-foreground">Registrierte Unternehmen</div>
+          <div className="text-xs text-muted-foreground">{t('interactive.admin.registeredCompanies')}</div>
         </div>
         <div className="bg-blue-50 dark:bg-blue-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-blue-600">423</div>
-          <div className="text-xs text-muted-foreground">Verfügbare Ressourcen</div>
+          <div className="text-xs text-muted-foreground">{t('interactive.admin.availableResources')}</div>
         </div>
       </div>
 
       {/* Admin Navigation */}
       <div className="space-y-2">
-        <h4 className="font-medium text-sm">Verwaltung</h4>
+        <h4 className="font-medium text-sm">{t('interactive.admin.management')}</h4>
         {[
-          { icon: Users, text: "Benutzerverwaltung", count: "1,234", color: "text-blue-600" },
-          { icon: Building2, text: "Unternehmen verwalten", count: "156", color: "text-green-600" },
-          { icon: UserCheck, text: "Ressourcen zuweisen", count: "42", color: "text-purple-600" },
-          { icon: BarChart3, text: "Analytics & Reports", count: "", color: "text-orange-600" }
+          { icon: Users, text: t('interactive.admin.userManagement'), count: "1,234", color: "text-blue-600" },
+          { icon: Building2, text: t('interactive.admin.companyManagement'), count: "156", color: "text-green-600" },
+          { icon: UserCheck, text: t('interactive.admin.resourceAllocation'), count: "42", color: "text-purple-600" },
+          { icon: BarChart3, text: t('interactive.admin.analytics'), count: "", color: "text-orange-600" }
         ].map((item, idx) => (
           <div 
             key={idx}
