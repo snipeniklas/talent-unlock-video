@@ -825,6 +825,23 @@
         "qualified": "Qualifiziert",
         "customer": "Kunde",
         "inactive": "Inaktiv"
+      },
+      "detail": {
+        "title": "Unternehmens Details",
+        "contactInfo": "Kontaktinformationen",
+        "address": "Adresse",
+        "contacts": "Kontakte",
+        "stats": "Statistiken",
+        "timeline": "Zeitverlauf",
+        "created": "Erstellt",
+        "lastUpdated": "Zuletzt aktualisiert",
+        "notFound": "Unternehmen nicht gefunden",
+        "fetchError": "Fehler beim Laden der Unternehmensdaten",
+        "noIndustry": "Keine Branche angegeben",
+        "totalContacts": "Kontakte gesamt",
+        "addContact": "Kontakt hinzufügen",
+        "addFirstContact": "Ersten Kontakt hinzufügen",
+        "noContacts": "Noch keine Kontakte vorhanden"
       }
     },
     "contacts": {
@@ -895,51 +912,6 @@
     "kanban": {
       "noContacts": "Keine Kontakte in dieser Phase",
       "contactsCount": "Kontakte"
-    }
-  },
-  "companies": {
-    "title": "Unternehmen",
-    "subtitle": "Verwalten Sie alle CRM Unternehmen",
-    "addNew": "Neues Unternehmen",
-    "editCompany": "Unternehmen bearbeiten",
-    "viewCompany": "Unternehmen ansehen",
-    "fields": {
-      "name": "Firmenname",
-      "website": "Website",
-      "industry": "Branche",
-      "sizeCategory": "Unternehmensgröße",
-      "annualRevenue": "Jahresumsatz",
-      "phone": "Telefon",
-      "email": "E-Mail",
-      "addressStreet": "Straße",
-      "addressCity": "Stadt",
-      "addressPostalCode": "PLZ",
-      "addressCountry": "Land",
-      "notes": "Notizen",
-      "status": "Status"
-    },
-    "status": {
-      "prospect": "Interessent",
-      "qualified": "Qualifiziert",
-      "customer": "Kunde",
-      "inactive": "Inaktiv"
-    },
-    "detail": {
-      "title": "Unternehmens Details",
-      "contactInfo": "Kontaktinformationen",
-      "address": "Adresse",
-      "contacts": "Kontakte",
-      "stats": "Statistiken",
-      "timeline": "Zeitverlauf",
-      "created": "Erstellt",
-      "lastUpdated": "Zuletzt aktualisiert",
-      "notFound": "Unternehmen nicht gefunden",
-      "fetchError": "Fehler beim Laden der Unternehmensdaten",
-      "noIndustry": "Keine Branche angegeben",
-      "totalContacts": "Kontakte gesamt",
-      "addContact": "Kontakt hinzufügen",
-      "addFirstContact": "Ersten Kontakt hinzufügen",
-      "noContacts": "Noch keine Kontakte vorhanden"
     }
   }
 }
