@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Circle, Clock, Play } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface TimelineActivity {
   id: string;
@@ -20,53 +21,54 @@ interface ProjectTimelineProps {
 
 const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, className = "" }) => {
   const [hoveredActivity, setHoveredActivity] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   const activities: TimelineActivity[] = [
     {
       id: '1',
-      title: 'Beratung',
+      title: t('timeline.activities.consultation.title'),
       duration: 0.5,
       startWeek: 0,
       status: 'completed',
-      description: 'Analyse Ihrer Anforderungen und Zielsetzung',
+      description: t('timeline.activities.consultation.description'),
       optional: true
     },
     {
       id: '2',
-      title: 'Aufnahme Anforderungen',
+      title: t('timeline.activities.requirements.title'),
       duration: 0.2,
       startWeek: 0.5,
       status: 'active',
-      description: 'Detaillierte Spezifikation der benötigten Expertise'
+      description: t('timeline.activities.requirements.description')
     },
     {
       id: '3a',
-      title: 'Kandidatenvorschlag',
+      title: t('timeline.activities.candidates.title'),
       duration: 1,
       startWeek: 0.7,
       status: 'upcoming',
-      description: 'Präsentation passender Remote-Experten'
+      description: t('timeline.activities.candidates.description')
     },
     {
       id: '3b',
-      title: 'Auswahlprozess',
+      title: t('timeline.activities.selection.title'),
       duration: 0.8,
       startWeek: 1.7,
       status: 'upcoming',
-      description: 'Interviews und finale Kandidatenauswahl'
+      description: t('timeline.activities.selection.description')
     },
     {
       id: '4',
-      title: 'Umsetzungsbetreuung',
+      title: t('timeline.activities.implementation.title'),
       duration: 0.5,
       startWeek: 2.5,
       status: 'upcoming',
-      description: 'Onboarding und kontinuierliche Unterstützung'
+      description: t('timeline.activities.implementation.description')
     }
   ];
 
   const totalWeeks = 3;
-  const weekLabels = ['Opt. Woche 1', 'Woche 1', 'Woche 2', 'Woche 3'];
+  const weekLabels = [t('timeline.weeks.optional'), t('timeline.weeks.week1'), t('timeline.weeks.week2'), t('timeline.weeks.week3')];
 
   const getActivityBarStyle = (activity: TimelineActivity) => {
     const startPercent = (activity.startWeek / totalWeeks) * 100;
@@ -120,11 +122,11 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl md:text-2xl font-semibold text-brand-dark">
-            Zeitplan
+            {t('timeline.title')}
           </CardTitle>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Clock className="w-4 h-4" />
-            <span>3 Wochen Prozess</span>
+            <span>{t('timeline.process')}</span>
           </div>
         </div>
       </CardHeader>
@@ -161,7 +163,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
                     <span className="text-sm font-medium text-brand-dark">
                       {index + 1}. {activity.title}
                       {activity.optional && (
-                        <span className="text-xs text-muted-foreground ml-1">(optional)</span>
+                        <span className="text-xs text-muted-foreground ml-1">{t('timeline.optional')}</span>
                       )}
                     </span>
                     {activity.description && (
@@ -170,12 +172,12 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
                   </div>
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  {activity.duration === 0.2 ? 'max. 1 Tag' : 
-                   activity.duration === 0.5 ? 'max. 3 Tage' :
-                   activity.duration === 0.8 ? 'max. 6 Tage' :
-                   activity.duration === 1 ? 'max. 7 Tage' :
-                   activity.duration === 1.5 ? 'max. 10 Tage' :
-                   `max. ${Math.ceil(activity.duration * 7)} Tage`}
+                  {activity.duration === 0.2 ? t('timeline.duration.day1') : 
+                   activity.duration === 0.5 ? t('timeline.duration.days3') :
+                   activity.duration === 0.8 ? t('timeline.duration.days6') :
+                   activity.duration === 1 ? t('timeline.duration.days7') :
+                   activity.duration === 1.5 ? t('timeline.duration.days10') :
+                   t('timeline.duration.days').replace('{count}', Math.ceil(activity.duration * 7).toString())}
                 </div>
               </div>
 
@@ -211,11 +213,11 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
         <div className="flex justify-between items-center pt-4 border-t border-border">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-primary rounded-full" />
-            <span className="text-sm font-medium text-brand-dark">Kickoff</span>
+            <span className="text-sm font-medium text-brand-dark">{t('timeline.milestones.kickoff')}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-green-500 rounded-full" />
-            <span className="text-sm font-medium text-brand-dark">1. Arbeitstag</span>
+            <span className="text-sm font-medium text-brand-dark">{t('timeline.milestones.firstDay')}</span>
           </div>
         </div>
 
@@ -226,7 +228,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ onActivityClick, clas
             onClick={() => handleActivityClick(activities[0])}
           >
             <Play className="w-4 h-4 mr-2" />
-            Projekt jetzt starten
+            {t('timeline.cta')}
           </Button>
         </div>
       </CardContent>

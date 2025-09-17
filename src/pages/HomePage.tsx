@@ -402,15 +402,15 @@ const HomePage = () => {
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Skill-basierte Auswahl
+                  {t('platform.features.request.skillSelection')}
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Budget & Zeitrahmen
+                  {t('platform.features.request.budgetTime')}
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Projektspezifikation
+                  {t('platform.features.request.specification')}
                 </li>
               </ul>
             </div>
@@ -426,15 +426,15 @@ const HomePage = () => {
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Automatisches Matching
+                  {t('platform.features.matching.automatic')}
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Profil-Bewertungen
+                  {t('platform.features.matching.reviews')}
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Verfügbarkeits-Check
+                  {t('platform.features.matching.availability')}
                 </li>
               </ul>
             </div>
@@ -450,15 +450,15 @@ const HomePage = () => {
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Live-Dashboard
+                  {t('platform.features.management.dashboard')}
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Fortschritt-Tracking
+                  {t('platform.features.management.tracking')}
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Kommunikations-Hub
+                  {t('platform.features.management.communication')}
                 </li>
               </ul>
             </div>
