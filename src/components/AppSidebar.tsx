@@ -112,9 +112,15 @@ export function AppSidebar() {
     { title: t('app.sidebar.admin.companies', 'Alle Unternehmen'), url: "/admin/companies", icon: Building2 },
     { title: t('app.sidebar.admin.resources', 'RaaS Ressourcen'), url: "/admin/candidates", icon: UserCog },
     { title: t('app.sidebar.admin.projects', 'Kundenprojekte'), url: "/admin/search-requests", icon: FileText },
-    { title: t('crm.title', 'CRM System'), url: "/admin/crm", icon: Users },
     { title: t('app.sidebar.admin.support', 'Support Chat'), url: "/admin/support", icon: MessageCircle },
     { title: t('app.sidebar.admin.settings', 'Benutzerverwaltung'), url: "/admin/settings", icon: SettingsIcon },
+  ];
+
+  // CRM Navigation Items
+  const crmItems = [
+    { title: t('crm.overview.title', 'CRM Übersicht'), url: "/admin/crm", icon: Shield },
+    { title: t('crm.companies.title', 'Unternehmen'), url: "/admin/crm/companies", icon: Building2 },
+    { title: t('crm.contacts.title', 'Kontakte'), url: "/admin/crm/contacts", icon: Users },
   ];
 
   if (loading) {
@@ -171,6 +177,34 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {/* CRM Section - Only for Admins */}
+        {userRole?.role === 'admin' && (
+          <SidebarGroup>
+            <SidebarGroupLabel className="text-foreground font-semibold">
+              {t('crm.title', 'CRM System')}
+            </SidebarGroupLabel>
+            
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {crmItems.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <NavLink 
+                        to={item.url} 
+                        end 
+                        className={({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${getNavCls({ isActive })}`}
+                      >
+                        <item.icon className="h-4 w-4 flex-shrink-0" />
+                        {!isCollapsed && <span className="flex-1">{item.title}</span>}
+                      </NavLink>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
 
         {/* Quick Actions */}
         {userRole?.role !== 'admin' && (
