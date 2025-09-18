@@ -604,41 +604,6 @@ const ITDevelopmentLanding = () => {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-16 bg-primary text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6 animate-bounce-in">
-            {t('landing.itDev.finalCta.title', 'Starten Sie HEUTE mit Ihrem neuen Entwickler-Team')}
-          </h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90 animate-fade-in-delay-1">
-            {t('landing.itDev.finalCta.text', 'Buchen Sie jetzt Ihr kostenloses 15-Minuten-Gespräch und bekommen Sie in 48h Ihren perfekten Senior-Entwickler präsentiert – garantiert.')}
-          </p>
-          
-          <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-8">
-            <Button variant="secondary" size="xl" className="animate-scale-in-delay-2 hover:scale-110 transition-transform duration-300">
-              🚀 {t('landing.itDev.finalCta.ctaButton', 'Kostenloses Gespräch buchen')}
-            </Button>
-            <Button variant="outline" size="xl" className="text-white border-white hover:bg-white hover:text-primary animate-scale-in-delay-3">
-              📋 {t('landing.itDev.finalCta.requirementsButton', 'Anforderungen schicken')}
-            </Button>
-          </div>
-
-          <div className="flex items-center justify-center gap-8 text-sm opacity-80">
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4" />
-              <span>{t('landing.itDev.finalCta.badges.0', 'Keine Verpflichtung')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4" />
-              <span>{t('landing.itDev.finalCta.badges.1', 'Sofort verfügbar')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4" />
-              <span>{t('landing.itDev.finalCta.badges.2', '14 Tage Garantie')}</span>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Trust Stack */}
       <section className="py-16 bg-gradient-subtle overflow-hidden">
