@@ -600,15 +600,6 @@ const ITDevelopmentLanding = () => {
               </Card>
             </div>
 
-            <div className="bg-white p-8 rounded-xl border-l-4 border-orange-500">
-              <h3 className="font-bold text-lg mb-4">🔥 Begrenzte Verfügbarkeit</h3>
-              <p className="text-muted-foreground mb-4">
-                {t('landing.itDev.urgency.limitedAvailability', 'Wir arbeiten nur mit 50 Kunden gleichzeitig, um höchste Qualität zu garantieren. Aktuell sind noch')} <strong className="text-primary">{t('landing.itDev.urgency.availableSlots', '7 Plätze')}</strong> {t('landing.itDev.urgency.availableSlotsTrailing', 'verfügbar.')}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                <strong>{t('landing.itDev.urgency.nextAvailability', 'Nächste freie Kapazitäten:')}</strong> {t('landing.itDev.urgency.nextAvailabilityDate', 'Februar 2025')}
-              </p>
-            </div>
           </div>
         </div>
       </section>
