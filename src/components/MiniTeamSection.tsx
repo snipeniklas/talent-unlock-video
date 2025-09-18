@@ -30,7 +30,7 @@ export const MiniTeamSection: React.FC<MiniTeamSectionProps> = ({ className = ""
       quote: t('miniTeam.joachim.quote', 'Mit unserem RaaS-Konzept denken wir HR-Prozesse neu: frischer, smarter, einfach besser!')
     },
     {
-      name: "Pascal Schmidt",
+      name: "Pascal Spieß",
       role: t('miniTeam.pascal.role', 'Co-Gründer & Head of Talent'),
       image: "/lovable-uploads/pascal-schmidt.jpg",
       initials: "PS",
