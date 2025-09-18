@@ -278,6 +278,39 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* About Hej Talent Section */}
+      <section id="about-hej-talent" className="py-20 bg-gradient-subtle px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="animate-slide-in-left">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">{t('home.about.title', 'Über Hej Talent')}</h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                {t('home.about.text', 'Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und Vermittlung von internationalen Remote-Talenten.')}
+              </p>
+              <div className="space-y-4">
+                {get<string[]>('home.about.bullets', ["Umfassende Background-Checks", "Persönliche Betreuung", "Qualitätsgarantie"])?.map((bullet, i) => (
+                  <div key={i} className="flex items-center gap-3 group hover:scale-105 transition-transform duration-200">
+                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center group-hover:animate-bounce">
+                      <Shield className="w-5 h-5 text-white" />
+                    </div>
+                    <span className="text-brand-dark font-medium">{bullet}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative animate-slide-in-right">
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+                <img 
+                  src="/lovable-uploads/joachim-kalff-profile.jpg" 
+                  alt="Joachim Kalff - Hej Talent Team"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
       <section className="py-12 md:py-20 bg-gradient-subtle overflow-hidden relative">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
@@ -496,38 +529,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Working Method Section */}
-      <section id="working-method" className="py-20 bg-gradient-subtle px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="animate-slide-in-left">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">{t('home.about.title', 'Über Hej Talent')}</h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                {t('home.about.text', 'Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und Vermittlung von internationalen Remote-Talenten.')}
-              </p>
-              <div className="space-y-4">
-                {get<string[]>('home.about.bullets', ["Umfassende Background-Checks", "Persönliche Betreuung", "Qualitätsgarantie"])?.map((bullet, i) => (
-                  <div key={i} className="flex items-center gap-3 group hover:scale-105 transition-transform duration-200">
-                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center group-hover:animate-bounce">
-                      <Shield className="w-5 h-5 text-white" />
-                    </div>
-                    <span className="text-brand-dark font-medium">{bullet}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative animate-slide-in-right">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
-                <img 
-                  src="/lovable-uploads/joachim-kalff-profile.jpg" 
-                  alt="Joachim Kalff - Hej Talent Team"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Testimonials Section */}
       <section id="testimonials" className="py-20 px-4">
