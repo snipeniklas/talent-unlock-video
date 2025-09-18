@@ -517,8 +517,12 @@ const HomePage = () => {
               </div>
             </div>
             <div className="relative animate-slide-in-right">
-              <div className="aspect-square bg-gradient-primary rounded-2xl flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
-                <Code className="w-24 h-24 text-white animate-float" />
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+                <img 
+                  src="/lovable-uploads/joachim-kalff-profile.jpg" 
+                  alt="Joachim Kalff - Hej Talent Team"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
