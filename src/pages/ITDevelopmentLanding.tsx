@@ -119,7 +119,7 @@ const ITDevelopmentLanding = () => {
               variant="cta"
               size="xl"
               asChild
-              className="mb-16 animate-bounce-in-delay-3 hover:animate-pulse relative overflow-hidden"
+              className="mb-16 animate-fade-in-delay-3 hover:scale-105 relative overflow-hidden"
             >
               <Link to="/app/search-requests/new">
                 <span className="relative z-10">
