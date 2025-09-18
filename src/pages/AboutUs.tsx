@@ -36,7 +36,7 @@ const AboutUs = () => {
     {
       name: "Pascal Spieß",
       role: t('aboutUs.team.pascal.role', 'Consultant'),
-      image: "/lovable-uploads/pascal-spiess.jpg",
+      image: "/lovable-uploads/pascal-spiess-new.jpg",
       initials: "PS",
       bio: {
         p1: `Ich bin Pascal Spieß, Consultant bei Hej Talent, mit mehr als 11 Jahren Erfahrung in Beratung und Vertrieb. Schon immer hat mich die Frage angetrieben, wie Unternehmen effizienter, flexibler und erfolgreicher arbeiten können – und genau hier setze ich heute an.`,
