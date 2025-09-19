@@ -29,24 +29,10 @@ export const useUserData = () => {
         throw new Error('Not authenticated');
       }
 
-      // Fetch user profile with company and roles - optimized query
+      // First get the basic profile
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
-        .select(`
-          user_id,
-          company_id,
-          first_name,
-          last_name,
-          email,
-          phone,
-          companies:company_id(
-            id,
-            name,
-            email,
-            website
-          ),
-          user_roles(role)
-        `)
+        .select('*')
         .eq('user_id', user.id)
         .maybeSingle();
 
@@ -55,9 +41,33 @@ export const useUserData = () => {
         throw new Error('Benutzerprofil konnte nicht geladen werden');
       }
 
+      // Then get company data if company_id exists
+      let companyData = null;
+      if (profile.company_id) {
+        const { data: company } = await supabase
+          .from('companies')
+          .select('*')
+          .eq('id', profile.company_id)
+          .maybeSingle();
+        companyData = company;
+      }
+
+      // Then get user roles
+      const { data: userRoles } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', user.id);
+
+      // Combine the data
+      const combinedProfile = {
+        ...profile,
+        companies: companyData,
+        user_roles: userRoles || []
+      };
+
       return {
         user,
-        profile: profile as any // Safe type assertion after successful query
+        profile: combinedProfile as any // Safe type assertion after successful query
       };
     },
     staleTime: 1000 * 60 * 5, // 5 minutes
