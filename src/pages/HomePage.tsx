@@ -121,14 +121,14 @@ const HomePage = () => {
 
                 {/* Main Title */}
                 <div className="text-center lg:text-left">
-                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl font-bold text-brand-dark mb-2 sm:mb-3 md:mb-4 lg:mb-6 leading-tight animate-fade-in">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-brand-dark mb-3 md:mb-4 lg:mb-6 leading-tight animate-fade-in">
                     <span className="text-primary">{t('home.hero.title', 'RaaS')}</span>
                   </h1>
-                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-2 sm:mb-3 md:mb-4 lg:mb-6 animate-fade-in-delay-1 font-light leading-snug">
+                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-3 md:mb-4 lg:mb-6 animate-fade-in-delay-1 font-light leading-snug">
                     <span className="font-semibold text-brand-dark">{t('home.hero.tagline.prefix')}</span> {t('home.hero.tagline.main')}
                   </p>
-                  <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-3 sm:mb-4 md:mb-6 lg:mb-8 animate-fade-in-delay-2 leading-relaxed">
-                    {t('home.hero.description', 'Als führender Dienstleister für internationale Fachkräfte stellen wir Ihnen seit 9 Jahren die besten Talente zur Verfügung. Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir liefern die perfekte Fachkraft-Lösung.')}
+                  <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-3 sm:mb-4 md:mb-6 lg:mb-8 animate-fade-in-delay-2 leading-relaxed">
+                    {t('home.hero.description', 'Als führender Dienstleister für internationale Fachkräfte stellen wir Ihnen seit 9 Jahren die besten Talente zur Verfügung. Unser bewährtes RaaS-System macht es einfach: Statt klassischer Anstellungen stellen wir Remote-Ressourcen über Dienstleistungsverträge bereit und schaffen so sofortigen Zugang zu qualifizierten Spezialisten weltweit.')}
                   </p>
                 </div>
 
