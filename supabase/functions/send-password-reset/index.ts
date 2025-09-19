@@ -44,10 +44,13 @@ serve(async (req) => {
       throw new Error('Keine Berechtigung für diese Aktion')
     }
 
-    // Passwort-Reset Link generieren
+    // Passwort-Reset Link generieren mit korrekter Redirect-URL
     const { data, error } = await supabaseAdmin.auth.admin.generateLink({
       type: 'recovery',
       email: email,
+      options: {
+        redirectTo: 'https://hejtalent.de/'
+      }
     })
 
     if (error) {
