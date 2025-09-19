@@ -20,7 +20,9 @@ import {
   CheckCircle,
   UserX,
   Edit,
-  Copy
+  Copy,
+  UserCog,
+  Key
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -77,7 +79,7 @@ export default function AdminSettings() {
 
   const fetchUsers = async () => {
     try {
-      const { data: profiles, error: profilesError } = await supabase
+      const { data: profiles, error } = await supabase
         .from('profiles')
         .select(`
           *,
@@ -85,27 +87,27 @@ export default function AdminSettings() {
         `)
         .order('created_at', { ascending: false });
 
-      if (profilesError) throw profilesError;
+      if (error) throw error;
 
-      // Rollen separat laden
-      const { data: roles, error: rolesError } = await supabase
+      // Benutzerrollen für jeden Benutzer abrufen
+      const { data: userRoles, error: rolesError } = await supabase
         .from('user_roles')
         .select('user_id, role');
 
       if (rolesError) throw rolesError;
 
-      // Rollen zu Profilen zuordnen
-      const usersWithRoles = (profiles || []).map(profile => ({
+      // Rollen zu Benutzerprofilen hinzufügen
+      const usersWithRoles = profiles?.map(profile => ({
         ...profile,
-        user_roles: (roles || []).filter(role => role.user_id === profile.user_id).map(role => ({ role: role.role }))
-      }));
+        user_roles: userRoles?.filter(role => role.user_id === profile.user_id) || []
+      })) || [];
 
       setUsers(usersWithRoles);
     } catch (error) {
       console.error('Error fetching users:', error);
       toast({
         title: "Fehler beim Laden der Benutzer",
-        description: "Die Benutzerliste konnte nicht geladen werden.",
+        description: "Die Benutzerdaten konnten nicht geladen werden.",
         variant: "destructive",
       });
     } finally {
@@ -118,7 +120,7 @@ export default function AdminSettings() {
       const { data, error } = await supabase
         .from('companies')
         .select('id, name')
-        .order('name');
+        .order('name', { ascending: true });
 
       if (error) throw error;
       setCompanies(data || []);
@@ -242,11 +244,11 @@ export default function AdminSettings() {
     return "user";
   };
 
-  const getRoleColor = (role: string) => {
+  const getRoleColor = (role: string): "default" | "destructive" | "secondary" | "outline" => {
     const colors = {
-      admin: "destructive",
-      company_admin: "default", 
-      user: "secondary"
+      admin: "destructive" as const,
+      company_admin: "default" as const, 
+      user: "secondary" as const
     };
     return colors[role as keyof typeof colors] || "secondary";
   };
@@ -321,90 +323,120 @@ export default function AdminSettings() {
     }
   };
 
+  // Statistiken berechnen
+  const totalUsers = users.length;
+  const totalAdmins = users.filter(user => 
+    user.user_roles.some(role => role.role === "admin")
+  ).length;
+  const totalCompanyAdmins = users.filter(user => 
+    user.user_roles.some(role => role.role === "company_admin")
+  ).length;
+  const totalCompanies = companies.length;
+
   if (loading) {
     return (
-      <div className="p-6 space-y-6">
-        <Skeleton className="h-8 w-64" />
-        <div className="space-y-4">
-          {[...Array(5)].map((_, i) => (
-            <Skeleton key={i} className="h-16 w-full" />
-          ))}
-        </div>
+      <div className="container mx-auto p-6 space-y-6">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Users className="h-5 w-5" />
+              Benutzerverwaltung
+            </CardTitle>
+            <CardDescription>
+              Verwalten Sie alle Benutzer und deren Rollen
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {[...Array(4)].map((_, i) => (
+                  <Card key={i}>
+                    <CardContent className="p-4">
+                      <Skeleton className="h-4 w-24 mb-2" />
+                      <Skeleton className="h-8 w-16" />
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[...Array(3)].map((_, i) => (
+                  <Skeleton key={i} className="h-10 w-full" />
+                ))}
+              </div>
+              <div className="space-y-2">
+                {[...Array(5)].map((_, i) => (
+                  <Skeleton key={i} className="h-16 w-full" />
+                ))}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold">Benutzerverwaltung</h1>
-          <p className="text-muted-foreground">Alle registrierten Benutzer verwalten</p>
-        </div>
-      </div>
-
-      {/* Statistiken */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Gesamt Benutzer</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{users.length}</div>
-            <p className="text-xs text-muted-foreground">Registrierte Benutzer</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Admins</CardTitle>
-            <Shield className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {users.filter(u => getUserRole(u.user_roles) === 'admin').length}
-            </div>
-            <p className="text-xs text-muted-foreground">Hej Talent Admins</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Unternehmens-Admins</CardTitle>
-            <Building2 className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {users.filter(u => getUserRole(u.user_roles) === 'company_admin').length}
-            </div>
-            <p className="text-xs text-muted-foreground">Unternehmens-Admins</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Unternehmen</CardTitle>
-            <Building2 className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{companies.length}</div>
-            <p className="text-xs text-muted-foreground">Registrierte Unternehmen</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Filter */}
+    <div className="container mx-auto p-6 space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Filter & Suche</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <Users className="h-5 w-5" />
+            Benutzerverwaltung
+          </CardTitle>
+          <CardDescription>
+            Verwalten Sie alle Benutzer und deren Rollen im System
+          </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <CardContent>
+          {/* Statistiken Dashboard */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2">
+                  <Users className="h-4 w-4 text-blue-500" />
+                  <span className="text-sm font-medium text-muted-foreground">Gesamt Benutzer</span>
+                </div>
+                <p className="text-2xl font-bold">{totalUsers}</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2">
+                  <Shield className="h-4 w-4 text-red-500" />
+                  <span className="text-sm font-medium text-muted-foreground">Hej Talent Admins</span>
+                </div>
+                <p className="text-2xl font-bold">{totalAdmins}</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2">
+                  <UserCog className="h-4 w-4 text-orange-500" />
+                  <span className="text-sm font-medium text-muted-foreground">Unternehmens-Admins</span>
+                </div>
+                <p className="text-2xl font-bold">{totalCompanyAdmins}</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2">
+                  <Building2 className="h-4 w-4 text-green-500" />
+                  <span className="text-sm font-medium text-muted-foreground">Unternehmen</span>
+                </div>
+                <p className="text-2xl font-bold">{totalCompanies}</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Filter und Suche */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div className="relative">
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Nach Name oder E-Mail suchen..."
+                placeholder="Benutzer suchen..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
@@ -424,7 +456,7 @@ export default function AdminSettings() {
                 ))}
               </SelectContent>
             </Select>
-
+            
             <Select value={roleFilter} onValueChange={setRoleFilter}>
               <SelectTrigger>
                 <SelectValue placeholder="Rolle filtern" />
@@ -437,148 +469,102 @@ export default function AdminSettings() {
               </SelectContent>
             </Select>
           </div>
-        </CardContent>
-      </Card>
 
-      {/* Benutzerliste */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Benutzer ({filteredUsers.length})</CardTitle>
-          <CardDescription>
-            Alle registrierten Benutzer sortiert nach Unternehmen
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {filteredUsers.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-muted-foreground">
-                Keine Benutzer gefunden, die den Filterkriterien entsprechen.
-              </p>
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
+          {/* Benutzertabelle */}
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Name</TableHead>
+                  <TableHead>E-Mail</TableHead>
+                  <TableHead>Unternehmen</TableHead>
+                  <TableHead>Rolle</TableHead>
+                  <TableHead>Registriert</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead className="text-right">Aktionen</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredUsers.length === 0 ? (
                   <TableRow>
-                    <TableHead>Benutzer</TableHead>
-                    <TableHead>Unternehmen</TableHead>
-                    <TableHead>Rolle</TableHead>
-                    <TableHead>Registriert</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Aktionen</TableHead>
+                    <TableCell colSpan={7} className="h-24 text-center">
+                      Keine Benutzer gefunden.
+                    </TableCell>
                   </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredUsers.map((user) => {
-                    const role = getUserRole(user.user_roles);
+                ) : (
+                  filteredUsers.map((user) => {
+                    const userRole = getUserRole(user.user_roles);
                     return (
                       <TableRow key={user.id}>
-                        <TableCell>
-                          <div>
-                            <p className="font-medium">
-                              {user.first_name} {user.last_name}
-                            </p>
-                            {user.email && (
-                              <p className="text-sm text-muted-foreground flex items-center gap-1">
-                                <Mail className="h-3 w-3" />
-                                {user.email}
-                              </p>
-                            )}
-                          </div>
+                        <TableCell className="font-medium">
+                          {user.first_name} {user.last_name}
                         </TableCell>
+                        <TableCell>{user.email}</TableCell>
+                        <TableCell>{user.company?.name || "-"}</TableCell>
                         <TableCell>
-                          {user.company ? (
-                            <div className="flex items-center gap-2">
-                              <Building2 className="h-4 w-4 text-muted-foreground" />
-                              {user.company.name}
-                            </div>
-                          ) : (
-                            <span className="text-muted-foreground">Kein Unternehmen</span>
-                          )}
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant={getRoleColor(role) as any}>
-                            {getRoleText(role)}
+                          <Badge variant={getRoleColor(userRole)}>
+                            {getRoleText(userRole)}
                           </Badge>
                         </TableCell>
                         <TableCell>
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3 text-muted-foreground" />
-                            <span className="text-sm">
-                              {new Date(user.created_at).toLocaleDateString('de-DE')}
-                            </span>
+                          <div className="flex items-center gap-2">
+                            <Calendar className="h-4 w-4 text-muted-foreground" />
+                            {new Date(user.created_at).toLocaleDateString('de-DE')}
                           </div>
                         </TableCell>
                         <TableCell>
-                          <div className="flex items-center gap-1">
-                            <CheckCircle className="h-3 w-3 text-green-600" />
+                          <div className="flex items-center gap-2">
+                            <CheckCircle className="h-4 w-4 text-green-500" />
                             <span className="text-sm">Aktiv</span>
                           </div>
                         </TableCell>
-                        <TableCell>
-                          <div className="flex gap-2">
-                            <Button 
-                              size="sm" 
+                        <TableCell className="text-right">
+                          <div className="flex justify-end gap-2">
+                            <Button
                               variant="outline"
-                              onClick={() => setEditingRole({ userId: user.user_id, currentRole: role })}
+                              size="sm"
+                              onClick={() => setEditingRole({
+                                userId: user.user_id,
+                                currentRole: userRole
+                              })}
+                              className="flex items-center gap-1"
                             >
-                              <Edit className="w-3 h-3 mr-1" />
-                              Rolle ändern
-                            </Button>
-
-                            <Button 
-                              size="sm" 
-                              variant="outline"
-                              onClick={() => user.email && resetUserPassword(user.user_id, user.email)}
-                              disabled={!user.email}
-                            >
-                              <RefreshCw className="w-3 h-3 mr-1" />
-                              Reset PW
+                              <Edit className="h-4 w-4" />
+                              Rolle
                             </Button>
                             
-                            <AlertDialog>
-                              <AlertDialogTrigger asChild>
-                                <Button 
-                                  size="sm" 
-                                  variant="outline"
-                                  className="text-red-600 hover:text-red-700"
-                                >
-                                  <UserX className="w-3 h-3 mr-1" />
-                                  Sperren
-                                </Button>
-                              </AlertDialogTrigger>
-                              <AlertDialogContent>
-                                <AlertDialogHeader>
-                                  <AlertDialogTitle>Benutzer sperren</AlertDialogTitle>
-                                  <AlertDialogDescription>
-                                    Möchten Sie den Benutzer {user.first_name} {user.last_name} wirklich sperren? 
-                                    Der Benutzer kann sich dann nicht mehr anmelden.
-                                  </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                  <AlertDialogCancel>Abbrechen</AlertDialogCancel>
-                                  <AlertDialogAction
-                                    onClick={() => toggleUserStatus(user.user_id, true)}
-                                    className="bg-red-600 hover:bg-red-700"
-                                  >
-                                    Benutzer sperren
-                                  </AlertDialogAction>
-                                </AlertDialogFooter>
-                              </AlertDialogContent>
-                            </AlertDialog>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => resetUserPassword(user.user_id, user.email || '')}
+                              className="flex items-center gap-1"
+                            >
+                              <Key className="h-4 w-4" />
+                              Reset
+                            </Button>
+                            
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => toggleUserStatus(user.user_id, true)}
+                              className="flex items-center gap-1"
+                            >
+                              <UserX className="h-4 w-4" />
+                              Sperren
+                            </Button>
                           </div>
                         </TableCell>
                       </TableRow>
                     );
-                  })}
-                </TableBody>
-              </Table>
-            </div>
-          )}
+                  })
+                )}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
 
-      {/* Role Edit Dialog */}
+      {/* Rolle bearbeiten Dialog */}
       {editingRole && (
         <AlertDialog open={!!editingRole} onOpenChange={() => setEditingRole(null)}>
           <AlertDialogContent>
@@ -591,10 +577,10 @@ export default function AdminSettings() {
             <div className="py-4">
               <Label htmlFor="role-select">Neue Rolle:</Label>
               <Select 
-                defaultValue={editingRole.currentRole} 
-                onValueChange={(value) => setEditingRole({ ...editingRole, currentRole: value })}
+                value={editingRole.currentRole} 
+                onValueChange={(value) => setEditingRole({...editingRole, currentRole: value})}
               >
-                <SelectTrigger id="role-select" className="mt-2">
+                <SelectTrigger className="mt-2">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
