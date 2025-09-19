@@ -179,14 +179,14 @@ const AuthPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-lg">
         {/* Header with Logo and Welcome Text */}
-        <div className="text-center mb-8 animate-fade-in">
-          <div className="flex justify-center items-center gap-4 mb-4">
+        <div className="text-center mb-6 lg:mb-8 animate-fade-in">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-4">
             <Button 
               variant="ghost" 
               onClick={() => navigate('/')}
-              className="text-muted-foreground hover:text-primary"
+              className="text-muted-foreground hover:text-primary text-sm lg:text-base order-2 sm:order-1"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Zur Startseite
@@ -194,24 +194,24 @@ const AuthPage = () => {
             <img 
               src={hejTalentLogo} 
               alt="Hej Talent"
-              className="h-12 md:h-14 hover:scale-105 transition-transform duration-300 cursor-pointer" 
+              className="h-10 md:h-12 lg:h-14 hover:scale-105 transition-transform duration-300 cursor-pointer order-1 sm:order-2" 
               onClick={() => navigate('/')}
             />
           </div>
-          <h1 className="text-3xl font-bold text-brand-dark mb-2">
+          <h1 className="text-2xl md:text-3xl font-bold text-brand-dark mb-2">
             Willkommen bei Hej Talent
           </h1>
-          <p className="text-muted-foreground mb-4">
+          <p className="text-muted-foreground mb-4 text-sm lg:text-base">
             Ihr RaaS Hub für erstklassige Remote-Fachkräfte
           </p>
           
           {/* Trust indicators */}
-          <div className="flex justify-center items-center gap-4 mb-6">
-            <Badge variant="secondary" className="animate-slide-in-left">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 lg:gap-4 mb-6">
+            <Badge variant="secondary" className="animate-slide-in-left text-xs lg:text-sm">
               <Star className="w-3 h-3 mr-1 text-primary" />
               500+ Entwickler
             </Badge>
-            <Badge variant="secondary" className="animate-slide-in-right">
+            <Badge variant="secondary" className="animate-slide-in-right text-xs lg:text-sm">
               <Shield className="w-3 h-3 mr-1 text-primary" />
               Geprüfte Qualität
             </Badge>
@@ -300,25 +300,27 @@ const AuthPage = () => {
               <CardContent>
                 {registrationStep === 1 ? (
                   <form onSubmit={handlePersonalDataSubmit} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="first-name">Vorname</Label>
+                        <Label htmlFor="first-name" className="text-sm lg:text-base">Vorname</Label>
                         <Input
                           id="first-name"
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
                           required
                           disabled={isSubmitting}
+                          className="text-sm lg:text-base"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="last-name">Nachname</Label>
+                        <Label htmlFor="last-name" className="text-sm lg:text-base">Nachname</Label>
                         <Input
                           id="last-name"
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
                           required
                           disabled={isSubmitting}
+                          className="text-sm lg:text-base"
                         />
                       </div>
                     </div>

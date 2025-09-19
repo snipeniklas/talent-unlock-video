@@ -110,13 +110,13 @@ const AboutUs = () => {
       <PublicHeader />
       
       {/* Hero Section */}
-      <section className="py-16 lg:py-24">
+      <section className="py-12 md:py-16 lg:py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-brand-dark mb-4 lg:mb-6 leading-tight">
               {t('aboutUs.hero.title', 'Über ')}<span className="text-primary">Hej Talent</span>
             </h1>
-            <p className="text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 lg:mb-12 max-w-3xl mx-auto">
               {t('aboutUs.hero.subtitle', 'Seit 2020 sind wir Deutschlands führende Plattform für internationale Remote-Fachkräfte. Wir verbinden Unternehmen mit den besten Talenten weltweit.')}
             </p>
           </div>
@@ -124,37 +124,37 @@ const AboutUs = () => {
       </section>
 
       {/* Mission Section */}
-      <section className="py-16 bg-gradient-subtle">
+      <section className="py-12 md:py-16 bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-6">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-dark mb-4 lg:mb-6">
                   {t('aboutUs.mission.title', 'Unsere Mission')}
                 </h2>
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-base md:text-lg text-muted-foreground mb-4 lg:mb-6 leading-relaxed">
                   {t('aboutUs.mission.p1', 'Wir machen internationale Expertise für deutsche Unternehmen zugänglich. Mit unserem Resources as a Service (RaaS) Modell revolutionieren wir die Art, wie Unternehmen auf Fachkräfte zugreifen – flexibel, effizient und ohne Grenzen.')}
                 </p>
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-base md:text-lg text-muted-foreground mb-4 lg:mb-6 leading-relaxed">
                   {t('aboutUs.mission.p2', 'Statt langwieriger Einstellungsprozesse bieten wir flexible Dienstleistungsverträge mit geprüften Remote-Experten aus über 15 Ländern.')}
                 </p>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 lg:gap-4">
                   {get<string[]>('aboutUs.mission.stats', ['500+ internationale Fachkräfte', '150+ erfolgreiche Projekte', '98% Kundenzufriedenheit'])?.map((item, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-primary rounded-full"></div>
-                      <span className="font-medium">{item}</span>
+                      <div className="w-3 h-3 bg-primary rounded-full flex-shrink-0"></div>
+                      <span className="font-medium text-sm lg:text-base">{item}</span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-8 lg:mt-0">
                 {values.map((value, index) => (
-                  <Card key={index} className="text-center p-6 hover:shadow-lg transition-shadow">
-                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                      <value.icon className="w-6 h-6 text-white" />
+                  <Card key={index} className="text-center p-4 lg:p-6 hover:shadow-lg transition-shadow">
+                    <div className="w-10 h-10 lg:w-12 lg:h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3 lg:mb-4">
+                      <value.icon className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
                     </div>
-                    <h3 className="font-semibold text-brand-dark mb-2">{value.title}</h3>
-                    <p className="text-sm text-muted-foreground">{value.description}</p>
+                    <h3 className="font-semibold text-brand-dark mb-2 text-sm lg:text-base">{value.title}</h3>
+                    <p className="text-xs lg:text-sm text-muted-foreground">{value.description}</p>
                   </Card>
                 ))}
               </div>
@@ -164,14 +164,14 @@ const AboutUs = () => {
       </section>
 
       {/* Über uns - Joachim & Pascal Section */}
-      <section className="py-16">
+      <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark text-center mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-dark text-center mb-8 lg:mb-12">
               {t('aboutUs.team.title', 'Über uns - Joachim & Pascal')}
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
               {teamMembers.map((member, index) => (
                 <TeamCard key={index} member={member} />
               ))}

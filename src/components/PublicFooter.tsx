@@ -8,36 +8,36 @@ const PublicFooter = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-brand-dark text-white py-16">
+    <footer className="bg-brand-dark text-white py-12 md:py-16">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-8 lg:mb-12">
           {/* Company Info */}
-          <div>
-            <h3 className="text-2xl font-bold mb-6">{t('footer.brand')}</h3>
-            <p className="text-white/80 mb-6">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <h3 className="text-xl lg:text-2xl font-bold mb-4 lg:mb-6">{t('footer.brand')}</h3>
+            <p className="text-white/80 mb-4 lg:mb-6 text-sm lg:text-base">
               {t('footer.tagline')}
             </p>
-            <div className="flex space-x-4">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-hover transition-colors cursor-pointer">
-                <Linkedin className="w-5 h-5" />
+            <div className="flex space-x-3 lg:space-x-4">
+              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-hover transition-colors cursor-pointer">
+                <Linkedin className="w-4 h-4 lg:w-5 lg:h-5" />
               </div>
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-hover transition-colors cursor-pointer">
-                <Twitter className="w-5 h-5" />
+              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-hover transition-colors cursor-pointer">
+                <Twitter className="w-4 h-4 lg:w-5 lg:h-5" />
               </div>
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-hover transition-colors cursor-pointer">
-                <Facebook className="w-5 h-5" />
+              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-hover transition-colors cursor-pointer">
+                <Facebook className="w-4 h-4 lg:w-5 lg:h-5" />
               </div>
             </div>
           </div>
 
           {/* Solutions */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">{t('footer.sections.solutions')}</h4>
-            <ul className="space-y-3">
+            <h4 className="text-base lg:text-lg font-semibold mb-4 lg:mb-6">{t('footer.sections.solutions')}</h4>
+            <ul className="space-y-2 lg:space-y-3">
               <li>
                 <button 
                   onClick={() => navigate('/solutions/backoffice')}
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white/80 hover:text-white transition-colors text-sm lg:text-base"
                 >
                   {t('footer.links.backoffice')}
                 </button>
@@ -45,7 +45,7 @@ const PublicFooter = () => {
               <li>
                 <button 
                   onClick={() => navigate('/solutions/it-development')}
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white/80 hover:text-white transition-colors text-sm lg:text-base"
                 >
                   {t('footer.links.it')}
                 </button>
@@ -53,7 +53,7 @@ const PublicFooter = () => {
               <li>
                 <button 
                   onClick={() => navigate('/solutions/ai-ml')}
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white/80 hover:text-white transition-colors text-sm lg:text-base"
                 >
                   {t('footer.links.ai')}
                 </button>
@@ -63,12 +63,12 @@ const PublicFooter = () => {
 
           {/* Company */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">{t('footer.sections.company')}</h4>
-            <ul className="space-y-3">
+            <h4 className="text-base lg:text-lg font-semibold mb-4 lg:mb-6">{t('footer.sections.company')}</h4>
+            <ul className="space-y-2 lg:space-y-3">
               <li>
                 <button 
                   onClick={() => navigate('/how-we-work')}
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white/80 hover:text-white transition-colors text-sm lg:text-base"
                 >
                   {t('footer.links.howWeWork')}
                 </button>
@@ -76,7 +76,7 @@ const PublicFooter = () => {
               <li>
                 <button 
                   onClick={() => navigate('/resource-hub')}
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white/80 hover:text-white transition-colors text-sm lg:text-base"
                 >
                   {t('footer.links.hub')}
                 </button>
@@ -84,7 +84,7 @@ const PublicFooter = () => {
               <li>
                 <button 
                   onClick={() => navigate('/contact')}
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white/80 hover:text-white transition-colors text-sm lg:text-base"
                 >
                   {t('footer.links.contact')}
                 </button>
@@ -94,44 +94,44 @@ const PublicFooter = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">{t('footer.sections.contact')}</h4>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-primary" />
-                <a href="mailto:kontakt@hejtalent.de" className="text-white/80 hover:text-white transition-colors">
+            <h4 className="text-base lg:text-lg font-semibold mb-4 lg:mb-6">{t('footer.sections.contact')}</h4>
+            <div className="space-y-3 lg:space-y-4">
+              <div className="flex items-start gap-2 lg:gap-3">
+                <Mail className="w-4 h-4 lg:w-5 lg:h-5 text-primary mt-0.5 flex-shrink-0" />
+                <a href="mailto:kontakt@hejtalent.de" className="text-white/80 hover:text-white transition-colors text-sm lg:text-base break-all">
                   kontakt@hejtalent.de
                 </a>
               </div>
-              <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary" />
-                <a href="tel:+498990176218" className="text-white/80 hover:text-white transition-colors">
+              <div className="flex items-start gap-2 lg:gap-3">
+                <Phone className="w-4 h-4 lg:w-5 lg:h-5 text-primary mt-0.5 flex-shrink-0" />
+                <a href="tel:+498990176218" className="text-white/80 hover:text-white transition-colors text-sm lg:text-base">
                   +49 89 9017 6218
                 </a>
               </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-primary" />
-                <span className="text-white/80">{t('footer.address')}</span>
+              <div className="flex items-start gap-2 lg:gap-3">
+                <MapPin className="w-4 h-4 lg:w-5 lg:h-5 text-primary mt-0.5 flex-shrink-0" />
+                <span className="text-white/80 text-sm lg:text-base">{t('footer.address')}</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/20 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-white/60 mb-4 md:mb-0">
+        <div className="border-t border-white/20 pt-6 lg:pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-white/60 text-xs lg:text-sm text-center md:text-left">
               {t('footer.copyright')}
             </div>
-            <div className="flex space-x-6">
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6">
               <button 
                 onClick={() => navigate('/datenschutz')}
-                className="text-white/60 hover:text-white transition-colors text-sm"
+                className="text-white/60 hover:text-white transition-colors text-xs lg:text-sm"
               >
                 {t('footer.links.privacy')}
               </button>
               <button 
                 onClick={() => navigate('/impressum')}
-                className="text-white/60 hover:text-white transition-colors text-sm"
+                className="text-white/60 hover:text-white transition-colors text-xs lg:text-sm"
               >
                 {t('footer.links.imprint')}
               </button>
