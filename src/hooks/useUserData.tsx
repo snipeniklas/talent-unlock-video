@@ -29,29 +29,44 @@ export const useUserData = () => {
         throw new Error('Not authenticated');
       }
 
-      // Fetch user profile with company and roles in one query
+      // Fetch user profile with company and roles - optimized query
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select(`
-          *,
-          companies(*),
+          user_id,
+          company_id,
+          first_name,
+          last_name,
+          email,
+          phone,
+          companies:company_id(
+            id,
+            name,
+            email,
+            website
+          ),
           user_roles(role)
         `)
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
-      if (profileError) {
-        throw profileError;
+      if (profileError || !profile) {
+        console.warn('Profile loading error:', profileError);
+        throw new Error('Benutzerprofil konnte nicht geladen werden');
       }
 
       return {
         user,
-        profile: profile as any // Type assertion for complex nested query
+        profile: profile as any // Safe type assertion after successful query
       };
     },
     staleTime: 1000 * 60 * 5, // 5 minutes
-    gcTime: 1000 * 60 * 10, // 10 minutes (renamed from cacheTime)
-    retry: 2,
+    gcTime: 1000 * 60 * 10, // 10 minutes
+    retry: (failureCount, error) => {
+      // Retry up to 2 times, but not for auth errors
+      return failureCount < 2 && !error.message.includes('Not authenticated');
+    },
+    retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
   });
 };
 

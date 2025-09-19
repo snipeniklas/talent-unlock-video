@@ -102,7 +102,11 @@ export const useDashboardData = () => {
     },
     enabled: !!companyId && !userLoading,
     staleTime: 1000 * 60 * 2, // 2 minutes
-    gcTime: 1000 * 60 * 5, // 5 minutes (renamed from cacheTime)
-    retry: 2,
+    gcTime: 1000 * 60 * 5, // 5 minutes
+    retry: (failureCount, error) => {
+      // Retry up to 2 times, but not for missing company ID
+      return failureCount < 2 && !error.message.includes('No company ID');
+    },
+    retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 5000), // Faster exponential backoff for dashboard
   });
 };
