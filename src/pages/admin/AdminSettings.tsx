@@ -226,58 +226,38 @@ export default function AdminSettings() {
     try {
       console.log('Updating role for user:', userId, 'to role:', newRole);
       
-      // Aktuelle Rollen direkt aus der Datenbank laden
-      const { data: currentRoles, error: rolesError } = await supabase
+      // Alle alten Rollen löschen (sicherstellen dass die Tabelle sauber ist)
+      const { error: deleteError } = await supabase
         .from('user_roles')
-        .select('role')
+        .delete()
         .eq('user_id', userId);
 
-      if (rolesError) throw rolesError;
-
-      console.log('Current roles from database:', currentRoles);
-
-      // Prüfen ob der User bereits die gewünschte Rolle hat
-      const hasRole = currentRoles && currentRoles.length > 0 
-        ? currentRoles.some(role => role.role === newRole)
-        : false;
-      
-      console.log('User has role?', hasRole);
-
-      if (hasRole) {
-        toast({
-          title: "Keine Änderung erforderlich",
-          description: "Der Benutzer hat bereits diese Rolle.",
-          variant: "default",
-        });
-        setEditingRole(null);
-        return;
+      if (deleteError) {
+        console.log('Delete error:', deleteError);
+        throw deleteError;
       }
 
-      // Erst alle alten Rollen löschen (falls vorhanden)
-      if (currentRoles && currentRoles.length > 0) {
-        const { error: deleteError } = await supabase
-          .from('user_roles')
-          .delete()
-          .eq('user_id', userId);
+      console.log('Deleted all existing roles for user');
 
-        if (deleteError) throw deleteError;
-        console.log('Deleted existing roles');
-      }
+      // Kurze Pause um sicherzustellen dass DELETE abgeschlossen ist
+      await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Neue Rolle hinzufügen
-      const { error: insertError } = await supabase
+      // Neue Rolle hinzufügen mit UPSERT
+      const { error: upsertError } = await supabase
         .from('user_roles')
-        .insert({
+        .upsert({
           user_id: userId,
           role: newRole as 'admin' | 'company_admin' | 'user'
+        }, {
+          onConflict: 'user_id,role'
         });
 
-      if (insertError) {
-        console.log('Insert error:', insertError);
-        throw insertError;
+      if (upsertError) {
+        console.log('Upsert error:', upsertError);
+        throw upsertError;
       }
 
-      console.log('Successfully inserted new role');
+      console.log('Successfully upserted new role');
 
       toast({
         title: "Rolle aktualisiert",
@@ -292,7 +272,7 @@ export default function AdminSettings() {
       let errorMessage = "Die Rolle konnte nicht geändert werden.";
       
       if (error.code === '23505') {
-        errorMessage = "Diese Rolle ist bereits für den Benutzer vergeben.";
+        errorMessage = "Fehler beim Zuweisen der Rolle. Bitte versuchen Sie es erneut.";
       }
       
       toast({
