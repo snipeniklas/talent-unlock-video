@@ -103,19 +103,19 @@ const HomePage = () => {
                 <div className="hidden md:flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
                   <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-brand-dark">9+ Jahre Expertise</span>
+                    <span className="text-sm font-medium text-brand-dark">{t('home.hero.badges.expertise', '9+ Jahre Expertise')}</span>
                   </div>
                   <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
                     <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-brand-dark">500+ Fachkräfte</span>
+                    <span className="text-sm font-medium text-brand-dark">{t('home.hero.badges.specialists', '500+ Fachkräfte')}</span>
                   </div>
                   <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
                     <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-brand-dark">98% Erfolg</span>
+                    <span className="text-sm font-medium text-brand-dark">{t('home.hero.badges.success', '98% Erfolg')}</span>
                   </div>
                   <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
                     <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-brand-dark">Qualitätsgarantie</span>
+                    <span className="text-sm font-medium text-brand-dark">{t('home.hero.badges.quality', 'Qualitätsgarantie')}</span>
                   </div>
                 </div>
 

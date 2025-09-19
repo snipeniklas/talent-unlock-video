@@ -73,6 +73,12 @@
       "tagline": {
         "prefix": "The remote experts,",
         "main": "who understand and solve your HR challenges"
+      },
+      "badges": {
+        "expertise": "9+ Years Expertise",
+        "specialists": "500+ Specialists",
+        "success": "98% Success",
+        "quality": "Quality Guarantee"
       }
     },
     "trust": {
