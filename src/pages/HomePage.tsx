@@ -340,19 +340,19 @@ const HomePage = () => {
             </div>
             
             {/* CTA in Stats Section */}
-            <div className="text-center mt-16">
-              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto border border-primary/20 shadow-xl">
-                <p className="text-lg font-semibold text-brand-dark mb-4">
+            <div className="text-center mt-8 sm:mt-12 md:mt-16">
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl mx-auto border border-primary/20 shadow-xl">
+                <p className="text-sm sm:text-base md:text-lg font-semibold text-brand-dark mb-3 sm:mb-4">
                   {t('home.stats.ctaTitle', 'Ihre kostenfreie RaaS Anfrage dauert nur 3 Minuten')}
                 </p>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-4 sm:mb-6">
                   {t('home.stats.ctaText', 'Beschreiben Sie Ihre Herausforderung, wir schlagen Ihnen passende Experten vor. Kein Risiko, keine versteckten Kosten.')}
                 </p>
-                <Button asChild size="lg" className="text-xl px-12 py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
+                <Button asChild size="lg" className="w-full text-xs sm:text-sm md:text-base lg:text-xl px-3 sm:px-6 md:px-8 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
                   <Link to="/app/search-requests/new">
-                    <Target className="w-6 h-6 mr-3" />
-                    {t('home.stats.ctaButton', 'Jetzt kostenfrei starten')}
-                    <ArrowRight className="w-6 h-6 ml-3" />
+                    <Target className="w-3 sm:w-4 md:w-5 lg:w-6 h-3 sm:h-4 md:h-5 lg:h-6 mr-1 sm:mr-2 md:mr-3 flex-shrink-0" />
+                    <span className="truncate">{t('home.stats.ctaButton', 'Jetzt kostenfrei starten')}</span>
+                    <ArrowRight className="w-3 sm:w-4 md:w-5 lg:w-6 h-3 sm:h-4 md:h-5 lg:h-6 ml-1 sm:ml-2 md:ml-3 flex-shrink-0" />
                   </Link>
                 </Button>
               </div>
