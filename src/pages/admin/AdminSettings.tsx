@@ -153,22 +153,30 @@ export default function AdminSettings() {
 
   const resetUserPassword = async (userId: string, email: string) => {
     try {
-      const { error } = await supabase.auth.admin.generateLink({
-        type: 'recovery',
-        email: email,
+      const { data: userData } = await supabase.auth.getUser();
+      
+      const { data, error } = await supabase.functions.invoke('send-password-reset', {
+        body: { 
+          email: email,
+          requestingUserId: userData.user?.id
+        }
       });
 
       if (error) throw error;
 
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
       toast({
         title: "Passwort-Reset gesendet",
-        description: `Ein Passwort-Reset Link wurde an ${email} gesendet.`,
+        description: data.message || `Ein Passwort-Reset Link wurde an ${email} gesendet.`,
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error resetting password:', error);
       toast({
         title: "Fehler beim Passwort-Reset",
-        description: "Der Passwort-Reset konnte nicht gesendet werden.",
+        description: error.message || "Der Passwort-Reset konnte nicht gesendet werden.",
         variant: "destructive",
       });
     }
