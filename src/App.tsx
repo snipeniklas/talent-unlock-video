@@ -52,6 +52,7 @@ import CrmCompanyForm from "./pages/admin/CrmCompanyForm";
 import CrmContactForm from "./pages/admin/CrmContactForm";
 import CrmCompanyDetail from "./pages/admin/CrmCompanyDetail";
 import CrmContactDetail from "./pages/admin/CrmContactDetail";
+import OutreachProfile from "./pages/admin/OutreachProfile";
 
 const queryClient = new QueryClient();
 
@@ -114,6 +115,7 @@ const App = () => (
             <Route path="crm/contacts/new" element={<CrmContactForm />} />
             <Route path="crm/contacts/:id" element={<CrmContactDetail />} />
             <Route path="crm/contacts/:id/edit" element={<CrmContactForm />} />
+            <Route path="outreach-profile" element={<OutreachProfile />} />
             <Route path="support" element={<AdminSupport />} />
             <Route path="settings" element={<AdminSettings />} />
           </Route>

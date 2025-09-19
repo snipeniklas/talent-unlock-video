@@ -12,7 +12,8 @@ import {
   FileText,
   Shield,
   MessageCircle,
-  UserCog
+  UserCog,
+  Mail
 } from "lucide-react";
 import {
   Sidebar,
@@ -89,6 +90,7 @@ export function AppSidebar() {
     { title: t('crm.overview.title', 'CRM Übersicht'), url: "/admin/crm", icon: Shield },
     { title: t('crm.companies.title', 'Unternehmen'), url: "/admin/crm/companies", icon: Building2 },
     { title: t('crm.contacts.title', 'Kontakte'), url: "/admin/crm/contacts", icon: Users },
+    { title: t('outreach.profile.title', 'Outreach Profil'), url: "/admin/outreach-profile", icon: Mail },
   ];
 
   if (!userRole) {
