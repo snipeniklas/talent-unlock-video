@@ -17,7 +17,8 @@ import {
   Calendar,
   AlertTriangle,
   CheckCircle,
-  UserX
+  UserX,
+  Edit
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -58,6 +59,7 @@ export default function AdminSettings() {
   const [companyFilter, setCompanyFilter] = useState("all");
   const [roleFilter, setRoleFilter] = useState("all");
   const [companies, setCompanies] = useState<{id: string, name: string}[]>([]);
+  const [editingRole, setEditingRole] = useState<{userId: string, currentRole: string} | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -218,6 +220,44 @@ export default function AdminSettings() {
       user: "Benutzer"
     };
     return texts[role as keyof typeof texts] || "Benutzer";
+  };
+
+  const updateUserRole = async (userId: string, newRole: string) => {
+    try {
+      // Erst alle alten Rollen löschen
+      const { error: deleteError } = await supabase
+        .from('user_roles')
+        .delete()
+        .eq('user_id', userId);
+
+      if (deleteError) throw deleteError;
+
+      // Neue Rolle hinzufügen
+      const { error: insertError } = await supabase
+        .from('user_roles')
+        .insert({
+          user_id: userId,
+          role: newRole as 'admin' | 'company_admin' | 'user'
+        });
+
+      if (insertError) throw insertError;
+
+      toast({
+        title: "Rolle aktualisiert",
+        description: "Die Benutzerrolle wurde erfolgreich geändert.",
+      });
+
+      // Benutzerliste aktualisieren
+      fetchUsers();
+      setEditingRole(null);
+    } catch (error) {
+      console.error('Error updating user role:', error);
+      toast({
+        title: "Fehler beim Aktualisieren der Rolle",
+        description: "Die Rolle konnte nicht geändert werden.",
+        variant: "destructive",
+      });
+    }
   };
 
   if (loading) {
@@ -419,6 +459,15 @@ export default function AdminSettings() {
                             <Button 
                               size="sm" 
                               variant="outline"
+                              onClick={() => setEditingRole({ userId: user.user_id, currentRole: role })}
+                            >
+                              <Edit className="w-3 h-3 mr-1" />
+                              Rolle ändern
+                            </Button>
+
+                            <Button 
+                              size="sm" 
+                              variant="outline"
                               onClick={() => user.email && resetUserPassword(user.user_id, user.email)}
                               disabled={!user.email}
                             >
@@ -467,6 +516,44 @@ export default function AdminSettings() {
           )}
         </CardContent>
       </Card>
+
+      {/* Role Edit Dialog */}
+      {editingRole && (
+        <AlertDialog open={!!editingRole} onOpenChange={() => setEditingRole(null)}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Benutzerrolle ändern</AlertDialogTitle>
+              <AlertDialogDescription>
+                Wählen Sie eine neue Rolle für diesen Benutzer aus.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <div className="py-4">
+              <Label htmlFor="role-select">Neue Rolle:</Label>
+              <Select 
+                defaultValue={editingRole.currentRole} 
+                onValueChange={(value) => setEditingRole({ ...editingRole, currentRole: value })}
+              >
+                <SelectTrigger id="role-select" className="mt-2">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="user">Benutzer</SelectItem>
+                  <SelectItem value="company_admin">Unternehmens-Admin</SelectItem>
+                  <SelectItem value="admin">Hej Talent Admin</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => updateUserRole(editingRole.userId, editingRole.currentRole)}
+              >
+                Rolle ändern
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      )}
     </div>
   );
 }
