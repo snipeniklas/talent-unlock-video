@@ -94,9 +94,9 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-gradient-hero opacity-10"></div>
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
         
-        <div className="container mx-auto px-3 sm:px-4 relative z-10">
+        <div className="container mx-auto px-2 sm:px-3 md:px-4 relative z-10">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
               {/* Left Column - Content */}
               <div className="space-y-4 sm:space-y-6 lg:space-y-8">
                 {/* Expert Status Badges - Hidden on mobile */}
@@ -279,21 +279,21 @@ const HomePage = () => {
       </section>
 
       {/* About Hej Talent Section */}
-      <section id="about-hej-talent" className="py-20 bg-gradient-subtle px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      <section id="about-hej-talent" className="py-12 sm:py-16 md:py-20 bg-gradient-subtle">
+        <div className="container mx-auto max-w-6xl px-3 sm:px-4">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
             <div className="animate-slide-in-left">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">{t('home.about.title', 'Über Hej Talent')}</h2>
-              <p className="text-lg text-muted-foreground mb-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 text-brand-dark">{t('home.about.title', 'Über Hej Talent')}</h2>
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-4 sm:mb-6 leading-relaxed">
                 {t('home.about.text', 'Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und Vermittlung von internationalen Remote-Talenten.')}
               </p>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {get<string[]>('home.about.bullets', ["Umfassende Background-Checks", "Persönliche Betreuung", "Qualitätsgarantie"])?.map((bullet, i) => (
-                  <div key={i} className="flex items-center gap-3 group hover:scale-105 transition-transform duration-200">
-                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center group-hover:animate-bounce">
-                      <Shield className="w-5 h-5 text-white" />
+                  <div key={i} className="flex items-center gap-2 sm:gap-3 group hover:scale-105 transition-transform duration-200">
+                    <div className="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 bg-primary rounded-full flex items-center justify-center group-hover:animate-bounce flex-shrink-0">
+                      <Shield className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 text-white" />
                     </div>
-                    <span className="text-brand-dark font-medium">{bullet}</span>
+                    <span className="text-brand-dark font-medium text-sm sm:text-base">{bullet}</span>
                   </div>
                 ))}
               </div>
@@ -312,9 +312,9 @@ const HomePage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 md:py-20 bg-gradient-subtle overflow-hidden relative">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-subtle overflow-hidden relative">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-3 sm:px-4 relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12 md:mb-16">
               <h2 className="text-2xl md:text-4xl font-bold text-brand-dark mb-4">
