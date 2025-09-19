@@ -74,15 +74,15 @@ const ContactCTA = () => {
             </div>
           </div>
           
-          <div className="order-1 lg:order-2 max-w-md mx-auto lg:max-w-none">
-            <Card className="shadow-lg border-0">
-             <CardHeader className="pb-3 sm:pb-4 md:pb-6 px-3 sm:px-6">
-               <CardTitle className="text-lg sm:text-xl md:text-2xl text-brand-dark">{t('contactCTA.form.title', 'Suchauftrag kostenlos erstellen')}</CardTitle>
-               <p className="text-muted-foreground text-sm sm:text-base">
+          <div className="order-1 lg:order-2 w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto lg:max-w-none">
+            <Card className="shadow-lg border-0 mx-2 sm:mx-0">
+             <CardHeader className="pb-3 sm:pb-4 md:pb-6 px-3 sm:px-4 md:px-6">
+               <CardTitle className="text-base sm:text-lg md:text-xl lg:text-2xl text-brand-dark text-center lg:text-left">{t('contactCTA.form.title', 'Suchauftrag kostenlos erstellen')}</CardTitle>
+               <p className="text-muted-foreground text-xs sm:text-sm md:text-base text-center lg:text-left">
                  {t('contactCTA.form.subtitle', 'Erzählen Sie uns von Ihrem Projekt und wir melden uns binnen 24 Stunden')}
                </p>
             </CardHeader>
-            <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-6">
+            <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-4 md:px-6">
               <div className="grid gap-3 sm:gap-4">
                 <Input placeholder={t('contactCTA.form.placeholders.firstName', 'Vorname')} className="text-sm sm:text-base h-10 sm:h-11" />
                 <Input placeholder={t('contactCTA.form.placeholders.lastName', 'Nachname')} className="text-sm sm:text-base h-10 sm:h-11" />
@@ -91,10 +91,10 @@ const ContactCTA = () => {
               <Input placeholder={t('contactCTA.form.placeholders.company', 'Unternehmen')} className="text-sm sm:text-base h-10 sm:h-11" />
               <Input placeholder={t('contactCTA.form.placeholders.phone', 'Telefon')} className="text-sm sm:text-base h-10 sm:h-11" />
               <Textarea placeholder={t('contactCTA.form.placeholders.description', 'Beschreiben Sie Ihren Remote-Fachkräfte-Bedarf...')} className="h-20 sm:h-24 md:h-28 text-sm sm:text-base resize-none" />
-              <Button asChild className="w-full bg-gradient-primary hover:shadow-xl transition-all duration-300 text-sm sm:text-base py-3 sm:py-4 border-0 h-auto">
-                <Link to="/app/search-requests/new">
-                  <span className="truncate">Jetzt starten</span>
-                  <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 ml-2 flex-shrink-0" />
+              <Button asChild className="w-full bg-gradient-primary hover:shadow-xl transition-all duration-300 text-xs sm:text-sm md:text-base py-2.5 sm:py-3 md:py-4 border-0 h-auto max-w-full">
+                <Link to="/app/search-requests/new" className="block w-full">
+                  <span className="truncate block">Jetzt starten</span>
+                  <ArrowRight className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 ml-1 sm:ml-2 flex-shrink-0" />
                 </Link>
               </Button>
             </CardContent>
