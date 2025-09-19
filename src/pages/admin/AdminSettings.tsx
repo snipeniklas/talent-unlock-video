@@ -224,6 +224,20 @@ export default function AdminSettings() {
 
   const updateUserRole = async (userId: string, newRole: string) => {
     try {
+      // Prüfen ob der User bereits die gewünschte Rolle hat
+      const currentUser = users.find(u => u.user_id === userId);
+      const currentRole = getUserRole(currentUser?.user_roles || []);
+      
+      if (currentRole === newRole) {
+        toast({
+          title: "Keine Änderung erforderlich",
+          description: "Der Benutzer hat bereits diese Rolle.",
+          variant: "default",
+        });
+        setEditingRole(null);
+        return;
+      }
+
       // Erst alle alten Rollen löschen
       const { error: deleteError } = await supabase
         .from('user_roles')
@@ -250,11 +264,17 @@ export default function AdminSettings() {
       // Benutzerliste aktualisieren
       fetchUsers();
       setEditingRole(null);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error updating user role:', error);
+      let errorMessage = "Die Rolle konnte nicht geändert werden.";
+      
+      if (error.code === '23505') {
+        errorMessage = "Diese Rolle ist bereits für den Benutzer vergeben.";
+      }
+      
       toast({
         title: "Fehler beim Aktualisieren der Rolle",
-        description: "Die Rolle konnte nicht geändert werden.",
+        description: errorMessage,
         variant: "destructive",
       });
     }
