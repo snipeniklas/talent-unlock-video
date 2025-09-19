@@ -99,23 +99,23 @@ const HomePage = () => {
             <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-center">
               {/* Left Column - Content */}
               <div className="space-y-4 sm:space-y-6 lg:space-y-8">
-                {/* Expert Status Badges */}
-                <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center lg:justify-start gap-2 sm:gap-1 md:gap-3">
-                  <div className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 py-1.5 shadow-lg text-center">
-                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse flex-shrink-0"></div>
-                    <span className="text-xs font-medium text-brand-dark whitespace-nowrap">9+ Jahre Expertise</span>
+                {/* Expert Status Badges - Hidden on mobile */}
+                <div className="hidden md:flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
+                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-medium text-brand-dark">9+ Jahre Expertise</span>
                   </div>
-                  <div className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 py-1.5 shadow-lg text-center">
-                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse flex-shrink-0"></div>
-                    <span className="text-xs font-medium text-brand-dark whitespace-nowrap">500+ Fachkräfte</span>
+                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-medium text-brand-dark">500+ Fachkräfte</span>
                   </div>
-                  <div className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 py-1.5 shadow-lg text-center">
-                    <div className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse flex-shrink-0"></div>
-                    <span className="text-xs font-medium text-brand-dark whitespace-nowrap">98% Erfolg</span>
+                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-medium text-brand-dark">98% Erfolg</span>
                   </div>
-                  <div className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 py-1.5 shadow-lg text-center">
-                    <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse flex-shrink-0"></div>
-                    <span className="text-xs font-medium text-brand-dark whitespace-nowrap">Qualitätsgarantie</span>
+                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-medium text-brand-dark">Qualitätsgarantie</span>
                   </div>
                 </div>
 
