@@ -100,48 +100,48 @@ const HomePage = () => {
               {/* Left Column - Content */}
               <div className="space-y-6 lg:space-y-8">
                 {/* Expert Status Badges */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
-                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">9+ Jahre Remote-Expertise</span>
+                <div className="flex flex-wrap justify-center lg:justify-start gap-1 sm:gap-2 md:gap-3 px-2 sm:px-0">
+                  <div className="inline-flex items-center gap-1 sm:gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 shadow-lg">
+                    <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs font-medium text-brand-dark">9+ Jahre Expertise</span>
                   </div>
-                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">500+ geprüfte Fachkräfte</span>
+                  <div className="inline-flex items-center gap-1 sm:gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 shadow-lg">
+                    <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs font-medium text-brand-dark">500+ Fachkräfte</span>
                   </div>
-                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">98% Erfolgsquote</span>
+                  <div className="inline-flex items-center gap-1 sm:gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 shadow-lg">
+                    <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs font-medium text-brand-dark">98% Erfolg</span>
                   </div>
-                  <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-3 md:px-4 py-2 shadow-lg">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs md:text-sm font-medium text-brand-dark">Qualitätsgarantie</span>
+                  <div className="inline-flex items-center gap-1 sm:gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 shadow-lg">
+                    <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs font-medium text-brand-dark">Qualitätsgarantie</span>
                   </div>
                 </div>
 
                 {/* Main Title */}
                 <div className="text-center lg:text-left">
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-brand-dark mb-4 lg:mb-6 leading-tight animate-fade-in">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-brand-dark mb-3 md:mb-4 lg:mb-6 leading-tight animate-fade-in px-2 sm:px-0">
                     <span className="text-primary">{t('home.hero.title', 'RaaS')}</span>
                   </h1>
-                  <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-4 lg:mb-6 animate-fade-in-delay-1 font-light">
+                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-3 md:mb-4 lg:mb-6 animate-fade-in-delay-1 font-light px-2 sm:px-0">
                     <span className="font-semibold text-brand-dark">{t('home.hero.tagline.prefix')}</span> {t('home.hero.tagline.main')}
                   </p>
-                  <p className="text-base md:text-lg text-muted-foreground mb-6 lg:mb-8 animate-fade-in-delay-2">
+                  <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-4 md:mb-6 lg:mb-8 animate-fade-in-delay-2 px-2 sm:px-0 leading-relaxed">
                     {t('home.hero.description', 'Als führender Dienstleister für internationale Fachkräfte stellen wir Ihnen seit 9 Jahren die besten Talente zur Verfügung. Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir liefern die perfekte Fachkraft-Lösung.')}
                   </p>
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="space-y-4 justify-center lg:justify-start animate-slide-up-delay-3">
-                  <Button asChild size="lg" className="w-full sm:w-auto text-base md:text-lg px-8 md:px-10 py-5 md:py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
+                <div className="space-y-4 justify-center lg:justify-start animate-slide-up-delay-3 px-2 sm:px-0">
+                  <Button asChild size="lg" className="w-full sm:w-auto text-sm sm:text-base md:text-lg px-4 sm:px-8 md:px-10 py-4 sm:py-5 md:py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
                     <Link to="/app/search-requests/new">
-                      <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                      <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full animate-pulse">
                         {t('home.hero.ctaBadge', 'KOSTENFREI')}
                       </span>
-                      <Phone className="w-5 h-5 mr-3" />
-                      <span>{t('home.hero.ctaPrimary', 'Unverbindliche RaaS Anfrage starten')}</span>
-                      <ArrowRight className="w-5 h-5 ml-3" />
+                      <Phone className="w-4 sm:w-5 h-4 sm:h-5 mr-2 sm:mr-3" />
+                      <span className="whitespace-nowrap overflow-hidden text-ellipsis">{t('home.hero.ctaPrimary', 'Unverbindliche RaaS Anfrage starten')}</span>
+                      <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 ml-2 sm:ml-3 flex-shrink-0" />
                     </Link>
                   </Button>
                   
@@ -149,10 +149,10 @@ const HomePage = () => {
                     <Button 
                       variant="ghost" 
                       size="sm"
-                      className="text-sm text-primary hover:bg-primary/10 px-4 py-2"
+                      className="text-xs sm:text-sm text-primary hover:bg-primary/10 px-3 sm:px-4 py-2"
                       onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
                     >
-                      {t('home.hero.ctaSecondary', 'Oder entdecken Sie unsere Expertise →')}
+                      <span className="text-center">{t('home.hero.ctaSecondary', 'Oder entdecken Sie unsere Expertise →')}</span>
                     </Button>
                   </div>
                 </div>
@@ -161,8 +161,8 @@ const HomePage = () => {
               {/* Right Column - Video & CTA Box */}
               <div className="space-y-6 lg:space-y-8">
                 {/* Video */}
-                <div className="relative">
-                  <div className="aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm border border-primary/20">
+                <div className="relative mx-2 sm:mx-0">
+                  <div className="aspect-video rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm border border-primary/20">
                     <iframe 
                       src="https://drive.google.com/file/d/1vMtWbY24d-ELZ8K76f4yF2zrngkkJLLW/preview" 
                       className="w-full h-full border-0"
@@ -172,15 +172,15 @@ const HomePage = () => {
                     />
                   </div>
                   {/* Video accent border */}
-                  <div className="absolute -inset-1 bg-gradient-primary rounded-2xl lg:rounded-3xl opacity-50 -z-10"></div>
+                  <div className="absolute -inset-1 bg-gradient-primary rounded-xl sm:rounded-2xl lg:rounded-3xl opacity-50 -z-10"></div>
                 </div>
                 
                 {/* Risk-Free Highlight */}
-                <div className="bg-gradient-primary/10 border border-primary/20 rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <p className="text-base md:text-lg font-semibold text-brand-dark mb-2">
+                <div className="bg-gradient-primary/10 border border-primary/20 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 mx-2 sm:mx-0">
+                  <p className="text-sm sm:text-base md:text-lg font-semibold text-brand-dark mb-2">
                     {t('home.hero.riskFreeTitle', '✅ 100% kostenfrei & unverbindlich starten')}
                   </p>
-                  <p className="text-sm md:text-base text-muted-foreground">
+                  <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">
                     {t('home.hero.riskFreeText', 'Erhalten Sie maßgeschneiderte Ressourcen-Vorschläge ohne jegliche Verpflichtung. Erst bei Ihrer Zustimmung beginnt die Zusammenarbeit.')}
                   </p>
                 </div>
@@ -188,19 +188,19 @@ const HomePage = () => {
             </div>
             
             {/* Trust Indicators */}
-            <div className="text-center mt-12 lg:mt-16">
-              <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">{t('home.trust.line', 'Vertrauen Sie auf 9+ Jahre Expertise:')}</p>
-              <div className="flex flex-wrap justify-center gap-2 md:gap-8 items-center opacity-60">
+            <div className="text-center mt-8 sm:mt-12 lg:mt-16 px-4">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 md:mb-4">{t('home.trust.line', 'Vertrauen Sie auf 9+ Jahre Expertise:')}</p>
+              <div className="flex flex-wrap justify-center gap-1 sm:gap-2 md:gap-8 items-center opacity-60">
                 {get<string[]>('home.trust.items', ["Internationale Kunden", "DSGVO-konform", "ISO 27001"])?.map((item, i) => (
-                  <span key={i} className="text-xs md:text-sm font-medium">
-                    {item}{i < (get<string[]>('home.trust.items', [])?.length || 0) - 1 ? <span className="hidden md:inline">•</span> : null}
+                  <span key={i} className="text-xs sm:text-sm font-medium">
+                    {item}{i < (get<string[]>('home.trust.items', [])?.length || 0) - 1 ? <span className="hidden sm:inline mx-1">•</span> : null}
                   </span>
                 ))}
               </div>
             </div>
             
             {/* Solution Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 lg:mt-16 animate-slide-up-delay-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-12 lg:mt-16 animate-slide-up-delay-4 px-4 sm:px-0">
               <Card 
                 className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 border-0 bg-white/80 backdrop-blur-sm hover:bg-white overflow-hidden relative h-full flex flex-col"
                 onClick={() => navigate('/solutions/backoffice')}
