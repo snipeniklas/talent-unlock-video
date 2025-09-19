@@ -64,12 +64,11 @@
   "home": {
     "hero": {
       "title": "RaaS - Resources as a Service",
-      
       "ctaBadge": "FREE",
       "ctaPrimary": "Start a non-binding RaaS request",
       "ctaSecondary": "Or explore our expertise →",
-      "riskFreeTitle": "✅ 100% free & non-binding to start",
-      "riskFreeText": "Receive tailored resource suggestions without any obligation. Work starts only after your approval.",
+      "riskFreeTitle": "✅ 100% free & non-binding",
+      "riskFreeText": "Get tailored resource suggestions without any obligation. Cooperation begins only with your approval.",
       "description": "As a leading provider of international professionals, we have been delivering the best talent for 9 years. Our proven RaaS system makes it simple: Instead of traditional employment, we provide remote resources through service contracts and create immediate access to qualified specialists worldwide.",
       "tagline": {
         "prefix": "The remote experts,",

@@ -178,10 +178,10 @@ const HomePage = () => {
                 {/* Risk-Free Highlight */}
                 <div className="bg-gradient-primary/10 border border-primary/20 rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <p className="text-xs sm:text-sm md:text-base font-semibold text-brand-dark mb-1.5">
-                    ✅ 100% kostenfrei & unverbindlich
+                    {t('home.hero.riskFreeTitle', '✅ 100% kostenfrei & unverbindlich')}
                   </p>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    Maßgeschneiderte Ressourcen-Vorschläge ohne Verpflichtung. Erst bei Zustimmung beginnt die Zusammenarbeit.
+                    {t('home.hero.riskFreeText', 'Maßgeschneiderte Ressourcen-Vorschläge ohne Verpflichtung. Erst bei Zustimmung beginnt die Zusammenarbeit.')}
                   </p>
                 </div>
               </div>
