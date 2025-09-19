@@ -11,89 +11,89 @@ const ContactCTA = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 bg-gradient-subtle">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-brand-dark mb-6">
+    <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-subtle">
+      <div className="container mx-auto px-3 sm:px-4">
+        <div className="max-w-4xl mx-auto text-center mb-8 sm:mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-brand-dark mb-3 sm:mb-4 md:mb-6">
             {t('contactCTA.title', 'Kontakt aufnehmen')}
           </h2>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground px-2">
             {t('contactCTA.subtitle', 'Lassen Sie uns gemeinsam die passenden Remote-Fachkräfte für Ihr Unternehmen finden')}
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          <div>
-            <h3 className="text-2xl font-bold text-brand-dark mb-8">{t('contactCTA.talkToUs', 'Sprechen Sie uns an')}</h3>
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-white" />
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 max-w-6xl mx-auto">
+          <div className="order-2 lg:order-1">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-brand-dark mb-4 sm:mb-6 md:mb-8">{t('contactCTA.talkToUs', 'Sprechen Sie uns an')}</h3>
+            <div className="space-y-3 sm:space-y-4 md:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-white" />
                 </div>
-                <div>
-                  <div className="font-semibold text-brand-dark">{t('contactCTA.labels.email', 'E-Mail')}</div>
-                  <a href="mailto:kontakt@hejtalent.de" className="text-primary hover:underline">
+                <div className="min-w-0 flex-1">
+                  <div className="font-semibold text-brand-dark text-sm sm:text-base">{t('contactCTA.labels.email', 'E-Mail')}</div>
+                  <a href="mailto:kontakt@hejtalent.de" className="text-primary hover:underline text-sm sm:text-base break-all">
                     kontakt@hejtalent.de
                   </a>
                 </div>
               </div>
               
-              <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                  <Phone className="w-6 h-6 text-white" />
+              <div className="flex items-center gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-white" />
                 </div>
-                <div>
-                  <div className="font-semibold text-brand-dark">{t('contactCTA.labels.phone', 'Telefon')}</div>
-                  <a href="tel:+4989901762180" className="text-primary hover:underline">
+                <div className="min-w-0 flex-1">
+                  <div className="font-semibold text-brand-dark text-sm sm:text-base">{t('contactCTA.labels.phone', 'Telefon')}</div>
+                  <a href="tel:+4989901762180" className="text-primary hover:underline text-sm sm:text-base">
                     +49 89 9017 6218
                   </a>
                 </div>
               </div>
               
-              <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                  <Linkedin className="w-6 h-6 text-white" />
+              <div className="flex items-center gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                  <Linkedin className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-white" />
                 </div>
-                <div>
-                  <div className="font-semibold text-brand-dark">{t('contactCTA.labels.linkedin', 'LinkedIn Profil')}</div>
-                  <a href="https://www.linkedin.com/company/hejtalent/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                <div className="min-w-0 flex-1">
+                  <div className="font-semibold text-brand-dark text-sm sm:text-base">{t('contactCTA.labels.linkedin', 'LinkedIn Profil')}</div>
+                  <a href="https://www.linkedin.com/company/hejtalent/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm sm:text-base">
                     LinkedIn
                   </a>
                 </div>
               </div>
               
-              <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                  <MapPin className="w-6 h-6 text-white" />
+              <div className="flex items-center gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-white" />
                 </div>
-                <div>
-                  <div className="font-semibold text-brand-dark">{t('contactCTA.labels.location', 'Standort')}</div>
-                  <span className="text-muted-foreground">{t('contactCTA.location', 'München, Deutschland')}</span>
+                <div className="min-w-0 flex-1">
+                  <div className="font-semibold text-brand-dark text-sm sm:text-base">{t('contactCTA.labels.location', 'Standort')}</div>
+                  <span className="text-muted-foreground text-sm sm:text-base">{t('contactCTA.location', 'München, Deutschland')}</span>
                 </div>
               </div>
             </div>
           </div>
           
-          <Card className="shadow-lg border-0">
-             <CardHeader>
-               <CardTitle className="text-2xl text-brand-dark">{t('contactCTA.form.title', 'Suchauftrag kostenlos erstellen')}</CardTitle>
-               <p className="text-muted-foreground">
+          <Card className="shadow-lg border-0 order-1 lg:order-2">
+             <CardHeader className="pb-3 sm:pb-4 md:pb-6">
+               <CardTitle className="text-lg sm:text-xl md:text-2xl text-brand-dark">{t('contactCTA.form.title', 'Suchauftrag kostenlos erstellen')}</CardTitle>
+               <p className="text-muted-foreground text-sm sm:text-base">
                  {t('contactCTA.form.subtitle', 'Erzählen Sie uns von Ihrem Projekt und wir melden uns binnen 24 Stunden')}
                </p>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <Input placeholder={t('contactCTA.form.placeholders.firstName', 'Vorname')} />
-                <Input placeholder={t('contactCTA.form.placeholders.lastName', 'Nachname')} />
+            <CardContent className="space-y-3 sm:space-y-4">
+              <div className="grid gap-3 sm:gap-4">
+                <Input placeholder={t('contactCTA.form.placeholders.firstName', 'Vorname')} className="text-sm sm:text-base" />
+                <Input placeholder={t('contactCTA.form.placeholders.lastName', 'Nachname')} className="text-sm sm:text-base" />
               </div>
-              <Input placeholder={t('contactCTA.form.placeholders.email', 'E-Mail-Adresse')} type="email" />
-              <Input placeholder={t('contactCTA.form.placeholders.company', 'Unternehmen')} />
-              <Input placeholder={t('contactCTA.form.placeholders.phone', 'Telefon')} />
-              <Textarea placeholder={t('contactCTA.form.placeholders.description', 'Beschreiben Sie Ihren Remote-Fachkräfte-Bedarf...')} className="h-32" />
-              <Button asChild className="w-full bg-gradient-primary hover:shadow-xl transition-all duration-300 text-lg py-6 border-0">
+              <Input placeholder={t('contactCTA.form.placeholders.email', 'E-Mail-Adresse')} type="email" className="text-sm sm:text-base" />
+              <Input placeholder={t('contactCTA.form.placeholders.company', 'Unternehmen')} className="text-sm sm:text-base" />
+              <Input placeholder={t('contactCTA.form.placeholders.phone', 'Telefon')} className="text-sm sm:text-base" />
+              <Textarea placeholder={t('contactCTA.form.placeholders.description', 'Beschreiben Sie Ihren Remote-Fachkräfte-Bedarf...')} className="h-24 sm:h-28 md:h-32 text-sm sm:text-base resize-none" />
+              <Button asChild className="w-full bg-gradient-primary hover:shadow-xl transition-all duration-300 text-sm sm:text-base md:text-lg py-3 sm:py-4 md:py-6 border-0">
                 <Link to="/app/search-requests/new">
-                  {t('contactCTA.form.submit', 'Jetzt kostenfrei Suchauftrag einstellen')}
-                  <ArrowRight className="w-5 h-5 ml-2" />
+                  <span className="truncate">{t('contactCTA.form.submit', 'Jetzt kostenfrei Suchauftrag einstellen')}</span>
+                  <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 ml-2 flex-shrink-0" />
                 </Link>
               </Button>
             </CardContent>
