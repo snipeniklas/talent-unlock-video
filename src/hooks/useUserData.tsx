@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 
 export interface UserProfile {
@@ -20,6 +20,8 @@ export interface UserProfile {
 }
 
 export const useUserData = () => {
+  const queryClient = useQueryClient();
+  
   return useQuery({
     queryKey: ['userData'],
     queryFn: async () => {
@@ -65,10 +67,19 @@ export const useUserData = () => {
         user_roles: userRoles || []
       };
 
-      return {
+      const result = {
         user,
         profile: combinedProfile as any // Safe type assertion after successful query
       };
+      
+      console.log('User data loaded successfully:', result);
+      
+      // Invalidate dashboard data when user data is loaded to ensure fresh data
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ['dashboardData'] });
+      }, 100);
+      
+      return result;
     },
     staleTime: 1000 * 60 * 5, // 5 minutes
     gcTime: 1000 * 60 * 10, // 10 minutes

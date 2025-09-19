@@ -26,13 +26,23 @@ export interface RecommendedSpecialist {
 }
 
 export const useDashboardData = () => {
-  const { data: userData, isLoading: userLoading } = useUserData();
+  const { data: userData, isLoading: userLoading, isSuccess: userSuccess } = useUserData();
   const companyId = userData?.profile?.company_id;
+
+  console.log('Dashboard Data Hook:', { 
+    userLoading, 
+    userSuccess, 
+    companyId, 
+    hasUserData: !!userData 
+  });
 
   return useQuery({
     queryKey: ['dashboardData', companyId],
     queryFn: async () => {
+      console.log('Dashboard query executing with companyId:', companyId);
+      
       if (!companyId) {
+        console.error('No company ID available for dashboard query');
         throw new Error('No company ID available');
       }
 
@@ -74,12 +84,16 @@ export const useDashboardData = () => {
 
       // Calculate stats
       const searchRequests = searchRequestsData.data || [];
+      console.log('Search requests data:', searchRequests);
+      
       const stats: DashboardStats = {
         activeSearchRequests: searchRequests.filter(r => r.status === 'active').length,
         completedProjects: searchRequests.filter(r => r.status === 'completed').length,
         pendingRequests: searchRequests.filter(r => r.status === 'pending').length,
         totalSpecialists: candidatesData.count || 0,
       };
+      
+      console.log('Calculated dashboard stats:', stats);
 
       // Format recent requests
       const recentRequests: RecentSearchRequest[] = recentRequestsData.data || [];
@@ -94,16 +108,20 @@ export const useDashboardData = () => {
         rating: null // Rating would need to be added to the schema
       }));
 
-      return {
+      const result = {
         stats,
         recentRequests,
         specialists,
       };
+      
+      console.log('Final dashboard data:', result);
+      return result;
     },
-    enabled: !!companyId && !userLoading,
-    staleTime: 1000 * 60 * 2, // 2 minutes
-    gcTime: 1000 * 60 * 5, // 5 minutes
+    enabled: !!companyId && userSuccess && !userLoading,
+    staleTime: 1000 * 30, // 30 seconds - shorter for dashboard freshness
+    gcTime: 1000 * 60 * 2, // 2 minutes
     retry: (failureCount, error) => {
+      console.log('Dashboard query retry:', { failureCount, error: error.message });
       // Retry up to 2 times, but not for missing company ID
       return failureCount < 2 && !error.message.includes('No company ID');
     },

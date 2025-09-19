@@ -21,10 +21,20 @@ const Dashboard = () => {
   const { t, lang } = useTranslation();
   
   // Use optimized hooks with React Query
-  const { isLoading: userLoading } = useUserData();
+  const { data: userData, isLoading: userLoading } = useUserData();
   const userRole = useUserRole();
   const company = useUserCompany();
-  const { data: dashboardData, isLoading: dashboardLoading } = useDashboardData();
+  const { data: dashboardData, isLoading: dashboardLoading, error: dashboardError, refetch } = useDashboardData();
+
+  console.log('Dashboard Component State:', {
+    userData,
+    userLoading,
+    dashboardData,
+    dashboardLoading,
+    dashboardError,
+    userRole,
+    company
+  });
 
   const loading = userLoading || dashboardLoading;
 
@@ -48,6 +58,15 @@ const Dashboard = () => {
             {userRole === 'company_admin' ? `${t('app.dashboard.welcomePrefix', 'Willkommen zurück bei')} ${company?.name || ''}` : t('app.dashboard.subtitle', 'Übersicht Ihrer Aktivitäten')}
           </p>
         </div>
+        <div className="flex gap-2">
+          <Button 
+            onClick={() => refetch()} 
+            variant="outline" 
+            size="sm"
+            disabled={dashboardLoading}
+          >
+            {dashboardLoading ? 'Laden...' : 'Aktualisieren'}
+          </Button>
         {userRole !== 'admin' && (
           <Button onClick={() => navigate('/app/search-requests/new')} className="bg-primary hover:bg-primary-hover w-full sm:w-auto text-sm lg:text-base">
             <Plus className="w-4 h-4 mr-2" />
@@ -55,7 +74,8 @@ const Dashboard = () => {
             <span className="hidden sm:inline lg:hidden">{t('app.dashboard.cta.newMedium', 'Neue Anfrage')}</span>
             <span className="hidden lg:inline">{t('app.dashboard.cta.new', 'Neue Anfrage erstellen')}</span>
           </Button>
-        )}
+          )}
+        </div>
       </div>
 
       {/* Stats Cards */}
