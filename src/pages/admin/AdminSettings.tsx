@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { 
   Users, 
   Search,
@@ -18,7 +19,8 @@ import {
   AlertTriangle,
   CheckCircle,
   UserX,
-  Edit
+  Edit,
+  Copy
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -60,6 +62,8 @@ export default function AdminSettings() {
   const [roleFilter, setRoleFilter] = useState("all");
   const [companies, setCompanies] = useState<{id: string, name: string}[]>([]);
   const [editingRole, setEditingRole] = useState<{userId: string, currentRole: string} | null>(null);
+  const [resetLinkDialog, setResetLinkDialog] = useState<{email: string, link: string} | null>(null);
+  const [copiedToClipboard, setCopiedToClipboard] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -168,6 +172,14 @@ export default function AdminSettings() {
         throw new Error(data.error);
       }
 
+      // Zeige den Reset-Link im Dialog an
+      if (data.resetLink) {
+        setResetLinkDialog({
+          email: email,
+          link: data.resetLink
+        });
+      }
+
       toast({
         title: "Passwort-Reset gesendet",
         description: data.message || `Ein Passwort-Reset Link wurde an ${email} gesendet.`,
@@ -177,6 +189,24 @@ export default function AdminSettings() {
       toast({
         title: "Fehler beim Passwort-Reset",
         description: error.message || "Der Passwort-Reset konnte nicht gesendet werden.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedToClipboard(true);
+      setTimeout(() => setCopiedToClipboard(false), 2000);
+      toast({
+        title: "Link kopiert",
+        description: "Der Passwort-Reset Link wurde in die Zwischenablage kopiert.",
+      });
+    } catch (error) {
+      toast({
+        title: "Fehler beim Kopieren",
+        description: "Der Link konnte nicht kopiert werden.",
         variant: "destructive",
       });
     }
@@ -585,6 +615,51 @@ export default function AdminSettings() {
           </AlertDialogContent>
         </AlertDialog>
       )}
+
+      {/* Passwort-Reset Link Dialog */}
+      <Dialog open={!!resetLinkDialog} onOpenChange={() => setResetLinkDialog(null)}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Passwort-Reset Link generiert</DialogTitle>
+            <DialogDescription>
+              Der Passwort-Reset Link wurde erfolgreich generiert und an {resetLinkDialog?.email} gesendet.
+              Sie können den Link auch direkt kopieren und an den Benutzer weiterleiten.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="reset-link">Passwort-Reset Link:</Label>
+              <div className="flex gap-2 mt-2">
+                <Input
+                  id="reset-link"
+                  value={resetLinkDialog?.link || ''}
+                  readOnly
+                  className="font-mono text-sm"
+                />
+                <Button
+                  onClick={() => copyToClipboard(resetLinkDialog?.link || '')}
+                  variant="outline"
+                  size="icon"
+                  className="shrink-0"
+                >
+                  {copiedToClipboard ? (
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
+            </div>
+          </div>
+          
+          <DialogFooter>
+            <Button onClick={() => setResetLinkDialog(null)}>
+              Schließen
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

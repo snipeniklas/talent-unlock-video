@@ -60,7 +60,8 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: `Passwort-Reset Link wurde an ${email} gesendet.`
+        message: `Passwort-Reset Link wurde an ${email} gesendet.`,
+        resetLink: data.properties?.action_link || null
       }),
       { 
         headers: { 
