@@ -224,11 +224,18 @@ export default function AdminSettings() {
 
   const updateUserRole = async (userId: string, newRole: string) => {
     try {
+      // Aktuelle Rollen direkt aus der Datenbank laden
+      const { data: currentRoles, error: rolesError } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', userId);
+
+      if (rolesError) throw rolesError;
+
       // Prüfen ob der User bereits die gewünschte Rolle hat
-      const currentUser = users.find(u => u.user_id === userId);
-      const currentRole = getUserRole(currentUser?.user_roles || []);
+      const hasRole = currentRoles?.some(role => role.role === newRole);
       
-      if (currentRole === newRole) {
+      if (hasRole) {
         toast({
           title: "Keine Änderung erforderlich",
           description: "Der Benutzer hat bereits diese Rolle.",
