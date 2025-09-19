@@ -64,14 +64,17 @@
   "home": {
     "hero": {
       "title": "RaaS - Resources as a Service",
-      "tagline": "die Ihre HR-Herausforderungen verstehen und lösen",
+      
       "ctaBadge": "KOSTENFREI",
       "ctaPrimary": "Unverbindliche RaaS Anfrage starten",
       "ctaSecondary": "Oder entdecken Sie unsere Expertise →",
       "riskFreeTitle": "✅ 100% kostenfrei & unverbindlich starten",
       "riskFreeText": "Erhalten Sie maßgeschneiderte Ressourcen-Vorschläge ohne jegliche Verpflichtung. Erst bei Ihrer Zustimmung beginnt die Zusammenarbeit.",
       "description": "Als führender Dienstleister für internationale Fachkräfte stellen wir Ihnen seit 9 Jahren die besten Talente zur Verfügung. Unser bewährtes RaaS-System macht es einfach: Statt klassischer Anstellungen stellen wir Remote-Ressourcen über Dienstleistungsverträge bereit und schaffen so sofortigen Zugang zu qualifizierten Spezialisten weltweit.",
-      "tagline.prefix": "Die Remote-Experten,"
+      "tagline": {
+        "prefix": "Die Remote-Experten,",
+        "main": "die Ihre HR-Herausforderungen verstehen und lösen"
+      }
     },
     "trust": {
       "line": "Vertrauen Sie auf 9+ Jahre Expertise:",
