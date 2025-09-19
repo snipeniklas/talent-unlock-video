@@ -93,7 +93,7 @@ const ContactCTA = () => {
               <Textarea placeholder={t('contactCTA.form.placeholders.description', 'Beschreiben Sie Ihren Remote-Fachkräfte-Bedarf...')} className="h-20 sm:h-24 md:h-28 text-sm sm:text-base resize-none" />
               <Button asChild className="w-full bg-gradient-primary hover:shadow-xl transition-all duration-300 text-sm sm:text-base py-3 sm:py-4 border-0 h-auto">
                 <Link to="/app/search-requests/new">
-                  <span className="truncate">Kostenfrei Suchauftrag einstellen</span>
+                  <span className="truncate">Jetzt starten</span>
                   <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 ml-2 flex-shrink-0" />
                 </Link>
               </Button>
