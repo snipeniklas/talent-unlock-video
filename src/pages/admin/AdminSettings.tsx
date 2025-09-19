@@ -224,6 +224,8 @@ export default function AdminSettings() {
 
   const updateUserRole = async (userId: string, newRole: string) => {
     try {
+      console.log('Updating role for user:', userId, 'to role:', newRole);
+      
       // Aktuelle Rollen direkt aus der Datenbank laden
       const { data: currentRoles, error: rolesError } = await supabase
         .from('user_roles')
@@ -232,9 +234,15 @@ export default function AdminSettings() {
 
       if (rolesError) throw rolesError;
 
+      console.log('Current roles from database:', currentRoles);
+
       // Prüfen ob der User bereits die gewünschte Rolle hat
-      const hasRole = currentRoles?.some(role => role.role === newRole);
+      const hasRole = currentRoles && currentRoles.length > 0 
+        ? currentRoles.some(role => role.role === newRole)
+        : false;
       
+      console.log('User has role?', hasRole);
+
       if (hasRole) {
         toast({
           title: "Keine Änderung erforderlich",
@@ -245,13 +253,16 @@ export default function AdminSettings() {
         return;
       }
 
-      // Erst alle alten Rollen löschen
-      const { error: deleteError } = await supabase
-        .from('user_roles')
-        .delete()
-        .eq('user_id', userId);
+      // Erst alle alten Rollen löschen (falls vorhanden)
+      if (currentRoles && currentRoles.length > 0) {
+        const { error: deleteError } = await supabase
+          .from('user_roles')
+          .delete()
+          .eq('user_id', userId);
 
-      if (deleteError) throw deleteError;
+        if (deleteError) throw deleteError;
+        console.log('Deleted existing roles');
+      }
 
       // Neue Rolle hinzufügen
       const { error: insertError } = await supabase
@@ -261,7 +272,12 @@ export default function AdminSettings() {
           role: newRole as 'admin' | 'company_admin' | 'user'
         });
 
-      if (insertError) throw insertError;
+      if (insertError) {
+        console.log('Insert error:', insertError);
+        throw insertError;
+      }
+
+      console.log('Successfully inserted new role');
 
       toast({
         title: "Rolle aktualisiert",
