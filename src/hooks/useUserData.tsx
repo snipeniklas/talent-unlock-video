@@ -74,10 +74,11 @@ export const useUserData = () => {
       
       console.log('User data loaded successfully:', result);
       
-      // Invalidate dashboard data when user data is loaded to ensure fresh data
-      setTimeout(() => {
-        queryClient.invalidateQueries({ queryKey: ['dashboardData'] });
-      }, 100);
+      // Trigger dashboard data reload immediately when user data is loaded
+      queryClient.invalidateQueries({ 
+        queryKey: ['dashboardData'],
+        exact: false 
+      });
       
       return result;
     },
