@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -12,105 +11,22 @@ import {
   Building2,
   UserCheck
 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '@/i18n/i18n';
+import { useUserData, useUserRole, useUserCompany } from '@/hooks/useUserData';
+import { useDashboardData } from '@/hooks/useDashboardData';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [userRole, setUserRole] = useState<string | null>(null);
-  const [companyName, setCompanyName] = useState<string>('');
-  const [recentSearchRequests, setRecentSearchRequests] = useState<any[]>([]);
-  const [recommendedSpecialists, setRecommendedSpecialists] = useState<any[]>([]);
-  const [stats, setStats] = useState({
-    activeSearchRequests: 0,
-    totalSpecialists: 0,
-    completedProjects: 0,
-    pendingRequests: 0
-  });
-  const [loading, setLoading] = useState(true);
   const { t, lang } = useTranslation();
+  
+  // Use optimized hooks with React Query
+  const { isLoading: userLoading } = useUserData();
+  const userRole = useUserRole();
+  const company = useUserCompany();
+  const { data: dashboardData, isLoading: dashboardLoading } = useDashboardData();
 
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) return;
-
-        // Get user role and profile
-        const [roleData, profileData] = await Promise.all([
-          supabase
-            .from('user_roles')
-            .select('role')
-            .eq('user_id', user.id)
-            .single(),
-          supabase
-            .from('profiles')
-            .select('company_id, companies(*)')
-            .eq('user_id', user.id)
-            .single()
-        ]);
-
-        if (roleData.data) {
-          setUserRole(roleData.data.role);
-        }
-
-        if (profileData.data?.companies) {
-          setCompanyName(profileData.data.companies.name);
-        }
-
-        // Fetch actual stats and recent data from the database
-        const { data: { user: currentUser } } = await supabase.auth.getUser();
-        if (currentUser && profileData.data?.company_id) {
-          const [searchRequestsData, resourcesData, recentRequestsData] = await Promise.all([
-            supabase
-              .from('search_requests')
-              .select('status')
-              .eq('company_id', profileData.data.company_id),
-            supabase
-              .from('candidates')
-              .select('id'),
-            supabase
-              .from('search_requests')
-              .select('id, title, status, created_at')
-              .eq('company_id', profileData.data.company_id)
-              .order('created_at', { ascending: false })
-              .limit(3)
-          ]);
-
-          const activeRequests = searchRequestsData.data?.filter(r => r.status === 'active').length || 0;
-          const completedRequests = searchRequestsData.data?.filter(r => r.status === 'completed').length || 0;
-          const pendingRequests = searchRequestsData.data?.filter(r => r.status === 'pending').length || 0;
-          const totalSpecialists = resourcesData.data?.length || 0;
-
-          setStats({
-            activeSearchRequests: activeRequests,
-            totalSpecialists,
-            completedProjects: completedRequests,
-            pendingRequests
-          });
-
-          // Set recent search requests
-          setRecentSearchRequests(recentRequestsData.data || []);
-
-          // Fetch recommended specialists (top rated and available)
-          const { data: specialistsData } = await supabase
-            .from('candidates')
-            .select('id, first_name, last_name, current_position, experience_years, rating')
-            .limit(3);
-
-          setRecommendedSpecialists(specialistsData || []);
-        }
-
-      } catch (error) {
-        console.error('Error fetching dashboard data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDashboardData();
-  }, []);
+  const loading = userLoading || dashboardLoading;
 
   const locale = lang === 'en' ? 'en-US' : 'de-DE';
 
@@ -129,7 +45,7 @@ const Dashboard = () => {
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-brand-dark">{t('app.dashboard.title', 'Dashboard')}</h1>
           <p className="text-muted-foreground mt-1 text-sm md:text-base">
-            {userRole === 'company_admin' ? `${t('app.dashboard.welcomePrefix', 'Willkommen zurück bei')} ${companyName}` : t('app.dashboard.subtitle', 'Übersicht Ihrer Aktivitäten')}
+            {userRole === 'company_admin' ? `${t('app.dashboard.welcomePrefix', 'Willkommen zurück bei')} ${company?.name || ''}` : t('app.dashboard.subtitle', 'Übersicht Ihrer Aktivitäten')}
           </p>
         </div>
         {userRole !== 'admin' && (
@@ -149,7 +65,7 @@ const Dashboard = () => {
             <Search className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-primary">{stats.activeSearchRequests}</div>
+            <div className="text-2xl font-bold text-primary">{dashboardData?.stats?.activeSearchRequests || 0}</div>
             <p className="text-xs text-muted-foreground">
               {t('app.dashboard.cards.active.delta', '+2 seit letztem Monat')}
             </p>
@@ -162,7 +78,7 @@ const Dashboard = () => {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-primary">{stats.totalSpecialists}</div>
+            <div className="text-2xl font-bold text-primary">{dashboardData?.stats?.totalSpecialists || 0}</div>
             <p className="text-xs text-muted-foreground">
               {t('app.dashboard.cards.specialists.caption', 'Verfügbare Experten')}
             </p>
@@ -175,7 +91,7 @@ const Dashboard = () => {
             <CheckCircle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">{stats.completedProjects}</div>
+            <div className="text-2xl font-bold text-green-600">{dashboardData?.stats?.completedProjects || 0}</div>
             <p className="text-xs text-muted-foreground">
               {t('app.dashboard.cards.completed.caption', 'Erfolgreiche Projekte')}
             </p>
@@ -188,7 +104,7 @@ const Dashboard = () => {
             <Clock className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-orange-600">{stats.pendingRequests}</div>
+            <div className="text-2xl font-bold text-orange-600">{dashboardData?.stats?.pendingRequests || 0}</div>
             <p className="text-xs text-muted-foreground">
               {t('app.dashboard.cards.pending.caption', 'Warten auf Bearbeitung')}
             </p>
@@ -210,11 +126,11 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {recentSearchRequests.length > 0 ? (
-                recentSearchRequests.map((request, index) => (
+              {dashboardData?.recentRequests && dashboardData.recentRequests.length > 0 ? (
+                dashboardData.recentRequests.map((request, index) => (
                   <div 
                     key={request.id} 
-                    className={`flex items-center justify-between ${index < recentSearchRequests.length - 1 ? 'border-b pb-3' : ''}`}
+                    className={`flex items-center justify-between ${index < dashboardData.recentRequests.length - 1 ? 'border-b pb-3' : ''}`}
                   >
                     <div>
                       <p className="font-medium">{request.title}</p>
@@ -271,11 +187,11 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {recommendedSpecialists.length > 0 ? (
-                recommendedSpecialists.map((specialist, index) => (
+              {dashboardData?.specialists && dashboardData.specialists.length > 0 ? (
+                dashboardData.specialists.map((specialist, index) => (
                   <div 
                     key={specialist.id} 
-                    className={`flex items-center justify-between ${index < recommendedSpecialists.length - 1 ? 'border-b pb-3' : ''}`}
+                    className={`flex items-center justify-between ${index < dashboardData.specialists.length - 1 ? 'border-b pb-3' : ''}`}
                   >
                     <div>
                       <p className="font-medium">{specialist.first_name} {specialist.last_name}</p>

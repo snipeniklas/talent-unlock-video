@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { 
   Home, 
@@ -31,47 +31,15 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 import { useTranslation } from '@/i18n/i18n';
-
-interface UserRole {
-  role: 'admin' | 'company_admin' | 'user';
-}
+import { useUserRole } from '@/hooks/useUserData';
 
 export function AppSidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [userRole, setUserRole] = useState<UserRole | null>(null);
-  const [loading, setLoading] = useState(true);
+  const userRole = useUserRole();
   const { t } = useTranslation();
-
-  useEffect(() => {
-    const getCurrentUserRole = async () => {
-      try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) {
-          navigate('/auth');
-          return;
-        }
-
-        const { data: roles } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', user.id)
-          .single();
-
-        if (roles) {
-          setUserRole({ role: roles.role });
-        }
-      } catch (error) {
-        console.error('Error fetching user role:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getCurrentUserRole();
-  }, [navigate]);
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -123,7 +91,7 @@ export function AppSidebar() {
     { title: t('crm.contacts.title', 'Kontakte'), url: "/admin/crm/contacts", icon: Users },
   ];
 
-  if (loading) {
+  if (!userRole) {
     return (
     <Sidebar className={`${isCollapsed ? "w-14" : "w-60"} bg-card border-r`}>
         <SidebarContent>
@@ -135,7 +103,7 @@ export function AppSidebar() {
     );
   }
 
-  const navigationItems = userRole?.role === 'admin' ? adminItems : companyItems;
+  const navigationItems = userRole === 'admin' ? adminItems : companyItems;
 
   return (
     <Sidebar className={isCollapsed ? "w-14" : "w-60"}>
@@ -155,7 +123,7 @@ export function AppSidebar() {
 
         <SidebarGroup>
           <SidebarGroupLabel className="text-foreground font-semibold">
-            {userRole?.role === 'admin' ? t('app.sidebar.section.admin', 'Admin Bereich') : t('app.sidebar.section.main', 'Hauptmenü')}
+            {userRole === 'admin' ? t('app.sidebar.section.admin', 'Admin Bereich') : t('app.sidebar.section.main', 'Hauptmenü')}
           </SidebarGroupLabel>
           
           <SidebarGroupContent>
@@ -179,7 +147,7 @@ export function AppSidebar() {
         </SidebarGroup>
 
         {/* CRM Section - Only for Admins */}
-        {userRole?.role === 'admin' && (
+        {userRole === 'admin' && (
           <SidebarGroup>
             <SidebarGroupLabel className="text-foreground font-semibold">
               {t('crm.title', 'CRM System')}
@@ -207,7 +175,7 @@ export function AppSidebar() {
         )}
 
         {/* Quick Actions */}
-        {userRole?.role !== 'admin' && (
+        {userRole !== 'admin' && (
           <SidebarGroup>
             <SidebarGroupLabel className="text-foreground font-semibold">{t('app.sidebar.quick', 'Schnellzugriff')}</SidebarGroupLabel>
             <SidebarGroupContent>
