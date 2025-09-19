@@ -100,6 +100,36 @@ const AuthPage = () => {
     }
   };
 
+  const handlePasswordReset = async () => {
+    if (!loginEmail) {
+      toast({
+        title: "E-Mail erforderlich",
+        description: "Bitte geben Sie Ihre E-Mail-Adresse ein, um das Passwort zurückzusetzen.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(loginEmail, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Reset-Link gesendet",
+        description: "Überprüfen Sie Ihre E-Mails für den Passwort-Reset-Link.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Fehler",
+        description: error.message || "Reset-Link konnte nicht gesendet werden.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const handlePersonalDataSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (firstName && lastName && position && phoneNumber && signupEmail && signupPassword) {
@@ -266,6 +296,15 @@ const AuthPage = () => {
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Anmelden..." : "Anmelden"}
+                  </Button>
+                  
+                  <Button 
+                    type="button" 
+                    variant="ghost" 
+                    className="w-full text-sm" 
+                    onClick={handlePasswordReset}
+                  >
+                    Passwort vergessen?
                   </Button>
                   
                   <div className="text-center text-sm text-muted-foreground mt-4">

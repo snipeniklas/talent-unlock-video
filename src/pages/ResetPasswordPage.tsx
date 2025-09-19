@@ -22,6 +22,22 @@ const ResetPasswordPage = () => {
   useEffect(() => {
     console.log('ResetPasswordPage mounted');
     
+    // Check for error parameters in URL hash first
+    const hash = window.location.hash;
+    console.log('URL hash:', hash);
+    
+    if (hash.includes('error=access_denied') || hash.includes('error_code=otp_expired')) {
+      console.log('Error detected in URL hash: expired or invalid token');
+      setIsValidToken(false);
+      setIsLoading(false);
+      toast({
+        title: "Link abgelaufen",
+        description: "Dieser Passwort-Reset-Link ist abgelaufen. Bitte fordern Sie einen neuen Link an.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     const handleAuthFlow = async () => {
       try {
         // Get current session first
