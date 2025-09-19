@@ -49,7 +49,7 @@ serve(async (req) => {
       type: 'recovery',
       email: email,
       options: {
-        redirectTo: 'https://hejtalent.de/'
+        redirectTo: 'https://hejtalent.de/reset-password'
       }
     })
 

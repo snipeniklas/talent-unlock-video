@@ -10,6 +10,7 @@ import BackofficeLanding from "./pages/BackofficeLanding";
 import ITDevelopmentLanding from "./pages/ITDevelopmentLanding";
 import AIMLLanding from "./pages/AIMLLanding";
 import AuthPage from "./pages/AuthPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import AppLayout from "./layouts/AppLayout";
 import Dashboard from "./pages/app/Dashboard";
 import SearchRequests from "./pages/app/SearchRequests";
@@ -69,7 +70,8 @@ const App = () => (
           <Route path="/backoffice-landing" element={<BackofficeLanding />} />
           <Route path="/it-development-landing" element={<ITDevelopmentLanding />} />
           <Route path="/ai-ml-landing" element={<AIMLLanding />} />
-          <Route path="/auth" element={<AuthPage />} />
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/solutions" element={<SolutionsOverview />} />
           <Route path="/solutions/backoffice" element={<BackofficeSolution />} />
           <Route path="/solutions/it-development" element={<ITDevelopmentSolution />} />
