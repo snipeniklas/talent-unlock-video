@@ -11,6 +11,8 @@ import InteractiveAppScreen from "@/components/InteractiveAppScreen";
 import FloatingAppDemo from "@/components/FloatingAppDemo";
 import ProjectTimeline from "@/components/ProjectTimeline";
 import { MiniTeamSection } from '@/components/MiniTeamSection';
+import SEOHead from '@/components/SEOHead';
+import LazyImage from '@/components/LazyImage';
 import { useTranslation } from '@/i18n/i18n';
 
 const HomePage = () => {
@@ -84,15 +86,79 @@ const HomePage = () => {
     }
   ];
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Hej Talent GmbH",
+    "url": "https://heytalent.de",
+    "logo": "/lovable-uploads/855a0f3a-c846-4b0e-9e4a-7feffb901a01.png",
+    "description": "Premium Remote Recruiting Plattform für KI-Entwickler und IT-Spezialisten",
+    "foundingDate": "2016",
+    "numberOfEmployees": "10-50",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "DE",
+      "addressLocality": "Berlin"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Remote Recruiting Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Remote IT-Entwickler",
+            "description": "Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Remote KI-Spezialisten",
+            "description": "KI-Experten und Data Scientists für Machine Learning und AI-Projekte"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Remote Backoffice-Kräfte",
+            "description": "Qualifizierte Remote-Mitarbeiter für Administration und operative Unterstützung"
+          }
+        }
+      ]
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "150",
+      "bestRating": "5"
+    },
+    "sameAs": [
+      "https://linkedin.com/company/heytalent",
+      "https://twitter.com/heytalent"
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-background font-inter">
+      <SEOHead
+        title="Hej Talent - Premium RaaS Remote Recruiting | KI-Entwickler 60% günstiger"
+        description="🚀 Deutschlands #1 Remote Recruiting Plattform seit 2016. Geprüfte KI-Entwickler & IT-Spezialisten bis zu 60% günstiger. 500+ vetted Experten, 98% Erfolgsrate. Kostenlose RaaS-Beratung!"
+        keywords="Remote Recruiting, RaaS, Resources as a Service, KI Entwickler, IT Outsourcing, Software Entwicklung, Remote Work, Deutschland"
+        canonical="https://heytalent.de/"
+        ogImage="/lovable-uploads/855a0f3a-c846-4b0e-9e4a-7feffb901a01.png"
+        structuredData={structuredData}
+      />
       <PublicHeader />
 
       {/* Hero Section */}
       <section className="relative py-6 sm:py-8 md:py-12 lg:py-20 overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-hero opacity-10"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1920')] bg-cover bg-center opacity-5"></div>
         
         <div className="container mx-auto px-2 sm:px-3 md:px-4 relative z-10">
           <div className="max-w-7xl mx-auto">
@@ -168,7 +234,8 @@ const HomePage = () => {
                       className="w-full h-full border-0"
                       allow="autoplay"
                       allowFullScreen 
-                      title="Hej Talent Intro Video"
+                      title="Hej Talent Intro Video - Premium Remote Recruiting seit 2016"
+                      loading="lazy"
                     />
                   </div>
                   {/* Video accent border */}
