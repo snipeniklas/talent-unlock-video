@@ -28,7 +28,7 @@
     }
   },
   "footer": {
-    "brand": "HejTalent, a hej consulting GmbH brand",
+    "brand": "Hej Talent, a hej consulting GmbH brand",
     "tagline": "Your trusted partner for qualified international remote professionals.",
     "sections": {
       "solutions": "Our solutions",
@@ -45,7 +45,7 @@
       "privacy": "Privacy policy",
       "imprint": "Imprint"
     },
-    "copyright": "© 2024 HejTalent, a hej consulting GmbH brand. All rights reserved.",
+    "copyright": "© 2024 Hej Talent, a hej consulting GmbH brand. All rights reserved.",
     "address": "Herzogstrasse 19, 80803 München, Germany"
   },
   "benefitBanner": {
@@ -439,7 +439,7 @@
       "hero": {"title": "- Vetted AI developers", "badge": "30-60% cheaper", "trailing": "in 7 days", "p1": "Our proven RaaS system makes it simple: describe your AI project, we deliver the perfect developer solution.", "p2": "Exclusive video shows the proven 3-step RaaS process ...", "cta": "Submit RaaS request"},
       "bullets": {"0": {"title": "30-50% cost savings","text": "Save up to €4,000 per month ..."}, "1": {"title": "48h matching","text": "From request to perfect developer in 2 days – start within 7 days"}, "2": {"title": "100% money-back guarantee","text": "Not satisfied? Full refund within the first 14 days"}},
       "trust": {"title": "50+ companies already trust Hej Talent"},
-      "testimonials": {"0": "\"Within 5 days I had the perfect AI developer. Saves us €3,200/month with better quality.\"", "1": "\"Great work by a new colleague convinced us to add a second HejTalent professional.\""},
+      "testimonials": {"0": "\"Within 5 days I had the perfect AI developer. Saves us €3,200/month with better quality.\"", "1": "\"Great work by a new colleague convinced us to add a second Hej Talent professional.\""},
       "reviews": {"caption": "from 57 reviews"},
       "faq": {"title": "Frequently asked questions", "items": {"0": {"q": "How do you ensure developer quality?","a": "Each developer passes a 3-stage assessment ..."}, "1": {"q": "How is data privacy ensured?","a": "GDPR-compliant, German servers and NDAs ..."}, "2": {"q": "How does communication work?","a": "Our developers work in European time zones ..."}, "3": {"q": "What contract models do you offer?","a": "Flexible: full-time, part-time or project-based ..."}}},
       "footer": {"tagline": "Your partner for vetted international remote AI developers.", "legal": "Legal", "contact": "Contact", "rights": "All rights reserved."}
@@ -451,7 +451,7 @@
       "problem": {"title": "Do these backoffice challenges sound familiar?", "items": []},
       "how": {"title": "How it works: your backoffice professional in 3 steps", "0": {"title": "Create a request in our platform", "text": "Log in and define your backoffice needs ..."}, "1": {"title": "Automatic matching & candidate selection", "text": "Our system matches suitable pros ..."}, "2": {"title": "Interview & productive start", "text": "Scheduling and interviews via platform ..."}},
       "trust": {"title": "30+ companies are already optimizing their backoffice"},
-      "testimonials": {"0": "\"Thanks to remote accounting we save €2,800 monthly ...\"", "1": "\"Great work convinced us to add a second HejTalent pro.\""},
+      "testimonials": {"0": "\"Thanks to remote accounting we save €2,800 monthly ...\"", "1": "\"Great work convinced us to add a second Hej Talent pro.\""},
       "reviews": {"caption": "from 42 reviews"},
       "faq": {"title": "Frequently asked questions", "items": {"0": {"q": "Which backoffice tasks can be covered?","a": "Accounting, data entry, customer service ..."}, "1": {"q": "How is work quality ensured?","a": "Min. 3 years experience, vetted by us ..."}, "2": {"q": "How does communication work?","a": "Via your preferred tools (Teams, Slack, email) ..."}, "3": {"q": "Can I adjust working hours flexibly?","a": "Yes, from 10h/week to full-time ..."}}},
       "footer": {"tagline": "Remote backoffice professionals for German companies", "solutions": "Solutions", "solutionItems": ["Remote accounting","Customer service","Administrative support","Data entry"], "company": "Company", "companyItems": ["About us","Careers","Become a partner","Contact"], "contact": "Contact", "rights": "All rights reserved.", "terms": "Terms"}

@@ -28,7 +28,7 @@
     }
   },
   "footer": {
-    "brand": "HejTalent, a hej consulting GmbH brand",
+    "brand": "Hej Talent, a hej consulting GmbH brand",
     "tagline": "Ihr vertrauensvoller Partner für qualifizierte internationale Remote-Fachkräfte.",
     "sections": {
       "solutions": "Unsere Lösungen",
@@ -45,7 +45,7 @@
       "privacy": "Datenschutz",
       "imprint": "Impressum"
     },
-    "copyright": "© 2024 HejTalent, a hej consulting GmbH brand. Alle Rechte vorbehalten.",
+    "copyright": "© 2024 Hej Talent, a hej consulting GmbH brand. Alle Rechte vorbehalten.",
     "address": "Herzogstrasse 19, 80803 München, Germany"
   },
   "benefitBanner": {
@@ -441,7 +441,7 @@
       "hero": {"title": "- Geprüfte KI-Entwickler", "badge": "30-60% günstiger", "trailing": "in 7 Tagen", "p1": "Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr KI-Projekt, wir liefern die perfekte Entwickler-Lösung.", "p2": "Exklusives Video zeigt ...", "cta": "RaaS Anfrage stellen"},
       "bullets": {"0": {"title": "30-50% Kostenersparnis","text": "Sparen Sie bis zu €4.000 ..."}, "1": {"title": "48h Matching-Prozess","text": "Von der Anfrage ..."}, "2": {"title": "100% Geld-zurück-Garantie","text": "Nicht zufrieden? Volle Rückerstattung ..."}},
       "trust": {"title": "Über 50 Unternehmen vertrauen bereits auf Hej Talent"},
-      "testimonials": {"0": "\"Binnen 5 Tagen hatte ich den perfekten KI-Entwickler. Spart uns monatlich €3.200 bei besserer Qualität.\"", "1": "\"Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen.\""},
+      "testimonials": {"0": "\"Binnen 5 Tagen hatte ich den perfekten KI-Entwickler. Spart uns monatlich €3.200 bei besserer Qualität.\"", "1": "\"Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite Hej Talent-Kraft ins Team zu holen.\""},
       "reviews": {"caption": "aus 57 Bewertungen"},
       "faq": {"title": "Häufig gestellte Fragen", "items": {"0": {"q": "Wie stellen Sie die Qualität der Entwickler sicher?","a": "Jeder Entwickler durchläuft ..."}, "1": {"q": "Wie wird der Datenschutz gewährleistet?","a": "DSGVO-konform, deutsche Server ..."}, "2": {"q": "Wie funktioniert die Kommunikation?","a": "Alle unsere Entwickler ..."}, "3": {"q": "Welche Vertragsmodelle bieten Sie an?","a": "Flexibel nach Ihren Bedürfnissen ..."}}},
       "footer": {"tagline": "Ihr Partner für geprüfte internationale Remote-KI-Entwickler.", "legal": "Rechtliches", "contact": "Kontakt", "rights": "Alle Rechte vorbehalten."}
