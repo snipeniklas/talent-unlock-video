@@ -2,3 +2,6 @@ project_id = "pcbpxhzaajbycxwompif"
 
 [functions.send-admin-notification]
 verify_jwt = false
+
+[functions.ms365-webhook-receiver]
+verify_jwt = false
