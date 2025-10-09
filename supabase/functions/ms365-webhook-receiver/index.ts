@@ -80,7 +80,7 @@ async function matchEmailToContact(fromEmail: string) {
   return data.id;
 }
 
-async function storeEmail(emailData: any, contactId: string | null) {
+async function storeEmail(emailData: any, contactId: string | null, userId: string) {
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
   const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const supabase = createClient(supabaseUrl, supabaseServiceKey);
@@ -88,6 +88,7 @@ async function storeEmail(emailData: any, contactId: string | null) {
   const { error } = await supabase
     .from("crm_emails")
     .insert({
+      user_id: userId,
       contact_id: contactId,
       ms365_message_id: emailData.id,
       subject: emailData.subject,
@@ -109,7 +110,7 @@ async function storeEmail(emailData: any, contactId: string | null) {
     throw error;
   }
 
-  console.log("Email stored successfully");
+  console.log("Email stored successfully for user:", userId);
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -177,8 +178,8 @@ const handler = async (req: Request): Promise<Response> => {
         const fromEmail = emailData.from?.emailAddress?.address;
         const contactId = fromEmail ? await matchEmailToContact(fromEmail) : null;
 
-        // Store email in database
-        await storeEmail(emailData, contactId);
+        // Store email in database with user_id
+        await storeEmail(emailData, contactId, userId);
 
         console.log("Email processed and stored successfully");
         

@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '@/i18n/i18n';
 import { useUserData, useUserRole, useUserCompany } from '@/hooks/useUserData';
 import { useDashboardData } from '@/hooks/useDashboardData';
+import { UserEmailWidget } from '@/components/UserEmailWidget';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -133,8 +134,13 @@ const Dashboard = () => {
         </Card>
       </div>
 
-      {/* Recent Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+      {/* Email Widget and Recent Activity */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
+        <div className="lg:col-span-1">
+          <UserEmailWidget />
+        </div>
+        
+        <div className="lg:col-span-2">
         <Card className="p-4 lg:p-6">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -195,60 +201,62 @@ const Dashboard = () => {
             </div>
           </CardContent>
         </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <UserCheck className="w-5 h-5 text-primary" />
-              {t('app.dashboard.recommended.title', 'Empfohlene Spezialisten')}
-            </CardTitle>
-            <CardDescription>
-              {t('app.dashboard.recommended.desc', 'Neue Experten für Ihre Anforderungen')}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {dashboardData?.specialists && dashboardData.specialists.length > 0 ? (
-                dashboardData.specialists.map((specialist, index) => (
-                  <div 
-                    key={specialist.id} 
-                    className={`flex items-center justify-between ${index < dashboardData.specialists.length - 1 ? 'border-b pb-3' : ''}`}
-                  >
-                    <div>
-                      <p className="font-medium">{specialist.first_name} {specialist.last_name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {specialist.current_position || t('app.dashboard.recommended.fallbackRole', 'Spezialist')} • {specialist.experience_years || 0} {t('app.dashboard.recommended.years', 'Jahre Erfahrung')}
-                        {specialist.rating && (
-                          <span className="ml-2">⭐ {specialist.rating}/5</span>
-                        )}
-                      </p>
-                    </div>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={() => navigate(`/app/specialists/${specialist.id}`)}
-                    >
-                      {t('app.dashboard.recommended.viewProfile', 'Profil ansehen')}
-                    </Button>
+        </div>
+      </div>
+      
+      {/* Recommended Specialists */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <UserCheck className="w-5 h-5 text-primary" />
+            {t('app.dashboard.recommended.title', 'Empfohlene Spezialisten')}
+          </CardTitle>
+          <CardDescription>
+            {t('app.dashboard.recommended.desc', 'Neue Experten für Ihre Anforderungen')}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {dashboardData?.specialists && dashboardData.specialists.length > 0 ? (
+              dashboardData.specialists.map((specialist, index) => (
+                <div 
+                  key={specialist.id} 
+                  className={`flex items-center justify-between ${index < dashboardData.specialists.length - 1 ? 'border-b pb-3' : ''}`}
+                >
+                  <div>
+                    <p className="font-medium">{specialist.first_name} {specialist.last_name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {specialist.current_position || t('app.dashboard.recommended.fallbackRole', 'Spezialist')} • {specialist.experience_years || 0} {t('app.dashboard.recommended.years', 'Jahre Erfahrung')}
+                      {specialist.rating && (
+                        <span className="ml-2">⭐ {specialist.rating}/5</span>
+                      )}
+                    </p>
                   </div>
-                ))
-              ) : (
-                <div className="text-center py-8">
-                  <p className="text-muted-foreground">{t('app.dashboard.recommended.empty.text', 'Noch keine Spezialisten verfügbar')}</p>
                   <Button 
                     variant="outline" 
-                    size="sm" 
-                    className="mt-2"
-                    onClick={() => navigate('/app/specialists')}
+                    size="sm"
+                    onClick={() => navigate(`/app/specialists/${specialist.id}`)}
                   >
-                    {t('app.dashboard.recommended.empty.btn', 'Spezialisten durchsuchen')}
+                    {t('app.dashboard.recommended.viewProfile', 'Profil ansehen')}
                   </Button>
                 </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+              ))
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">{t('app.dashboard.recommended.empty.text', 'Noch keine Spezialisten verfügbar')}</p>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="mt-2"
+                  onClick={() => navigate('/app/specialists')}
+                >
+                  {t('app.dashboard.recommended.empty.btn', 'Spezialisten durchsuchen')}
+                </Button>
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Quick Actions */}
       {userRole !== 'admin' && (

@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
-import { Mail, Clock } from "lucide-react";
+import { Mail, Clock, User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 interface Email {
   id: string;
@@ -16,6 +17,11 @@ interface Email {
   received_at: string;
   is_read: boolean;
   importance: string;
+  user_id: string;
+  profiles?: {
+    first_name: string;
+    last_name: string;
+  } | null;
 }
 
 interface ContactEmailTimelineProps {
@@ -35,7 +41,17 @@ export const ContactEmailTimeline = ({ contactId }: ContactEmailTimelineProps) =
     try {
       const { data, error } = await supabase
         .from("crm_emails")
-        .select("*")
+        .select(`
+          id,
+          subject,
+          from_email,
+          from_name,
+          body_preview,
+          received_at,
+          is_read,
+          importance,
+          user_id
+        `)
         .eq("contact_id", contactId)
         .order("received_at", { ascending: false });
 
@@ -44,7 +60,23 @@ export const ContactEmailTimeline = ({ contactId }: ContactEmailTimelineProps) =
         return;
       }
 
-      setEmails(data || []);
+      // Fetch profile data separately for each email
+      const emailsWithProfiles = await Promise.all(
+        (data || []).map(async (email) => {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("first_name, last_name")
+            .eq("user_id", email.user_id)
+            .maybeSingle();
+
+          return {
+            ...email,
+            profiles: profile || undefined,
+          };
+        })
+      );
+
+      setEmails(emailsWithProfiles as Email[]);
     } catch (error) {
       console.error("Error fetching emails:", error);
     } finally {
@@ -73,6 +105,22 @@ export const ContactEmailTimeline = ({ contactId }: ContactEmailTimelineProps) =
     return () => {
       supabase.removeChannel(channel);
     };
+  };
+
+  const getUserInitials = (email: Email) => {
+    if (email.profiles) {
+      const first = email.profiles.first_name?.[0] || "";
+      const last = email.profiles.last_name?.[0] || "";
+      return (first + last).toUpperCase();
+    }
+    return "?";
+  };
+
+  const getUserName = (email: Email) => {
+    if (email.profiles) {
+      return `${email.profiles.first_name || ""} ${email.profiles.last_name || ""}`.trim();
+    }
+    return "Unbekannter Benutzer";
   };
 
   if (isLoading) {
@@ -112,7 +160,13 @@ export const ContactEmailTimeline = ({ contactId }: ContactEmailTimelineProps) =
               key={email.id}
               className="border-l-2 border-primary/20 pl-4 pb-4 last:pb-0"
             >
-              <div className="flex items-start justify-between gap-2">
+              <div className="flex items-start gap-3">
+                <Avatar className="h-8 w-8 mt-1">
+                  <AvatarFallback className="text-xs">
+                    {getUserInitials(email)}
+                  </AvatarFallback>
+                </Avatar>
+                
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="font-medium truncate">{email.subject || "(Kein Betreff)"}</span>
@@ -127,14 +181,20 @@ export const ContactEmailTimeline = ({ contactId }: ContactEmailTimelineProps) =
                       </Badge>
                     )}
                   </div>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Von: {email.from_name || email.from_email}
-                  </p>
-                  <p className="text-sm line-clamp-2">{email.body_preview}</p>
-                </div>
-                <div className="flex items-center gap-1 text-xs text-muted-foreground whitespace-nowrap">
-                  <Clock className="h-3 w-3" />
-                  {format(new Date(email.received_at), "dd.MM.yy HH:mm", { locale: de })}
+                  
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+                    <User className="h-3 w-3" />
+                    <span>{getUserName(email)}</span>
+                    <span>•</span>
+                    <span>Von: {email.from_name || email.from_email}</span>
+                  </div>
+                  
+                  <p className="text-sm line-clamp-2 mb-2">{email.body_preview}</p>
+                  
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3" />
+                    {format(new Date(email.received_at), "dd.MM.yy HH:mm", { locale: de })}
+                  </div>
                 </div>
               </div>
             </div>

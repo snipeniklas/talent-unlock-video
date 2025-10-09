@@ -391,6 +391,7 @@ export type Database = {
           subject: string | null
           to_emails: string[] | null
           updated_at: string
+          user_id: string | null
         }
         Insert: {
           body_content?: string | null
@@ -410,6 +411,7 @@ export type Database = {
           subject?: string | null
           to_emails?: string[] | null
           updated_at?: string
+          user_id?: string | null
         }
         Update: {
           body_content?: string | null
@@ -429,6 +431,7 @@ export type Database = {
           subject?: string | null
           to_emails?: string[] | null
           updated_at?: string
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -827,6 +830,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_email_settings: {
+        Row: {
+          auto_match_contacts: boolean | null
+          created_at: string
+          id: string
+          sync_enabled: boolean | null
+          sync_sent_items: boolean | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          auto_match_contacts?: boolean | null
+          created_at?: string
+          id?: string
+          sync_enabled?: boolean | null
+          sync_sent_items?: boolean | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          auto_match_contacts?: boolean | null
+          created_at?: string
+          id?: string
+          sync_enabled?: boolean | null
+          sync_sent_items?: boolean | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {
