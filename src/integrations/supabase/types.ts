@@ -835,6 +835,7 @@ export type Database = {
         Row: {
           auto_match_contacts: boolean | null
           created_at: string
+          email_signature: string | null
           id: string
           sync_enabled: boolean | null
           sync_sent_items: boolean | null
@@ -844,6 +845,7 @@ export type Database = {
         Insert: {
           auto_match_contacts?: boolean | null
           created_at?: string
+          email_signature?: string | null
           id?: string
           sync_enabled?: boolean | null
           sync_sent_items?: boolean | null
@@ -853,6 +855,7 @@ export type Database = {
         Update: {
           auto_match_contacts?: boolean | null
           created_at?: string
+          email_signature?: string | null
           id?: string
           sync_enabled?: boolean | null
           sync_sent_items?: boolean | null
