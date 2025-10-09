@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/i18n";
 import CsvImportDialog from "@/components/CsvImportDialog";
 
-
 interface CrmContact {
   id: string;
   first_name: string;
