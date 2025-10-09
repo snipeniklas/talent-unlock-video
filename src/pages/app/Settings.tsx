@@ -13,8 +13,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { User, Building2, UserPlus, Lock, Mail, Trash2 } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from '@/i18n/i18n';
-import { MS365ConnectButton } from "@/components/MS365ConnectButton";
-import { useMS365Integration } from "@/hooks/useMS365Integration";
 
 interface UserProfile {
   id: string;
@@ -56,9 +54,6 @@ const Settings = () => {
   const [inviteRole, setInviteRole] = useState<'user' | 'admin' | 'company_admin'>('user');
   const [isCompanyAdmin, setIsCompanyAdmin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [emailSignature, setEmailSignature] = useState('');
-
-  const { isConnected: ms365Connected } = useMS365Integration();
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -128,23 +123,6 @@ const Settings = () => {
     enabled: !!currentUser?.profile?.company_id && (currentUser?.isCompanyAdmin || currentUser?.isAdmin)
   });
 
-  // Fetch email settings
-  const { data: emailSettings } = useQuery({
-    queryKey: ['userEmailSettings'],
-    queryFn: async () => {
-      if (!currentUser?.user?.id) return null;
-      
-      const { data, error } = await supabase
-        .from('user_email_settings')
-        .select('*')
-        .eq('user_id', currentUser.user.id)
-        .maybeSingle();
-
-      if (error) throw error;
-      return data;
-    },
-    enabled: !!currentUser?.user?.id
-  });
 
   // Set initial data when loaded
   useEffect(() => {
@@ -161,10 +139,7 @@ const Settings = () => {
     if (currentUser?.isAdmin) {
       setIsAdmin(true);
     }
-    if (emailSettings?.email_signature) {
-      setEmailSignature(emailSettings.email_signature);
-    }
-  }, [company, currentUser, emailSettings]);
+  }, [company, currentUser]);
 
   // Change password mutation
   const changePasswordMutation = useMutation({
@@ -308,37 +283,6 @@ const Settings = () => {
     }
   });
 
-  // Update email signature mutation
-  const updateEmailSignatureMutation = useMutation({
-    mutationFn: async () => {
-      if (!currentUser?.user?.id) throw new Error('Nicht authentifiziert');
-
-      const { error } = await supabase
-        .from('user_email_settings')
-        .upsert({
-          user_id: currentUser.user.id,
-          email_signature: emailSignature,
-        }, {
-          onConflict: 'user_id'
-        });
-
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['userEmailSettings'] });
-      toast({
-        title: 'E-Mail Signatur gespeichert',
-        description: 'Ihre E-Mail Signatur wurde erfolgreich aktualisiert.',
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        title: 'Fehler',
-        description: error.message,
-        variant: 'destructive',
-      });
-    }
-  });
 
   const getInvitationStatusColor = (status: string) => {
     switch (status) {
@@ -381,14 +325,10 @@ const Settings = () => {
         </div>
 
         <Tabs defaultValue="profile" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="profile" className="flex items-center gap-2">
               <User className="w-4 h-4" />
               {t('app.settings.tabs.profile', 'Profil & Passwort')}
-            </TabsTrigger>
-            <TabsTrigger value="email" className="flex items-center gap-2">
-              <Mail className="w-4 h-4" />
-              E-Mail Integration
             </TabsTrigger>
             <TabsTrigger value="company" className="flex items-center gap-2" disabled={!isCompanyAdmin}>
               <Building2 className="w-4 h-4" />
@@ -481,76 +421,6 @@ const Settings = () => {
             </div>
           </TabsContent>
 
-          {/* Email Integration Tab */}
-          <TabsContent value="email">
-            <div className="grid gap-6">
-              {/* MS365 Connection */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Mail className="w-5 h-5" />
-                    Microsoft 365 Integration
-                  </CardTitle>
-                  <CardDescription>
-                    Verbinden Sie Ihr Microsoft 365 Konto, um E-Mails automatisch mit CRM-Kontakten zu synchronisieren
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <Mail className="w-5 h-5 text-muted-foreground" />
-                      <div>
-                        <p className="font-medium">
-                          {ms365Connected ? 'Verbunden' : 'Nicht verbunden'}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {ms365Connected 
-                            ? 'Ihre E-Mails werden automatisch synchronisiert' 
-                            : 'Verbinden Sie Ihr Konto, um E-Mails zu synchronisieren'}
-                        </p>
-                      </div>
-                    </div>
-                    <MS365ConnectButton />
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Email Signature */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Mail className="w-5 h-5" />
-                    E-Mail Signatur (HTML)
-                  </CardTitle>
-                  <CardDescription>
-                    Definieren Sie Ihre persönliche E-Mail Signatur in HTML-Format
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <Label htmlFor="emailSignature">HTML Signatur</Label>
-                    <Textarea
-                      id="emailSignature"
-                      value={emailSignature}
-                      onChange={(e) => setEmailSignature(e.target.value)}
-                      placeholder="<div>Mit freundlichen Grüßen,<br/>Ihr Name</div>"
-                      className="min-h-[200px] font-mono text-sm"
-                    />
-                    <p className="text-xs text-muted-foreground mt-2">
-                      Verwenden Sie HTML-Tags für die Formatierung. Beispiel: &lt;strong&gt;Fett&lt;/strong&gt;, &lt;br/&gt; für Zeilenumbruch
-                    </p>
-                  </div>
-                  <Button 
-                    onClick={() => updateEmailSignatureMutation.mutate()}
-                    disabled={updateEmailSignatureMutation.isPending}
-                    className="bg-primary hover:bg-primary/90"
-                  >
-                    {updateEmailSignatureMutation.isPending ? 'Wird gespeichert...' : 'Signatur speichern'}
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
 
           {/* Company Tab */}
           <TabsContent value="company">

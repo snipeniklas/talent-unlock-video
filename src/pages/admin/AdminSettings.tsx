@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
 import { 
   Users, 
   Search,
@@ -27,6 +29,9 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
+import { MS365ConnectButton } from "@/components/MS365ConnectButton";
+import { useMS365Integration } from "@/hooks/useMS365Integration";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -66,12 +71,48 @@ export default function AdminSettings() {
   const [editingRole, setEditingRole] = useState<{userId: string, currentRole: string} | null>(null);
   const [resetLinkDialog, setResetLinkDialog] = useState<{email: string, link: string} | null>(null);
   const [copiedToClipboard, setCopiedToClipboard] = useState(false);
+  const [emailSignature, setEmailSignature] = useState('');
   const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const { isConnected: ms365Connected } = useMS365Integration();
+
+  // Fetch current user for email settings
+  const { data: currentUser } = useQuery({
+    queryKey: ['currentAdminUser'],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      return user;
+    }
+  });
+
+  // Fetch email settings
+  const { data: emailSettings } = useQuery({
+    queryKey: ['adminEmailSettings'],
+    queryFn: async () => {
+      if (!currentUser?.id) return null;
+      
+      const { data, error } = await supabase
+        .from('user_email_settings')
+        .select('*')
+        .eq('user_id', currentUser.id)
+        .maybeSingle();
+
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!currentUser?.id
+  });
 
   useEffect(() => {
     fetchUsers();
     fetchCompanies();
   }, []);
+
+  useEffect(() => {
+    if (emailSettings?.email_signature) {
+      setEmailSignature(emailSettings.email_signature);
+    }
+  }, [emailSettings]);
 
   useEffect(() => {
     filterUsers();
@@ -323,6 +364,38 @@ export default function AdminSettings() {
     }
   };
 
+  // Update email signature mutation
+  const updateEmailSignatureMutation = useMutation({
+    mutationFn: async () => {
+      if (!currentUser?.id) throw new Error('Nicht authentifiziert');
+
+      const { error } = await supabase
+        .from('user_email_settings')
+        .upsert({
+          user_id: currentUser.id,
+          email_signature: emailSignature,
+        }, {
+          onConflict: 'user_id'
+        });
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['adminEmailSettings'] });
+      toast({
+        title: 'E-Mail Signatur gespeichert',
+        description: 'Ihre E-Mail Signatur wurde erfolgreich aktualisiert.',
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Fehler',
+        description: error.message,
+        variant: 'destructive',
+      });
+    }
+  });
+
   // Statistiken berechnen
   const totalUsers = users.length;
   const totalAdmins = users.filter(user => 
@@ -377,17 +450,30 @@ export default function AdminSettings() {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Users className="h-5 w-5" />
+      <Tabs defaultValue="users" className="space-y-6">
+        <TabsList>
+          <TabsTrigger value="users">
+            <Users className="h-4 w-4 mr-2" />
             Benutzerverwaltung
-          </CardTitle>
-          <CardDescription>
-            Verwalten Sie alle Benutzer und deren Rollen im System
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+          </TabsTrigger>
+          <TabsTrigger value="email">
+            <Mail className="h-4 w-4 mr-2" />
+            E-Mail Integration
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="users">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5" />
+                Benutzerverwaltung
+              </CardTitle>
+              <CardDescription>
+                Verwalten Sie alle Benutzer und deren Rollen im System
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
           {/* Statistiken Dashboard */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <Card>
@@ -646,6 +732,79 @@ export default function AdminSettings() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+        </TabsContent>
+
+        {/* Email Integration Tab */}
+        <TabsContent value="email">
+          <div className="grid gap-6">
+            {/* MS365 Connection */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Mail className="h-5 w-5" />
+                  Microsoft 365 Integration
+                </CardTitle>
+                <CardDescription>
+                  Verbinden Sie Ihr Microsoft 365 Konto, um E-Mails automatisch mit CRM-Kontakten zu synchronisieren
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-5 h-5 text-muted-foreground" />
+                    <div>
+                      <p className="font-medium">
+                        {ms365Connected ? 'Verbunden' : 'Nicht verbunden'}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {ms365Connected 
+                          ? 'Ihre E-Mails werden automatisch synchronisiert' 
+                          : 'Verbinden Sie Ihr Konto, um E-Mails zu synchronisieren'}
+                      </p>
+                    </div>
+                  </div>
+                  <MS365ConnectButton />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Email Signature */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Mail className="h-5 h-5" />
+                  E-Mail Signatur (HTML)
+                </CardTitle>
+                <CardDescription>
+                  Definieren Sie Ihre persönliche E-Mail Signatur in HTML-Format
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="emailSignature">HTML Signatur</Label>
+                  <Textarea
+                    id="emailSignature"
+                    value={emailSignature}
+                    onChange={(e) => setEmailSignature(e.target.value)}
+                    placeholder="<div>Mit freundlichen Grüßen,<br/>Ihr Name</div>"
+                    className="min-h-[200px] font-mono text-sm"
+                  />
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Verwenden Sie HTML-Tags für die Formatierung. Beispiel: &lt;strong&gt;Fett&lt;/strong&gt;, &lt;br/&gt; für Zeilenumbruch
+                  </p>
+                </div>
+                <Button 
+                  onClick={() => updateEmailSignatureMutation.mutate()}
+                  disabled={updateEmailSignatureMutation.isPending}
+                  className="bg-primary hover:bg-primary/90"
+                >
+                  {updateEmailSignatureMutation.isPending ? 'Wird gespeichert...' : 'Signatur speichern'}
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
