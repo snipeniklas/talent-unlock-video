@@ -54,6 +54,9 @@ import CrmContactForm from "./pages/admin/CrmContactForm";
 import CrmCompanyDetail from "./pages/admin/CrmCompanyDetail";
 import CrmContactDetail from "./pages/admin/CrmContactDetail";
 import OutreachProfile from "./pages/admin/OutreachProfile";
+import OutreachCampaigns from "./pages/admin/OutreachCampaigns";
+import OutreachCampaignNew from "./pages/admin/OutreachCampaignNew";
+import OutreachCampaignDetail from "./pages/admin/OutreachCampaignDetail";
 
 const queryClient = new QueryClient();
 
@@ -118,6 +121,9 @@ const App = () => (
             <Route path="crm/contacts/:id" element={<CrmContactDetail />} />
             <Route path="crm/contacts/:id/edit" element={<CrmContactForm />} />
             <Route path="outreach-profile" element={<OutreachProfile />} />
+            <Route path="outreach-campaigns" element={<OutreachCampaigns />} />
+            <Route path="outreach-campaigns/new" element={<OutreachCampaignNew />} />
+            <Route path="outreach-campaigns/:id" element={<OutreachCampaignDetail />} />
             <Route path="support" element={<AdminSupport />} />
             <Route path="settings" element={<AdminSettings />} />
           </Route>

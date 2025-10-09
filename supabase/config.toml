@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.ms365-oauth-callback]
 verify_jwt = false
+
+[functions.process-outreach-campaigns]
+verify_jwt = false

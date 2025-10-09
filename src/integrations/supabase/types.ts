@@ -553,6 +553,183 @@ export type Database = {
         }
         Relationships: []
       }
+      outreach_campaign_contacts: {
+        Row: {
+          added_at: string
+          campaign_id: string
+          contact_id: string
+          id: string
+          status: string
+        }
+        Insert: {
+          added_at?: string
+          campaign_id: string
+          contact_id: string
+          id?: string
+          status?: string
+        }
+        Update: {
+          added_at?: string
+          campaign_id?: string
+          contact_id?: string
+          id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "outreach_campaign_contacts_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "outreach_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "outreach_campaign_contacts_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      outreach_campaigns: {
+        Row: {
+          ai_instructions: string | null
+          created_at: string
+          created_by: string
+          description: string | null
+          email_template: string | null
+          id: string
+          name: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          ai_instructions?: string | null
+          created_at?: string
+          created_by: string
+          description?: string | null
+          email_template?: string | null
+          id?: string
+          name: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          ai_instructions?: string | null
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          email_template?: string | null
+          id?: string
+          name?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      outreach_email_sequences: {
+        Row: {
+          body_template: string
+          campaign_id: string
+          created_at: string
+          delay_days: number
+          id: string
+          sequence_number: number
+          subject_template: string
+        }
+        Insert: {
+          body_template: string
+          campaign_id: string
+          created_at?: string
+          delay_days?: number
+          id?: string
+          sequence_number: number
+          subject_template: string
+        }
+        Update: {
+          body_template?: string
+          campaign_id?: string
+          created_at?: string
+          delay_days?: number
+          id?: string
+          sequence_number?: number
+          subject_template?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "outreach_email_sequences_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "outreach_campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      outreach_sent_emails: {
+        Row: {
+          body: string
+          campaign_id: string
+          contact_id: string
+          error_message: string | null
+          id: string
+          ms365_message_id: string | null
+          sent_at: string
+          sent_by: string
+          sequence_id: string
+          status: string
+          subject: string
+        }
+        Insert: {
+          body: string
+          campaign_id: string
+          contact_id: string
+          error_message?: string | null
+          id?: string
+          ms365_message_id?: string | null
+          sent_at?: string
+          sent_by: string
+          sequence_id: string
+          status?: string
+          subject: string
+        }
+        Update: {
+          body?: string
+          campaign_id?: string
+          contact_id?: string
+          error_message?: string | null
+          id?: string
+          ms365_message_id?: string | null
+          sent_at?: string
+          sent_by?: string
+          sequence_id?: string
+          status?: string
+          subject?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "outreach_sent_emails_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "outreach_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "outreach_sent_emails_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "outreach_sent_emails_sequence_id_fkey"
+            columns: ["sequence_id"]
+            isOneToOne: false
+            referencedRelation: "outreach_email_sequences"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           company_id: string | null
