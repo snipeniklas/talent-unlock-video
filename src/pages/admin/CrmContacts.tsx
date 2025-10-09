@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/i18n";
 import CsvImportDialog from "@/components/CsvImportDialog";
+import { MS365ConnectButton } from "@/components/MS365ConnectButton";
 
 interface CrmContact {
   id: string;
@@ -245,6 +246,7 @@ export default function CrmContacts() {
           <p className="text-muted-foreground">{t('crm.contacts.subtitle')}</p>
         </div>
         <div className="flex gap-2">
+          <MS365ConnectButton />
           <CsvImportDialog 
             open={csvDialogOpen}
             onOpenChange={setCsvDialogOpen}

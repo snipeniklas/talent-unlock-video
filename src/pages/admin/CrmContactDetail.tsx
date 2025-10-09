@@ -9,6 +9,7 @@ import { ArrowLeft, Edit, Mail, Phone, Smartphone, Building, Calendar, User, Mes
 import { useTranslation } from "@/i18n/i18n";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { ContactEmailTimeline } from "@/components/ContactEmailTimeline";
 
 interface Contact {
   id: string;
@@ -311,6 +312,9 @@ export default function CrmContactDetail() {
               </CardContent>
             </Card>
           )}
+
+          {/* Email Timeline */}
+          <ContactEmailTimeline contactId={contact.id} />
 
           {/* Timeline Information */}
           <Card>

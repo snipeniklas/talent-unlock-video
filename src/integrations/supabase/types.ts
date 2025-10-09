@@ -372,6 +372,74 @@ export type Database = {
           },
         ]
       }
+      crm_emails: {
+        Row: {
+          body_content: string | null
+          body_preview: string | null
+          cc_emails: string[] | null
+          contact_id: string | null
+          conversation_id: string | null
+          created_at: string
+          from_email: string
+          from_name: string | null
+          has_attachments: boolean | null
+          id: string
+          importance: string | null
+          is_read: boolean | null
+          ms365_message_id: string
+          received_at: string
+          subject: string | null
+          to_emails: string[] | null
+          updated_at: string
+        }
+        Insert: {
+          body_content?: string | null
+          body_preview?: string | null
+          cc_emails?: string[] | null
+          contact_id?: string | null
+          conversation_id?: string | null
+          created_at?: string
+          from_email: string
+          from_name?: string | null
+          has_attachments?: boolean | null
+          id?: string
+          importance?: string | null
+          is_read?: boolean | null
+          ms365_message_id: string
+          received_at: string
+          subject?: string | null
+          to_emails?: string[] | null
+          updated_at?: string
+        }
+        Update: {
+          body_content?: string | null
+          body_preview?: string | null
+          cc_emails?: string[] | null
+          contact_id?: string | null
+          conversation_id?: string | null
+          created_at?: string
+          from_email?: string
+          from_name?: string | null
+          has_attachments?: boolean | null
+          id?: string
+          importance?: string | null
+          is_read?: boolean | null
+          ms365_message_id?: string
+          received_at?: string
+          subject?: string | null
+          to_emails?: string[] | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_emails_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       invitations: {
         Row: {
           company_id: string
@@ -415,6 +483,72 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      ms365_subscriptions: {
+        Row: {
+          change_type: string
+          created_at: string
+          expires_at: string
+          id: string
+          resource: string
+          subscription_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          change_type: string
+          created_at?: string
+          expires_at: string
+          id?: string
+          resource: string
+          subscription_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          change_type?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          resource?: string
+          subscription_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ms365_tokens: {
+        Row: {
+          access_token: string
+          created_at: string
+          email_address: string
+          expires_at: string
+          id: string
+          refresh_token: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          access_token: string
+          created_at?: string
+          email_address: string
+          expires_at: string
+          id?: string
+          refresh_token: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          access_token?: string
+          created_at?: string
+          email_address?: string
+          expires_at?: string
+          id?: string
+          refresh_token?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
