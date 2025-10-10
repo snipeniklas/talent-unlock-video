@@ -57,6 +57,7 @@ import OutreachProfile from "./pages/admin/OutreachProfile";
 import OutreachCampaigns from "./pages/admin/OutreachCampaigns";
 import OutreachCampaignNew from "./pages/admin/OutreachCampaignNew";
 import OutreachCampaignDetail from "./pages/admin/OutreachCampaignDetail";
+import MS365Callback from "./pages/admin/MS365Callback";
 
 const queryClient = new QueryClient();
 
@@ -99,6 +100,9 @@ const App = () => (
             <Route path="support" element={<Support />} />
             <Route path="settings" element={<Settings />} />
           </Route>
+          
+          {/* Microsoft 365 OAuth Callback - Outside AppLayout */}
+          <Route path="/admin/ms365-callback" element={<MS365Callback />} />
           
           {/* Admin Routes mit AppLayout */}
           <Route path="/admin" element={<AppLayout />}>
