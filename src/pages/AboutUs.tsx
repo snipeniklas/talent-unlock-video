@@ -27,9 +27,9 @@ const AboutUs = () => {
       qa: {
         q1: `Warum ist das Thema Personal wichtig für mich?`,
         a1: `Weil Unternehmen nicht durch Produkte, sondern durch Menschen wachsen. Hinter jedem Erfolg stehen Talente, die ihre Persönlichkeit, Ideen und Energie einbringen.`,
-        q2: `Was treibt mich bei hejTalent an?`,
+        q2: `Was treibt mich bei Hej Talent an?`,
         a2: `Verbindungen zu schaffen, die über KI hinausgehen – echte Begegnungen, die auf Vertrauen, Authentizität und gemeinsamen Werten beruhen. Denn Technologie kann vieles, aber menschliche Tiefe und Vertrauen niemals ersetzen.`,
-        q3: `Meine schönsten Momente bei hejTalent sind…`,
+        q3: `Meine schönsten Momente bei Hej Talent sind…`,
         a3: `…wenn Talente und Unternehmen merken, dass sie nicht nur fachlich, sondern auch menschlich zusammenpassen. Dann wird aus einem Job eine echte Chance fürs Leben.`
       }
     },
@@ -46,9 +46,9 @@ const AboutUs = () => {
       qa: {
         q1: `Warum ist das Thema Personal wichtig für mich?`,
         a1: `Weil die richtige Person am richtigen Ort mehr bewirken kann als jede Strategie. Personal ist nicht nur eine Ressource, sondern das Herzstück jeder Organisation.`,
-        q2: `Was treibt mich bei hejTalent an?`,
+        q2: `Was treibt mich bei Hej Talent an?`,
         a2: `Die Überzeugung, dass Karrieren nicht von Zufällen oder Algorithmen abhängen sollten. Sondern von Begegnungen, die Sinn stiften und Türen öffnen.`,
-        q3: `Meine schönsten Momente bei hejTalent sind…`,
+        q3: `Meine schönsten Momente bei Hej Talent sind…`,
         a3: `…wenn Menschen merken: „Hier werde ich gesehen – so wie ich bin." Genau dann entstehen Chancen, die weit über den nächsten Job hinausgehen.`
       }
     }
