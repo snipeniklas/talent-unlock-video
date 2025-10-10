@@ -76,7 +76,6 @@ export default {
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-subtle': 'var(--gradient-subtle)',
-				'gradient-hero': 'var(--gradient-hero)',
 				'shimmer': 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
 			},
 			borderRadius: {
