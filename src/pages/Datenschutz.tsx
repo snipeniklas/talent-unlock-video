@@ -154,7 +154,7 @@ const Datenschutz = () => {
                       Herzogstrasse 19<br />
                       80803 München<br />
                       Tel: +49 89 9017 6218<br />
-                      Email: kontakt@hejtalent.de
+                      Email: hello@hejtalent.de
                     </p>
                     <p className="text-muted-foreground">
                       {t('legal.privacy.notes.controller.text2', 'The controller is the natural or legal person who alone or jointly with others determines the purposes and means of the processing of personal data (e.g. names, e-mail addresses or similar).')}

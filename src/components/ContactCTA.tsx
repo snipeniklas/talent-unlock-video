@@ -32,8 +32,8 @@ const ContactCTA = () => {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="font-semibold text-brand-dark text-sm sm:text-base">{t('contactCTA.labels.email', 'E-Mail')}</div>
-                  <a href="mailto:kontakt@hejtalent.de" className="text-primary hover:underline text-sm sm:text-base break-all">
-                    kontakt@hejtalent.de
+                  <a href="mailto:hello@hejtalent.de" className="text-primary hover:underline text-sm sm:text-base break-all">
+                    hello@hejtalent.de
                   </a>
                 </div>
               </div>

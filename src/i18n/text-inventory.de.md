@@ -27,7 +27,7 @@ Hinweis: Diese Inventur listet alle sichtbaren, deutschsprachigen Texte aus Head
   - Resource Hub
   - Kontakt
 - Kontakt
-  - kontakt@hejtalent.de
+  - hello@hejtalent.de
   - +49 89 9017 6218
   - Herzogstrasse 19, 80803 München, Germany
 - © 2024 HejTalent, a hej consulting GmbH brand. Alle Rechte vorbehalten.

@@ -35,9 +35,9 @@ const Contact = () => {
                   <Mail className="w-5 h-5 lg:w-6 lg:h-6 text-primary mt-1 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-sm lg:text-base">{t('contact.labels.email')}</div>
-                    <a href="mailto:kontakt@hejtalent.de" className="text-muted-foreground text-sm lg:text-base hover:text-primary break-all">
-                      kontakt@hejtalent.de
-                    </a>
+                  <a href="mailto:hello@hejtalent.de" className="text-muted-foreground text-sm lg:text-base hover:text-primary break-all">
+                    hello@hejtalent.de
+                  </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 lg:gap-4">
