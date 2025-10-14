@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
 import { Star, Users, Shield, ArrowLeft } from 'lucide-react';
+import { trackEvent } from '@/components/FacebookPixel';
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
 const AuthPage = () => {
@@ -178,6 +179,29 @@ const AuthPage = () => {
           });
         }
       } else {
+        // Check if user came from RaaS CTA on landing page
+        const leadIntent = localStorage.getItem('raas_lead_intent');
+        
+        if (leadIntent) {
+          try {
+            const intentData = JSON.parse(leadIntent);
+            
+            // Track Facebook Lead Event
+            trackEvent('Lead', {
+              content_name: 'RaaS Registration Complete',
+              content_category: 'Registration',
+              value: 0,
+              currency: 'EUR',
+              status: intentData.source
+            });
+            
+            // Cleanup localStorage
+            localStorage.removeItem('raas_lead_intent');
+          } catch (e) {
+            console.error('Error parsing lead intent:', e);
+          }
+        }
+        
         toast({
           title: "Registrierung erfolgreich",
           description: "Bitte prüfen Sie Ihre E-Mails zur Bestätigung.",

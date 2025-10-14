@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { MiniTeamSection } from '@/components/MiniTeamSection';
+import FacebookPixel, { trackEvent } from '@/components/FacebookPixel';
 
 import { Play, Star, CheckCircle, Users, Clock, Shield, Calendar, Linkedin } from 'lucide-react';
 import videoThumbnail from '@/assets/video-thumbnail.jpg';
@@ -45,6 +46,7 @@ const HejTalentLanding = () => {
 
   return (
     <div className="min-h-screen bg-background font-inter">
+      <FacebookPixel />
       {/* Sticky Trust Bar */}
       <div className="sticky top-0 z-40 bg-white border-b shadow-sm backdrop-blur-sm bg-white/95">
         <div className="container mx-auto px-4 py-3">
@@ -124,7 +126,21 @@ const HejTalentLanding = () => {
               asChild
               className="mb-16 animate-fade-in-delay-3 hover:scale-105 relative overflow-hidden"
             >
-              <Link to="/app/search-requests/new">
+              <Link 
+                to="/app/search-requests/new"
+                onClick={() => {
+                  trackEvent('InitiateCheckout', {
+                    content_name: 'RaaS Anfrage',
+                    value: 0,
+                    currency: 'EUR'
+                  });
+                  localStorage.setItem('raas_lead_intent', JSON.stringify({
+                    timestamp: Date.now(),
+                    source: 'hejtalent-landing',
+                    content: 'RaaS CTA Click'
+                  }));
+                }}
+              >
                 <span className="relative z-10">
                   {t('landing.hejTalent.hero.cta', 'RaaS Anfrage stellen')}
                 </span>
