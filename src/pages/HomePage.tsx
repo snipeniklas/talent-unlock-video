@@ -65,9 +65,9 @@ const HomePage = () => {
   ];
 
   const stats = [
-    { label: t('home.stats.items.placed', 'Vermittelte Remote-Fachkräfte'), value: "500+" },
+    { label: t('home.stats.items.placed', 'Remote-Fachkräfte aktiv'), value: "300+" },
     { label: t('home.stats.items.successful', 'Erfolgreiche Vermittlungen'), value: "150+" },
-    { label: t('home.stats.items.satisfaction', 'Zufriedene Unternehmen'), value: "98%" },
+    { label: t('home.stats.items.satisfaction', 'Zufriedene Unternehmen'), value: "80+" },
     { label: t('home.stats.items.weeks', 'Wochen Besetzungszeit'), value: "2-4" }
   ];
 
