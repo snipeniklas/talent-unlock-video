@@ -63,17 +63,16 @@
   },
   "home": {
     "hero": {
-      "title": "Global Remote Talents.",
+      "title": "RaaS - Resources as a Service",
       "ctaBadge": "KOSTENFREI",
       "ctaPrimary": "Unverbindliche RaaS Anfrage starten",
       "ctaSecondary": "Oder entdecken Sie unsere Expertise →",
       "riskFreeTitle": "✅ 100% kostenfrei & unverbindlich",
       "riskFreeText": "Maßgeschneiderte Ressourcen-Vorschläge ohne Verpflichtung. Erst bei Zustimmung beginnt die Zusammenarbeit.",
-      "description": "Wir integrieren unsere remote IT, KI und Backoffice Mitarbeiter in ihr Team und sparen somit mindestens 30% ihrer Personalkosten – 100% flexibel über Freelancer Verträge und innerhalb einer Woche startklar.",
-      "ctaDescription": "Stellen sie jetzt innerhalb 3 Minuten ihre RaaS-Suchanfrage ein und sie bekommen sofort unverbindliche Kandidaten vorgeschlagen.",
+      "description": "Als führender Dienstleister für internationale Fachkräfte stellen wir Ihnen seit 9 Jahren die besten Talente zur Verfügung. Unser bewährtes RaaS-System macht es einfach: Statt klassischer Anstellungen stellen wir Remote-Ressourcen über Dienstleistungsverträge bereit und schaffen so sofortigen Zugang zu qualifizierten Spezialisten weltweit.",
       "tagline": {
-        "prefix": "",
-        "main": ""
+        "prefix": "Die Remote-Experten,",
+        "main": "die Ihre HR-Herausforderungen verstehen und lösen"
       },
       "badges": {
         "expertise": "9+ Jahre Expertise",

@@ -115,9 +115,9 @@ Hinweis: Diese Inventur listet alle sichtbaren, deutschsprachigen Texte aus Head
 
 ### `pages/HomePage.tsx`
 - 9+ Jahre Remote-Expertise; 500+ geprüfte Fachkräfte; 98% Erfolgsquote
-- Global Remote Talents.
-- Wir integrieren unsere remote IT, KI und Backoffice Mitarbeiter in ihr Team und sparen somit mindestens 30% ihrer Personalkosten – 100% flexibel über Freelancer Verträge und innerhalb einer Woche startklar.
-- Stellen sie jetzt innerhalb 3 Minuten ihre RaaS-Suchanfrage ein und sie bekommen sofort unverbindliche Kandidaten vorgeschlagen.
+- RaaS - Resources as a Service
+- Die Remote-Experten, die Ihre Herausforderungen verstehen und lösen.
+- Als führender Dienstleister für internationale Fachkräfte stellen wir Ihnen seit 9 Jahren die besten Talente zur Verfügung. Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr Problem, wir liefern die perfekte Fachkraft-Lösung.
 - KOSTENFREI (Badge)
 - Unverbindliche RaaS Anfrage starten
 - Oder entdecken Sie unsere Expertise →
