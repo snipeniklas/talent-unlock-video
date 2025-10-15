@@ -104,7 +104,7 @@
     },
     "stats": {
       "headline": "Market leader",
-      "headlineSuffix": "in remote recruiting since 2020",
+      "headlineSuffix": "in remote recruiting since 2016",
       "sub": "Numbers that prove our expertise",
       "award": "🏆 Awarded 'Best Remote Recruiting Platform 2023'",
       "more": "Over 150 companies already trust our proven RaaS methodology. From startups to enterprises – we find the right remote experts.",
@@ -159,7 +159,7 @@
     },
     "about": {
       "title": "About Hej Talent",
-      "text": "Since 2020, we’ve been the trusted partner for companies seeking top remote professionals. We focus on thoroughly vetting and placing international remote talent.",
+      "text": "Since 2016, we've been the trusted partner for companies seeking top remote professionals. We focus on thoroughly vetting and placing international remote talent.",
       "bullets": ["Comprehensive background checks", "Personal support", "Quality guarantee"]
     },
     "testimonials": {
@@ -226,7 +226,7 @@
   "aboutUs": {
     "hero": {
       "title": "About ",
-      "subtitle": "Since 2020, we have been Germany’s leading platform for international remote professionals. We connect companies with the best talent worldwide."
+      "subtitle": "Since 2016, we have been Germany's leading platform for international remote professionals. We connect companies with the best talent worldwide."
     },
     "mission": {
       "title": "Our mission",
@@ -251,7 +251,7 @@
       }
     },
     "development": {
-      "title": "Our development since 2020"
+      "title": "Our development since 2016"
     },
     "why": {
       "title": "Why international professionals?",

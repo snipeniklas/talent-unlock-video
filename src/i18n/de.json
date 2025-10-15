@@ -104,7 +104,7 @@
     },
     "stats": {
       "headline": "Marktführer",
-      "headlineSuffix": "für Remote-Recruiting seit 2020",
+      "headlineSuffix": "für Remote-Recruiting seit 2016",
       "sub": "Zahlen, die unsere Expertise beweisen",
       "award": "🏆 Ausgezeichnet als \"Best Remote Recruiting Platform 2023\"",
       "more": "Über 150 Unternehmen vertrauen bereits auf unsere bewährte RaaS-Methodik. Von Startups bis DAX-Konzerne - wir finden die passenden Remote-Experten.",
@@ -159,7 +159,7 @@
     },
     "about": {
       "title": "Über Hej Talent",
-      "text": "Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und Vermittlung von internationalen Remote-Talenten.",
+      "text": "Seit 2016 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und Vermittlung von internationalen Remote-Talenten.",
       "bullets": ["Umfassende Background-Checks", "Persönliche Betreuung", "Qualitätsgarantie"]
     },
     "testimonials": {
@@ -226,7 +226,7 @@
   "aboutUs": {
     "hero": {
       "title": "Über ",
-      "subtitle": "Seit 2020 sind wir Deutschlands führende Plattform für internationale Remote-Fachkräfte. Wir verbinden Unternehmen mit den besten Talenten weltweit."
+      "subtitle": "Seit 2016 sind wir Deutschlands führende Plattform für internationale Remote-Fachkräfte. Wir verbinden Unternehmen mit den besten Talenten weltweit."
     },
     "mission": {
       "title": "Unsere Mission",
@@ -252,7 +252,7 @@
       }
     },
     "development": {
-      "title": "Unsere Entwicklung seit 2020"
+      "title": "Unsere Entwicklung seit 2016"
     },
     "why": {
       "title": "Warum internationale Fachkräfte?",

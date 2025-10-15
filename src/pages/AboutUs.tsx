@@ -56,9 +56,9 @@ const AboutUs = () => {
 
   const milestones = [
     {
-      year: "2020",
-      title: t('aboutUs.milestones.2020.title', 'Gründung von Hej Talent'),
-      description: t('aboutUs.milestones.2020.desc', 'Start als spezialisierte Remote-Recruiting Plattform')
+      year: "2016",
+      title: t('aboutUs.milestones.2016.title', 'Gründung von Hej Talent'),
+      description: t('aboutUs.milestones.2016.desc', 'Start als spezialisierte Remote-Recruiting Plattform')
     },
     {
       year: "2021",
