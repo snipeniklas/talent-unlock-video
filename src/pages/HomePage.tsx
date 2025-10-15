@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Users, Code, Shield, Star, CheckCircle, Mail, Phone, Linkedin, MapPin, Zap, Target, TrendingUp, Search } from "lucide-react";
+import { ArrowRight, Users, Code, Shield, Star, CheckCircle, Mail, Linkedin, MapPin, Zap, Target, TrendingUp, Search } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
@@ -190,11 +190,11 @@ const HomePage = () => {
                   <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-brand-dark mb-3 md:mb-4 lg:mb-6 leading-tight animate-fade-in">
                     <span className="text-primary">{t('home.hero.title', 'RaaS')}</span>
                   </h1>
-                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-3 md:mb-4 lg:mb-6 animate-fade-in-delay-1 font-light leading-snug">
-                    <span className="font-semibold text-brand-dark">{t('home.hero.tagline.prefix')}</span> {t('home.hero.tagline.main')}
+                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-brand-dark font-semibold mb-3 md:mb-4 lg:mb-6 animate-fade-in-delay-1 leading-snug">
+                    {t('home.hero.tagline.prefix', 'Global Remote Talents.')}
                   </p>
-                  <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-3 sm:mb-4 md:mb-6 lg:mb-8 animate-fade-in-delay-2 leading-relaxed">
-                    {t('home.hero.description', 'Als führender Dienstleister für internationale Fachkräfte stellen wir Ihnen seit 9 Jahren die besten Talente zur Verfügung. Unser bewährtes RaaS-System macht es einfach: Statt klassischer Anstellungen stellen wir Remote-Ressourcen über Dienstleistungsverträge bereit und schaffen so sofortigen Zugang zu qualifizierten Spezialisten weltweit.')}
+                  <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-3 sm:mb-4 md:mb-6 lg:mb-8 animate-fade-in-delay-2 leading-relaxed whitespace-pre-line">
+                    {t('home.hero.description', 'Wir integrieren unsere remote IT, KI und Backoffice Mitarbeiter in Ihr Team und sparen somit mindestens 30% Ihrer Personalkosten – 100% flexibel über Freelancer Verträge und innerhalb einer Woche startklar.\n\nStellen Sie jetzt innerhalb 3 Minuten Ihre RaaS-Suchanfrage ein und Sie bekommen sofort unverbindliche Kandidaten vorgeschlagen.')}
                   </p>
                 </div>
 
@@ -205,7 +205,6 @@ const HomePage = () => {
                       <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs px-1 py-0.5 rounded-full animate-pulse">
                         KOSTENLOS
                       </span>
-                      <Phone className="w-3 sm:w-4 h-3 sm:h-4 mr-1 sm:mr-2 flex-shrink-0" />
                       <span className="truncate">RaaS Anfrage</span>
                       <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4 ml-1 sm:ml-2 flex-shrink-0" />
                     </Link>
