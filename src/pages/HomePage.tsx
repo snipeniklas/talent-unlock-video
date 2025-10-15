@@ -474,12 +474,20 @@ const HomePage = () => {
       </section>
 
       {/* Interactive Platform Experience Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto max-w-7xl px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark">
-              {t('home.hub.title', 'Erleben Sie unseren ')} <span className="text-primary">RaaS</span> {t('home.hub.titleSuffix', 'Hub')}
-            </h2>
+      <section className="py-20 relative bg-white">
+        {/* Background Image with Opacity */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.08] pointer-events-none"
+          style={{ backgroundImage: 'url(/lovable-uploads/raas-hub-background.jpg)' }}
+        />
+        
+        {/* Content with z-index for foreground */}
+        <div className="relative z-10">
+          <div className="container mx-auto max-w-7xl px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-dark">
+                {t('home.hub.title', 'Erleben Sie unseren ')} <span className="text-primary">RaaS</span> {t('home.hub.titleSuffix', 'Hub')}
+              </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               {t('home.hub.text', 'Entdecken Sie, wie unser intuitiver Hub Ihren gesamten RaaS-Prozess vereinfacht - von der Anfrage bis zur erfolgreichen Zusammenarbeit.')}
             </p>
@@ -588,6 +596,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </section>
 
