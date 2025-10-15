@@ -188,13 +188,13 @@ const HomePage = () => {
                 {/* Main Title */}
                 <div className="text-center lg:text-left">
                   <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-brand-dark mb-3 md:mb-4 lg:mb-6 leading-tight animate-fade-in">
-                    <span className="text-primary">{t('home.hero.title', 'RaaS')}</span>
+                    {t('home.hero.title', 'Global Remote Talents.')}
                   </h1>
-                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-3 md:mb-4 lg:mb-6 animate-fade-in-delay-1 font-light leading-snug">
-                    <span className="font-semibold text-brand-dark">{t('home.hero.tagline.prefix')}</span> {t('home.hero.tagline.main')}
+                  <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-3 sm:mb-4 md:mb-6 animate-fade-in-delay-1 leading-relaxed">
+                    {t('home.hero.description', 'Wir integrieren unsere remote IT, KI und Backoffice Mitarbeiter in ihr Team und sparen somit mindestens 30% ihrer Personalkosten – 100% flexibel über Freelancer Verträge und innerhalb einer Woche startklar.')}
                   </p>
-                  <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-3 sm:mb-4 md:mb-6 lg:mb-8 animate-fade-in-delay-2 leading-relaxed">
-                    {t('home.hero.description', 'Als führender Dienstleister für internationale Fachkräfte stellen wir Ihnen seit 9 Jahren die besten Talente zur Verfügung. Unser bewährtes RaaS-System macht es einfach: Statt klassischer Anstellungen stellen wir Remote-Ressourcen über Dienstleistungsverträge bereit und schaffen so sofortigen Zugang zu qualifizierten Spezialisten weltweit.')}
+                  <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 md:mb-6 lg:mb-8 animate-fade-in-delay-2 leading-relaxed">
+                    {t('home.hero.ctaDescription', 'Stellen sie jetzt innerhalb 3 Minuten ihre RaaS-Suchanfrage ein und sie bekommen sofort unverbindliche Kandidaten vorgeschlagen.')}
                   </p>
                 </div>
 
