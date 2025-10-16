@@ -50,12 +50,16 @@ const HomePage = () => {
     {
       title: t('home.cards.backoffice.title', 'Remote Backoffice-Kräfte'),
       description: t('home.cards.backoffice.desc', 'Qualifizierte Remote-Mitarbeiter für administrative Aufgaben und operative Unterstützung'),
-      features: get<string[]>('home.cards.backoffice.features', ["Büroorganisation & Administration", "Buchhaltung & Controlling", "Kundenservice & Support"]) || []
+      features: get<string[]>('home.cards.backoffice.features', ["Büroorganisation & Administration", "Buchhaltung & Controlling", "Kundenservice & Support"]) || [],
+      image: '/lovable-uploads/professional-backoffice.png',
+      imageAlt: 'Professional Backoffice Specialist'
     },
     {
       title: t('home.cards.it.title', 'Remote IT-Entwickler & Tech-Experten'),
       description: t('home.cards.it.desc', 'Erfahrene Remote-Entwickler für alle Bereiche der Softwareentwicklung'),
-      features: get<string[]>('home.cards.it.features', ["Full-Stack Entwicklung", "DevOps & Cloud", "Mobile & Web Apps"]) || []
+      features: get<string[]>('home.cards.it.features', ["Full-Stack Entwicklung", "DevOps & Cloud", "Mobile & Web Apps"]) || [],
+      image: '/lovable-uploads/professional-it-developer.png',
+      imageAlt: 'Professional IT Developer'
     },
     {
       title: t('home.cards.ai.title', 'Remote KI & ML-Spezialisten'),
@@ -438,7 +442,7 @@ const HomePage = () => {
               <Card 
                 key={index} 
                 ref={(el) => {cardRefs.current[index] = el;}}
-                className={`cursor-pointer transition-all duration-500 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary ${
+                className={`cursor-pointer transition-all duration-500 hover:shadow-xl hover:scale-105 group border-2 hover:border-primary overflow-hidden ${
                   activeService === index ? 'ring-2 ring-primary border-primary' : ''
                 } ${
                   visibleCards[index] 
@@ -448,6 +452,16 @@ const HomePage = () => {
                 style={{ transitionDelay: `${index * 0.2}s` }}
                 onClick={() => setActiveService(index)}
               >
+                {service.image && (
+                  <div className="relative h-56 w-full overflow-hidden">
+                    <img 
+                      src={service.image} 
+                      alt={service.imageAlt}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/80" />
+                  </div>
+                )}
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center group-hover:animate-bounce">
