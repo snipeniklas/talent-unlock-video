@@ -64,7 +64,9 @@ const HomePage = () => {
     {
       title: t('home.cards.ai.title', 'Remote KI & ML-Spezialisten'),
       description: t('home.cards.ai.desc', 'KI-Experten und Data Scientists für Machine Learning und AI-Projekte'),
-      features: get<string[]>('home.cards.ai.features', ["Machine Learning", "Data Science", "KI-Strategieberatung"]) || []
+      features: get<string[]>('home.cards.ai.features', ["Machine Learning", "Data Science", "KI-Strategieberatung"]) || [],
+      image: '/lovable-uploads/professional-ai-ml.png',
+      imageAlt: 'Professional AI ML Specialist'
     }
   ];
 
