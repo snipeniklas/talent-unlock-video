@@ -150,7 +150,7 @@ Antworte NUR mit dem JSON-Objekt, ohne zusätzlichen Text.
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-5-mini-2025-08-07',
+        model: 'gpt-4o-mini',
         messages: [
           { role: 'system', content: 'Du bist ein JSON-Extraktions-Assistent.' },
           { role: 'user', content: structurePrompt }
