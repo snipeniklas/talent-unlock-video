@@ -238,9 +238,12 @@ async function personalizeEmail(
   }
 
   try {
+    // Get supabase instance for research data lookup
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    
     // Optional: Load research data for this contact (if available)
     let researchContext = "";
-    const { data: researchData } = await supabaseAdmin
+    const { data: researchData } = await supabase
       .from('crm_contact_research')
       .select('research_data')
       .eq('contact_id', contact.id)
@@ -428,6 +431,12 @@ async function sendEmailViaMS365(
   if (!response.ok) {
     const errorText = await response.text();
     console.error("MS365 API error:", response.status, errorText);
+    
+    // Better error message for expired tokens
+    if (response.status === 401) {
+      throw new Error("MS365 Token abgelaufen - bitte MS365 neu verbinden");
+    }
+    
     throw new Error(`Failed to send email via MS365: ${response.status}`);
   }
 }

@@ -374,13 +374,35 @@ export default function OutreachCampaignDetail() {
 
   const handleProcessNow = async () => {
     setIsProcessing(true);
-    // TODO: Trigger edge function to process campaign
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setIsProcessing(false);
-    toast({
-      title: "Verarbeitung gestartet",
-      description: "Die Kampagne wird jetzt verarbeitet.",
-    });
+    
+    try {
+      const { data, error } = await supabase.functions.invoke(
+        'process-outreach-campaigns',
+        {
+          body: { campaignId: id }
+        }
+      );
+
+      if (error) throw error;
+
+      toast({
+        title: "✅ Verarbeitung erfolgreich",
+        description: "E-Mails werden jetzt versendet.",
+      });
+
+      // Reload data
+      await refetch();
+      
+    } catch (error: any) {
+      console.error('Error processing campaign:', error);
+      toast({
+        title: "❌ Fehler bei Verarbeitung",
+        description: error.message || "Bitte versuche es erneut.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   if (!campaign) return <div>Laden...</div>;
@@ -462,12 +484,15 @@ export default function OutreachCampaignDetail() {
               {campaign.status === "draft" && (
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button onClick={() => updateStatusMutation.mutate("active")}>
+                    <Button onClick={async () => {
+                      await updateStatusMutation.mutateAsync("active");
+                      await handleProcessNow();
+                    }}>
                       <Play className="h-4 w-4 mr-2" />
                       Starten
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>Kampagne starten</TooltipContent>
+                  <TooltipContent>Kampagne starten und erste E-Mails senden</TooltipContent>
                 </Tooltip>
               )}
               
@@ -487,12 +512,15 @@ export default function OutreachCampaignDetail() {
                 <>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button onClick={() => updateStatusMutation.mutate("active")}>
+                      <Button onClick={async () => {
+                        await updateStatusMutation.mutateAsync("active");
+                        await handleProcessNow();
+                      }}>
                         <Play className="h-4 w-4 mr-2" />
                         Fortsetzen
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>Kampagne fortsetzen</TooltipContent>
+                    <TooltipContent>Kampagne fortsetzen und E-Mails senden</TooltipContent>
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
