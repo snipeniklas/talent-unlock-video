@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Mail, Phone, Plus, Upload, LayoutGrid, Table as TableIcon, Eye, Edit, Calendar } from "lucide-react";
+import { User, Mail, Phone, Plus, Upload, LayoutGrid, Table as TableIcon, Eye, Edit, Calendar, UserPlus, PhoneCall, CheckCircle2, FileText, Handshake, Trophy, XCircle, GripVertical } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/i18n";
@@ -38,6 +38,8 @@ export default function CrmContacts() {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeView, setActiveView] = useState<"kanban" | "table">("kanban");
   const [csvDialogOpen, setCsvDialogOpen] = useState(false);
+  const [draggedContact, setDraggedContact] = useState<CrmContact | null>(null);
+  const [dragOverStatus, setDragOverStatus] = useState<string | null>(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -90,133 +92,180 @@ export default function CrmContacts() {
     }
   };
 
+  const handleDragStart = (e: React.DragEvent, contact: CrmContact) => {
+    setDraggedContact(contact);
+    e.dataTransfer.effectAllowed = "move";
+    if (e.currentTarget instanceof HTMLElement) {
+      e.currentTarget.style.opacity = "0.5";
+    }
+  };
+
+  const handleDragEnd = (e: React.DragEvent) => {
+    if (e.currentTarget instanceof HTMLElement) {
+      e.currentTarget.style.opacity = "1";
+    }
+    setDraggedContact(null);
+    setDragOverStatus(null);
+  };
+
+  const handleDragOver = (e: React.DragEvent, status: string) => {
+    e.preventDefault();
+    setDragOverStatus(status);
+  };
+
+  const handleDrop = async (e: React.DragEvent, newStatus: string) => {
+    e.preventDefault();
+    if (!draggedContact || draggedContact.status === newStatus) return;
+    
+    // Optimistic Update
+    const oldStatus = draggedContact.status;
+    setContacts(prev => prev.map(c => 
+      c.id === draggedContact.id ? { ...c, status: newStatus } : c
+    ));
+    
+    // Database Update
+    const { error } = await (supabase as any)
+      .from('crm_contacts')
+      .update({ status: newStatus })
+      .eq('id', draggedContact.id);
+    
+    if (error) {
+      console.error(error);
+      // Rollback on error
+      setContacts(prev => prev.map(c => 
+        c.id === draggedContact.id ? { ...c, status: oldStatus } : c
+      ));
+    }
+    
+    setDragOverStatus(null);
+  };
+
   const ContactCard = ({ contact }: { contact: CrmContact }) => (
-    <Card className="hover:shadow-lg transition-all duration-200 mb-3 cursor-pointer group border hover:border-primary/50 bg-card">
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between">
-          <div className="min-w-0 flex-1">
-            <CardTitle className="text-base font-medium group-hover:text-primary transition-colors truncate">
-              {contact.first_name} {contact.last_name}
-            </CardTitle>
-            {contact.position && (
-              <CardDescription className="text-sm mt-1 truncate">{contact.position}</CardDescription>
-            )}
+    <Card 
+      draggable
+      onDragStart={(e) => handleDragStart(e, contact)}
+      onDragEnd={handleDragEnd}
+      className="hover:shadow-md transition-all duration-200 mb-2 cursor-grab active:cursor-grabbing group border hover:border-primary/50 bg-card"
+    >
+      <CardContent className="p-3 space-y-1.5">
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0 flex-1">
+            <GripVertical className="h-4 w-4 text-muted-foreground/40 flex-shrink-0" />
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-medium truncate group-hover:text-primary transition-colors">
+                {contact.first_name} {contact.last_name}
+              </p>
+              {contact.position && (
+                <p className="text-xs text-muted-foreground truncate">{contact.position}</p>
+              )}
+            </div>
           </div>
-          <div className="flex flex-col gap-1 ml-2">
-            <Badge className={`text-xs ${getPriorityColor(contact.priority)}`} variant="outline">
-              {t(`crm.contacts.priority.${contact.priority}`)}
-            </Badge>
-          </div>
+          <Badge className={`text-xs px-1.5 py-0 flex-shrink-0 ${getPriorityColor(contact.priority)}`} variant="outline">
+            {contact.priority === 'high' ? '!' : contact.priority === 'medium' ? '•' : '·'}
+          </Badge>
         </div>
-      </CardHeader>
-      <CardContent className="space-y-2 pb-4">
-        {contact.email && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
-            <span className="truncate">{contact.email}</span>
-          </div>
-        )}
-        {contact.phone && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
-            <span className="truncate">{contact.phone}</span>
-          </div>
-        )}
-        {contact.department && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
-            <span className="truncate">{contact.department}</span>
-          </div>
+        
+        {(contact.email || contact.phone) && (
+          <p className="text-xs text-muted-foreground truncate pl-6">
+            {contact.email || contact.phone}
+          </p>
         )}
         
-        <div className="flex gap-1 pt-2">
-          <Button
-            variant="ghost"
-            size="sm"
+        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity pt-1 pl-6">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="h-6 w-6 p-0" 
             onClick={(e) => {
               e.stopPropagation();
               navigate(`/admin/crm/contacts/${contact.id}`);
             }}
-            className="flex-1 h-8 text-xs hover:bg-muted hover:text-foreground"
           >
-            <Eye className="h-3 w-3 mr-1" />
-            {t('common.actions.view')}
+            <Eye className="h-3 w-3" />
           </Button>
-          <Button
-            variant="ghost"
-            size="sm"
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="h-6 w-6 p-0" 
             onClick={(e) => {
               e.stopPropagation();
-              navigate(`/admin/crm/contacts/${contact.id}/edit`)}
-            }
-            className="flex-1 h-8 text-xs hover:bg-muted hover:text-foreground"
+              navigate(`/admin/crm/contacts/${contact.id}/edit`);
+            }}
           >
-            <Edit className="h-3 w-3 mr-1" />
-            {t('common.actions.edit')}
+            <Edit className="h-3 w-3" />
           </Button>
         </div>
       </CardContent>
     </Card>
   );
 
-  const KanbanView = () => (
-    <div className="overflow-x-auto pb-4">
-      <div className="flex gap-6 min-w-max" style={{ width: 'max-content' }}>
-        {statusOrder.map(status => {
-          const statusContacts = filteredContacts.filter(contact => contact.status === status);
-          const statusInfo = {
-            new: { icon: '🆕', color: 'border-border' },
-            contacted: { icon: '📞', color: 'border-border' },
-            qualified: { icon: '✅', color: 'border-border' },
-            proposal: { icon: '📋', color: 'border-border' },
-            negotiation: { icon: '🤝', color: 'border-border' },
-            won: { icon: '🎉', color: 'border-green-200 bg-green-50' },
-            lost: { icon: '❌', color: 'border-red-200 bg-red-50' }
-          };
-          
-          return (
-            <div key={status} className="flex-shrink-0 w-80">
-              <div className={`rounded-lg border-2 bg-card ${statusInfo[status as keyof typeof statusInfo]?.color || 'border-border'} h-full shadow-sm`}>
-                <div className="p-4 border-b border-border/50 bg-muted/30">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className="text-lg">{statusInfo[status as keyof typeof statusInfo]?.icon}</span>
-                      <div>
-                        <h3 className="font-semibold text-base text-foreground">
+  const KanbanView = () => {
+    const statusInfo = {
+      new: { icon: UserPlus, color: 'border-blue-200 bg-blue-50/50', iconColor: 'text-blue-600' },
+      contacted: { icon: PhoneCall, color: 'border-yellow-200 bg-yellow-50/50', iconColor: 'text-yellow-600' },
+      qualified: { icon: CheckCircle2, color: 'border-green-200 bg-green-50/50', iconColor: 'text-green-600' },
+      proposal: { icon: FileText, color: 'border-purple-200 bg-purple-50/50', iconColor: 'text-purple-600' },
+      negotiation: { icon: Handshake, color: 'border-orange-200 bg-orange-50/50', iconColor: 'text-orange-600' },
+      won: { icon: Trophy, color: 'border-green-300 bg-green-100/50', iconColor: 'text-green-700' },
+      lost: { icon: XCircle, color: 'border-red-200 bg-red-50/50', iconColor: 'text-red-600' }
+    };
+
+    return (
+      <div className="overflow-x-auto pb-4">
+        <div className="flex gap-4 min-w-max" style={{ width: 'max-content' }}>
+          {statusOrder.map(status => {
+            const statusContacts = filteredContacts.filter(contact => contact.status === status);
+            const info = statusInfo[status as keyof typeof statusInfo];
+            const IconComponent = info.icon;
+            
+            return (
+              <div key={status} className="flex-shrink-0 w-72">
+                <div 
+                  onDragOver={(e) => handleDragOver(e, status)}
+                  onDragLeave={() => setDragOverStatus(null)}
+                  onDrop={(e) => handleDrop(e, status)}
+                  className={`rounded-lg border-2 transition-all duration-200 h-full shadow-sm ${
+                    dragOverStatus === status 
+                      ? 'border-primary bg-primary/5 scale-[1.02]' 
+                      : info.color
+                  }`}
+                >
+                  <div className="p-3 border-b sticky top-0 bg-card/95 backdrop-blur-sm z-10">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <IconComponent className={`h-4 w-4 ${info.iconColor}`} />
+                        <h3 className="font-semibold text-sm">
                           {t(`crm.contacts.status.${status}`)}
                         </h3>
-                        <p className="text-sm text-muted-foreground">
-                          {statusContacts.length} {t('crm.kanban.contactsCount', 'contacts')}
-                        </p>
                       </div>
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-sm font-medium">
-                      {statusContacts.length}
+                      <Badge variant="secondary" className="h-5 w-5 p-0 flex items-center justify-center text-xs">
+                        {statusContacts.length}
+                      </Badge>
                     </div>
                   </div>
-                </div>
-                
-                <div className="p-4 space-y-3 min-h-[500px] max-h-[70vh] overflow-y-auto">
-                  {statusContacts.length === 0 ? (
-                    <div className="text-center py-8 text-muted-foreground">
-                      <div className="text-4xl mb-2 opacity-50">📝</div>
-                      <p className="text-sm">{t('crm.kanban.noContacts', 'No contacts in this stage')}</p>
-                    </div>
-                  ) : (
-                    statusContacts.map((contact) => (
-                      <div key={contact.id} className="animate-fade-in">
-                        <ContactCard contact={contact} />
+                  
+                  <div className="p-3 space-y-2 min-h-[500px] max-h-[70vh] overflow-y-auto">
+                    {statusContacts.length === 0 ? (
+                      <div className="text-center py-8 text-muted-foreground">
+                        <IconComponent className={`h-8 w-8 mx-auto mb-2 opacity-20 ${info.iconColor}`} />
+                        <p className="text-xs">{t('crm.kanban.noContacts', 'Keine Kontakte')}</p>
                       </div>
-                    ))
-                  )}
+                    ) : (
+                      statusContacts.map((contact) => (
+                        <div key={contact.id} className="animate-fade-in">
+                          <ContactCard contact={contact} />
+                        </div>
+                      ))
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   // Column definitions for table view
   const columns: ColumnDef<CrmContact>[] = [
