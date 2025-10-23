@@ -57,6 +57,7 @@ import OutreachProfile from "./pages/admin/OutreachProfile";
 import OutreachCampaigns from "./pages/admin/OutreachCampaigns";
 import OutreachCampaignNew from "./pages/admin/OutreachCampaignNew";
 import OutreachCampaignDetail from "./pages/admin/OutreachCampaignDetail";
+import OutreachCampaignEdit from "./pages/admin/OutreachCampaignEdit";
 import MS365Callback from "./pages/admin/MS365Callback";
 
 const queryClient = new QueryClient();
@@ -128,6 +129,7 @@ const App = () => (
             <Route path="outreach-campaigns" element={<OutreachCampaigns />} />
             <Route path="outreach-campaigns/new" element={<OutreachCampaignNew />} />
             <Route path="outreach-campaigns/:id" element={<OutreachCampaignDetail />} />
+            <Route path="outreach-campaigns/:id/edit" element={<OutreachCampaignEdit />} />
             <Route path="support" element={<AdminSupport />} />
             <Route path="settings" element={<AdminSettings />} />
           </Route>

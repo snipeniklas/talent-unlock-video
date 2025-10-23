@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Play, Pause, CheckCircle, Ban, Check } from "lucide-react";
+import { ArrowLeft, Play, Pause, CheckCircle, Ban, Check, Edit, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -86,6 +86,31 @@ export default function OutreachCampaignDetail() {
     },
   });
 
+  const deleteCampaignMutation = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabase
+        .from("outreach_campaigns")
+        .delete()
+        .eq("id", id);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast({
+        title: "Kampagne gelöscht",
+        description: "Die Kampagne wurde erfolgreich gelöscht.",
+      });
+      navigate("/admin/outreach-campaigns");
+    },
+    onError: (error) => {
+      toast({
+        title: "Fehler",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "active":
@@ -134,29 +159,61 @@ export default function OutreachCampaignDetail() {
           </Badge>
         </div>
         <div className="flex gap-2">
+          {/* Bearbeiten-Button (nur wenn pausiert oder draft) */}
+          {(campaign.status === "paused" || campaign.status === "draft") && (
+            <Button 
+              variant="outline"
+              onClick={() => navigate(`/admin/outreach-campaigns/${id}/edit`)}
+            >
+              <Edit className="h-4 w-4 mr-2" />
+              Bearbeiten
+            </Button>
+          )}
+          
+          {/* Status-Buttons */}
           {campaign.status === "draft" && (
             <Button onClick={() => updateStatusMutation.mutate("active")}>
               <Play className="h-4 w-4 mr-2" />
               Starten
             </Button>
           )}
+          
           {campaign.status === "active" && (
             <Button onClick={() => updateStatusMutation.mutate("paused")}>
               <Pause className="h-4 w-4 mr-2" />
               Pausieren
             </Button>
           )}
+          
           {campaign.status === "paused" && (
             <>
               <Button onClick={() => updateStatusMutation.mutate("active")}>
                 <Play className="h-4 w-4 mr-2" />
                 Fortsetzen
               </Button>
-              <Button onClick={() => updateStatusMutation.mutate("completed")}>
+              <Button 
+                variant="outline"
+                onClick={() => updateStatusMutation.mutate("completed")}
+              >
                 <CheckCircle className="h-4 w-4 mr-2" />
                 Abschließen
               </Button>
             </>
+          )}
+          
+          {/* Löschen-Button (für alle Status außer active) */}
+          {campaign.status !== "active" && (
+            <Button 
+              variant="destructive"
+              onClick={() => {
+                if (confirm("Kampagne wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.")) {
+                  deleteCampaignMutation.mutate();
+                }
+              }}
+            >
+              <Trash2 className="h-4 w-4 mr-2" />
+              Löschen
+            </Button>
           )}
         </div>
       </div>
