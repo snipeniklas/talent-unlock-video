@@ -9,9 +9,16 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Info } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface EmailSequence {
   sequence_number: number;
@@ -179,6 +186,21 @@ Wichtig:
         </div>
       </div>
 
+      {/* Info Banner */}
+      <Alert>
+        <Info className="h-4 w-4" />
+        <AlertTitle>So funktioniert die AI-Personalisierung</AlertTitle>
+        <AlertDescription>
+          Du gibst die Richtung vor (Ton, Struktur, Thema), die AI macht den Rest:
+          <ul className="list-disc list-inside mt-2 space-y-1">
+            <li>Passt Betreff und Nachricht an Position und Branche an</li>
+            <li>Integriert deine Zielgruppe und den Call-to-Action</li>
+            <li>Ersetzt Variablen wie {`{{first_name}}`} automatisch</li>
+            <li>Optimiert die Ansprache für jeden Kontakt individuell</li>
+          </ul>
+        </AlertDescription>
+      </Alert>
+
       <div className="grid gap-6">
         {/* Kampagnen Details */}
         <Card>
@@ -287,7 +309,7 @@ Wichtig:
               <div>
                 <CardTitle>E-Mail Sequenzen *</CardTitle>
                 <CardDescription>
-                  Definiere die E-Mails, die automatisch gesendet werden
+                  Definiere die Richtung für deine E-Mails. Die AI verwendet diese als Grundlage und personalisiert sie automatisch für jeden Kontakt basierend auf Zielgruppe, CTA und Kontaktdaten.
                 </CardDescription>
               </div>
               <Button onClick={addEmailSequence} variant="outline" size="sm">
@@ -331,25 +353,59 @@ Wichtig:
                     </div>
                   )}
                   <div className="space-y-2">
-                    <Label>Betreff *</Label>
+                    <div className="flex items-center gap-2">
+                      <Label>Betreff-Guideline *</Label>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
+                          </TooltipTrigger>
+                          <TooltipContent className="max-w-xs">
+                            <p>Die AI verwendet diese Vorlage als Grundlage und passt sie automatisch an jeden Kontakt an. Du kannst Variablen wie {`{{first_name}}`} oder {`{{position}}`} verwenden.</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
                     <Input
                       value={sequence.subject_template}
                       onChange={(e) =>
                         updateEmailSequence(index, "subject_template", e.target.value)
                       }
-                      placeholder="Verwende {{first_name}}, {{company}} etc. für Variablen"
+                      placeholder={`z.B. Hallo {{first_name}}, gemeinsam zum Erfolg?`}
                     />
+                    <p className="text-xs text-muted-foreground">
+                      💡 Die AI personalisiert diesen Betreff basierend auf Zielgruppe, Position und CTA
+                    </p>
                   </div>
                   <div className="space-y-2">
-                    <Label>Nachricht *</Label>
+                    <div className="flex items-center gap-2">
+                      <Label>Nachricht-Guideline *</Label>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
+                          </TooltipTrigger>
+                          <TooltipContent className="max-w-xs">
+                            <p>Gib den Ton und die Struktur vor. Die AI passt die Nachricht automatisch an Position, Unternehmen und Branche des Kontakts an.</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
                     <Textarea
                       value={sequence.body_template}
                       onChange={(e) =>
                         updateEmailSequence(index, "body_template", e.target.value)
                       }
-                      placeholder="Die AI wird diese Vorlage personalisieren..."
-                      rows={6}
+                      placeholder={`z.B. Sehr geehrte(r) {{first_name}},
+
+ich habe gesehen, dass Sie als {{position}} tätig sind. Gemeinsam mit Ihrem Team bei {{company}} könnten wir...
+
+Beste Grüße`}
+                      rows={8}
                     />
+                    <p className="text-xs text-muted-foreground">
+                      💡 Die AI erweitert und personalisiert diese Vorlage unter Verwendung von Zielgruppe, CTA und Kontaktdaten
+                    </p>
                   </div>
                 </div>
               </div>
