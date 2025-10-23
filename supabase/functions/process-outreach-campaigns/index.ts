@@ -75,6 +75,39 @@ serve(async (req) => {
 
       const ms365Token: MS365Token = tokenData;
 
+      // Load campaign creator's email signature
+      const { data: emailSettings } = await supabase
+        .from("user_email_settings")
+        .select("email_signature")
+        .eq("user_id", campaign.created_by)
+        .maybeSingle();
+
+      // Load sender profile data for fallback signature
+      const { data: senderProfile } = await supabase
+        .from("profiles")
+        .select("first_name, last_name, email, company_id")
+        .eq("user_id", campaign.created_by)
+        .single();
+
+      let companyName = "";
+      if (senderProfile?.company_id) {
+        const { data: companyData } = await supabase
+          .from("companies")
+          .select("name")
+          .eq("id", senderProfile.company_id)
+          .single();
+        companyName = companyData?.name || "";
+      }
+
+      // Use custom signature or generate fallback
+      const emailSignature = emailSettings?.email_signature || 
+        generateFallbackSignature(
+          senderProfile?.first_name || "",
+          senderProfile?.last_name || "",
+          companyName,
+          senderProfile?.email || ""
+        );
+
       // Process each contact in this campaign
       for (const contactEntry of campaign.outreach_campaign_contacts) {
         // Skip excluded contacts
@@ -132,7 +165,8 @@ serve(async (req) => {
             campaign.ai_instructions || "",
             campaign.target_audience || "",
             campaign.desired_cta || "",
-            nextSequenceNumber
+            nextSequenceNumber,
+            emailSignature
           );
 
           // Send email via MS365
@@ -226,7 +260,8 @@ async function personalizeEmail(
   aiInstructions: string,
   targetAudience: string,
   desiredCta: string,
-  sequenceNumber: number
+  sequenceNumber: number,
+  emailSignature: string
 ): Promise<{ subject: string; body: string }> {
   // Fallback when OpenAI is not available
   if (!OPENAI_API_KEY) {
@@ -272,6 +307,20 @@ Deine Aufgabe: Personalisiere Betreff und Nachricht einer Outreach-E-Mail basier
 2. Kontakt-Informationen (Name, Position, Unternehmen, Branche)
 3. Kampagnen-Kontext (Zielgruppe, CTA, AI-Anweisungen)
 4. Optional: Research-Daten über den Kontakt
+
+FORMATIERUNGS-ANFORDERUNGEN:
+- Generiere HTML-formatierte E-Mail-Inhalte (NUR Content, KEINE vollständige HTML-Struktur)
+- Nutze <p> Tags für Absätze
+- Nutze <br> für Zeilenumbrüche innerhalb von Absätzen
+- Füge KEINE <html>, <head> oder <body> Tags hinzu
+- Halte die Formatierung sauber und professionell
+- Die Signatur wird automatisch angehängt - füge sie NICHT manuell hinzu
+
+Beispiel-Output:
+<p>Hallo {{first_name}},</p>
+<p>ich habe gesehen, dass Sie bei {{company}} als {{position}} tätig sind.<br>
+Das passt perfekt zu unserem Angebot.</p>
+<p>Hätten Sie Interesse an einem kurzen Austausch?</p>
 
 Wichtig:
 - Behalte den Ton und die Struktur der Vorlagen bei
@@ -373,7 +422,7 @@ Erstelle jetzt die personalisierte E-Mail.
 
     return {
       subject: result.subject,
-      body: result.body,
+      body: result.body + emailSignature,
     };
 
   } catch (error) {
@@ -439,4 +488,22 @@ async function sendEmailViaMS365(
     
     throw new Error(`Failed to send email via MS365: ${response.status}`);
   }
+}
+
+/**
+ * Generate fallback HTML signature if user hasn't defined one
+ */
+function generateFallbackSignature(
+  firstName: string,
+  lastName: string,
+  company: string,
+  email: string
+): string {
+  return `
+<br><br>
+<p>Beste Grüße<br>
+<strong>${firstName} ${lastName}</strong><br>
+${company}<br>
+<a href="mailto:${email}">${email}</a></p>
+  `.trim();
 }
