@@ -328,7 +328,6 @@ export default function CrmTaskForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="">Nicht zugewiesen</SelectItem>
                         {users.map((user) => (
                           <SelectItem key={user.user_id} value={user.user_id}>
                             {user.first_name} {user.last_name}
@@ -357,7 +356,6 @@ export default function CrmTaskForm() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="">Kein Kontakt</SelectItem>
                           {contacts.map((contact) => (
                             <SelectItem key={contact.id} value={contact.id}>
                               {contact.first_name} {contact.last_name}
@@ -383,7 +381,6 @@ export default function CrmTaskForm() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="">Kein Unternehmen</SelectItem>
                           {companies.map((company) => (
                             <SelectItem key={company.id} value={company.id}>
                               {company.name}
@@ -409,7 +406,6 @@ export default function CrmTaskForm() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="">Keine Kampagne</SelectItem>
                           {campaigns.map((campaign) => (
                             <SelectItem key={campaign.id} value={campaign.id}>
                               {campaign.name}
