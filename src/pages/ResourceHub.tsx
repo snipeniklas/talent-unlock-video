@@ -32,6 +32,8 @@ import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
 import { useTranslation } from '@/i18n/i18n';
+import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
+import { LazyImage } from "@/components/LazyImage";
 
 const ResourceHub = () => {
   const navigate = useNavigate();
@@ -410,15 +412,19 @@ const ResourceHub = () => {
 
           {/* Main CTA */}
           <div className="text-center">
-            <Button 
-              size="lg" 
-              className="text-xl px-12 py-8 bg-gradient-primary border-0 hover:scale-105 transition-transform shadow-2xl"
-              onClick={() => navigate('/auth')}
-            >
-              <UserCheck className="w-6 h-6 mr-3" />
-              {t('resourceHub.mainCta.open', 'RaaS Hub jetzt öffnen')}
-              <ArrowRight className="w-6 h-6 ml-3" />
-            </Button>
+            <RaasInquiryDialog
+              source="resource-hub-main-cta"
+              trigger={
+                <Button 
+                  size="lg" 
+                  className="text-xl px-12 py-8 bg-gradient-primary border-0 hover:scale-105 transition-transform shadow-2xl"
+                >
+                  <UserCheck className="w-6 h-6 mr-3" />
+                  {t('resourceHub.mainCta.open', 'RaaS Hub jetzt öffnen')}
+                  <ArrowRight className="w-6 h-6 ml-3" />
+                </Button>
+              }
+            />
           </div>
 
           {/* Feature Grid with Enhanced Cards */}
@@ -454,11 +460,16 @@ const ResourceHub = () => {
               {t('resourceHub.premium.subtitle', 'Treten Sie ein in die neue Ära intelligenter Talent-Beschaffung und erleben Sie, wie KI Ihr Recruiting revolutioniert.')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-10 py-6 bg-gradient-primary border-0 hover:scale-105 transition-transform" onClick={() => navigate('/auth')}>
-                <UserCheck className="w-5 h-5 mr-2" />
-                {t('resourceHub.premium.open', 'Hub jetzt öffnen')}
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
+            <RaasInquiryDialog
+              source="resource-hub-premium-cta"
+              trigger={
+                <Button size="lg" className="text-lg px-10 py-6 bg-gradient-primary border-0 hover:scale-105 transition-transform">
+                  <UserCheck className="w-5 h-5 mr-2" />
+                  {t('resourceHub.premium.open', 'Hub jetzt öffnen')}
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              }
+            />
               <Button variant="outline" size="lg" className="text-lg px-10 py-6 border-2 border-primary hover:bg-primary hover:text-white transition-all duration-300" onClick={() => navigate('/contact')}>
                 {t('resourceHub.premium.demo', 'Demo anfragen')}
               </Button>

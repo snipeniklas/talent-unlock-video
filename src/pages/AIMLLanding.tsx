@@ -118,33 +118,33 @@ const AIMLLanding = () => {
               </div>
             </div>
 
-            <Button
-              variant="cta"
-              size="xl"
-              asChild
-              className="mb-16 animate-fade-in-delay-3 hover:scale-105 relative overflow-hidden"
-            >
-              <Link 
-                to="/app/search-requests/new"
-                onClick={() => {
-                  trackEvent('InitiateCheckout', {
-                    content_name: 'RaaS Anfrage',
-                    value: 0,
-                    currency: 'EUR'
-                  });
-                  localStorage.setItem('raas_lead_intent', JSON.stringify({
-                    timestamp: Date.now(),
-                    source: 'ai-ml-landing',
-                    content: 'RaaS CTA Click'
-                  }));
-                }}
-              >
-                <span className="relative z-10">
-                  {t('landing.aiMl.hero.cta', 'RaaS Anfrage stellen')}
-                </span>
-                <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>
-              </Link>
-            </Button>
+            <RaasInquiryDialog
+              source="ai-ml-landing-hero"
+              trigger={
+                <Button
+                  variant="cta"
+                  size="xl"
+                  className="mb-16 animate-fade-in-delay-3 hover:scale-105 relative overflow-hidden"
+                  onClick={() => {
+                    trackEvent('InitiateCheckout', {
+                      content_name: 'RaaS Anfrage',
+                      value: 0,
+                      currency: 'EUR'
+                    });
+                    localStorage.setItem('raas_lead_intent', JSON.stringify({
+                      timestamp: Date.now(),
+                      source: 'ai-ml-landing',
+                      content: 'RaaS CTA Click'
+                    }));
+                  }}
+                >
+                  <span className="relative z-10">
+                    {t('landing.aiMl.hero.cta', 'RaaS Anfrage stellen')}
+                  </span>
+                  <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>
+                </Button>
+              }
+            />
 
             {/* 3-Bullet Preview */}
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">

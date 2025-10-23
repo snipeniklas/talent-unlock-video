@@ -8,6 +8,7 @@ import { ArrowRight, Mail, Phone, MapPin, Clock } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import { useTranslation } from '@/i18n/i18n';
+import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -71,20 +72,15 @@ const Contact = () => {
                 <CardTitle>{t('contact.form.title')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 p-4 lg:p-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Input placeholder={t('contact.form.placeholders.firstName')} />
-                  <Input placeholder={t('contact.form.placeholders.lastName')} />
-                </div>
-                <Input placeholder={t('contact.form.placeholders.email')} type="email" />
-                <Input placeholder={t('contact.form.placeholders.company')} />
-                <Input placeholder={t('contact.form.placeholders.phone')} />
-                <Textarea placeholder={t('contact.form.placeholders.description')} className="h-24 lg:h-32" />
-                <Button asChild className="w-full bg-primary hover:bg-primary-hover text-sm lg:text-base py-3">
-                  <Link to="/app/search-requests/new">
-                    {t('contact.form.submit')}
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
+                <RaasInquiryDialog
+                  source="contact-page"
+                  trigger={
+                    <Button className="w-full bg-primary hover:bg-primary-hover text-sm lg:text-base py-3">
+                      {t('contact.form.submit')}
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  }
+                />
               </CardContent>
             </Card>
           </div>

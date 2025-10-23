@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowRight, Mail, Phone, MapPin, Clock, Linkedin } from "lucide-react";
 import { useTranslation } from '@/i18n/i18n';
+import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
 
 const ContactCTA = () => {
   const { t } = useTranslation();
@@ -83,20 +84,15 @@ const ContactCTA = () => {
                </p>
             </CardHeader>
             <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-4 md:px-6">
-              <div className="grid gap-3 sm:gap-4">
-                <Input placeholder={t('contactCTA.form.placeholders.firstName', 'Vorname')} className="text-sm sm:text-base h-10 sm:h-11" />
-                <Input placeholder={t('contactCTA.form.placeholders.lastName', 'Nachname')} className="text-sm sm:text-base h-10 sm:h-11" />
-              </div>
-              <Input placeholder={t('contactCTA.form.placeholders.email', 'E-Mail-Adresse')} type="email" className="text-sm sm:text-base h-10 sm:h-11" />
-              <Input placeholder={t('contactCTA.form.placeholders.company', 'Unternehmen')} className="text-sm sm:text-base h-10 sm:h-11" />
-              <Input placeholder={t('contactCTA.form.placeholders.phone', 'Telefon')} className="text-sm sm:text-base h-10 sm:h-11" />
-              <Textarea placeholder={t('contactCTA.form.placeholders.description', 'Beschreiben Sie Ihren Remote-Fachkräfte-Bedarf...')} className="h-20 sm:h-24 md:h-28 text-sm sm:text-base resize-none" />
-              <Button asChild className="w-full bg-gradient-primary hover:shadow-xl transition-all duration-300 text-xs sm:text-sm md:text-base py-2.5 sm:py-3 md:py-4 border-0 h-auto max-w-full">
-                <Link to="/app/search-requests/new" className="block w-full">
-                  <span className="truncate block">Jetzt starten</span>
-                  <ArrowRight className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 ml-1 sm:ml-2 flex-shrink-0" />
-                </Link>
-              </Button>
+              <RaasInquiryDialog
+                source="contact-cta"
+                trigger={
+                  <Button className="w-full bg-gradient-primary hover:shadow-xl transition-all duration-300 text-xs sm:text-sm md:text-base py-2.5 sm:py-3 md:py-4 border-0 h-auto max-w-full">
+                    <span className="truncate block">Jetzt starten</span>
+                    <ArrowRight className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 ml-1 sm:ml-2 flex-shrink-0" />
+                  </Button>
+                }
+              />
             </CardContent>
             </Card>
           </div>
