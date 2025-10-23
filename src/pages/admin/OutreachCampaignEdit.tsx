@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Plus, Trash2, Info } from "lucide-react";
+import { ArrowLeft, Mail, Info } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -19,6 +19,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface EmailSequence {
   id?: string;
@@ -34,6 +41,7 @@ export default function OutreachCampaignEdit() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
+  const [numFollowUps, setNumFollowUps] = useState(1);
   const [campaignName, setCampaignName] = useState("");
   const [campaignDescription, setCampaignDescription] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
@@ -85,6 +93,59 @@ export default function OutreachCampaignEdit() {
     },
   });
 
+  // Helper functions for default prompts
+  const getDefaultSubjectPrompt = (sequenceNum: number): string => {
+    if (sequenceNum === 1) {
+      return "Schreibe einen professionellen, neugierig machenden Betreff für eine erste Kontaktaufnahme. Beziehe dich auf die Position des Kontakts und schaffe einen direkten Bezug zur Zielgruppe. Maximal 60 Zeichen.";
+    } else if (sequenceNum === 2) {
+      return "Schreibe einen freundlichen Follow-Up Betreff, der auf die erste E-Mail Bezug nimmt, ohne aufdringlich zu wirken. Maximal 60 Zeichen.";
+    } else if (sequenceNum === 3) {
+      return "Schreibe einen prägnanten, wertorientierten Betreff für ein zweites Follow-Up.";
+    } else {
+      return `Schreibe einen direkten Betreff für Follow-Up #${sequenceNum - 1}.`;
+    }
+  };
+
+  const getDefaultBodyPrompt = (sequenceNum: number): string => {
+    if (sequenceNum === 1) {
+      return `Schreibe eine professionelle, aber persönliche E-Mail für eine erste Kontaktaufnahme.
+
+Wichtige Elemente:
+- Persönliche Ansprache basierend auf Position und Unternehmen
+- Relevanter Aufhänger (z.B. aktuelle Entwicklungen in der Branche)
+- Klarer Mehrwert für den Empfänger
+- Direkter, aber unaufdringlicher Call-to-Action
+- Professioneller, freundlicher Ton
+
+Länge: 100-150 Wörter. Nutze HTML-Formatierung mit <p> Tags.`;
+    } else if (sequenceNum === 2) {
+      return `Schreibe ein höfliches Follow-Up zur ersten E-Mail.
+
+Wichtige Elemente:
+- Kurzer Verweis auf die erste Nachricht
+- Zusätzlicher Mehrwert oder neue Perspektive
+- Verständnis für Zeitknappheit zeigen
+- Erneuter, sanfter Call-to-Action
+
+Länge: 80-120 Wörter. Ton: Freundlich, nicht pushy.`;
+    } else if (sequenceNum === 3) {
+      return `Verfasse ein kurzes, wertorientiertes zweites Follow-Up.
+
+Wichtige Elemente:
+- Sehr kurz und auf den Punkt (max. 80 Wörter)
+- Konkreter Mehrwert im Fokus
+- Alternative CTA anbieten (z.B. kurzer Call vs. Ressource)
+- Professionell, aber mit leichter Dringlichkeit`;
+    } else {
+      return `Verfasse ein sehr kurzes, finales Follow-Up #${sequenceNum - 1}.
+
+Wichtig:
+- Maximal 60 Wörter
+- Klare Deadline oder letzte Chance kommunizieren
+- Professionell bleiben`;
+    }
+  };
+
   // Pre-fill form when campaign data loads
   useEffect(() => {
     if (campaign) {
@@ -98,7 +159,7 @@ export default function OutreachCampaignEdit() {
       const contactIds = campaign.outreach_campaign_contacts?.map((cc: any) => cc.contact_id) || [];
       setSelectedContacts(contactIds);
       
-      // Set email sequences
+      // Set email sequences and derive numFollowUps
       const sequences = campaign.outreach_email_sequences?.map((seq: any) => ({
         id: seq.id,
         sequence_number: seq.sequence_number,
@@ -106,14 +167,31 @@ export default function OutreachCampaignEdit() {
         body_template: seq.body_template,
         delay_days: seq.delay_days,
       })) || [];
-      setEmailSequences(sequences.length > 0 ? sequences : [{
-        sequence_number: 1,
-        subject_template: "",
-        body_template: "",
-        delay_days: 0,
-      }]);
+      
+      if (sequences.length > 0) {
+        setEmailSequences(sequences);
+        setNumFollowUps(sequences.length - 1); // -1 because first email is not a follow-up
+      }
     }
   }, [campaign]);
+
+  // Generate email sequences based on numFollowUps
+  useEffect(() => {
+    const totalEmails = numFollowUps + 1; // +1 for initial email
+    
+    if (emailSequences.length !== totalEmails) {
+      const newSequences = Array.from({ length: totalEmails }, (_, i) => {
+        const existing = emailSequences[i];
+        return existing || {
+          sequence_number: i + 1,
+          subject_template: getDefaultSubjectPrompt(i + 1),
+          body_template: getDefaultBodyPrompt(i + 1),
+          delay_days: i === 0 ? 0 : 3,
+        };
+      });
+      setEmailSequences(newSequences);
+    }
+  }, [numFollowUps]);
 
   const updateCampaignMutation = useMutation({
     mutationFn: async () => {
@@ -198,22 +276,6 @@ export default function OutreachCampaignEdit() {
     );
   };
 
-  const addEmailSequence = () => {
-    setEmailSequences([
-      ...emailSequences,
-      {
-        sequence_number: emailSequences.length + 1,
-        subject_template: "",
-        body_template: "",
-        delay_days: 3,
-      },
-    ]);
-  };
-
-  const removeEmailSequence = (index: number) => {
-    setEmailSequences(emailSequences.filter((_, i) => i !== index));
-  };
-
   const updateEmailSequence = (
     index: number,
     field: keyof EmailSequence,
@@ -254,16 +316,10 @@ export default function OutreachCampaignEdit() {
 
       {/* Info Banner */}
       <Alert>
-        <Info className="h-4 w-4" />
-        <AlertTitle>So funktioniert die AI-Personalisierung</AlertTitle>
+        <Mail className="h-4 w-4" />
+        <AlertTitle>AI-Generierung</AlertTitle>
         <AlertDescription>
-          Du gibst die Richtung vor (Ton, Struktur, Thema), die AI macht den Rest:
-          <ul className="list-disc list-inside mt-2 space-y-1">
-            <li>Passt Betreff und Nachricht an Position und Branche an</li>
-            <li>Integriert deine Zielgruppe und den Call-to-Action</li>
-            <li>Ersetzt Variablen wie {`{{first_name}}`} automatisch</li>
-            <li>Optimiert die Ansprache für jeden Kontakt individuell</li>
-          </ul>
+          Die E-Mails werden von KI komplett neu geschrieben basierend auf Ihren Prompts, Kontaktdaten und Firmenprofil.
         </AlertDescription>
       </Alert>
 
@@ -368,39 +424,49 @@ export default function OutreachCampaignEdit() {
           </CardContent>
         </Card>
 
-        {/* E-Mail Sequenzen */}
+        {/* Email Configuration */}
         <Card>
           <CardHeader>
-            <div className="flex justify-between items-center">
-              <div>
-                <CardTitle>E-Mail Sequenzen *</CardTitle>
-                <CardDescription>
-                  Definiere die Richtung für deine E-Mails. Die AI verwendet diese als Grundlage und personalisiert sie automatisch für jeden Kontakt basierend auf Zielgruppe, CTA und Kontaktdaten.
-                </CardDescription>
-              </div>
-              <Button onClick={addEmailSequence} variant="outline" size="sm">
-                <Plus className="h-4 w-4 mr-2" />
-                E-Mail hinzufügen
-              </Button>
-            </div>
+            <CardTitle>E-Mail Konfiguration</CardTitle>
+            <CardDescription>
+              Konfigurieren Sie die E-Mail-Sequenzen für diese Kampagne
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="numFollowUps">Anzahl Follow-Ups</Label>
+              <Select
+                value={numFollowUps.toString()}
+                onValueChange={(value) => setNumFollowUps(parseInt(value))}
+              >
+                <SelectTrigger id="numFollowUps">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="0">0 (nur initiale E-Mail)</SelectItem>
+                  <SelectItem value="1">1 Follow-Up</SelectItem>
+                  <SelectItem value="2">2 Follow-Ups</SelectItem>
+                  <SelectItem value="3">3 Follow-Ups</SelectItem>
+                  <SelectItem value="4">4 Follow-Ups</SelectItem>
+                  <SelectItem value="5">5 Follow-Ups</SelectItem>
+                </SelectContent>
+              </Select>
+              <p className="text-sm text-muted-foreground">
+                ℹ️ Du erstellst damit {numFollowUps + 1} E-Mail{numFollowUps + 1 > 1 ? 's' : ''} insgesamt
+              </p>
+            </div>
+
+            <Separator />
+
             {emailSequences.map((sequence, index) => (
-              <div key={index}>
-                {index > 0 && <Separator className="my-6" />}
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <h4 className="font-semibold">E-Mail #{sequence.sequence_number}</h4>
-                    {emailSequences.length > 1 && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeEmailSequence(index)}
-                      >
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                      </Button>
-                    )}
-                  </div>
+              <Card key={index}>
+                <CardHeader>
+                  <CardTitle className="text-base">
+                    E-Mail #{sequence.sequence_number}
+                    {index === 0 ? ' (Initiale E-Mail)' : ` (${index}. Follow-Up)`}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
                   {index > 0 && (
                     <div className="space-y-2">
                       <Label>Verzögerung (Tage)</Label>

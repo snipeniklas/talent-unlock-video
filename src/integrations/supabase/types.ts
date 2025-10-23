@@ -221,6 +221,7 @@ export type Database = {
           id: string
           name: string
           updated_at: string
+          value_proposition: string | null
           website: string | null
         }
         Insert: {
@@ -229,6 +230,7 @@ export type Database = {
           id?: string
           name: string
           updated_at?: string
+          value_proposition?: string | null
           website?: string | null
         }
         Update: {
@@ -237,6 +239,7 @@ export type Database = {
           id?: string
           name?: string
           updated_at?: string
+          value_proposition?: string | null
           website?: string | null
         }
         Relationships: []

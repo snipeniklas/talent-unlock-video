@@ -1,183 +1,292 @@
-import React from 'react';
-import { useTranslation } from '@/i18n/i18n';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
-import { 
-  Settings, 
-  Key, 
-  Mail, 
-  Building2, 
-  User, 
-  Globe,
-  Zap,
-  Search,
-  Send
-} from 'lucide-react';
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { CheckCircle2, Settings, Zap, Mail, Save, RotateCcw, Building2, AtSign } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "@/hooks/use-toast";
 
 export default function OutreachProfile() {
-  const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  
+  // State
+  const [companyName, setCompanyName] = useState('');
+  const [companyWebsite, setCompanyWebsite] = useState('');
+  const [valueProposition, setValueProposition] = useState('');
+  const [emailSignature, setEmailSignature] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  // Fetch current user
+  const { data: currentUser } = useQuery({
+    queryKey: ['currentUser'],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      return user;
+    }
+  });
+
+  // Fetch user data with company info
+  const { data: userData } = useQuery({
+    queryKey: ['userData', currentUser?.id],
+    queryFn: async () => {
+      if (!currentUser?.id) return null;
+      
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('company_id, companies(id, name, website, value_proposition)')
+        .eq('user_id', currentUser.id)
+        .single();
+      
+      return profile;
+    },
+    enabled: !!currentUser?.id
+  });
+
+  // Fetch email signature
+  const { data: emailSettings } = useQuery({
+    queryKey: ['emailSettings', currentUser?.id],
+    queryFn: async () => {
+      if (!currentUser?.id) return null;
+      
+      const { data } = await supabase
+        .from('user_email_settings')
+        .select('email_signature')
+        .eq('user_id', currentUser.id)
+        .maybeSingle();
+      
+      return data;
+    },
+    enabled: !!currentUser?.id
+  });
+
+  // Load company data
+  useEffect(() => {
+    if (userData?.companies) {
+      setCompanyName(userData.companies.name || '');
+      setCompanyWebsite(userData.companies.website || '');
+      setValueProposition(userData.companies.value_proposition || '');
+    }
+  }, [userData]);
+
+  // Load email signature
+  useEffect(() => {
+    if (emailSettings?.email_signature) {
+      setEmailSignature(emailSettings.email_signature);
+    }
+  }, [emailSettings]);
+
+  const handleSave = async () => {
+    if (!currentUser?.id || !userData?.company_id) {
+      toast({
+        title: 'Fehler',
+        description: 'Benutzerdaten konnten nicht geladen werden.',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    if (!companyName.trim()) {
+      toast({
+        title: 'Validierungsfehler',
+        description: 'Firmenname ist erforderlich.',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    setSaving(true);
+
+    try {
+      // Save company profile
+      const { error: companyError } = await supabase
+        .from('companies')
+        .update({
+          name: companyName,
+          website: companyWebsite,
+          value_proposition: valueProposition
+        })
+        .eq('id', userData.company_id);
+
+      if (companyError) throw companyError;
+
+      // Save email signature
+      const { error: signatureError } = await supabase
+        .from('user_email_settings')
+        .upsert({
+          user_id: currentUser.id,
+          email_signature: emailSignature
+        }, {
+          onConflict: 'user_id'
+        });
+
+      if (signatureError) throw signatureError;
+
+      // Invalidate queries
+      queryClient.invalidateQueries({ queryKey: ['userData'] });
+      queryClient.invalidateQueries({ queryKey: ['emailSettings'] });
+
+      toast({
+        title: '✅ Profil gespeichert',
+        description: 'Ihr Outreach-Profil wurde erfolgreich aktualisiert.',
+      });
+
+    } catch (error: any) {
+      toast({
+        title: 'Fehler beim Speichern',
+        description: error.message,
+        variant: 'destructive'
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleReset = () => {
+    if (userData?.companies) {
+      setCompanyName(userData.companies.name || '');
+      setCompanyWebsite(userData.companies.website || '');
+      setValueProposition(userData.companies.value_proposition || '');
+    }
+    if (emailSettings?.email_signature) {
+      setEmailSignature(emailSettings.email_signature);
+    } else {
+      setEmailSignature('');
+    }
+  };
 
   return (
-    <div className="container mx-auto py-6 space-y-6">
+    <div className="container mx-auto p-6 space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            {t('outreach.profile.title', 'Outreach Profil')}
-          </h1>
-          <p className="text-muted-foreground">
-            {t('outreach.profile.subtitle', 'Konfiguration für automatisierte Lead-Generierung und E-Mail-Outreach')}
-          </p>
-        </div>
-        <Badge variant="secondary" className="px-3 py-1">
-          <Settings className="w-4 h-4 mr-2" />
-          {t('outreach.status.setup', 'Setup')}
-        </Badge>
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold">Outreach Profil</h1>
+        <p className="text-muted-foreground">
+          Ihr Absenderprofil für E-Mail-Kampagnen
+        </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Company Profile */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Building2 className="w-5 h-5" />
-              {t('outreach.company.title', 'Firmenprofil')}
-            </CardTitle>
-            <CardDescription>
-              {t('outreach.company.description', 'Informationen für die Personalisierung von Outreach-Nachrichten')}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="company-name">{t('outreach.company.name', 'Firmenname')}</Label>
-              <Input 
-                id="company-name" 
-                placeholder={t('outreach.company.namePlaceholder', 'Ihre Firma GmbH')}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="company-website">{t('outreach.company.website', 'Website')}</Label>
-              <Input 
-                id="company-website" 
-                placeholder="https://ihr-unternehmen.de"
-                type="url"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="company-value-prop">{t('outreach.company.valueProp', 'Wertversprechen')}</Label>
-              <Textarea 
-                id="company-value-prop"
-                placeholder={t('outreach.company.valuePropPlaceholder', 'Kurze Beschreibung, was Ihr Unternehmen einzigartig macht...')}
-                rows={3}
-              />
-            </div>
-          </CardContent>
-        </Card>
+      {/* Company Profile */}
+      <Card>
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <Building2 className="w-5 h-5" />
+            <CardTitle>Firmenprofil</CardTitle>
+          </div>
+          <CardDescription>
+            Informationen über Ihr Unternehmen für personalisierte Outreach-Kampagnen
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="companyName">Firmenname *</Label>
+            <Input 
+              id="companyName"
+              type="text" 
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              placeholder="Hej Talent GmbH"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="companyWebsite">Website</Label>
+            <Input 
+              id="companyWebsite"
+              type="url" 
+              value={companyWebsite}
+              onChange={(e) => setCompanyWebsite(e.target.value)}
+              placeholder="https://hejtalent.de"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="valueProposition">Wertversprechen *</Label>
+            <Textarea 
+              id="valueProposition"
+              value={valueProposition}
+              onChange={(e) => setValueProposition(e.target.value)}
+              className="min-h-[100px]"
+              placeholder="Beschreiben Sie, was Ihr Unternehmen einzigartig macht und welchen Mehrwert Sie bieten..."
+            />
+            <p className="text-xs text-muted-foreground">
+              💡 Die KI nutzt diese Information, um relevantere E-Mails zu generieren
+            </p>
+          </div>
+        </CardContent>
+      </Card>
 
-        {/* Personal Profile */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <User className="w-5 h-5" />
-              {t('outreach.personal.title', 'Persönliches Profil')}
-            </CardTitle>
-            <CardDescription>
-              {t('outreach.personal.description', 'Ihre Kontaktdaten für E-Mail-Signaturen')}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="first-name">{t('outreach.personal.firstName', 'Vorname')}</Label>
-                <Input id="first-name" placeholder="Max" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="last-name">{t('outreach.personal.lastName', 'Nachname')}</Label>
-                <Input id="last-name" placeholder="Mustermann" />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="position">{t('outreach.personal.position', 'Position')}</Label>
-              <Input 
-                id="position" 
-                placeholder={t('outreach.personal.positionPlaceholder', 'Geschäftsführer, Vertriebsleiter, etc.')}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">{t('outreach.personal.email', 'E-Mail-Adresse')}</Label>
-              <Input 
-                id="email" 
-                type="email"
-                placeholder="max@ihr-unternehmen.de"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="phone">{t('outreach.personal.phone', 'Telefon')}</Label>
-              <Input 
-                id="phone" 
-                placeholder="+49 123 456789"
-              />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      {/* Email Signature */}
+      <Card>
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <AtSign className="w-5 h-5" />
+            <CardTitle>E-Mail Signatur</CardTitle>
+          </div>
+          <CardDescription>
+            Ihre Signatur für Outreach E-Mails
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="emailSignature">Signatur</Label>
+            <Textarea 
+              id="emailSignature"
+              value={emailSignature}
+              onChange={(e) => setEmailSignature(e.target.value)}
+              className="min-h-[120px] font-mono text-sm"
+              placeholder="Beste Grüße&#10;&#10;Max Mustermann&#10;Geschäftsführer&#10;Hej Talent GmbH"
+            />
+            <p className="text-xs text-muted-foreground">
+              💡 Sie können HTML verwenden (&lt;p&gt;, &lt;br&gt;, &lt;strong&gt;)
+            </p>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* API Information */}
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="flex items-center gap-2">
-                <Key className="w-5 h-5" />
-                {t('outreach.api.title', 'API-Integration')}
-              </CardTitle>
-              <CardDescription>
-                {t('outreach.api.description', 'KI-Funktionen sind zentral konfiguriert')}
-              </CardDescription>
-            </div>
-            <Badge variant="secondary" className="text-xs">
-              <Zap className="w-3 h-3 mr-1" />
-              Aktiv
-            </Badge>
+          <div className="flex items-center gap-2">
+            <Settings className="w-5 h-5" />
+            <CardTitle>API-Integration</CardTitle>
           </div>
+          <CardDescription>
+            Integrierte Dienste für automatisiertes Outreach
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-3">
-            <div className="p-4 rounded-lg border bg-muted/50">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 rounded-lg border bg-card">
               <div className="flex items-center gap-2 mb-2">
                 <Zap className="w-4 h-4 text-blue-500" />
-                <h3 className="font-semibold text-sm">OpenAI</h3>
+                <Badge variant="secondary">OpenAI</Badge>
               </div>
-              <p className="text-xs text-muted-foreground">
-                E-Mail-Generierung und Personalisierung
+              <p className="text-sm text-muted-foreground">
+                E-Mail-Generierung
               </p>
             </div>
-            <div className="p-4 rounded-lg border bg-muted/50">
+            <div className="p-4 rounded-lg border bg-card">
               <div className="flex items-center gap-2 mb-2">
-                <Search className="w-4 h-4 text-purple-500" />
-                <h3 className="font-semibold text-sm">Perplexity</h3>
+                <Zap className="w-4 h-4 text-purple-500" />
+                <Badge variant="secondary">Perplexity</Badge>
               </div>
-              <p className="text-xs text-muted-foreground">
-                Automatisches Lead Research
+              <p className="text-sm text-muted-foreground">
+                Lead Research
               </p>
             </div>
-            <div className="p-4 rounded-lg border bg-muted/50">
+            <div className="p-4 rounded-lg border bg-card">
               <div className="flex items-center gap-2 mb-2">
                 <Mail className="w-4 h-4 text-green-500" />
-                <h3 className="font-semibold text-sm">MS365</h3>
+                <Badge variant="secondary">MS365</Badge>
               </div>
-              <p className="text-xs text-muted-foreground">
-                Professioneller E-Mail-Versand
+              <p className="text-sm text-muted-foreground">
+                E-Mail-Versand
               </p>
             </div>
           </div>
-          <p className="text-xs text-muted-foreground text-center pt-2">
-            💡 Die API-Keys werden zentral vom System verwaltet und müssen nicht konfiguriert werden.
+          <p className="text-xs text-muted-foreground text-center">
+            💡 API-Keys werden zentral verwaltet
           </p>
         </CardContent>
       </Card>
@@ -185,45 +294,69 @@ export default function OutreachProfile() {
       {/* Workflow Overview */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Globe className="w-5 h-5" />
-            {t('outreach.workflow.title', 'Workflow-Übersicht')}
-          </CardTitle>
+          <div className="flex items-center gap-2">
+            <Zap className="w-5 h-5" />
+            <CardTitle>Workflow-Übersicht</CardTitle>
+          </div>
           <CardDescription>
-            {t('outreach.workflow.description', 'So funktioniert der automatisierte Outreach-Prozess')}
+            Automatisierter Outreach-Prozess
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-3">
-            <div className="space-y-2 p-4 rounded-lg border bg-muted/50">
-              <Badge variant="outline" className="w-fit">1. {t('outreach.workflow.step1.title', 'Lead-Management')}</Badge>
-              <p className="text-sm text-muted-foreground">
-                {t('outreach.workflow.step1.description', 'Leads hinzufügen und Status verwalten (new → contacted → qualified → closed)')}
-              </p>
+        <CardContent className="space-y-4">
+          <div className="space-y-4">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-sm font-semibold text-primary">1</span>
+              </div>
+              <div>
+                <h4 className="font-semibold">Lead-Management</h4>
+                <p className="text-sm text-muted-foreground">
+                  Kontakte werden in der CRM-Datenbank verwaltet
+                </p>
+              </div>
             </div>
-            <div className="space-y-2 p-4 rounded-lg border bg-muted/50">
-              <Badge variant="outline" className="w-fit">2. {t('outreach.workflow.step2.title', 'KI-Research')}</Badge>
-              <p className="text-sm text-muted-foreground">
-                KI-Research mit Perplexity (aktiviert) - Automatische Analyse von Leads und Firmen
-              </p>
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-sm font-semibold text-primary">2</span>
+              </div>
+              <div>
+                <h4 className="font-semibold">AI-Research</h4>
+                <p className="text-sm text-muted-foreground">
+                  Perplexity AI recherchiert Hintergrundinformationen
+                </p>
+              </div>
             </div>
-            <div className="space-y-2 p-4 rounded-lg border bg-muted/50">
-              <Badge variant="outline" className="w-fit">3. {t('outreach.workflow.step3.title', 'E-Mail-Outreach')}</Badge>
-              <p className="text-sm text-muted-foreground">
-                E-Mail-Personalisierung mit OpenAI + MS365 Versand
-              </p>
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-sm font-semibold text-primary">3</span>
+              </div>
+              <div>
+                <h4 className="font-semibold">E-Mail Outreach</h4>
+                <p className="text-sm text-muted-foreground">
+                  OpenAI generiert personalisierte E-Mails und versendet sie über MS365
+                </p>
+              </div>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Action Buttons */}
-      <div className="flex gap-4">
-        <Button>
-          {t('outreach.actions.save', 'Konfiguration speichern')}
+      <div className="flex gap-3 justify-end">
+        <Button
+          variant="outline"
+          onClick={handleReset}
+          disabled={saving}
+        >
+          <RotateCcw className="w-4 h-4 mr-2" />
+          Zurücksetzen
         </Button>
-        <Button variant="outline">
-          {t('outreach.actions.test', 'Verbindung testen')}
+        <Button
+          onClick={handleSave}
+          disabled={saving || !companyName.trim()}
+        >
+          <Save className="w-4 h-4 mr-2" />
+          {saving ? 'Wird gespeichert...' : 'Speichern'}
         </Button>
       </div>
     </div>

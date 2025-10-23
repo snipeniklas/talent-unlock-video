@@ -83,7 +83,7 @@ export function AppSidebar() {
     { title: t('app.sidebar.admin.resources', 'RaaS Ressourcen'), url: "/admin/candidates", icon: UserCog },
     { title: t('app.sidebar.admin.projects', 'Kundenprojekte'), url: "/admin/search-requests", icon: FileText },
     { title: t('app.sidebar.admin.support', 'Support Chat'), url: "/admin/support", icon: MessageCircle },
-    { title: t('app.sidebar.admin.settings', 'Admin Einstellungen'), url: "/admin/settings", icon: SettingsIcon },
+    { title: t('app.sidebar.admin.settings', 'Benutzerverwaltung'), url: "/admin/settings", icon: SettingsIcon },
   ];
 
   // CRM Navigation Items
