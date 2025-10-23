@@ -420,13 +420,16 @@ const HomePage = () => {
                 <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-4 sm:mb-6">
                   {t('home.stats.ctaText', 'Beschreiben Sie Ihre Herausforderung, wir schlagen Ihnen passende Experten vor. Kein Risiko, keine versteckten Kosten.')}
                 </p>
-                <Button asChild size="lg" className="w-full text-xs sm:text-sm md:text-base lg:text-xl px-3 sm:px-6 md:px-8 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
-                  <Link to="/app/search-requests/new">
+              <RaasInquiryDialog
+                source="homepage-stats"
+                trigger={
+                  <Button size="lg" className="w-full text-xs sm:text-sm md:text-base lg:text-xl px-3 sm:px-6 md:px-8 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
                     <Target className="w-3 sm:w-4 md:w-5 lg:w-6 h-3 sm:h-4 md:h-5 lg:h-6 mr-1 sm:mr-2 md:mr-3 flex-shrink-0" />
                     <span className="truncate">{t('home.stats.ctaButton', 'Jetzt kostenfrei starten')}</span>
                     <ArrowRight className="w-3 sm:w-4 md:w-5 lg:w-6 h-3 sm:h-4 md:h-5 lg:h-6 ml-1 sm:ml-2 md:ml-3 flex-shrink-0" />
-                  </Link>
-                </Button>
+                  </Button>
+                }
+              />
               </div>
             </div>
           </div>
@@ -602,12 +605,15 @@ const HomePage = () => {
                 {t('home.hub.cta.text', 'Starten Sie noch heute und erleben Sie, wie schnell und effizient Sie die besten Remote-Talente für Ihr Unternehmen finden können.')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="bg-gradient-primary hover:shadow-lg border-0">
-                  <Link to="/app/search-requests/new">
+              <RaasInquiryDialog
+                source="homepage-hub-cta"
+                trigger={
+                  <Button size="lg" className="bg-gradient-primary hover:shadow-lg border-0">
                     {t('home.hub.cta.primary', 'Kostenlos testen')}
                     <ArrowRight className="w-5 h-5 ml-2" />
-                  </Link>
-                </Button>
+                  </Button>
+                }
+              />
                 <Button asChild variant="outline" size="lg">
                   <Link to="/resource-hub">
                     {t('home.hub.cta.secondary', 'Zum RaaS Hub')}

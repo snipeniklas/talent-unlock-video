@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
+import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Users, Calculator, FileText, Clock, Target, CheckCircle, Star, Phone } from "lucide-react";
@@ -68,13 +69,16 @@ const BackofficeSolution = () => {
               {t('solutions.backoffice.hero.text', 'Entlasten Sie Ihr Team mit erfahrenen Remote-Fachkräften für Administration, Buchhaltung und operative Aufgaben. Flexibel, kostengünstig und sofort einsatzbereit.')}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button asChild size="lg" className="text-xl px-12 py-6 bg-primary text-white hover:bg-primary-hover hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
-                <Link to="/app/search-requests/new">
-                  <Phone className="w-6 h-6 mr-3" />
-                  {t('solutions.backoffice.hero.ctaPrimary', 'RaaS Anfrage erstellen')}
-                  <ArrowRight className="w-6 h-6 ml-3" />
-                </Link>
-              </Button>
+              <RaasInquiryDialog
+                source="backoffice-solution-hero"
+                trigger={
+                  <Button size="lg" className="text-xl px-12 py-6 bg-primary text-white hover:bg-primary-hover hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
+                    <Phone className="w-6 h-6 mr-3" />
+                    {t('solutions.backoffice.hero.ctaPrimary', 'RaaS Anfrage erstellen')}
+                    <ArrowRight className="w-6 h-6 ml-3" />
+                  </Button>
+                }
+              />
               <Button variant="outline" size="lg" className="text-xl px-12 py-6 border-2 border-primary bg-white text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105">
                 {t('solutions.backoffice.hero.ctaSecondary', 'Remote Backoffice-Kräfte entdecken')}
               </Button>
@@ -191,12 +195,15 @@ const BackofficeSolution = () => {
             {t('solutions.backoffice.cta.text', 'Sprechen Sie mit uns über Ihre Anforderungen. Wir finden die passenden Remote-Fachkräfte für Ihr Backoffice.')}
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button asChild size="lg" className="text-xl px-12 py-6 bg-white text-primary hover:bg-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
-              <Link to="/app/search-requests/new">
-                <Phone className="w-6 h-6 mr-3" />
-                {t('solutions.backoffice.cta.primary', 'RaaS Anfrage erstellen')}
-              </Link>
-            </Button>
+            <RaasInquiryDialog
+              source="backoffice-solution-cta"
+              trigger={
+                <Button size="lg" className="text-xl px-12 py-6 bg-white text-primary hover:bg-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  <Phone className="w-6 h-6 mr-3" />
+                  {t('solutions.backoffice.cta.primary', 'RaaS Anfrage erstellen')}
+                </Button>
+              }
+            />
             <Button variant="outline" size="lg" className="text-xl px-12 py-6 border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105">
               {t('solutions.backoffice.cta.secondary', 'Remote-Fachkräfte kennenlernen')}
             </Button>
