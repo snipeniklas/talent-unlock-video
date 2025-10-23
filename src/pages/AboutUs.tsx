@@ -9,6 +9,7 @@ import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
 import { useTranslation } from '@/i18n/i18n';
 import { TeamCard } from '@/components/TeamCard';
+import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
 
 const AboutUs = () => {
   const { t, get } = useTranslation();
@@ -259,12 +260,15 @@ const AboutUs = () => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             {t('aboutUs.cta.subtitle', 'Entdecken Sie, wie unsere internationalen Remote-Fachkräfte Ihr Unternehmen voranbringen können.')}
           </p>
-          <Button asChild size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-            <Link to="/app/search-requests/new">
-              {t('aboutUs.cta.button', 'Kostenlose RaaS Anfrage starten')}
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
-          </Button>
+          <RaasInquiryDialog
+            source="about-us"
+            trigger={
+              <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
+                {t('aboutUs.cta.button', 'Kostenlose RaaS Anfrage starten')}
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            }
+          />
         </div>
       </section>
       

@@ -202,15 +202,18 @@ const HomePage = () => {
 
                 {/* CTA Buttons */}
                 <div className="space-y-3 justify-center lg:justify-start animate-slide-up-delay-3">
-                  <Button asChild size="lg" className="w-full text-xs sm:text-sm md:text-base px-2 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
-                    <Link to="/app/search-requests/new">
-                      <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs px-1 py-0.5 rounded-full animate-pulse">
-                        KOSTENLOS
-                      </span>
-                      <span className="truncate">RaaS Anfrage</span>
-                      <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4 ml-1 sm:ml-2 flex-shrink-0" />
-                    </Link>
-                  </Button>
+                  <RaasInquiryDialog
+                    source="homepage-hero"
+                    trigger={
+                      <Button size="lg" className="w-full text-xs sm:text-sm md:text-base px-2 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
+                        <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs px-1 py-0.5 rounded-full animate-pulse">
+                          KOSTENLOS
+                        </span>
+                        <span className="truncate">RaaS Anfrage</span>
+                        <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4 ml-1 sm:ml-2 flex-shrink-0" />
+                      </Button>
+                    }
+                  />
                   
                   <div className="flex justify-center lg:justify-start">
                     <Button 

@@ -797,6 +797,40 @@
       "toasts": {"error": "Fehler", "deleteSuccessTitle": "Erfolg", "deleteSuccess": "Suchauftrag wurde erfolgreich gelöscht.", "unexpected": "Ein unerwarteter Fehler ist aufgetreten.", "deleteFailed": "Suchauftrag konnte nicht gelöscht werden."}
     }
   },
+  "raasInquiry": {
+    "title": "RaaS Anfrage erstellen",
+    "subtitle": "Beschreiben Sie uns Ihr Anliegen – wir melden uns innerhalb von 24 Stunden",
+    "fields": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail Adresse",
+      "phone": "Telefonnummer",
+      "position": "Position (optional)",
+      "inquiry": "Ihr Anliegen"
+    },
+    "placeholders": {
+      "inquiry": "Beschreiben Sie Ihr Anliegen, z.B.: Wir suchen einen Senior React Developer für 6 Monate..."
+    },
+    "validation": {
+      "firstNameMin": "Vorname muss mindestens 2 Zeichen haben",
+      "lastNameMin": "Nachname muss mindestens 2 Zeichen haben",
+      "emailInvalid": "Bitte geben Sie eine gültige E-Mail Adresse ein",
+      "phoneMin": "Bitte geben Sie eine gültige Telefonnummer ein",
+      "inquiryMin": "Bitte beschreiben Sie Ihr Anliegen (mindestens 10 Zeichen)",
+      "inquiryMax": "Ihr Anliegen darf maximal 2000 Zeichen lang sein"
+    },
+    "submit": "Anfrage absenden",
+    "submitting": "Wird gesendet...",
+    "success": {
+      "title": "Anfrage erfolgreich!",
+      "message": "Vielen Dank für Ihr Interesse. Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
+      "confirmationSent": "Bestätigung gesendet an"
+    },
+    "error": {
+      "title": "Fehler",
+      "message": "Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt."
+    }
+  },
   "crm": {
     "title": "CRM System",
     "overview": {

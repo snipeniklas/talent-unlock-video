@@ -9,6 +9,7 @@ import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
 import InteractiveAppScreen from "@/components/InteractiveAppScreen";
 import { useTranslation } from '@/i18n/i18n';
+import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
 
 const HowWeWork = () => {
   const { t, get } = useTranslation();
@@ -263,12 +264,15 @@ const HowWeWork = () => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             {t('howWeWork.cta.subtitle', 'Lassen Sie uns in einem kostenlosen Beratungsgespräch über Ihre Anforderungen sprechen und gemeinsam die passenden Remote-Fachkräfte für Ihr Unternehmen finden.')}
           </p>
-          <Button asChild size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-            <Link to="/app/search-requests/new">
-              {t('howWeWork.cta.button', 'RaaS Anfrage kostenlos erstellen')}
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
-          </Button>
+          <RaasInquiryDialog
+            source="how-we-work"
+            trigger={
+              <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
+                {t('howWeWork.cta.button', 'RaaS Anfrage kostenlos erstellen')}
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            }
+          />
         </div>
       </section>
       

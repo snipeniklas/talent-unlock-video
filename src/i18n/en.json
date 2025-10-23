@@ -794,6 +794,40 @@
       "toasts": {"error": "Error", "deleteSuccessTitle": "Success", "deleteSuccess": "Search request deleted successfully.", "unexpected": "An unexpected error occurred.", "deleteFailed": "Failed to delete search request."}
     }
   },
+  "raasInquiry": {
+    "title": "Create RaaS Request",
+    "subtitle": "Describe your inquiry – we'll get back to you within 24 hours",
+    "fields": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "position": "Position (optional)",
+      "inquiry": "Your Inquiry"
+    },
+    "placeholders": {
+      "inquiry": "Describe your inquiry, e.g.: We're looking for a Senior React Developer for 6 months..."
+    },
+    "validation": {
+      "firstNameMin": "First name must be at least 2 characters",
+      "lastNameMin": "Last name must be at least 2 characters",
+      "emailInvalid": "Please enter a valid email address",
+      "phoneMin": "Please enter a valid phone number",
+      "inquiryMin": "Please describe your inquiry (at least 10 characters)",
+      "inquiryMax": "Your inquiry must not exceed 2000 characters"
+    },
+    "submit": "Submit Inquiry",
+    "submitting": "Submitting...",
+    "success": {
+      "title": "Inquiry Successful!",
+      "message": "Thank you for your interest. We'll get back to you within 24 hours.",
+      "confirmationSent": "Confirmation sent to"
+    },
+    "error": {
+      "title": "Error",
+      "message": "An error occurred. Please try again or contact us directly."
+    }
+  },
   "crm": {
     "title": "CRM System",
     "overview": {

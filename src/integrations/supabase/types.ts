@@ -310,6 +310,7 @@ export type Database = {
           email: string | null
           first_name: string
           id: string
+          inquiry: string | null
           last_contact_date: string | null
           last_name: string
           lead_source: string | null
@@ -330,6 +331,7 @@ export type Database = {
           email?: string | null
           first_name: string
           id?: string
+          inquiry?: string | null
           last_contact_date?: string | null
           last_name: string
           lead_source?: string | null
@@ -350,6 +352,7 @@ export type Database = {
           email?: string | null
           first_name?: string
           id?: string
+          inquiry?: string | null
           last_contact_date?: string | null
           last_name?: string
           lead_source?: string | null
@@ -1067,10 +1070,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      get_user_company: {
-        Args: { _user_id: string }
-        Returns: string
-      }
+      get_user_company: { Args: { _user_id: string }; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

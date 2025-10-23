@@ -12,6 +12,7 @@ import customerLogos from '@/assets/customer-logos.png';
 import verifiedBadge from '@/assets/verified-badge.png';
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 import { useTranslation } from '@/i18n/i18n';
+import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
 
 const BackofficeLanding = () => {
   const { t, get } = useTranslation();

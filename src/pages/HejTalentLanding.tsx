@@ -12,6 +12,7 @@ import customerLogos from '@/assets/customer-logos.png';
 import verifiedBadge from '@/assets/verified-badge.png';
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 import { useTranslation } from '@/i18n/i18n';
+import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
 
 const HejTalentLanding = () => {
   const { t, get } = useTranslation();
@@ -120,33 +121,21 @@ const HejTalentLanding = () => {
               </div>
             </div>
 
-            <Button
-              variant="cta"
-              size="xl"
-              asChild
-              className="mb-16 animate-fade-in-delay-3 hover:scale-105 relative overflow-hidden"
-            >
-              <Link 
-                to="/app/search-requests/new"
-                onClick={() => {
-                  trackEvent('InitiateCheckout', {
-                    content_name: 'RaaS Anfrage',
-                    value: 0,
-                    currency: 'EUR'
-                  });
-                  localStorage.setItem('raas_lead_intent', JSON.stringify({
-                    timestamp: Date.now(),
-                    source: 'hejtalent-landing',
-                    content: 'RaaS CTA Click'
-                  }));
-                }}
-              >
-                <span className="relative z-10">
-                  {t('landing.hejTalent.hero.cta', 'RaaS Anfrage stellen')}
-                </span>
-                <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>
-              </Link>
-            </Button>
+            <RaasInquiryDialog
+              source="hejtalent-landing"
+              trigger={
+                <Button
+                  variant="cta"
+                  size="xl"
+                  className="mb-16 animate-fade-in-delay-3 hover:scale-105 relative overflow-hidden"
+                >
+                  <span className="relative z-10">
+                    {t('landing.hejTalent.hero.cta', 'RaaS Anfrage stellen')}
+                  </span>
+                  <div className="absolute inset-0 bg-shimmer animate-shimmer bg-200%"></div>
+                </Button>
+              }
+            />
 
             {/* 3-Bullet Preview */}
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
