@@ -127,78 +127,58 @@ export default function OutreachProfile() {
         </Card>
       </div>
 
-      {/* API Configuration */}
+      {/* API Information */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Key className="w-5 h-5" />
-            {t('outreach.api.title', 'API-Konfiguration')}
-          </CardTitle>
-          <CardDescription>
-            {t('outreach.api.description', 'API-Keys für KI-Funktionen und E-Mail-Versendung')}
-          </CardDescription>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="flex items-center gap-2">
+                <Key className="w-5 h-5" />
+                {t('outreach.api.title', 'API-Integration')}
+              </CardTitle>
+              <CardDescription>
+                {t('outreach.api.description', 'KI-Funktionen sind zentral konfiguriert')}
+              </CardDescription>
+            </div>
+            <Badge variant="secondary" className="text-xs">
+              <Zap className="w-3 h-3 mr-1" />
+              Aktiv
+            </Badge>
+          </div>
         </CardHeader>
-        <CardContent className="space-y-6">
-          {/* OpenAI Configuration */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4" />
-              <h3 className="font-semibold">{t('outreach.api.openai.title', 'OpenAI (E-Mail-Generierung)')}</h3>
+        <CardContent className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="p-4 rounded-lg border bg-muted/50">
+              <div className="flex items-center gap-2 mb-2">
+                <Zap className="w-4 h-4 text-blue-500" />
+                <h3 className="font-semibold text-sm">OpenAI</h3>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                E-Mail-Generierung und Personalisierung
+              </p>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="openai-key">{t('outreach.api.openai.key', 'OpenAI API Key')}</Label>
-              <Input 
-                id="openai-key" 
-                type="password"
-                placeholder="sk-..."
-              />
-              <p className="text-sm text-muted-foreground">
-                {t('outreach.api.openai.description', 'Für die automatische Generierung personalisierter E-Mails')}
+            <div className="p-4 rounded-lg border bg-muted/50">
+              <div className="flex items-center gap-2 mb-2">
+                <Search className="w-4 h-4 text-purple-500" />
+                <h3 className="font-semibold text-sm">Perplexity</h3>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Automatisches Lead Research
+              </p>
+            </div>
+            <div className="p-4 rounded-lg border bg-muted/50">
+              <div className="flex items-center gap-2 mb-2">
+                <Mail className="w-4 h-4 text-green-500" />
+                <h3 className="font-semibold text-sm">MS365</h3>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Professioneller E-Mail-Versand
               </p>
             </div>
           </div>
-
-          <Separator />
-
-          {/* Perplexity Configuration */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Search className="w-4 h-4" />
-              <h3 className="font-semibold">{t('outreach.api.perplexity.title', 'Perplexity (Research)')}</h3>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="perplexity-key">{t('outreach.api.perplexity.key', 'Perplexity API Key')}</Label>
-              <Input 
-                id="perplexity-key" 
-                type="password"
-                placeholder="pplx-..."
-              />
-              <p className="text-sm text-muted-foreground">
-                {t('outreach.api.perplexity.description', 'Für automatisches Research über Leads und Unternehmen')}
-              </p>
-            </div>
-          </div>
-
-          <Separator />
-
-          {/* Email Configuration */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Send className="w-4 h-4" />
-              <h3 className="font-semibold">{t('outreach.api.email.title', 'E-Mail-Versendung')}</h3>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="resend-key">{t('outreach.api.email.key', 'Resend API Key')}</Label>
-              <Input 
-                id="resend-key" 
-                type="password"
-                placeholder="re_..."
-              />
-              <p className="text-sm text-muted-foreground">
-                {t('outreach.api.email.description', 'Für den professionellen E-Mail-Versand über Resend')}
-              </p>
-            </div>
-          </div>
+          <p className="text-xs text-muted-foreground text-center pt-2">
+            💡 Die API-Keys werden zentral vom System verwaltet und müssen nicht konfiguriert werden.
+          </p>
         </CardContent>
       </Card>
 
@@ -224,13 +204,13 @@ export default function OutreachProfile() {
             <div className="space-y-2 p-4 rounded-lg border bg-muted/50">
               <Badge variant="outline" className="w-fit">2. {t('outreach.workflow.step2.title', 'KI-Research')}</Badge>
               <p className="text-sm text-muted-foreground">
-                {t('outreach.workflow.step2.description', 'Automatische Analyse von Leads und Firmen über Perplexity API')}
+                KI-Research mit Perplexity (aktiviert) - Automatische Analyse von Leads und Firmen
               </p>
             </div>
             <div className="space-y-2 p-4 rounded-lg border bg-muted/50">
               <Badge variant="outline" className="w-fit">3. {t('outreach.workflow.step3.title', 'E-Mail-Outreach')}</Badge>
               <p className="text-sm text-muted-foreground">
-                {t('outreach.workflow.step3.description', 'Personalisierte E-Mail-Generierung und professioneller Versand')}
+                E-Mail-Personalisierung mit OpenAI + MS365 Versand
               </p>
             </div>
           </div>

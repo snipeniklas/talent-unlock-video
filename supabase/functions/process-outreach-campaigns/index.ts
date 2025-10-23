@@ -1,7 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
@@ -228,49 +228,95 @@ async function personalizeEmail(
   desiredCta: string,
   sequenceNumber: number
 ): Promise<{ subject: string; body: string }> {
-  if (!LOVABLE_API_KEY) {
-    // Fallback: simple template replacement
-    const subject = replaceVariables(subjectTemplate, contact);
-    const body = replaceVariables(bodyTemplate, contact);
-    return { subject, body };
+  // Fallback when OpenAI is not available
+  if (!OPENAI_API_KEY) {
+    console.log("OpenAI API Key not set, using simple variable replacement");
+    return {
+      subject: replaceVariables(subjectTemplate, contact),
+      body: replaceVariables(bodyTemplate, contact),
+    };
   }
 
   try {
-    const contextInfo = sequenceNumber === 1 
-      ? "Dies ist die erste E-Mail in der Kampagne." 
-      : `Dies ist Follow-Up E-Mail #${sequenceNumber} in der Sequenz.`;
+    // Optional: Load research data for this contact (if available)
+    let researchContext = "";
+    const { data: researchData } = await supabaseAdmin
+      .from('crm_contact_research')
+      .select('research_data')
+      .eq('contact_id', contact.id)
+      .maybeSingle();
 
-    const prompt = `${aiInstructions}
+    if (researchData?.research_data) {
+      const research = researchData.research_data;
+      researchContext = `
 
-${contextInfo}
+ZUSÄTZLICHE RESEARCH-DATEN ÜBER DEN KONTAKT:
+- Zusammenfassung: ${research.summary || 'Nicht verfügbar'}
+- Beruflicher Hintergrund: ${research.professional_background || 'Nicht verfügbar'}
+- Aktuelle Aktivitäten: ${research.recent_activities || 'Nicht verfügbar'}
+- Key Facts: ${research.key_facts?.join(', ') || 'Nicht verfügbar'}
+- Talking Points: ${research.talking_points?.join(', ') || 'Nicht verfügbar'}
 
-Zielgruppe: ${targetAudience || "Nicht spezifiziert"}
-Gewünschter Call-to-Action: ${desiredCta || "Nicht spezifiziert"}
+Nutze diese Informationen für eine hochgradig personalisierte E-Mail!
+`;
+    }
 
-Kontaktinformationen:
-- Name: ${contact.first_name} ${contact.last_name}
-- Position: ${contact.position || "Nicht angegeben"}
-- Email: ${contact.email}
+    // Create prompt for OpenAI
+    const systemPrompt = `Du bist ein Experte für B2B E-Mail-Personalisierung.
 
-Betreff-Vorlage: ${subjectTemplate}
-E-Mail-Vorlage: ${bodyTemplate}
+Deine Aufgabe: Personalisiere Betreff und Nachricht einer Outreach-E-Mail basierend auf:
+1. Vorlagen (Betreff-Guideline und Nachricht-Guideline)
+2. Kontakt-Informationen (Name, Position, Unternehmen, Branche)
+3. Kampagnen-Kontext (Zielgruppe, CTA, AI-Anweisungen)
+4. Optional: Research-Daten über den Kontakt
 
-Bitte personalisiere die E-Mail basierend auf den Kontaktinformationen, der Zielgruppe und integriere den Call-to-Action natürlich.`;
+Wichtig:
+- Behalte den Ton und die Struktur der Vorlagen bei
+- Ersetze Variablen wie {{first_name}}, {{position}}, {{company}} mit echten Daten
+- Personalisiere den Inhalt basierend auf Position und Branche
+- Integriere die Zielgruppe und den CTA natürlich
+- Falls Research-Daten vorhanden sind, nutze sie für spezifische Anknüpfungspunkte
+- Vermeide generische Floskeln
+- Halte die E-Mail professionell aber persönlich
+- Deutsch als Sprache`;
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    const userPrompt = `
+VORLAGEN:
+Betreff-Guideline: ${subjectTemplate}
+Nachricht-Guideline: ${bodyTemplate}
+
+KONTAKT-INFORMATIONEN:
+- Vorname: ${contact.first_name || 'Nicht verfügbar'}
+- Nachname: ${contact.last_name || 'Nicht verfügbar'}
+- Position: ${contact.position || 'Nicht verfügbar'}
+- Abteilung: ${contact.department || 'Nicht verfügbar'}
+- Unternehmen: ${contact.crm_companies?.name || 'Nicht verfügbar'}
+- Branche: ${contact.crm_companies?.industry || 'Nicht verfügbar'}
+
+KAMPAGNEN-KONTEXT:
+- Zielgruppe: ${targetAudience || 'Nicht spezifiziert'}
+- Gewünschter CTA: ${desiredCta || 'Nicht spezifiziert'}
+- Sequenz-Nummer: ${sequenceNumber} (1 = Erstkontakt, 2+ = Follow-up)
+- Zusätzliche AI-Anweisungen: ${aiInstructions || 'Keine'}
+${researchContext}
+
+Erstelle jetzt die personalisierte E-Mail.
+    `.trim();
+
+    console.log(`Calling OpenAI for email personalization (sequence ${sequenceNumber})...`);
+
+    // OpenAI API Call
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${LOVABLE_API_KEY}`,
+        "Authorization": `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
+        model: "gpt-5-mini-2025-08-07", // Cost-efficient & fast
         messages: [
-          {
-            role: "system",
-            content: "Du bist ein Assistent für E-Mail-Personalisierung. Antworte immer im JSON-Format mit den Feldern 'subject' und 'body'.",
-          },
-          { role: "user", content: prompt },
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt }
         ],
         tools: [
           {
@@ -281,44 +327,57 @@ Bitte personalisiere die E-Mail basierend auf den Kontaktinformationen, der Ziel
               parameters: {
                 type: "object",
                 properties: {
-                  subject: { type: "string", description: "Personalisierter Betreff" },
-                  body: { type: "string", description: "Personalisierter E-Mail-Inhalt" },
+                  subject: { 
+                    type: "string",
+                    description: "Der personalisierte Betreff der E-Mail"
+                  },
+                  body: { 
+                    type: "string",
+                    description: "Der personalisierte Inhalt der E-Mail"
+                  }
                 },
                 required: ["subject", "body"],
-                additionalProperties: false,
-              },
-            },
-          },
+                additionalProperties: false
+              }
+            }
+          }
         ],
-        tool_choice: { type: "function", function: { name: "personalize_email" } },
+        tool_choice: { 
+          type: "function", 
+          function: { name: "personalize_email" } 
+        },
+        max_completion_tokens: 1500,
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("AI API error:", response.status, errorText);
-      throw new Error(`AI API error: ${response.status}`);
+      console.error("OpenAI API error:", response.status, errorText);
+      throw new Error(`OpenAI API error: ${response.status}`);
     }
 
     const data = await response.json();
-    const toolCall = data.choices?.[0]?.message?.tool_calls?.[0];
     
-    if (toolCall && toolCall.function.arguments) {
-      const args = JSON.parse(toolCall.function.arguments);
-      return {
-        subject: args.subject || replaceVariables(subjectTemplate, contact),
-        body: args.body || replaceVariables(bodyTemplate, contact),
-      };
+    // Parse Tool Call Response
+    const toolCall = data.choices[0].message.tool_calls?.[0];
+    if (!toolCall) {
+      throw new Error("No tool call in OpenAI response");
     }
 
-    // Fallback
+    const result = JSON.parse(toolCall.function.arguments);
+    
+    console.log("OpenAI personalization successful");
+
     return {
-      subject: replaceVariables(subjectTemplate, contact),
-      body: replaceVariables(bodyTemplate, contact),
+      subject: result.subject,
+      body: result.body,
     };
+
   } catch (error) {
-    console.error("Error personalizing email with AI:", error);
-    // Fallback to simple template replacement
+    console.error("Error in OpenAI personalization:", error);
+    console.log("Falling back to simple variable replacement");
+    
+    // Fallback: Simple variable replacement
     return {
       subject: replaceVariables(subjectTemplate, contact),
       body: replaceVariables(bodyTemplate, contact),

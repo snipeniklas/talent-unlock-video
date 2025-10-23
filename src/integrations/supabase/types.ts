@@ -301,6 +301,41 @@ export type Database = {
         }
         Relationships: []
       }
+      crm_contact_research: {
+        Row: {
+          contact_id: string
+          created_at: string
+          id: string
+          research_data: Json
+          researched_at: string
+          researched_by: string | null
+        }
+        Insert: {
+          contact_id: string
+          created_at?: string
+          id?: string
+          research_data?: Json
+          researched_at?: string
+          researched_by?: string | null
+        }
+        Update: {
+          contact_id?: string
+          created_at?: string
+          id?: string
+          research_data?: Json
+          researched_at?: string
+          researched_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_contact_research_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: true
+            referencedRelation: "crm_contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       crm_contacts: {
         Row: {
           created_at: string

@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ArrowLeft, Edit, Mail, Phone, Smartphone, Building, Calendar, User, MessageSquare } from "lucide-react";
+import { ArrowLeft, Edit, Mail, Phone, Smartphone, Building, Calendar, User, MessageSquare, Sparkles, ExternalLink, Lightbulb, TrendingUp } from "lucide-react";
 import { useTranslation } from "@/i18n/i18n";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { ContactEmailTimeline } from "@/components/ContactEmailTimeline";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface Contact {
   id: string;
@@ -44,6 +46,30 @@ export default function CrmContactDetail() {
   const { toast } = useToast();
   const [contact, setContact] = useState<Contact | null>(null);
   const [loading, setLoading] = useState(true);
+  const [researchData, setResearchData] = useState<any>(null);
+  const [isResearching, setIsResearching] = useState(false);
+
+  // Query for existing research data
+  const { data: existingResearch } = useQuery({
+    queryKey: ['contact-research', id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('crm_contact_research')
+        .select('research_data, researched_at')
+        .eq('contact_id', id)
+        .maybeSingle();
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!id,
+  });
+
+  useEffect(() => {
+    if (existingResearch) {
+      setResearchData(existingResearch.research_data);
+    }
+  }, [existingResearch]);
 
   useEffect(() => {
     if (id) {
@@ -101,6 +127,34 @@ export default function CrmContactDetail() {
     };
     return colors[priority as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
   };
+
+  // Mutation for performing research
+  const performResearchMutation = useMutation({
+    mutationFn: async () => {
+      setIsResearching(true);
+      const { data, error } = await supabase.functions.invoke('research-contact', {
+        body: { contact_id: id }
+      });
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: (data) => {
+      setResearchData(data.data);
+      setIsResearching(false);
+      toast({
+        title: "AI Research abgeschlossen",
+        description: "Kontaktdaten wurden erfolgreich recherchiert.",
+      });
+    },
+    onError: (error: any) => {
+      setIsResearching(false);
+      toast({
+        title: "Research fehlgeschlagen",
+        description: error.message || "Fehler beim Recherchieren der Kontaktdaten.",
+        variant: "destructive"
+      });
+    }
+  });
 
   if (loading) {
     return (
@@ -167,10 +221,20 @@ export default function CrmContactDetail() {
             <p className="text-muted-foreground">{t('crm.contacts.detail.title')}</p>
           </div>
         </div>
-        <Button onClick={() => navigate(`/admin/crm/contacts/${id}/edit`)}>
-          <Edit className="h-4 w-4 mr-2" />
-          {t('common.actions.edit')}
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button 
+            variant="outline"
+            onClick={() => performResearchMutation.mutate()}
+            disabled={isResearching}
+          >
+            <Sparkles className="h-4 w-4 mr-2" />
+            {isResearching ? 'Recherchiere...' : 'AI Research durchführen'}
+          </Button>
+          <Button onClick={() => navigate(`/admin/crm/contacts/${id}/edit`)}>
+            <Edit className="h-4 w-4 mr-2" />
+            {t('common.actions.edit')}
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -325,6 +389,163 @@ export default function CrmContactDetail() {
                     {t('crm.contacts.detail.viewCompany')}
                   </Button>
                 </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* AI Research Data */}
+          {researchData && (
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    <Sparkles className="h-5 w-5 text-purple-500" />
+                    AI Research
+                  </CardTitle>
+                  <Badge variant="secondary" className="text-xs">
+                    {existingResearch?.researched_at && 
+                      new Date(existingResearch.researched_at).toLocaleDateString()
+                    }
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {/* Summary */}
+                {researchData.summary && (
+                  <div>
+                    <p className="text-sm font-medium mb-1">📋 Zusammenfassung</p>
+                    <p className="text-sm text-muted-foreground">{researchData.summary}</p>
+                  </div>
+                )}
+
+                <Separator />
+
+                {/* Professional Background - Collapsible */}
+                {researchData.professional_background && (
+                  <Collapsible>
+                    <CollapsibleTrigger className="flex items-center justify-between w-full hover:bg-muted/50 p-2 rounded-md transition-colors">
+                      <p className="text-sm font-medium">💼 Beruflicher Hintergrund</p>
+                      <TrendingUp className="h-4 w-4" />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="pt-2">
+                      <p className="text-sm text-muted-foreground whitespace-pre-wrap">
+                        {researchData.professional_background}
+                      </p>
+                    </CollapsibleContent>
+                  </Collapsible>
+                )}
+
+                {/* Company Info - Collapsible */}
+                {researchData.company_info && (
+                  <Collapsible>
+                    <CollapsibleTrigger className="flex items-center justify-between w-full hover:bg-muted/50 p-2 rounded-md transition-colors">
+                      <p className="text-sm font-medium">🏢 Unternehmensinfos</p>
+                      <Building className="h-4 w-4" />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="pt-2">
+                      <p className="text-sm text-muted-foreground whitespace-pre-wrap">
+                        {researchData.company_info}
+                      </p>
+                    </CollapsibleContent>
+                  </Collapsible>
+                )}
+
+                {/* Recent Activities - Collapsible */}
+                {researchData.recent_activities && (
+                  <Collapsible>
+                    <CollapsibleTrigger className="flex items-center justify-between w-full hover:bg-muted/50 p-2 rounded-md transition-colors">
+                      <p className="text-sm font-medium">📰 Aktuelle Aktivitäten</p>
+                      <MessageSquare className="h-4 w-4" />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="pt-2">
+                      <p className="text-sm text-muted-foreground whitespace-pre-wrap">
+                        {researchData.recent_activities}
+                      </p>
+                    </CollapsibleContent>
+                  </Collapsible>
+                )}
+
+                <Separator />
+
+                {/* Key Facts */}
+                {researchData.key_facts && researchData.key_facts.length > 0 && (
+                  <div>
+                    <p className="text-sm font-medium mb-2">💡 Key Facts</p>
+                    <div className="flex flex-wrap gap-2">
+                      {researchData.key_facts.map((fact: string, index: number) => (
+                        <Badge key={index} variant="outline" className="text-xs">
+                          {fact}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Talking Points */}
+                {researchData.talking_points && researchData.talking_points.length > 0 && (
+                  <div>
+                    <p className="text-sm font-medium mb-2">🎯 Talking Points</p>
+                    <ul className="space-y-1">
+                      {researchData.talking_points.map((point: string, index: number) => (
+                        <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
+                          <Lightbulb className="h-3 w-3 mt-1 flex-shrink-0" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Social Profiles */}
+                {researchData.social_profiles && Object.values(researchData.social_profiles).some((v: any) => v) && (
+                  <div>
+                    <p className="text-sm font-medium mb-2">🔗 Social Profiles</p>
+                    <div className="flex flex-col gap-1">
+                      {researchData.social_profiles.linkedin && (
+                        <a 
+                          href={researchData.social_profiles.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-primary hover:underline flex items-center gap-1"
+                        >
+                          LinkedIn <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
+                      {researchData.social_profiles.twitter && (
+                        <a 
+                          href={researchData.social_profiles.twitter}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-primary hover:underline flex items-center gap-1"
+                        >
+                          Twitter <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
+                      {researchData.social_profiles.github && (
+                        <a 
+                          href={researchData.social_profiles.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-primary hover:underline flex items-center gap-1"
+                        >
+                          GitHub <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Refresh Button */}
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="w-full mt-2"
+                  onClick={() => performResearchMutation.mutate()}
+                  disabled={isResearching}
+                >
+                  <Sparkles className="h-3 w-3 mr-2" />
+                  Research aktualisieren
+                </Button>
               </CardContent>
             </Card>
           )}
