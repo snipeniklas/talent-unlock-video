@@ -14,6 +14,7 @@ import { MiniTeamSection } from '@/components/MiniTeamSection';
 import SEOHead from '@/components/SEOHead';
 import LazyImage from '@/components/LazyImage';
 import { useTranslation } from '@/i18n/i18n';
+import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
 
 const HomePage = () => {
   const navigate = useNavigate();
