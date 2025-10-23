@@ -132,6 +132,26 @@ serve(async (req) => {
           continue;
         }
 
+        // OPTIMISTIC LOCKING: Try to acquire lock by setting status to "processing"
+        // This prevents race conditions when multiple edge function instances run simultaneously
+        const { data: lockResult, error: lockError } = await supabase
+          .from("outreach_campaign_contacts")
+          .update({ 
+            status: "processing",
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", contactEntry.id)
+          .eq("status", "pending") // Only update if still "pending"
+          .select();
+
+        // If no rows were updated, another process is already handling this contact
+        if (lockError || !lockResult || lockResult.length === 0) {
+          console.log(`Contact ${contactEntry.contact_id} already being processed by another instance, skipping`);
+          continue;
+        }
+
+        console.log(`✓ Acquired lock for contact ${contactEntry.contact_id}, proceeding with email send`);
+
         const contact = contactEntry.crm_contacts;
         if (!contact?.email) {
           console.log(`Skipping contact ${contactEntry.contact_id} - no email`);

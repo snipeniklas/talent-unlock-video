@@ -1196,6 +1196,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      cleanup_stuck_processing_contacts: { Args: never; Returns: undefined }
       get_user_company: { Args: { _user_id: string }; Returns: string }
       has_role: {
         Args: {
