@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Building2, Plus, Search, Edit, Eye, Upload } from "lucide-react";
+import { Building2, Globe, Mail, Phone, Plus, Upload, Eye, Edit, DollarSign } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/i18n";
 import CsvImportDialog from "@/components/CsvImportDialog";
+import { DataTable, ColumnDef, FilterDef } from "@/components/DataTable";
 
 interface CrmCompany {
   id: string;
@@ -25,7 +24,6 @@ interface CrmCompany {
 export default function CrmCompanies() {
   const [companies, setCompanies] = useState<CrmCompany[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
   const [csvDialogOpen, setCsvDialogOpen] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -50,21 +48,222 @@ export default function CrmCompanies() {
     }
   };
 
-  const filteredCompanies = companies.filter(company =>
-    company.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    company.industry?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    company.email?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "prospect": return "bg-yellow-100 text-yellow-800";
-      case "qualified": return "bg-blue-100 text-blue-800";
-      case "customer": return "bg-green-100 text-green-800";
-      case "inactive": return "bg-gray-100 text-gray-800";
-      default: return "bg-gray-100 text-gray-800";
+      case "customer":
+        return "bg-green-500/10 text-green-700 dark:text-green-400";
+      case "qualified":
+        return "bg-blue-500/10 text-blue-700 dark:text-blue-400";
+      case "prospect":
+        return "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400";
+      case "inactive":
+        return "bg-gray-500/10 text-gray-700 dark:text-gray-400";
+      default:
+        return "bg-gray-500/10 text-gray-700 dark:text-gray-400";
     }
   };
+
+  const formatRevenue = (revenue: number | null) => {
+    if (!revenue) return "-";
+    return new Intl.NumberFormat("de-DE", {
+      style: "currency",
+      currency: "EUR",
+      maximumFractionDigits: 0,
+    }).format(revenue);
+  };
+
+  // Column definitions
+  const columns: ColumnDef<CrmCompany>[] = [
+    {
+      id: "name",
+      header: "Name",
+      accessorKey: "name",
+      sortable: true,
+      defaultVisible: true,
+      cell: (value, row) => (
+        <div className="flex items-center gap-2">
+          <Building2 className="h-4 w-4 text-muted-foreground" />
+          <span className="font-medium">{value}</span>
+        </div>
+      ),
+    },
+    {
+      id: "website",
+      header: "Website",
+      accessorKey: "website",
+      sortable: true,
+      defaultVisible: false,
+      cell: (value) =>
+        value ? (
+          <a
+            href={value}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-primary hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Globe className="h-3 w-3" />
+            {value}
+          </a>
+        ) : (
+          "-"
+        ),
+    },
+    {
+      id: "industry",
+      header: "Branche",
+      accessorKey: "industry",
+      sortable: true,
+      filterable: true,
+      defaultVisible: true,
+      cell: (value) => value || "-",
+    },
+    {
+      id: "size_category",
+      header: "Größe",
+      accessorKey: "size_category",
+      sortable: true,
+      filterable: true,
+      defaultVisible: false,
+      cell: (value) => value || "-",
+    },
+    {
+      id: "annual_revenue",
+      header: "Umsatz",
+      accessorKey: "annual_revenue",
+      sortable: true,
+      defaultVisible: true,
+      cell: (value) => (
+        <div className="flex items-center gap-1">
+          <DollarSign className="h-3 w-3 text-muted-foreground" />
+          {formatRevenue(value)}
+        </div>
+      ),
+    },
+    {
+      id: "email",
+      header: "E-Mail",
+      accessorKey: "email",
+      sortable: true,
+      defaultVisible: true,
+      cell: (value) =>
+        value ? (
+          <a
+            href={`mailto:${value}`}
+            className="flex items-center gap-1 text-primary hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Mail className="h-3 w-3" />
+            {value}
+          </a>
+        ) : (
+          "-"
+        ),
+    },
+    {
+      id: "phone",
+      header: "Telefon",
+      accessorKey: "phone",
+      sortable: false,
+      defaultVisible: false,
+      cell: (value) =>
+        value ? (
+          <a
+            href={`tel:${value}`}
+            className="flex items-center gap-1 hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Phone className="h-3 w-3" />
+            {value}
+          </a>
+        ) : (
+          "-"
+        ),
+    },
+    {
+      id: "status",
+      header: "Status",
+      accessorKey: "status",
+      sortable: true,
+      filterable: true,
+      defaultVisible: true,
+      cell: (value) => (
+        <Badge className={getStatusColor(value)}>
+          {value === "customer" && "Kunde"}
+          {value === "qualified" && "Qualifiziert"}
+          {value === "prospect" && "Interessent"}
+          {value === "inactive" && "Inaktiv"}
+        </Badge>
+      ),
+    },
+    {
+      id: "created_at",
+      header: "Erstellt",
+      accessorKey: "created_at",
+      sortable: true,
+      defaultVisible: false,
+      cell: (value) => new Date(value).toLocaleDateString("de-DE"),
+    },
+    {
+      id: "actions",
+      header: "Aktionen",
+      sortable: false,
+      defaultVisible: true,
+      cell: (_, row) => (
+        <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate(`/admin/crm/companies/${row.id}`)}
+          >
+            <Eye className="h-4 w-4 mr-1" />
+            Ansehen
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate(`/admin/crm/companies/${row.id}/edit`)}
+          >
+            <Edit className="h-4 w-4 mr-1" />
+            Bearbeiten
+          </Button>
+        </div>
+      ),
+    },
+  ];
+
+  // Filter definitions
+  const uniqueIndustries = Array.from(new Set(companies.map((c) => c.industry).filter(Boolean)));
+  const uniqueSizes = Array.from(new Set(companies.map((c) => c.size_category).filter(Boolean)));
+
+  const filters: FilterDef[] = [
+    {
+      id: "status",
+      label: "Status",
+      options: [
+        { label: "Interessent", value: "prospect" },
+        { label: "Qualifiziert", value: "qualified" },
+        { label: "Kunde", value: "customer" },
+        { label: "Inaktiv", value: "inactive" },
+      ],
+    },
+    {
+      id: "industry",
+      label: "Branche",
+      options: uniqueIndustries.map((industry) => ({
+        label: industry!,
+        value: industry!,
+      })),
+    },
+    {
+      id: "size_category",
+      label: "Größe",
+      options: uniqueSizes.map((size) => ({
+        label: size!,
+        value: size!,
+      })),
+    },
+  ];
 
   if (loading) {
     return (
@@ -75,123 +274,41 @@ export default function CrmCompanies() {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">{t('crm.companies.title')}</h1>
-          <p className="text-muted-foreground">{t('crm.companies.subtitle')}</p>
-        </div>
-        <div className="flex gap-2">
-          <CsvImportDialog 
-            open={csvDialogOpen}
-            onOpenChange={setCsvDialogOpen}
-            type="companies"
-            onImportComplete={fetchCompanies}
-          />
-          <Button variant="outline" onClick={() => setCsvDialogOpen(true)}>
-            <Upload className="h-4 w-4 mr-2" />
-            CSV Import
-          </Button>
-          <Button onClick={() => navigate("/admin/crm/companies/new")}>
-            <Plus className="h-4 w-4 mr-2" />
-            {t('crm.companies.addNew')}
-          </Button>
-        </div>
+    <div className="container mx-auto py-8 px-4">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-2">CRM Unternehmen</h1>
+        <p className="text-muted-foreground">
+          Verwalten Sie Ihre Unternehmenskontakte und potenzielle Kunden
+        </p>
       </div>
 
-      {/* Search */}
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-        <Input
-          placeholder={`${t('common.actions.search')} ${t('crm.companies.title')}...`}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="pl-10"
-        />
+      <div className="flex justify-end gap-2 mb-6">
+        <Button variant="outline" onClick={() => setCsvDialogOpen(true)}>
+          <Upload className="h-4 w-4 mr-2" />
+          CSV Import
+        </Button>
+        <Button onClick={() => navigate("/admin/crm/companies/new")}>
+          <Plus className="h-4 w-4 mr-2" />
+          Neu anlegen
+        </Button>
       </div>
 
-      {/* Companies Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredCompanies.map((company) => (
-          <Card key={company.id} className="hover:shadow-md transition-shadow">
-            <CardHeader className="pb-3">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-2">
-                  <Building2 className="h-5 w-5 text-primary" />
-                  <CardTitle className="text-lg">{company.name}</CardTitle>
-                </div>
-                <Badge className={getStatusColor(company.status)}>
-                  {t(`crm.companies.status.${company.status}`)}
-                </Badge>
-              </div>
-              {company.industry && (
-                <CardDescription>{company.industry}</CardDescription>
-              )}
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {company.website && (
-                <p className="text-sm text-muted-foreground">
-                  🌐 {company.website}
-                </p>
-              )}
-              {company.email && (
-                <p className="text-sm text-muted-foreground">
-                  ✉️ {company.email}
-                </p>
-              )}
-              {company.phone && (
-                <p className="text-sm text-muted-foreground">
-                  📞 {company.phone}
-                </p>
-              )}
-              {company.annual_revenue && (
-                <p className="text-sm text-muted-foreground">
-                  💰 €{company.annual_revenue.toLocaleString()}
-                </p>
-              )}
-              
-              <div className="flex gap-2 pt-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate(`/admin/crm/companies/${company.id}`)}
-                  className="flex-1"
-                >
-                  <Eye className="h-4 w-4 mr-1" />
-                  {t('common.actions.view')}
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate(`/admin/crm/companies/${company.id}/edit`)}
-                  className="flex-1"
-                >
-                  <Edit className="h-4 w-4 mr-1" />
-                  {t('common.actions.edit')}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <DataTable
+        data={companies}
+        columns={columns}
+        filters={filters}
+        searchKey="name"
+        searchPlaceholder="Unternehmen suchen..."
+        onRowClick={(row) => navigate(`/admin/crm/companies/${row.id}`)}
+        storageKey="crm-companies"
+      />
 
-      {filteredCompanies.length === 0 && (
-        <div className="text-center py-8">
-          <Building2 className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-muted-foreground">
-            {searchTerm ? 'No companies found' : 'No companies yet'}
-          </h3>
-          <p className="text-muted-foreground mb-4">
-            {searchTerm ? 'Try adjusting your search terms' : 'Start by adding your first company'}
-          </p>
-          {!searchTerm && (
-            <Button onClick={() => navigate("/admin/crm/companies/new")}>
-              <Plus className="h-4 w-4 mr-2" />
-              {t('crm.companies.addNew')}
-            </Button>
-          )}
-        </div>
-      )}
+      <CsvImportDialog
+        open={csvDialogOpen}
+        onOpenChange={setCsvDialogOpen}
+        type="companies"
+        onImportComplete={fetchCompanies}
+      />
     </div>
   );
 }

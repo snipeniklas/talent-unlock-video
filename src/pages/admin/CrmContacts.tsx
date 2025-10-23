@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Users, Plus, Search, Edit, Eye, LayoutGrid, List, Upload } from "lucide-react";
+import { User, Mail, Phone, Plus, Upload, LayoutGrid, Table as TableIcon, Eye, Edit, Calendar } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/i18n";
 import CsvImportDialog from "@/components/CsvImportDialog";
+import { DataTable, ColumnDef, FilterDef } from "@/components/DataTable";
 
 interface CrmContact {
   id: string;
@@ -35,7 +36,7 @@ export default function CrmContacts() {
   const [contacts, setContacts] = useState<CrmContact[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeView, setActiveView] = useState("kanban");
+  const [activeView, setActiveView] = useState<"kanban" | "table">("kanban");
   const [csvDialogOpen, setCsvDialogOpen] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -146,8 +147,8 @@ export default function CrmContacts() {
             size="sm"
             onClick={(e) => {
               e.stopPropagation();
-              navigate(`/admin/crm/contacts/${contact.id}/edit`);
-            }}
+              navigate(`/admin/crm/contacts/${contact.id}/edit`)}
+            }
             className="flex-1 h-8 text-xs hover:bg-muted hover:text-foreground"
           >
             <Edit className="h-3 w-3 mr-1" />
@@ -176,7 +177,6 @@ export default function CrmContacts() {
           return (
             <div key={status} className="flex-shrink-0 w-80">
               <div className={`rounded-lg border-2 bg-card ${statusInfo[status as keyof typeof statusInfo]?.color || 'border-border'} h-full shadow-sm`}>
-                {/* Column Header */}
                 <div className="p-4 border-b border-border/50 bg-muted/30">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -196,7 +196,6 @@ export default function CrmContacts() {
                   </div>
                 </div>
                 
-                {/* Cards Container */}
                 <div className="p-4 space-y-3 min-h-[500px] max-h-[70vh] overflow-y-auto">
                   {statusContacts.length === 0 ? (
                     <div className="text-center py-8 text-muted-foreground">
@@ -219,15 +218,245 @@ export default function CrmContacts() {
     </div>
   );
 
-  const ListView = () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {filteredContacts.map(contact => (
-        <div key={contact.id} className="animate-fade-in">
-          <ContactCard contact={contact} />
+  // Column definitions for table view
+  const columns: ColumnDef<CrmContact>[] = [
+    {
+      id: "name",
+      header: "Name",
+      accessorFn: (row) => `${row.first_name} ${row.last_name}`,
+      sortable: true,
+      defaultVisible: true,
+      cell: (value, row) => (
+        <div className="flex items-center gap-2">
+          <User className="h-4 w-4 text-muted-foreground" />
+          <span className="font-medium">{value}</span>
         </div>
-      ))}
-    </div>
-  );
+      ),
+    },
+    {
+      id: "position",
+      header: "Position",
+      accessorKey: "position",
+      sortable: true,
+      defaultVisible: true,
+      cell: (value) => value || "-",
+    },
+    {
+      id: "department",
+      header: "Abteilung",
+      accessorKey: "department",
+      sortable: true,
+      filterable: true,
+      defaultVisible: false,
+      cell: (value) => value || "-",
+    },
+    {
+      id: "email",
+      header: "E-Mail",
+      accessorKey: "email",
+      sortable: true,
+      defaultVisible: true,
+      cell: (value) =>
+        value ? (
+          <a
+            href={`mailto:${value}`}
+            className="flex items-center gap-1 text-primary hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Mail className="h-3 w-3" />
+            {value}
+          </a>
+        ) : (
+          "-"
+        ),
+    },
+    {
+      id: "phone",
+      header: "Telefon",
+      accessorKey: "phone",
+      sortable: false,
+      defaultVisible: false,
+      cell: (value) =>
+        value ? (
+          <a
+            href={`tel:${value}`}
+            className="flex items-center gap-1 hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Phone className="h-3 w-3" />
+            {value}
+          </a>
+        ) : (
+          "-"
+        ),
+    },
+    {
+      id: "mobile",
+      header: "Mobil",
+      accessorKey: "mobile",
+      sortable: false,
+      defaultVisible: false,
+      cell: (value) =>
+        value ? (
+          <a
+            href={`tel:${value}`}
+            className="flex items-center gap-1 hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Phone className="h-3 w-3" />
+            {value}
+          </a>
+        ) : (
+          "-"
+        ),
+    },
+    {
+      id: "status",
+      header: "Status",
+      accessorKey: "status",
+      sortable: true,
+      filterable: true,
+      defaultVisible: true,
+      cell: (value) => (
+        <Badge className={getStatusColor(value)}>
+          {value === "new" && "Neu"}
+          {value === "contacted" && "Kontaktiert"}
+          {value === "qualified" && "Qualifiziert"}
+          {value === "proposal" && "Angebot"}
+          {value === "negotiation" && "Verhandlung"}
+          {value === "won" && "Gewonnen"}
+          {value === "lost" && "Verloren"}
+        </Badge>
+      ),
+    },
+    {
+      id: "priority",
+      header: "Priorität",
+      accessorKey: "priority",
+      sortable: true,
+      filterable: true,
+      defaultVisible: true,
+      cell: (value) => (
+        <Badge className={getPriorityColor(value)}>
+          {value === "high" && "Hoch"}
+          {value === "medium" && "Mittel"}
+          {value === "low" && "Niedrig"}
+        </Badge>
+      ),
+    },
+    {
+      id: "lead_source",
+      header: "Lead-Quelle",
+      accessorKey: "lead_source",
+      sortable: true,
+      filterable: true,
+      defaultVisible: false,
+      cell: (value) => value || "-",
+    },
+    {
+      id: "last_contact_date",
+      header: "Letzter Kontakt",
+      accessorKey: "last_contact_date",
+      sortable: true,
+      defaultVisible: false,
+      cell: (value) => (value ? new Date(value).toLocaleDateString("de-DE") : "-"),
+    },
+    {
+      id: "next_follow_up",
+      header: "Nächstes Follow-up",
+      accessorKey: "next_follow_up",
+      sortable: true,
+      defaultVisible: true,
+      cell: (value) =>
+        value ? (
+          <div className="flex items-center gap-1">
+            <Calendar className="h-3 w-3 text-muted-foreground" />
+            {new Date(value).toLocaleDateString("de-DE")}
+          </div>
+        ) : (
+          "-"
+        ),
+    },
+    {
+      id: "created_at",
+      header: "Erstellt",
+      accessorKey: "created_at",
+      sortable: true,
+      defaultVisible: false,
+      cell: (value) => new Date(value).toLocaleDateString("de-DE"),
+    },
+    {
+      id: "actions",
+      header: "Aktionen",
+      sortable: false,
+      defaultVisible: true,
+      cell: (_, row) => (
+        <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate(`/admin/crm/contacts/${row.id}`)}
+          >
+            <Eye className="h-4 w-4 mr-1" />
+            Ansehen
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate(`/admin/crm/contacts/${row.id}/edit`)}
+          >
+            <Edit className="h-4 w-4 mr-1" />
+            Bearbeiten
+          </Button>
+        </div>
+      ),
+    },
+  ];
+
+  // Filter definitions
+  const uniqueDepartments = Array.from(new Set(contacts.map((c) => c.department).filter(Boolean)));
+  const uniqueLeadSources = Array.from(new Set(contacts.map((c) => c.lead_source).filter(Boolean)));
+
+  const filters: FilterDef[] = [
+    {
+      id: "status",
+      label: "Status",
+      options: [
+        { label: "Neu", value: "new" },
+        { label: "Kontaktiert", value: "contacted" },
+        { label: "Qualifiziert", value: "qualified" },
+        { label: "Angebot", value: "proposal" },
+        { label: "Verhandlung", value: "negotiation" },
+        { label: "Gewonnen", value: "won" },
+        { label: "Verloren", value: "lost" },
+      ],
+    },
+    {
+      id: "priority",
+      label: "Priorität",
+      options: [
+        { label: "Hoch", value: "high" },
+        { label: "Mittel", value: "medium" },
+        { label: "Niedrig", value: "low" },
+      ],
+    },
+    {
+      id: "department",
+      label: "Abteilung",
+      options: uniqueDepartments.map((dept) => ({
+        label: dept!,
+        value: dept!,
+      })),
+    },
+    {
+      id: "lead_source",
+      label: "Lead-Quelle",
+      options: uniqueLeadSources.map((source) => ({
+        label: source!,
+        value: source!,
+      })),
+    },
+  ];
 
   if (loading) {
     return (
@@ -262,60 +491,44 @@ export default function CrmContacts() {
         </div>
       </div>
 
-      {/* Search and View Toggle */}
-      <div className="flex flex-col sm:flex-row gap-4 items-center">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-          <Input
-            placeholder={`${t('common.actions.search')} ${t('crm.contacts.title')}...`}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
-          />
-        </div>
-        <Tabs value={activeView} onValueChange={setActiveView} className="w-auto">
-          <TabsList className="grid grid-cols-2 w-64">
-            <TabsTrigger value="kanban" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
+      <Tabs value={activeView} onValueChange={(v) => setActiveView(v as "kanban" | "table")}>
+        <div className="flex items-center justify-between mb-6">
+          <TabsList>
+            <TabsTrigger value="kanban" className="flex items-center gap-2">
               <LayoutGrid className="h-4 w-4" />
-              <span className="hidden sm:inline">{t('crm.contacts.kanbanView')}</span>
+              Kanban
             </TabsTrigger>
-            <TabsTrigger value="list" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
-              <List className="h-4 w-4" />
-              <span className="hidden sm:inline">{t('crm.contacts.listView')}</span>
+            <TabsTrigger value="table" className="flex items-center gap-2">
+              <TableIcon className="h-4 w-4" />
+              Tabelle
             </TabsTrigger>
           </TabsList>
-        </Tabs>
-      </div>
-
-      {/* Content */}
-      <div className="mt-6">
-        <Tabs value={activeView} onValueChange={setActiveView}>
-          <TabsContent value="kanban" className="mt-0">
-            <KanbanView />
-          </TabsContent>
-          <TabsContent value="list" className="mt-0">
-            <ListView />
-          </TabsContent>
-        </Tabs>
-      </div>
-
-      {filteredContacts.length === 0 && (
-        <div className="text-center py-8">
-          <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-muted-foreground">
-            {searchTerm ? 'No contacts found' : 'No contacts yet'}
-          </h3>
-          <p className="text-muted-foreground mb-4">
-            {searchTerm ? 'Try adjusting your search terms' : 'Start by adding your first contact'}
-          </p>
-          {!searchTerm && (
-            <Button onClick={() => navigate("/admin/crm/contacts/new")}>
-              <Plus className="h-4 w-4 mr-2" />
-              {t('crm.contacts.addNew')}
-            </Button>
-          )}
         </div>
-      )}
+
+        <TabsContent value="kanban" className="mt-0">
+          <div className="mb-6">
+            <Input
+              placeholder="Kontakte suchen..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="max-w-md"
+            />
+          </div>
+          <KanbanView />
+        </TabsContent>
+
+        <TabsContent value="table" className="mt-0">
+          <DataTable
+            data={contacts}
+            columns={columns}
+            filters={filters}
+            searchKey="first_name"
+            searchPlaceholder="Kontakte suchen..."
+            onRowClick={(row) => navigate(`/admin/crm/contacts/${row.id}`)}
+            storageKey="crm-contacts"
+          />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
