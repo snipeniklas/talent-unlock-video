@@ -191,6 +191,15 @@ export default function CrmTasks() {
       accessorKey: 'title',
       sortable: true,
       defaultVisible: true,
+      cell: (value, task: CrmTask) => (
+        <Button
+          variant="link"
+          className="p-0 h-auto font-normal"
+          onClick={() => navigate(`/admin/crm/tasks/${task.id}`)}
+        >
+          {task.title}
+        </Button>
+      ),
     },
     {
       id: 'status',
@@ -199,7 +208,7 @@ export default function CrmTasks() {
       sortable: true,
       filterable: true,
       defaultVisible: true,
-      cell: (task: CrmTask) => (
+      cell: (value, task: CrmTask) => (
         <Badge variant="outline" className={getStatusColor(task.status)}>
           {statusLabels[task.status]}
         </Badge>
@@ -212,7 +221,7 @@ export default function CrmTasks() {
       sortable: true,
       filterable: true,
       defaultVisible: true,
-      cell: (task: CrmTask) => (
+      cell: (value, task: CrmTask) => (
         <Badge variant="outline" className={getPriorityColor(task.priority)}>
           {priorityLabels[task.priority]}
         </Badge>
@@ -224,7 +233,7 @@ export default function CrmTasks() {
       accessorKey: 'due_date',
       sortable: true,
       defaultVisible: true,
-      cell: (task: CrmTask) => {
+      cell: (value, task: CrmTask) => {
         if (!task.due_date) return '-';
         const dueDate = new Date(task.due_date);
         const isOverdue = dueDate < new Date() && task.status !== 'completed';
@@ -241,7 +250,7 @@ export default function CrmTasks() {
       accessorKey: 'assigned_to',
       filterable: true,
       defaultVisible: true,
-      cell: (task: CrmTask) => {
+      cell: (value, task: CrmTask) => {
         if (!task.assigned_to_profile) return '-';
         return `${task.assigned_to_profile.first_name} ${task.assigned_to_profile.last_name}`;
       },
@@ -251,7 +260,7 @@ export default function CrmTasks() {
       header: 'Kontakt',
       accessorKey: 'contact_id',
       defaultVisible: false,
-      cell: (task: CrmTask) => {
+      cell: (value, task: CrmTask) => {
         if (!task.contact) return '-';
         return (
           <Button
@@ -269,7 +278,7 @@ export default function CrmTasks() {
       header: 'Unternehmen',
       accessorKey: 'company_id',
       defaultVisible: false,
-      cell: (task: CrmTask) => {
+      cell: (value, task: CrmTask) => {
         if (!task.company) return '-';
         return (
           <Button
@@ -287,7 +296,7 @@ export default function CrmTasks() {
       header: 'Kampagne',
       accessorKey: 'campaign_id',
       defaultVisible: false,
-      cell: (task: CrmTask) => {
+      cell: (value, task: CrmTask) => {
         if (!task.campaign) return '-';
         return (
           <Button
@@ -306,14 +315,14 @@ export default function CrmTasks() {
       accessorKey: 'created_at',
       sortable: true,
       defaultVisible: false,
-      cell: (task: CrmTask) => formatDistanceToNow(new Date(task.created_at), { addSuffix: true, locale: de }),
+      cell: (value, task: CrmTask) => formatDistanceToNow(new Date(task.created_at), { addSuffix: true, locale: de }),
     },
     {
       id: 'actions',
       header: 'Aktionen',
       accessorKey: 'id',
       defaultVisible: true,
-      cell: (task: CrmTask) => (
+      cell: (value, task: CrmTask) => (
         <div className="flex gap-2">
           {task.status !== 'completed' && (
             <Button

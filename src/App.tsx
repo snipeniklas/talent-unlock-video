@@ -55,6 +55,7 @@ import CrmCompanyDetail from "./pages/admin/CrmCompanyDetail";
 import CrmContactDetail from "./pages/admin/CrmContactDetail";
 import CrmTasks from "./pages/admin/CrmTasks";
 import CrmTaskForm from "./pages/admin/CrmTaskForm";
+import CrmTaskDetail from "./pages/admin/CrmTaskDetail";
 import OutreachProfile from "./pages/admin/OutreachProfile";
 import OutreachCampaigns from "./pages/admin/OutreachCampaigns";
 import OutreachCampaignNew from "./pages/admin/OutreachCampaignNew";
@@ -129,6 +130,7 @@ const App = () => (
             <Route path="crm/contacts/:id/edit" element={<CrmContactForm />} />
             <Route path="crm/tasks" element={<CrmTasks />} />
             <Route path="crm/tasks/new" element={<CrmTaskForm />} />
+            <Route path="crm/tasks/:id" element={<CrmTaskDetail />} />
             <Route path="crm/tasks/:id/edit" element={<CrmTaskForm />} />
             <Route path="outreach-profile" element={<OutreachProfile />} />
             <Route path="outreach-campaigns" element={<OutreachCampaigns />} />
