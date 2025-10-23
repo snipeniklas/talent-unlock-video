@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -9,11 +9,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Info, Mail } from "lucide-react";
+import { ArrowLeft, Info, Mail, List as ListIcon, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Tooltip,
   TooltipContent,
@@ -39,6 +40,8 @@ export default function OutreachCampaignNew() {
   const [desiredCta, setDesiredCta] = useState("");
   const [aiInstructions, setAiInstructions] = useState("");
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
+  const [selectedLists, setSelectedLists] = useState<string[]>([]);
+  const [contactSelectionMode, setContactSelectionMode] = useState<"lists" | "contacts">("lists");
   const [numFollowUps, setNumFollowUps] = useState(1);
   const [emailSequences, setEmailSequences] = useState<EmailSequence[]>([]);
 
@@ -123,6 +126,46 @@ Wichtig:
     },
   });
 
+  const { data: contactLists } = useQuery({
+    queryKey: ["contact-lists"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("crm_contact_lists")
+        .select(`
+          *,
+          crm_contact_list_members (
+            contact_id
+          )
+        `);
+      
+      if (error) throw error;
+      
+      return data?.map(list => ({
+        ...list,
+        contact_count: list.crm_contact_list_members?.length || 0,
+        contact_ids: list.crm_contact_list_members?.map((m: any) => m.contact_id) || []
+      }));
+    },
+  });
+
+  // All contacts from selected lists
+  const contactsFromLists = useMemo(() => {
+    if (!contactLists || !selectedLists.length) return [];
+    
+    const allIds = selectedLists.flatMap(listId => {
+      const list = contactLists.find(l => l.id === listId);
+      return list?.contact_ids || [];
+    });
+    
+    return Array.from(new Set(allIds));
+  }, [contactLists, selectedLists]);
+
+  // Final contacts (Lists + Individual, without duplicates)
+  const finalContactIds = useMemo(() => {
+    const combined = [...contactsFromLists, ...selectedContacts];
+    return Array.from(new Set(combined));
+  }, [contactsFromLists, selectedContacts]);
+
   const createCampaignMutation = useMutation({
     mutationFn: async () => {
       const { data: { user } } = await supabase.auth.getUser();
@@ -143,7 +186,7 @@ Wichtig:
 
       if (campaignError) throw campaignError;
 
-      const contactsToAdd = selectedContacts.map((contactId) => ({
+      const contactsToAdd = finalContactIds.map((contactId) => ({
         campaign_id: campaign.id,
         contact_id: contactId,
       }));
@@ -192,6 +235,14 @@ Wichtig:
     );
   };
 
+  const toggleList = (listId: string) => {
+    setSelectedLists(prev =>
+      prev.includes(listId)
+        ? prev.filter(id => id !== listId)
+        : [...prev, listId]
+    );
+  };
+
   const updateEmailSequence = (
     sequenceNumber: number,
     field: keyof EmailSequence,
@@ -205,7 +256,7 @@ Wichtig:
 
   const canCreate = 
     campaignName.trim() !== "" &&
-    selectedContacts.length > 0 &&
+    finalContactIds.length > 0 &&
     emailSequences.length > 0 &&
     emailSequences.every((seq) => seq.subject_template && seq.body_template);
 
@@ -290,34 +341,132 @@ Wichtig:
 
         <Card>
           <CardHeader>
-            <CardTitle>Kontakte auswählen *</CardTitle>
+            <CardTitle>Zielgruppe auswählen *</CardTitle>
             <CardDescription>
-              {selectedContacts.length} von {contacts?.length || 0} Kontakten ausgewählt
+              Wählen Sie Listen oder einzelne Kontakte aus
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="max-h-96 overflow-y-auto space-y-2">
-              {contacts?.map((contact) => (
-                <div
-                  key={contact.id}
-                  className="flex items-center space-x-2 p-3 rounded-lg hover:bg-muted cursor-pointer"
-                  onClick={() => toggleContact(contact.id)}
-                >
-                  <Checkbox
-                    checked={selectedContacts.includes(contact.id)}
-                    onCheckedChange={() => toggleContact(contact.id)}
-                  />
-                  <div className="flex-1">
-                    <p className="font-medium">
-                      {contact.first_name} {contact.last_name}
-                    </p>
-                    <p className="text-sm text-muted-foreground">{contact.email}</p>
-                  </div>
-                  {contact.position && (
-                    <Badge variant="outline">{contact.position}</Badge>
+            <Tabs value={contactSelectionMode} onValueChange={(v) => setContactSelectionMode(v as "lists" | "contacts")}>
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="lists" className="gap-2">
+                  <ListIcon className="h-4 w-4" />
+                  Listen
+                </TabsTrigger>
+                <TabsTrigger value="contacts" className="gap-2">
+                  <Users className="h-4 w-4" />
+                  Einzelkontakte
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="lists" className="space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  Alle Kontakte aus gewählten Listen werden zur Kampagne hinzugefügt
+                </p>
+                
+                <div className="space-y-2 max-h-96 overflow-y-auto border rounded-lg p-3">
+                  {contactLists && contactLists.length > 0 ? (
+                    contactLists.map(list => (
+                      <div
+                        key={list.id}
+                        onClick={() => toggleList(list.id)}
+                        className="flex items-center justify-between p-3 rounded-lg hover:bg-muted cursor-pointer transition-colors border"
+                      >
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                          <Checkbox
+                            checked={selectedLists.includes(list.id)}
+                            onCheckedChange={() => toggleList(list.id)}
+                          />
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium truncate">{list.name}</p>
+                            {list.description && (
+                              <p className="text-sm text-muted-foreground truncate">
+                                {list.description}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        <Badge variant="secondary" className="flex-shrink-0">
+                          {list.contact_count} Kontakte
+                        </Badge>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-8 text-muted-foreground">
+                      <ListIcon className="h-12 w-12 mx-auto mb-2 opacity-20" />
+                      <p>Keine Listen vorhanden</p>
+                      <Button
+                        variant="link"
+                        onClick={() => navigate('/admin/crm/contact-lists')}
+                        className="mt-2"
+                      >
+                        Erste Liste erstellen
+                      </Button>
+                    </div>
                   )}
                 </div>
-              ))}
+
+                <div className="p-3 bg-muted/30 rounded-lg">
+                  <p className="text-sm font-medium">
+                    📋 {selectedLists.length} Listen ausgewählt
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    = {contactsFromLists.length} Kontakte
+                  </p>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="contacts" className="space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  Wählen Sie individuelle Kontakte zusätzlich zu den Listen aus
+                </p>
+
+                <div className="max-h-96 overflow-y-auto space-y-2 border rounded-lg p-3">
+                  {contacts?.map((contact) => (
+                    <div
+                      key={contact.id}
+                      className="flex items-center space-x-2 p-3 rounded-lg hover:bg-muted cursor-pointer"
+                      onClick={() => toggleContact(contact.id)}
+                    >
+                      <Checkbox
+                        checked={selectedContacts.includes(contact.id)}
+                        onCheckedChange={() => toggleContact(contact.id)}
+                      />
+                      <div className="flex-1">
+                        <p className="font-medium">
+                          {contact.first_name} {contact.last_name}
+                        </p>
+                        <p className="text-sm text-muted-foreground">{contact.email}</p>
+                      </div>
+                      {contact.position && (
+                        <Badge variant="outline">{contact.position}</Badge>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="p-3 bg-muted/30 rounded-lg">
+                  <p className="text-sm font-medium">
+                    👤 {selectedContacts.length} Einzelkontakte ausgewählt
+                  </p>
+                </div>
+              </TabsContent>
+            </Tabs>
+
+            <div className="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+              <p className="font-semibold mb-2">Kampagnen-Reichweite:</p>
+              <div className="space-y-1 text-sm">
+                <p>📋 {selectedLists.length} Listen = {contactsFromLists.length} Kontakte</p>
+                <p>👤 {selectedContacts.length} Einzelkontakte</p>
+                <div className="pt-2 border-t mt-2">
+                  <p className="font-semibold text-base">
+                    = {finalContactIds.length} Kontakte gesamt
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    (Duplikate wurden entfernt)
+                  </p>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>

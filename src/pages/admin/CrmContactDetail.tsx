@@ -5,13 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ArrowLeft, Edit, Mail, Phone, Smartphone, Building, Calendar, User, MessageSquare, Sparkles, ExternalLink, Lightbulb, TrendingUp, CheckCircle2, UserPlus } from "lucide-react";
+import { ArrowLeft, Edit, Mail, Phone, Smartphone, Building, Calendar, User, MessageSquare, Sparkles, ExternalLink, Lightbulb, TrendingUp, CheckCircle2, UserPlus, List as ListIcon, Plus, X } from "lucide-react";
 import { useTranslation } from "@/i18n/i18n";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { ContactEmailTimeline } from "@/components/ContactEmailTimeline";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 interface Contact {
   id: string;
@@ -45,12 +46,15 @@ export default function CrmContactDetail() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { toast } = useToast();
+  const queryClient = useQueryClient();
   const [contact, setContact] = useState<Contact | null>(null);
   const [loading, setLoading] = useState(true);
   const [researchData, setResearchData] = useState<any>(null);
   const [isResearching, setIsResearching] = useState(false);
+  const [contactLists, setContactLists] = useState<any[]>([]);
+  const [availableLists, setAvailableLists] = useState<any[]>([]);
+  const [listDialogOpen, setListDialogOpen] = useState(false);
 
-  // Query for existing research data
   const { data: existingResearch } = useQuery({
     queryKey: ['contact-research', id],
     queryFn: async () => {
@@ -66,11 +70,58 @@ export default function CrmContactDetail() {
     enabled: !!id,
   });
 
+  const { data: contactListMemberships, refetch: refetchLists } = useQuery({
+    queryKey: ['contact-lists', id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('crm_contact_list_members')
+        .select(`
+          list_id,
+          crm_contact_lists (
+            id,
+            name,
+            description
+          )
+        `)
+        .eq('contact_id', id);
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!id,
+  });
+
+  const { data: allLists } = useQuery({
+    queryKey: ['all-contact-lists'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('crm_contact_lists')
+        .select('*')
+        .order('name');
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
   useEffect(() => {
     if (existingResearch) {
       setResearchData(existingResearch.research_data);
     }
   }, [existingResearch]);
+
+  useEffect(() => {
+    if (contactListMemberships) {
+      setContactLists(contactListMemberships.map((m: any) => m.crm_contact_lists));
+    }
+  }, [contactListMemberships]);
+
+  useEffect(() => {
+    if (allLists && contactLists) {
+      const contactListIds = contactLists.map(l => l.id);
+      setAvailableLists(allLists.filter(l => !contactListIds.includes(l.id)));
+    }
+  }, [allLists, contactLists]);
 
   useEffect(() => {
     if (id) {
@@ -129,7 +180,6 @@ export default function CrmContactDetail() {
     return colors[priority as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
   };
 
-  // Mutation for performing research
   const performResearchMutation = useMutation({
     mutationFn: async () => {
       setIsResearching(true);
@@ -155,6 +205,47 @@ export default function CrmContactDetail() {
         variant: "destructive"
       });
     }
+  });
+
+  const addToListMutation = useMutation({
+    mutationFn: async (listId: string) => {
+      const { error } = await supabase
+        .from('crm_contact_list_members')
+        .insert({
+          list_id: listId,
+          contact_id: id,
+        });
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      refetchLists();
+      queryClient.invalidateQueries({ queryKey: ['contact-lists'] });
+      toast({
+        title: "Zur Liste hinzugefügt",
+        description: "Kontakt wurde erfolgreich zur Liste hinzugefügt.",
+      });
+    },
+  });
+
+  const removeFromListMutation = useMutation({
+    mutationFn: async (listId: string) => {
+      const { error } = await supabase
+        .from('crm_contact_list_members')
+        .delete()
+        .eq('list_id', listId)
+        .eq('contact_id', id);
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      refetchLists();
+      queryClient.invalidateQueries({ queryKey: ['contact-lists'] });
+      toast({
+        title: "Aus Liste entfernt",
+        description: "Kontakt wurde erfolgreich aus der Liste entfernt.",
+      });
+    },
   });
 
   if (loading) {
@@ -268,6 +359,88 @@ export default function CrmContactDetail() {
                         Registrierter Benutzer
                       </Badge>
                     )}
+                  </div>
+
+                  <div className="mt-3 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                        <ListIcon className="h-4 w-4" />
+                        In Listen:
+                      </p>
+                      <Dialog open={listDialogOpen} onOpenChange={setListDialogOpen}>
+                        <DialogTrigger asChild>
+                          <Button variant="ghost" size="sm">
+                            <Plus className="h-4 w-4" />
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Listen verwalten</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-4">
+                            {contactLists.length > 0 && (
+                              <div className="space-y-2">
+                                <p className="text-sm font-medium">Aktuelle Listen:</p>
+                                {contactLists.map(list => (
+                                  <div key={list.id} className="flex items-center justify-between p-2 border rounded-lg">
+                                    <div>
+                                      <p className="font-medium">{list.name}</p>
+                                      {list.description && (
+                                        <p className="text-xs text-muted-foreground">{list.description}</p>
+                                      )}
+                                    </div>
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      onClick={() => removeFromListMutation.mutate(list.id)}
+                                    >
+                                      <X className="h-4 w-4" />
+                                    </Button>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                            
+                            {availableLists.length > 0 && (
+                              <div className="space-y-2">
+                                <p className="text-sm font-medium">Zu Liste hinzufügen:</p>
+                                {availableLists.map(list => (
+                                  <div
+                                    key={list.id}
+                                    onClick={() => addToListMutation.mutate(list.id)}
+                                    className="p-2 border rounded-lg cursor-pointer hover:bg-muted transition-colors"
+                                  >
+                                    <p className="font-medium">{list.name}</p>
+                                    {list.description && (
+                                      <p className="text-xs text-muted-foreground">{list.description}</p>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                            
+                            {availableLists.length === 0 && contactLists.length === 0 && (
+                              <p className="text-center text-muted-foreground py-4">
+                                Keine Listen verfügbar
+                              </p>
+                            )}
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-2">
+                      {contactLists.length > 0 ? (
+                        contactLists.map(list => (
+                          <Badge key={list.id} variant="outline" className="gap-1">
+                            <ListIcon className="h-3 w-3" />
+                            {list.name}
+                          </Badge>
+                        ))
+                      ) : (
+                        <p className="text-sm text-muted-foreground">Keine Listen zugeordnet</p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

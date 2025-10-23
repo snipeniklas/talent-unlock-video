@@ -4,13 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Mail, Phone, Plus, Upload, LayoutGrid, Table as TableIcon, Eye, Edit, Calendar, UserPlus, PhoneCall, CheckCircle2, FileText, Handshake, Trophy, XCircle, GripVertical } from "lucide-react";
+import { User, Mail, Phone, Plus, Upload, LayoutGrid, Table as TableIcon, Eye, Edit, Calendar, UserPlus, PhoneCall, CheckCircle2, FileText, Handshake, Trophy, XCircle, GripVertical, List as ListIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/i18n";
+import { useToast } from "@/hooks/use-toast";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import CsvImportDialog from "@/components/CsvImportDialog";
 import { DataTable, ColumnDef, FilterDef } from "@/components/DataTable";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface CrmContact {
   id: string;
@@ -42,8 +45,49 @@ export default function CrmContacts() {
   const [csvDialogOpen, setCsvDialogOpen] = useState(false);
   const [draggedContact, setDraggedContact] = useState<CrmContact | null>(null);
   const [dragOverStatus, setDragOverStatus] = useState<string | null>(null);
+  const [selectedContactIds, setSelectedContactIds] = useState<string[]>([]);
+  const [addToListDialogOpen, setAddToListDialogOpen] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  const { data: contactLists } = useQuery({
+    queryKey: ['contact-lists'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('crm_contact_lists')
+        .select('*')
+        .order('name');
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const addContactsToListMutation = useMutation({
+    mutationFn: async (listId: string) => {
+      const members = selectedContactIds.map(contactId => ({
+        list_id: listId,
+        contact_id: contactId,
+      }));
+      
+      const { error } = await supabase
+        .from('crm_contact_list_members')
+        .insert(members);
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast({
+        title: "Kontakte hinzugefügt",
+        description: `${selectedContactIds.length} Kontakte wurden zur Liste hinzugefügt.`,
+      });
+      setSelectedContactIds([]);
+      setAddToListDialogOpen(false);
+      queryClient.invalidateQueries({ queryKey: ['contact-lists'] });
+    },
+  });
 
   useEffect(() => {
     fetchContacts();
@@ -608,7 +652,30 @@ export default function CrmContacts() {
           <KanbanView />
         </TabsContent>
 
-        <TabsContent value="table" className="mt-0">
+        <TabsContent value="table" className="mt-0 space-y-4">
+          {selectedContactIds.length > 0 && (
+            <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
+              <p className="font-medium">
+                {selectedContactIds.length} Kontakte ausgewählt
+              </p>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setAddToListDialogOpen(true)}
+                >
+                  <ListIcon className="h-4 w-4 mr-2" />
+                  Zu Liste hinzufügen
+                </Button>
+                <Button
+                  variant="ghost"
+                  onClick={() => setSelectedContactIds([])}
+                >
+                  Auswahl aufheben
+                </Button>
+              </div>
+            </div>
+          )}
+
           <DataTable
             data={contacts}
             columns={columns}
@@ -620,6 +687,42 @@ export default function CrmContacts() {
           />
         </TabsContent>
       </Tabs>
+
+      <Dialog open={addToListDialogOpen} onOpenChange={setAddToListDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Zu Liste hinzufügen</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-2">
+            {contactLists && contactLists.length > 0 ? (
+              contactLists.map(list => (
+                <div
+                  key={list.id}
+                  onClick={() => addContactsToListMutation.mutate(list.id)}
+                  className="p-3 border rounded-lg cursor-pointer hover:bg-muted transition-colors"
+                >
+                  <p className="font-medium">{list.name}</p>
+                  {list.description && (
+                    <p className="text-xs text-muted-foreground">{list.description}</p>
+                  )}
+                </div>
+              ))
+            ) : (
+              <div className="text-center py-8 text-muted-foreground">
+                <ListIcon className="h-12 w-12 mx-auto mb-2 opacity-20" />
+                <p>Keine Listen verfügbar</p>
+                <Button
+                  variant="link"
+                  onClick={() => navigate('/admin/crm/contact-lists')}
+                  className="mt-2"
+                >
+                  Erste Liste erstellen
+                </Button>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

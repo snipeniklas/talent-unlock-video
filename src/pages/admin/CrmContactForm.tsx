@@ -6,10 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft, Save, Plus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "@/i18n/i18n";
 import { useToast } from "@/hooks/use-toast";
+import { useQuery } from "@tanstack/react-query";
 import CreateCompanyDialog from "@/components/CreateCompanyDialog";
 
 interface ContactFormData {
@@ -61,7 +63,21 @@ export default function CrmContactForm() {
   const [companies, setCompanies] = useState<CrmCompany[]>([]);
   const [formData, setFormData] = useState<ContactFormData>(initialFormData);
   const [createCompanyDialogOpen, setCreateCompanyDialogOpen] = useState(false);
+  const [selectedLists, setSelectedLists] = useState<string[]>([]);
   const isEdit = Boolean(id);
+
+  const { data: contactLists } = useQuery({
+    queryKey: ['contact-lists'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('crm_contact_lists')
+        .select('*')
+        .order('name');
+      
+      if (error) throw error;
+      return data;
+    },
+  });
 
   useEffect(() => {
     fetchCompanies();
@@ -118,6 +134,16 @@ export default function CrmContactForm() {
           last_contact_date: data.last_contact_date || "",
           crm_company_id: data.crm_company_id || "none"
         });
+
+        // Load contact's lists
+        const { data: listMemberships } = await supabase
+          .from('crm_contact_list_members')
+          .select('list_id')
+          .eq('contact_id', contactId);
+        
+        if (listMemberships) {
+          setSelectedLists(listMemberships.map((m: any) => m.list_id));
+        }
       }
     } catch (error) {
       console.error("Error fetching contact:", error);
@@ -153,6 +179,8 @@ export default function CrmContactForm() {
         last_contact_date: formData.last_contact_date || null
       };
 
+      let contactId = id;
+
       if (isEdit && id) {
         const { error } = await (supabase as any)
           .from("crm_contacts")
@@ -160,22 +188,43 @@ export default function CrmContactForm() {
           .eq("id", id);
         
         if (error) throw error;
+
+        // Delete existing list memberships
+        await supabase
+          .from('crm_contact_list_members')
+          .delete()
+          .eq('contact_id', id);
         
         toast({
           title: "Success",
           description: "Contact updated successfully"
         });
       } else {
-        const { error } = await (supabase as any)
+        const { data: insertedContact, error } = await (supabase as any)
           .from("crm_contacts")
-          .insert([submitData]);
+          .insert([submitData])
+          .select()
+          .single();
         
         if (error) throw error;
+        contactId = insertedContact.id;
         
         toast({
           title: "Success",
           description: "Contact created successfully"
         });
+      }
+
+      // Add list memberships
+      if (selectedLists.length > 0 && contactId) {
+        const members = selectedLists.map(listId => ({
+          list_id: listId,
+          contact_id: contactId,
+        }));
+        
+        await supabase
+          .from('crm_contact_list_members')
+          .insert(members);
       }
       
       navigate("/admin/crm/contacts");
@@ -425,6 +474,41 @@ export default function CrmContactForm() {
                     placeholder="Additional notes..."
                     rows={4}
                   />
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Kontaktlisten</Label>
+                  <div className="border rounded-lg p-4 space-y-2 max-h-48 overflow-y-auto">
+                    {contactLists && contactLists.length > 0 ? (
+                      contactLists.map(list => (
+                        <div key={list.id} className="flex items-center gap-2 p-2 hover:bg-muted rounded transition-colors">
+                          <Checkbox
+                            checked={selectedLists.includes(list.id)}
+                            onCheckedChange={(checked) => {
+                              if (checked) {
+                                setSelectedLists(prev => [...prev, list.id]);
+                              } else {
+                                setSelectedLists(prev => prev.filter(id => id !== list.id));
+                              }
+                            }}
+                          />
+                          <div>
+                            <p className="font-medium text-sm">{list.name}</p>
+                            {list.description && (
+                              <p className="text-xs text-muted-foreground">{list.description}</p>
+                            )}
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-sm text-muted-foreground text-center py-2">
+                        Keine Listen verfügbar
+                      </p>
+                    )}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {selectedLists.length} Listen ausgewählt
+                  </p>
                 </div>
               </div>
             </div>
