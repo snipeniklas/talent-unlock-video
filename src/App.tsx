@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import HejTalentLanding from "./pages/HejTalentLanding";
 import BackofficeLanding from "./pages/BackofficeLanding";
@@ -91,7 +92,11 @@ const App = () => (
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/datenschutz" element={<Datenschutz />} />
           <Route path="/invite" element={<InviteRegister />} />
-          <Route path="/app" element={<AppLayout />}>
+          <Route path="/app" element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          }>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="search-requests" element={<SearchRequests />} />
             <Route path="search-requests/new" element={<NewSearchRequest />} />
@@ -108,8 +113,12 @@ const App = () => (
           {/* Microsoft 365 OAuth Callback - Outside AppLayout */}
           <Route path="/admin/ms365-callback" element={<MS365Callback />} />
           
-          {/* Admin Routes mit AppLayout */}
-          <Route path="/admin" element={<AppLayout />}>
+          {/* Admin Routes mit AppLayout - Protected with admin role */}
+          <Route path="/admin" element={
+            <ProtectedRoute requiredRole="admin">
+              <AppLayout />
+            </ProtectedRoute>
+          }>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="candidates" element={<CandidateManagement />} />
             <Route path="candidates/:id" element={<CandidateView />} />

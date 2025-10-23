@@ -42,9 +42,23 @@ const AuthPage = () => {
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Redirect authenticated users to dashboard
+        // Redirect authenticated users based on role
         if (session?.user) {
-          navigate('/app/dashboard');
+          // Defer role check to avoid blocking auth state change
+          setTimeout(async () => {
+            const { data: roleData } = await supabase
+              .from('user_roles')
+              .select('role')
+              .eq('user_id', session.user.id)
+              .maybeSingle();
+            
+            // Redirect based on role
+            if (roleData?.role === 'admin') {
+              navigate('/admin/dashboard');
+            } else {
+              navigate('/app/dashboard');
+            }
+          }, 0);
         }
         
         if (loading) {
@@ -54,14 +68,25 @@ const AuthPage = () => {
     );
 
     // THEN check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
       
       // Redirect if already authenticated
       if (session?.user) {
-        navigate('/app/dashboard');
+        const { data: roleData } = await supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
+        
+        // Redirect based on role
+        if (roleData?.role === 'admin') {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/app/dashboard');
+        }
       }
     });
 
