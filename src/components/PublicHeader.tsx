@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import BenefitBanner from "@/components/BenefitBanner";
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 import { useTranslation } from '@/i18n/i18n';
+import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
 
 const PublicHeader = () => {
   const navigate = useNavigate();
@@ -59,9 +60,14 @@ const PublicHeader = () => {
               <Button variant="outline" asChild>
                 <a href="/auth">{t('header.cta.login')}</a>
               </Button>
-              <Button asChild className="bg-primary hover:bg-primary-hover">
-                <Link to="/app/search-requests/new">{t('header.cta.createRequest')}</Link>
-              </Button>
+              <RaasInquiryDialog 
+                source="header-desktop"
+                trigger={
+                  <Button className="bg-primary hover:bg-primary-hover">
+                    {t('header.cta.createRequest')}
+                  </Button>
+                }
+              />
               <Button variant="ghost" onClick={() => setLang(lang === 'de' ? 'en' : 'de')}>
                 {lang === 'de' ? 'EN' : 'DE'}
               </Button>
@@ -69,9 +75,14 @@ const PublicHeader = () => {
 
             {/* Mobile Menu */}
             <div className="flex items-center space-x-2 md:hidden">
-              <Button asChild size="sm" className="bg-primary hover:bg-primary-hover">
-                <Link to="/app/search-requests/new">{t('header.cta.createRequestShort')}</Link>
-              </Button>
+              <RaasInquiryDialog 
+                source="header-mobile"
+                trigger={
+                  <Button size="sm" className="bg-primary hover:bg-primary-hover">
+                    {t('header.cta.createRequestShort')}
+                  </Button>
+                }
+              />
               <Button variant="ghost" size="sm" onClick={() => setLang(lang === 'de' ? 'en' : 'de')}>
                 {lang === 'de' ? 'EN' : 'DE'}
               </Button>
@@ -121,9 +132,14 @@ const PublicHeader = () => {
                       <Button variant="outline" asChild className="w-full">
                         <a href="/auth">{t('header.cta.login')}</a>
                       </Button>
-                      <Button asChild className="w-full bg-primary hover:bg-primary-hover">
-                        <Link to="/app/search-requests/new">{t('header.cta.createRequest')}</Link>
-                      </Button>
+                      <RaasInquiryDialog 
+                        source="header-mobile-menu"
+                        trigger={
+                          <Button className="w-full bg-primary hover:bg-primary-hover">
+                            {t('header.cta.createRequest')}
+                          </Button>
+                        }
+                      />
                     </div>
                   </div>
                 </SheetContent>

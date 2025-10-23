@@ -801,6 +801,7 @@
     "title": "RaaS Anfrage erstellen",
     "subtitle": "Beschreiben Sie uns Ihr Anliegen – wir melden uns innerhalb von 24 Stunden",
     "fields": {
+      "companyName": "Firmenname",
       "firstName": "Vorname",
       "lastName": "Nachname",
       "email": "E-Mail Adresse",
@@ -809,9 +810,11 @@
       "inquiry": "Ihr Anliegen"
     },
     "placeholders": {
+      "companyName": "Ihre Firma GmbH",
       "inquiry": "Beschreiben Sie Ihr Anliegen, z.B.: Wir suchen einen Senior React Developer für 6 Monate..."
     },
     "validation": {
+      "companyNameMin": "Firmenname muss mindestens 2 Zeichen haben",
       "firstNameMin": "Vorname muss mindestens 2 Zeichen haben",
       "lastNameMin": "Nachname muss mindestens 2 Zeichen haben",
       "emailInvalid": "Bitte geben Sie eine gültige E-Mail Adresse ein",

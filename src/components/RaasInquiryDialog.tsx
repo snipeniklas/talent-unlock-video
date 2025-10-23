@@ -27,6 +27,7 @@ import { CheckCircle, Loader2 } from "lucide-react";
 import { trackEvent } from "@/components/FacebookPixel";
 
 const formSchema = z.object({
+  companyName: z.string().min(2, "raasInquiry.validation.companyNameMin").max(100),
   firstName: z.string().min(2, "raasInquiry.validation.firstNameMin").max(50),
   lastName: z.string().min(2, "raasInquiry.validation.lastNameMin").max(50),
   email: z.string().email("raasInquiry.validation.emailInvalid").max(255),
@@ -55,6 +56,7 @@ export function RaasInquiryDialog({
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      companyName: "",
       firstName: "",
       lastName: "",
       email: "",
@@ -68,10 +70,43 @@ export function RaasInquiryDialog({
     setIsSubmitting(true);
 
     try {
-      // Insert into CRM contacts
-      const { error } = await supabase
+      let companyId: string | null = null;
+      
+      // 1. Check if company already exists by name (case-insensitive)
+      const { data: existingCompany, error: searchError } = await supabase
+        .from("crm_companies")
+        .select("id")
+        .ilike("name", data.companyName)
+        .maybeSingle();
+      
+      if (searchError && searchError.code !== 'PGRST116') {
+        throw searchError;
+      }
+      
+      if (existingCompany) {
+        // Company exists, use existing ID
+        companyId = existingCompany.id;
+      } else {
+        // 2. Create new company
+        const { data: newCompany, error: companyError } = await supabase
+          .from("crm_companies")
+          .insert({
+            name: data.companyName,
+            status: "prospect",
+            email: data.email,
+          })
+          .select("id")
+          .single();
+        
+        if (companyError) throw companyError;
+        companyId = newCompany.id;
+      }
+      
+      // 3. Insert contact with company reference
+      const { error: contactError } = await supabase
         .from("crm_contacts")
         .insert({
+          crm_company_id: companyId,
           first_name: data.firstName,
           last_name: data.lastName,
           email: data.email,
@@ -84,7 +119,7 @@ export function RaasInquiryDialog({
           last_contact_date: new Date().toISOString(),
         });
 
-      if (error) throw error;
+      if (contactError) throw contactError;
 
       // Track Facebook Pixel event
       trackEvent("Lead", {
@@ -158,6 +193,24 @@ export function RaasInquiryDialog({
 
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="companyName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("raasInquiry.fields.companyName")}</FormLabel>
+                      <FormControl>
+                        <Input 
+                          {...field} 
+                          placeholder={t("raasInquiry.placeholders.companyName")}
+                          disabled={isSubmitting} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 <div className="grid grid-cols-2 gap-4">
                   <FormField
                     control={form.control}

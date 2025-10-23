@@ -798,6 +798,7 @@
     "title": "Create RaaS Request",
     "subtitle": "Describe your inquiry – we'll get back to you within 24 hours",
     "fields": {
+      "companyName": "Company Name",
       "firstName": "First Name",
       "lastName": "Last Name",
       "email": "Email Address",
@@ -806,9 +807,11 @@
       "inquiry": "Your Inquiry"
     },
     "placeholders": {
+      "companyName": "Your Company Ltd",
       "inquiry": "Describe your inquiry, e.g.: We're looking for a Senior React Developer for 6 months..."
     },
     "validation": {
+      "companyNameMin": "Company name must be at least 2 characters",
       "firstNameMin": "First name must be at least 2 characters",
       "lastNameMin": "Last name must be at least 2 characters",
       "emailInvalid": "Please enter a valid email address",
