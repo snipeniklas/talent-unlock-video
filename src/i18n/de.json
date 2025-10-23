@@ -826,8 +826,13 @@
     "submitting": "Wird gesendet...",
     "success": {
       "title": "Anfrage erfolgreich!",
-      "message": "Vielen Dank für Ihr Interesse. Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
-      "confirmationSent": "Bestätigung gesendet an"
+      "message": "Vielen Dank für Ihr Interesse. Wir haben Ihre Anfrage erhalten.",
+      "calendly": {
+        "title": "Jetzt Strategiegespräch buchen",
+        "description": "Vereinbaren Sie direkt einen Termin mit unserem Team, um Ihr Projekt zu besprechen.",
+        "button": "Termin buchen (15 Min.)",
+        "optional": "Sie können dieses Fenster auch schließen. Wir melden uns bei Ihnen."
+      }
     },
     "error": {
       "title": "Fehler",

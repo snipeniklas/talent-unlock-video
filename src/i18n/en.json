@@ -822,9 +822,14 @@
     "submit": "Submit Inquiry",
     "submitting": "Submitting...",
     "success": {
-      "title": "Inquiry Successful!",
-      "message": "Thank you for your interest. We'll get back to you within 24 hours.",
-      "confirmationSent": "Confirmation sent to"
+      "title": "Request Successful!",
+      "message": "Thank you for your interest. We have received your inquiry.",
+      "calendly": {
+        "title": "Book Strategy Call Now",
+        "description": "Schedule a meeting with our team directly to discuss your project.",
+        "button": "Book Appointment (15 Min.)",
+        "optional": "You can also close this window. We will contact you."
+      }
     },
     "error": {
       "title": "Error",

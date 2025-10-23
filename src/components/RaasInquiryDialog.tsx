@@ -133,12 +133,6 @@ export function RaasInquiryDialog({
       setSubmittedEmail(data.email);
       setIsSuccess(true);
       form.reset();
-
-      // Auto-close after 3 seconds
-      setTimeout(() => {
-        setIsOpen(false);
-        setIsSuccess(false);
-      }, 3000);
     } catch (error) {
       console.error("Error submitting inquiry:", error);
       form.setError("root", {
@@ -168,7 +162,7 @@ export function RaasInquiryDialog({
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="max-w-[600px] max-h-[90vh] overflow-y-auto">
         {isSuccess ? (
-          <div className="flex flex-col items-center justify-center py-8 space-y-4">
+          <div className="flex flex-col items-center justify-center py-8 space-y-6">
             <CheckCircle className="h-16 w-16 text-green-500" />
             <DialogHeader className="text-center">
               <DialogTitle className="text-2xl">
@@ -178,9 +172,36 @@ export function RaasInquiryDialog({
                 {t("raasInquiry.success.message")}
               </DialogDescription>
             </DialogHeader>
-            <p className="text-sm text-muted-foreground">
-              📧 {t("raasInquiry.success.confirmationSent")} {submittedEmail}
-            </p>
+            
+            {/* Calendly CTA Section */}
+            <div className="w-full max-w-md space-y-4 pt-4">
+              <div className="text-center space-y-2">
+                <p className="text-base font-medium">
+                  📅 {t("raasInquiry.success.calendly.title")}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {t("raasInquiry.success.calendly.description")}
+                </p>
+              </div>
+              
+              <Button 
+                asChild
+                size="lg" 
+                className="w-full"
+              >
+                <a 
+                  href="https://calendly.com/pascal-hejtalent/15min" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  {t("raasInquiry.success.calendly.button")}
+                </a>
+              </Button>
+              
+              <p className="text-xs text-center text-muted-foreground">
+                {t("raasInquiry.success.calendly.optional")}
+              </p>
+            </div>
           </div>
         ) : (
           <>
