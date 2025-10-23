@@ -304,6 +304,72 @@ export type Database = {
         }
         Relationships: []
       }
+      crm_contact_list_members: {
+        Row: {
+          added_at: string
+          added_by: string | null
+          contact_id: string
+          id: string
+          list_id: string
+        }
+        Insert: {
+          added_at?: string
+          added_by?: string | null
+          contact_id: string
+          id?: string
+          list_id: string
+        }
+        Update: {
+          added_at?: string
+          added_by?: string | null
+          contact_id?: string
+          id?: string
+          list_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_contact_list_members_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_contact_list_members_list_id_fkey"
+            columns: ["list_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contact_lists"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_contact_lists: {
+        Row: {
+          created_at: string
+          created_by: string
+          description: string | null
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          description?: string | null
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       crm_contact_research: {
         Row: {
           contact_id: string

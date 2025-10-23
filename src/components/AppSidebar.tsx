@@ -14,7 +14,8 @@ import {
   MessageCircle,
   UserCog,
   Mail,
-  CheckSquare
+  CheckSquare,
+  List
 } from "lucide-react";
 import {
   Sidebar,
@@ -91,6 +92,7 @@ export function AppSidebar() {
     { title: t('crm.overview.title', 'CRM Übersicht'), url: "/admin/crm", icon: Shield },
     { title: t('crm.companies.title', 'Unternehmen'), url: "/admin/crm/companies", icon: Building2 },
     { title: t('crm.contacts.title', 'Kontakte'), url: "/admin/crm/contacts", icon: Users },
+    { title: 'Kontaktlisten', url: "/admin/crm/contact-lists", icon: List },
     { title: 'Aufgaben', url: "/admin/crm/tasks", icon: CheckSquare },
     { title: 'Outreach Kampagnen', url: "/admin/outreach-campaigns", icon: Mail },
     { title: t('outreach.profile.title', 'Outreach Profil'), url: "/admin/outreach-profile", icon: UserCog },
