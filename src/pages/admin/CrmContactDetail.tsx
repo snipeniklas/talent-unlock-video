@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ArrowLeft, Edit, Mail, Phone, Smartphone, Building, Calendar, User, MessageSquare, Sparkles, ExternalLink, Lightbulb, TrendingUp } from "lucide-react";
+import { ArrowLeft, Edit, Mail, Phone, Smartphone, Building, Calendar, User, MessageSquare, Sparkles, ExternalLink, Lightbulb, TrendingUp, CheckCircle2, UserPlus } from "lucide-react";
 import { useTranslation } from "@/i18n/i18n";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -15,6 +15,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 
 interface Contact {
   id: string;
+  user_id?: string; // Link to registered user
   first_name: string;
   last_name: string;
   email: string;
@@ -261,6 +262,12 @@ export default function CrmContactDetail() {
                     <Badge className={getPriorityColor(contact.priority)}>
                       {t(`crm.contacts.priority.${contact.priority}`)}
                     </Badge>
+                    {contact.user_id && (
+                      <Badge className="bg-green-100 text-green-700 border-green-300">
+                        <User className="h-3 w-3 mr-1" />
+                        Registrierter Benutzer
+                      </Badge>
+                    )}
                   </div>
                 </div>
               </div>
@@ -549,6 +556,47 @@ export default function CrmContactDetail() {
               </CardContent>
             </Card>
           )}
+
+          {/* User Status Card */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <User className="h-5 w-5" />
+                Benutzerstatus
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {contact.user_id ? (
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-green-600">
+                    <CheckCircle2 className="h-4 w-4" />
+                    <span className="font-medium">Registriert</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Dieser Kontakt hat sich als Benutzer registriert und kann sich im Portal anmelden.
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full mt-2"
+                    onClick={() => navigate(`/admin/settings?tab=users&user=${contact.user_id}`)}
+                  >
+                    Benutzerprofil anzeigen
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <UserPlus className="h-4 w-4" />
+                    <span>Nicht registriert</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Dieser Kontakt hat noch keinen Benutzerzugang.
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
 
           {/* Email Timeline */}
           <ContactEmailTimeline contactId={contact.id} />

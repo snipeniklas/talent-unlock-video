@@ -10,9 +10,11 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/i18n";
 import CsvImportDialog from "@/components/CsvImportDialog";
 import { DataTable, ColumnDef, FilterDef } from "@/components/DataTable";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface CrmContact {
   id: string;
+  user_id?: string; // Link to registered user
   first_name: string;
   last_name: string;
   email?: string;
@@ -163,6 +165,20 @@ export default function CrmContacts() {
           <Badge className={`text-xs px-1.5 py-0 flex-shrink-0 ${getPriorityColor(contact.priority)}`} variant="outline">
             {contact.priority === 'high' ? '!' : contact.priority === 'medium' ? '•' : '·'}
           </Badge>
+          {contact.user_id && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Badge variant="secondary" className="text-xs px-1.5 py-0 bg-green-100 text-green-700 border-green-300">
+                    <User className="h-3 w-3" />
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Registrierter Benutzer</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </div>
         
         {(contact.email || contact.phone) && (
@@ -394,6 +410,24 @@ export default function CrmContacts() {
       ),
     },
     {
+      id: "is_registered",
+      header: "Registriert",
+      accessorKey: "user_id",
+      sortable: true,
+      filterable: true,
+      defaultVisible: true,
+      cell: (value) => value ? (
+        <Badge variant="secondary" className="bg-green-100 text-green-700 border-green-300">
+          <User className="h-3 w-3 mr-1" />
+          Ja
+        </Badge>
+      ) : (
+        <Badge variant="outline" className="text-muted-foreground">
+          Nein
+        </Badge>
+      ),
+    },
+    {
       id: "lead_source",
       header: "Lead-Quelle",
       accessorKey: "lead_source",
@@ -487,6 +521,14 @@ export default function CrmContacts() {
         { label: "Hoch", value: "high" },
         { label: "Mittel", value: "medium" },
         { label: "Niedrig", value: "low" },
+      ],
+    },
+    {
+      id: "is_registered",
+      label: "Registrierungsstatus",
+      options: [
+        { label: "Registriert", value: "true" },
+        { label: "Nicht registriert", value: "false" },
       ],
     },
     {
