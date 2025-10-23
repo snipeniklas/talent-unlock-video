@@ -9,6 +9,7 @@ import { CheckCircle2, Settings, Zap, Mail, Save, RotateCcw, Building2, AtSign }
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
+import { MS365ConnectButton } from "@/components/MS365ConnectButton";
 
 export default function OutreachProfile() {
   const queryClient = useQueryClient();
@@ -55,6 +56,23 @@ export default function OutreachProfile() {
       const { data } = await supabase
         .from('user_email_settings')
         .select('email_signature')
+        .eq('user_id', currentUser.id)
+        .maybeSingle();
+      
+      return data;
+    },
+    enabled: !!currentUser?.id
+  });
+
+  // Fetch MS365 connection status
+  const { data: ms365Token } = useQuery({
+    queryKey: ['ms365Token', currentUser?.id],
+    queryFn: async () => {
+      if (!currentUser?.id) return null;
+      
+      const { data } = await supabase
+        .from('ms365_tokens')
+        .select('email_address')
         .eq('user_id', currentUser.id)
         .maybeSingle();
       
@@ -239,6 +257,51 @@ export default function OutreachProfile() {
             />
             <p className="text-xs text-muted-foreground">
               💡 Sie können HTML verwenden (&lt;p&gt;, &lt;br&gt;, &lt;strong&gt;)
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* MS365 Connection Status */}
+      <Card>
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <Mail className="w-5 h-5" />
+            <CardTitle>Microsoft 365 Verbindung</CardTitle>
+          </div>
+          <CardDescription>
+            Ihr Outlook-Konto für automatisierten E-Mail-Versand
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-3">
+            {/* Connection Status */}
+            <div className="flex items-center justify-between p-3 rounded-lg border bg-muted/30">
+              <div className="space-y-1">
+                <p className="text-sm font-medium">Verbindungsstatus</p>
+                {ms365Token?.email_address ? (
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-600" />
+                    <p className="text-sm text-muted-foreground">
+                      Verbunden als <span className="font-medium text-foreground">{ms365Token.email_address}</span>
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    Nicht verbunden
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Connect Button */}
+            <div className="flex justify-center pt-2">
+              <MS365ConnectButton />
+            </div>
+
+            {/* Info Text */}
+            <p className="text-xs text-muted-foreground text-center">
+              💡 Alle Outreach-E-Mails werden über dieses Konto versendet
             </p>
           </div>
         </CardContent>
