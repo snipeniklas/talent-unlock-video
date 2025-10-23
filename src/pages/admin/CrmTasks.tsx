@@ -104,8 +104,8 @@ export default function CrmTasks() {
         .from('crm_tasks')
         .select(`
           *,
-          assigned_to_profile:profiles!crm_tasks_assigned_to_fkey(first_name, last_name),
-          created_by_profile:profiles!crm_tasks_created_by_fkey(first_name, last_name),
+          assigned_to_profile:assigned_to(first_name, last_name),
+          created_by_profile:created_by(first_name, last_name),
           contact:crm_contacts(first_name, last_name),
           company:crm_companies(name),
           campaign:outreach_campaigns(name)
