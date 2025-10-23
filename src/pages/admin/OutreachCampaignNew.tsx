@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -9,10 +9,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Plus, Trash2, Info } from "lucide-react";
+import { ArrowLeft, Info, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   Tooltip,
   TooltipContent,
@@ -36,24 +37,78 @@ export default function OutreachCampaignNew() {
   const [campaignDescription, setCampaignDescription] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
   const [desiredCta, setDesiredCta] = useState("");
-  const [aiInstructions, setAiInstructions] = useState(
-    `Personalisiere die E-Mail basierend auf den Kontaktinformationen.
-  
-Wichtig:
-- Verwende einen professionellen, aber freundlichen Ton
-- Gehe auf die Position und das Unternehmen des Empfängers ein
-- Stelle einen klaren Bezug zur Zielgruppe her
-- Integriere den Call-to-Action natürlich in die E-Mail`
-  );
+  const [aiInstructions, setAiInstructions] = useState("");
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
-  const [emailSequences, setEmailSequences] = useState<EmailSequence[]>([
-    {
-      sequence_number: 1,
-      subject_template: "",
-      body_template: "",
-      delay_days: 0,
-    },
-  ]);
+  const [numFollowUps, setNumFollowUps] = useState(1);
+  const [emailSequences, setEmailSequences] = useState<EmailSequence[]>([]);
+
+  // Helper functions for default prompts
+  const getDefaultSubjectPrompt = (sequenceNum: number): string => {
+    if (sequenceNum === 1) {
+      return "Schreibe einen professionellen, neugierig machenden Betreff für eine erste Kontaktaufnahme. Beziehe dich auf die Position des Kontakts und schaffe einen direkten Bezug zur Zielgruppe. Maximal 60 Zeichen.";
+    } else if (sequenceNum === 2) {
+      return "Schreibe einen freundlichen Follow-Up Betreff, der auf die erste E-Mail Bezug nimmt, ohne aufdringlich zu wirken. Maximal 60 Zeichen.";
+    } else if (sequenceNum === 3) {
+      return "Schreibe einen prägnanten, wertorientierten Betreff für ein zweites Follow-Up. Maximal 60 Zeichen.";
+    } else {
+      return `Schreibe einen direkten Betreff für Follow-Up #${sequenceNum - 1}. Maximal 60 Zeichen.`;
+    }
+  };
+
+  const getDefaultBodyPrompt = (sequenceNum: number): string => {
+    if (sequenceNum === 1) {
+      return `Schreibe eine professionelle, aber persönliche E-Mail für eine erste Kontaktaufnahme.
+
+Wichtige Elemente:
+- Persönliche Ansprache basierend auf Position und Unternehmen
+- Relevanter Aufhänger (z.B. aktuelle Entwicklungen in der Branche)
+- Klarer Mehrwert für den Empfänger
+- Direkter, aber unaufdringlicher Call-to-Action
+- Professioneller, freundlicher Ton
+
+Länge: 100-150 Wörter. Nutze HTML-Formatierung mit <p> Tags.`;
+    } else if (sequenceNum === 2) {
+      return `Schreibe ein höfliches Follow-Up zur ersten E-Mail.
+
+Wichtige Elemente:
+- Kurzer Verweis auf die erste Nachricht
+- Zusätzlicher Mehrwert oder neue Perspektive
+- Verständnis für Zeitknappheit zeigen
+- Erneuter, sanfter Call-to-Action
+
+Länge: 80-120 Wörter. Ton: Freundlich, nicht pushy.`;
+    } else if (sequenceNum === 3) {
+      return `Verfasse ein kurzes, wertorientiertes zweites Follow-Up.
+
+Wichtige Elemente:
+- Sehr kurz und auf den Punkt (max. 80 Wörter)
+- Konkreter Mehrwert im Fokus
+- Alternative CTA anbieten (z.B. kurzer Call vs. Ressource)
+- Professionell, aber mit leichter Dringlichkeit`;
+    } else {
+      return `Verfasse ein sehr kurzes, finales Follow-Up #${sequenceNum - 1}.
+
+Wichtig:
+- Maximal 60 Wörter
+- Klare Deadline oder letzte Chance kommunizieren
+- Professionell bleiben`;
+    }
+  };
+
+  // Generate email sequences dynamically based on number of follow-ups
+  useEffect(() => {
+    const totalEmails = numFollowUps + 1;
+    
+    if (emailSequences.length !== totalEmails) {
+      const newSequences = Array.from({ length: totalEmails }, (_, i) => ({
+        sequence_number: i + 1,
+        subject_template: getDefaultSubjectPrompt(i + 1),
+        body_template: getDefaultBodyPrompt(i + 1),
+        delay_days: i === 0 ? 0 : 3,
+      }));
+      setEmailSequences(newSequences);
+    }
+  }, [numFollowUps]);
 
   const { data: contacts } = useQuery({
     queryKey: ["crm-contacts"],
@@ -73,7 +128,6 @@ Wichtig:
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Nicht angemeldet");
 
-      // Create campaign
       const { data: campaign, error: campaignError } = await supabase
         .from("outreach_campaigns")
         .insert({
@@ -89,7 +143,6 @@ Wichtig:
 
       if (campaignError) throw campaignError;
 
-      // Add contacts to campaign
       const contactsToAdd = selectedContacts.map((contactId) => ({
         campaign_id: campaign.id,
         contact_id: contactId,
@@ -101,7 +154,6 @@ Wichtig:
 
       if (contactsError) throw contactsError;
 
-      // Add email sequences
       const sequencesToAdd = emailSequences.map((seq) => ({
         campaign_id: campaign.id,
         ...seq,
@@ -140,29 +192,14 @@ Wichtig:
     );
   };
 
-  const addEmailSequence = () => {
-    setEmailSequences([
-      ...emailSequences,
-      {
-        sequence_number: emailSequences.length + 1,
-        subject_template: "",
-        body_template: "",
-        delay_days: 3,
-      },
-    ]);
-  };
-
-  const removeEmailSequence = (index: number) => {
-    setEmailSequences(emailSequences.filter((_, i) => i !== index));
-  };
-
   const updateEmailSequence = (
-    index: number,
+    sequenceNumber: number,
     field: keyof EmailSequence,
     value: string | number
   ) => {
-    const updated = [...emailSequences];
-    updated[index] = { ...updated[index], [field]: value };
+    const updated = emailSequences.map((seq) =>
+      seq.sequence_number === sequenceNumber ? { ...seq, [field]: value } : seq
+    );
     setEmailSequences(updated);
   };
 
@@ -186,18 +223,12 @@ Wichtig:
         </div>
       </div>
 
-      {/* Info Banner */}
-      <Alert>
+      <Alert className="mb-6">
         <Info className="h-4 w-4" />
-        <AlertTitle>So funktioniert die AI-Personalisierung</AlertTitle>
         <AlertDescription>
-          Du gibst die Richtung vor (Ton, Struktur, Thema), die AI macht den Rest:
-          <ul className="list-disc list-inside mt-2 space-y-1">
-            <li>Passt Betreff und Nachricht an Position und Branche an</li>
-            <li>Integriert deine Zielgruppe und den Call-to-Action</li>
-            <li>Ersetzt Variablen wie {`{{first_name}}`} automatisch</li>
-            <li>Optimiert die Ansprache für jeden Kontakt individuell</li>
-          </ul>
+          Die KI schreibt jede E-Mail komplett neu basierend auf deinen Prompts (Anweisungen). 
+          Du gibst an, <strong>WIE</strong> die E-Mail geschrieben werden soll (Ton, Struktur, Länge) - 
+          die KI erstellt dann eine individuelle, personalisierte E-Mail für jeden Kontakt basierend auf Position, Unternehmen und Research-Daten.
         </AlertDescription>
       </Alert>
 
@@ -235,9 +266,6 @@ Wichtig:
                 placeholder="z.B. CTOs in Tech-Startups mit 50-200 Mitarbeitern"
                 rows={2}
               />
-              <p className="text-xs text-muted-foreground">
-                Beschreibe deine Zielgruppe für bessere AI-Personalisierung
-              </p>
             </div>
             <div className="space-y-2">
               <Label htmlFor="desired-cta">Gewünschter Call-to-Action</Label>
@@ -245,11 +273,8 @@ Wichtig:
                 id="desired-cta"
                 value={desiredCta}
                 onChange={(e) => setDesiredCta(e.target.value)}
-                placeholder="z.B. Demo-Call buchen, Whitepaper downloaden"
+                placeholder="z.B. Demo-Call buchen"
               />
-              <p className="text-xs text-muted-foreground">
-                Was soll der Empfänger nach der E-Mail tun?
-              </p>
             </div>
             <div className="space-y-2">
               <Label htmlFor="ai-instructions">AI Anweisungen (Optional)</Label>
@@ -257,17 +282,12 @@ Wichtig:
                 id="ai-instructions"
                 value={aiInstructions}
                 onChange={(e) => setAiInstructions(e.target.value)}
-                placeholder="Zusätzliche Anweisungen für die AI-Personalisierung"
                 rows={3}
               />
-              <p className="text-xs text-muted-foreground">
-                Erweitere die Standard-Anweisungen falls nötig
-              </p>
             </div>
           </CardContent>
         </Card>
 
-        {/* Kontakt-Auswahl */}
         <Card>
           <CardHeader>
             <CardTitle>Kontakte auswählen *</CardTitle>
@@ -302,49 +322,62 @@ Wichtig:
           </CardContent>
         </Card>
 
-        {/* E-Mail Sequenzen */}
         <Card>
           <CardHeader>
-            <div className="flex justify-between items-center">
-              <div>
-                <CardTitle>E-Mail Sequenzen *</CardTitle>
-                <CardDescription>
-                  Definiere die Richtung für deine E-Mails. Die AI verwendet diese als Grundlage und personalisiert sie automatisch für jeden Kontakt basierend auf Zielgruppe, CTA und Kontaktdaten.
-                </CardDescription>
-              </div>
-              <Button onClick={addEmailSequence} variant="outline" size="sm">
-                <Plus className="h-4 w-4 mr-2" />
-                E-Mail hinzufügen
-              </Button>
-            </div>
+            <CardTitle className="flex items-center gap-2">
+              <Mail className="h-5 w-5" />
+              E-Mail Konfiguration
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            {emailSequences.map((sequence, index) => (
-              <div key={index}>
-                {index > 0 && <Separator className="my-6" />}
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <h4 className="font-semibold">E-Mail #{sequence.sequence_number}</h4>
-                    {emailSequences.length > 1 && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeEmailSequence(index)}
-                      >
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                      </Button>
-                    )}
-                  </div>
-                  {index > 0 && (
-                    <div className="space-y-2">
-                      <Label>Verzögerung (Tage)</Label>
+            <div>
+              <Label htmlFor="num-followups">Anzahl Follow-Ups</Label>
+              <Select
+                value={numFollowUps.toString()}
+                onValueChange={(value) => setNumFollowUps(parseInt(value))}
+              >
+                <SelectTrigger id="num-followups">
+                  <SelectValue placeholder="Wähle Anzahl..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="0">0 (nur initiale E-Mail)</SelectItem>
+                  <SelectItem value="1">1 Follow-Up</SelectItem>
+                  <SelectItem value="2">2 Follow-Ups</SelectItem>
+                  <SelectItem value="3">3 Follow-Ups</SelectItem>
+                  <SelectItem value="4">4 Follow-Ups</SelectItem>
+                  <SelectItem value="5">5 Follow-Ups</SelectItem>
+                </SelectContent>
+              </Select>
+              <p className="text-sm text-muted-foreground mt-2">
+                ℹ️ Du erstellst damit {numFollowUps + 1} E-Mail{numFollowUps + 1 > 1 ? 's' : ''} insgesamt:
+                1 initiale E-Mail{numFollowUps > 0 ? ` + ${numFollowUps} Follow-Up${numFollowUps > 1 ? 's' : ''}` : ''}
+              </p>
+            </div>
+
+            <Separator />
+
+            {emailSequences.map((sequence) => (
+              <Card key={sequence.sequence_number}>
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    E-Mail #{sequence.sequence_number}
+                    {sequence.sequence_number === 1 ? " (Initiale E-Mail)" : ` (${sequence.sequence_number - 1}. Follow-Up)`}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {sequence.sequence_number > 1 && (
+                    <div>
+                      <Label htmlFor={`delay-${sequence.sequence_number}`}>
+                        Verzögerung (Tage nach vorheriger E-Mail)
+                      </Label>
                       <Input
+                        id={`delay-${sequence.sequence_number}`}
                         type="number"
-                        min="0"
+                        min="1"
                         value={sequence.delay_days}
                         onChange={(e) =>
                           updateEmailSequence(
-                            index,
+                            sequence.sequence_number,
                             "delay_days",
                             parseInt(e.target.value) || 0
                           )
@@ -352,68 +385,74 @@ Wichtig:
                       />
                     </div>
                   )}
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <Label>Betreff-Guideline *</Label>
+
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Label htmlFor={`subject-${sequence.sequence_number}`}>
+                        Betreff-Prompt *
+                      </Label>
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                           </TooltipTrigger>
                           <TooltipContent className="max-w-xs">
-                            <p>Die AI verwendet diese Vorlage als Grundlage und passt sie automatisch an jeden Kontakt an. Du kannst Variablen wie {`{{first_name}}`} oder {`{{position}}`} verwenden.</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </div>
-                    <Input
-                      value={sequence.subject_template}
-                      onChange={(e) =>
-                        updateEmailSequence(index, "subject_template", e.target.value)
-                      }
-                      placeholder={`z.B. Hallo {{first_name}}, gemeinsam zum Erfolg?`}
-                    />
-                    <p className="text-xs text-muted-foreground">
-                      💡 Die AI personalisiert diesen Betreff basierend auf Zielgruppe, Position und CTA
-                    </p>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <Label>Nachricht-Guideline *</Label>
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-                          </TooltipTrigger>
-                          <TooltipContent className="max-w-xs">
-                            <p>Gib den Ton und die Struktur vor. Die AI passt die Nachricht automatisch an Position, Unternehmen und Branche des Kontakts an.</p>
+                            <p>Gib der KI Anweisungen, WIE der Betreff geschrieben werden soll. Die KI generiert dann einen komplett neuen, individuellen Betreff für jeden Kontakt basierend auf Position, Unternehmen und Zielgruppe.</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
                     </div>
                     <Textarea
+                      id={`subject-${sequence.sequence_number}`}
+                      placeholder="z.B. Schreibe einen professionellen, neugierig machenden Betreff..."
+                      value={sequence.subject_template}
+                      onChange={(e) =>
+                        updateEmailSequence(
+                          sequence.sequence_number,
+                          "subject_template",
+                          e.target.value
+                        )
+                      }
+                      rows={3}
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Label htmlFor={`body-${sequence.sequence_number}`}>
+                        E-Mail-Prompt *
+                      </Label>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
+                          </TooltipTrigger>
+                          <TooltipContent className="max-w-xs">
+                            <p>Beschreibe, WIE die E-Mail geschrieben werden soll (Ton, Struktur, Fokus, Länge). Die KI erstellt dann eine komplett neue, personalisierte E-Mail für jeden Kontakt. Keine Variablen nötig - die KI macht alles.</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
+                    <Textarea
+                      id={`body-${sequence.sequence_number}`}
+                      placeholder="z.B. Schreibe eine professionelle E-Mail mit persönlicher Ansprache..."
                       value={sequence.body_template}
                       onChange={(e) =>
-                        updateEmailSequence(index, "body_template", e.target.value)
+                        updateEmailSequence(
+                          sequence.sequence_number,
+                          "body_template",
+                          e.target.value
+                        )
                       }
-                      placeholder={`z.B. Sehr geehrte(r) {{first_name}},
-
-ich habe gesehen, dass Sie als {{position}} tätig sind. Gemeinsam mit Ihrem Team bei {{company}} könnten wir...
-
-Beste Grüße`}
                       rows={8}
                     />
-                    <p className="text-xs text-muted-foreground">
-                      💡 Die AI erweitert und personalisiert diese Vorlage unter Verwendung von Zielgruppe, CTA und Kontaktdaten
-                    </p>
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </CardContent>
         </Card>
 
-        {/* Actions */}
         <div className="flex justify-end gap-4">
           <Button variant="outline" onClick={() => navigate("/admin/outreach-campaigns")}>
             Abbrechen

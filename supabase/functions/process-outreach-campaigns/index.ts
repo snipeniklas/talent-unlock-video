@@ -320,13 +320,20 @@ Nutze diese Informationen für eine hochgradig personalisierte E-Mail!
     }
 
     // Create prompt for OpenAI
-    const systemPrompt = `Du bist ein Experte für B2B E-Mail-Personalisierung.
+    const systemPrompt = `Du bist ein Experte für B2B E-Mail-Verfassung und Personalisierung.
 
-Deine Aufgabe: Personalisiere Betreff und Nachricht einer Outreach-E-Mail basierend auf:
-1. Vorlagen (Betreff-Guideline und Nachricht-Guideline)
+Deine Aufgabe: Schreibe eine KOMPLETT NEUE, individuell personalisierte E-Mail basierend auf:
+1. E-Mail-Prompts (Anweisungen WIE die E-Mail geschrieben werden soll)
 2. Kontakt-Informationen (Name, Position, Unternehmen, Branche)
 3. Kampagnen-Kontext (Zielgruppe, CTA, AI-Anweisungen)
 4. Optional: Research-Daten über den Kontakt
+
+WICHTIG - DIE PROMPTS SIND ANWEISUNGEN, KEINE VORLAGEN:
+- Die "Prompts" sind ANWEISUNGEN, keine Texte zum Kopieren
+- Schreibe die E-Mail KOMPLETT NEU basierend auf diesen Anweisungen
+- Personalisiere JEDEN Aspekt der E-Mail für den spezifischen Kontakt
+- Nutze die Kontakt- und Research-Daten für maximale Relevanz
+- KEINE Variablen wie {{first_name}} verwenden - schreibe alles direkt
 
 FORMATIERUNGS-ANFORDERUNGEN:
 - Generiere HTML-formatierte E-Mail-Inhalte (NUR Content, KEINE vollständige HTML-Struktur)
@@ -343,9 +350,9 @@ Das passt perfekt zu unserem Angebot.</p>
 <p>Hätten Sie Interesse an einem kurzen Austausch?</p>
 
 Wichtig:
-- Behalte den Ton und die Struktur der Vorlagen bei
-- Ersetze Variablen wie {{first_name}}, {{position}}, {{company}} mit echten Daten
-- Personalisiere den Inhalt basierend auf Position und Branche
+- Schreibe JEDE E-Mail komplett neu (kein Copy-Paste)
+- Beachte die Anweisungen aus den Prompts genau
+- Personalisiere basierend auf Position, Unternehmen und Branche
 - Integriere die Zielgruppe und den CTA natürlich
 - Falls Research-Daten vorhanden sind, nutze sie für spezifische Anknüpfungspunkte
 - Vermeide generische Floskeln
@@ -353,9 +360,9 @@ Wichtig:
 - Deutsch als Sprache`;
 
     const userPrompt = `
-VORLAGEN:
-Betreff-Guideline: ${subjectTemplate}
-Nachricht-Guideline: ${bodyTemplate}
+E-MAIL-ANWEISUNGEN:
+Betreff-Prompt: ${subjectTemplate}
+E-Mail-Prompt: ${bodyTemplate}
 
 KONTAKT-INFORMATIONEN:
 - Vorname: ${contact.first_name || 'Nicht verfügbar'}
@@ -372,7 +379,7 @@ KAMPAGNEN-KONTEXT:
 - Zusätzliche AI-Anweisungen: ${aiInstructions || 'Keine'}
 ${researchContext}
 
-Erstelle jetzt die personalisierte E-Mail.
+Erstelle jetzt die personalisierte E-Mail basierend auf den Anweisungen.
     `.trim();
 
     console.log(`Calling OpenAI for email personalization (sequence ${sequenceNumber})...`);
@@ -394,18 +401,18 @@ Erstelle jetzt die personalisierte E-Mail.
           {
             type: "function",
             function: {
-              name: "personalize_email",
-              description: "Personalisiere Betreff und Inhalt einer E-Mail",
+              name: "generate_email",
+              description: "Generiere einen komplett neuen, personalisierten E-Mail-Betreff und -Inhalt basierend auf den Anweisungen",
               parameters: {
                 type: "object",
                 properties: {
                   subject: { 
                     type: "string",
-                    description: "Der personalisierte Betreff der E-Mail"
+                    description: "Der personalisierte E-Mail-Betreff (NEU geschrieben basierend auf Betreff-Prompt)"
                   },
                   body: { 
                     type: "string",
-                    description: "Der personalisierte Inhalt der E-Mail"
+                    description: "Der vollständige, personalisierte E-Mail-Inhalt als HTML (NEU geschrieben basierend auf E-Mail-Prompt)"
                   }
                 },
                 required: ["subject", "body"],
@@ -416,7 +423,7 @@ Erstelle jetzt die personalisierte E-Mail.
         ],
         tool_choice: { 
           type: "function", 
-          function: { name: "personalize_email" } 
+          function: { name: "generate_email" } 
         },
         max_completion_tokens: 1500,
       }),
