@@ -213,7 +213,7 @@ export function RaasInquiryDialog({
             </DialogHeader>
 
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
                 <FormField
                   control={form.control}
                   name="companyName"
@@ -262,33 +262,36 @@ export function RaasInquiryDialog({
                   />
                 </div>
 
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("raasInquiry.fields.email")}</FormLabel>
-                      <FormControl>
-                        <Input type="email" {...field} disabled={isSubmitting} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                {/* Email + Phone */}
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t("raasInquiry.fields.email")}</FormLabel>
+                        <FormControl>
+                          <Input type="email" {...field} disabled={isSubmitting} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("raasInquiry.fields.phone")}</FormLabel>
-                      <FormControl>
-                        <Input type="tel" {...field} disabled={isSubmitting} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t("raasInquiry.fields.phone")}</FormLabel>
+                        <FormControl>
+                          <Input type="tel" {...field} disabled={isSubmitting} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
                 <FormField
                   control={form.control}
@@ -314,7 +317,7 @@ export function RaasInquiryDialog({
                         <Textarea
                           {...field}
                           placeholder={t("raasInquiry.placeholders.inquiry")}
-                          className="min-h-[120px] resize-none"
+                          className="min-h-[80px] resize-none"
                           disabled={isSubmitting}
                         />
                       </FormControl>

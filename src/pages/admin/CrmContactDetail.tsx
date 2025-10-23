@@ -24,6 +24,7 @@ interface Contact {
   priority: string;
   lead_source: string;
   notes: string;
+  inquiry: string;
   next_follow_up: string;
   last_contact_date: string;
   created_at: string;
@@ -266,6 +267,21 @@ export default function CrmContactDetail() {
               </CardHeader>
               <CardContent>
                 <p className="whitespace-pre-wrap">{contact.notes}</p>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Inquiry/Request */}
+          {contact.inquiry && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MessageSquare className="h-5 w-5" />
+                  Anliegen / Anfrage
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="whitespace-pre-wrap text-sm">{contact.inquiry}</p>
               </CardContent>
             </Card>
           )}
