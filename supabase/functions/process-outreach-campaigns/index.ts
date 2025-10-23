@@ -325,8 +325,9 @@ Nutze diese Informationen für eine hochgradig personalisierte E-Mail!
 Deine Aufgabe: Schreibe eine KOMPLETT NEUE, individuell personalisierte E-Mail basierend auf:
 1. E-Mail-Prompts (Anweisungen WIE die E-Mail geschrieben werden soll)
 2. Kontakt-Informationen (Name, Position, Unternehmen, Branche)
-3. Kampagnen-Kontext (Zielgruppe, CTA, AI-Anweisungen)
-4. Optional: Research-Daten über den Kontakt
+3. Absender-Unternehmen (Firma, Wertversprechen)
+4. Kampagnen-Kontext (Zielgruppe, CTA, AI-Anweisungen)
+5. Optional: Research-Daten über den Kontakt
 
 WICHTIG - DIE PROMPTS SIND ANWEISUNGEN, KEINE VORLAGEN:
 - Die "Prompts" sind ANWEISUNGEN, keine Texte zum Kopieren
@@ -334,6 +335,7 @@ WICHTIG - DIE PROMPTS SIND ANWEISUNGEN, KEINE VORLAGEN:
 - Personalisiere JEDEN Aspekt der E-Mail für den spezifischen Kontakt
 - Nutze die Kontakt- und Research-Daten für maximale Relevanz
 - KEINE Variablen wie {{first_name}} verwenden - schreibe alles direkt
+- Nutze das Wertversprechen des Absender-Unternehmens intelligent
 
 FORMATIERUNGS-ANFORDERUNGEN:
 - Generiere HTML-formatierte E-Mail-Inhalte (NUR Content, KEINE vollständige HTML-Struktur)
@@ -344,16 +346,17 @@ FORMATIERUNGS-ANFORDERUNGEN:
 - Die Signatur wird automatisch angehängt - füge sie NICHT manuell hinzu
 
 Beispiel-Output:
-<p>Hallo {{first_name}},</p>
-<p>ich habe gesehen, dass Sie bei {{company}} als {{position}} tätig sind.<br>
-Das passt perfekt zu unserem Angebot.</p>
-<p>Hätten Sie Interesse an einem kurzen Austausch?</p>
+<p>Hallo Max,</p>
+<p>als CTO bei TechCorp kennen Sie sicherlich die Herausforderungen bei der Skalierung von Entwicklerteams.<br>
+Genau hier setzen wir an.</p>
+<p>Hätten Sie nächste Woche 15 Minuten für einen kurzen Austausch?</p>
 
 Wichtig:
 - Schreibe JEDE E-Mail komplett neu (kein Copy-Paste)
 - Beachte die Anweisungen aus den Prompts genau
 - Personalisiere basierend auf Position, Unternehmen und Branche
 - Integriere die Zielgruppe und den CTA natürlich
+- Verknüpfe das Wertversprechen des Absenders mit den Bedürfnissen des Kontakts
 - Falls Research-Daten vorhanden sind, nutze sie für spezifische Anknüpfungspunkte
 - Vermeide generische Floskeln
 - Halte die E-Mail professionell aber persönlich
@@ -372,12 +375,15 @@ KONTAKT-INFORMATIONEN:
 - Unternehmen: ${contact.crm_companies?.name || 'Nicht verfügbar'}
 - Branche: ${contact.crm_companies?.industry || 'Nicht verfügbar'}
 
+${companyContext || ''}
 KAMPAGNEN-KONTEXT:
 - Zielgruppe: ${targetAudience || 'Nicht spezifiziert'}
 - Gewünschter CTA: ${desiredCta || 'Nicht spezifiziert'}
 - Sequenz-Nummer: ${sequenceNumber} (1 = Erstkontakt, 2+ = Follow-up)
 - Zusätzliche AI-Anweisungen: ${aiInstructions || 'Keine'}
 ${researchContext}
+
+WICHTIG: Nutze das Wertversprechen des Absender-Unternehmens um die E-Mail relevant und ansprechend zu gestalten. Verknüpfe es mit den Bedürfnissen des Kontakts und seiner Position.
 
 Erstelle jetzt die personalisierte E-Mail basierend auf den Anweisungen.
     `.trim();

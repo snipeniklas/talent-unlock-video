@@ -469,78 +469,62 @@ Wichtig:
                 <CardContent className="space-y-4">
                   {index > 0 && (
                     <div className="space-y-2">
-                      <Label>Verzögerung (Tage)</Label>
+                      <Label htmlFor={`delay-${index}`}>Verzögerung (Tage)</Label>
                       <Input
+                        id={`delay-${index}`}
                         type="number"
-                        min="0"
+                        min="1"
                         value={sequence.delay_days}
-                        onChange={(e) =>
-                          updateEmailSequence(
-                            index,
-                            "delay_days",
-                            parseInt(e.target.value) || 0
-                          )
-                        }
+                        onChange={(e) => updateEmailSequence(index, 'delay_days', parseInt(e.target.value) || 0)}
                       />
                     </div>
                   )}
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <Label>Betreff-Guideline *</Label>
+                    <Label htmlFor={`subject-${index}`}>
+                      Betreff-Prompt *
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
+                            <Info className="inline-block w-4 h-4 ml-1 text-muted-foreground" />
                           </TooltipTrigger>
                           <TooltipContent className="max-w-xs">
-                            <p>Die AI verwendet diese Vorlage als Grundlage und passt sie automatisch an jeden Kontakt an. Du kannst Variablen wie {`{{first_name}}`} oder {`{{position}}`} verwenden.</p>
+                            <p>Gib der KI Anweisungen, WIE der Betreff geschrieben werden soll.</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
-                    </div>
-                    <Input
+                    </Label>
+                    <Textarea
+                      id={`subject-${index}`}
                       value={sequence.subject_template}
-                      onChange={(e) =>
-                        updateEmailSequence(index, "subject_template", e.target.value)
-                      }
-                      placeholder={`z.B. Hallo {{first_name}}, gemeinsam zum Erfolg?`}
+                      onChange={(e) => updateEmailSequence(index, 'subject_template', e.target.value)}
+                      className="min-h-[80px]"
+                      placeholder="z.B. Schreibe einen professionellen Betreff..."
                     />
-                    <p className="text-xs text-muted-foreground">
-                      💡 Die AI personalisiert diesen Betreff basierend auf Zielgruppe, Position und CTA
-                    </p>
                   </div>
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <Label>Nachricht-Guideline *</Label>
+                    <Label htmlFor={`body-${index}`}>
+                      E-Mail-Prompt *
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
+                            <Info className="inline-block w-4 h-4 ml-1 text-muted-foreground" />
                           </TooltipTrigger>
                           <TooltipContent className="max-w-xs">
-                            <p>Gib den Ton und die Struktur vor. Die AI passt die Nachricht automatisch an Position, Unternehmen und Branche des Kontakts an.</p>
+                            <p>Beschreibe, WIE die E-Mail geschrieben werden soll.</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
-                    </div>
+                    </Label>
                     <Textarea
+                      id={`body-${index}`}
                       value={sequence.body_template}
-                      onChange={(e) =>
-                        updateEmailSequence(index, "body_template", e.target.value)
-                      }
-                      placeholder={`z.B. Sehr geehrte(r) {{first_name}},
-
-ich habe gesehen, dass Sie als {{position}} tätig sind. Gemeinsam mit Ihrem Team bei {{company}} könnten wir...
-
-Beste Grüße`}
-                      rows={8}
+                      onChange={(e) => updateEmailSequence(index, 'body_template', e.target.value)}
+                      className="min-h-[200px]"
+                      placeholder="z.B. Schreibe eine professionelle E-Mail..."
                     />
-                    <p className="text-xs text-muted-foreground">
-                      💡 Die AI erweitert und personalisiert diese Vorlage unter Verwendung von Zielgruppe, CTA und Kontaktdaten
-                    </p>
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </CardContent>
         </Card>
