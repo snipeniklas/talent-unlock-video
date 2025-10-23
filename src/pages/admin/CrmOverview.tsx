@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Building2, Users, Plus, ArrowRight, Clock } from "lucide-react";
+import { Building2, Users, Plus, ArrowRight, Clock, CheckSquare } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/i18n";
@@ -199,7 +199,7 @@ export default function CrmOverview() {
       </div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="hover:shadow-md transition-shadow">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -259,6 +259,38 @@ export default function CrmOverview() {
               >
                 <Plus className="h-5 w-5 mr-2" />
                 {t('crm.contacts.addNew')}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <CheckSquare className="h-5 w-5" />
+              Aufgaben
+            </CardTitle>
+            <CardDescription>
+              CRM-Aufgaben verwalten
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex gap-3">
+              <Button 
+                onClick={() => navigate("/admin/crm/tasks")}
+                variant="outline"
+                className="flex-1"
+              >
+                <ArrowRight className="h-5 w-5 mr-2" />
+                {t('common.actions.view')}
+              </Button>
+              <Button 
+                onClick={() => navigate("/admin/crm/tasks/new")}
+                variant="default"
+                className="flex-1"
+              >
+                <Plus className="h-5 w-5 mr-2" />
+                Neue Aufgabe
               </Button>
             </div>
           </CardContent>
