@@ -100,20 +100,38 @@ export default function CrmTasks() {
 
   const fetchTasks = async () => {
     try {
-      const { data, error } = await supabase
+      const { data: tasksData, error: tasksError } = await supabase
         .from('crm_tasks')
-        .select(`
-          *,
-          assigned_to_profile:assigned_to(first_name, last_name),
-          created_by_profile:created_by(first_name, last_name),
-          contact:crm_contacts(first_name, last_name),
-          company:crm_companies(name),
-          campaign:outreach_campaigns(name)
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
-      setTasks((data as any) || []);
+      if (tasksError) throw tasksError;
+
+      // Fetch all profiles, contacts, companies, and campaigns separately
+      const [profilesRes, contactsRes, companiesRes, campaignsRes] = await Promise.all([
+        supabase.from('profiles').select('user_id, first_name, last_name'),
+        supabase.from('crm_contacts').select('id, first_name, last_name'),
+        supabase.from('crm_companies').select('id, name'),
+        supabase.from('outreach_campaigns').select('id, name')
+      ]);
+
+      // Create lookup maps
+      const profilesMap = new Map(profilesRes.data?.map(p => [p.user_id, p]) || []);
+      const contactsMap = new Map(contactsRes.data?.map(c => [c.id, c]) || []);
+      const companiesMap = new Map(companiesRes.data?.map(c => [c.id, c]) || []);
+      const campaignsMap = new Map(campaignsRes.data?.map(c => [c.id, c]) || []);
+
+      // Enrich tasks with related data
+      const enrichedTasks = tasksData?.map(task => ({
+        ...task,
+        assigned_to_profile: task.assigned_to ? profilesMap.get(task.assigned_to) : null,
+        created_by_profile: task.created_by ? profilesMap.get(task.created_by) : null,
+        contact: task.contact_id ? contactsMap.get(task.contact_id) : null,
+        company: task.company_id ? companiesMap.get(task.company_id) : null,
+        campaign: task.campaign_id ? campaignsMap.get(task.campaign_id) : null
+      })) || [];
+
+      setTasks(enrichedTasks as any);
     } catch (error) {
       console.error('Error fetching tasks:', error);
       toast.error('Fehler beim Laden der Aufgaben');
