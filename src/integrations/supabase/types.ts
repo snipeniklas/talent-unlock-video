@@ -562,6 +562,9 @@ export type Database = {
           campaign_id: string
           contact_id: string
           id: string
+          is_excluded: boolean | null
+          next_send_date: string | null
+          next_sequence_number: number | null
           status: string
         }
         Insert: {
@@ -569,6 +572,9 @@ export type Database = {
           campaign_id: string
           contact_id: string
           id?: string
+          is_excluded?: boolean | null
+          next_send_date?: string | null
+          next_sequence_number?: number | null
           status?: string
         }
         Update: {
@@ -576,6 +582,9 @@ export type Database = {
           campaign_id?: string
           contact_id?: string
           id?: string
+          is_excluded?: boolean | null
+          next_send_date?: string | null
+          next_sequence_number?: number | null
           status?: string
         }
         Relationships: [
@@ -601,10 +610,12 @@ export type Database = {
           created_at: string
           created_by: string
           description: string | null
+          desired_cta: string | null
           email_template: string | null
           id: string
           name: string
           status: string
+          target_audience: string | null
           updated_at: string
         }
         Insert: {
@@ -612,10 +623,12 @@ export type Database = {
           created_at?: string
           created_by: string
           description?: string | null
+          desired_cta?: string | null
           email_template?: string | null
           id?: string
           name: string
           status?: string
+          target_audience?: string | null
           updated_at?: string
         }
         Update: {
@@ -623,10 +636,12 @@ export type Database = {
           created_at?: string
           created_by?: string
           description?: string | null
+          desired_cta?: string | null
           email_template?: string | null
           id?: string
           name?: string
           status?: string
+          target_audience?: string | null
           updated_at?: string
         }
         Relationships: []

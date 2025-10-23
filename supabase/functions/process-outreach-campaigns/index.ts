@@ -34,6 +34,9 @@ serve(async (req) => {
           id,
           contact_id,
           status,
+          next_sequence_number,
+          next_send_date,
+          is_excluded,
           crm_contacts(*)
         ),
         outreach_email_sequences(*)
@@ -72,33 +75,64 @@ serve(async (req) => {
 
       const ms365Token: MS365Token = tokenData;
 
-      // Process contacts that are still pending
+      // Process each contact in this campaign
       for (const contactEntry of campaign.outreach_campaign_contacts) {
-        if (contactEntry.status !== "pending") continue;
+        // Skip excluded contacts
+        if (contactEntry.is_excluded) {
+          console.log(`Contact ${contactEntry.contact_id} is excluded, skipping`);
+          continue;
+        }
+
+        // Skip contacts that are not ready to be sent yet
+        if (contactEntry.next_send_date) {
+          const sendDate = new Date(contactEntry.next_send_date);
+          const now = new Date();
+          if (sendDate > now) {
+            console.log(`Not yet time to send to ${contactEntry.contact_id}, next send: ${sendDate.toISOString()}`);
+            continue;
+          }
+        }
+
+        // Skip contacts with failed or completed status
+        if (contactEntry.status === "failed" || contactEntry.status === "completed") {
+          console.log(`Skipping contact ${contactEntry.contact_id} - status: ${contactEntry.status}`);
+          continue;
+        }
 
         const contact = contactEntry.crm_contacts;
-        if (!contact || !contact.email) {
+        if (!contact?.email) {
           console.log(`Skipping contact ${contactEntry.contact_id} - no email`);
           continue;
         }
 
-        // Get the first email sequence
-        const firstSequence = campaign.outreach_email_sequences?.find(
-          (seq: any) => seq.sequence_number === 1
+        // Get the next email sequence to send
+        const nextSequenceNumber = contactEntry.next_sequence_number || 1;
+        const nextSequence = campaign.outreach_email_sequences?.find(
+          (seq: any) => seq.sequence_number === nextSequenceNumber
         );
 
-        if (!firstSequence) {
-          console.log(`No email sequence found for campaign ${campaign.id}`);
+        if (!nextSequence) {
+          console.log(`No more sequences for contact ${contactEntry.contact_id}, marking as completed`);
+          // Mark campaign contact as completed
+          await supabase
+            .from("outreach_campaign_contacts")
+            .update({ status: "completed" })
+            .eq("id", contactEntry.id);
           continue;
         }
+
+        console.log(`Processing contact ${contact.email} with sequence #${nextSequenceNumber}`);
 
         try {
           // Personalize email with AI
           const personalizedEmail = await personalizeEmail(
-            firstSequence.subject_template,
-            firstSequence.body_template,
+            nextSequence.subject_template,
+            nextSequence.body_template,
             contact,
-            campaign.ai_instructions
+            campaign.ai_instructions || "",
+            campaign.target_audience || "",
+            campaign.desired_cta || "",
+            nextSequenceNumber
           );
 
           // Send email via MS365
@@ -112,18 +146,36 @@ serve(async (req) => {
           // Record sent email
           await supabase.from("outreach_sent_emails").insert({
             campaign_id: campaign.id,
-            contact_id: contact.id,
-            sequence_id: firstSequence.id,
+            contact_id: contactEntry.contact_id,
+            sequence_id: nextSequence.id,
             sent_by: campaign.created_by,
             subject: personalizedEmail.subject,
             body: personalizedEmail.body,
             status: "sent",
           });
 
-          // Update contact status
+          // Calculate next send date based on the next sequence's delay
+          const allSequences = campaign.outreach_email_sequences || [];
+          const nextSeqNum = nextSequenceNumber + 1;
+          const subsequentSequence = allSequences.find((s: any) => s.sequence_number === nextSeqNum);
+
+          let nextSendDate = null;
+          if (subsequentSequence) {
+            const now = new Date();
+            nextSendDate = new Date(now.getTime() + subsequentSequence.delay_days * 24 * 60 * 60 * 1000);
+            console.log(`Next email (#${nextSeqNum}) scheduled for ${nextSendDate.toISOString()}`);
+          } else {
+            console.log(`No more sequences after #${nextSequenceNumber} for contact ${contact.email}`);
+          }
+
+          // Update contact with next sequence info
           await supabase
             .from("outreach_campaign_contacts")
-            .update({ status: "sent" })
+            .update({ 
+              status: subsequentSequence ? "sent" : "completed",
+              next_sequence_number: nextSeqNum,
+              next_send_date: nextSendDate,
+            })
             .eq("id", contactEntry.id);
 
           console.log(`Email sent to ${contact.email}`);
@@ -133,11 +185,11 @@ serve(async (req) => {
           // Record failed email
           await supabase.from("outreach_sent_emails").insert({
             campaign_id: campaign.id,
-            contact_id: contact.id,
-            sequence_id: firstSequence.id,
+            contact_id: contactEntry.contact_id,
+            sequence_id: nextSequence.id,
             sent_by: campaign.created_by,
-            subject: firstSequence.subject_template,
-            body: firstSequence.body_template,
+            subject: nextSequence.subject_template,
+            body: nextSequence.body_template,
             status: "failed",
             error_message: error.message,
           });
@@ -171,7 +223,10 @@ async function personalizeEmail(
   subjectTemplate: string,
   bodyTemplate: string,
   contact: any,
-  aiInstructions: string
+  aiInstructions: string,
+  targetAudience: string,
+  desiredCta: string,
+  sequenceNumber: number
 ): Promise<{ subject: string; body: string }> {
   if (!LOVABLE_API_KEY) {
     // Fallback: simple template replacement
@@ -181,18 +236,26 @@ async function personalizeEmail(
   }
 
   try {
+    const contextInfo = sequenceNumber === 1 
+      ? "Dies ist die erste E-Mail in der Kampagne." 
+      : `Dies ist Follow-Up E-Mail #${sequenceNumber} in der Sequenz.`;
+
     const prompt = `${aiInstructions}
+
+${contextInfo}
+
+Zielgruppe: ${targetAudience || "Nicht spezifiziert"}
+Gewünschter Call-to-Action: ${desiredCta || "Nicht spezifiziert"}
 
 Kontaktinformationen:
 - Name: ${contact.first_name} ${contact.last_name}
 - Position: ${contact.position || "Nicht angegeben"}
-- Unternehmen: ${contact.crm_company_id || "Nicht angegeben"}
 - Email: ${contact.email}
 
 Betreff-Vorlage: ${subjectTemplate}
 E-Mail-Vorlage: ${bodyTemplate}
 
-Bitte personalisiere die E-Mail basierend auf den Kontaktinformationen. Gib die personalisierte Version zurück.`;
+Bitte personalisiere die E-Mail basierend auf den Kontaktinformationen, der Zielgruppe und integriere den Call-to-Action natürlich.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",

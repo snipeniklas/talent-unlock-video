@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Play, Pause, CheckCircle } from "lucide-react";
+import { ArrowLeft, Play, Pause, CheckCircle, Ban, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -50,6 +50,31 @@ export default function OutreachCampaignDetail() {
       toast({
         title: "Status aktualisiert",
         description: "Der Kampagnenstatus wurde erfolgreich aktualisiert.",
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Fehler",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const toggleContactExclusionMutation = useMutation({
+    mutationFn: async ({ contactId, exclude }: { contactId: string; exclude: boolean }) => {
+      const { error } = await supabase
+        .from("outreach_campaign_contacts")
+        .update({ is_excluded: exclude })
+        .eq("id", contactId);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["outreach-campaign", id] });
+      toast({
+        title: "Status aktualisiert",
+        description: "Der Kontaktstatus wurde erfolgreich aktualisiert.",
       });
     },
     onError: (error) => {
@@ -184,6 +209,32 @@ export default function OutreachCampaignDetail() {
             </Card>
           </div>
 
+          {campaign.target_audience && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Zielgruppe</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground whitespace-pre-wrap">
+                  {campaign.target_audience}
+                </p>
+              </CardContent>
+            </Card>
+          )}
+
+          {campaign.desired_cta && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Call-to-Action</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground whitespace-pre-wrap">
+                  {campaign.desired_cta}
+                </p>
+              </CardContent>
+            </Card>
+          )}
+
           <Card>
             <CardHeader>
               <CardTitle>AI Anweisungen</CardTitle>
@@ -204,21 +255,64 @@ export default function OutreachCampaignDetail() {
             <CardContent>
               <div className="space-y-2">
                 {campaign.outreach_campaign_contacts?.map((cc: any) => (
-                  <div
-                    key={cc.id}
-                    className="flex items-center justify-between p-3 rounded-lg border"
-                  >
-                    <div>
+                  <div key={cc.id} className="flex items-center justify-between p-4 border rounded-lg gap-4">
+                    <div className="flex-1">
                       <p className="font-medium">
                         {cc.crm_contacts.first_name} {cc.crm_contacts.last_name}
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {cc.crm_contacts.email}
                       </p>
+                      <div className="flex gap-2 mt-2 flex-wrap">
+                        <Badge className={getContactStatusColor(cc.status)}>
+                          {cc.status}
+                        </Badge>
+                        {cc.next_sequence_number && cc.status !== "completed" && cc.status !== "failed" && (
+                          <Badge variant="outline">
+                            Nächste E-Mail: #{cc.next_sequence_number}
+                          </Badge>
+                        )}
+                        {cc.next_send_date && cc.status !== "completed" && cc.status !== "failed" && (
+                          <Badge variant="outline">
+                            {new Date(cc.next_send_date).toLocaleDateString("de-DE")}
+                          </Badge>
+                        )}
+                        {cc.is_excluded && (
+                          <Badge variant="destructive">
+                            Ausgeschlossen
+                          </Badge>
+                        )}
+                      </div>
                     </div>
-                    <Badge className={getContactStatusColor(cc.status)}>
-                      {cc.status}
-                    </Badge>
+                    <div className="flex items-center gap-2">
+                      {cc.is_excluded ? (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => toggleContactExclusionMutation.mutate({ 
+                            contactId: cc.id, 
+                            exclude: false 
+                          })}
+                          disabled={toggleContactExclusionMutation.isPending}
+                        >
+                          <Check className="h-4 w-4 mr-2" />
+                          Wieder aufnehmen
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => toggleContactExclusionMutation.mutate({ 
+                            contactId: cc.id, 
+                            exclude: true 
+                          })}
+                          disabled={toggleContactExclusionMutation.isPending}
+                        >
+                          <Ban className="h-4 w-4 mr-2" />
+                          Ausschließen
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>

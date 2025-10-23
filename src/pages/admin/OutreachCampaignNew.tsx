@@ -27,8 +27,16 @@ export default function OutreachCampaignNew() {
 
   const [campaignName, setCampaignName] = useState("");
   const [campaignDescription, setCampaignDescription] = useState("");
+  const [targetAudience, setTargetAudience] = useState("");
+  const [desiredCta, setDesiredCta] = useState("");
   const [aiInstructions, setAiInstructions] = useState(
-    "Personalisiere die E-Mail basierend auf den Kontaktinformationen. Verwende einen professionellen, aber freundlichen Ton."
+    `Personalisiere die E-Mail basierend auf den Kontaktinformationen.
+  
+Wichtig:
+- Verwende einen professionellen, aber freundlichen Ton
+- Gehe auf die Position und das Unternehmen des Empfängers ein
+- Stelle einen klaren Bezug zur Zielgruppe her
+- Integriere den Call-to-Action natürlich in die E-Mail`
   );
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
   const [emailSequences, setEmailSequences] = useState<EmailSequence[]>([
@@ -65,6 +73,8 @@ export default function OutreachCampaignNew() {
           name: campaignName,
           description: campaignDescription,
           ai_instructions: aiInstructions,
+          target_audience: targetAudience,
+          desired_cta: desiredCta,
           created_by: user.id,
         })
         .select()
@@ -195,14 +205,42 @@ export default function OutreachCampaignNew() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="ai-instructions">AI Anweisungen</Label>
+              <Label htmlFor="target-audience">Zielgruppe</Label>
+              <Textarea
+                id="target-audience"
+                value={targetAudience}
+                onChange={(e) => setTargetAudience(e.target.value)}
+                placeholder="z.B. CTOs in Tech-Startups mit 50-200 Mitarbeitern"
+                rows={2}
+              />
+              <p className="text-xs text-muted-foreground">
+                Beschreibe deine Zielgruppe für bessere AI-Personalisierung
+              </p>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="desired-cta">Gewünschter Call-to-Action</Label>
+              <Input
+                id="desired-cta"
+                value={desiredCta}
+                onChange={(e) => setDesiredCta(e.target.value)}
+                placeholder="z.B. Demo-Call buchen, Whitepaper downloaden"
+              />
+              <p className="text-xs text-muted-foreground">
+                Was soll der Empfänger nach der E-Mail tun?
+              </p>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="ai-instructions">AI Anweisungen (Optional)</Label>
               <Textarea
                 id="ai-instructions"
                 value={aiInstructions}
                 onChange={(e) => setAiInstructions(e.target.value)}
-                placeholder="Anweisungen für die AI zur Personalisierung der E-Mails"
+                placeholder="Zusätzliche Anweisungen für die AI-Personalisierung"
                 rows={3}
               />
+              <p className="text-xs text-muted-foreground">
+                Erweitere die Standard-Anweisungen falls nötig
+              </p>
             </div>
           </CardContent>
         </Card>
