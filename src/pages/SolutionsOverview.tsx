@@ -6,6 +6,7 @@ import { ArrowRight, Users, Code, Shield } from "lucide-react";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import ContactCTA from "@/components/ContactCTA";
+import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
 import { useTranslation } from '@/i18n/i18n';
 
 const SolutionsOverview = () => {
@@ -109,12 +110,15 @@ const SolutionsOverview = () => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             {t('solutionsOverview.ctaText')}
           </p>
-          <Button asChild size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
-            <a href="https://calendly.com/joachim-kalff" target="_blank" rel="noopener noreferrer">
-              {t('solutionsOverview.ctaButton')}
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </a>
-          </Button>
+          <RaasInquiryDialog
+            source="solutions-overview-cta"
+            trigger={
+              <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary-hover">
+                {t('solutionsOverview.ctaButton')}
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            }
+          />
         </div>
       </section>
       
