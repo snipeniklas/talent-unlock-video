@@ -116,61 +116,25 @@ serve(async (req) => {
           continue;
         }
 
+        // Skip contacts that are already completed or failed
+        if (contactEntry.status === "failed" || contactEntry.status === "completed") {
+          console.log(`Contact ${contactEntry.contact_id} has status ${contactEntry.status}, skipping`);
+          continue;
+        }
+
         // Skip contacts that are not ready to be sent yet
+        // This also provides natural deduplication - if next_send_date is in the future,
+        // the contact won't be processed even if function runs multiple times
         if (contactEntry.next_send_date) {
           const sendDate = new Date(contactEntry.next_send_date);
           const now = new Date();
           if (sendDate > now) {
-            console.log(`Not yet time to send to ${contactEntry.contact_id}, next send: ${sendDate.toISOString()}`);
+            console.log(`Contact ${contactEntry.contact_id} not ready yet (next send: ${sendDate.toISOString()})`);
             continue;
           }
         }
 
-        // Skip contacts with failed or completed status
-        if (contactEntry.status === "failed" || contactEntry.status === "completed") {
-          console.log(`Skipping contact ${contactEntry.contact_id} - status: ${contactEntry.status}`);
-          continue;
-        }
-
-        // RESET STUCK PROCESSING LOCKS (older than 5 minutes)
-        if (contactEntry.status === "processing") {
-          const updatedAt = contactEntry.updated_at ? new Date(contactEntry.updated_at) : new Date(0);
-          const now = new Date();
-          const minutesSinceUpdate = (now.getTime() - updatedAt.getTime()) / (1000 * 60);
-          
-          if (minutesSinceUpdate > 5) {
-            console.log(`Resetting stuck processing lock for contact ${contactEntry.contact_id} (stuck for ${minutesSinceUpdate.toFixed(1)} minutes)`);
-            await supabase
-              .from("outreach_campaign_contacts")
-              .update({ status: "pending" })
-              .eq("id", contactEntry.id);
-            // Re-fetch the contact to continue processing
-            contactEntry.status = "pending";
-          } else {
-            console.log(`Contact ${contactEntry.contact_id} is currently being processed (${minutesSinceUpdate.toFixed(1)} min ago), skipping`);
-            continue;
-          }
-        }
-
-        // OPTIMISTIC LOCKING: Try to acquire lock by setting status to "processing"
-        // This prevents race conditions when multiple edge function instances run simultaneously
-        const { data: lockResult, error: lockError } = await supabase
-          .from("outreach_campaign_contacts")
-          .update({ 
-            status: "processing",
-            updated_at: new Date().toISOString()
-          })
-          .eq("id", contactEntry.id)
-          .eq("status", "pending") // Only update if still "pending"
-          .select();
-
-        // If no rows were updated, another process is already handling this contact
-        if (lockError || !lockResult || lockResult.length === 0) {
-          console.log(`Contact ${contactEntry.contact_id} could not acquire lock, skipping`);
-          continue;
-        }
-
-        console.log(`✓ Acquired lock for contact ${contactEntry.contact_id}, proceeding with email send`);
+        console.log(`Processing contact: ${contactEntry.contact_id} (${contactEntry.crm_contacts?.email})`);
 
         const contact = contactEntry.crm_contacts;
         if (!contact?.email) {
@@ -243,6 +207,8 @@ serve(async (req) => {
           }
 
           // Update contact with next sequence info
+          // Setting next_send_date in the future provides natural deduplication
+          // even if the function runs multiple times in parallel
           await supabase
             .from("outreach_campaign_contacts")
             .update({ 
