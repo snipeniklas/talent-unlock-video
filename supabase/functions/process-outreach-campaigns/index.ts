@@ -74,7 +74,16 @@ serve(async (req) => {
 
     console.log(`Found ${campaigns.length} active campaigns`);
 
+    // Track total emails sent in this run (max 10 per execution)
+    const MAX_EMAILS_PER_RUN = 10;
+    let totalEmailsSent = 0;
+
     for (const campaign of campaigns) {
+      // Stop processing if we've reached the limit
+      if (totalEmailsSent >= MAX_EMAILS_PER_RUN) {
+        console.log(`Reached email limit (${MAX_EMAILS_PER_RUN}), stopping for this run`);
+        break;
+      }
       console.log(`Processing campaign: ${campaign.name} (${campaign.id})`);
 
       // Get MS365 token for the campaign creator
@@ -138,6 +147,12 @@ ABSENDER-UNTERNEHMEN:
 
       // Process each contact in this campaign
       for (const contactEntry of campaign.outreach_campaign_contacts) {
+        // Stop if we've reached the email limit for this run
+        if (totalEmailsSent >= MAX_EMAILS_PER_RUN) {
+          console.log(`Reached email limit (${MAX_EMAILS_PER_RUN}) during campaign processing`);
+          break;
+        }
+
         // Skip excluded contacts
         if (contactEntry.is_excluded) {
           console.log(`Contact ${contactEntry.contact_id} is excluded, skipping`);
@@ -252,6 +267,7 @@ ABSENDER-UNTERNEHMEN:
             .eq("id", contactEntry.id);
 
           console.log(`Email sent to ${contact.email}`);
+          totalEmailsSent++;
         } catch (error) {
           console.error(`Error sending email to ${contact.email}:`, error);
           
@@ -276,8 +292,14 @@ ABSENDER-UNTERNEHMEN:
       }
     }
 
+    console.log(`Outreach processing completed. Emails sent in this run: ${totalEmailsSent}/${MAX_EMAILS_PER_RUN}`);
+
     return new Response(
-      JSON.stringify({ message: "Outreach processing completed" }),
+      JSON.stringify({ 
+        message: "Outreach processing completed",
+        emails_sent: totalEmailsSent,
+        max_per_run: MAX_EMAILS_PER_RUN
+      }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
