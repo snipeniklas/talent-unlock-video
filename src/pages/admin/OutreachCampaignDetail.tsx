@@ -90,6 +90,24 @@ export default function OutreachCampaignDetail() {
     },
   });
 
+  // Fetch creator profile
+  const { data: creatorProfile } = useQuery({
+    queryKey: ["campaign-creator", campaign?.created_by],
+    queryFn: async () => {
+      if (!campaign?.created_by) return null;
+      
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("first_name, last_name, email")
+        .eq("user_id", campaign.created_by)
+        .maybeSingle();
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!campaign?.created_by,
+  });
+
   // Fetch upcoming activities
   const { data: upcomingActivities } = useQuery({
     queryKey: ["upcoming-activities", id],
@@ -799,6 +817,13 @@ export default function OutreachCampaignDetail() {
                   </Badge>
                 </div>
                 <p className="text-muted-foreground mt-1">{campaign.description}</p>
+                {creatorProfile && (
+                  <p className="text-sm text-muted-foreground mt-1 flex items-center gap-1">
+                    <Send className="h-3 w-3" />
+                    Absender: {creatorProfile.first_name} {creatorProfile.last_name}
+                    {creatorProfile.email && ` (${creatorProfile.email})`}
+                  </p>
+                )}
                 <p className="text-xs text-muted-foreground mt-1">
                   Aktualisiert vor {Math.floor((new Date().getTime() - lastUpdated.getTime()) / 1000)}s
                 </p>
