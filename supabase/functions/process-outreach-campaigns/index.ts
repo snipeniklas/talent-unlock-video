@@ -132,6 +132,26 @@ serve(async (req) => {
           continue;
         }
 
+        // RESET STUCK PROCESSING LOCKS (older than 5 minutes)
+        if (contactEntry.status === "processing") {
+          const updatedAt = contactEntry.updated_at ? new Date(contactEntry.updated_at) : new Date(0);
+          const now = new Date();
+          const minutesSinceUpdate = (now.getTime() - updatedAt.getTime()) / (1000 * 60);
+          
+          if (minutesSinceUpdate > 5) {
+            console.log(`Resetting stuck processing lock for contact ${contactEntry.contact_id} (stuck for ${minutesSinceUpdate.toFixed(1)} minutes)`);
+            await supabase
+              .from("outreach_campaign_contacts")
+              .update({ status: "pending" })
+              .eq("id", contactEntry.id);
+            // Re-fetch the contact to continue processing
+            contactEntry.status = "pending";
+          } else {
+            console.log(`Contact ${contactEntry.contact_id} is currently being processed (${minutesSinceUpdate.toFixed(1)} min ago), skipping`);
+            continue;
+          }
+        }
+
         // OPTIMISTIC LOCKING: Try to acquire lock by setting status to "processing"
         // This prevents race conditions when multiple edge function instances run simultaneously
         const { data: lockResult, error: lockError } = await supabase
@@ -146,7 +166,7 @@ serve(async (req) => {
 
         // If no rows were updated, another process is already handling this contact
         if (lockError || !lockResult || lockResult.length === 0) {
-          console.log(`Contact ${contactEntry.contact_id} already being processed by another instance, skipping`);
+          console.log(`Contact ${contactEntry.contact_id} could not acquire lock, skipping`);
           continue;
         }
 
