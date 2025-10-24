@@ -11,11 +11,14 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   ArrowLeft, Play, Pause, CheckCircle, Ban, Check, Edit, Trash2, Eye, Search,
-  Filter, ChevronDown, RefreshCw, AlertCircle, RotateCcw, Lightbulb, UserPlus, Plus
+  Filter, ChevronDown, RefreshCw, AlertCircle, RotateCcw, Lightbulb, UserPlus, Plus,
+  Calendar, Clock, Sparkles, TrendingUp, Send, AlertTriangle, MessageSquare
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { format, formatDistanceToNow, isToday, differenceInHours } from "date-fns";
+import { de } from "date-fns/locale";
 import { ActivityTimeline } from "@/components/ActivityTimeline";
 import { EmailPreviewModal } from "@/components/EmailPreviewModal";
 import { ContactDetailDrawer } from "@/components/ContactDetailDrawer";
@@ -60,6 +63,9 @@ export default function OutreachCampaignDetail() {
   // State for realtime
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
   const [isProcessing, setIsProcessing] = useState(false);
+  
+  // State for timeline filter
+  const [timelineFilter, setTimelineFilter] = useState<string>('all');
 
   const { data: campaign, refetch } = useQuery({
     queryKey: ["outreach-campaign", id],
@@ -82,6 +88,69 @@ export default function OutreachCampaignDetail() {
       setLastUpdated(new Date());
       return data;
     },
+  });
+
+  // Fetch upcoming activities
+  const { data: upcomingActivities } = useQuery({
+    queryKey: ["upcoming-activities", id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("outreach_campaign_contacts")
+        .select(`
+          id,
+          next_send_date,
+          next_sequence_number,
+          contact_id,
+          crm_contacts(first_name, last_name)
+        `)
+        .eq("campaign_id", id)
+        .eq("status", "pending")
+        .not("next_send_date", "is", null)
+        .order("next_send_date", { ascending: true })
+        .limit(10);
+
+      if (error) throw error;
+      
+      // Enrich with sequence info
+      const enriched = await Promise.all(
+        (data || []).map(async (activity: any) => {
+          const { data: sequence } = await supabase
+            .from("outreach_email_sequences")
+            .select("subject_template")
+            .eq("campaign_id", id)
+            .eq("sequence_number", activity.next_sequence_number)
+            .single();
+          
+          return {
+            ...activity,
+            subject: sequence?.subject_template || `Sequenz ${activity.next_sequence_number}`,
+          };
+        })
+      );
+      
+      return enriched;
+    },
+    enabled: !!id,
+  });
+
+  // Fetch CRM emails for reply tracking
+  const { data: crmEmails } = useQuery({
+    queryKey: ["crm-emails", id],
+    queryFn: async () => {
+      if (!campaign?.outreach_campaign_contacts) return [];
+      
+      const contactIds = campaign.outreach_campaign_contacts.map((cc: any) => cc.contact_id);
+      if (contactIds.length === 0) return [];
+      
+      const { data, error } = await supabase
+        .from("crm_emails")
+        .select("*")
+        .in("contact_id", contactIds);
+        
+      if (error) throw error;
+      return data || [];
+    },
+    enabled: !!campaign,
   });
 
   // Use refetchInterval in a separate effect to avoid circular dependency
@@ -265,7 +334,7 @@ export default function OutreachCampaignDetail() {
     }
   };
 
-  // Build activity timeline
+  // Build activity timeline with enriched events
   const buildTimeline = () => {
     if (!campaign) return [];
     
@@ -279,7 +348,7 @@ export default function OutreachCampaignDetail() {
       description: 'Kampagne erstellt',
     });
 
-    // Status changes (simplified - in real app would track from audit log)
+    // Status changes
     if (campaign.status === 'active' || campaign.status === 'paused' || campaign.status === 'completed') {
       events.push({
         id: 'started',
@@ -297,9 +366,29 @@ export default function OutreachCampaignDetail() {
         timestamp: cc.added_at,
         description: `Kontakt hinzugefügt: ${cc.crm_contacts.first_name} ${cc.crm_contacts.last_name}`,
       });
+      
+      // Contact excluded/included
+      if (cc.is_excluded) {
+        events.push({
+          id: `excluded-${cc.id}`,
+          type: 'contact_excluded',
+          timestamp: cc.updated_at,
+          description: `Kontakt ausgeschlossen: ${cc.crm_contacts.first_name} ${cc.crm_contacts.last_name}`,
+        });
+      }
+      
+      // Sequence completed
+      if (cc.status === 'completed') {
+        events.push({
+          id: `completed-${cc.id}`,
+          type: 'sequence_completed',
+          timestamp: cc.updated_at,
+          description: `Alle Sequenzen abgeschlossen für ${cc.crm_contacts.first_name} ${cc.crm_contacts.last_name}`,
+        });
+      }
     });
 
-    // Emails sent
+    // Emails sent/failed
     campaign.outreach_sent_emails?.forEach((email: any) => {
       events.push({
         id: `email-${email.id}`,
@@ -311,9 +400,223 @@ export default function OutreachCampaignDetail() {
         details: email.error_message || undefined,
       });
     });
+    
+    // Email replies (from CRM emails)
+    crmEmails?.forEach((email: any) => {
+      if (email.direction === 'incoming') {
+        events.push({
+          id: `reply-${email.id}`,
+          type: 'email_replied',
+          timestamp: email.received_at,
+          description: `Antwort erhalten: ${email.subject || 'Kein Betreff'}`,
+        });
+      }
+    });
 
     return events.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
   };
+
+  // Calculate comprehensive statistics
+  const calculateStats = useMemo(() => {
+    if (!campaign) return null;
+    
+    const contacts = campaign.outreach_campaign_contacts || [];
+    const emails = campaign.outreach_sent_emails || [];
+    
+    const totalContacts = contacts.length;
+    const excludedCount = contacts.filter((c: any) => c.is_excluded).length;
+    
+    const sentEmails = emails.filter((e: any) => e.status === 'sent').length;
+    const failedEmails = emails.filter((e: any) => e.status === 'failed').length;
+    const bouncedCount = emails.filter((e: any) => e.status === 'bounced').length;
+    
+    const repliedContacts = contacts.filter((c: any) => c.status === 'replied');
+    const repliedCount = repliedContacts.length;
+    const responseRate = sentEmails > 0 
+      ? ((repliedCount / sentEmails) * 100).toFixed(1) 
+      : '0';
+    
+    const pendingContacts = contacts.filter((c: any) => 
+      c.status === 'pending' && !c.is_excluded
+    );
+    const pendingCount = pendingContacts.length;
+    
+    const nextSend = pendingContacts
+      .filter((c: any) => c.next_send_date)
+      .sort((a: any, b: any) => new Date(a.next_send_date).getTime() - new Date(b.next_send_date).getTime())[0];
+    
+    const nextSendTime = nextSend 
+      ? format(new Date(nextSend.next_send_date), 'HH:mm', { locale: de })
+      : 'N/A';
+    
+    const totalSent = emails.length;
+    const errorRate = totalSent > 0
+      ? (((failedEmails + bouncedCount) / totalSent) * 100).toFixed(1)
+      : '0';
+    
+    // Calculate average response time
+    const responseTimes: number[] = [];
+    emails.forEach((sent: any) => {
+      const reply = crmEmails?.find((email: any) => 
+        email.contact_id === contacts.find((c: any) => 
+          sent.contact_id === c.contact_id
+        )?.contact_id && 
+        email.direction === 'incoming' &&
+        new Date(email.received_at) > new Date(sent.sent_at)
+      );
+      
+      if (reply) {
+        const diff = new Date(reply.received_at).getTime() - new Date(sent.sent_at).getTime();
+        responseTimes.push(diff);
+      }
+    });
+    
+    const avgResponseMs = responseTimes.length > 0
+      ? responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length
+      : 0;
+    const avgResponseHours = avgResponseMs / (1000 * 60 * 60);
+    const fastestResponseHours = responseTimes.length > 0
+      ? Math.min(...responseTimes) / (1000 * 60 * 60)
+      : 0;
+    
+    return {
+      totalContacts,
+      excludedCount,
+      sentEmails,
+      failedEmails,
+      bouncedCount,
+      repliedCount,
+      responseRate,
+      pendingCount,
+      nextSendTime,
+      errorRate,
+      avgResponseHours: avgResponseHours > 0 ? avgResponseHours.toFixed(1) : '0',
+      fastestResponseHours: fastestResponseHours > 0 ? fastestResponseHours.toFixed(1) : '0',
+    };
+  }, [campaign, crmEmails]);
+
+  // Calculate Smart Insights
+  const calculateInsights = useMemo(() => {
+    if (!campaign || !crmEmails) return null;
+    
+    const emails = campaign.outreach_sent_emails || [];
+    const sequences = campaign.outreach_email_sequences || [];
+    
+    // Best send time (hour with most replies)
+    const replyHours: number[] = [];
+    emails.forEach((sent: any) => {
+      const reply = crmEmails.find((email: any) => 
+        email.direction === 'incoming' &&
+        new Date(email.received_at) > new Date(sent.sent_at)
+      );
+      if (reply) {
+        replyHours.push(new Date(sent.sent_at).getHours());
+      }
+    });
+    
+    let bestSendTime = null;
+    if (replyHours.length > 0) {
+      const hourCounts = replyHours.reduce((acc: any, hour) => {
+        acc[hour] = (acc[hour] || 0) + 1;
+        return acc;
+      }, {});
+      const bestHour = Object.keys(hourCounts).reduce((a, b) => 
+        hourCounts[a] > hourCounts[b] ? a : b
+      );
+      bestSendTime = {
+        start: parseInt(bestHour),
+        end: parseInt(bestHour) + 2,
+      };
+    }
+    
+    // Critical sequence (high bounce rate)
+    const sequenceStats = sequences.map((seq: any) => {
+      const seqEmails = emails.filter((e: any) => e.sequence_number === seq.sequence_number);
+      const bounced = seqEmails.filter((e: any) => e.status === 'bounced' || e.status === 'failed').length;
+      const total = seqEmails.length || 1;
+      return {
+        number: seq.sequence_number,
+        bounceRate: ((bounced / total) * 100).toFixed(1),
+      };
+    });
+    const criticalSequence = sequenceStats.find((s: any) => parseFloat(s.bounceRate) > 20);
+    
+    // Top performing sequence
+    const performanceStats = sequences.map((seq: any) => {
+      const seqEmails = emails.filter((e: any) => e.sequence_number === seq.sequence_number);
+      const contacts = campaign.outreach_campaign_contacts || [];
+      const replied = seqEmails.filter((e: any) => {
+        const contact = contacts.find((c: any) => c.contact_id === e.contact_id);
+        return contact?.status === 'replied';
+      }).length;
+      const sent = seqEmails.filter((e: any) => e.status === 'sent').length || 1;
+      return {
+        number: seq.sequence_number,
+        responseRate: ((replied / sent) * 100).toFixed(1),
+      };
+    });
+    const topSequence = performanceStats.sort((a: any, b: any) => 
+      parseFloat(b.responseRate) - parseFloat(a.responseRate)
+    )[0];
+    
+    return {
+      bestSendTime,
+      criticalSequence,
+      topSequence: parseFloat(topSequence?.responseRate || '0') > 0 ? topSequence : null,
+    };
+  }, [campaign, crmEmails]);
+
+  // Count today's activities
+  const todayActivitiesCount = useMemo(() => {
+    if (!campaign?.outreach_campaign_contacts) return 0;
+    return campaign.outreach_campaign_contacts.filter((cc: any) => 
+      cc.next_send_date && isToday(new Date(cc.next_send_date)) && !cc.is_excluded
+    ).length;
+  }, [campaign]);
+
+  // Format relative time
+  const formatRelativeTime = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const isPast = date < now;
+    
+    if (isPast) {
+      return 'ÜBERFÄLLIG';
+    }
+    
+    if (isToday(date)) {
+      return `heute um ${format(date, 'HH:mm', { locale: de })}`;
+    }
+    
+    return formatDistanceToNow(date, { addSuffix: true, locale: de });
+  };
+
+  // Group timeline by date
+  const groupedTimeline = useMemo(() => {
+    const timeline = buildTimeline();
+    
+    // Filter by type
+    let filtered = timeline;
+    if (timelineFilter === 'emails') {
+      filtered = timeline.filter(e => e.type === 'email_sent');
+    } else if (timelineFilter === 'errors') {
+      filtered = timeline.filter(e => e.type === 'email_failed');
+    } else if (timelineFilter === 'replies') {
+      filtered = timeline.filter(e => e.type === 'email_replied');
+    }
+    
+    // Group by date
+    const grouped = filtered.reduce((acc: any, event: any) => {
+      const date = format(new Date(event.timestamp), 'yyyy-MM-dd');
+      if (!acc[date]) {
+        acc[date] = [];
+      }
+      acc[date].push(event);
+      return acc;
+    }, {});
+    
+    return grouped;
+  }, [campaign, crmEmails, timelineFilter]);
 
   // Filter and sort contacts
   const getFilteredContacts = () => {
@@ -452,7 +755,8 @@ export default function OutreachCampaignDetail() {
 
   const filteredContacts = getFilteredContacts();
   const progress = getProgress();
-  const timeline = buildTimeline();
+  const stats = calculateStats;
+  const insights = calculateInsights;
 
   return (
     <TooltipProvider>
@@ -662,6 +966,26 @@ export default function OutreachCampaignDetail() {
               </AlertDescription>
             </Alert>
           )}
+
+          {/* Today's Activities Alert */}
+          {todayActivitiesCount > 0 && (
+            <Alert className="mt-4 bg-blue-50 border-blue-200">
+              <Calendar className="h-4 w-4 text-blue-600" />
+              <AlertDescription className="flex items-center justify-between">
+                <span className="text-blue-900">
+                  📅 {todayActivitiesCount} E-Mail{todayActivitiesCount > 1 ? 's' : ''} {todayActivitiesCount > 1 ? 'sind' : 'ist'} heute geplant
+                </span>
+                <Button 
+                  size="sm" 
+                  onClick={handleProcessNow}
+                  disabled={isProcessing}
+                  className="ml-4"
+                >
+                  Jetzt verarbeiten
+                </Button>
+              </AlertDescription>
+            </Alert>
+          )}
         </div>
 
         <Tabs defaultValue="overview">
@@ -680,44 +1004,194 @@ export default function OutreachCampaignDetail() {
           </TabsList>
 
           <TabsContent value="overview" className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-3">
+            {/* Enhanced Statistics - 6 Cards */}
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">
-                    Kontakte
+                  <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                    👥 Gesamt Kontakte
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">
-                    {campaign.outreach_campaign_contacts?.length || 0}
-                  </div>
+                  <div className="text-2xl font-bold">{stats?.totalContacts || 0}</div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {stats?.excludedCount || 0} ausgeschlossen
+                  </p>
                 </CardContent>
               </Card>
+
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">
-                    Versendete E-Mails
+                  <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                    📧 Versendete E-Mails
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">
-                    {campaign.outreach_sent_emails?.length || 0}
-                  </div>
+                  <div className="text-2xl font-bold text-green-600">{stats?.sentEmails || 0}</div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {stats?.failedEmails || 0} fehlgeschlagen
+                  </p>
                 </CardContent>
               </Card>
+
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">
-                    E-Mail Sequenzen
+                  <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                    💬 Antwortquote
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-blue-600">{stats?.responseRate || 0}%</div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {stats?.repliedCount || 0} von {stats?.sentEmails || 0} Empfängern
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                    ⏳ Ausstehend
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-yellow-600">{stats?.pendingCount || 0}</div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Nächste um {stats?.nextSendTime}
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                    ⚠️ Fehlerrate
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-red-600">{stats?.errorRate || 0}%</div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {stats?.bouncedCount || 0} bounced, {stats?.failedEmails || 0} failed
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                    ⏱️ Ø Antwortzeit
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
-                    {campaign.outreach_email_sequences?.length || 0}
+                    {stats?.avgResponseHours && parseFloat(stats.avgResponseHours) > 0 
+                      ? `${stats.avgResponseHours}h` 
+                      : 'N/A'}
                   </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Schnellste: {stats?.fastestResponseHours && parseFloat(stats.fastestResponseHours) > 0 
+                      ? `${stats.fastestResponseHours}h` 
+                      : 'N/A'}
+                  </p>
                 </CardContent>
               </Card>
             </div>
+
+            {/* Upcoming Activities Card */}
+            {upcomingActivities && upcomingActivities.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Calendar className="h-5 w-5" />
+                    📅 Anstehende Aktivitäten
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {upcomingActivities.map((activity: any) => {
+                      const isOverdue = new Date(activity.next_send_date) < new Date();
+                      return (
+                        <div key={activity.id} className="flex items-start gap-3 p-3 border rounded-lg hover:bg-accent/50 transition-colors">
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium truncate">
+                              {activity.crm_contacts.first_name} {activity.crm_contacts.last_name}
+                            </p>
+                            <p className="text-sm text-muted-foreground truncate">
+                              Sequenz {activity.next_sequence_number}: {activity.subject}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Badge variant={isOverdue ? "destructive" : "default"} className="whitespace-nowrap">
+                              {formatRelativeTime(activity.next_send_date)}
+                            </Badge>
+                            <Button 
+                              size="sm" 
+                              variant="ghost"
+                              className="h-8 w-8 p-0"
+                              onClick={() => toast({ 
+                                title: "Senden geplant", 
+                                description: "E-Mail wird beim nächsten Verarbeitungslauf gesendet" 
+                              })}
+                            >
+                              <Send className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Smart Insights Card */}
+            {insights && (insights.bestSendTime || insights.criticalSequence || insights.topSequence) && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Sparkles className="h-5 w-5" />
+                    💡 Smart Insights
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {insights.bestSendTime && (
+                    <div className="p-3 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg">
+                      <p className="text-sm font-medium text-blue-900 dark:text-blue-100 flex items-center gap-2">
+                        <Clock className="h-4 w-4" />
+                        Beste Sendezeit
+                      </p>
+                      <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
+                        Die meisten Antworten kamen zwischen {insights.bestSendTime.start}:00 - {insights.bestSendTime.end}:00 Uhr
+                      </p>
+                    </div>
+                  )}
+
+                  {insights.criticalSequence && (
+                    <div className="p-3 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-lg">
+                      <p className="text-sm font-medium text-red-900 dark:text-red-100 flex items-center gap-2">
+                        <AlertTriangle className="h-4 w-4" />
+                        Hohe Abbruchrate
+                      </p>
+                      <p className="text-xs text-red-700 dark:text-red-300 mt-1">
+                        Sequenz {insights.criticalSequence.number} hat {insights.criticalSequence.bounceRate}% Bounce-Rate
+                      </p>
+                    </div>
+                  )}
+
+                  {insights.topSequence && (
+                    <div className="p-3 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg">
+                      <p className="text-sm font-medium text-green-900 dark:text-green-100 flex items-center gap-2">
+                        <TrendingUp className="h-4 w-4" />
+                        Top Sequenz
+                      </p>
+                      <p className="text-xs text-green-700 dark:text-green-300 mt-1">
+                        Sequenz {insights.topSequence.number} hat {insights.topSequence.responseRate}% Antwortquote
+                      </p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            )}
 
             {campaign.target_audience && (
               <Card>
@@ -1264,7 +1738,61 @@ export default function OutreachCampaignDetail() {
           </TabsContent>
 
           <TabsContent value="activity" className="space-y-4">
-            <ActivityTimeline events={timeline} />
+            <Card>
+              <CardHeader>
+                <CardTitle>Aktivitäten Timeline</CardTitle>
+                <div className="flex gap-2 mt-4">
+                  <Button 
+                    variant={timelineFilter === 'all' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setTimelineFilter('all')}
+                  >
+                    Alle
+                  </Button>
+                  <Button 
+                    variant={timelineFilter === 'emails' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setTimelineFilter('emails')}
+                  >
+                    📧 Nur E-Mails
+                  </Button>
+                  <Button 
+                    variant={timelineFilter === 'errors' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setTimelineFilter('errors')}
+                  >
+                    ⚠️ Nur Fehler
+                  </Button>
+                  <Button 
+                    variant={timelineFilter === 'replies' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setTimelineFilter('replies')}
+                  >
+                    💬 Nur Antworten
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                {Object.keys(groupedTimeline).length === 0 ? (
+                  <p className="text-muted-foreground text-center py-8">
+                    Keine Aktivitäten gefunden
+                  </p>
+                ) : (
+                  <div className="space-y-6">
+                    {Object.entries(groupedTimeline)
+                      .sort(([a], [b]) => new Date(b).getTime() - new Date(a).getTime())
+                      .map(([date, events]) => (
+                      <div key={date}>
+                        <h3 className="text-sm font-semibold mb-3 sticky top-0 bg-background py-2 border-b">
+                          {format(new Date(date), 'EEEE, dd. MMMM yyyy', { locale: de })}
+                        </h3>
+                        <ActivityTimeline events={events as any[]} />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
 
