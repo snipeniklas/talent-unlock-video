@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Mail, Phone, Plus, Upload, LayoutGrid, Table as TableIcon, Eye, Edit, Calendar, UserPlus, PhoneCall, CheckCircle2, FileText, Handshake, Trophy, XCircle, GripVertical, List as ListIcon } from "lucide-react";
+import { User, Mail, Phone, Plus, Upload, LayoutGrid, Table as TableIcon, Eye, Edit, Calendar, UserPlus, PhoneCall, CheckCircle2, FileText, Handshake, Trophy, XCircle, GripVertical, List as ListIcon, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/i18n";
@@ -14,6 +14,7 @@ import CsvImportDialog from "@/components/CsvImportDialog";
 import { DataTable, ColumnDef, FilterDef } from "@/components/DataTable";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 interface CrmContact {
   id: string;
@@ -47,6 +48,8 @@ export default function CrmContacts() {
   const [dragOverStatus, setDragOverStatus] = useState<string | null>(null);
   const [selectedContactIds, setSelectedContactIds] = useState<string[]>([]);
   const [addToListDialogOpen, setAddToListDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [contactToDelete, setContactToDelete] = useState<CrmContact | null>(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -88,6 +91,45 @@ export default function CrmContacts() {
       queryClient.invalidateQueries({ queryKey: ['contact-lists'] });
     },
   });
+
+  const deleteContactMutation = useMutation({
+    mutationFn: async (contactId: string) => {
+      const { error } = await supabase
+        .from('crm_contacts')
+        .delete()
+        .eq('id', contactId);
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast({
+        title: "Kontakt gelöscht",
+        description: "Der Kontakt wurde erfolgreich gelöscht.",
+      });
+      setDeleteDialogOpen(false);
+      setContactToDelete(null);
+      fetchContacts();
+    },
+    onError: (error) => {
+      toast({
+        title: "Fehler",
+        description: "Der Kontakt konnte nicht gelöscht werden.",
+        variant: "destructive",
+      });
+      console.error("Error deleting contact:", error);
+    },
+  });
+
+  const handleDeleteContact = (contact: CrmContact) => {
+    setContactToDelete(contact);
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (contactToDelete) {
+      deleteContactMutation.mutate(contactToDelete.id);
+    }
+  };
 
   useEffect(() => {
     fetchContacts();
@@ -253,6 +295,17 @@ export default function CrmContacts() {
             }}
           >
             <Edit className="h-3 w-3" />
+          </Button>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="h-6 w-6 p-0 text-destructive hover:text-destructive" 
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDeleteContact(contact);
+            }}
+          >
+            <Trash2 className="h-3 w-3" />
           </Button>
         </div>
       </CardContent>
@@ -535,6 +588,15 @@ export default function CrmContacts() {
             <Edit className="h-4 w-4 mr-1" />
             Bearbeiten
           </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleDeleteContact(row)}
+            className="text-destructive hover:text-destructive"
+          >
+            <Trash2 className="h-4 w-4 mr-1" />
+            Löschen
+          </Button>
         </div>
       ),
     },
@@ -723,6 +785,27 @@ export default function CrmContacts() {
           </div>
         </DialogContent>
       </Dialog>
+
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Kontakt löschen?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Möchten Sie den Kontakt "{contactToDelete?.first_name} {contactToDelete?.last_name}" wirklich löschen? 
+              Diese Aktion kann nicht rückgängig gemacht werden.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Löschen
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
