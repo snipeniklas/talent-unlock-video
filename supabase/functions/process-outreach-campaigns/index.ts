@@ -305,9 +305,10 @@ ABSENDER-UNTERNEHMEN:
           console.log(`Email sent to ${contact.email}`);
           totalEmailsSent++;
         } catch (error) {
-          console.error(`Error sending email to ${contact.email}:`, error);
+          console.error(`❌ Error sending email to ${contact.email}:`, error);
+          console.error(`❌ Error details:`, error.message);
           
-          // Record failed email
+          // Record failed email with detailed error message
           await supabase.from("outreach_sent_emails").insert({
             campaign_id: campaign.id,
             contact_id: contactEntry.contact_id,
@@ -316,7 +317,7 @@ ABSENDER-UNTERNEHMEN:
             subject: nextSequence.subject_template,
             body: nextSequence.body_template,
             status: "failed",
-            error_message: error.message,
+            error_message: `${error.message} | Stack: ${error.stack?.substring(0, 500)}`,
           });
 
           // Update contact status
@@ -361,13 +362,11 @@ async function personalizeEmail(
   emailSignature: string,
   companyContext: string
 ): Promise<{ subject: string; body: string }> {
-  // Fallback when OpenAI is not available
+  // CRITICAL: OpenAI API Key MUST be set for personalization
   if (!OPENAI_API_KEY) {
-    console.log("OpenAI API Key not set, using simple variable replacement");
-    return {
-      subject: replaceVariables(subjectTemplate, contact),
-      body: replaceVariables(bodyTemplate, contact),
-    };
+    const errorMsg = "❌ KRITISCHER FEHLER: OPENAI_API_KEY nicht gesetzt! E-Mail-Personalisierung nicht möglich.";
+    console.error(errorMsg);
+    throw new Error(errorMsg);
   }
 
   try {
@@ -466,7 +465,10 @@ WICHTIG: Nutze das Wertversprechen des Absender-Unternehmens um die E-Mail relev
 Erstelle jetzt die personalisierte E-Mail basierend auf den Anweisungen.
     `.trim();
 
-    console.log(`Calling OpenAI for email personalization (sequence ${sequenceNumber})...`);
+    console.log(`🤖 Calling OpenAI for email personalization (sequence ${sequenceNumber})...`);
+    console.log(`📧 Contact: ${contact.first_name} ${contact.last_name} (${contact.email})`);
+    console.log(`📝 Subject Prompt: ${subjectTemplate.substring(0, 100)}...`);
+    console.log(`📝 Body Prompt: ${bodyTemplate.substring(0, 100)}...`);
 
     // OpenAI API Call
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -515,21 +517,25 @@ Erstelle jetzt die personalisierte E-Mail basierend auf den Anweisungen.
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("OpenAI API error:", response.status, errorText);
-      throw new Error(`OpenAI API error: ${response.status}`);
+      console.error("❌ OpenAI API error:", response.status, errorText);
+      throw new Error(`OpenAI API error: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();
+    console.log("📨 OpenAI Response received");
     
     // Parse Tool Call Response
     const toolCall = data.choices[0].message.tool_calls?.[0];
     if (!toolCall) {
+      console.error("❌ No tool call in OpenAI response:", JSON.stringify(data));
       throw new Error("No tool call in OpenAI response");
     }
 
     const result = JSON.parse(toolCall.function.arguments);
     
-    console.log("OpenAI personalization successful");
+    console.log("✅ OpenAI personalization successful");
+    console.log(`📧 Generated Subject: ${result.subject}`);
+    console.log(`📝 Generated Body Preview: ${result.body.substring(0, 150)}...`);
 
     return {
       subject: result.subject,
@@ -537,14 +543,11 @@ Erstelle jetzt die personalisierte E-Mail basierend auf den Anweisungen.
     };
 
   } catch (error) {
-    console.error("Error in OpenAI personalization:", error);
-    console.log("Falling back to simple variable replacement");
+    console.error("❌ KRITISCHER FEHLER in OpenAI personalization:", error);
+    console.error("❌ Fehler-Details:", error.message);
     
-    // Fallback: Simple variable replacement
-    return {
-      subject: replaceVariables(subjectTemplate, contact),
-      body: replaceVariables(bodyTemplate, contact),
-    };
+    // Re-throw error instead of falling back silently
+    throw new Error(`E-Mail-Personalisierung fehlgeschlagen: ${error.message}`);
   }
 }
 
