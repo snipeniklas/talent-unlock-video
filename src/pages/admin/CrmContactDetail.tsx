@@ -10,6 +10,7 @@ import { useTranslation } from "@/i18n/i18n";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { ContactEmailTimeline } from "@/components/ContactEmailTimeline";
+import { ContactActivityTimeline } from "@/components/ContactActivityTimeline";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -729,6 +730,22 @@ export default function CrmContactDetail() {
               </CardContent>
             </Card>
           )}
+
+          {/* Outreach Activities Timeline */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5" />
+                Outreach Aktivitäten
+              </CardTitle>
+              <CardDescription>
+                Kompletter Verlauf aller Outreach-Kampagnen und E-Mail-Interaktionen
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ContactActivityTimeline contactId={contact.id} />
+            </CardContent>
+          </Card>
 
           {/* User Status Card */}
           <Card>
