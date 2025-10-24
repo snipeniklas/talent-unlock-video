@@ -15,6 +15,9 @@ verify_jwt = false
 [functions.research-contact]
 verify_jwt = false
 
+[functions.ms365-refresh-token]
+verify_jwt = false
+
 [edge_runtime]
 enabled = true
 

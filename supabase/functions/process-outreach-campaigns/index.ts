@@ -122,7 +122,22 @@ serve(async (req) => {
       }
       console.log(`Processing campaign: ${campaign.name} (${campaign.id})`);
 
-      // Get MS365 token for the campaign creator
+      // Get MS365 token for the campaign creator and refresh if needed
+      console.log(`🔄 Checking MS365 token for user ${campaign.created_by}...`);
+      
+      // Call token refresh function to ensure token is valid
+      const refreshResponse = await supabase.functions.invoke("ms365-refresh-token", {
+        body: { userId: campaign.created_by }
+      });
+
+      if (refreshResponse.error || !refreshResponse.data?.success) {
+        console.error(`❌ Failed to refresh/validate MS365 token for user ${campaign.created_by}:`, refreshResponse.error);
+        continue;
+      }
+
+      console.log(`✅ MS365 token valid for user ${campaign.created_by}`);
+
+      // Get the fresh token from the database
       const { data: tokenData, error: tokenError } = await supabase
         .from("ms365_tokens")
         .select("access_token, user_id")
@@ -130,7 +145,7 @@ serve(async (req) => {
         .single();
 
       if (tokenError || !tokenData) {
-        console.error(`No MS365 token found for user ${campaign.created_by}`);
+        console.error(`❌ No MS365 token found for user ${campaign.created_by}`);
         continue;
       }
 
