@@ -133,7 +133,7 @@ Wichtig:
         .from("crm_contact_lists")
         .select(`
           *,
-          crm_contact_list_members (
+          crm_contact_list_members!inner (
             contact_id
           )
         `);
@@ -142,8 +142,10 @@ Wichtig:
       
       return data?.map(list => ({
         ...list,
-        contact_count: list.crm_contact_list_members?.length || 0,
-        contact_ids: list.crm_contact_list_members?.map((m: any) => m.contact_id) || []
+        contact_count: Array.isArray(list.crm_contact_list_members) ? list.crm_contact_list_members.length : 0,
+        contact_ids: Array.isArray(list.crm_contact_list_members) 
+          ? list.crm_contact_list_members.map((m: any) => m.contact_id) 
+          : []
       }));
     },
   });
