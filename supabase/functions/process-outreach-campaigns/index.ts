@@ -4,6 +4,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const MAX_EMAILS_PER_RUN = 1; // Only send 1 email per minute
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -34,12 +35,26 @@ serve(async (req) => {
       console.log("⚡ FORCE PROCESS MODE ENABLED - Ignoring delay and time window checks");
     }
 
-    // Check if current time is within allowed sending window (9-16 German time)
+    // Check if current time is within allowed sending window (9-16 German time, Monday-Friday)
     if (!forceProcess) {
       const now = new Date();
       // Convert to German time (Europe/Berlin)
       const germanTime = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Berlin" }));
       const currentHour = germanTime.getHours();
+      const currentDay = germanTime.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+      
+      // Check if it's a weekday (Monday-Friday)
+      if (currentDay === 0 || currentDay === 6) {
+        console.log(`Outside sending window: Weekend (day ${currentDay})`);
+        return new Response(
+          JSON.stringify({ 
+            message: "Outside sending window: Weekend",
+            current_day: currentDay,
+            allowed_days: "Monday-Friday (1-5)"
+          }),
+          { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
       
       if (currentHour < 9 || currentHour >= 16) {
         console.log(`Outside sending window (9-16 German time). Current hour: ${currentHour}`);
@@ -52,7 +67,7 @@ serve(async (req) => {
           { headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
-      console.log(`Within sending window. Current German hour: ${currentHour}`);
+      console.log(`Within sending window. Current German hour: ${currentHour}, day: ${currentDay}`);
     }
 
     // Get campaigns based on campaignId or all active campaigns
@@ -269,9 +284,8 @@ ABSENDER-UNTERNEHMEN:
           let nextSendDate = null;
           if (subsequentSequence) {
             const now = new Date();
-            // Add 1 minute delay between emails
-            nextSendDate = new Date(now.getTime() + 60 * 1000);
-            console.log(`Next email (#${nextSeqNum}) scheduled for ${nextSendDate.toISOString()} (1 minute delay)`);
+            nextSendDate = new Date(now.getTime() + subsequentSequence.delay_days * 24 * 60 * 60 * 1000);
+            console.log(`Next email (#${nextSeqNum}) scheduled for ${nextSendDate.toISOString()} (${subsequentSequence.delay_days} days delay)`);
           } else {
             console.log(`No more sequences after #${nextSequenceNumber} for contact ${contact.email}`);
           }
