@@ -31,7 +31,28 @@ serve(async (req) => {
     const forceProcess = requestBody.forceProcess || false;
     
     if (forceProcess) {
-      console.log("⚡ FORCE PROCESS MODE ENABLED - Ignoring delay checks");
+      console.log("⚡ FORCE PROCESS MODE ENABLED - Ignoring delay and time window checks");
+    }
+
+    // Check if current time is within allowed sending window (9-16 German time)
+    if (!forceProcess) {
+      const now = new Date();
+      // Convert to German time (Europe/Berlin)
+      const germanTime = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Berlin" }));
+      const currentHour = germanTime.getHours();
+      
+      if (currentHour < 9 || currentHour >= 16) {
+        console.log(`Outside sending window (9-16 German time). Current hour: ${currentHour}`);
+        return new Response(
+          JSON.stringify({ 
+            message: "Outside sending window",
+            current_hour: currentHour,
+            allowed_hours: "9-16 German time"
+          }),
+          { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      console.log(`Within sending window. Current German hour: ${currentHour}`);
     }
 
     // Get campaigns based on campaignId or all active campaigns
@@ -248,8 +269,9 @@ ABSENDER-UNTERNEHMEN:
           let nextSendDate = null;
           if (subsequentSequence) {
             const now = new Date();
-            nextSendDate = new Date(now.getTime() + subsequentSequence.delay_days * 24 * 60 * 60 * 1000);
-            console.log(`Next email (#${nextSeqNum}) scheduled for ${nextSendDate.toISOString()}`);
+            // Add 1 minute delay between emails
+            nextSendDate = new Date(now.getTime() + 60 * 1000);
+            console.log(`Next email (#${nextSeqNum}) scheduled for ${nextSendDate.toISOString()} (1 minute delay)`);
           } else {
             console.log(`No more sequences after #${nextSequenceNumber} for contact ${contact.email}`);
           }

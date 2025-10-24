@@ -19,8 +19,8 @@ verify_jwt = false
 enabled = true
 
 # Cron Jobs
-# Automatically process outreach campaigns every 2 minutes (max 10 emails per run)
+# Automatically process outreach campaigns every minute (max 10 emails per run, only 9-16 German time)
 [[edge_runtime.scheduler]]
 name = "process-outreach-campaigns-scheduler"
-schedule = "*/2 * * * *"  # Every 2 minutes
+schedule = "* * * * *"  # Every minute
 function = "process-outreach-campaigns"
