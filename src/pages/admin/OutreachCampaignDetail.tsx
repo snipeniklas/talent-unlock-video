@@ -405,6 +405,49 @@ export default function OutreachCampaignDetail() {
     }
   };
 
+  const handleForceProcessNow = async () => {
+    const confirmed = window.confirm(
+      "⚠️ ACHTUNG: Dies ignoriert alle Delay-Einstellungen und sendet E-Mails sofort!\n\n" +
+      "Dieser Modus ist NUR für Testing gedacht.\n\n" +
+      "Fortfahren?"
+    );
+    
+    if (!confirmed) return;
+    
+    setIsProcessing(true);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke(
+        'process-outreach-campaigns',
+        {
+          body: { 
+            campaignId: id,
+            forceProcess: true
+          }
+        }
+      );
+
+      if (error) throw error;
+
+      toast({
+        title: "🧪 Test-Verarbeitung erfolgreich",
+        description: "E-Mails wurden sofort versendet (Delays ignoriert).",
+      });
+
+      await refetch();
+      
+    } catch (error: any) {
+      console.error('Error force-processing campaign:', error);
+      toast({
+        title: "❌ Fehler bei Force-Verarbeitung",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   if (!campaign) return <div>Laden...</div>;
 
   const filteredContacts = getFilteredContacts();
@@ -465,6 +508,24 @@ export default function OutreachCampaignDetail() {
                 onProcessNow={handleProcessNow}
                 onImportCsv={() => toast({ title: "CSV Import", description: "Feature kommt bald" })}
               />
+
+              {(campaign.status === 'active' || campaign.status === 'draft') && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button 
+                      variant="outline"
+                      onClick={handleForceProcessNow}
+                      disabled={isProcessing}
+                    >
+                      <Lightbulb className="h-4 w-4 mr-2" />
+                      🧪 Test senden
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Ignoriert Delays und sendet E-Mails sofort (nur für Testing)
+                  </TooltipContent>
+                </Tooltip>
+              )}
 
               {(campaign.status === "paused" || campaign.status === "draft") && (
                 <Tooltip>

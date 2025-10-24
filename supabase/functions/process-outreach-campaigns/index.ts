@@ -25,8 +25,17 @@ serve(async (req) => {
 
     console.log("Starting outreach campaign processing...");
 
-    // Get all active campaigns
-    const { data: campaigns, error: campaignsError } = await supabase
+    // Parse request body for campaignId and forceProcess flag
+    const requestBody = await req.json().catch(() => ({}));
+    const campaignId = requestBody.campaignId;
+    const forceProcess = requestBody.forceProcess || false;
+    
+    if (forceProcess) {
+      console.log("⚡ FORCE PROCESS MODE ENABLED - Ignoring delay checks");
+    }
+
+    // Get campaigns based on campaignId or all active campaigns
+    let query = supabase
       .from("outreach_campaigns")
       .select(`
         *,
@@ -40,8 +49,15 @@ serve(async (req) => {
           crm_contacts(*)
         ),
         outreach_email_sequences(*)
-      `)
-      .eq("status", "active");
+      `);
+    
+    if (campaignId) {
+      query = query.eq("id", campaignId);
+    } else {
+      query = query.eq("status", "active");
+    }
+    
+    const { data: campaigns, error: campaignsError } = await query;
 
     if (campaignsError) {
       console.error("Error fetching campaigns:", campaignsError);
@@ -134,16 +150,20 @@ ABSENDER-UNTERNEHMEN:
           continue;
         }
 
-        // Skip contacts that are not ready to be sent yet
+        // Skip contacts that are not ready to be sent yet (UNLESS forceProcess is true)
         // This also provides natural deduplication - if next_send_date is in the future,
         // the contact won't be processed even if function runs multiple times
-        if (contactEntry.next_send_date) {
+        if (!forceProcess && contactEntry.next_send_date) {
           const sendDate = new Date(contactEntry.next_send_date);
           const now = new Date();
           if (sendDate > now) {
             console.log(`Contact ${contactEntry.contact_id} not ready yet (next send: ${sendDate.toISOString()})`);
             continue;
           }
+        }
+        
+        if (forceProcess) {
+          console.log(`⚡ FORCE PROCESS: Sending to contact ${contactEntry.contact_id} immediately (ignoring delays)`);
         }
 
         console.log(`Processing contact: ${contactEntry.contact_id} (${contactEntry.crm_contacts?.email})`);
