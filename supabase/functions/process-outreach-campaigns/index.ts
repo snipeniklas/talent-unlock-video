@@ -89,18 +89,30 @@ serve(async (req) => {
         .eq("user_id", campaign.created_by)
         .single();
 
+      // Load company context for AI personalization
       let companyName = "";
+      let companyContext = "";
       if (senderProfile?.company_id) {
         const { data: companyData } = await supabase
           .from("companies")
-          .select("name")
+          .select("name, website, value_proposition")
           .eq("id", senderProfile.company_id)
           .single();
+        
         companyName = companyData?.name || "";
+        
+        if (companyData) {
+          companyContext = `
+ABSENDER-UNTERNEHMEN:
+- Name: ${companyData.name || 'Nicht verfügbar'}
+- Wertversprechen: ${companyData.value_proposition || 'Nicht verfügbar'}
+- Website: ${companyData.website || 'Nicht verfügbar'}
+`;
+        }
       }
 
       // Use custom signature or generate fallback
-      const emailSignature = emailSettings?.email_signature || 
+      const emailSignature = emailSettings?.email_signature ||
         generateFallbackSignature(
           senderProfile?.first_name || "",
           senderProfile?.last_name || "",
@@ -170,7 +182,8 @@ serve(async (req) => {
             campaign.target_audience || "",
             campaign.desired_cta || "",
             nextSequenceNumber,
-            emailSignature
+            emailSignature,
+            companyContext
           );
 
           // Send email via MS365
@@ -267,7 +280,8 @@ async function personalizeEmail(
   targetAudience: string,
   desiredCta: string,
   sequenceNumber: number,
-  emailSignature: string
+  emailSignature: string,
+  companyContext: string
 ): Promise<{ subject: string; body: string }> {
   // Fallback when OpenAI is not available
   if (!OPENAI_API_KEY) {
