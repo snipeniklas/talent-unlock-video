@@ -677,12 +677,16 @@ export default function CrmContactDetail() {
                   </div>
                 )}
 
-                {/* Social Profiles */}
-                {researchData.social_profiles && Object.values(researchData.social_profiles).some((v: any) => v) && (
+                {/* Social Profiles - nur anzeigen wenn mindestens ein gültiger Link existiert */}
+                {researchData.social_profiles && 
+                  Object.values(researchData.social_profiles).some((v: any) => 
+                    typeof v === 'string' && (v.startsWith('http://') || v.startsWith('https://'))
+                  ) && (
                   <div>
                     <p className="text-sm font-medium mb-2">🔗 Social Profiles</p>
                     <div className="flex flex-col gap-1">
-                      {researchData.social_profiles.linkedin && (
+                      {researchData.social_profiles.linkedin && 
+                       researchData.social_profiles.linkedin.startsWith('http') && (
                         <a 
                           href={researchData.social_profiles.linkedin}
                           target="_blank"
@@ -692,7 +696,8 @@ export default function CrmContactDetail() {
                           LinkedIn <ExternalLink className="h-3 w-3" />
                         </a>
                       )}
-                      {researchData.social_profiles.twitter && (
+                      {researchData.social_profiles.twitter && 
+                       researchData.social_profiles.twitter.startsWith('http') && (
                         <a 
                           href={researchData.social_profiles.twitter}
                           target="_blank"
@@ -702,7 +707,19 @@ export default function CrmContactDetail() {
                           Twitter <ExternalLink className="h-3 w-3" />
                         </a>
                       )}
-                      {researchData.social_profiles.github && (
+                      {researchData.social_profiles.xing && 
+                       researchData.social_profiles.xing.startsWith('http') && (
+                        <a 
+                          href={researchData.social_profiles.xing}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-primary hover:underline flex items-center gap-1"
+                        >
+                          Xing <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
+                      {researchData.social_profiles.github && 
+                       researchData.social_profiles.github.startsWith('http') && (
                         <a 
                           href={researchData.social_profiles.github}
                           target="_blank"

@@ -131,11 +131,20 @@ Analysiere folgenden Research-Text und extrahiere die Informationen in folgendes
   "key_facts": ["Fakt 1", "Fakt 2", "Fakt 3"],
   "talking_points": ["Punkt 1", "Punkt 2", "Punkt 3"],
   "social_profiles": {
-    "linkedin": "URL oder null",
-    "twitter": "URL oder null",
-    "github": "URL oder null"
+    "linkedin": "vollständige LinkedIn URL oder null",
+    "twitter": "vollständige Twitter URL oder null",
+    "xing": "vollständige Xing URL oder null",
+    "github": "vollständige GitHub URL oder null"
   }
 }
+
+WICHTIG für social_profiles:
+- Setze ein Feld nur dann auf eine URL, wenn du eine konkrete, vollständige URL (mit https://) im Research-Text gefunden hast
+- Wenn keine URL gefunden wurde, setze das Feld auf null
+- Füge KEINE fiktiven oder vermuteten URLs hinzu
+- LinkedIn und Twitter sind am wichtigsten für Business-Kontakte
+- Xing ist relevant für DACH-Raum (Deutschland, Österreich, Schweiz)
+- GitHub nur erwähnen wenn die Person ein technisches/Entwickler-Profil hat
 
 Research-Text:
 ${rawResearch}
