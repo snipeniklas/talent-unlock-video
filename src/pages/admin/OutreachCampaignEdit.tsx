@@ -261,6 +261,9 @@ Wichtig:
       const contactsToAdd = finalContactIds.map((contactId) => ({
         campaign_id: id,
         contact_id: contactId,
+        next_send_date: new Date().toISOString(),
+        next_sequence_number: 1,
+        status: 'pending',
       }));
 
       const { error: contactsError } = await supabase
