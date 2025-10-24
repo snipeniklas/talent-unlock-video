@@ -133,7 +133,7 @@ Wichtig:
         .from("crm_contact_lists")
         .select(`
           *,
-          crm_contact_list_members!inner (
+          crm_contact_list_members (
             contact_id
           )
         `);
