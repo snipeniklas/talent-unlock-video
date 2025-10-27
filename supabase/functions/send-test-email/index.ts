@@ -73,9 +73,9 @@ serve(async (req) => {
       (a: any, b: any) => a.sequence_number - b.sequence_number
     );
 
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    if (!LOVABLE_API_KEY) {
-      throw new Error("LOVABLE_API_KEY not configured");
+    const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
+    if (!OPENAI_API_KEY) {
+      throw new Error("OPENAI_API_KEY not configured");
     }
 
     // Create a dummy contact for testing
@@ -89,77 +89,116 @@ serve(async (req) => {
 
     // Send all sequences to test email
     for (const sequence of sequences) {
-      console.log(`Generating test email - Sequence ${sequence.sequence_number}`);
+      console.log(`🤖 Calling OpenAI for test email (sequence ${sequence.sequence_number})...`);
+      console.log(`📧 Test recipient: ${testEmail}`);
 
-      // Generate subject using AI
-      const subjectPrompt = `${sequence.subject_template}
+      // System prompt (identical to process-outreach-campaigns)
+      const systemPrompt = `Du bist ein Experte für professionelle B2B-Outreach-E-Mails im deutschen Raum.
 
-Kontext:
-- Kontakt: ${testContact.first_name} ${testContact.last_name}, ${testContact.position} bei ${testContact.company_name}
-- Kampagne Zielgruppe: ${campaign.target_audience || 'Nicht angegeben'}
-- Gewünschter CTA: ${campaign.desired_cta || 'Nicht angegeben'}
+Deine Aufgabe ist es, personalisierte E-Mails zu erstellen, die:
+1. **Professionell und authentisch** wirken
+2. **Kurz und prägnant** sind (max. 150 Wörter für den Body)
+3. **Einen klaren Call-to-Action** enthalten
+4. **Personalisiert** auf den Empfänger eingehen
+5. **HTML-formatiert** sind mit <p> Tags für Absätze
 
-Generiere NUR den Betreff, keine zusätzlichen Erklärungen.`;
+**Wichtige Regeln:**
+- Verwende die "Sie"-Form
+- Keine übertriebenen Superlative
+- Keine Emoji
+- Vermeide generische Phrasen wie "Ich hoffe, diese E-Mail erreicht Sie gut"
+- Der Betreff sollte neugierig machen, aber nicht zu verkaufsorientiert sein
+- Nutze die bereitgestellten Vorlagen als Basis, aber personalisiere basierend auf Kontaktinformationen
+- Falls Research-Daten verfügbar sind, integriere relevante Insights subtil
 
-      const subjectResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+**Format:**
+- Betreff: Kurz, prägnant, personalisiert (max. 60 Zeichen)
+- Body: HTML mit <p> Tags, professionelle Anrede, max. 150 Wörter
+- CTA: Klar und spezifisch (z.B. "15-minütiges Kennenlerngespräch nächste Woche?")`;
+
+      // User prompt
+      const userPrompt = `**Kontext:**
+- **Kontakt:** ${testContact.first_name} ${testContact.last_name}
+- **Position:** ${testContact.position}
+- **Unternehmen:** ${testContact.company_name}
+- **Email:** ${testContact.email}
+
+**Kampagnendetails:**
+- **Zielgruppe:** ${campaign.target_audience || 'Nicht angegeben'}
+- **Gewünschter CTA:** ${campaign.desired_cta || 'Nicht angegeben'}
+- **AI-Anweisungen:** ${campaign.ai_instructions || 'Keine zusätzlichen Anweisungen'}
+
+**Absender (Deine Firma):**
+- **Firmenname:** ${profile?.companies?.name || 'Hej Talent'}
+- **Website:** ${profile?.companies?.website || 'https://hejtalent.de'}
+
+**E-Mail-Vorlagen:**
+- **Betreff-Vorlage:** ${sequence.subject_template}
+- **Body-Vorlage:** ${sequence.body_template}
+
+**Sequenz:** ${sequence.sequence_number}
+
+Generiere jetzt eine personalisierte E-Mail basierend auf diesen Informationen.`;
+
+      // Call OpenAI with tool calling
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${LOVABLE_API_KEY}`,
+          "Authorization": `Bearer ${OPENAI_API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "google/gemini-2.5-flash",
+          model: "gpt-4o-mini",
           messages: [
-            { role: "user", content: subjectPrompt }
+            { role: "system", content: systemPrompt },
+            { role: "user", content: userPrompt }
           ],
+          tools: [{
+            type: "function",
+            function: {
+              name: "generate_email",
+              description: "Generiere personalisierten E-Mail-Betreff und -Inhalt",
+              parameters: {
+                type: "object",
+                properties: {
+                  subject: {
+                    type: "string",
+                    description: "Der personalisierte E-Mail-Betreff"
+                  },
+                  body: {
+                    type: "string",
+                    description: "Der personalisierte E-Mail-Body in HTML-Format"
+                  }
+                },
+                required: ["subject", "body"]
+              }
+            }
+          }],
+          tool_choice: { type: "function", function: { name: "generate_email" } }
         }),
       });
 
-      if (!subjectResponse.ok) {
-        const error = await subjectResponse.text();
-        console.error("AI subject generation failed:", error);
-        throw new Error(`AI subject generation failed: ${error}`);
+      if (!response.ok) {
+        const error = await response.text();
+        console.error("❌ OpenAI API error:", error);
+        throw new Error(`OpenAI API failed: ${error}`);
       }
 
-      const subjectData = await subjectResponse.json();
-      const generatedSubject = subjectData.choices?.[0]?.message?.content?.trim() || sequence.subject_template;
-
-      // Generate body using AI
-      const bodyPrompt = `${sequence.body_template}
-
-Kontext:
-- Kontakt: ${testContact.first_name} ${testContact.last_name}, ${testContact.position} bei ${testContact.company_name}
-- Email: ${testContact.email}
-- Kampagne Zielgruppe: ${campaign.target_audience || 'Nicht angegeben'}
-- Gewünschter CTA: ${campaign.desired_cta || 'Nicht angegeben'}
-- Zusätzliche AI Anweisungen: ${campaign.ai_instructions || 'Keine'}
-- Firma: ${profile?.companies?.name || 'Hej Talent'}
-- Firmen-Website: ${profile?.companies?.website || 'https://hejtalent.de'}
-
-Erstelle eine professionelle, personalisierte E-Mail. Nutze HTML-Formatierung mit <p> Tags. Generiere NUR den E-Mail-Text, keine Betreffzeile und keine zusätzlichen Erklärungen.`;
-
-      const bodyResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${LOVABLE_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "google/gemini-2.5-flash",
-          messages: [
-            { role: "user", content: bodyPrompt }
-          ],
-        }),
-      });
-
-      if (!bodyResponse.ok) {
-        const error = await bodyResponse.text();
-        console.error("AI body generation failed:", error);
-        throw new Error(`AI body generation failed: ${error}`);
+      const data = await response.json();
+      
+      // Parse tool call response
+      const toolCall = data.choices?.[0]?.message?.tool_calls?.[0];
+      if (!toolCall || toolCall.function.name !== "generate_email") {
+        console.error("❌ No valid tool call in OpenAI response");
+        throw new Error("Invalid OpenAI response: No tool call found");
       }
 
-      const bodyData = await bodyResponse.json();
-      const generatedBody = bodyData.choices?.[0]?.message?.content?.trim() || sequence.body_template;
+      const emailData = JSON.parse(toolCall.function.arguments);
+      const generatedSubject = emailData.subject || sequence.subject_template;
+      const generatedBody = emailData.body || sequence.body_template;
+
+      console.log(`✅ Email generated successfully`);
+      console.log(`📋 Subject: ${generatedSubject.substring(0, 60)}...`);
 
       const subject = `[TEST - Sequenz ${sequence.sequence_number}] ${generatedSubject}`;
       const bodyWithSignature = `${generatedBody}${signature ? `\n\n${signature}` : ""}`;
