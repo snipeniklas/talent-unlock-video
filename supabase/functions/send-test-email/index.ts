@@ -111,9 +111,16 @@ Deine Aufgabe ist es, personalisierte E-Mails zu erstellen, die:
 - Nutze die bereitgestellten Vorlagen als Basis, aber personalisiere basierend auf Kontaktinformationen
 - Falls Research-Daten verfügbar sind, integriere relevante Insights subtil
 
+**KRITISCH - SIGNATUR UND GRUßFORMEL:**
+- Füge KEINE Grußformel hinzu (KEIN "Mit besten Grüßen", "Mit freundlichen Grüßen", "Viele Grüße", etc.)
+- Füge KEINE Signatur hinzu (KEIN Name, KEINE Kontaktdaten, KEIN Firmenname am Ende)
+- Die E-Mail endet DIREKT mit dem Call-to-Action
+- Die Signatur wird automatisch aus der Datenbank angehängt
+- Schreibe NICHTS nach dem CTA
+
 **Format:**
 - Betreff: Kurz, prägnant, personalisiert (max. 60 Zeichen)
-- Body: HTML mit <p> Tags, professionelle Anrede, max. 150 Wörter
+- Body: HTML mit <p> Tags, professionelle Anrede, max. 150 Wörter, ENDET mit CTA (keine Signatur!)
 - CTA: Klar und spezifisch (z.B. "15-minütiges Kennenlerngespräch nächste Woche?")`;
 
       // User prompt

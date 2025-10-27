@@ -506,12 +506,17 @@ FORMATIERUNGS-ANFORDERUNGEN:
 - Nutze <br> für Zeilenumbrüche innerhalb von Absätzen
 - Füge KEINE <html>, <head> oder <body> Tags hinzu
 - Halte die Formatierung sauber und professionell
-- Die Signatur wird automatisch angehängt - füge sie NICHT manuell hinzu
 
-Beispiel-Output:
-<p>Hallo Max,</p>
-<p>als CTO bei TechCorp kennen Sie sicherlich die Herausforderungen bei der Skalierung von Entwicklerteams.<br>
-Genau hier setzen wir an.</p>
+KRITISCH - SIGNATUR UND GRUßFORMEL:
+- Füge KEINE Grußformel hinzu (KEIN "Mit besten Grüßen", "Mit freundlichen Grüßen", "Viele Grüße", etc.)
+- Füge KEINE Signatur hinzu (KEIN Name, KEINE Kontaktdaten, KEIN Firmenname am Ende)
+- Die E-Mail endet DIREKT mit dem Call-to-Action
+- Die Signatur wird automatisch aus der Datenbank angehängt
+- Schreibe NICHTS nach dem CTA
+
+Beispiel-Output (ENDET mit CTA, KEINE Signatur):
+<p>Guten Tag Herr Müller,</p>
+<p>als CTO bei TechCorp kennen Sie sicherlich die Herausforderungen bei der Skalierung von Entwicklerteams. Genau hier setzen wir an.</p>
 <p>Hätten Sie nächste Woche 15 Minuten für einen kurzen Austausch?</p>
 
 Wichtig:
@@ -523,6 +528,7 @@ Wichtig:
 - Falls Research-Daten vorhanden sind, nutze sie für spezifische Anknüpfungspunkte
 - Vermeide generische Floskeln
 - Halte die E-Mail professionell aber persönlich
+- ENDE direkt nach dem CTA - keine Signatur!
 - Deutsch als Sprache`;
 
     const userPrompt = `
