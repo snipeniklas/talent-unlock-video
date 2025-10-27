@@ -613,9 +613,91 @@ export default function CrmContactDetail() {
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
-                      Personenbezogene Research-Daten werden hier angezeigt (Coming Soon)
-                    </p>
+                    {contactResearchData.summary && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Zusammenfassung</h4>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{contactResearchData.summary}</p>
+                      </div>
+                    )}
+                    
+                    {contactResearchData.professional_background && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Beruflicher Hintergrund</h4>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{contactResearchData.professional_background}</p>
+                      </div>
+                    )}
+                    
+                    {contactResearchData.key_facts && contactResearchData.key_facts.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Wichtige Fakten</h4>
+                        <ul className="list-disc list-inside space-y-1">
+                          {contactResearchData.key_facts.map((fact: string, idx: number) => (
+                            <li key={idx} className="text-sm text-muted-foreground">{fact}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {contactResearchData.interests && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Interessen</h4>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{contactResearchData.interests}</p>
+                      </div>
+                    )}
+                    
+                    {contactResearchData.recent_activities && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Aktuelle Aktivitäten</h4>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{contactResearchData.recent_activities}</p>
+                      </div>
+                    )}
+                    
+                    {contactResearchData.talking_points && contactResearchData.talking_points.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Gesprächsthemen</h4>
+                        <ul className="list-disc list-inside space-y-1">
+                          {contactResearchData.talking_points.map((point: string, idx: number) => (
+                            <li key={idx} className="text-sm text-muted-foreground">{point}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {contactResearchData.social_profiles && Object.keys(contactResearchData.social_profiles).length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Social Profiles</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {contactResearchData.social_profiles.linkedin && (
+                            <Button variant="outline" size="sm" asChild>
+                              <a href={contactResearchData.social_profiles.linkedin} target="_blank" rel="noopener noreferrer">
+                                LinkedIn
+                              </a>
+                            </Button>
+                          )}
+                          {contactResearchData.social_profiles.twitter && (
+                            <Button variant="outline" size="sm" asChild>
+                              <a href={contactResearchData.social_profiles.twitter} target="_blank" rel="noopener noreferrer">
+                                Twitter
+                              </a>
+                            </Button>
+                          )}
+                          {contactResearchData.social_profiles.github && (
+                            <Button variant="outline" size="sm" asChild>
+                              <a href={contactResearchData.social_profiles.github} target="_blank" rel="noopener noreferrer">
+                                GitHub
+                              </a>
+                            </Button>
+                          )}
+                          {contactResearchData.social_profiles.xing && (
+                            <Button variant="outline" size="sm" asChild>
+                              <a href={contactResearchData.social_profiles.xing} target="_blank" rel="noopener noreferrer">
+                                Xing
+                              </a>
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               )}
@@ -629,9 +711,65 @@ export default function CrmContactDetail() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
-                      Unternehmensbezogene Research-Daten werden hier angezeigt (Coming Soon)
-                    </p>
+                    {companyResearchData.overview && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Überblick</h4>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{companyResearchData.overview}</p>
+                      </div>
+                    )}
+                    
+                    {companyResearchData.key_facts && companyResearchData.key_facts.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Wichtige Fakten</h4>
+                        <ul className="list-disc list-inside space-y-1">
+                          {companyResearchData.key_facts.map((fact: string, idx: number) => (
+                            <li key={idx} className="text-sm text-muted-foreground">{fact}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {companyResearchData.products_services && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Produkte & Dienstleistungen</h4>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{companyResearchData.products_services}</p>
+                      </div>
+                    )}
+                    
+                    {companyResearchData.technology_stack && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Technologie-Stack</h4>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{companyResearchData.technology_stack}</p>
+                      </div>
+                    )}
+                    
+                    {companyResearchData.challenges && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Herausforderungen</h4>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{companyResearchData.challenges}</p>
+                      </div>
+                    )}
+                    
+                    {companyResearchData.opportunities && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Chancen</h4>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{companyResearchData.opportunities}</p>
+                      </div>
+                    )}
+                    
+                    {companyResearchData.recent_news && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Aktuelle News</h4>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{companyResearchData.recent_news}</p>
+                      </div>
+                    )}
+                    
+                    {companyResearchData.size_structure && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Größe & Struktur</h4>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{companyResearchData.size_structure}</p>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               )}
