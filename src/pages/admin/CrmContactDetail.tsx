@@ -530,6 +530,22 @@ export default function CrmContactDetail() {
               </CardContent>
             </Card>
           )}
+
+          {/* Outreach Activities Timeline */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5" />
+                Outreach Aktivitäten
+              </CardTitle>
+              <CardDescription>
+                Kompletter Verlauf aller Outreach-Kampagnen und E-Mail-Interaktionen
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ContactActivityTimeline contactId={contact.id} />
+            </CardContent>
+          </Card>
         </div>
 
         {/* Sidebar */}
@@ -747,22 +763,6 @@ export default function CrmContactDetail() {
               </CardContent>
             </Card>
           )}
-
-          {/* Outreach Activities Timeline */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <TrendingUp className="h-5 w-5" />
-                Outreach Aktivitäten
-              </CardTitle>
-              <CardDescription>
-                Kompletter Verlauf aller Outreach-Kampagnen und E-Mail-Interaktionen
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ContactActivityTimeline contactId={contact.id} />
-            </CardContent>
-          </Card>
 
           {/* User Status Card */}
           <Card>
