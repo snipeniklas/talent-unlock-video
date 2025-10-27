@@ -876,6 +876,7 @@ export type Database = {
           ai_instructions: string | null
           created_at: string
           created_by: string
+          daily_send_time: string | null
           description: string | null
           desired_cta: string | null
           email_template: string | null
@@ -889,6 +890,7 @@ export type Database = {
           ai_instructions?: string | null
           created_at?: string
           created_by: string
+          daily_send_time?: string | null
           description?: string | null
           desired_cta?: string | null
           email_template?: string | null
@@ -902,6 +904,7 @@ export type Database = {
           ai_instructions?: string | null
           created_at?: string
           created_by?: string
+          daily_send_time?: string | null
           description?: string | null
           desired_cta?: string | null
           email_template?: string | null

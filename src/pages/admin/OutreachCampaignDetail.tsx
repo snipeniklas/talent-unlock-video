@@ -469,13 +469,18 @@ export default function OutreachCampaignDetail() {
 
       const contactIds = draftContacts.map((c: any) => c.contact_id);
 
-      // Calculate send dates for contacts
-      const creationTime = new Date();
+      // Get current time for daily send time (UTC)
+      const activationTime = new Date();
+      const timeString = activationTime.toTimeString().split(' ')[0]; // Format: "HH:MM:SS"
+      
+      console.log(`🕐 Activating campaign. Daily send time set to: ${timeString} UTC`);
+
+      // Calculate send dates for contacts - first batch gets today's time, rest get future dates
       const EMAILS_PER_DAY = 10;
       
       const contactsWithDates = contactIds.map((contactId, index) => {
         const batchNumber = Math.floor(index / EMAILS_PER_DAY);
-        const nextSendDate = new Date(creationTime);
+        const nextSendDate = new Date(activationTime);
         nextSendDate.setDate(nextSendDate.getDate() + batchNumber);
         
         return {
@@ -501,10 +506,13 @@ export default function OutreachCampaignDetail() {
 
       if (insertError) throw insertError;
 
-      // Update campaign status to active
+      // Update campaign status to active and set daily_send_time
       const { error: updateError } = await supabase
         .from("outreach_campaigns")
-        .update({ status: "active" })
+        .update({ 
+          status: "active",
+          daily_send_time: timeString
+        })
         .eq("id", id);
 
       if (updateError) throw updateError;

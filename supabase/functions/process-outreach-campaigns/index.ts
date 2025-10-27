@@ -4,7 +4,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-const MAX_EMAILS_PER_RUN = 50; // Max emails per function invocation
+const MAX_NEW_CONTACTS_PER_DAY = 10; // Max new first contacts per day (follow-ups have no limit)
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -35,47 +35,73 @@ serve(async (req) => {
       console.log("⚡ FORCE PROCESS MODE ENABLED - Processing immediately");
     }
 
-    console.log(`Current time: ${new Date().toISOString()}`);
+    const now = new Date();
+    const currentTime = now.toTimeString().split(' ')[0].substring(0, 5); // "HH:MM"
+    
+    console.log(`⏰ Current time: ${now.toISOString()} (${currentTime} UTC)`);
 
-    // Get campaigns based on campaignId or all active campaigns (NOT draft)
-    let query = supabase
+    // Get active campaigns (without inner join on contacts to see all campaigns first)
+    let campaignQuery = supabase
       .from("outreach_campaigns")
       .select(`
         *,
-        outreach_campaign_contacts!inner(
-          id,
-          contact_id,
-          status,
-          next_sequence_number,
-          next_send_date,
-          is_excluded,
-          crm_contacts(*)
-        ),
         outreach_email_sequences(*)
-      `);
+      `)
+      .eq("status", "active");
     
     if (campaignId) {
-      query = query.eq("id", campaignId).eq("status", "active");
-    } else {
-      query = query.eq("status", "active");
+      campaignQuery = campaignQuery.eq("id", campaignId);
     }
     
-    const { data: campaigns, error: campaignsError } = await query;
+    const { data: allCampaigns, error: campaignsError } = await campaignQuery;
 
     if (campaignsError) {
       console.error("Error fetching campaigns:", campaignsError);
       throw campaignsError;
     }
 
-    if (!campaigns || campaigns.length === 0) {
-      console.log("No active campaigns found");
+    if (!allCampaigns || allCampaigns.length === 0) {
+      console.log("ℹ️ No active campaigns found");
       return new Response(
         JSON.stringify({ message: "No active campaigns" }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    console.log(`Found ${campaigns.length} active campaigns`);
+    console.log(`Found ${allCampaigns.length} active campaigns`);
+
+    // Filter campaigns that should be processed in current time window
+    const campaignsToProcess = allCampaigns.filter(campaign => {
+      if (!campaign.daily_send_time) {
+        console.log(`⚠️ Campaign "${campaign.name}" has no daily_send_time set, skipping`);
+        return false;
+      }
+      
+      const sendTime = campaign.daily_send_time.substring(0, 5); // "HH:MM"
+      const [sendHour, sendMinute] = sendTime.split(':').map(Number);
+      const [currentHour, currentMinute] = currentTime.split(':').map(Number);
+      
+      // Check if we're within 10-minute window
+      const sendTimeInMinutes = sendHour * 60 + sendMinute;
+      const currentTimeInMinutes = currentHour * 60 + currentMinute;
+      const timeDiff = Math.abs(currentTimeInMinutes - sendTimeInMinutes);
+      
+      const shouldProcess = timeDiff < 10 || forceProcess;
+      
+      console.log(`📅 Campaign "${campaign.name}": send_time=${sendTime}, current=${currentTime}, diff=${timeDiff}min, process=${shouldProcess}`);
+      
+      return shouldProcess;
+    });
+
+    if (campaignsToProcess.length === 0) {
+      console.log("ℹ️ No campaigns scheduled for current time window");
+      return new Response(
+        JSON.stringify({ message: "No campaigns to process now" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    console.log(`✅ Processing ${campaignsToProcess.length} campaign(s)`);
 
     // STARTUP VALIDATION: Auto-fix any stuck "processing" contacts
     console.log(`🔧 Running startup validation to fix any stuck 'processing' contacts...`);
@@ -83,7 +109,7 @@ serve(async (req) => {
     const { data: stuckContacts, error: stuckError } = await supabase
       .from("outreach_campaign_contacts")
       .select("id, status, contact_id, crm_contacts(email)")
-      .in("campaign_id", campaigns.map(c => c.id))
+      .in("campaign_id", campaignsToProcess.map(c => c.id))
       .eq("status", "processing");
 
     if (stuckContacts && stuckContacts.length > 0) {
@@ -110,40 +136,50 @@ serve(async (req) => {
     // Track total emails sent in this run
     let totalEmailsSent = 0;
 
-    for (const campaign of campaigns) {
-      // Stop processing if we've reached the limit
-      if (totalEmailsSent >= MAX_EMAILS_PER_RUN) {
-        console.log(`Reached email limit (${MAX_EMAILS_PER_RUN}), stopping for this run`);
-        break;
-      }
+    for (const campaign of campaignsToProcess) {
       console.log(`\n=== Processing Campaign: ${campaign.name} (ID: ${campaign.id}) ===`);
 
-      // STEP 1: DEDUPLICATE CONTACTS
-      // This prevents sending multiple emails to the same contact if duplicate entries exist
-      const uniqueContacts = new Map();
-      for (const contactEntry of campaign.outreach_campaign_contacts) {
-        const contactId = contactEntry.contact_id;
-        
-        if (!uniqueContacts.has(contactId)) {
-          uniqueContacts.set(contactId, contactEntry);
-        } else {
-          // If duplicate exists, keep the one with the earliest next_send_date
-          const existing = uniqueContacts.get(contactId);
-          const existingDate = existing.next_send_date ? new Date(existing.next_send_date) : new Date(0);
-          const currentDate = contactEntry.next_send_date ? new Date(contactEntry.next_send_date) : new Date(0);
-          
-          if (currentDate < existingDate) {
-            console.log(`⚠️ Duplicate contact detected: ${contactId}. Using entry with earlier next_send_date.`);
-            uniqueContacts.set(contactId, contactEntry);
-          }
-        }
+      // Fetch contacts for this campaign - TWO SEPARATE QUERIES
+      // 1. New first contacts (max 10 per day)
+      const { data: newContacts, error: newContactsError } = await supabase
+        .from("outreach_campaign_contacts")
+        .select("*, crm_contacts(*)")
+        .eq("campaign_id", campaign.id)
+        .eq("status", "pending")
+        .eq("next_sequence_number", 1)
+        .eq("is_excluded", false)
+        .order("added_at", { ascending: true })
+        .limit(MAX_NEW_CONTACTS_PER_DAY);
+
+      if (newContactsError) {
+        console.error(`Error fetching new contacts:`, newContactsError);
+        continue;
       }
 
-      console.log(`Total contact entries: ${campaign.outreach_campaign_contacts.length}`);
-      console.log(`Unique contacts after deduplication: ${uniqueContacts.size}`);
+      // 2. Due follow-ups (no limit - send ALL that are ready)
+      const { data: followUpContacts, error: followUpError } = await supabase
+        .from("outreach_campaign_contacts")
+        .select("*, crm_contacts(*)")
+        .eq("campaign_id", campaign.id)
+        .eq("status", "pending")
+        .gt("next_sequence_number", 1)
+        .eq("is_excluded", false)
+        .lte("next_send_date", now.toISOString())
+        .order("next_send_date", { ascending: true });
 
-      // Replace the campaign contacts array with deduplicated version
-      campaign.outreach_campaign_contacts = Array.from(uniqueContacts.values());
+      if (followUpError) {
+        console.error(`Error fetching follow-up contacts:`, followUpError);
+        continue;
+      }
+
+      // Combine both lists
+      const contactsToProcess = [...(newContacts || []), ...(followUpContacts || [])];
+
+      console.log(`📊 Campaign "${campaign.name}":
+  - New first contacts: ${newContacts?.length || 0}
+  - Follow-ups due: ${followUpContacts?.length || 0}
+  - Total to send: ${contactsToProcess.length}
+      `);
 
       // Get MS365 token for the campaign creator and refresh if needed
       console.log(`🔄 Checking MS365 token for user ${campaign.created_by}...`);
@@ -220,40 +256,9 @@ ABSENDER-UNTERNEHMEN:
         );
 
       // Process each contact in this campaign
-      for (const contactEntry of campaign.outreach_campaign_contacts) {
-        // Stop if we've reached the email limit for this run
-        if (totalEmailsSent >= MAX_EMAILS_PER_RUN) {
-          console.log(`Reached email limit (${MAX_EMAILS_PER_RUN}) during campaign processing`);
-          break;
-        }
-
-        // Skip excluded contacts
-        if (contactEntry.is_excluded) {
-          console.log(`⏭️ SKIP: Contact ${contactEntry.crm_contacts?.email || contactEntry.contact_id} - EXCLUDED by user`);
-          continue;
-        }
-
-        // Skip contacts that are already completed or failed
-        if (contactEntry.status === "failed" || contactEntry.status === "completed") {
-          console.log(`⏭️ SKIP: Contact ${contactEntry.crm_contacts?.email || contactEntry.contact_id} - Status: ${contactEntry.status.toUpperCase()}`);
-          continue;
-        }
-
-        // Skip contacts that are not ready to be sent yet (UNLESS forceProcess is true)
-        // This also provides natural deduplication - if next_send_date is in the future,
-        // the contact won't be processed even if function runs multiple times
-        if (!forceProcess && contactEntry.next_send_date) {
-          const sendDate = new Date(contactEntry.next_send_date);
-          const now = new Date();
-          if (sendDate > now) {
-            const hoursUntilReady = Math.round((sendDate.getTime() - now.getTime()) / (1000 * 60 * 60));
-            console.log(`⏭️ SKIP: Contact ${contactEntry.crm_contacts?.email || contactEntry.contact_id} - Not ready yet (next send in ${hoursUntilReady}h: ${sendDate.toISOString()})`);
-            continue;
-          }
-        }
-        
+      for (const contactEntry of contactsToProcess) {
         if (forceProcess) {
-          console.log(`⚡ FORCE PROCESS: Sending to contact ${contactEntry.contact_id} immediately (ignoring delays)`);
+          console.log(`⚡ FORCE PROCESS: Sending to contact ${contactEntry.contact_id} immediately`);
         }
 
         console.log(`Processing contact: ${contactEntry.contact_id} (${contactEntry.crm_contacts?.email})`);
@@ -342,17 +347,25 @@ ABSENDER-UNTERNEHMEN:
           });
 
           // Calculate next send date based on the next sequence's delay
-          // Follow-ups go out at the SAME TIME as the original email, just X days later
+          // Use campaign's daily_send_time to schedule at exact same time each day
           const allSequences = campaign.outreach_email_sequences || [];
           const nextSeqNum = nextSequenceNumber + 1;
           const subsequentSequence = allSequences.find((s: any) => s.sequence_number === nextSeqNum);
 
           let nextSendDate = null;
           if (subsequentSequence) {
-            // Use the current time (when the email was just sent) as the base
-            const now = new Date();
-            nextSendDate = new Date(now.getTime() + subsequentSequence.delay_days * 24 * 60 * 60 * 1000);
-            console.log(`Next email (#${nextSeqNum}) scheduled for ${nextSendDate.toISOString()} (${subsequentSequence.delay_days} days from now)`);
+            // Calculate date: today + delay_days
+            const sendDate = new Date();
+            sendDate.setDate(sendDate.getDate() + subsequentSequence.delay_days);
+            
+            // Set exact time from campaign's daily_send_time
+            if (campaign.daily_send_time) {
+              const [hour, minute, second] = campaign.daily_send_time.split(':').map(Number);
+              sendDate.setUTCHours(hour, minute, second || 0, 0);
+            }
+            
+            nextSendDate = sendDate.toISOString();
+            console.log(`📅 Next email (#${nextSeqNum}) scheduled for ${nextSendDate} (${subsequentSequence.delay_days} days from now at ${campaign.daily_send_time})`);
           } else {
             console.log(`No more sequences after #${nextSequenceNumber} for contact ${contact.email}`);
           }
@@ -415,13 +428,13 @@ ABSENDER-UNTERNEHMEN:
       }
     }
 
-    console.log(`Outreach processing completed. Emails sent in this run: ${totalEmailsSent}/${MAX_EMAILS_PER_RUN}`);
+    console.log(`✅ Outreach processing completed. Total emails sent: ${totalEmailsSent}`);
 
     return new Response(
       JSON.stringify({ 
         message: "Outreach processing completed",
         emails_sent: totalEmailsSent,
-        max_per_run: MAX_EMAILS_PER_RUN
+        campaigns_processed: campaignsToProcess.length
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
