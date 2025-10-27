@@ -120,7 +120,34 @@ serve(async (req) => {
         console.log(`Reached email limit (${MAX_EMAILS_PER_RUN}), stopping for this run`);
         break;
       }
-      console.log(`Processing campaign: ${campaign.name} (${campaign.id})`);
+      console.log(`\n=== Processing Campaign: ${campaign.name} (ID: ${campaign.id}) ===`);
+
+      // STEP 1: DEDUPLICATE CONTACTS
+      // This prevents sending multiple emails to the same contact if duplicate entries exist
+      const uniqueContacts = new Map();
+      for (const contactEntry of campaign.outreach_campaign_contacts) {
+        const contactId = contactEntry.contact_id;
+        
+        if (!uniqueContacts.has(contactId)) {
+          uniqueContacts.set(contactId, contactEntry);
+        } else {
+          // If duplicate exists, keep the one with the earliest next_send_date
+          const existing = uniqueContacts.get(contactId);
+          const existingDate = existing.next_send_date ? new Date(existing.next_send_date) : new Date(0);
+          const currentDate = contactEntry.next_send_date ? new Date(contactEntry.next_send_date) : new Date(0);
+          
+          if (currentDate < existingDate) {
+            console.log(`⚠️ Duplicate contact detected: ${contactId}. Using entry with earlier next_send_date.`);
+            uniqueContacts.set(contactId, contactEntry);
+          }
+        }
+      }
+
+      console.log(`Total contact entries: ${campaign.outreach_campaign_contacts.length}`);
+      console.log(`Unique contacts after deduplication: ${uniqueContacts.size}`);
+
+      // Replace the campaign contacts array with deduplicated version
+      campaign.outreach_campaign_contacts = Array.from(uniqueContacts.values());
 
       // Get MS365 token for the campaign creator and refresh if needed
       console.log(`🔄 Checking MS365 token for user ${campaign.created_by}...`);
@@ -240,6 +267,26 @@ ABSENDER-UNTERNEHMEN:
           continue;
         }
 
+        // STEP 2: OPTIMISTIC LOCKING
+        // Try to acquire lock by setting status to "processing"
+        // This prevents race conditions when multiple function instances run simultaneously
+        const { data: lockData, error: lockError } = await supabase
+          .from("outreach_campaign_contacts")
+          .update({ 
+            status: "processing",
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", contactEntry.id)
+          .eq("status", "pending") // Only lock if status is still "pending"
+          .select();
+
+        if (lockError || !lockData || lockData.length === 0) {
+          console.log(`⏭️ Contact ${contact.email} is already being processed or not in pending state. Skipping.`);
+          continue;
+        }
+
+        console.log(`🔒 Acquired lock for contact ${contact.email}`);
+
         // Get the next email sequence to send
         const nextSequenceNumber = contactEntry.next_sequence_number || 1;
         const nextSequence = campaign.outreach_email_sequences?.find(
@@ -248,10 +295,13 @@ ABSENDER-UNTERNEHMEN:
 
         if (!nextSequence) {
           console.log(`No more sequences for contact ${contactEntry.contact_id}, marking as completed`);
-          // Mark campaign contact as completed
+          // Mark campaign contact as completed and release lock
           await supabase
             .from("outreach_campaign_contacts")
-            .update({ status: "completed" })
+            .update({ 
+              status: "completed",
+              updated_at: new Date().toISOString()
+            })
             .eq("id", contactEntry.id);
           continue;
         }
@@ -305,19 +355,19 @@ ABSENDER-UNTERNEHMEN:
             console.log(`No more sequences after #${nextSequenceNumber} for contact ${contact.email}`);
           }
 
-          // Update contact with next sequence info
+          // Update contact with next sequence info and release lock
           // Setting next_send_date in the future provides natural deduplication
-          // even if the function runs multiple times in parallel
           await supabase
             .from("outreach_campaign_contacts")
             .update({ 
-              status: subsequentSequence ? "sent" : "completed",
+              status: subsequentSequence ? "pending" : "completed", // Back to pending for next sequence
               next_sequence_number: nextSeqNum,
               next_send_date: nextSendDate,
+              updated_at: new Date().toISOString()
             })
             .eq("id", contactEntry.id);
 
-          console.log(`Email sent to ${contact.email}`);
+          console.log(`✅ Email sent to ${contact.email}`);
           totalEmailsSent++;
         } catch (error) {
           console.error(`❌ Error sending email to ${contact.email}:`, error);
@@ -335,10 +385,13 @@ ABSENDER-UNTERNEHMEN:
             error_message: `${error.message} | Stack: ${error.stack?.substring(0, 500)}`,
           });
 
-          // Update contact status
+          // Release lock on error - keep as pending so it can be retried
           await supabase
             .from("outreach_campaign_contacts")
-            .update({ status: "failed" })
+            .update({ 
+              status: "pending",
+              updated_at: new Date().toISOString()
+            })
             .eq("id", contactEntry.id);
         }
       }

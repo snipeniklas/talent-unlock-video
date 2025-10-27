@@ -27,3 +27,9 @@ enabled = true
 name = "process-outreach-campaigns-scheduler"
 schedule = "* * * * *"  # Every minute
 function = "process-outreach-campaigns"
+
+# Cleanup stuck processing contacts every 15 minutes
+[[edge_runtime.scheduler]]
+name = "cleanup-stuck-contacts-scheduler"
+schedule = "*/15 * * * *"  # Every 15 minutes
+function = "cleanup-stuck-contacts"
