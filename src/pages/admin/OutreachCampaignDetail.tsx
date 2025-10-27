@@ -340,10 +340,11 @@ export default function OutreachCampaignDetail() {
 
   const sendTestEmailMutation = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase.functions.invoke("send-test-email", {
+      const { data, error } = await supabase.functions.invoke("send-test-email", {
         body: { campaignId: id, testEmail },
       });
       if (error) throw error;
+      return data;
     },
     onSuccess: () => {
       toast({
