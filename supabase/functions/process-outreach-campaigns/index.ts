@@ -4,7 +4,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-const MAX_NEW_CONTACTS_PER_DAY = 10; // Max new first contacts per day (follow-ups have no limit)
+const MAX_EMAILS_PER_SEQUENCE_PER_DAY = 10; // Max 10 emails per sequence per day
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -26,21 +26,19 @@ serve(async (req) => {
 
     console.log("Starting outreach campaign processing...");
 
-    // Parse request body for campaignId and forceProcess flag
+    // Parse request body for immediate flag and optional campaignId
     const requestBody = await req.json().catch(() => ({}));
+    const immediate = requestBody.immediate || false;
     const campaignId = requestBody.campaignId;
-    const forceProcess = requestBody.forceProcess || false;
     
-    if (forceProcess) {
-      console.log("⚡ FORCE PROCESS MODE ENABLED - Processing immediately");
+    if (immediate) {
+      console.log("⚡ IMMEDIATE MODE - Processing now regardless of next_send_date");
     }
 
     const now = new Date();
-    const currentTime = now.toTimeString().split(' ')[0].substring(0, 5); // "HH:MM"
-    
-    console.log(`⏰ Current time: ${now.toISOString()} (${currentTime} UTC)`);
+    console.log(`⏰ Current time: ${now.toISOString()}`);
 
-    // Get active campaigns (without inner join on contacts to see all campaigns first)
+    // Get active campaigns
     let campaignQuery = supabase
       .from("outreach_campaigns")
       .select(`
@@ -48,6 +46,11 @@ serve(async (req) => {
         outreach_email_sequences(*)
       `)
       .eq("status", "active");
+    
+    // Filter by next_send_date unless immediate mode
+    if (!immediate) {
+      campaignQuery = campaignQuery.lte("next_send_date", now.toISOString());
+    }
     
     if (campaignId) {
       campaignQuery = campaignQuery.eq("id", campaignId);
@@ -68,40 +71,15 @@ serve(async (req) => {
       );
     }
 
-    console.log(`Found ${allCampaigns.length} active campaigns`);
-
-    // Filter campaigns that should be processed in current time window
-    const campaignsToProcess = allCampaigns.filter(campaign => {
-      if (!campaign.daily_send_time) {
-        console.log(`⚠️ Campaign "${campaign.name}" has no daily_send_time set, skipping`);
-        return false;
-      }
-      
-      const sendTime = campaign.daily_send_time.substring(0, 5); // "HH:MM"
-      const [sendHour, sendMinute] = sendTime.split(':').map(Number);
-      const [currentHour, currentMinute] = currentTime.split(':').map(Number);
-      
-      // Check if we're within 10-minute window
-      const sendTimeInMinutes = sendHour * 60 + sendMinute;
-      const currentTimeInMinutes = currentHour * 60 + currentMinute;
-      const timeDiff = Math.abs(currentTimeInMinutes - sendTimeInMinutes);
-      
-      const shouldProcess = timeDiff < 10 || forceProcess;
-      
-      console.log(`📅 Campaign "${campaign.name}": send_time=${sendTime}, current=${currentTime}, diff=${timeDiff}min, process=${shouldProcess}`);
-      
-      return shouldProcess;
-    });
-
-    if (campaignsToProcess.length === 0) {
-      console.log("ℹ️ No campaigns scheduled for current time window");
+    if (!allCampaigns || allCampaigns.length === 0) {
+      console.log("ℹ️ No campaigns due for processing");
       return new Response(
-        JSON.stringify({ message: "No campaigns to process now" }),
+        JSON.stringify({ message: "No campaigns to process" }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    console.log(`✅ Processing ${campaignsToProcess.length} campaign(s)`);
+    console.log(`✅ Processing ${allCampaigns.length} campaign(s)`);
 
     // STARTUP VALIDATION: Auto-fix any stuck "processing" contacts
     console.log(`🔧 Running startup validation to fix any stuck 'processing' contacts...`);
@@ -109,7 +87,7 @@ serve(async (req) => {
     const { data: stuckContacts, error: stuckError } = await supabase
       .from("outreach_campaign_contacts")
       .select("id, status, contact_id, crm_contacts(email)")
-      .in("campaign_id", campaignsToProcess.map(c => c.id))
+      .in("campaign_id", allCampaigns.map(c => c.id))
       .eq("status", "processing");
 
     if (stuckContacts && stuckContacts.length > 0) {
@@ -136,50 +114,48 @@ serve(async (req) => {
     // Track total emails sent in this run
     let totalEmailsSent = 0;
 
-    for (const campaign of campaignsToProcess) {
+    for (const campaign of allCampaigns) {
       console.log(`\n=== Processing Campaign: ${campaign.name} (ID: ${campaign.id}) ===`);
 
-      // Fetch contacts for this campaign - TWO SEPARATE QUERIES
-      // 1. New first contacts (max 10 per day)
-      const { data: newContacts, error: newContactsError } = await supabase
+      // Fetch ALL due contacts for this campaign (new + follow-ups)
+      const { data: allDueContacts, error: contactsError } = await supabase
         .from("outreach_campaign_contacts")
         .select("*, crm_contacts(*)")
         .eq("campaign_id", campaign.id)
         .eq("status", "pending")
-        .eq("next_sequence_number", 1)
         .eq("is_excluded", false)
-        .order("added_at", { ascending: true })
-        .limit(MAX_NEW_CONTACTS_PER_DAY);
+        .or(`next_sequence_number.eq.1,and(next_sequence_number.gt.1,next_send_date.lte.${now.toISOString()})`)
+        .order("next_sequence_number", { ascending: true })
+        .order("added_at", { ascending: true });
 
-      if (newContactsError) {
-        console.error(`Error fetching new contacts:`, newContactsError);
+      if (contactsError) {
+        console.error(`Error fetching contacts:`, contactsError);
         continue;
       }
 
-      // 2. Due follow-ups (no limit - send ALL that are ready)
-      const { data: followUpContacts, error: followUpError } = await supabase
-        .from("outreach_campaign_contacts")
-        .select("*, crm_contacts(*)")
-        .eq("campaign_id", campaign.id)
-        .eq("status", "pending")
-        .gt("next_sequence_number", 1)
-        .eq("is_excluded", false)
-        .lte("next_send_date", now.toISOString())
-        .order("next_send_date", { ascending: true });
+      // Group by sequence and limit each sequence to MAX_EMAILS_PER_SEQUENCE_PER_DAY
+      const contactsBySequence = new Map<number, any[]>();
 
-      if (followUpError) {
-        console.error(`Error fetching follow-up contacts:`, followUpError);
-        continue;
+      for (const contact of allDueContacts || []) {
+        const seqNum = contact.next_sequence_number || 1;
+        if (!contactsBySequence.has(seqNum)) {
+          contactsBySequence.set(seqNum, []);
+        }
+        
+        const seqContacts = contactsBySequence.get(seqNum)!;
+        if (seqContacts.length < MAX_EMAILS_PER_SEQUENCE_PER_DAY) {
+          seqContacts.push(contact);
+        }
       }
 
-      // Combine both lists
-      const contactsToProcess = [...(newContacts || []), ...(followUpContacts || [])];
+      // Flatten back to a single list
+      const contactsToProcess = Array.from(contactsBySequence.values()).flat();
 
-      console.log(`📊 Campaign "${campaign.name}":
-  - New first contacts: ${newContacts?.length || 0}
-  - Follow-ups due: ${followUpContacts?.length || 0}
-  - Total to send: ${contactsToProcess.length}
-      `);
+      console.log(`📊 Campaign "${campaign.name}":`);
+      for (const [seqNum, contacts] of contactsBySequence.entries()) {
+        console.log(`  - Sequenz ${seqNum}: ${contacts.length} E-Mails`);
+      }
+      console.log(`  - Total: ${contactsToProcess.length} E-Mails`);
 
       // Get MS365 token for the campaign creator and refresh if needed
       console.log(`🔄 Checking MS365 token for user ${campaign.created_by}...`);
@@ -257,10 +233,6 @@ ABSENDER-UNTERNEHMEN:
 
       // Process each contact in this campaign
       for (const contactEntry of contactsToProcess) {
-        if (forceProcess) {
-          console.log(`⚡ FORCE PROCESS: Sending to contact ${contactEntry.contact_id} immediately`);
-        }
-
         console.log(`Processing contact: ${contactEntry.contact_id} (${contactEntry.crm_contacts?.email})`);
 
         const contact = contactEntry.crm_contacts;
@@ -426,6 +398,15 @@ ABSENDER-UNTERNEHMEN:
             .eq("id", contactEntry.id);
         }
       }
+
+      // After processing all contacts in this campaign, update next_send_date
+      const nextSendDate = new Date(Date.now() + 24 * 60 * 60 * 1000); // +24h
+      await supabase
+        .from("outreach_campaigns")
+        .update({ next_send_date: nextSendDate.toISOString() })
+        .eq("id", campaign.id);
+
+      console.log(`📅 Next send for "${campaign.name}": ${nextSendDate.toISOString()}`);
     }
 
     console.log(`✅ Outreach processing completed. Total emails sent: ${totalEmailsSent}`);
@@ -434,7 +415,7 @@ ABSENDER-UNTERNEHMEN:
       JSON.stringify({ 
         message: "Outreach processing completed",
         emails_sent: totalEmailsSent,
-        campaigns_processed: campaignsToProcess.length
+        campaigns_processed: allCampaigns.length
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );

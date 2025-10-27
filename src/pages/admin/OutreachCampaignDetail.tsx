@@ -21,7 +21,8 @@ import {
 import {
   ArrowLeft, Play, Pause, CheckCircle, Ban, Check, Edit, Trash2, Eye, Search,
   Filter, ChevronDown, RefreshCw, AlertCircle, RotateCcw, Lightbulb, UserPlus, Plus,
-  Calendar, Clock, Sparkles, TrendingUp, Send, AlertTriangle, MessageSquare, TestTube
+  Calendar, Clock, Sparkles, TrendingUp, Send, AlertTriangle, MessageSquare, TestTube,
+  Loader2
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -469,59 +470,60 @@ export default function OutreachCampaignDetail() {
 
       const contactIds = draftContacts.map((c: any) => c.contact_id);
 
-      // Get current time for daily send time - store as UTC
-      const activationTime = new Date();
-      const timeString = activationTime.toISOString().split('T')[1].split('.')[0]; // Format: "HH:MM:SS" in UTC
+      // Calculate next_send_date (24h from now)
+      const now = new Date();
+      const nextSendDate = new Date(now.getTime() + 24 * 60 * 60 * 1000);
       
-      console.log(`🕐 Activating campaign. Daily send time set to: ${timeString} UTC`);
+      console.log(`🚀 Activating campaign. Next automated send: ${nextSendDate.toISOString()}`);
 
-      // Calculate send dates for contacts - first batch gets today's time, rest get future dates
-      const EMAILS_PER_DAY = 10;
-      
-      const contactsWithDates = contactIds.map((contactId, index) => {
-        const batchNumber = Math.floor(index / EMAILS_PER_DAY);
-        const nextSendDate = new Date(activationTime);
-        nextSendDate.setDate(nextSendDate.getDate() + batchNumber);
-        
-        return {
-          campaign_id: id,
-          contact_id: contactId,
-          next_send_date: nextSendDate.toISOString(),
-          next_sequence_number: 1,
-          status: 'pending',
-        };
-      });
-
-      // Delete existing draft contacts and add new ones with dates
-      const { error: deleteError } = await supabase
-        .from("outreach_campaign_contacts")
-        .delete()
-        .eq("campaign_id", id);
-
-      if (deleteError) throw deleteError;
-
-      const { error: insertError } = await supabase
-        .from("outreach_campaign_contacts")
-        .insert(contactsWithDates);
-
-      if (insertError) throw insertError;
-
-      // Update campaign status to active and set daily_send_time
+      // Update campaign status and set next_send_date
       const { error: updateError } = await supabase
         .from("outreach_campaigns")
         .update({ 
           status: "active",
-          daily_send_time: timeString
+          next_send_date: nextSendDate.toISOString()
         })
         .eq("id", id);
 
       if (updateError) throw updateError;
+
+      // Set all draft contacts to "pending" status
+      if (contactIds.length > 0) {
+        const { error: contactError } = await supabase
+          .from("outreach_campaign_contacts")
+          .update({ status: "pending" })
+          .eq("campaign_id", id)
+          .in("contact_id", contactIds);
+
+        if (contactError) throw contactError;
+      }
+
+      // Trigger immediate email send
+      console.log("📧 Triggering immediate email send...");
+      
+      const { data, error: functionError } = await supabase.functions.invoke(
+        "process-outreach-campaigns",
+        {
+          body: { 
+            immediate: true,
+            campaignId: id 
+          }
+        }
+      );
+
+      if (functionError) {
+        console.error("Edge function error:", functionError);
+        throw new Error(`Email send failed: ${functionError.message}`);
+      }
+
+      console.log("✅ Immediate send completed:", data);
+      return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["outreach-campaign", id] });
       toast({
-        title: "Kampagne aktiviert",
-        description: "Die Kampagne wurde aktiviert und E-Mails werden versendet.",
+        title: "Kampagne aktiviert! 🎉",
+        description: `${data?.emails_sent || 0} E-Mails wurden sofort versendet. Nächster automatischer Versand: morgen zur gleichen Zeit.`,
       });
     },
     onError: (error) => {
@@ -1064,11 +1066,20 @@ export default function OutreachCampaignDetail() {
                         onClick={() => activateCampaignMutation.mutate()}
                         disabled={activateCampaignMutation.isPending}
                       >
-                        <Play className="h-4 w-4 mr-2" />
-                        Kampagne aktivieren
+                        {activateCampaignMutation.isPending ? (
+                          <>
+                            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                            Versende erste E-Mails...
+                          </>
+                        ) : (
+                          <>
+                            <Play className="h-4 w-4 mr-2" />
+                            Kampagne aktivieren
+                          </>
+                        )}
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>Kampagne aktivieren und E-Mail-Versand starten</TooltipContent>
+                    <TooltipContent>Kampagne aktivieren und erste E-Mails sofort versenden</TooltipContent>
                   </Tooltip>
                 </>
               )}
@@ -1319,7 +1330,7 @@ export default function OutreachCampaignDetail() {
             </div>
 
             {/* Send Time Information Card - Only show for active/paused campaigns */}
-            {campaign.daily_send_time && (campaign.status === 'active' || campaign.status === 'paused') && (
+            {campaign.next_send_date && (campaign.status === 'active' || campaign.status === 'paused') && (
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -1329,49 +1340,22 @@ export default function OutreachCampaignDetail() {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div>
-                    <p className="text-sm text-muted-foreground">Tägliche E-Mail-Versandzeit</p>
+                    <p className="text-sm text-muted-foreground">Nächster automatischer Versand</p>
                     <p className="text-lg font-semibold">
-                      {(() => {
-                        // Convert UTC time from database to local time for display
-                        const utcTime = campaign.daily_send_time; // Format: "HH:MM:SS" in UTC
-                        const [hours, minutes] = utcTime.split(':');
-                        const utcDate = new Date();
-                        utcDate.setUTCHours(parseInt(hours), parseInt(minutes), 0, 0);
-                        return utcDate.toLocaleTimeString('de-DE', { 
-                          hour: '2-digit', 
-                          minute: '2-digit',
-                          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
-                        });
-                      })()} Uhr (lokale Zeit)
+                      {new Date(campaign.next_send_date).toLocaleString('de-DE', {
+                        weekday: 'short',
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                      })} Uhr
                     </p>
                   </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Nächster Versandlauf</p>
-                    <p className="text-lg font-semibold">
-                      {(() => {
-                        const utcTime = campaign.daily_send_time;
-                        const [hours, minutes] = utcTime.split(':');
-                        const now = new Date();
-                        const nextRun = new Date();
-                        nextRun.setUTCHours(parseInt(hours), parseInt(minutes), 0, 0);
-                        
-                        // If today's run has passed, show tomorrow
-                        if (nextRun <= now) {
-                          nextRun.setDate(nextRun.getDate() + 1);
-                        }
-                        
-                        const options: Intl.DateTimeFormatOptions = {
-                          weekday: 'short',
-                          day: 'numeric',
-                          month: 'short',
-                          hour: '2-digit',
-                          minute: '2-digit'
-                        };
-                        
-                        return nextRun.toLocaleDateString('de-DE', options) + ' Uhr';
-                      })()}
-                    </p>
-                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Pro Sequenz werden maximal 10 E-Mails versendet.
+                  </p>
                 </CardContent>
               </Card>
             )}

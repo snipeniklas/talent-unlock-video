@@ -882,6 +882,7 @@ export type Database = {
           email_template: string | null
           id: string
           name: string
+          next_send_date: string | null
           status: string
           target_audience: string | null
           updated_at: string
@@ -896,6 +897,7 @@ export type Database = {
           email_template?: string | null
           id?: string
           name: string
+          next_send_date?: string | null
           status?: string
           target_audience?: string | null
           updated_at?: string
@@ -910,6 +912,7 @@ export type Database = {
           email_template?: string | null
           id?: string
           name?: string
+          next_send_date?: string | null
           status?: string
           target_audience?: string | null
           updated_at?: string
