@@ -878,6 +878,60 @@ export type Database = {
         }
         Relationships: []
       }
+      outreach_contact_activities: {
+        Row: {
+          activity_type: string
+          campaign_id: string
+          contact_id: string
+          created_at: string
+          created_by: string
+          id: string
+          meeting_date: string | null
+          metadata: Json | null
+          notes: string | null
+          reply_content: string | null
+        }
+        Insert: {
+          activity_type: string
+          campaign_id: string
+          contact_id: string
+          created_at?: string
+          created_by: string
+          id?: string
+          meeting_date?: string | null
+          metadata?: Json | null
+          notes?: string | null
+          reply_content?: string | null
+        }
+        Update: {
+          activity_type?: string
+          campaign_id?: string
+          contact_id?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          meeting_date?: string | null
+          metadata?: Json | null
+          notes?: string | null
+          reply_content?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "outreach_contact_activities_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "outreach_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "outreach_contact_activities_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       outreach_email_sequences: {
         Row: {
           body_template: string

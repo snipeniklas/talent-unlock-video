@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { ActivityTimeline } from "./ActivityTimeline";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { ChevronDown, Calendar } from "lucide-react";
+import { format } from "date-fns";
+import { de } from "date-fns/locale";
 
 interface TimelineEvent {
   id: string;
   type: 'campaign_created' | 'campaign_started' | 'campaign_paused' | 'campaign_completed' | 
-        'contact_added' | 'contact_removed' | 'email_sent' | 'email_failed' | 'email_replied';
+        'contact_added' | 'contact_removed' | 'contact_removed_reply' | 'contact_removed_meeting' | 
+        'email_sent' | 'email_failed' | 'email_replied';
   timestamp: string;
   description: string;
-  details?: string;
+  details?: string | any;
+  replyContent?: string;
+  meetingDate?: string;
 }
 
 interface ContactActivityTimelineProps {
@@ -21,7 +28,8 @@ export function ContactActivityTimeline({ contactId }: ContactActivityTimelinePr
 
   useEffect(() => {
     fetchActivities();
-    subscribeToActivities();
+    const cleanup = subscribeToActivities();
+    return cleanup;
   }, [contactId]);
 
   const fetchActivities = async () => {
@@ -69,6 +77,23 @@ export function ContactActivityTimeline({ contactId }: ContactActivityTimelinePr
 
       if (receivedError) throw receivedError;
 
+      // Fetch outreach contact activities (removal reasons, etc.)
+      const { data: activities, error: activitiesError } = await supabase
+        .from('outreach_contact_activities')
+        .select(`
+          id,
+          activity_type,
+          created_at,
+          notes,
+          reply_content,
+          meeting_date,
+          outreach_campaigns(name)
+        `)
+        .eq('contact_id', contactId)
+        .order('created_at', { ascending: false });
+
+      if (activitiesError) throw activitiesError;
+
       // Map sent emails to timeline events
       const sentEmailEvents: TimelineEvent[] = (sentEmails || []).map(email => ({
         id: `sent-${email.id}`,
@@ -100,8 +125,41 @@ export function ContactActivityTimeline({ contactId }: ContactActivityTimelinePr
         details: `Von: ${email.from_name || email.from_email}`
       }));
 
+      // Map outreach activities to timeline events
+      const activityEvents: TimelineEvent[] = (activities || []).map(activity => {
+        let description = '';
+        let type: TimelineEvent['type'] = 'contact_removed';
+        
+        switch (activity.activity_type) {
+          case 'removed_no_contact':
+            description = `Aus Kampagne entfernt: ${activity.outreach_campaigns?.name || 'Unbekannt'}`;
+            type = 'contact_removed';
+            break;
+          case 'removed_reply_received':
+            description = `Aus Kampagne entfernt (Antwort erhalten): ${activity.outreach_campaigns?.name || 'Unbekannt'}`;
+            type = 'contact_removed_reply';
+            break;
+          case 'removed_meeting_booked':
+            description = `Aus Kampagne entfernt (Termin gebucht): ${activity.outreach_campaigns?.name || 'Unbekannt'}`;
+            type = 'contact_removed_meeting';
+            break;
+          default:
+            description = `Aktivität: ${activity.activity_type}`;
+        }
+
+        return {
+          id: `activity-${activity.id}`,
+          type,
+          timestamp: activity.created_at,
+          description,
+          details: activity.notes,
+          replyContent: activity.reply_content,
+          meetingDate: activity.meeting_date
+        };
+      });
+
       // Combine and sort all events by timestamp (newest first)
-      const allEvents = [...sentEmailEvents, ...campaignEvents, ...receivedEmailEvents]
+      const allEvents = [...sentEmailEvents, ...campaignEvents, ...receivedEmailEvents, ...activityEvents]
         .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
 
       setEvents(allEvents);
@@ -164,10 +222,28 @@ export function ContactActivityTimeline({ contactId }: ContactActivityTimelinePr
       )
       .subscribe();
 
+    // Subscribe to new outreach activities
+    const activitiesChannel = supabase
+      .channel('outreach-activities-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'outreach_contact_activities',
+          filter: `contact_id=eq.${contactId}`
+        },
+        () => {
+          fetchActivities();
+        }
+      )
+      .subscribe();
+
     return () => {
       supabase.removeChannel(sentEmailsChannel);
       supabase.removeChannel(receivedEmailsChannel);
       supabase.removeChannel(campaignContactsChannel);
+      supabase.removeChannel(activitiesChannel);
     };
   };
 
@@ -179,5 +255,43 @@ export function ContactActivityTimeline({ contactId }: ContactActivityTimelinePr
     );
   }
 
-  return <ActivityTimeline events={events} />;
+  // Enhanced rendering with collapsible content for replies and meetings
+  return (
+    <div className="space-y-4">
+      {events.map((event, index) => (
+        <div key={event.id}>
+          <ActivityTimeline events={[event]} />
+          
+          {/* Collapsible content for reply or meeting */}
+          {(event.replyContent || event.meetingDate) && (
+            <div className="ml-12 mt-2">
+              {event.replyContent && (
+                <Collapsible>
+                  <CollapsibleTrigger className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
+                    <ChevronDown className="h-4 w-4" />
+                    E-Mail Antwort anzeigen
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="mt-2 p-4 border rounded-lg bg-muted/50">
+                    <p className="text-sm whitespace-pre-wrap">{event.replyContent}</p>
+                  </CollapsibleContent>
+                </Collapsible>
+              )}
+              
+              {event.meetingDate && (
+                <div className="flex items-center gap-2 p-3 border rounded-lg bg-blue-50 dark:bg-blue-950/20">
+                  <Calendar className="h-4 w-4 text-blue-600" />
+                  <div>
+                    <p className="text-sm font-medium">Termin:</p>
+                    <p className="text-sm text-muted-foreground">
+                      {format(new Date(event.meetingDate), 'PPP', { locale: de })}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
 }

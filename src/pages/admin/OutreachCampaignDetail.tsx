@@ -32,6 +32,7 @@ import { ActivityTimeline } from "@/components/ActivityTimeline";
 import { EmailPreviewModal } from "@/components/EmailPreviewModal";
 import { ContactDetailDrawer } from "@/components/ContactDetailDrawer";
 import { QuickActionsMenu } from "@/components/QuickActionsMenu";
+import { RemoveContactDialog, RemovalReason } from "@/components/RemoveContactDialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -79,6 +80,8 @@ export default function OutreachCampaignDetail() {
   // State for test email
   const [showTestDialog, setShowTestDialog] = useState(false);
   const [testEmail, setTestEmail] = useState("");
+  const [contactToRemove, setContactToRemove] = useState<any>(null);
+  const [showRemoveDialog, setShowRemoveDialog] = useState(false);
 
   const { data: campaign, refetch } = useQuery({
     queryKey: ["outreach-campaign", id],
@@ -245,6 +248,74 @@ export default function OutreachCampaignDetail() {
       toast({
         title: "Status aktualisiert",
         description: "Der Kampagnenstatus wurde erfolgreich aktualisiert.",
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Fehler",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const removeContactMutation = useMutation({
+    mutationFn: async ({ 
+      campaignContact, 
+      reason, 
+      data 
+    }: { 
+      campaignContact: any; 
+      reason: RemovalReason; 
+      data?: { reply?: string; meetingDate?: Date; notes?: string };
+    }) => {
+      // Get user session for created_by
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      // Determine activity type
+      let activityType = "removed_no_contact";
+      if (reason === "reply_received") activityType = "removed_reply_received";
+      if (reason === "meeting_booked") activityType = "removed_meeting_booked";
+
+      // Create activity record
+      const { error: activityError } = await supabase
+        .from("outreach_contact_activities")
+        .insert({
+          campaign_id: id,
+          contact_id: campaignContact.contact_id,
+          activity_type: activityType,
+          created_by: user.id,
+          notes: data?.notes || null,
+          reply_content: data?.reply || null,
+          meeting_date: data?.meetingDate?.toISOString() || null,
+        });
+
+      if (activityError) throw activityError;
+
+      // Remove from campaign (set is_excluded = true)
+      const { error: excludeError } = await supabase
+        .from("outreach_campaign_contacts")
+        .update({ is_excluded: true, status: "completed" })
+        .eq("id", campaignContact.id);
+
+      if (excludeError) throw excludeError;
+
+      // Remove from all contact lists
+      const { error: listError } = await supabase
+        .from("crm_contact_list_members")
+        .delete()
+        .eq("contact_id", campaignContact.contact_id);
+
+      if (listError) throw listError;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["outreach-campaign", id] });
+      setShowRemoveDialog(false);
+      setContactToRemove(null);
+      toast({
+        title: "Kontakt entfernt",
+        description: "Der Kontakt wurde erfolgreich aus der Kampagne und allen Listen entfernt.",
       });
     },
     onError: (error) => {
@@ -1701,18 +1772,15 @@ export default function OutreachCampaignDetail() {
                                   size="sm"
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    toggleContactExclusionMutation.mutate({ 
-                                      contactId: cc.id, 
-                                      exclude: true 
-                                    });
+                                    setContactToRemove(cc);
+                                    setShowRemoveDialog(true);
                                   }}
-                                  disabled={toggleContactExclusionMutation.isPending}
                                 >
-                                  <Ban className="h-4 w-4 mr-2" />
-                                  Ausschließen
+                                  <Trash2 className="h-4 w-4 mr-2" />
+                                  Entfernen
                                 </Button>
                               </TooltipTrigger>
-                              <TooltipContent>Kontakt von Kampagne ausschließen</TooltipContent>
+                              <TooltipContent>Kontakt aus Kampagne entfernen</TooltipContent>
                             </Tooltip>
                           )}
                         </div>
@@ -2016,6 +2084,27 @@ export default function OutreachCampaignDetail() {
             onClose={() => setSelectedContact(null)}
             contact={selectedContact}
             sentEmails={campaign.outreach_sent_emails || []}
+          />
+        )}
+
+        {/* Remove Contact Dialog */}
+        {contactToRemove && (
+          <RemoveContactDialog
+            open={showRemoveDialog}
+            onOpenChange={setShowRemoveDialog}
+            contactName={
+              contactToRemove.crm_contacts 
+                ? `${contactToRemove.crm_contacts.first_name} ${contactToRemove.crm_contacts.last_name}`
+                : "Unbekannter Kontakt"
+            }
+            onConfirm={(reason, data) => {
+              removeContactMutation.mutate({ 
+                campaignContact: contactToRemove, 
+                reason, 
+                data 
+              });
+            }}
+            isLoading={removeContactMutation.isPending}
           />
         )}
       </div>

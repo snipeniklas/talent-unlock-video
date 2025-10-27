@@ -4,7 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 interface TimelineEvent {
   id: string;
   type: 'campaign_created' | 'campaign_started' | 'campaign_paused' | 'campaign_completed' | 
-        'contact_added' | 'contact_removed' | 'email_sent' | 'email_failed' | 'email_replied';
+        'contact_added' | 'contact_removed' | 'contact_removed_reply' | 'contact_removed_meeting' | 
+        'email_sent' | 'email_failed' | 'email_replied';
   timestamp: string;
   description: string;
   details?: string;
@@ -27,6 +28,8 @@ export function ActivityTimeline({ events }: ActivityTimelineProps) {
       case 'contact_added':
         return <UserPlus className="h-4 w-4" />;
       case 'contact_removed':
+      case 'contact_removed_reply':
+      case 'contact_removed_meeting':
         return <UserMinus className="h-4 w-4" />;
       case 'email_sent':
         return <Mail className="h-4 w-4" />;
@@ -56,6 +59,10 @@ export function ActivityTimeline({ events }: ActivityTimelineProps) {
         return 'bg-blue-500 text-white';
       case 'contact_removed':
         return 'bg-muted text-muted-foreground';
+      case 'contact_removed_reply':
+        return 'bg-blue-500 text-white';
+      case 'contact_removed_meeting':
+        return 'bg-green-500 text-white';
       default:
         return 'bg-muted text-muted-foreground';
     }
