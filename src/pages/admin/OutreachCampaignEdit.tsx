@@ -62,7 +62,8 @@ export default function OutreachCampaignEdit() {
         .select(`
           *,
           outreach_campaign_contacts(contact_id),
-          outreach_email_sequences(*)
+          outreach_email_sequences(*),
+          outreach_campaign_lists(list_id)
         `)
         .eq("id", id)
         .single();
@@ -197,31 +198,19 @@ Wichtig:
       setDesiredCta(campaign.desired_cta || "");
       setAiInstructions(campaign.ai_instructions || "");
       
-      // Set selected contacts
-      const contactIds = campaign.outreach_campaign_contacts?.map((cc: any) => cc.contact_id) || [];
+      // Load selected lists directly from database
+      const listIds = campaign.outreach_campaign_lists?.map((cl: any) => cl.list_id) || [];
+      setSelectedLists(listIds);
       
-      // Try to determine which lists were originally selected by checking if all contacts from a list are in the campaign
-      const listsToSelect: string[] = [];
-      contactLists.forEach(list => {
-        const listContactIds = list.contact_ids || [];
-        // If at least 80% of the list's contacts are in the campaign, consider the list as selected
-        if (listContactIds.length > 0) {
-          const matchingContacts = listContactIds.filter(id => contactIds.includes(id));
-          const matchPercentage = matchingContacts.length / listContactIds.length;
-          if (matchPercentage >= 0.8) {
-            listsToSelect.push(list.id);
-          }
-        }
-      });
-      
-      setSelectedLists(listsToSelect);
-      
-      // Set individual contacts (those not part of any selected list)
-      const contactsFromSelectedLists = listsToSelect.flatMap(listId => {
+      // Get contacts from selected lists
+      const contactsFromSelectedLists = listIds.flatMap(listId => {
         const list = contactLists.find(l => l.id === listId);
         return list?.contact_ids || [];
       });
-      const individualContacts = contactIds.filter(id => !contactsFromSelectedLists.includes(id));
+      
+      // Set individual contacts (those not part of any selected list)
+      const allContactIds = campaign.outreach_campaign_contacts?.map((cc: any) => cc.contact_id) || [];
+      const individualContacts = allContactIds.filter(id => !contactsFromSelectedLists.includes(id));
       setSelectedContacts(individualContacts);
       
       // Set email sequences and derive numFollowUps
@@ -297,6 +286,28 @@ Wichtig:
 
       if (campaignError) throw campaignError;
 
+      // Delete existing campaign lists
+      const { error: deleteListsError } = await supabase
+        .from("outreach_campaign_lists")
+        .delete()
+        .eq("campaign_id", id);
+
+      if (deleteListsError) throw deleteListsError;
+
+      // Add selected lists
+      if (selectedLists.length > 0) {
+        const listsToAdd = selectedLists.map((listId) => ({
+          campaign_id: id,
+          list_id: listId,
+        }));
+
+        const { error: listsError } = await supabase
+          .from("outreach_campaign_lists")
+          .insert(listsToAdd);
+
+        if (listsError) throw listsError;
+      }
+
       // Delete existing contacts and add new ones
       const { error: deleteContactsError } = await supabase
         .from("outreach_campaign_contacts")
@@ -308,7 +319,7 @@ Wichtig:
       const contactsToAdd = finalContactIds.map((contactId) => ({
         campaign_id: id,
         contact_id: contactId,
-        status: 'draft',
+        status: 'pending',
       }));
 
       const { error: contactsError } = await supabase

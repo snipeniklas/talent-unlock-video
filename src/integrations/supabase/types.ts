@@ -784,6 +784,42 @@ export type Database = {
           },
         ]
       }
+      outreach_campaign_lists: {
+        Row: {
+          added_at: string
+          campaign_id: string
+          id: string
+          list_id: string
+        }
+        Insert: {
+          added_at?: string
+          campaign_id: string
+          id?: string
+          list_id: string
+        }
+        Update: {
+          added_at?: string
+          campaign_id?: string
+          id?: string
+          list_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "outreach_campaign_lists_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "outreach_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "outreach_campaign_lists_list_id_fkey"
+            columns: ["list_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contact_lists"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       outreach_campaigns: {
         Row: {
           ai_instructions: string | null

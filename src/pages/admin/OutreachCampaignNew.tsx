@@ -201,11 +201,25 @@ Wichtig:
 
       if (sequencesError) throw sequencesError;
 
+      // Save selected lists
+      if (selectedLists.length > 0) {
+        const listsToAdd = selectedLists.map((listId) => ({
+          campaign_id: campaign.id,
+          list_id: listId,
+        }));
+
+        const { error: listsError } = await supabase
+          .from("outreach_campaign_lists")
+          .insert(listsToAdd);
+
+        if (listsError) throw listsError;
+      }
+
       // Save contact selection (we'll add them properly when campaign is activated)
       const contactsToAdd = finalContactIds.map((contactId) => ({
         campaign_id: campaign.id,
         contact_id: contactId,
-        status: 'draft',
+        status: 'pending',
       }));
 
       const { error: contactsError } = await supabase
