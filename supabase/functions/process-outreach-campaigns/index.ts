@@ -459,27 +459,60 @@ async function personalizeEmail(
     // Get supabase instance for research data lookup
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
     
-    // Optional: Load research data for this contact (if available)
+    // Load research data for this contact (if available)
     let researchContext = "";
     const { data: researchData } = await supabase
       .from('crm_contact_research')
-      .select('research_data')
+      .select('contact_research_data, company_research_data')
       .eq('contact_id', contact.id)
       .maybeSingle();
 
-    if (researchData?.research_data) {
-      const research = researchData.research_data;
-      researchContext = `
-
-ZUSÄTZLICHE RESEARCH-DATEN ÜBER DEN KONTAKT:
-- Zusammenfassung: ${research.summary || 'Nicht verfügbar'}
-- Beruflicher Hintergrund: ${research.professional_background || 'Nicht verfügbar'}
-- Aktuelle Aktivitäten: ${research.recent_activities || 'Nicht verfügbar'}
-- Key Facts: ${research.key_facts?.join(', ') || 'Nicht verfügbar'}
-- Talking Points: ${research.talking_points?.join(', ') || 'Nicht verfügbar'}
-
-Nutze diese Informationen für eine hochgradig personalisierte E-Mail!
+    if (researchData) {
+      const contactResearch = researchData.contact_research_data;
+      const companyResearch = researchData.company_research_data;
+      
+      let contactInfo = "";
+      let companyInfo = "";
+      
+      // Parse Contact Research
+      if (contactResearch && Object.keys(contactResearch).length > 0) {
+        contactInfo = `
+KONTAKT RESEARCH-DATEN:
+${contactResearch.summary ? `- Zusammenfassung: ${contactResearch.summary}` : ''}
+${contactResearch.professional_background ? `- Beruflicher Hintergrund: ${contactResearch.professional_background}` : ''}
+${contactResearch.current_role_details ? `- Aktuelle Position: ${contactResearch.current_role_details}` : ''}
+${contactResearch.recent_activities ? `- Aktuelle Aktivitäten: ${contactResearch.recent_activities}` : ''}
+${contactResearch.key_facts?.length > 0 ? `- Key Facts: ${contactResearch.key_facts.join(', ')}` : ''}
+${contactResearch.talking_points?.length > 0 ? `- Gesprächsansätze: ${contactResearch.talking_points.join(', ')}` : ''}
+${contactResearch.interests?.length > 0 ? `- Interessen: ${contactResearch.interests.join(', ')}` : ''}
 `;
+      }
+      
+      // Parse Company Research
+      if (companyResearch && Object.keys(companyResearch).length > 0) {
+        companyInfo = `
+UNTERNEHMENS RESEARCH-DATEN:
+${companyResearch.company_overview ? `- Überblick: ${companyResearch.company_overview}` : ''}
+${companyResearch.recent_news ? `- Aktuelle News: ${companyResearch.recent_news}` : ''}
+${companyResearch.products_services ? `- Produkte & Services: ${companyResearch.products_services}` : ''}
+${companyResearch.growth_signals?.length > 0 ? `- Wachstumssignale: ${companyResearch.growth_signals.join(', ')}` : ''}
+${companyResearch.pain_points?.length > 0 ? `- Potenzielle Pain Points: ${companyResearch.pain_points.join(', ')}` : ''}
+${companyResearch.competitors?.length > 0 ? `- Wettbewerber: ${companyResearch.competitors.join(', ')}` : ''}
+`;
+      }
+      
+      if (contactInfo || companyInfo) {
+        researchContext = `
+${contactInfo}
+${companyInfo}
+
+⭐ WICHTIG: Nutze diese Research-Daten für eine hochgradig personalisierte E-Mail!
+- Beziehe dich auf spezifische Details aus der Research
+- Nutze Talking Points als natürliche Gesprächseinstiege
+- Adressiere relevante Pain Points des Unternehmens
+- Erwähne aktuelle Entwicklungen/News wenn relevant
+`;
+      }
     }
 
     // Create prompt for OpenAI
@@ -490,7 +523,7 @@ Deine Aufgabe: Schreibe eine KOMPLETT NEUE, individuell personalisierte E-Mail b
 2. Kontakt-Informationen (Name, Position, Unternehmen, Branche)
 3. Absender-Unternehmen (Firma, Wertversprechen)
 4. Kampagnen-Kontext (Zielgruppe, CTA, AI-Anweisungen)
-5. Optional: Research-Daten über den Kontakt
+5. Optional: Research-Daten über den Kontakt UND dessen Unternehmen
 
 WICHTIG - DIE PROMPTS SIND ANWEISUNGEN, KEINE VORLAGEN:
 - Die "Prompts" sind ANWEISUNGEN, keine Texte zum Kopieren
@@ -499,6 +532,9 @@ WICHTIG - DIE PROMPTS SIND ANWEISUNGEN, KEINE VORLAGEN:
 - Nutze die Kontakt- und Research-Daten für maximale Relevanz
 - KEINE Variablen wie {{first_name}} verwenden - schreibe alles direkt
 - Nutze das Wertversprechen des Absender-Unternehmens intelligent
+- Falls Research-Daten vorhanden sind, nutze sie GEZIELT für spezifische Anknüpfungspunkte
+- Beziehe dich auf konkrete Details aus der Research (aktuelle Aktivitäten, News, Pain Points)
+- Verwende Talking Points als natürliche Gesprächseinstiege
 
 FORMATIERUNGS-ANFORDERUNGEN:
 - Generiere HTML-formatierte E-Mail-Inhalte (NUR Content, KEINE vollständige HTML-Struktur)
