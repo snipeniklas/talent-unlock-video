@@ -110,6 +110,37 @@ serve(async (req) => {
 
     console.log(`Found ${campaigns.length} active campaigns`);
 
+    // STARTUP VALIDATION: Auto-fix any stuck contacts before processing
+    console.log(`🔧 Running startup validation to fix any stuck contacts...`);
+    
+    const { data: stuckContacts, error: stuckError } = await supabase
+      .from("outreach_campaign_contacts")
+      .select("id, status, next_send_date, contact_id, crm_contacts(email)")
+      .in("campaign_id", campaigns.map(c => c.id))
+      .in("status", ["sent", "processing"]) // Fix both "sent" and "processing"
+      .lt("next_send_date", new Date().toISOString());
+
+    if (stuckContacts && stuckContacts.length > 0) {
+      console.log(`⚠️ Found ${stuckContacts.length} stuck contacts that need status reset`);
+      
+      for (const stuck of stuckContacts) {
+        const contactEmail = stuck.crm_contacts?.email || 'unknown';
+        console.log(`🔧 Resetting contact ${contactEmail} (ID: ${stuck.contact_id}) from status '${stuck.status}' to 'pending'`);
+        
+        await supabase
+          .from("outreach_campaign_contacts")
+          .update({ 
+            status: "pending",
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", stuck.id);
+      }
+      
+      console.log(`✅ Reset ${stuckContacts.length} stuck contacts to 'pending'`);
+    } else {
+      console.log(`✅ No stuck contacts found - all clean`);
+    }
+
     // Track total emails sent in this run (max 10 per execution)
     const MAX_EMAILS_PER_RUN = 10;
     let totalEmailsSent = 0;
@@ -233,13 +264,13 @@ ABSENDER-UNTERNEHMEN:
 
         // Skip excluded contacts
         if (contactEntry.is_excluded) {
-          console.log(`Contact ${contactEntry.contact_id} is excluded, skipping`);
+          console.log(`⏭️ SKIP: Contact ${contactEntry.crm_contacts?.email || contactEntry.contact_id} - EXCLUDED by user`);
           continue;
         }
 
         // Skip contacts that are already completed or failed
         if (contactEntry.status === "failed" || contactEntry.status === "completed") {
-          console.log(`Contact ${contactEntry.contact_id} has status ${contactEntry.status}, skipping`);
+          console.log(`⏭️ SKIP: Contact ${contactEntry.crm_contacts?.email || contactEntry.contact_id} - Status: ${contactEntry.status.toUpperCase()}`);
           continue;
         }
 
@@ -250,7 +281,8 @@ ABSENDER-UNTERNEHMEN:
           const sendDate = new Date(contactEntry.next_send_date);
           const now = new Date();
           if (sendDate > now) {
-            console.log(`Contact ${contactEntry.contact_id} not ready yet (next send: ${sendDate.toISOString()})`);
+            const hoursUntilReady = Math.round((sendDate.getTime() - now.getTime()) / (1000 * 60 * 60));
+            console.log(`⏭️ SKIP: Contact ${contactEntry.crm_contacts?.email || contactEntry.contact_id} - Not ready yet (next send in ${hoursUntilReady}h: ${sendDate.toISOString()})`);
             continue;
           }
         }
@@ -263,9 +295,12 @@ ABSENDER-UNTERNEHMEN:
 
         const contact = contactEntry.crm_contacts;
         if (!contact?.email) {
-          console.log(`Skipping contact ${contactEntry.contact_id} - no email`);
+          console.log(`⏭️ SKIP: Contact ${contactEntry.contact_id} - No email address`);
           continue;
         }
+
+        // Log contact details before attempting lock
+        console.log(`✅ READY: Contact ${contact.email} - Status: ${contactEntry.status}, Next Seq: #${contactEntry.next_sequence_number || 1}`);
 
         // STEP 2: OPTIMISTIC LOCKING
         // Try to acquire lock by setting status to "processing"
@@ -281,11 +316,11 @@ ABSENDER-UNTERNEHMEN:
           .select();
 
         if (lockError || !lockData || lockData.length === 0) {
-          console.log(`⏭️ Contact ${contact.email} is already being processed or not in pending state. Skipping.`);
+          console.log(`❌ LOCK FAILED: Contact ${contact.email} - Current status is NOT 'pending' (might be '${contactEntry.status}')`);
           continue;
         }
 
-        console.log(`🔒 Acquired lock for contact ${contact.email}`);
+        console.log(`🔒 LOCK ACQUIRED: Contact ${contact.email} - Processing sequence #${contactEntry.next_sequence_number || 1}`);
 
         // Get the next email sequence to send
         const nextSequenceNumber = contactEntry.next_sequence_number || 1;
@@ -357,15 +392,31 @@ ABSENDER-UNTERNEHMEN:
 
           // Update contact with next sequence info and release lock
           // Setting next_send_date in the future provides natural deduplication
-          await supabase
+          const updateData = {
+            status: subsequentSequence ? "pending" : "completed", // Back to pending for next sequence
+            next_sequence_number: nextSeqNum,
+            next_send_date: nextSendDate,
+            updated_at: new Date().toISOString()
+          };
+
+          console.log(`📝 Updating contact ${contactEntry.id} to status: ${updateData.status}, next sequence: ${nextSeqNum}`);
+
+          const { data: updateResult, error: updateError } = await supabase
             .from("outreach_campaign_contacts")
-            .update({ 
-              status: subsequentSequence ? "pending" : "completed", // Back to pending for next sequence
-              next_sequence_number: nextSeqNum,
-              next_send_date: nextSendDate,
-              updated_at: new Date().toISOString()
-            })
-            .eq("id", contactEntry.id);
+            .update(updateData)
+            .eq("id", contactEntry.id)
+            .select();
+
+          if (updateError) {
+            console.error(`❌ Failed to update contact status:`, updateError);
+            throw new Error(`Contact status update failed: ${updateError.message}`);
+          }
+
+          if (!updateResult || updateResult.length === 0) {
+            console.error(`⚠️ Contact ${contactEntry.id} update returned no rows!`);
+          } else {
+            console.log(`✅ Contact ${contactEntry.id} updated successfully to status: ${updateResult[0].status}`);
+          }
 
           console.log(`✅ Email sent to ${contact.email}`);
           totalEmailsSent++;
