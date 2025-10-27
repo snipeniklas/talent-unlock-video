@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { ContactEmailTimeline } from "@/components/ContactEmailTimeline";
 import { ContactActivityTimeline } from "@/components/ContactActivityTimeline";
+import { ContactActivitiesSection } from "@/components/ContactActivitiesSection";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -534,6 +535,9 @@ export default function CrmContactDetail() {
               </CardContent>
             </Card>
           )}
+
+          {/* General Activities (Tasks & Notes) */}
+          <ContactActivitiesSection contactId={contact.id} />
 
           {/* Outreach Activities Timeline */}
           <Card>
