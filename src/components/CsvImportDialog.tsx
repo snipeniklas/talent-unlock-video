@@ -2,12 +2,16 @@ import { useState, useCallback } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Upload, FileText, Download, CheckCircle, AlertCircle } from "lucide-react";
+import { Upload, FileText, Download, CheckCircle, AlertCircle, List } from "lucide-react";
 import { useTranslation } from "@/i18n/i18n";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useQuery } from "@tanstack/react-query";
 
 interface CsvImportDialogProps {
   open: boolean;
@@ -78,9 +82,30 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
   const [fieldMapping, setFieldMapping] = useState<FieldMapping>({});
   const [importing, setImporting] = useState(false);
   const [importResults, setImportResults] = useState<{ success: number; errors: number }>({ success: 0, errors: 0 });
+  
+  // Contact list states
+  const [listOption, setListOption] = useState<"none" | "existing" | "new">("none");
+  const [selectedListId, setSelectedListId] = useState<string>("");
+  const [newListName, setNewListName] = useState("");
+  const [newListDescription, setNewListDescription] = useState("");
 
   const fields = type === "companies" ? companyFields : contactFields;
   const tableName = type === "companies" ? "crm_companies" : "crm_contacts";
+
+  // Fetch existing contact lists
+  const { data: contactLists } = useQuery({
+    queryKey: ['contactLists'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('crm_contact_lists')
+        .select('*')
+        .order('name');
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: type === "contacts" && open
+  });
 
   const handleFileUpload = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -145,107 +170,184 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
     setImporting(true);
     let successCount = 0;
     let errorCount = 0;
+    const importedContactIds: string[] = [];
+    let targetListId = selectedListId;
 
-    for (const row of csvData) {
-      try {
-        const mappedData: any = {};
-        const companyData: any = {};
+    try {
+      // Create new list if needed
+      if (type === "contacts" && listOption === "new" && newListName.trim()) {
+        const { data: { user } } = await supabase.auth.getUser();
         
-        // Map CSV fields to database fields
-        Object.entries(fieldMapping).forEach(([csvField, dbField]) => {
-          if (dbField && dbField !== "skip" && row[csvField]) {
-            let value = row[csvField].trim();
-            
-            // Handle company fields for contact import
-            if (type === "contacts" && dbField.startsWith('company_')) {
-              const companyField = dbField.replace('company_', '');
-              if (companyField === 'annual_revenue' && value) {
-                const numericValue = parseFloat(value.replace(/[^0-9.-]/g, ''));
-                companyData[companyField] = isNaN(numericValue) ? null : numericValue;
-              } else {
-                companyData[companyField] = value;
-              }
-              return;
-            }
-            
-            // Handle special field types
-            if (dbField === 'annual_revenue' && value) {
-              const numericValue = parseFloat(value.replace(/[^0-9.-]/g, ''));
-              mappedData[dbField] = isNaN(numericValue) ? null : numericValue;
-            } else if ((dbField === 'next_follow_up' || dbField === 'last_contact_date') && value) {
-              // Validate date format
-              if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
-                throw new Error(`Invalid date format for ${dbField}: ${value}`);
-              }
-              mappedData[dbField] = value;
-            } else {
-              mappedData[dbField] = value;
-            }
-          }
-        });
-
-        // Set default values
-        if (type === "companies") {
-          mappedData.status = mappedData.status || "prospect";
-        } else {
-          mappedData.status = mappedData.status || "new";
-          mappedData.priority = mappedData.priority || "medium";
+        if (!user) {
+          toast({
+            title: "Error",
+            description: "User not authenticated",
+            variant: "destructive"
+          });
+          setImporting(false);
+          return;
         }
 
-        // Validate required fields
-        if (type === "companies" && !mappedData.name) {
-          throw new Error("Company name is required");
-        }
-        if (type === "contacts" && (!mappedData.first_name || !mappedData.last_name)) {
-          throw new Error("First name and last name are required");
-        }
+        const { data: newList, error: listError } = await supabase
+          .from('crm_contact_lists')
+          .insert([{
+            name: newListName,
+            description: newListDescription || null,
+            created_by: user.id
+          }])
+          .select('id')
+          .single();
 
-        // Handle company creation for contacts
-        if (type === "contacts" && companyData.name) {
-          // Check if company already exists
-          const { data: existingCompany } = await (supabase as any)
-            .from('crm_companies')
-            .select('id')
-            .eq('name', companyData.name)
-            .maybeSingle();
-
-          let companyId;
-          if (existingCompany) {
-            companyId = existingCompany.id;
-          } else {
-            // Create new company
-            companyData.status = companyData.status || "prospect";
-            const { data: newCompany, error: companyError } = await (supabase as any)
-              .from('crm_companies')
-              .insert([companyData])
-              .select('id')
-              .single();
-
-            if (companyError) throw companyError;
-            companyId = newCompany.id;
-          }
-
-          mappedData.crm_company_id = companyId;
+        if (listError) {
+          toast({
+            title: "Error",
+            description: "Failed to create contact list",
+            variant: "destructive"
+          });
+          setImporting(false);
+          return;
         }
 
-        const { error } = await (supabase as any)
-          .from(tableName)
-          .insert([mappedData]);
-
-        if (error) throw error;
-        successCount++;
-      } catch (error) {
-        console.error("Import error:", error);
-        errorCount++;
+        targetListId = newList.id;
       }
-    }
 
-    setImportResults({ success: successCount, errors: errorCount });
-    setImporting(false);
-    setStep(3);
+      for (const row of csvData) {
+        try {
+          const mappedData: any = {};
+          const companyData: any = {};
+          
+          // Map CSV fields to database fields
+          Object.entries(fieldMapping).forEach(([csvField, dbField]) => {
+            if (dbField && dbField !== "skip" && row[csvField]) {
+              let value = row[csvField].trim();
+              
+              // Handle company fields for contact import
+              if (type === "contacts" && dbField.startsWith('company_')) {
+                const companyField = dbField.replace('company_', '');
+                if (companyField === 'annual_revenue' && value) {
+                  const numericValue = parseFloat(value.replace(/[^0-9.-]/g, ''));
+                  companyData[companyField] = isNaN(numericValue) ? null : numericValue;
+                } else {
+                  companyData[companyField] = value;
+                }
+                return;
+              }
+              
+              // Handle special field types
+              if (dbField === 'annual_revenue' && value) {
+                const numericValue = parseFloat(value.replace(/[^0-9.-]/g, ''));
+                mappedData[dbField] = isNaN(numericValue) ? null : numericValue;
+              } else if ((dbField === 'next_follow_up' || dbField === 'last_contact_date') && value) {
+                // Validate date format
+                if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+                  throw new Error(`Invalid date format for ${dbField}: ${value}`);
+                }
+                mappedData[dbField] = value;
+              } else {
+                mappedData[dbField] = value;
+              }
+            }
+          });
 
-    if (successCount > 0) {
-      onImportComplete();
+          // Set default values
+          if (type === "companies") {
+            mappedData.status = mappedData.status || "prospect";
+          } else {
+            mappedData.status = mappedData.status || "new";
+            mappedData.priority = mappedData.priority || "medium";
+          }
+
+          // Validate required fields
+          if (type === "companies" && !mappedData.name) {
+            throw new Error("Company name is required");
+          }
+          if (type === "contacts" && (!mappedData.first_name || !mappedData.last_name)) {
+            throw new Error("First name and last name are required");
+          }
+
+          // Handle company creation for contacts
+          if (type === "contacts" && companyData.name) {
+            // Check if company already exists
+            const { data: existingCompany } = await supabase
+              .from('crm_companies')
+              .select('id')
+              .eq('name', companyData.name)
+              .maybeSingle();
+
+            let companyId;
+            if (existingCompany) {
+              companyId = existingCompany.id;
+            } else {
+              // Create new company
+              companyData.status = companyData.status || "prospect";
+              const { data: newCompany, error: companyError } = await supabase
+                .from('crm_companies')
+                .insert([companyData])
+                .select('id')
+                .single();
+
+              if (companyError) throw companyError;
+              companyId = newCompany.id;
+            }
+
+            mappedData.crm_company_id = companyId;
+          }
+
+          const { data: insertedData, error } = await supabase
+            .from(tableName)
+            .insert([mappedData])
+            .select('id')
+            .single();
+
+          if (error) throw error;
+          
+          if (type === "contacts" && insertedData?.id) {
+            importedContactIds.push(insertedData.id);
+          }
+          
+          successCount++;
+        } catch (error) {
+          console.error("Import error:", error);
+          errorCount++;
+        }
+      }
+
+      // Add contacts to list if a list was selected or created
+      if (type === "contacts" && targetListId && importedContactIds.length > 0) {
+        const listMembers = importedContactIds.map(contactId => ({
+          list_id: targetListId,
+          contact_id: contactId
+        }));
+
+        const { error: listError } = await supabase
+          .from('crm_contact_list_members')
+          .insert(listMembers);
+
+        if (listError) {
+          console.error("Error adding contacts to list:", listError);
+          toast({
+            title: "Warning",
+            description: "Contacts imported but some could not be added to the list",
+            variant: "destructive"
+          });
+        }
+      }
+
+      setImportResults({ success: successCount, errors: errorCount });
+      setImporting(false);
+      setStep(3);
+
+      if (successCount > 0) {
+        onImportComplete();
+      }
+    } catch (error) {
+      console.error("Import error:", error);
+      setImporting(false);
+      toast({
+        title: "Error",
+        description: "Import failed",
+        variant: "destructive"
+      });
     }
   };
 
@@ -255,6 +357,10 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
     setCsvHeaders([]);
     setFieldMapping({});
     setImportResults({ success: 0, errors: 0 });
+    setListOption("none");
+    setSelectedListId("");
+    setNewListName("");
+    setNewListDescription("");
   };
 
   const handleClose = () => {
@@ -387,6 +493,74 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
                 </div>
               </CardContent>
             </Card>
+
+            {/* Contact List Selection - Only for contacts */}
+            {type === "contacts" && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <List className="h-5 w-5" />
+                    Add to Contact List (Optional)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <RadioGroup value={listOption} onValueChange={(value: any) => setListOption(value)}>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="none" id="none" />
+                      <Label htmlFor="none">Don't add to any list</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="existing" id="existing" />
+                      <Label htmlFor="existing">Add to existing list</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="new" id="new" />
+                      <Label htmlFor="new">Create new list</Label>
+                    </div>
+                  </RadioGroup>
+
+                  {listOption === "existing" && (
+                    <div className="space-y-2 pl-6">
+                      <Label>Select Contact List</Label>
+                      <Select value={selectedListId} onValueChange={setSelectedListId}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Choose a contact list" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {contactLists?.map((list) => (
+                            <SelectItem key={list.id} value={list.id}>
+                              {list.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  )}
+
+                  {listOption === "new" && (
+                    <div className="space-y-4 pl-6">
+                      <div className="space-y-2">
+                        <Label>List Name *</Label>
+                        <Input
+                          value={newListName}
+                          onChange={(e) => setNewListName(e.target.value)}
+                          placeholder="Enter list name"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Description</Label>
+                        <Textarea
+                          value={newListDescription}
+                          onChange={(e) => setNewListDescription(e.target.value)}
+                          placeholder="Optional description"
+                          rows={3}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            )}
           </div>
         )}
 
