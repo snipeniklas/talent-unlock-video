@@ -469,9 +469,9 @@ export default function OutreachCampaignDetail() {
 
       const contactIds = draftContacts.map((c: any) => c.contact_id);
 
-      // Get current time for daily send time (UTC)
+      // Get current time for daily send time - store as UTC
       const activationTime = new Date();
-      const timeString = activationTime.toTimeString().split(' ')[0]; // Format: "HH:MM:SS"
+      const timeString = activationTime.toISOString().split('T')[1].split('.')[0]; // Format: "HH:MM:SS" in UTC
       
       console.log(`🕐 Activating campaign. Daily send time set to: ${timeString} UTC`);
 
@@ -1317,6 +1317,64 @@ export default function OutreachCampaignDetail() {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Send Time Information Card - Only show for active/paused campaigns */}
+            {campaign.daily_send_time && (campaign.status === 'active' || campaign.status === 'paused') && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Clock className="h-5 w-5" />
+                    📧 Versand-Informationen
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Tägliche E-Mail-Versandzeit</p>
+                    <p className="text-lg font-semibold">
+                      {(() => {
+                        // Convert UTC time from database to local time for display
+                        const utcTime = campaign.daily_send_time; // Format: "HH:MM:SS" in UTC
+                        const [hours, minutes] = utcTime.split(':');
+                        const utcDate = new Date();
+                        utcDate.setUTCHours(parseInt(hours), parseInt(minutes), 0, 0);
+                        return utcDate.toLocaleTimeString('de-DE', { 
+                          hour: '2-digit', 
+                          minute: '2-digit',
+                          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                        });
+                      })()} Uhr (lokale Zeit)
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Nächster Versandlauf</p>
+                    <p className="text-lg font-semibold">
+                      {(() => {
+                        const utcTime = campaign.daily_send_time;
+                        const [hours, minutes] = utcTime.split(':');
+                        const now = new Date();
+                        const nextRun = new Date();
+                        nextRun.setUTCHours(parseInt(hours), parseInt(minutes), 0, 0);
+                        
+                        // If today's run has passed, show tomorrow
+                        if (nextRun <= now) {
+                          nextRun.setDate(nextRun.getDate() + 1);
+                        }
+                        
+                        const options: Intl.DateTimeFormatOptions = {
+                          weekday: 'short',
+                          day: 'numeric',
+                          month: 'short',
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        };
+                        
+                        return nextRun.toLocaleDateString('de-DE', options) + ' Uhr';
+                      })()}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
             {/* Upcoming Activities Card */}
             {upcomingActivities && upcomingActivities.length > 0 && (
