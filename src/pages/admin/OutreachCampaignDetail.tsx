@@ -675,6 +675,11 @@ export default function OutreachCampaignDetail() {
       (activity: any) => activity.activity_type === 'removed_no_contact'
     ).length || 0;
     
+    // Count meetings booked (activity_type = 'removed_meeting_booked')
+    const meetingCount = contactActivities?.filter(
+      (activity: any) => activity.activity_type === 'removed_meeting_booked'
+    ).length || 0;
+    
     return {
       totalContacts,
       excludedCount,
@@ -686,6 +691,7 @@ export default function OutreachCampaignDetail() {
       pendingCount,
       nextSendTime,
       rejectedCount,
+      meetingCount,
     };
   }, [campaign, contactActivities]);
 
@@ -1216,7 +1222,7 @@ export default function OutreachCampaignDetail() {
           </TabsList>
 
           <TabsContent value="overview" className="space-y-4">
-            {/* Enhanced Statistics - 5 Cards */}
+            {/* Enhanced Statistics - 6 Cards */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               <Card>
                 <CardHeader className="pb-2">
@@ -1284,6 +1290,20 @@ export default function OutreachCampaignDetail() {
                   <div className="text-2xl font-bold text-red-600">{stats?.rejectedCount || 0}</div>
                   <p className="text-xs text-muted-foreground mt-1">
                     Keine weitere Kontaktaufnahme gewünscht
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                    📅 Terminquote
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-green-600">{stats?.meetingCount || 0}</div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Gebuchte Termine
                   </p>
                 </CardContent>
               </Card>
