@@ -37,7 +37,7 @@ serve(async (req) => {
 
     console.log(`Current time: ${new Date().toISOString()}`);
 
-    // Get campaigns based on campaignId or all active campaigns
+    // Get campaigns based on campaignId or all active campaigns (NOT draft)
     let query = supabase
       .from("outreach_campaigns")
       .select(`
@@ -55,7 +55,7 @@ serve(async (req) => {
       `);
     
     if (campaignId) {
-      query = query.eq("id", campaignId);
+      query = query.eq("id", campaignId).eq("status", "active");
     } else {
       query = query.eq("status", "active");
     }

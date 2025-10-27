@@ -68,12 +68,12 @@ export default function OutreachCampaignEdit() {
 
       if (error) throw error;
       
-      // Redirect if campaign is active or completed
-      if (data.status === "active" || data.status === "completed") {
+      // Only draft campaigns can be edited
+      if (data.status !== "draft") {
         navigate(`/admin/outreach-campaigns/${id}`);
         toast({
           title: "Nicht erlaubt",
-          description: "Aktive oder abgeschlossene Kampagnen können nicht bearbeitet werden.",
+          description: "Nur Draft-Kampagnen können bearbeitet werden.",
           variant: "destructive",
         });
         return null;
@@ -261,9 +261,7 @@ Wichtig:
       const contactsToAdd = finalContactIds.map((contactId) => ({
         campaign_id: id,
         contact_id: contactId,
-        next_send_date: new Date().toISOString(),
-        next_sequence_number: 1,
-        status: 'pending',
+        status: 'draft',
       }));
 
       const { error: contactsError } = await supabase

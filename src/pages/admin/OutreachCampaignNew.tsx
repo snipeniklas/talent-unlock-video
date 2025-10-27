@@ -181,6 +181,7 @@ Wichtig:
           ai_instructions: aiInstructions,
           target_audience: targetAudience,
           desired_cta: desiredCta,
+          status: "draft",
           created_by: user.id,
         })
         .select()
@@ -188,35 +189,7 @@ Wichtig:
 
       if (campaignError) throw campaignError;
 
-      // Calculate next_send_date for each contact based on their position
-      // Max 10 emails per day starting from creation time
-      const EMAILS_PER_DAY = 10;
-      const creationTime = new Date();
-      
-      const contactsToAdd = finalContactIds.map((contactId, index) => {
-        // Calculate which "batch" this contact belongs to (0, 1, 2, ...)
-        const batchNumber = Math.floor(index / EMAILS_PER_DAY);
-        
-        // Calculate send date: creation time + (batch number * 1 day)
-        const sendDate = new Date(creationTime.getTime() + (batchNumber * 24 * 60 * 60 * 1000));
-        
-        console.log(`Contact ${index + 1}/${finalContactIds.length}: Batch ${batchNumber}, Send at ${sendDate.toISOString()}`);
-        
-        return {
-          campaign_id: campaign.id,
-          contact_id: contactId,
-          next_send_date: sendDate.toISOString(),
-          next_sequence_number: 1,
-          status: 'pending',
-        };
-      });
-
-      const { error: contactsError } = await supabase
-        .from("outreach_campaign_contacts")
-        .insert(contactsToAdd);
-
-      if (contactsError) throw contactsError;
-
+      // Save sequences
       const sequencesToAdd = emailSequences.map((seq) => ({
         campaign_id: campaign.id,
         ...seq,
@@ -228,13 +201,26 @@ Wichtig:
 
       if (sequencesError) throw sequencesError;
 
+      // Save contact selection (we'll add them properly when campaign is activated)
+      const contactsToAdd = finalContactIds.map((contactId) => ({
+        campaign_id: campaign.id,
+        contact_id: contactId,
+        status: 'draft',
+      }));
+
+      const { error: contactsError } = await supabase
+        .from("outreach_campaign_contacts")
+        .insert(contactsToAdd);
+
+      if (contactsError) throw contactsError;
+
       return campaign;
     },
     onSuccess: (campaign) => {
       queryClient.invalidateQueries({ queryKey: ["outreach-campaigns"] });
       toast({
-        title: "Kampagne erstellt",
-        description: "Die Kampagne wurde erfolgreich erstellt.",
+        title: "Kampagne erstellt (Draft)",
+        description: "Jetzt kannst du sie testen und dann aktivieren.",
       });
       navigate(`/admin/outreach-campaigns/${campaign.id}`);
     },

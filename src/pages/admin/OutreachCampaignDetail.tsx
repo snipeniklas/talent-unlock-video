@@ -9,10 +9,19 @@ import { Progress } from "@/components/ui/progress";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   ArrowLeft, Play, Pause, CheckCircle, Ban, Check, Edit, Trash2, Eye, Search,
   Filter, ChevronDown, RefreshCw, AlertCircle, RotateCcw, Lightbulb, UserPlus, Plus,
-  Calendar, Clock, Sparkles, TrendingUp, Send, AlertTriangle, MessageSquare
+  Calendar, Clock, Sparkles, TrendingUp, Send, AlertTriangle, MessageSquare, TestTube
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -66,6 +75,10 @@ export default function OutreachCampaignDetail() {
   
   // State for timeline filter
   const [timelineFilter, setTimelineFilter] = useState<string>('all');
+  
+  // State for test email
+  const [showTestDialog, setShowTestDialog] = useState(false);
+  const [testEmail, setTestEmail] = useState("");
 
   const { data: campaign, refetch } = useQuery({
     queryKey: ["outreach-campaign", id],
@@ -315,6 +328,98 @@ export default function OutreachCampaignDetail() {
         description: "Die Kampagne wurde erfolgreich gelöscht.",
       });
       navigate("/admin/outreach-campaigns");
+    },
+    onError: (error) => {
+      toast({
+        title: "Fehler",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const sendTestEmailMutation = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabase.functions.invoke("send-test-email", {
+        body: { campaignId: id, testEmail },
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast({
+        title: "Test-E-Mails versendet",
+        description: `Alle E-Mail-Sequenzen wurden an ${testEmail} gesendet.`,
+      });
+      setShowTestDialog(false);
+      setTestEmail("");
+    },
+    onError: (error) => {
+      toast({
+        title: "Fehler",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const activateCampaignMutation = useMutation({
+    mutationFn: async () => {
+      // Get existing draft contacts
+      const { data: draftContacts, error: draftError } = await supabase
+        .from("outreach_campaign_contacts")
+        .select("contact_id")
+        .eq("campaign_id", id);
+
+      if (draftError) throw draftError;
+
+      const contactIds = draftContacts.map((c: any) => c.contact_id);
+
+      // Calculate send dates for contacts
+      const creationTime = new Date();
+      const EMAILS_PER_DAY = 10;
+      
+      const contactsWithDates = contactIds.map((contactId, index) => {
+        const batchNumber = Math.floor(index / EMAILS_PER_DAY);
+        const nextSendDate = new Date(creationTime);
+        nextSendDate.setDate(nextSendDate.getDate() + batchNumber);
+        
+        return {
+          campaign_id: id,
+          contact_id: contactId,
+          next_send_date: nextSendDate.toISOString(),
+          next_sequence_number: 1,
+          status: 'pending',
+        };
+      });
+
+      // Delete existing draft contacts and add new ones with dates
+      const { error: deleteError } = await supabase
+        .from("outreach_campaign_contacts")
+        .delete()
+        .eq("campaign_id", id);
+
+      if (deleteError) throw deleteError;
+
+      const { error: insertError } = await supabase
+        .from("outreach_campaign_contacts")
+        .insert(contactsWithDates);
+
+      if (insertError) throw insertError;
+
+      // Update campaign status to active
+      const { error: updateError } = await supabase
+        .from("outreach_campaigns")
+        .update({ status: "active" })
+        .eq("id", id);
+
+      if (updateError) throw updateError;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["outreach-campaign", id] });
+      toast({
+        title: "Kampagne aktiviert",
+        description: "Die Kampagne wurde aktiviert und E-Mails werden versendet.",
+      });
     },
     onError: (error) => {
       toast({
@@ -838,25 +943,50 @@ export default function OutreachCampaignDetail() {
                 onImportCsv={() => toast({ title: "CSV Import", description: "Feature kommt bald" })}
               />
 
-              {(campaign.status === 'active' || campaign.status === 'draft') && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button 
-                      variant="outline"
-                      onClick={handleForceProcessNow}
-                      disabled={isProcessing}
-                    >
-                      <Lightbulb className="h-4 w-4 mr-2" />
-                      🧪 Test senden
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    Ignoriert Delays und sendet E-Mails sofort (nur für Testing)
-                  </TooltipContent>
-                </Tooltip>
+              {campaign.status === "draft" && (
+                <>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button 
+                        variant="outline"
+                        onClick={() => navigate(`/admin/outreach-campaigns/${id}/edit`)}
+                      >
+                        <Edit className="h-4 w-4 mr-2" />
+                        Prompts bearbeiten
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Prompts und Einstellungen bearbeiten</TooltipContent>
+                  </Tooltip>
+                  
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button 
+                        variant="outline"
+                        onClick={() => setShowTestDialog(true)}
+                      >
+                        <TestTube className="h-4 w-4 mr-2" />
+                        Test senden
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Alle E-Mails an Test-Adresse senden</TooltipContent>
+                  </Tooltip>
+                  
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button 
+                        onClick={() => activateCampaignMutation.mutate()}
+                        disabled={activateCampaignMutation.isPending}
+                      >
+                        <Play className="h-4 w-4 mr-2" />
+                        Kampagne aktivieren
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Kampagne aktivieren und E-Mail-Versand starten</TooltipContent>
+                  </Tooltip>
+                </>
               )}
 
-              {(campaign.status === "paused" || campaign.status === "draft") && (
+              {(campaign.status === "paused") && (
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button 
@@ -868,21 +998,6 @@ export default function OutreachCampaignDetail() {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>Kampagne bearbeiten</TooltipContent>
-                </Tooltip>
-              )}
-              
-              {campaign.status === "draft" && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button onClick={async () => {
-                      await updateStatusMutation.mutateAsync("active");
-                      await handleProcessNow();
-                    }}>
-                      <Play className="h-4 w-4 mr-2" />
-                      Starten
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Kampagne starten und erste E-Mails senden</TooltipContent>
                 </Tooltip>
               )}
               
@@ -1831,6 +1946,48 @@ export default function OutreachCampaignDetail() {
             sequenceNumber={previewEmail.sequence_number}
           />
         )}
+
+        {/* Test Email Dialog */}
+        <Dialog open={showTestDialog} onOpenChange={setShowTestDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Test-E-Mails senden</DialogTitle>
+              <DialogDescription>
+                Alle E-Mail-Sequenzen werden sofort an die angegebene Test-Adresse gesendet.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="testEmail">E-Mail-Adresse</Label>
+                <Input
+                  id="testEmail"
+                  type="email"
+                  placeholder="test@example.com"
+                  value={testEmail}
+                  onChange={(e) => setTestEmail(e.target.value)}
+                />
+              </div>
+              <Alert>
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>
+                  Es werden {campaign?.outreach_email_sequences?.length || 0} E-Mails versendet
+                  (Erst-Mail + alle Follow-ups).
+                </AlertDescription>
+              </Alert>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setShowTestDialog(false)}>
+                Abbrechen
+              </Button>
+              <Button
+                onClick={() => sendTestEmailMutation.mutate()}
+                disabled={!testEmail || sendTestEmailMutation.isPending}
+              >
+                {sendTestEmailMutation.isPending ? "Sende..." : "Test senden"}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         {selectedContact && (
           <ContactDetailDrawer
