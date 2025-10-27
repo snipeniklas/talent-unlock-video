@@ -340,6 +340,15 @@ export default function OutreachCampaignDetail() {
 
   const sendTestEmailMutation = useMutation({
     mutationFn: async () => {
+      // Close dialog immediately
+      setShowTestDialog(false);
+      
+      // Show sending notification
+      toast({
+        title: "Test-E-Mails werden versendet",
+        description: `${campaign?.outreach_email_sequences?.length || 0} E-Mails werden an ${testEmail} gesendet...`,
+      });
+      
       const { data, error } = await supabase.functions.invoke("send-test-email", {
         body: { campaignId: id, testEmail },
       });
@@ -348,15 +357,14 @@ export default function OutreachCampaignDetail() {
     },
     onSuccess: () => {
       toast({
-        title: "Test-E-Mails versendet",
+        title: "Test-E-Mails erfolgreich versendet",
         description: `Alle E-Mail-Sequenzen wurden an ${testEmail} gesendet.`,
       });
-      setShowTestDialog(false);
       setTestEmail("");
     },
     onError: (error) => {
       toast({
-        title: "Fehler",
+        title: "Fehler beim Versenden",
         description: error.message,
         variant: "destructive",
       });
