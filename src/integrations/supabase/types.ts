@@ -797,6 +797,7 @@ export type Database = {
           next_send_date: string | null
           next_sequence_number: number | null
           status: string
+          updated_at: string | null
         }
         Insert: {
           added_at?: string
@@ -807,6 +808,7 @@ export type Database = {
           next_send_date?: string | null
           next_sequence_number?: number | null
           status?: string
+          updated_at?: string | null
         }
         Update: {
           added_at?: string
@@ -817,6 +819,7 @@ export type Database = {
           next_send_date?: string | null
           next_sequence_number?: number | null
           status?: string
+          updated_at?: string | null
         }
         Relationships: [
           {
