@@ -11,21 +11,34 @@ import { useTranslation } from '@/i18n/i18n';
 
 const SolutionsOverview = () => {
   const navigate = useNavigate();
-  const { t, get } = useTranslation();
+  const { t } = useTranslation();
 
-  const solutionsData = get<Array<{title: string; description: string; benefits: string[]; cta: string}>>('solutionsOverview.solutions', []);
-  
-  const icons = [Users, Code, Shield];
-  const ids = ['backoffice', 'it-development', 'ai-ml'];
-  
-  const solutions = solutionsData.map((sol, index) => ({
-    id: ids[index],
-    title: sol.title,
-    description: sol.description,
-    icon: icons[index],
-    benefits: sol.benefits,
-    cta: sol.cta
-  }));
+  const solutions = [
+    {
+      id: 'backoffice',
+      title: 'Remote Backoffice-Fachkräfte',
+      description: 'Qualifizierte Remote-Mitarbeiter für Administration, Buchhaltung und operative Unterstützung',
+      icon: Users,
+      benefits: ['Kosteneinsparung bis zu 60%', 'Flexible Arbeitszeiten', 'Schnelle Einarbeitung'],
+      cta: 'Remote Backoffice-Kräfte finden'
+    },
+    {
+      id: 'it-development',
+      title: 'Remote IT-Entwickler & Tech-Experten',
+      description: 'Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur',
+      icon: Code,
+      benefits: ['Senior-Level Entwickler', 'Agile Remote-Arbeitsweise', 'Internationale Zeitzone-Abdeckung'],
+      cta: 'Remote IT-Experten finden'
+    },
+    {
+      id: 'ai-ml',
+      title: 'Remote KI & ML-Spezialisten',
+      description: 'KI-Experten und Data Scientists für Machine Learning und AI-Projekte',
+      icon: Shield,
+      benefits: ['Spezialisierte KI-Expertise', 'Proven Track Record', 'Modernste Technologien'],
+      cta: 'Remote KI-Experten finden'
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-background font-inter">
