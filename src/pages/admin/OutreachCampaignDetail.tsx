@@ -187,6 +187,21 @@ export default function OutreachCampaignDetail() {
     enabled: !!campaign,
   });
 
+  // Fetch contact activities for rejection tracking
+  const { data: contactActivities } = useQuery({
+    queryKey: ["contact-activities", id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("outreach_contact_activities")
+        .select("*")
+        .eq("campaign_id", id);
+        
+      if (error) throw error;
+      return data || [];
+    },
+    enabled: !!id,
+  });
+
   // Use refetchInterval in a separate effect to avoid circular dependency
   useEffect(() => {
     if (campaign?.status === 'active') {
@@ -655,35 +670,10 @@ export default function OutreachCampaignDetail() {
       ? format(new Date(nextSend.next_send_date), 'HH:mm', { locale: de })
       : 'N/A';
     
-    const totalSent = emails.length;
-    const errorRate = totalSent > 0
-      ? (((failedEmails + bouncedCount) / totalSent) * 100).toFixed(1)
-      : '0';
-    
-    // Calculate average response time
-    const responseTimes: number[] = [];
-    emails.forEach((sent: any) => {
-      const reply = crmEmails?.find((email: any) => 
-        email.contact_id === contacts.find((c: any) => 
-          sent.contact_id === c.contact_id
-        )?.contact_id && 
-        email.direction === 'incoming' &&
-        new Date(email.received_at) > new Date(sent.sent_at)
-      );
-      
-      if (reply) {
-        const diff = new Date(reply.received_at).getTime() - new Date(sent.sent_at).getTime();
-        responseTimes.push(diff);
-      }
-    });
-    
-    const avgResponseMs = responseTimes.length > 0
-      ? responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length
-      : 0;
-    const avgResponseHours = avgResponseMs / (1000 * 60 * 60);
-    const fastestResponseHours = responseTimes.length > 0
-      ? Math.min(...responseTimes) / (1000 * 60 * 60)
-      : 0;
+    // Count rejected contacts (activity_type = 'removed_no_contact')
+    const rejectedCount = contactActivities?.filter(
+      (activity: any) => activity.activity_type === 'removed_no_contact'
+    ).length || 0;
     
     return {
       totalContacts,
@@ -695,11 +685,9 @@ export default function OutreachCampaignDetail() {
       responseRate,
       pendingCount,
       nextSendTime,
-      errorRate,
-      avgResponseHours: avgResponseHours > 0 ? avgResponseHours.toFixed(1) : '0',
-      fastestResponseHours: fastestResponseHours > 0 ? fastestResponseHours.toFixed(1) : '0',
+      rejectedCount,
     };
-  }, [campaign, crmEmails]);
+  }, [campaign, contactActivities]);
 
   // Calculate Smart Insights
   const calculateInsights = useMemo(() => {
@@ -1228,7 +1216,7 @@ export default function OutreachCampaignDetail() {
           </TabsList>
 
           <TabsContent value="overview" className="space-y-4">
-            {/* Enhanced Statistics - 6 Cards */}
+            {/* Enhanced Statistics - 5 Cards */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               <Card>
                 <CardHeader className="pb-2">
@@ -1289,33 +1277,13 @@ export default function OutreachCampaignDetail() {
               <Card>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                    ⚠️ Fehlerrate
+                    🚫 Abgelehnt
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-red-600">{stats?.errorRate || 0}%</div>
+                  <div className="text-2xl font-bold text-red-600">{stats?.rejectedCount || 0}</div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {stats?.bouncedCount || 0} bounced, {stats?.failedEmails || 0} failed
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                    ⏱️ Ø Antwortzeit
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">
-                    {stats?.avgResponseHours && parseFloat(stats.avgResponseHours) > 0 
-                      ? `${stats.avgResponseHours}h` 
-                      : 'N/A'}
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Schnellste: {stats?.fastestResponseHours && parseFloat(stats.fastestResponseHours) > 0 
-                      ? `${stats.fastestResponseHours}h` 
-                      : 'N/A'}
+                    Keine weitere Kontaktaufnahme gewünscht
                   </p>
                 </CardContent>
               </Card>
