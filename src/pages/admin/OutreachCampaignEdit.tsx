@@ -216,8 +216,13 @@ Wichtig:
     }
   }, [campaign]);
 
-  // Generate email sequences based on numFollowUps
+  // Generate email sequences based on numFollowUps (only when not loaded from campaign)
   useEffect(() => {
+    // Skip if sequences are already loaded from the campaign
+    if (campaign?.outreach_email_sequences && emailSequences.length > 0 && emailSequences[0]?.id) {
+      return;
+    }
+    
     const totalEmails = numFollowUps + 1; // +1 for initial email
     
     if (emailSequences.length !== totalEmails) {
@@ -232,7 +237,7 @@ Wichtig:
       });
       setEmailSequences(newSequences);
     }
-  }, [numFollowUps]);
+  }, [numFollowUps, campaign]);
 
   const updateCampaignMutation = useMutation({
     mutationFn: async () => {
