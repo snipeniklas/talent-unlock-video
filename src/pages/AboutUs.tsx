@@ -21,17 +21,17 @@ const AboutUs = () => {
       image: "/lovable-uploads/joachim-kalff.jpg",
       initials: "JK",
       bio: {
-        p1: `Mein Name ist Joachim Kalff, Gründer und Geschäftsführer von Hej Talent. Mit unserem „RaaS"-Konzept denken wir HR-Prozesse neu: frischer, smarter, einfach besser! „Hej" kommt aus dem Skandinavischen und bedeutet „hallo" – eine Begrüßung mit „Wake-up"-Charakter. Für mich steht es für Freundlichkeit, Leichtigkeit und Sympathie.`,
-        p2: `Gleichzeitig vereint „Hej" die Initialen meiner Kinder Henry und Emilia – das „J" steht für meinen Vornamen. So verbinde ich die positive skandinavische Haltung mit meiner persönlichen Handschrift. Genauso gehe ich auch mit unserem internationalen Remote-Team um: verantwortungsbewusst, wertschätzend und nahbar.`,
-        p3: `Mit Begeisterung und unternehmerischem Antrieb entwickle ich Lösungen, die nachhaltig wirken und echten Mehrwert schaffen – pragmatisch, kreativ und immer mit Blick nach vorn.`
+        p1: t('aboutUs.team.joachim.bio.p1', 'Mein Name ist Joachim Kalff, Gründer und Geschäftsführer von Hej Talent. Mit unserem „RaaS"-Konzept denken wir HR-Prozesse neu: frischer, smarter, einfach besser! „Hej" kommt aus dem Skandinavischen und bedeutet „hallo" – eine Begrüßung mit „Wake-up"-Charakter. Für mich steht es für Freundlichkeit, Leichtigkeit und Sympathie.'),
+        p2: t('aboutUs.team.joachim.bio.p2', 'Gleichzeitig vereint „Hej" die Initialen meiner Kinder Henry und Emilia – das „J" steht für meinen Vornamen. So verbinde ich die positive skandinavische Haltung mit meiner persönlichen Handschrift. Genauso gehe ich auch mit unserem internationalen Remote-Team um: verantwortungsbewusst, wertschätzend und nahbar.'),
+        p3: t('aboutUs.team.joachim.bio.p3', 'Mit Begeisterung und unternehmerischem Antrieb entwickle ich Lösungen, die nachhaltig wirken und echten Mehrwert schaffen – pragmatisch, kreativ und immer mit Blick nach vorn.')
       },
       qa: {
-        q1: `Warum ist das Thema Personal wichtig für mich?`,
-        a1: `Weil Unternehmen nicht durch Produkte, sondern durch Menschen wachsen. Hinter jedem Erfolg stehen Talente, die ihre Persönlichkeit, Ideen und Energie einbringen.`,
-        q2: `Was treibt mich bei Hej Talent an?`,
-        a2: `Verbindungen zu schaffen, die über KI hinausgehen – echte Begegnungen, die auf Vertrauen, Authentizität und gemeinsamen Werten beruhen. Denn Technologie kann vieles, aber menschliche Tiefe und Vertrauen niemals ersetzen.`,
-        q3: `Meine schönsten Momente bei Hej Talent sind…`,
-        a3: `…wenn Talente und Unternehmen merken, dass sie nicht nur fachlich, sondern auch menschlich zusammenpassen. Dann wird aus einem Job eine echte Chance fürs Leben.`
+        q1: t('aboutUs.team.joachim.qa.q1', 'Warum ist das Thema Personal wichtig für mich?'),
+        a1: t('aboutUs.team.joachim.qa.a1', 'Weil Unternehmen nicht durch Produkte, sondern durch Menschen wachsen. Hinter jedem Erfolg stehen Talente, die ihre Persönlichkeit, Ideen und Energie einbringen.'),
+        q2: t('aboutUs.team.joachim.qa.q2', 'Was treibt mich bei Hej Talent an?'),
+        a2: t('aboutUs.team.joachim.qa.a2', 'Verbindungen zu schaffen, die über KI hinausgehen – echte Begegnungen, die auf Vertrauen, Authentizität und gemeinsamen Werten beruhen. Denn Technologie kann vieles, aber menschliche Tiefe und Vertrauen niemals ersetzen.'),
+        q3: t('aboutUs.team.joachim.qa.q3', 'Meine schönsten Momente bei Hej Talent sind…'),
+        a3: t('aboutUs.team.joachim.qa.a3', '…wenn Talente und Unternehmen merken, dass sie nicht nur fachlich, sondern auch menschlich zusammenpassen. Dann wird aus einem Job eine echte Chance fürs Leben.')
       }
     },
     {
@@ -40,17 +40,17 @@ const AboutUs = () => {
       image: "/lovable-uploads/pascal-spiess-new.jpg",
       initials: "PS",
       bio: {
-        p1: `Ich bin Pascal Spieß, Consultant bei Hej Talent, mit mehr als 11 Jahren Erfahrung in Beratung und Vertrieb. Schon immer hat mich die Frage angetrieben, wie Unternehmen effizienter, flexibler und erfolgreicher arbeiten können – und genau hier setze ich heute an.`,
-        p2: `Es begeistert mich, gemeinsam mit meinen Kunden in unserem „RaaS"-Konzept zu arbeiten - schnell, flexibel und kostengünstig.`,
-        p3: `Bei Hej Talent unterstütze ich Unternehmen, den Fachkräftemangel zu überwinden und Prozesse nachhaltig zu optimieren. Gemeinsam mit unseren Kunden integriere ich internationale Remote-Talente – von AI- und Tech-Talenten über Backoffice- und Buchhaltungsprofis bis hin zu IT- und Softwareentwicklern.`
+        p1: t('aboutUs.team.pascal.bio.p1', 'Ich bin Pascal Spieß, Consultant bei Hej Talent, mit mehr als 11 Jahren Erfahrung in Beratung und Vertrieb. Schon immer hat mich die Frage angetrieben, wie Unternehmen effizienter, flexibler und erfolgreicher arbeiten können – und genau hier setze ich heute an.'),
+        p2: t('aboutUs.team.pascal.bio.p2', 'Es begeistert mich, gemeinsam mit meinen Kunden in unserem „RaaS"-Konzept zu arbeiten - schnell, flexibel und kostengünstig.'),
+        p3: t('aboutUs.team.pascal.bio.p3', 'Bei Hej Talent unterstütze ich Unternehmen, den Fachkräftemangel zu überwinden und Prozesse nachhaltig zu optimieren. Gemeinsam mit unseren Kunden integriere ich internationale Remote-Talente – von AI- und Tech-Talenten über Backoffice- und Buchhaltungsprofis bis hin zu IT- und Softwareentwicklern.')
       },
       qa: {
-        q1: `Warum ist das Thema Personal wichtig für mich?`,
-        a1: `Weil die richtige Person am richtigen Ort mehr bewirken kann als jede Strategie. Personal ist nicht nur eine Ressource, sondern das Herzstück jeder Organisation.`,
-        q2: `Was treibt mich bei Hej Talent an?`,
-        a2: `Die Überzeugung, dass Karrieren nicht von Zufällen oder Algorithmen abhängen sollten. Sondern von Begegnungen, die Sinn stiften und Türen öffnen.`,
-        q3: `Meine schönsten Momente bei Hej Talent sind…`,
-        a3: `…wenn Menschen merken: „Hier werde ich gesehen – so wie ich bin." Genau dann entstehen Chancen, die weit über den nächsten Job hinausgehen.`
+        q1: t('aboutUs.team.pascal.qa.q1', 'Warum ist das Thema Personal wichtig für mich?'),
+        a1: t('aboutUs.team.pascal.qa.a1', 'Weil die richtige Person am richtigen Ort mehr bewirken kann als jede Strategie. Personal ist nicht nur eine Ressource, sondern das Herzstück jeder Organisation.'),
+        q2: t('aboutUs.team.pascal.qa.q2', 'Was treibt mich bei Hej Talent an?'),
+        a2: t('aboutUs.team.pascal.qa.a2', 'Die Überzeugung, dass Karrieren nicht von Zufällen oder Algorithmen abhängen sollten. Sondern von Begegnungen, die Sinn stiften und Türen öffnen.'),
+        q3: t('aboutUs.team.pascal.qa.q3', 'Meine schönsten Momente bei Hej Talent sind…'),
+        a3: t('aboutUs.team.pascal.qa.a3', '…wenn Menschen merken: „Hier werde ich gesehen – so wie ich bin." Genau dann entstehen Chancen, die weit über den nächsten Job hinausgehen.')
       }
     }
   ];
