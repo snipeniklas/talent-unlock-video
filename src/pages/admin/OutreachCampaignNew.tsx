@@ -188,13 +188,28 @@ Wichtig:
 
       if (campaignError) throw campaignError;
 
-      const contactsToAdd = finalContactIds.map((contactId) => ({
-        campaign_id: campaign.id,
-        contact_id: contactId,
-        next_send_date: new Date().toISOString(),
-        next_sequence_number: 1,
-        status: 'pending',
-      }));
+      // Calculate next_send_date for each contact based on their position
+      // Max 10 emails per day starting from creation time
+      const EMAILS_PER_DAY = 10;
+      const creationTime = new Date();
+      
+      const contactsToAdd = finalContactIds.map((contactId, index) => {
+        // Calculate which "batch" this contact belongs to (0, 1, 2, ...)
+        const batchNumber = Math.floor(index / EMAILS_PER_DAY);
+        
+        // Calculate send date: creation time + (batch number * 1 day)
+        const sendDate = new Date(creationTime.getTime() + (batchNumber * 24 * 60 * 60 * 1000));
+        
+        console.log(`Contact ${index + 1}/${finalContactIds.length}: Batch ${batchNumber}, Send at ${sendDate.toISOString()}`);
+        
+        return {
+          campaign_id: campaign.id,
+          contact_id: contactId,
+          next_send_date: sendDate.toISOString(),
+          next_sequence_number: 1,
+          status: 'pending',
+        };
+      });
 
       const { error: contactsError } = await supabase
         .from("outreach_campaign_contacts")
