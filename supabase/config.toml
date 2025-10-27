@@ -30,3 +30,9 @@ enabled = true
 name = "cleanup-stuck-contacts-scheduler"
 schedule = "*/15 * * * *"  # Every 15 minutes
 function = "cleanup-stuck-contacts"
+
+# Process research queue every 2 minutes
+[[edge_runtime.scheduler]]
+name = "process-research-queue-scheduler"
+schedule = "*/2 * * * *"  # Every 2 minutes
+function = "process-research-queue"
