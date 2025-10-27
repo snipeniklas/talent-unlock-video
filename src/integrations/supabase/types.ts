@@ -372,26 +372,29 @@ export type Database = {
       }
       crm_contact_research: {
         Row: {
+          company_research_data: Json | null
           contact_id: string
+          contact_research_data: Json
           created_at: string
           id: string
-          research_data: Json
           researched_at: string
           researched_by: string | null
         }
         Insert: {
+          company_research_data?: Json | null
           contact_id: string
+          contact_research_data?: Json
           created_at?: string
           id?: string
-          research_data?: Json
           researched_at?: string
           researched_by?: string | null
         }
         Update: {
+          company_research_data?: Json | null
           contact_id?: string
+          contact_research_data?: Json
           created_at?: string
           id?: string
-          research_data?: Json
           researched_at?: string
           researched_by?: string | null
         }

@@ -50,7 +50,8 @@ export default function CrmContactDetail() {
   const queryClient = useQueryClient();
   const [contact, setContact] = useState<Contact | null>(null);
   const [loading, setLoading] = useState(true);
-  const [researchData, setResearchData] = useState<any>(null);
+  const [contactResearchData, setContactResearchData] = useState<any>(null);
+  const [companyResearchData, setCompanyResearchData] = useState<any>(null);
   const [isResearching, setIsResearching] = useState(false);
   const [contactLists, setContactLists] = useState<any[]>([]);
   const [availableLists, setAvailableLists] = useState<any[]>([]);
@@ -61,7 +62,7 @@ export default function CrmContactDetail() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('crm_contact_research')
-        .select('research_data, researched_at')
+        .select('contact_research_data, company_research_data, researched_at')
         .eq('contact_id', id)
         .maybeSingle();
       
@@ -107,7 +108,8 @@ export default function CrmContactDetail() {
 
   useEffect(() => {
     if (existingResearch) {
-      setResearchData(existingResearch.research_data);
+      setContactResearchData(existingResearch.contact_research_data);
+      setCompanyResearchData(existingResearch.company_research_data);
     }
   }, [existingResearch]);
 
@@ -191,11 +193,13 @@ export default function CrmContactDetail() {
       return data;
     },
     onSuccess: (data) => {
-      setResearchData(data.data);
+      setContactResearchData(data.data.contact);
+      setCompanyResearchData(data.data.company);
       setIsResearching(false);
+      queryClient.invalidateQueries({ queryKey: ['contact-research', id] });
       toast({
         title: "AI Research abgeschlossen",
-        description: "Kontaktdaten wurden erfolgreich recherchiert.",
+        description: "Kontakt- und Unternehmensdaten wurden erfolgreich recherchiert.",
       });
     },
     onError: (error: any) => {
@@ -591,7 +595,48 @@ export default function CrmContactDetail() {
           )}
 
           {/* AI Research Data */}
-          {researchData && (
+          {(contactResearchData || companyResearchData) && (
+            <>
+              {contactResearchData && (
+                <Card>
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="flex items-center gap-2">
+                        <Sparkles className="h-5 w-5 text-purple-500" />
+                        AI Research - Kontakt
+                      </CardTitle>
+                      <Badge variant="secondary" className="text-xs">
+                        {existingResearch?.researched_at && 
+                          new Date(existingResearch.researched_at).toLocaleDateString()
+                        }
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground">
+                      Personenbezogene Research-Daten werden hier angezeigt (Coming Soon)
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+              
+              {companyResearchData && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Building className="h-5 w-5 text-blue-500" />
+                      AI Research - Unternehmen
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground">
+                      Unternehmensbezogene Research-Daten werden hier angezeigt (Coming Soon)
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+            </>
+          )}
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
