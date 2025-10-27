@@ -253,6 +253,19 @@
       "cta": "Projekt jetzt starten"
     }
   },
+  "miniTeam": {
+    "title": "Die Köpfe hinter Hej Talent",
+    "subtitle": "Lernen Sie unsere Gründer kennen und erfahren Sie mehr über unsere Vision",
+    "joachim": {
+      "role": "Gründer & Geschäftsführer",
+      "quote": "Mit unserem RaaS-Konzept denken wir HR-Prozesse neu: frischer, smarter, einfach besser!"
+    },
+    "pascal": {
+      "role": "Co-Gründer & Head of Talent",
+      "quote": "Echte Verbindungen zwischen Unternehmen und Talenten schaffen – das ist unser Antrieb."
+    },
+    "cta": "Mehr über unser Team erfahren"
+  },
   "aboutUs": {
     "about": {
       "title": "Über Hej Talent",
@@ -270,6 +283,134 @@
     "ctaTitle": "Nicht sicher, welche internationalen Fachkräfte Sie benötigen?",
     "ctaText": "Lassen Sie uns in einem kostenlosen Beratungsgespräch gemeinsam die passenden Remote-Experten für Ihre Herausforderungen finden.",
     "ctaButton": "Beratungstermin jetzt buchen"
+  },
+  "landing": {
+    "aiMl": {
+      "ticker": ["KI-Experten ab 3 Monaten", "40-60% günstiger", "Bewährte KI-Lösungen", "Von Konzept bis Deployment", "ML, Deep Learning, NLP", "Keine Headhunter-Fee"],
+      "hero": {
+        "title": "- KI & ML Experten",
+        "badge": "40-60% günstiger",
+        "trailing": "für Ihre KI-Transformation",
+        "p1": "Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr KI-Problem, wir liefern die perfekte Experten-Lösung.",
+        "p2": "Von der KI-Strategie bis zur produktiven Lösung: Holen Sie sich spezialisierte Data Scientists, ML Engineers und KI-Entwickler aus unserem geprüften Expertenpool – remote und sofort einsatzbereit.",
+        "cta": "RaaS Anfrage stellen"
+      },
+      "bullets": [
+        {"title": "KI-Spezialisten", "text": "Data Scientists, ML Engineers und KI-Entwickler mit PhD/Master und 5+ Jahren Praxiserfahrung"},
+        {"title": "Bewährte KI-Lösungen", "text": "Von Computer Vision bis NLP – praxiserprobte Lösungen für Ihr Geschäftsmodell"},
+        {"title": "ROI-Fokus", "text": "Messbare Geschäftsergebnisse in 3-6 Monaten statt jahrelanger Forschung"}
+      ],
+      "problem": {
+        "title": "Warum scheitern die meisten KI-Projekte?",
+        "items": [
+          {"title": "Fehlendes KI-Know-how", "desc": "Interne Teams haben keine Erfahrung mit ML-Projekten und überschätzen die Komplexität"},
+          {"title": "Monatelange Suche", "desc": "Qualifizierte Data Scientists sind rar und überteuert – wenn überhaupt verfügbar"},
+          {"title": "Kein Business-Fokus", "desc": "Projekte versanden in endloser Forschung ohne messbare Geschäftsergebnisse"}
+        ]
+      },
+      "how": {"title": "So funktioniert's: Ihr KI-Experte in 3 einfachen Schritten"},
+      "trust": {"title": "Führende Unternehmen vertrauen unseren KI-Experten"}
+    },
+    "itDev": {
+      "ticker": ["30-50% günstiger", "Start in 7-14 Tagen", "Senior Entwickler", "Alle Technologien", "Keine Headhunter-Fee", "Geld-zurück-Garantie"],
+      "hero": {
+        "title": "- Senior IT-Entwickler",
+        "badge": "30-50% günstiger",
+        "trailing": "als lokale Talente",
+        "p1": "Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr IT-Projekt, wir liefern die perfekte Entwickler-Lösung.",
+        "p2": "Entdecken Sie, wie Sie in 7-14 Tagen hochqualifizierte Senior-Entwickler für React, Node.js, Python & mehr aus unserem geprüften Netzwerk bekommen – remote und sofort produktiv.",
+        "cta": "RaaS Anfrage stellen"
+      },
+      "bullets": [
+        {"title": "Senior-Level Expertise", "text": "Nur Entwickler mit 5+ Jahren Erfahrung und nachgewiesenen Skills in modernen Technologien"},
+        {"title": "Schneller Start", "text": "Perfekter Match in 48h, Onboarding in 7-14 Tagen – produktiv ab Tag 1"},
+        {"title": "Bewährtes Matching", "text": "97% Erfolgsquote durch präzises Technical Screening und Kultur-Fit-Tests"}
+      ],
+      "problem": {
+        "title": "Kennen Sie diese IT-Herausforderungen?",
+        "resultTitle": "Das Resultat: Verpasste Opportunities, frustrierte Teams, explodierende Kosten",
+        "resultText": "Während Sie nach dem perfekten Entwickler suchen, überholt Sie die Konkurrenz mit fertigen Produkten.",
+        "items": [
+          {"title": "Monatelange Suche", "desc": "6+ Monate Recruiting für einen Senior-Entwickler – Projekte verzögern sich, Deadlines platzen"},
+          {"title": "Überteuerte Freelancer", "desc": "€120+/h für mittelmäßige Freelancer – Budget explodiert, Qualität enttäuscht"},
+          {"title": "Unzuverlässige Agenturen", "desc": "Hohe Headhunter-Fees, schlechte Matches, keine Garantien – Geld weg, Problem bleibt"}
+        ]
+      },
+      "solution": {
+        "title": "Die Lösung: Geprüfte Senior-Entwickler in 48 Stunden",
+        "0": {"title": "48h Perfect Match", "text": "Aus 1.000+ geprüften Entwicklern finden wir in 48h den perfekten Match für Ihr Projekt"},
+        "1": {"title": "97% Erfolgsquote", "text": "Unser 3-stufiger Prüfprozess garantiert höchste Qualität – nur 3% aller Bewerber bestehen"},
+        "2": {"title": "Start in 7 Tagen", "text": "Nach dem Match: Onboarding, Setup und produktive Arbeit binnen einer Woche"}
+      },
+      "how": {
+        "title": "So funktioniert's: Ihr Entwickler in 3 einfachen Schritten",
+        "0": {"title": "Anfrage über unsere Platform erstellen", "text": "Loggen Sie sich in unser System ein und erstellen Sie eine detaillierte Suchanfrage. Definieren Sie Technologie-Stack, Erfahrungslevel, Projektdauer und spezielle Anforderungen direkt in der Benutzeroberfläche."},
+        "1": {"title": "KI-Matching & Kandidaten-Review", "text": "Unser System analysiert Ihre Anfrage und matched automatisch passende Kandidaten aus unserem Talent-Pool. Sie erhalten binnen 48h eine kuratierte Liste mit 3-5 Top-Matches direkt in der Platform."},
+        "2": {"title": "Interview-Management & Onboarding", "text": "Terminbuchung, Interview-Koordination und Vertragsabwicklung laufen komplett über die Platform. Nach Ihrer Auswahl kümmern wir uns um das komplette Onboarding und Setup."}
+      }
+    },
+    "backoffice": {
+      "ticker": ["40-60% günstiger", "Start in 2-4 Wochen", "Geprüfte Backoffice-Profis", "Keine Headhunter-Fee", "Remote & DSGVO-konform", "Skalierung jederzeit möglich"],
+      "hero": {
+        "title": "- Remote Backoffice-Fachkräfte",
+        "badge": "40-60% günstiger",
+        "trailing": "als lokale Mitarbeiter",
+        "p1": "Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihre Backoffice-Anforderungen, wir liefern die perfekte Fachkraft-Lösung.",
+        "p2": "Entdecken Sie, wie Sie hochqualifizierte Backoffice-Profis für Buchhaltung, Admin und Kundenservice aus unserem geprüften Netzwerk bekommen – remote, zuverlässig und DSGVO-konform.",
+        "cta": "RaaS Anfrage stellen"
+      },
+      "bullets": [
+        {"title": "Massive Kostenersparnis", "text": "Optimieren Sie Ihre Backoffice-Prozesse durch qualifizierte Remote-Fachkräfte"},
+        {"title": "Flexibel skalieren", "text": "Von 10h/Woche bis Vollzeit – passen Sie die Kapazität jederzeit an Ihre Bedürfnisse an"},
+        {"title": "Professionelle Kommunikation", "text": "Alle unsere Backoffice-Profis kommunizieren professionell und verstehen Ihre Arbeitsweise"}
+      ],
+      "problem": {
+        "title": "Kennen Sie diese Backoffice-Herausforderungen?",
+        "items": [
+          {"title": "Explodierende Personalkosten", "desc": "Lokale Backoffice-Kräfte werden immer teurer bei gleichzeitig sinkender Verfügbarkeit"},
+          {"title": "Überlastete Teams", "desc": "Administrative Aufgaben fressen Zeit, die für Kerngeschäft und Wachstum fehlt"},
+          {"title": "Schwierige Skalierung", "desc": "Bei Wachstum schnell qualifiziertes Personal zu finden wird zum Engpass"}
+        ]
+      },
+      "how": {
+        "title": "So funktioniert's: Ihre Backoffice-Fachkraft in 3 einfachen Schritten",
+        "0": {"title": "Anfrage über unsere Platform erstellen", "text": "Loggen Sie sich in unser System ein und definieren Sie Ihre Backoffice-Anforderungen. Wählen Sie Aufgabenbereiche, Qualifikationen, Arbeitszeiten und Sprachkenntnisse über unsere intuitive Benutzeroberfläche."},
+        "1": {"title": "Automatisches Matching & Kandidatenauswahl", "text": "Unser System matched automatisch passende Backoffice-Profis aus unserem Pool. Sie erhalten binnen 48h eine Liste mit 3-5 qualifizierten Kandidaten zur Auswahl direkt in der Platform."},
+        "2": {"title": "Interview & Produktiver Start", "text": "Terminbuchung und Interview-Koordination laufen über die Platform. Nach Ihrer Entscheidung übernehmen wir Verträge, Onboarding und Tool-Setup. Start binnen 2-4 Wochen."}
+      },
+      "trust": {"title": "Über 30 Unternehmen optimieren bereits ihr Backoffice"},
+      "testimonials": [
+        "\"Dank Remote-Buchhaltung sparen wir monatlich €2.800 und haben endlich Zeit für unser Kerngeschäft. Top!\"",
+        "\"Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite Hej Talent-Kraft ins Team zu holen.\""
+      ]
+    }
+  },
+  "landing": {
+    "aiMl": {
+      "ticker": ["KI-Experten ab 3 Monaten", "40-60% günstiger", "Bewährte KI-Lösungen", "Von Konzept bis Deployment", "ML, Deep Learning, NLP", "Keine Headhunter-Fee"],
+      "hero": {"title": "- KI & ML Experten", "badge": "40-60% günstiger", "trailing": "für Ihre KI-Transformation", "p1": "Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr KI-Problem, wir liefern die perfekte Experten-Lösung.", "p2": "Von der KI-Strategie bis zur produktiven Lösung: Holen Sie sich spezialisierte Data Scientists, ML Engineers und KI-Entwickler aus unserem geprüften Expertenpool – remote und sofort einsatzbereit.", "cta": "RaaS Anfrage stellen"},
+      "bullets": [{"title": "KI-Spezialisten", "text": "Data Scientists, ML Engineers und KI-Entwickler mit PhD/Master und 5+ Jahren Praxiserfahrung"}, {"title": "Bewährte KI-Lösungen", "text": "Von Computer Vision bis NLP – praxiserprobte Lösungen für Ihr Geschäftsmodell"}, {"title": "ROI-Fokus", "text": "Messbare Geschäftsergebnisse in 3-6 Monaten statt jahrelanger Forschung"}],
+      "problem": {"title": "Warum scheitern die meisten KI-Projekte?", "items": [{"title": "Fehlendes KI-Know-how", "desc": "Interne Teams haben keine Erfahrung mit ML-Projekten und überschätzen die Komplexität"}, {"title": "Monatelange Suche", "desc": "Qualifizierte Data Scientists sind rar und überteuert – wenn überhaupt verfügbar"}, {"title": "Kein Business-Fokus", "desc": "Projekte versanden in endloser Forschung ohne messbare Geschäftsergebnisse"}]},
+      "how": {"title": "So funktioniert's: Ihr KI-Experte in 3 einfachen Schritten"},
+      "trust": {"title": "Führende Unternehmen vertrauen unseren KI-Experten"}
+    },
+    "itDev": {
+      "ticker": ["30-50% günstiger", "Start in 7-14 Tagen", "Senior Entwickler", "Alle Technologien", "Keine Headhunter-Fee", "Geld-zurück-Garantie"],
+      "hero": {"title": "- Senior IT-Entwickler", "badge": "30-50% günstiger", "trailing": "als lokale Talente", "p1": "Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihr IT-Projekt, wir liefern die perfekte Entwickler-Lösung.", "p2": "Entdecken Sie, wie Sie in 7-14 Tagen hochqualifizierte Senior-Entwickler für React, Node.js, Python & mehr aus unserem geprüften Netzwerk bekommen – remote und sofort produktiv.", "cta": "RaaS Anfrage stellen"},
+      "bullets": [{"title": "Senior-Level Expertise", "text": "Nur Entwickler mit 5+ Jahren Erfahrung und nachgewiesenen Skills in modernen Technologien"}, {"title": "Schneller Start", "text": "Perfekter Match in 48h, Onboarding in 7-14 Tagen – produktiv ab Tag 1"}, {"title": "Bewährtes Matching", "text": "97% Erfolgsquote durch präzises Technical Screening und Kultur-Fit-Tests"}],
+      "problem": {"title": "Kennen Sie diese IT-Herausforderungen?", "resultTitle": "Das Resultat: Verpasste Opportunities, frustrierte Teams, explodierende Kosten", "resultText": "Während Sie nach dem perfekten Entwickler suchen, überholt Sie die Konkurrenz mit fertigen Produkten.", "items": [{"title": "Monatelange Suche", "desc": "6+ Monate Recruiting für einen Senior-Entwickler – Projekte verzögern sich, Deadlines platzen"}, {"title": "Überteuerte Freelancer", "desc": "€120+/h für mittelmäßige Freelancer – Budget explodiert, Qualität enttäuscht"}, {"title": "Unzuverlässige Agenturen", "desc": "Hohe Headhunter-Fees, schlechte Matches, keine Garantien – Geld weg, Problem bleibt"}]},
+      "solution": {"title": "Die Lösung: Geprüfte Senior-Entwickler in 48 Stunden", "0": {"title": "48h Perfect Match", "text": "Aus 1.000+ geprüften Entwicklern finden wir in 48h den perfekten Match für Ihr Projekt"}, "1": {"title": "97% Erfolgsquote", "text": "Unser 3-stufiger Prüfprozess garantiert höchste Qualität – nur 3% aller Bewerber bestehen"}, "2": {"title": "Start in 7 Tagen", "text": "Nach dem Match: Onboarding, Setup und produktive Arbeit binnen einer Woche"}},
+      "how": {"title": "So funktioniert's: Ihr Entwickler in 3 einfachen Schritten", "0": {"title": "Anfrage über unsere Platform erstellen", "text": "Loggen Sie sich in unser System ein und erstellen Sie eine detaillierte Suchanfrage. Definieren Sie Technologie-Stack, Erfahrungslevel, Projektdauer und spezielle Anforderungen direkt in der Benutzeroberfläche."}, "1": {"title": "KI-Matching & Kandidaten-Review", "text": "Unser System analysiert Ihre Anfrage und matched automatisch passende Kandidaten aus unserem Talent-Pool. Sie erhalten binnen 48h eine kuratierte Liste mit 3-5 Top-Matches direkt in der Platform."}, "2": {"title": "Interview-Management & Onboarding", "text": "Terminbuchung, Interview-Koordination und Vertragsabwicklung laufen komplett über die Platform. Nach Ihrer Auswahl kümmern wir uns um das komplette Onboarding und Setup."}}
+    },
+    "backoffice": {
+      "ticker": ["40-60% günstiger", "Start in 2-4 Wochen", "Geprüfte Backoffice-Profis", "Keine Headhunter-Fee", "Remote & DSGVO-konform", "Skalierung jederzeit möglich"],
+      "hero": {"title": "- Remote Backoffice-Fachkräfte", "badge": "40-60% günstiger", "trailing": "als lokale Mitarbeiter", "p1": "Unser bewährtes RaaS-System macht es einfach: Sie beschreiben Ihre Backoffice-Anforderungen, wir liefern die perfekte Fachkraft-Lösung.", "p2": "Entdecken Sie, wie Sie hochqualifizierte Backoffice-Profis für Buchhaltung, Admin und Kundenservice aus unserem geprüften Netzwerk bekommen – remote, zuverlässig und DSGVO-konform.", "cta": "RaaS Anfrage stellen"},
+      "bullets": [{"title": "Massive Kostenersparnis", "text": "Optimieren Sie Ihre Backoffice-Prozesse durch qualifizierte Remote-Fachkräfte"}, {"title": "Flexibel skalieren", "text": "Von 10h/Woche bis Vollzeit – passen Sie die Kapazität jederzeit an Ihre Bedürfnisse an"}, {"title": "Professionelle Kommunikation", "text": "Alle unsere Backoffice-Profis kommunizieren professionell und verstehen Ihre Arbeitsweise"}],
+      "problem": {"title": "Kennen Sie diese Backoffice-Herausforderungen?", "items": [{"title": "Explodierende Personalkosten", "desc": "Lokale Backoffice-Kräfte werden immer teurer bei gleichzeitig sinkender Verfügbarkeit"}, {"title": "Überlastete Teams", "desc": "Administrative Aufgaben fressen Zeit, die für Kerngeschäft und Wachstum fehlt"}, {"title": "Schwierige Skalierung", "desc": "Bei Wachstum schnell qualifiziertes Personal zu finden wird zum Engpass"}]},
+      "how": {"title": "So funktioniert's: Ihre Backoffice-Fachkraft in 3 einfachen Schritten", "0": {"title": "Anfrage über unsere Platform erstellen", "text": "Loggen Sie sich in unser System ein und definieren Sie Ihre Backoffice-Anforderungen. Wählen Sie Aufgabenbereiche, Qualifikationen, Arbeitszeiten und Sprachkenntnisse über unsere intuitive Benutzeroberfläche."}, "1": {"title": "Automatisches Matching & Kandidatenauswahl", "text": "Unser System matched automatisch passende Backoffice-Profis aus unserem Pool. Sie erhalten binnen 48h eine Liste mit 3-5 qualifizierten Kandidaten zur Auswahl direkt in der Platform."}, "2": {"title": "Interview & Produktiver Start", "text": "Terminbuchung und Interview-Koordination laufen über die Platform. Nach Ihrer Entscheidung übernehmen wir Verträge, Onboarding und Tool-Setup. Start binnen 2-4 Wochen."}},
+      "trust": {"title": "Über 30 Unternehmen optimieren bereits ihr Backoffice"},
+      "testimonials": ["\"Dank Remote-Buchhaltung sparen wir monatlich €2.800 und haben endlich Zeit für unser Kerngeschäft. Top!\"", "\"Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite Hej Talent-Kraft ins Team zu holen.\""]
+    }
   },
   "contact": {
     "title": "Kontakt & Erstgespräch",
