@@ -207,7 +207,7 @@ Generiere jetzt eine personalisierte E-Mail basierend auf diesen Informationen.`
       console.log(`Subject: ${subject}`);
 
       // Send via MS365
-      const response = await fetch("https://graph.microsoft.com/v1.0/me/sendMail", {
+      const sendResponse = await fetch("https://graph.microsoft.com/v1.0/me/sendMail", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token.access_token}`,
@@ -231,8 +231,8 @@ Generiere jetzt eine personalisierte E-Mail basierend auf diesen Informationen.`
         }),
       });
 
-      if (!response.ok) {
-        const error = await response.text();
+      if (!sendResponse.ok) {
+        const error = await sendResponse.text();
         console.error(`Failed to send test email for sequence ${sequence.sequence_number}:`, error);
         throw new Error(`Failed to send test email: ${error}`);
       }
