@@ -190,7 +190,7 @@ Wichtig:
 
   // Pre-fill form when campaign data loads
   useEffect(() => {
-    if (campaign) {
+    if (campaign && contactLists) {
       setCampaignName(campaign.name || "");
       setCampaignDescription(campaign.description || "");
       setTargetAudience(campaign.target_audience || "");
@@ -199,7 +199,30 @@ Wichtig:
       
       // Set selected contacts
       const contactIds = campaign.outreach_campaign_contacts?.map((cc: any) => cc.contact_id) || [];
-      setSelectedContacts(contactIds);
+      
+      // Try to determine which lists were originally selected by checking if all contacts from a list are in the campaign
+      const listsToSelect: string[] = [];
+      contactLists.forEach(list => {
+        const listContactIds = list.contact_ids || [];
+        // If at least 80% of the list's contacts are in the campaign, consider the list as selected
+        if (listContactIds.length > 0) {
+          const matchingContacts = listContactIds.filter(id => contactIds.includes(id));
+          const matchPercentage = matchingContacts.length / listContactIds.length;
+          if (matchPercentage >= 0.8) {
+            listsToSelect.push(list.id);
+          }
+        }
+      });
+      
+      setSelectedLists(listsToSelect);
+      
+      // Set individual contacts (those not part of any selected list)
+      const contactsFromSelectedLists = listsToSelect.flatMap(listId => {
+        const list = contactLists.find(l => l.id === listId);
+        return list?.contact_ids || [];
+      });
+      const individualContacts = contactIds.filter(id => !contactsFromSelectedLists.includes(id));
+      setSelectedContacts(individualContacts);
       
       // Set email sequences and derive numFollowUps
       const sequences = campaign.outreach_email_sequences?.map((seq: any) => ({
@@ -216,7 +239,7 @@ Wichtig:
         setSequencesLoadedFromDb(true); // Mark that sequences were loaded from DB
       }
     }
-  }, [campaign]);
+  }, [campaign, contactLists]);
 
   // Generate email sequences based on numFollowUps
   useEffect(() => {
