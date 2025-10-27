@@ -68,6 +68,7 @@
       "ctaBadge": "KOSTENFREI",
       "ctaPrimary": "Unverbindliche RaaS Anfrage starten",
       "ctaSecondary": "Oder entdecken Sie unsere Expertise →",
+      "ctaExploreExpertise": "Expertise entdecken →",
       "riskFreeTitle": "✅ 100% kostenfrei & unverbindlich",
       "riskFreeText": "Maßgeschneiderte Ressourcen-Vorschläge ohne Verpflichtung. Erst bei Zustimmung beginnt die Zusammenarbeit.",
       "description": "Wir integrieren unsere remote IT, KI und Backoffice Mitarbeiter in Ihr Team und sparen somit mindestens 30% Ihrer Personalkosten – 100% flexibel über Freelancer Verträge und innerhalb einer Woche startklar.\n\nStellen Sie jetzt innerhalb 3 Minuten Ihre RaaS-Suchanfrage ein und Sie bekommen sofort unverbindliche Kandidaten vorgeschlagen.",
@@ -89,17 +90,32 @@
       "backoffice": {
         "title": "Remote Backoffice-Fachkräfte",
         "desc": "Qualifizierte Remote-Mitarbeiter für Administration, Buchhaltung und operative Unterstützung",
-        "cta": "Jetzt starten"
+        "cta": "Jetzt starten",
+        "features": [
+          "Büroorganisation & Administration",
+          "Buchhaltung & Controlling",
+          "Kundenservice & Support"
+        ]
       },
       "it": {
         "title": "Remote IT-Entwickler & Tech-Experten",
         "desc": "Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur",
-        "cta": "Jetzt starten"
+        "cta": "Jetzt starten",
+        "features": [
+          "Full-Stack Entwicklung",
+          "DevOps & Cloud",
+          "Mobile & Web Apps"
+        ]
       },
       "ai": {
         "title": "Remote KI & ML-Spezialisten",
         "desc": "KI-Experten und Data Scientists für Machine Learning und AI-Projekte",
-        "cta": "Jetzt starten"
+        "cta": "Jetzt starten",
+        "features": [
+          "Machine Learning",
+          "Data Science",
+          "KI-Strategieberatung"
+        ]
       }
     },
     "stats": {
@@ -156,7 +172,88 @@
         "primary": "Kostenlos testen",
         "secondary": "Zum RaaS Hub"
       }
+    }
+  },
+  "components": {
+    "floatingDemo": {
+      "dashboard": {
+        "title": "RaaS Dashboard",
+        "live": "Live",
+        "activeProjects": "Aktive Projekte",
+        "successRate": "Erfolgsrate",
+        "remoteDevelopers": "Remote-Entwickler",
+        "backofficeStaff": "Backoffice-Kräfte",
+        "active": "aktiv"
+      },
+      "searchRequest": {
+        "title": "Neue RaaS Anfrage",
+        "pythonDev": "Python Entwickler gesucht",
+        "response24h": "Antwort in 24h erwartet",
+        "candidatesFound": "{count} Kandidaten gefunden",
+        "viewDetails": "Details ansehen"
+      },
+      "resourcePool": {
+        "title": "Ressourcen Pool",
+        "availableExperts": "Verfügbare Experten",
+        "aiMlExperts": "AI/ML Experten",
+        "fullstackDev": "Fullstack Dev",
+        "backoffice": "Backoffice"
+      },
+      "performance": {
+        "title": "Performance",
+        "thisMonth": "+15% diesen Monat",
+        "successfulMatches": "Erfolgreiche Matches",
+        "avgPlacementTime": "Ø Besetzungszeit",
+        "weeks": "Wochen",
+        "customerSatisfaction": "Kundenzufriedenheit"
+      },
+      "notification": {
+        "matchFound": "Match gefunden!",
+        "perfectMatch": "Perfekter Python-Entwickler für Ihr KI-Projekt verfügbar. 5⭐ Bewertung, sofort startbereit.",
+        "viewProfile": "Profil ansehen",
+        "later": "Später"
+      },
+      "cta": "RaaS Anfrage starten"
     },
+    "projectTimeline": {
+      "title": "Zeitplan",
+      "processWeeks": "{weeks} Wochen Prozess",
+      "weekLabels": ["Opt. Woche 1", "Woche 1", "Woche 2", "Woche 3"],
+      "optional": "(optional)",
+      "activities": {
+        "consultation": {
+          "title": "Beratung",
+          "description": "Analyse Ihrer Anforderungen und Zielsetzung"
+        },
+        "requirements": {
+          "title": "Aufnahme Anforderungen",
+          "description": "Detaillierte Spezifikation der benötigten Expertise"
+        },
+        "candidates": {
+          "title": "Kandidatenvorschlag",
+          "description": "Präsentation passender Remote-Experten"
+        },
+        "selection": {
+          "title": "Auswahlprozess",
+          "description": "Interviews und finale Kandidatenauswahl"
+        },
+        "implementation": {
+          "title": "Umsetzungsbetreuung",
+          "description": "Onboarding und kontinuierliche Unterstützung"
+        }
+      },
+      "duration": {
+        "days": "max. {days} Tage",
+        "day": "max. 1 Tag"
+      },
+      "milestones": {
+        "kickoff": "Kickoff",
+        "firstDay": "1. Arbeitstag"
+      },
+      "cta": "Projekt jetzt starten"
+    }
+  },
+  "aboutUs": {
     "about": {
       "title": "Über Hej Talent",
       "text": "Seit 2016 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und Vermittlung von internationalen Remote-Talenten.",
