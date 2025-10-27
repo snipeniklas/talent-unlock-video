@@ -52,6 +52,7 @@ export default function OutreachCampaignEdit() {
   const [selectedLists, setSelectedLists] = useState<string[]>([]);
   const [contactSelectionMode, setContactSelectionMode] = useState<"lists" | "contacts">("lists");
   const [emailSequences, setEmailSequences] = useState<EmailSequence[]>([]);
+  const [sequencesLoadedFromDb, setSequencesLoadedFromDb] = useState(false);
 
   const { data: campaign, isLoading: campaignLoading } = useQuery({
     queryKey: ["outreach-campaign", id],
@@ -212,19 +213,37 @@ Wichtig:
       if (sequences.length > 0) {
         setEmailSequences(sequences);
         setNumFollowUps(sequences.length - 1); // -1 because first email is not a follow-up
+        setSequencesLoadedFromDb(true); // Mark that sequences were loaded from DB
       }
     }
   }, [campaign]);
 
-  // Generate email sequences based on numFollowUps (only when not loaded from campaign)
+  // Generate email sequences based on numFollowUps
   useEffect(() => {
-    // Skip if sequences are already loaded from the campaign
-    if (campaign?.outreach_email_sequences && emailSequences.length > 0 && emailSequences[0]?.id) {
+    const totalEmails = numFollowUps + 1; // +1 for initial email
+    
+    // If sequences are already loaded from DB, only add new ones if user increases follow-ups
+    if (sequencesLoadedFromDb) {
+      if (emailSequences.length < totalEmails) {
+        // User increased number of follow-ups, add new sequences with defaults
+        const newSequences = [...emailSequences];
+        for (let i = emailSequences.length; i < totalEmails; i++) {
+          newSequences.push({
+            sequence_number: i + 1,
+            subject_template: getDefaultSubjectPrompt(i + 1),
+            body_template: getDefaultBodyPrompt(i + 1),
+            delay_days: 3,
+          });
+        }
+        setEmailSequences(newSequences);
+      } else if (emailSequences.length > totalEmails) {
+        // User decreased number of follow-ups, remove excess sequences
+        setEmailSequences(emailSequences.slice(0, totalEmails));
+      }
       return;
     }
     
-    const totalEmails = numFollowUps + 1; // +1 for initial email
-    
+    // If not loaded from DB yet, generate all sequences with defaults
     if (emailSequences.length !== totalEmails) {
       const newSequences = Array.from({ length: totalEmails }, (_, i) => {
         const existing = emailSequences[i];
@@ -237,7 +256,7 @@ Wichtig:
       });
       setEmailSequences(newSequences);
     }
-  }, [numFollowUps, campaign]);
+  }, [numFollowUps, sequencesLoadedFromDb]);
 
   const updateCampaignMutation = useMutation({
     mutationFn: async () => {
