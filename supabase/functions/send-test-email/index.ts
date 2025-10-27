@@ -141,7 +141,7 @@ Deine Aufgabe ist es, personalisierte E-Mails zu erstellen, die:
 Generiere jetzt eine personalisierte E-Mail basierend auf diesen Informationen.`;
 
       // Call OpenAI with tool calling
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      const openaiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${OPENAI_API_KEY}`,
@@ -178,13 +178,13 @@ Generiere jetzt eine personalisierte E-Mail basierend auf diesen Informationen.`
         }),
       });
 
-      if (!response.ok) {
-        const error = await response.text();
+      if (!openaiResponse.ok) {
+        const error = await openaiResponse.text();
         console.error("❌ OpenAI API error:", error);
         throw new Error(`OpenAI API failed: ${error}`);
       }
 
-      const data = await response.json();
+      const data = await openaiResponse.json();
       
       // Parse tool call response
       const toolCall = data.choices?.[0]?.message?.tool_calls?.[0];
