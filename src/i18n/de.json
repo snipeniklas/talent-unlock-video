@@ -134,6 +134,11 @@
         "weeks": "Wochen Besetzungszeit"
       }
     },
+    "about": {
+      "title": "Über Hej Talent",
+      "text": "Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und Vermittlung von internationalen Remote-Talenten.",
+      "bullets": ["Umfassende Background-Checks", "Persönliche Betreuung", "Qualitätsgarantie"]
+    },
     "solutions": {
       "title": "Unsere internationalen Fachkräfte",
       "subtitle": "Maßgeschneiderte Remote-Teams für Ihre spezifischen Anforderungen"
@@ -266,21 +271,162 @@
     },
     "cta": "Mehr über unser Team erfahren"
   },
-  "aboutUs": {
+  "home": {
     "about": {
       "title": "Über Hej Talent",
-      "text": "Seit 2016 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und Vermittlung von internationalen Remote-Talenten.",
+      "text": "Seit 2020 sind wir der vertrauensvolle Partner für Unternehmen, die auf der Suche nach erstklassigen Remote-Fachkräften sind. Unser Fokus liegt auf der gründlichen Prüfung und Vermittlung von internationalen Remote-Talenten.",
       "bullets": ["Umfassende Background-Checks", "Persönliche Betreuung", "Qualitätsgarantie"]
+    }
+  },
+  "aboutUs": {
+    "hero": {
+      "title": "Über ",
+      "subtitle": "Seit 2020 sind wir Deutschlands führende Plattform für internationale Remote-Fachkräfte. Wir verbinden Unternehmen mit den besten Talenten weltweit."
     },
-    "testimonials": {
-      "title": "Was unsere Kunden sagen",
-      "subtitle": "Vertrauen Sie auf die Erfahrungen unserer zufriedenen Kunden"
+    "mission": {
+      "title": "Unsere Mission",
+      "p1": "Wir machen internationale Expertise für deutsche Unternehmen zugänglich. Mit unserem Resources as a Service (RaaS) Modell revolutionieren wir die Art, wie Unternehmen auf Fachkräfte zugreifen – flexibel, effizient und ohne Grenzen.",
+      "p2": "Statt langwieriger Einstellungsprozesse bieten wir flexible Dienstleistungsverträge mit geprüften Remote-Experten aus über 15 Ländern.",
+      "stats": ["500+ internationale Fachkräfte", "150+ erfolgreiche Projekte", "98% Kundenzufriedenheit"]
+    },
+    "values": {
+      "0": {
+        "title": "Internationale Expertise",
+        "desc": "Wir verbinden deutsche Unternehmen mit den besten internationalen Talenten weltweit."
+      },
+      "1": {
+        "title": "Geprüfte Qualität",
+        "desc": "Jede Remote-Fachkraft durchläuft unseren mehrstufigen Qualifizierungsprozess."
+      },
+      "2": {
+        "title": "Schnelle Vermittlung",
+        "desc": "Von der Anfrage bis zur Integration in nur 2-4 Wochen."
+      },
+      "3": {
+        "title": "Messbare Erfolge",
+        "desc": "98% Kundenzufriedenheit und über 90% Projektfortführungsrate."
+      }
+    },
+    "team": {
+      "title": "Über uns - Joachim & Pascal",
+      "joachim": {
+        "role": "Gründer & Geschäftsführer",
+        "bio": {
+          "p1": "Mein Name ist Joachim Kalff, Gründer und Geschäftsführer von Hej Talent. Mit unserem 'RaaS'-Konzept denken wir HR-Prozesse neu: frischer, smarter, einfach besser! 'Hej' kommt aus dem Skandinavischen und bedeutet 'hallo' – eine Begrüßung mit 'Wake-up'-Charakter. Für mich steht es für Freundlichkeit, Leichtigkeit und Sympathie.",
+          "p2": "Gleichzeitig vereint 'Hej' die Initialen meiner Kinder Henry und Emilia – das 'J' steht für meinen Vornamen. So verbinde ich die positive skandinavische Haltung mit meiner persönlichen Handschrift. Genauso gehe ich auch mit unserem internationalen Remote-Team um: verantwortungsbewusst, wertschätzend und nahbar.",
+          "p3": "Mit Begeisterung und unternehmerischem Antrieb entwickle ich Lösungen, die nachhaltig wirken und echten Mehrwert schaffen – pragmatisch, kreativ und immer mit Blick nach vorn."
+        },
+        "qa": {
+          "q1": "Warum ist das Thema Personal wichtig für mich?",
+          "a1": "Weil Unternehmen nicht durch Produkte, sondern durch Menschen wachsen. Hinter jedem Erfolg stehen Talente, die ihre Persönlichkeit, Ideen und Energie einbringen.",
+          "q2": "Was treibt mich bei Hej Talent an?",
+          "a2": "Verbindungen zu schaffen, die über KI hinausgehen – echte Begegnungen, die auf Vertrauen, Authentizität und gemeinsamen Werten beruhen. Denn Technologie kann vieles, aber menschliche Tiefe und Vertrauen niemals ersetzen.",
+          "q3": "Meine schönsten Momente bei Hej Talent sind…",
+          "a3": "…wenn Talente und Unternehmen merken, dass sie nicht nur fachlich, sondern auch menschlich zusammenpassen. Dann wird aus einem Job eine echte Chance fürs Leben."
+        }
+      },
+      "pascal": {
+        "role": "Consultant",
+        "bio": {
+          "p1": "Ich bin Pascal Spieß, Consultant bei Hej Talent, mit mehr als 11 Jahren Erfahrung in Beratung und Vertrieb. Schon immer hat mich die Frage angetrieben, wie Unternehmen effizienter, flexibler und erfolgreicher arbeiten können – und genau hier setze ich heute an.",
+          "p2": "Es begeistert mich, gemeinsam mit meinen Kunden in unserem 'RaaS'-Konzept zu arbeiten - schnell, flexibel und kostengünstig.",
+          "p3": "Bei Hej Talent unterstütze ich Unternehmen, den Fachkräftemangel zu überwinden und Prozesse nachhaltig zu optimieren. Gemeinsam mit unseren Kunden integriere ich internationale Remote-Talente – von AI- und Tech-Talenten über Backoffice- und Buchhaltungsprofis bis hin zu IT- und Softwareentwicklern."
+        },
+        "qa": {
+          "q1": "Warum ist das Thema Personal wichtig für mich?",
+          "a1": "Weil die richtige Person am richtigen Ort mehr bewirken kann als jede Strategie. Personal ist nicht nur eine Ressource, sondern das Herzstück jeder Organisation.",
+          "q2": "Was treibt mich bei Hej Talent an?",
+          "a2": "Die Überzeugung, dass Karrieren nicht von Zufällen oder Algorithmen abhängen sollten. Sondern von Begegnungen, die Sinn stiften und Türen öffnen.",
+          "q3": "Meine schönsten Momente bei Hej Talent sind…",
+          "a3": "…wenn Menschen merken: 'Hier werde ich gesehen – so wie ich bin.' Genau dann entstehen Chancen, die weit über den nächsten Job hinausgehen."
+        }
+      }
+    },
+    "milestones": {
+      "2016": {
+        "title": "Gründung von Hej Talent",
+        "desc": "Start als spezialisierte Remote-Recruiting Plattform"
+      },
+      "2021": {
+        "title": "Erste 100 Vermittlungen",
+        "desc": "Erfolgreiche Platzierung von 100+ Remote-Fachkräften"
+      },
+      "2022": {
+        "title": "Internationale Expansion",
+        "desc": "Erweiterung des Netzwerks auf 15+ Länder"
+      },
+      "2023": {
+        "title": "Best Remote Recruiting Platform",
+        "desc": "Auszeichnung als führende Remote-Recruiting Plattform"
+      },
+      "2024": {
+        "title": "500+ Remote-Fachkräfte",
+        "desc": "Über 500 geprüfte internationale Experten im Netzwerk"
+      }
+    },
+    "development": {
+      "title": "Unsere Entwicklung seit 2020"
+    },
+    "why": {
+      "title": "Warum internationale Fachkräfte?",
+      "subtitle": "Der deutsche Fachkräftemangel erfordert neue Lösungen. Unsere internationalen Remote-Experten bieten nicht nur kostengünstige Alternativen, sondern auch frische Perspektiven und Expertise aus globalen Märkten.",
+      "cards": {
+        "0": {
+          "title": "Kosteneinsparung",
+          "desc": "Durchschnittliche Ersparnis gegenüber lokalen Vollzeitkräften"
+        },
+        "1": {
+          "title": "Länder",
+          "desc": "Internationale Expertise aus verschiedenen Zeitzonen"
+        },
+        "2": {
+          "title": "Verfügbarkeit",
+          "desc": "Kontinuierliche Produktivität durch globale Zeitzone-Abdeckung"
+        }
+      }
+    },
+    "cta": {
+      "title": "Bereit für internationale Verstärkung?",
+      "subtitle": "Entdecken Sie, wie unsere internationalen Remote-Fachkräfte Ihr Unternehmen voranbringen können.",
+      "button": "Kostenlose RaaS Anfrage starten"
     }
   },
   "solutionsOverview": {
     "title": "Unsere internationalen Fachkräfte",
     "subtitle": "Qualifizierte Remote-Experten für jeden Bereich - von administrativer Unterstützung bis hin zu komplexen IT- und KI-Projekten.",
-    "ctaTitle": "Nicht sicher, welche internationalen Fachkräfte Sie benötigen?",
+    "solutions": [
+      {
+        "title": "Remote Backoffice-Fachkräfte",
+        "description": "Qualifizierte Remote-Mitarbeiter für Administration, Buchhaltung und operative Unterstützung",
+        "benefits": [
+          "Kosteneinsparung bis zu 60%",
+          "Flexible Arbeitszeiten",
+          "Schnelle Einarbeitung"
+        ],
+        "cta": "Remote Backoffice-Kräfte finden"
+      },
+      {
+        "title": "Remote IT-Entwickler & Tech-Experten",
+        "description": "Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur",
+        "benefits": [
+          "Senior-Level Entwickler",
+          "Agile Remote-Arbeitsweise",
+          "Internationale Zeitzone-Abdeckung"
+        ],
+        "cta": "Remote IT-Experten finden"
+      },
+      {
+        "title": "Remote KI & ML-Spezialisten",
+        "description": "KI-Experten und Data Scientists für Machine Learning und AI-Projekte",
+        "benefits": [
+          "Spezialisierte KI-Expertise",
+          "Proven Track Record",
+          "Modernste Technologien"
+        ],
+        "cta": "Remote KI-Experten finden"
+      }
+    ],
+    "ctaTitle": "Nicht sicher, welche Fachkräfte Sie benötigen?",
     "ctaText": "Lassen Sie uns in einem kostenlosen Beratungsgespräch gemeinsam die passenden Remote-Experten für Ihre Herausforderungen finden.",
     "ctaButton": "Beratungstermin jetzt buchen"
   },

@@ -134,6 +134,11 @@
         "weeks": "Weeks to fill"
       }
     },
+    "about": {
+      "title": "About Hej Talent",
+      "text": "Since 2020, we've been the trusted partner for companies seeking top remote professionals. We focus on thoroughly vetting and placing international remote talent.",
+      "bullets": ["Comprehensive background checks", "Personal support", "Quality guarantee"]
+    },
     "solutions": {
       "title": "Our international professionals",
       "subtitle": "Tailored remote teams for your specific requirements"
@@ -267,8 +272,20 @@
     "cta": "Learn more about our team"
   },
   "solutionsOverview": {
-    "about": {
-      "title": "About Hej Talent",
+    "title": "Our international professionals",
+    "subtitle": "Qualified remote experts for every area – from admin support to complex IT and AI projects.",
+    "solutions": [
+      {"title": "Remote backoffice professionals", "description": "Qualified remote staff for administration, accounting and operational support", "benefits": ["Cost savings up to 60%", "Flexible working hours", "Quick onboarding"], "cta": "Find remote backoffice professionals"},
+      {"title": "Remote IT developers & tech experts", "description": "Experienced remote developers for full-stack, DevOps and software architecture", "benefits": ["Senior-level developers", "Agile remote work approach", "International time zone coverage"], "cta": "Find remote IT experts"},
+      {"title": "Remote AI & ML specialists", "description": "AI experts and data scientists for machine learning and AI projects", "benefits": ["Specialized AI expertise", "Proven track record", "Latest technologies"], "cta": "Find remote AI experts"}
+    ],
+    "ctaTitle": "Not sure which professionals you need?",
+    "ctaText": "Let's find the right remote experts for your challenges in a free consultation.",
+    "ctaButton": "Book a consultation now"
+  },
+  "aboutUs": {
+    "hero": {
+      "title": "About ",
       "text": "Since 2016, we've been the trusted partner for companies seeking top remote professionals. We focus on thoroughly vetting and placing international remote talent.",
       "bullets": ["Comprehensive background checks", "Personal support", "Quality guarantee"]
     },
