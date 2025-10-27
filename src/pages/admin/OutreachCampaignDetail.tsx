@@ -1027,6 +1027,7 @@ export default function OutreachCampaignDetail() {
                 onAddSequence={() => toast({ title: "Sequenz hinzufügen", description: "Feature kommt bald" })}
                 onProcessNow={handleProcessNow}
                 onImportCsv={() => toast({ title: "CSV Import", description: "Feature kommt bald" })}
+                onResetToDraft={() => updateStatusMutation.mutate("draft")}
               />
 
               {campaign.status === "draft" && (
