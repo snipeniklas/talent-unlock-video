@@ -427,6 +427,9 @@ export type Database = {
           phone: string | null
           position: string | null
           priority: string
+          research_last_attempt: string | null
+          research_retry_count: number | null
+          research_status: Database["public"]["Enums"]["research_status"] | null
           status: string
           updated_at: string
           user_id: string | null
@@ -449,6 +452,11 @@ export type Database = {
           phone?: string | null
           position?: string | null
           priority?: string
+          research_last_attempt?: string | null
+          research_retry_count?: number | null
+          research_status?:
+            | Database["public"]["Enums"]["research_status"]
+            | null
           status?: string
           updated_at?: string
           user_id?: string | null
@@ -471,6 +479,11 @@ export type Database = {
           phone?: string | null
           position?: string | null
           priority?: string
+          research_last_attempt?: string | null
+          research_retry_count?: number | null
+          research_status?:
+            | Database["public"]["Enums"]["research_status"]
+            | null
           status?: string
           updated_at?: string
           user_id?: string | null
@@ -1318,6 +1331,12 @@ export type Database = {
       app_role: "admin" | "company_admin" | "user"
       availability_status: "immediately" | "notice_period" | "booked" | "paused"
       proficiency: "basic" | "conversational" | "fluent" | "native"
+      research_status:
+        | "pending"
+        | "processing"
+        | "completed"
+        | "failed"
+        | "skipped"
       seniority: "junior" | "mid" | "senior" | "lead"
     }
     CompositeTypes: {
@@ -1449,6 +1468,13 @@ export const Constants = {
       app_role: ["admin", "company_admin", "user"],
       availability_status: ["immediately", "notice_period", "booked", "paused"],
       proficiency: ["basic", "conversational", "fluent", "native"],
+      research_status: [
+        "pending",
+        "processing",
+        "completed",
+        "failed",
+        "skipped",
+      ],
       seniority: ["junior", "mid", "senior", "lead"],
     },
   },
