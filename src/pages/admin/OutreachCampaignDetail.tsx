@@ -492,6 +492,9 @@ export default function OutreachCampaignDetail() {
 
     // Contacts added
     campaign.outreach_campaign_contacts?.forEach((cc: any) => {
+      // Skip if contact data is missing
+      if (!cc.crm_contacts) return;
+      
       events.push({
         id: `contact-${cc.id}`,
         type: 'contact_added',
@@ -754,7 +757,8 @@ export default function OutreachCampaignDetail() {
   const getFilteredContacts = () => {
     if (!campaign?.outreach_campaign_contacts) return [];
     
-    let filtered = [...campaign.outreach_campaign_contacts];
+    // Filter out contacts without crm_contacts data first
+    let filtered = campaign.outreach_campaign_contacts.filter((cc: any) => cc.crm_contacts);
 
     // Search filter
     if (searchQuery) {
@@ -1257,7 +1261,7 @@ export default function OutreachCampaignDetail() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    {upcomingActivities.map((activity: any) => {
+                    {upcomingActivities?.filter(activity => activity.crm_contacts).map((activity: any) => {
                       const isOverdue = new Date(activity.next_send_date) < new Date();
                       return (
                         <div key={activity.id} className="flex items-start gap-3 p-3 border rounded-lg hover:bg-accent/50 transition-colors">
@@ -1616,12 +1620,20 @@ export default function OutreachCampaignDetail() {
                         />
                         
                         <div className="flex-1 min-w-0">
-                          <p className="font-medium truncate">
-                            {cc.crm_contacts.first_name} {cc.crm_contacts.last_name}
-                          </p>
-                          <p className="text-sm text-muted-foreground truncate">
-                            {cc.crm_contacts.email}
-                          </p>
+                          {cc.crm_contacts ? (
+                            <>
+                              <p className="font-medium truncate">
+                                {cc.crm_contacts.first_name} {cc.crm_contacts.last_name}
+                              </p>
+                              <p className="text-sm text-muted-foreground truncate">
+                                {cc.crm_contacts.email}
+                              </p>
+                            </>
+                          ) : (
+                            <p className="font-medium text-muted-foreground truncate">
+                              Kontakt gelöscht
+                            </p>
+                          )}
                           <div className="flex gap-2 mt-2 flex-wrap">
                             <Tooltip>
                               <TooltipTrigger asChild>
