@@ -68,7 +68,6 @@
       "ctaBadge": "FREE",
       "ctaPrimary": "Start a non-binding RaaS request",
       "ctaSecondary": "Or explore our expertise →",
-      "ctaExploreExpertise": "Explore our expertise →",
       "riskFreeTitle": "✅ 100% free & non-binding",
       "riskFreeText": "Get tailored resource suggestions without any obligation. Cooperation begins only with your approval.",
       "description": "We integrate our remote IT, AI and backoffice staff into your team, saving you at least 30% on personnel costs – 100% flexible via freelance contracts and ready to start within one week.\n\nSubmit your RaaS search request in just 3 minutes and receive non-binding candidate suggestions immediately.",
@@ -90,32 +89,17 @@
       "backoffice": {
         "title": "Remote backoffice professionals",
         "desc": "Qualified remote staff for admin, accounting and operations",
-        "cta": "Get started",
-        "features": [
-          "Office organization & administration",
-          "Accounting & controlling",
-          "Customer service & support"
-        ]
+        "cta": "Get started"
       },
       "it": {
         "title": "Remote IT developers & tech experts",
         "desc": "Experienced remote developers for full stack, DevOps and software architecture",
-        "cta": "Get started",
-        "features": [
-          "Full-stack development",
-          "DevOps & cloud",
-          "Mobile & web apps"
-        ]
+        "cta": "Get started"
       },
       "ai": {
         "title": "Remote AI & ML specialists",
         "desc": "AI experts and data scientists for machine learning and AI projects",
-        "cta": "Get started",
-        "features": [
-          "Machine learning",
-          "Data science",
-          "AI strategy consulting"
-        ]
+        "cta": "Get started"
       }
     },
     "stats": {
@@ -172,88 +156,7 @@
         "primary": "Try for free",
         "secondary": "Go to RaaS Hub"
       }
-    }
-  },
-  "components": {
-    "floatingDemo": {
-      "dashboard": {
-        "title": "RaaS Dashboard",
-        "live": "Live",
-        "activeProjects": "Active Projects",
-        "successRate": "Success Rate",
-        "remoteDevelopers": "Remote Developers",
-        "backofficeStaff": "Backoffice Staff",
-        "active": "active"
-      },
-      "searchRequest": {
-        "title": "New RaaS Request",
-        "pythonDev": "Looking for Python developer",
-        "response24h": "Response expected in 24h",
-        "candidatesFound": "{count} candidates found",
-        "viewDetails": "View details"
-      },
-      "resourcePool": {
-        "title": "Resource Pool",
-        "availableExperts": "Available experts",
-        "aiMlExperts": "AI/ML Experts",
-        "fullstackDev": "Fullstack Dev",
-        "backoffice": "Backoffice"
-      },
-      "performance": {
-        "title": "Performance",
-        "thisMonth": "+15% this month",
-        "successfulMatches": "Successful Matches",
-        "avgPlacementTime": "Avg. Placement Time",
-        "weeks": "weeks",
-        "customerSatisfaction": "Customer Satisfaction"
-      },
-      "notification": {
-        "matchFound": "Match found!",
-        "perfectMatch": "Perfect Python developer for your AI project available. 5⭐ rating, ready to start immediately.",
-        "viewProfile": "View profile",
-        "later": "Later"
-      },
-      "cta": "Start RaaS request"
     },
-    "projectTimeline": {
-      "title": "Schedule",
-      "processWeeks": "{weeks} week process",
-      "weekLabels": ["Opt. Week 1", "Week 1", "Week 2", "Week 3"],
-      "optional": "(optional)",
-      "activities": {
-        "consultation": {
-          "title": "Consultation",
-          "description": "Analysis of your requirements and objectives"
-        },
-        "requirements": {
-          "title": "Requirement gathering",
-          "description": "Detailed specification of needed expertise"
-        },
-        "candidates": {
-          "title": "Candidate proposal",
-          "description": "Presentation of suitable remote experts"
-        },
-        "selection": {
-          "title": "Selection process",
-          "description": "Interviews and final candidate selection"
-        },
-        "implementation": {
-          "title": "Implementation support",
-          "description": "Onboarding and continuous assistance"
-        }
-      },
-      "duration": {
-        "days": "max. {days} days",
-        "day": "max. 1 day"
-      },
-      "milestones": {
-        "kickoff": "Kickoff",
-        "firstDay": "1st Working Day"
-      },
-      "cta": "Start project now"
-    }
-  },
-  "solutionsOverview": {
     "about": {
       "title": "About Hej Talent",
       "text": "Since 2016, we've been the trusted partner for companies seeking top remote professionals. We focus on thoroughly vetting and placing international remote talent.",

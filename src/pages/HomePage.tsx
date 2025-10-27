@@ -223,7 +223,7 @@ const HomePage = () => {
                       className="text-xs text-primary hover:bg-primary/10 px-2 py-1.5"
                       onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
                     >
-                      <span className="text-center">{t('home.hero.ctaExploreExpertise', 'Expertise entdecken →')}</span>
+                      <span className="text-center">Expertise entdecken →</span>
                     </Button>
                   </div>
                 </div>
