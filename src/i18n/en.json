@@ -144,7 +144,48 @@
       },
       "floatingDemo": {
         "title": "Experience RaaS in action",
-        "description": "See how our intelligent system processes your resource requests in real time and finds the perfect remote experts for you."
+        "description": "See how our intelligent system processes your resource requests in real time and finds the perfect remote experts for you.",
+        "cards": {
+          "dashboard": {
+            "title": "RaaS Dashboard",
+            "live": "Live",
+            "activeProjects": "Active Projects",
+            "successRate": "Success Rate",
+            "remoteDevelopers": "Remote Developers",
+            "developersActive": "active",
+            "backofficeStaff": "Backoffice Staff",
+            "staffActive": "active"
+          },
+          "request": {
+            "title": "New RaaS Request",
+            "subtitle": "Python Developer Wanted",
+            "response24h": "Response in 24h expected",
+            "candidatesFound": "Candidates found",
+            "viewDetails": "View Details"
+          },
+          "resourcePool": {
+            "title": "Resource Pool",
+            "subtitle": "Available Experts",
+            "aiExperts": "AI/ML Experts",
+            "fullstackDev": "Fullstack Dev",
+            "backoffice": "Backoffice"
+          },
+          "performance": {
+            "title": "Performance",
+            "increase": "+15% this month",
+            "successfulMatches": "Successful Matches",
+            "avgPlacement": "Avg. Placement Time",
+            "weeks": "weeks",
+            "satisfaction": "Customer Satisfaction"
+          },
+          "notification": {
+            "title": "Match found!",
+            "description": "Perfect Python developer for your AI project available. 5⭐ rating, ready to start immediately.",
+            "viewProfile": "View Profile",
+            "later": "Later"
+          },
+          "cta": "Start RaaS Request"
+        }
       },
       "timeline": {
         "title": "Your path to the perfect remote experts",

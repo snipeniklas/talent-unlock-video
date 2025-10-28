@@ -144,7 +144,48 @@
       },
       "floatingDemo": {
         "title": "Erleben Sie RaaS in Aktion",
-        "description": "Sehen Sie, wie unser intelligentes System Ihre Ressourcen-Anfragen in Echtzeit bearbeitet und die perfekten Remote-Experten für Sie findet."
+        "description": "Sehen Sie, wie unser intelligentes System Ihre Ressourcen-Anfragen in Echtzeit bearbeitet und die perfekten Remote-Experten für Sie findet.",
+        "cards": {
+          "dashboard": {
+            "title": "RaaS Dashboard",
+            "live": "Live",
+            "activeProjects": "Aktive Projekte",
+            "successRate": "Erfolgsrate",
+            "remoteDevelopers": "Remote-Entwickler",
+            "developersActive": "aktiv",
+            "backofficeStaff": "Backoffice-Kräfte",
+            "staffActive": "aktiv"
+          },
+          "request": {
+            "title": "Neue RaaS Anfrage",
+            "subtitle": "Python Entwickler gesucht",
+            "response24h": "Antwort in 24h erwartet",
+            "candidatesFound": "Kandidaten gefunden",
+            "viewDetails": "Details ansehen"
+          },
+          "resourcePool": {
+            "title": "Ressourcen Pool",
+            "subtitle": "Verfügbare Experten",
+            "aiExperts": "AI/ML Experten",
+            "fullstackDev": "Fullstack Dev",
+            "backoffice": "Backoffice"
+          },
+          "performance": {
+            "title": "Performance",
+            "increase": "+15% diesen Monat",
+            "successfulMatches": "Erfolgreiche Matches",
+            "avgPlacement": "Ø Besetzungszeit",
+            "weeks": "Wochen",
+            "satisfaction": "Kundenzufriedenheit"
+          },
+          "notification": {
+            "title": "Match gefunden!",
+            "description": "Perfekter Python-Entwickler für Ihr KI-Projekt verfügbar. 5⭐ Bewertung, sofort startbereit.",
+            "viewProfile": "Profil ansehen",
+            "later": "Später"
+          },
+          "cta": "RaaS Anfrage starten"
+        }
       },
       "timeline": {
         "title": "Ihr Weg zu den perfekten Remote-Experten",
