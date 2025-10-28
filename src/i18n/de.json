@@ -522,7 +522,36 @@
       "titleSuffix": "Prozess in 4 Schritten",
       "subtitle": "Klicken Sie auf einen Schritt, um die entsprechende App-Ansicht zu sehen"
     },
-    "steps": [],
+      "steps": [
+        {
+          "step": "01",
+          "title": "Bedarfsanalyse",
+          "description": "Verstehen Ihrer Anforderungen",
+          "details": "In einem ausführlichen Gespräch analysieren wir Ihre aktuellen Herausforderungen, gewünschten Skills und Budget. Wir identifizieren die Art der Remote-Fachkräfte, die Sie benötigen.",
+          "timeline": "1-2 Tage"
+        },
+        {
+          "step": "02",
+          "title": "Kandidaten-Matching",
+          "description": "Passende Remote-Experten finden",
+          "details": "Basierend auf Ihrer Bedarfsanalyse präsentieren wir Ihnen 3-5 vorqualifizierte Remote-Kandidaten aus unserem Netzwerk. Jeder Kandidat wird sorgfältig auf Ihre Anforderungen abgestimmt.",
+          "timeline": "3-5 Tage"
+        },
+        {
+          "step": "03",
+          "title": "Interview & Auswahl",
+          "description": "Kennenlernen und Entscheidung",
+          "details": "Sie führen Interviews mit den vorgeschlagenen Kandidaten durch. Wir unterstützen Sie beim gesamten Auswahlprozess und bei Vertragsverhandlungen.",
+          "timeline": "1 Woche"
+        },
+        {
+          "step": "04",
+          "title": "Onboarding & Support",
+          "description": "Erfolgreiche Integration sicherstellen",
+          "details": "Wir begleiten das Onboarding Ihrer neuen Remote-Fachkraft und stehen bei Fragen zur Verfügung. Regelmäßige Check-ins sorgen für eine reibungslose Zusammenarbeit.",
+          "timeline": "Laufend"
+        }
+      ],
     "appScreen": {
       "step": "Schritt",
       "desc": "Sehen Sie hier, wie {step} in unserem RaaS Hub funktioniert"

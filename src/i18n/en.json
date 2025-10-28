@@ -521,7 +521,36 @@
       "titleSuffix": "process in 4 steps",
       "subtitle": "Click on a step to see the corresponding app view"
     },
-    "steps": [],
+      "steps": [
+        {
+          "step": "01",
+          "title": "Needs Analysis",
+          "description": "Understanding your requirements",
+          "details": "In a detailed conversation, we analyze your current challenges, desired skills, and budget. We identify the type of remote professionals you need.",
+          "timeline": "1-2 days"
+        },
+        {
+          "step": "02",
+          "title": "Candidate Matching",
+          "description": "Finding suitable remote experts",
+          "details": "Based on your needs analysis, we present you with 3-5 pre-qualified remote candidates from our network. Each candidate is carefully matched to your requirements.",
+          "timeline": "3-5 days"
+        },
+        {
+          "step": "03",
+          "title": "Interview & Selection",
+          "description": "Getting to know and deciding",
+          "details": "You conduct interviews with the proposed candidates. We support you throughout the selection process and contract negotiations.",
+          "timeline": "1 week"
+        },
+        {
+          "step": "04",
+          "title": "Onboarding & Support",
+          "description": "Ensuring successful integration",
+          "details": "We accompany the onboarding of your new remote professional and are available for questions. Regular check-ins ensure smooth collaboration.",
+          "timeline": "Ongoing"
+        }
+      ],
     "appScreen": {
       "step": "Step",
       "desc": "See here how {step} works in our RaaS Hub"
