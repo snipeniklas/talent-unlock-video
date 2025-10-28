@@ -48,16 +48,32 @@ serve(async (req) => {
       .eq("user_id", campaign.created_by)
       .single();
 
-    // Get MS365 token for the campaign creator
-    const { data: token, error: tokenError } = await supabase
+    // Call token refresh function to ensure token is valid
+    console.log(`🔄 Checking MS365 token for user ${campaign.created_by}...`);
+
+    const refreshResponse = await supabase.functions.invoke("ms365-refresh-token", {
+      body: { userId: campaign.created_by }
+    });
+
+    if (refreshResponse.error || !refreshResponse.data?.success) {
+      console.error(`❌ Failed to refresh/validate MS365 token:`, refreshResponse.error);
+      throw new Error("MS365 token refresh failed. Please reconnect your Microsoft 365 account.");
+    }
+
+    console.log(`✅ MS365 token valid for user ${campaign.created_by}`);
+
+    // Get the fresh token from the database
+    const { data: tokenData, error: tokenError } = await supabase
       .from("ms365_tokens")
-      .select("*")
+      .select("access_token")
       .eq("user_id", campaign.created_by)
       .single();
 
-    if (tokenError || !token) {
+    if (tokenError || !tokenData) {
       throw new Error("MS365 integration not configured for this user");
     }
+
+    const validToken = tokenData.access_token;
 
     // Get user email settings
     const { data: emailSettings } = await supabase
@@ -217,7 +233,7 @@ Generiere jetzt eine personalisierte E-Mail basierend auf diesen Informationen.`
       const sendResponse = await fetch("https://graph.microsoft.com/v1.0/me/sendMail", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${token.access_token}`,
+          "Authorization": `Bearer ${validToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
