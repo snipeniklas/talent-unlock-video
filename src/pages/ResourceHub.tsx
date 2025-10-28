@@ -307,22 +307,22 @@ const ResourceHub = () => {
                   <div className="flex items-start gap-3">
                     <TrendingUp className="w-5 h-5 text-green-500 mt-0.5" />
                     <div>
-                      <div className="font-medium">ROI-Tracking</div>
-                      <div className="text-sm text-muted-foreground">{t('resourceHub.analytics.roi', 'Messbare Kosteneinsparungen und Effizienzsteigerungen')}</div>
+                      <div className="font-medium">{t('resourceHub.management.roiTracking.title', 'ROI-Tracking')}</div>
+                      <div className="text-sm text-muted-foreground">{t('resourceHub.management.roiTracking.desc', 'Messbare Kosteneinsparungen und Effizienzsteigerungen')}</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <BarChart className="w-5 h-5 text-purple-500 mt-0.5" />
                     <div>
-                      <div className="font-medium">Performance Analytics</div>
-                      <div className="text-sm text-muted-foreground">{t('resourceHub.management.perf', 'Detaillierte Service-Leistungsbewertungen')}</div>
+                      <div className="font-medium">{t('resourceHub.management.performanceAnalytics.title', 'Performance Analytics')}</div>
+                      <div className="text-sm text-muted-foreground">{t('resourceHub.management.performanceAnalytics.desc', 'Detaillierte Service-Leistungsbewertungen')}</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Target className="w-5 h-5 text-blue-500 mt-0.5" />
                     <div>
-                      <div className="font-medium">Business Impact</div>
-                      <div className="text-sm text-muted-foreground">{t('resourceHub.management.impact', 'Konkrete Verbesserungen Ihrer Geschäftsprozesse')}</div>
+                      <div className="font-medium">{t('resourceHub.management.businessImpact.title', 'Business Impact')}</div>
+                      <div className="text-sm text-muted-foreground">{t('resourceHub.management.businessImpact.desc', 'Konkrete Verbesserungen Ihrer Geschäftsprozesse')}</div>
                     </div>
                   </div>
                 </div>

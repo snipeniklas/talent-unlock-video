@@ -648,15 +648,29 @@
       ],
       "kpis": {"mrr": "Monthly services", "sla": "SLA fulfillment", "response": "Avg. response"}
     },
-    "management": {
-      "title": "Service management made easy",
-      "text": "Keep track of all your remote services. From AI projects to backoffice automation – everything centrally managed with real-time status and performance metrics.",
-      "bullets": [
-        {"title": "Service portfolio overview", "desc": "All running services at a glance"},
-        {"title": "Real-time performance", "desc": "SLA tracking and delivery status"},
-        {"title": "Cost transparency", "desc": "Clear breakdown of all service costs"}
-      ]
-    },
+      "management": {
+        "title": "Service management made easy",
+        "text": "Keep track of all your remote services. From AI projects to backoffice automation – everything centrally managed with real-time status and performance metrics.",
+        "bullets": [
+          {"title": "Service portfolio overview", "desc": "All running services at a glance"},
+          {"title": "Real-time performance", "desc": "SLA tracking and delivery status"},
+          {"title": "Cost transparency", "desc": "Clear breakdown of all service costs"}
+        ],
+        "title2": "Measurable business success",
+        "text2": "Track the ROI of your RaaS services with detailed performance metrics. See how remote services transform your business.",
+        "roiTracking": {
+          "title": "ROI tracking",
+          "desc": "Measurable cost savings and efficiency gains"
+        },
+        "performanceAnalytics": {
+          "title": "Performance analytics",
+          "desc": "Detailed service performance evaluations"
+        },
+        "businessImpact": {
+          "title": "Business impact",
+          "desc": "Concrete improvements to your business processes"
+        }
+      },
     "request": {
       "title": "Request new RaaS services",
       "text": "Describe your business problem and receive tailored service solutions. Our AI system automatically matches you with the right expert teams.",

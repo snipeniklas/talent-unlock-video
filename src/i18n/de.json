@@ -649,15 +649,29 @@
       ],
       "kpis": {"mrr": "Monatl. Services", "sla": "SLA Erfüllung", "response": "Avg. Response"}
     },
-    "management": {
-      "title": "Service-Management leicht gemacht",
-      "text": "Behalten Sie den Überblick über alle Ihre Remote-Services. Von KI-Projekten bis hin zu Backoffice-Automation - alles zentral verwaltet mit Echtzeit-Status und Performance-Metriken.",
-      "bullets": [
-        {"title": "Service-Portfolio Übersicht", "desc": "Alle laufenden Services auf einen Blick"},
-        {"title": "Echtzeit Performance", "desc": "SLA-Tracking und Delivery-Status"},
-        {"title": "Kosten-Transparenz", "desc": "Klare Aufschlüsselung aller Service-Kosten"}
-      ]
-    },
+      "management": {
+        "title": "Service-Management leicht gemacht",
+        "text": "Behalten Sie den Überblick über alle Ihre Remote-Services. Von KI-Projekten bis hin zu Backoffice-Automation - alles zentral verwaltet mit Echtzeit-Status und Performance-Metriken.",
+        "bullets": [
+          {"title": "Service-Portfolio Übersicht", "desc": "Alle laufenden Services auf einen Blick"},
+          {"title": "Echtzeit Performance", "desc": "SLA-Tracking und Delivery-Status"},
+          {"title": "Kosten-Transparenz", "desc": "Klare Aufschlüsselung aller Service-Kosten"}
+        ],
+        "title2": "Messbare Business-Erfolge",
+        "text2": "Verfolgen Sie den ROI Ihrer RaaS Services mit detaillierten Performance-Metriken. Sehen Sie, wie Remote-Services Ihr Business transformieren.",
+        "roiTracking": {
+          "title": "ROI-Tracking",
+          "desc": "Messbare Kosteneinsparungen und Effizienzsteigerungen"
+        },
+        "performanceAnalytics": {
+          "title": "Performance Analytics",
+          "desc": "Detaillierte Service-Leistungsbewertungen"
+        },
+        "businessImpact": {
+          "title": "Business Impact",
+          "desc": "Konkrete Verbesserungen Ihrer Geschäftsprozesse"
+        }
+      },
     "request": {
       "title": "Neue RaaS Services anfragen",
       "text": "Beschreiben Sie Ihr Business-Problem und erhalten Sie maßgeschneiderte Service-Lösungen. Unser KI-System matched Sie automatisch mit den passenden Experten-Teams.",
