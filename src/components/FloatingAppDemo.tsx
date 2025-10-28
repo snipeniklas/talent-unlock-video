@@ -209,16 +209,16 @@ const FloatingAppDemo: React.FC<FloatingAppDemoProps> = ({ title, description })
                 <CheckCircle className="w-5 h-5 text-primary" />
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold mb-1">{get('home.floatingDemo.cards.notification.title')}</h4>
+                <h4 className="font-semibold mb-1">{get('home.hub.floatingDemo.cards.notification.title')}</h4>
                 <p className="text-sm text-muted-foreground mb-3">
-                  {get('home.floatingDemo.cards.notification.description')}
+                  {get('home.hub.floatingDemo.cards.notification.description')}
                 </p>
                 <div className="flex gap-2">
                   <Button size="sm" className="bg-gradient-primary border-0">
-                    {get('home.floatingDemo.cards.notification.viewProfile')}
+                    {get('home.hub.floatingDemo.cards.notification.viewProfile')}
                   </Button>
                   <Button size="sm" variant="ghost">
-                    {get('home.floatingDemo.cards.notification.later')}
+                    {get('home.hub.floatingDemo.cards.notification.later')}
                   </Button>
                 </div>
               </div>
