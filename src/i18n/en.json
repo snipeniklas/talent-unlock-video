@@ -683,6 +683,7 @@
         "title": "New service request",
         "subtitle": "Describe the problem",
         "example": "Automate our invoice processing with AI-based data extraction",
+        "exampleLabel": "What would you like to achieve?",
         "type": "Desired service type",
         "tags": ["Backoffice automation", "AI/ML"],
         "timeline": "Timeline & budget",
@@ -716,6 +717,12 @@
         "subtitle": "All services monitored",
         "badges": ["GDPR", "ISO 27001", "SOC 2"],
         "uptime": {"title": "Service uptime", "value": "99.97%", "caption": "Last 12 months"}
+      },
+      "items": {
+        "encrypt": "Service data encryption",
+        "mfa": "Multi-factor authentication",
+        "audit": "Audit logs & monitoring",
+        "sla": "Service SLA monitoring"
       }
     },
     "mainCta": {

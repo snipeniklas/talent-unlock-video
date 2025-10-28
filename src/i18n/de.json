@@ -684,6 +684,7 @@
         "title": "Neue Service-Anfrage",
         "subtitle": "Problem beschreiben",
         "example": "Automatisierung unserer Rechnungsverarbeitung mit KI-basierter Datenextraktion",
+        "exampleLabel": "Was möchten Sie erreichen?",
         "type": "Gewünschter Service-Typ",
         "tags": ["Backoffice Automation", "KI/ML"],
         "timeline": "Timeline & Budget",
@@ -717,6 +718,12 @@
         "subtitle": "Alle Services überwacht",
         "badges": ["DSGVO", "ISO 27001", "SOC 2"],
         "uptime": {"title": "Service Uptime", "value": "99.97%", "caption": "Letzte 12 Monate"}
+      },
+      "items": {
+        "encrypt": "Service-Datenverschlüsselung",
+        "mfa": "Multi-Factor Authentication",
+        "audit": "Audit Logs & Monitoring",
+        "sla": "Service SLA Monitoring"
       }
     },
     "mainCta": {
