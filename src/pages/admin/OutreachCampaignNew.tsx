@@ -103,15 +103,33 @@ Wichtig:
     const totalEmails = numFollowUps + 1;
     
     if (emailSequences.length !== totalEmails) {
-      const newSequences = Array.from({ length: totalEmails }, (_, i) => ({
-        sequence_number: i + 1,
-        subject_template: getDefaultSubjectPrompt(i + 1),
-        body_template: getDefaultBodyPrompt(i + 1),
-        delay_days: i === 0 ? 0 : 3,
-      }));
-      setEmailSequences(newSequences);
+      setEmailSequences(prev => {
+        // Wenn wir MEHR Emails brauchen: Alte behalten + Neue hinzufügen
+        if (totalEmails > prev.length) {
+          const newSequences = Array.from(
+            { length: totalEmails - prev.length },
+            (_, i) => {
+              const seqNum = prev.length + i + 1;
+              return {
+                sequence_number: seqNum,
+                subject_template: getDefaultSubjectPrompt(seqNum),
+                body_template: getDefaultBodyPrompt(seqNum),
+                delay_days: 3,
+              };
+            }
+          );
+          return [...prev, ...newSequences];
+        }
+        
+        // Wenn wir WENIGER Emails brauchen: Letzte entfernen
+        if (totalEmails < prev.length) {
+          return prev.slice(0, totalEmails);
+        }
+        
+        return prev;
+      });
     }
-  }, [numFollowUps]);
+  }, [numFollowUps, emailSequences.length]);
 
   const { data: contacts } = useQuery({
     queryKey: ["crm-contacts"],
