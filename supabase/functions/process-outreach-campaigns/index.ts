@@ -476,9 +476,9 @@ ${contactResearch.summary ? `- Zusammenfassung: ${contactResearch.summary}` : ''
 ${contactResearch.professional_background ? `- Beruflicher Hintergrund: ${contactResearch.professional_background}` : ''}
 ${contactResearch.current_role_details ? `- Aktuelle Position: ${contactResearch.current_role_details}` : ''}
 ${contactResearch.recent_activities ? `- Aktuelle Aktivitäten: ${contactResearch.recent_activities}` : ''}
-${contactResearch.key_facts?.length > 0 ? `- Key Facts: ${contactResearch.key_facts.join(', ')}` : ''}
-${contactResearch.talking_points?.length > 0 ? `- Gesprächsansätze: ${contactResearch.talking_points.join(', ')}` : ''}
-${contactResearch.interests?.length > 0 ? `- Interessen: ${contactResearch.interests.join(', ')}` : ''}
+${contactResearch.key_facts ? `- Key Facts: ${Array.isArray(contactResearch.key_facts) ? contactResearch.key_facts.join(', ') : contactResearch.key_facts}` : ''}
+${contactResearch.talking_points ? `- Gesprächsansätze: ${Array.isArray(contactResearch.talking_points) ? contactResearch.talking_points.join(', ') : contactResearch.talking_points}` : ''}
+${contactResearch.interests ? `- Interessen: ${Array.isArray(contactResearch.interests) ? contactResearch.interests.join(', ') : contactResearch.interests}` : ''}
 `;
       }
       
@@ -489,9 +489,9 @@ UNTERNEHMENS RESEARCH-DATEN:
 ${companyResearch.company_overview ? `- Überblick: ${companyResearch.company_overview}` : ''}
 ${companyResearch.recent_news ? `- Aktuelle News: ${companyResearch.recent_news}` : ''}
 ${companyResearch.products_services ? `- Produkte & Services: ${companyResearch.products_services}` : ''}
-${companyResearch.growth_signals?.length > 0 ? `- Wachstumssignale: ${companyResearch.growth_signals.join(', ')}` : ''}
-${companyResearch.pain_points?.length > 0 ? `- Potenzielle Pain Points: ${companyResearch.pain_points.join(', ')}` : ''}
-${companyResearch.competitors?.length > 0 ? `- Wettbewerber: ${companyResearch.competitors.join(', ')}` : ''}
+${companyResearch.growth_signals ? `- Wachstumssignale: ${Array.isArray(companyResearch.growth_signals) ? companyResearch.growth_signals.join(', ') : companyResearch.growth_signals}` : ''}
+${companyResearch.pain_points ? `- Potenzielle Pain Points: ${Array.isArray(companyResearch.pain_points) ? companyResearch.pain_points.join(', ') : companyResearch.pain_points}` : ''}
+${companyResearch.competitors ? `- Wettbewerber: ${Array.isArray(companyResearch.competitors) ? companyResearch.competitors.join(', ') : companyResearch.competitors}` : ''}
 `;
       }
       
