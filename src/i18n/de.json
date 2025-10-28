@@ -304,7 +304,95 @@
         "phone": "Telefon",
         "description": "Beschreiben Sie Ihren Remote-Fachkräfte-Bedarf..."
       },
-      "submit": "Jetzt kostenfrei Suchauftrag einstellen"
+      "submit": "Jetzt kostenfrei Suchauftrag einstellen",
+      "buttonText": "Jetzt starten"
+    }
+  },
+  "miniTeam": {
+    "title": "Die Köpfe hinter Hej Talent",
+    "subtitle": "Lernen Sie unsere Gründer kennen und erfahren Sie mehr über unsere Vision",
+    "joachim": {
+      "role": "Gründer & Geschäftsführer",
+      "quote": "Mit unserem RaaS-Konzept denken wir HR-Prozesse neu: frischer, smarter, einfach besser!"
+    },
+    "pascal": {
+      "role": "Co-Gründer & Head of Talent",
+      "quote": "Echte Verbindungen zwischen Unternehmen und Talenten schaffen – das ist unser Antrieb."
+    },
+    "cta": "Mehr über unser Team erfahren"
+  },
+  "interactiveAppScreen": {
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Übersicht Ihrer RaaS-Aktivitäten",
+      "button": "Ressource anfragen",
+      "stats": {
+        "activeProjects": "Aktive Projekte",
+        "assignedResources": "Zugeteilte Ressourcen",
+        "completedProjects": "Abgeschlossene Projekte",
+        "waitingResources": "Wartende Ressourcen"
+      },
+      "recentActivity": "Aktuelle Aktivitäten",
+      "activities": {
+        "resourceAssigned": "Neue Ressource für AI-Entwickler Projekt zugewiesen",
+        "requestUpdated": "Ressourcenanfrage 'Data Science Spezialist' aktualisiert",
+        "projectCompleted": "Projekt 'Buchhaltungs-Ressource' erfolgreich abgeschlossen"
+      },
+      "time": {
+        "hours2": "vor 2h",
+        "hours4": "vor 4h",
+        "day1": "vor 1d"
+      }
+    },
+    "searchRequests": {
+      "title": "Suchaufträge",
+      "button": "Neuen Auftrag erstellen",
+      "tabs": {
+        "all": "Alle",
+        "active": "Aktiv",
+        "completed": "Abgeschlossen"
+      },
+      "status": {
+        "active": "Aktiv",
+        "completed": "Abgeschlossen"
+      },
+      "resources": "Ressourcen",
+      "mockData": {
+        "aiDeveloper": "Remote AI Entwickler (Python)",
+        "accounting": "Buchhaltungs-Ressource Teilzeit",
+        "dataScience": "Data Science Spezialist",
+        "techCorp": "TechCorp GmbH",
+        "startupTech": "StartupTech",
+        "dataCorp": "DataCorp",
+        "remote": "Remote",
+        "ago2days": "vor 2 Tagen",
+        "ago1week": "vor 1 Woche",
+        "ago2weeks": "vor 2 Wochen"
+      }
+    },
+    "resources": {
+      "title": "Verfügbare Ressourcen",
+      "button": "Alle anzeigen",
+      "availability": {
+        "immediate": "Sofort verfügbar",
+        "in2weeks": "In 2 Wochen",
+        "in1month": "In 1 Monat"
+      }
+    },
+    "admin": {
+      "title": "Admin Dashboard",
+      "badge": "Hej Talent Admin",
+      "stats": {
+        "companies": "Registrierte Unternehmen",
+        "resources": "Verfügbare Ressourcen"
+      },
+      "management": "Verwaltung",
+      "items": {
+        "userManagement": "Benutzerverwaltung",
+        "companyManagement": "Unternehmen verwalten",
+        "resourceAllocation": "Ressourcen zuweisen",
+        "analytics": "Analytics & Reports"
+      }
     }
   },
   "aboutUs": {

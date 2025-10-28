@@ -88,7 +88,7 @@ const ContactCTA = () => {
                 source="contact-cta"
                 trigger={
                   <Button className="w-full bg-gradient-primary hover:shadow-xl transition-all duration-300 text-xs sm:text-sm md:text-base py-2.5 sm:py-3 md:py-4 border-0 h-auto max-w-full">
-                    <span className="truncate block">Jetzt starten</span>
+                    <span className="truncate block">{t('contactCTA.form.buttonText', 'Jetzt starten')}</span>
                     <ArrowRight className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 ml-1 sm:ml-2 flex-shrink-0" />
                   </Button>
                 }

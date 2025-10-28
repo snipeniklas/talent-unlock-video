@@ -18,6 +18,7 @@ import {
   Clock,
   CheckCircle
 } from "lucide-react";
+import { useTranslation } from '@/i18n/i18n';
 
 interface InteractiveScreenProps {
   title: string;
@@ -26,36 +27,37 @@ interface InteractiveScreenProps {
 }
 
 const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, description, screen }) => {
+  const { get } = useTranslation();
   const [activeTab, setActiveTab] = useState("all");
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
   const mockSearchRequests = [
     {
       id: 1,
-      title: "Remote AI Entwickler (Python)",
-      company: "TechCorp GmbH",
-      location: "Remote",
+      title: get('interactiveAppScreen.searchRequests.mockData.aiDeveloper', 'Remote AI Entwickler (Python)'),
+      company: get('interactiveAppScreen.searchRequests.mockData.techCorp', 'TechCorp GmbH'),
+      location: get('interactiveAppScreen.searchRequests.mockData.remote', 'Remote'),
       status: "active",
       resources: 2,
-      created: "vor 2 Tagen"
+      created: get('interactiveAppScreen.searchRequests.mockData.ago2days', 'vor 2 Tagen')
     },
     {
       id: 2,
-      title: "Buchhaltungs-Ressource Teilzeit",
-      company: "StartupTech",
-      location: "Remote",
+      title: get('interactiveAppScreen.searchRequests.mockData.accounting', 'Buchhaltungs-Ressource Teilzeit'),
+      company: get('interactiveAppScreen.searchRequests.mockData.startupTech', 'StartupTech'),
+      location: get('interactiveAppScreen.searchRequests.mockData.remote', 'Remote'),
       status: "active", 
       resources: 1,
-      created: "vor 1 Woche"
+      created: get('interactiveAppScreen.searchRequests.mockData.ago1week', 'vor 1 Woche')
     },
     {
       id: 3,
-      title: "Data Science Spezialist",
-      company: "DataCorp",
-      location: "Remote",
+      title: get('interactiveAppScreen.searchRequests.mockData.dataScience', 'Data Science Spezialist'),
+      company: get('interactiveAppScreen.searchRequests.mockData.dataCorp', 'DataCorp'),
+      location: get('interactiveAppScreen.searchRequests.mockData.remote', 'Remote'),
       status: "completed",
       resources: 1,
-      created: "vor 2 Wochen"
+      created: get('interactiveAppScreen.searchRequests.mockData.ago2weeks', 'vor 2 Wochen')
     }
   ];
 
@@ -67,7 +69,7 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       location: "Berlin",
       rating: 5,
       skills: ["Python", "TensorFlow", "AWS"],
-      availability: "Sofort verfügbar",
+      availability: get('interactiveAppScreen.resources.availability.immediate', 'Sofort verfügbar'),
       hourlyRate: "€45-65/h"
     },
     {
@@ -77,7 +79,7 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       location: "Hamburg", 
       rating: 4,
       skills: ["SAP", "DATEV", "Excel"],
-      availability: "In 2 Wochen",
+      availability: get('interactiveAppScreen.resources.availability.in2weeks', 'In 2 Wochen'),
       hourlyRate: "€25-35/h"
     },
     {
@@ -87,7 +89,7 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       location: "München",
       rating: 5,
       skills: ["R", "SQL", "Machine Learning"],
-      availability: "In 1 Monat",
+      availability: get('interactiveAppScreen.resources.availability.in1month', 'In 1 Monat'),
       hourlyRate: "€55-75/h"
     }
   ];
@@ -97,12 +99,12 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       {/* Dashboard Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h3 className="text-xl font-semibold">Dashboard</h3>
-          <p className="text-muted-foreground">Übersicht Ihrer RaaS-Aktivitäten</p>
+          <h3 className="text-xl font-semibold">{get('interactiveAppScreen.dashboard.title', 'Dashboard')}</h3>
+          <p className="text-muted-foreground">{get('interactiveAppScreen.dashboard.subtitle', 'Übersicht Ihrer RaaS-Aktivitäten')}</p>
         </div>
         <Button size="sm">
           <FileText className="w-4 h-4 mr-2" />
-          Ressource anfragen
+          {get('interactiveAppScreen.dashboard.button', 'Ressource anfragen')}
         </Button>
       </div>
 
@@ -110,29 +112,29 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
       <div className="grid grid-cols-4 gap-3 mb-6">
         <div className="bg-blue-50 dark:bg-blue-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-blue-600">3</div>
-          <div className="text-xs text-muted-foreground">Aktive Projekte</div>
+          <div className="text-xs text-muted-foreground">{get('interactiveAppScreen.dashboard.stats.activeProjects', 'Aktive Projekte')}</div>
         </div>
         <div className="bg-green-50 dark:bg-green-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-green-600">8</div>
-          <div className="text-xs text-muted-foreground">Zugeteilte Ressourcen</div>
+          <div className="text-xs text-muted-foreground">{get('interactiveAppScreen.dashboard.stats.assignedResources', 'Zugeteilte Ressourcen')}</div>
         </div>
         <div className="bg-purple-50 dark:bg-purple-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-purple-600">4</div>
-          <div className="text-xs text-muted-foreground">Abgeschlossene Projekte</div>
+          <div className="text-xs text-muted-foreground">{get('interactiveAppScreen.dashboard.stats.completedProjects', 'Abgeschlossene Projekte')}</div>
         </div>
         <div className="bg-orange-50 dark:bg-orange-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-orange-600">2</div>
-          <div className="text-xs text-muted-foreground">Wartende Ressourcen</div>
+          <div className="text-xs text-muted-foreground">{get('interactiveAppScreen.dashboard.stats.waitingResources', 'Wartende Ressourcen')}</div>
         </div>
       </div>
 
       {/* Recent Activity */}
       <div className="space-y-2">
-        <h4 className="font-medium text-sm">Aktuelle Aktivitäten</h4>
+        <h4 className="font-medium text-sm">{get('interactiveAppScreen.dashboard.recentActivity', 'Aktuelle Aktivitäten')}</h4>
         {[
-          { icon: UserCheck, text: "Neue Ressource für AI-Entwickler Projekt zugewiesen", time: "vor 2h", color: "text-green-600" },
-          { icon: FileText, text: "Ressourcenanfrage 'Data Science Spezialist' aktualisiert", time: "vor 4h", color: "text-blue-600" },
-          { icon: CheckCircle, text: "Projekt 'Buchhaltungs-Ressource' erfolgreich abgeschlossen", time: "vor 1d", color: "text-purple-600" }
+          { icon: UserCheck, text: get('interactiveAppScreen.dashboard.activities.resourceAssigned', 'Neue Ressource für AI-Entwickler Projekt zugewiesen'), time: get('interactiveAppScreen.dashboard.time.hours2', 'vor 2h'), color: "text-green-600" },
+          { icon: FileText, text: get('interactiveAppScreen.dashboard.activities.requestUpdated', "Ressourcenanfrage 'Data Science Spezialist' aktualisiert"), time: get('interactiveAppScreen.dashboard.time.hours4', 'vor 4h'), color: "text-blue-600" },
+          { icon: CheckCircle, text: get('interactiveAppScreen.dashboard.activities.projectCompleted', "Projekt 'Buchhaltungs-Ressource' erfolgreich abgeschlossen"), time: get('interactiveAppScreen.dashboard.time.day1', 'vor 1d'), color: "text-purple-600" }
         ].map((activity, idx) => (
           <div 
             key={idx} 
@@ -154,10 +156,10 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
   const renderSearchRequests = () => (
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold">Suchaufträge</h3>
+        <h3 className="text-xl font-semibold">{get('interactiveAppScreen.searchRequests.title', 'Suchaufträge')}</h3>
         <Button size="sm">
           <Search className="w-4 h-4 mr-2" />
-          Neuen Auftrag erstellen
+          {get('interactiveAppScreen.searchRequests.button', 'Neuen Auftrag erstellen')}
         </Button>
       </div>
 
@@ -171,7 +173,7 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
             onClick={() => setActiveTab(tab)}
             className="text-xs"
           >
-            {tab === "all" ? "Alle" : tab === "active" ? "Aktiv" : "Abgeschlossen"}
+            {get(`interactiveAppScreen.searchRequests.tabs.${tab}`, tab === "all" ? "Alle" : tab === "active" ? "Aktiv" : "Abgeschlossen")}
           </Button>
         ))}
       </div>
@@ -196,11 +198,11 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
                   </div>
                 </div>
                 <Badge variant={request.status === "active" ? "default" : "outline"} className="text-xs">
-                  {request.status === "active" ? "Aktiv" : "Abgeschlossen"}
+                  {get(`interactiveAppScreen.searchRequests.status.${request.status}`, request.status === "active" ? "Aktiv" : "Abgeschlossen")}
                 </Badge>
               </div>
               <div className="flex justify-between items-center text-xs text-muted-foreground">
-                <span>{request.resources} Ressourcen</span>
+                <span>{request.resources} {get('interactiveAppScreen.searchRequests.resources', 'Ressourcen')}</span>
                 <span>{request.created}</span>
               </div>
             </div>
@@ -212,10 +214,10 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
   const renderResources = () => (
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold">Verfügbare Ressourcen</h3>
+        <h3 className="text-xl font-semibold">{get('interactiveAppScreen.resources.title', 'Verfügbare Ressourcen')}</h3>
         <Button size="sm" variant="outline">
           <Eye className="w-4 h-4 mr-2" />
-          Alle anzeigen
+          {get('interactiveAppScreen.resources.button', 'Alle anzeigen')}
         </Button>
       </div>
 
@@ -262,30 +264,30 @@ const InteractiveAppScreen: React.FC<InteractiveScreenProps> = ({ title, descrip
   const renderAdmin = () => (
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold">Admin Dashboard</h3>
-        <Badge variant="destructive" className="text-xs">Hej Talent Admin</Badge>
+        <h3 className="text-xl font-semibold">{get('interactiveAppScreen.admin.title', 'Admin Dashboard')}</h3>
+        <Badge variant="destructive" className="text-xs">{get('interactiveAppScreen.admin.badge', 'Hej Talent Admin')}</Badge>
       </div>
 
       {/* Admin Stats */}
       <div className="grid grid-cols-2 gap-3 mb-6">
         <div className="bg-red-50 dark:bg-red-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-red-600">156</div>
-          <div className="text-xs text-muted-foreground">Registrierte Unternehmen</div>
+          <div className="text-xs text-muted-foreground">{get('interactiveAppScreen.admin.stats.companies', 'Registrierte Unternehmen')}</div>
         </div>
         <div className="bg-blue-50 dark:bg-blue-950/20 p-3 rounded-lg">
           <div className="text-2xl font-bold text-blue-600">423</div>
-          <div className="text-xs text-muted-foreground">Verfügbare Ressourcen</div>
+          <div className="text-xs text-muted-foreground">{get('interactiveAppScreen.admin.stats.resources', 'Verfügbare Ressourcen')}</div>
         </div>
       </div>
 
       {/* Admin Navigation */}
       <div className="space-y-2">
-        <h4 className="font-medium text-sm">Verwaltung</h4>
+        <h4 className="font-medium text-sm">{get('interactiveAppScreen.admin.management', 'Verwaltung')}</h4>
         {[
-          { icon: Users, text: "Benutzerverwaltung", count: "1,234", color: "text-blue-600" },
-          { icon: Building2, text: "Unternehmen verwalten", count: "156", color: "text-green-600" },
-          { icon: UserCheck, text: "Ressourcen zuweisen", count: "42", color: "text-purple-600" },
-          { icon: BarChart3, text: "Analytics & Reports", count: "", color: "text-orange-600" }
+          { icon: Users, text: get('interactiveAppScreen.admin.items.userManagement', 'Benutzerverwaltung'), count: "1,234", color: "text-blue-600" },
+          { icon: Building2, text: get('interactiveAppScreen.admin.items.companyManagement', 'Unternehmen verwalten'), count: "156", color: "text-green-600" },
+          { icon: UserCheck, text: get('interactiveAppScreen.admin.items.resourceAllocation', 'Ressourcen zuweisen'), count: "42", color: "text-purple-600" },
+          { icon: BarChart3, text: get('interactiveAppScreen.admin.items.analytics', 'Analytics & Reports'), count: "", color: "text-orange-600" }
         ].map((item, idx) => (
           <div 
             key={idx}

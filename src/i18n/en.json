@@ -304,7 +304,95 @@
         "phone": "Phone",
         "description": "Describe your remote talent needs..."
       },
-      "submit": "Post search request for free now"
+      "submit": "Post search request for free now",
+      "buttonText": "Start now"
+    }
+  },
+  "miniTeam": {
+    "title": "The Minds Behind Hej Talent",
+    "subtitle": "Meet our founders and learn more about our vision",
+    "joachim": {
+      "role": "Founder & Managing Director",
+      "quote": "With our RaaS concept, we're rethinking HR processes: fresher, smarter, simply better!"
+    },
+    "pascal": {
+      "role": "Co-Founder & Head of Talent",
+      "quote": "Creating genuine connections between companies and talent – that's what drives us."
+    },
+    "cta": "Learn more about our team"
+  },
+  "interactiveAppScreen": {
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Overview of your RaaS activities",
+      "button": "Request resource",
+      "stats": {
+        "activeProjects": "Active Projects",
+        "assignedResources": "Assigned Resources",
+        "completedProjects": "Completed Projects",
+        "waitingResources": "Waiting Resources"
+      },
+      "recentActivity": "Recent Activities",
+      "activities": {
+        "resourceAssigned": "New resource assigned to AI developer project",
+        "requestUpdated": "Resource request 'Data Science Specialist' updated",
+        "projectCompleted": "Project 'Accounting Resource' successfully completed"
+      },
+      "time": {
+        "hours2": "2h ago",
+        "hours4": "4h ago",
+        "day1": "1d ago"
+      }
+    },
+    "searchRequests": {
+      "title": "Search Requests",
+      "button": "Create new request",
+      "tabs": {
+        "all": "All",
+        "active": "Active",
+        "completed": "Completed"
+      },
+      "status": {
+        "active": "Active",
+        "completed": "Completed"
+      },
+      "resources": "Resources",
+      "mockData": {
+        "aiDeveloper": "Remote AI Developer (Python)",
+        "accounting": "Part-time Accounting Resource",
+        "dataScience": "Data Science Specialist",
+        "techCorp": "TechCorp GmbH",
+        "startupTech": "StartupTech",
+        "dataCorp": "DataCorp",
+        "remote": "Remote",
+        "ago2days": "2 days ago",
+        "ago1week": "1 week ago",
+        "ago2weeks": "2 weeks ago"
+      }
+    },
+    "resources": {
+      "title": "Available Resources",
+      "button": "View all",
+      "availability": {
+        "immediate": "Available immediately",
+        "in2weeks": "In 2 weeks",
+        "in1month": "In 1 month"
+      }
+    },
+    "admin": {
+      "title": "Admin Dashboard",
+      "badge": "Hej Talent Admin",
+      "stats": {
+        "companies": "Registered Companies",
+        "resources": "Available Resources"
+      },
+      "management": "Management",
+      "items": {
+        "userManagement": "User Management",
+        "companyManagement": "Manage Companies",
+        "resourceAllocation": "Assign Resources",
+        "analytics": "Analytics & Reports"
+      }
     }
   },
   "aboutUs": {
