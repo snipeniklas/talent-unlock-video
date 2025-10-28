@@ -462,13 +462,51 @@
         "role": "Founder & Managing Director",
         "p1": "My name is Joachim Kalff, founder and managing director of Hej Talent. With our 'RaaS' concept, we rethink HR processes: fresher, smarter, simply better! 'Hej' comes from Scandinavian and means 'hello', a greeting with a 'wake up' character. It has always felt friendly, refreshing and sympathetic to me.",
         "p2": "Moreover, 'Hej' combines the initials of my children Henry and Emilia. The 'J' stands for my first name. I want to combine the positive Scandinavian spirit with personality – and that’s how I approach our international remote staff: I take responsibility.",
-        "p3": "With passion and dedication, I develop innovative and sustainable solution concepts. Down to earth, efficient, creative – out of the box."
+        "p3": "With passion and dedication, I develop innovative and sustainable solution concepts. Down to earth, efficient, creative – out of the box.",
+        "qa": {
+          "q1": "Why is staffing important to me?",
+          "a1": "Because companies don't grow through products, but through people. Behind every success are talents who contribute their personality, ideas and energy.",
+          "q2": "What drives me at Hej Talent?",
+          "a2": "Creating connections that go beyond AI – real encounters based on trust, authenticity and shared values. Technology can do many things, but can never replace human depth and trust.",
+          "q3": "My best moments at Hej Talent are…",
+          "a3": "…when talents and companies realize they match not only professionally but also personally. That's when a job becomes a real life opportunity."
+        }
       },
       "pascal": {
         "role": "Consultant",
         "p1": "I am Pascal Spieß, Consultant at Hej Talent, with more than 11 years of experience in consulting and sales. I have always been driven by how companies can work more efficiently, flexibly and successfully – and that’s exactly where I focus today.",
         "p2": "I enjoy working with our clients within our 'RaaS' concept – fast, flexible and cost-effective.",
-        "p3": "At Hej Talent, I help companies overcome the skills shortage and sustainably optimize processes. Together with our clients, I integrate international remote talent – from AI and tech talent to backoffice and accounting professionals to IT and software developers."
+        "p3": "At Hej Talent, I help companies overcome the skills shortage and sustainably optimize processes. Together with our clients, I integrate international remote talent – from AI and tech talent to backoffice and accounting professionals to IT and software developers.",
+        "qa": {
+          "q1": "Why is staffing important to me?",
+          "a1": "Because the right person in the right place can achieve more than any strategy. Staff is not just a resource, but the heart of every organization.",
+          "q2": "What drives me at Hej Talent?",
+          "a2": "The conviction that careers should not depend on coincidences or algorithms. But on encounters that create meaning and open doors.",
+          "q3": "My best moments at Hej Talent are…",
+          "a3": "…when people realize: 'Here I am seen – just as I am.' That's when opportunities arise that go far beyond the next job."
+        }
+      }
+    },
+    "milestones": {
+      "2016": {
+        "title": "Foundation of Hej Talent",
+        "desc": "Start as specialized remote recruiting platform"
+      },
+      "2021": {
+        "title": "First 100 Placements",
+        "desc": "Successful placement of 100+ remote professionals"
+      },
+      "2022": {
+        "title": "International Expansion",
+        "desc": "Network expansion to 15+ countries"
+      },
+      "2023": {
+        "title": "Best Remote Recruiting Platform",
+        "desc": "Award as leading remote recruiting platform"
+      },
+      "2024": {
+        "title": "500+ Remote Professionals",
+        "desc": "Over 500 vetted international experts in our network"
       }
     },
     "development": {
