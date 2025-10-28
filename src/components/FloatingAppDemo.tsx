@@ -54,8 +54,8 @@ const FloatingAppDemo: React.FC<FloatingAppDemoProps> = ({ title, description })
         >
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <h4 className="font-semibold text-lg">{get('home.floatingDemo.cards.dashboard.title')}</h4>
-              <Badge className="bg-green-100 text-green-700 border-green-200">{get('home.floatingDemo.cards.dashboard.live')}</Badge>
+              <h4 className="font-semibold text-lg">{get('home.hub.floatingDemo.cards.dashboard.title')}</h4>
+              <Badge className="bg-green-100 text-green-700 border-green-200">{get('home.hub.floatingDemo.cards.dashboard.live')}</Badge>
             </div>
             
             {/* Stats Grid */}
@@ -63,14 +63,14 @@ const FloatingAppDemo: React.FC<FloatingAppDemoProps> = ({ title, description })
               <div className="bg-gradient-primary/10 rounded-lg p-3">
                 <div className="flex items-center gap-2 mb-1">
                   <Users className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-medium">{get('home.floatingDemo.cards.dashboard.activeProjects')}</span>
+                  <span className="text-sm font-medium">{get('home.hub.floatingDemo.cards.dashboard.activeProjects')}</span>
                 </div>
                 <div className="text-2xl font-bold text-brand-dark">12</div>
               </div>
               <div className="bg-blue-50 rounded-lg p-3">
                 <div className="flex items-center gap-2 mb-1">
                   <TrendingUp className="w-4 h-4 text-blue-600" />
-                  <span className="text-sm font-medium">{get('home.floatingDemo.cards.dashboard.successRate')}</span>
+                  <span className="text-sm font-medium">{get('home.hub.floatingDemo.cards.dashboard.successRate')}</span>
                 </div>
                 <div className="text-2xl font-bold text-blue-600">98%</div>
               </div>
@@ -100,24 +100,24 @@ const FloatingAppDemo: React.FC<FloatingAppDemoProps> = ({ title, description })
               <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
                 <Search className="w-5 h-5 text-white" />
               </div>
-              <div>
-                <h4 className="font-semibold">{get('home.floatingDemo.cards.request.title')}</h4>
-                <p className="text-sm text-muted-foreground">{get('home.floatingDemo.cards.request.subtitle')}</p>
-              </div>
+            <div>
+              <h4 className="font-semibold">{get('home.hub.floatingDemo.cards.request.title')}</h4>
+              <p className="text-sm text-muted-foreground">{get('home.hub.floatingDemo.cards.request.subtitle')}</p>
+            </div>
             </div>
             
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-sm">
                 <Clock className="w-4 h-4 text-orange-500" />
-                <span>{get('home.floatingDemo.cards.request.response24h')}</span>
+                <span>{get('home.hub.floatingDemo.cards.request.response24h')}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Target className="w-4 h-4 text-green-500" />
-                <span>3 {get('home.floatingDemo.cards.request.candidatesFound')}</span>
+                <span>3 {get('home.hub.floatingDemo.cards.request.candidatesFound')}</span>
               </div>
               
               <Button size="sm" className="w-full bg-gradient-primary border-0">
-                {get('home.floatingDemo.cards.request.viewDetails')}
+                {get('home.hub.floatingDemo.cards.request.viewDetails')}
               </Button>
             </div>
           </CardContent>
@@ -134,23 +134,23 @@ const FloatingAppDemo: React.FC<FloatingAppDemoProps> = ({ title, description })
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
                 <Users className="w-5 h-5 text-blue-600" />
               </div>
-              <div>
-                <h4 className="font-semibold">{get('home.floatingDemo.cards.resourcePool.title')}</h4>
-                <p className="text-sm text-muted-foreground">{get('home.floatingDemo.cards.resourcePool.subtitle')}</p>
-              </div>
+            <div>
+              <h4 className="font-semibold">{get('home.hub.floatingDemo.cards.resourcePool.title')}</h4>
+              <p className="text-sm text-muted-foreground">{get('home.hub.floatingDemo.cards.resourcePool.subtitle')}</p>
+            </div>
             </div>
             
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm">{get('home.floatingDemo.cards.resourcePool.aiExperts')}</span>
+                <span className="text-sm">{get('home.hub.floatingDemo.cards.resourcePool.aiExperts')}</span>
                 <Badge variant="secondary" className="text-xs">12</Badge>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm">{get('home.floatingDemo.cards.resourcePool.fullstackDev')}</span>
+                <span className="text-sm">{get('home.hub.floatingDemo.cards.resourcePool.fullstackDev')}</span>
                 <Badge variant="secondary" className="text-xs">8</Badge>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm">{get('home.floatingDemo.cards.resourcePool.backoffice')}</span>
+                <span className="text-sm">{get('home.hub.floatingDemo.cards.resourcePool.backoffice')}</span>
                 <Badge variant="secondary" className="text-xs">15</Badge>
               </div>
             </div>
@@ -169,25 +169,25 @@ const FloatingAppDemo: React.FC<FloatingAppDemoProps> = ({ title, description })
                 <BarChart3 className="w-5 h-5 text-green-600" />
               </div>
               <div>
-                <h4 className="font-semibold">{get('home.floatingDemo.cards.performance.title')}</h4>
+                <h4 className="font-semibold">{get('home.hub.floatingDemo.cards.performance.title')}</h4>
                 <div className="flex items-center gap-1">
                   <ArrowUp className="w-3 h-3 text-green-500" />
-                  <span className="text-sm text-green-600">{get('home.floatingDemo.cards.performance.increase')}</span>
+                  <span className="text-sm text-green-600">{get('home.hub.floatingDemo.cards.performance.increase')}</span>
                 </div>
               </div>
             </div>
             
             <div className="space-y-3">
               <div className="flex items-center justify-between text-sm">
-                <span>{get('home.floatingDemo.cards.performance.successfulMatches')}</span>
+                <span>{get('home.hub.floatingDemo.cards.performance.successfulMatches')}</span>
                 <span className="font-bold text-green-600">94%</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span>{get('home.floatingDemo.cards.performance.avgPlacement')}</span>
-                <span className="font-bold">2.1 {get('home.floatingDemo.cards.performance.weeks')}</span>
+                <span>{get('home.hub.floatingDemo.cards.performance.avgPlacement')}</span>
+                <span className="font-bold">2.1 {get('home.hub.floatingDemo.cards.performance.weeks')}</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span>{get('home.floatingDemo.cards.performance.satisfaction')}</span>
+                <span>{get('home.hub.floatingDemo.cards.performance.satisfaction')}</span>
                 <div className="flex items-center gap-1">
                   <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                   <span className="font-bold">4.9</span>
@@ -237,7 +237,7 @@ const FloatingAppDemo: React.FC<FloatingAppDemoProps> = ({ title, description })
               trigger={
                 <Button className="bg-gradient-primary border-0 shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 px-8 py-6 text-lg">
                   <Zap className="w-5 h-5 mr-2" />
-                  {get('home.floatingDemo.cards.cta')}
+                  {get('home.hub.floatingDemo.cards.cta')}
                 </Button>
               }
             />
