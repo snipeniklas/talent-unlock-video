@@ -438,7 +438,24 @@
       "p2": "Statt klassischer Anstellungen stellen wir Remote-Ressourcen über Dienstleistungsverträge bereit und schaffen so sofortigen Zugang zu qualifizierten Spezialisten weltweit.",
       "stats": ["500+ internationale Fachkräfte", "150+ erfolgreiche Projekte", "98% Kundenzufriedenheit"]
     },
-    "values": {},
+    "values": {
+      "0": {
+        "title": "Internationale Expertise",
+        "desc": "Wir verbinden deutsche Unternehmen mit den besten internationalen Talenten weltweit."
+      },
+      "1": {
+        "title": "Geprüfte Qualität",
+        "desc": "Jede Remote-Fachkraft durchläuft unseren mehrstufigen Qualifizierungsprozess."
+      },
+      "2": {
+        "title": "Schnelle Vermittlung",
+        "desc": "Von der Anfrage bis zur Integration in nur 2-4 Wochen."
+      },
+      "3": {
+        "title": "Messbare Erfolge",
+        "desc": "98% Kundenzufriedenheit und über 90% Projektfortführungsrate."
+      }
+    },
     "team": {
       "title": "Über uns - Joachim & Pascal",
       "joachim": {

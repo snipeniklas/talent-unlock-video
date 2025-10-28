@@ -438,7 +438,24 @@
       "p2": "Instead of traditional employment, we provide remote resources through service contracts and create immediate access to qualified specialists worldwide.",
       "stats": ["500+ international professionals", "150+ successful projects", "98% customer satisfaction"]
     },
-    "values": {},
+    "values": {
+      "0": {
+        "title": "International Expertise",
+        "desc": "We connect German companies with the best international talent worldwide."
+      },
+      "1": {
+        "title": "Verified Quality",
+        "desc": "Every remote professional goes through our multi-stage qualification process."
+      },
+      "2": {
+        "title": "Fast Placement",
+        "desc": "From request to integration in just 2-4 weeks."
+      },
+      "3": {
+        "title": "Measurable Success",
+        "desc": "98% customer satisfaction and over 90% project continuation rate."
+      }
+    },
     "team": {
       "title": "About us - Joachim & Pascal",
       "joachim": {
