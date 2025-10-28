@@ -191,6 +191,49 @@
         "title": "Ihr Weg zu den perfekten Remote-Experten",
         "text": "Unser bewährter 3-Wochen-Prozess bringt Sie sicher und strukturiert zu Ihrer idealen Remote-Fachkraft."
       },
+      "projectTimeline": {
+        "title": "Zeitplan",
+        "duration": "3 Wochen Prozess",
+        "weeks": {
+          "optional": "Opt. Woche 1",
+          "week1": "Woche 1",
+          "week2": "Woche 2",
+          "week3": "Woche 3"
+        },
+        "activities": {
+          "consultation": {
+            "title": "Beratung",
+            "description": "Analyse Ihrer Anforderungen und Zielsetzung"
+          },
+          "requirements": {
+            "title": "Aufnahme Anforderungen",
+            "description": "Detaillierte Spezifikation der benötigten Expertise"
+          },
+          "candidateProposal": {
+            "title": "Kandidatenvorschlag",
+            "description": "Präsentation passender Remote-Experten"
+          },
+          "selection": {
+            "title": "Auswahlprozess",
+            "description": "Interviews und finale Kandidatenauswahl"
+          },
+          "implementation": {
+            "title": "Umsetzungsbetreuung",
+            "description": "Onboarding und kontinuierliche Unterstützung"
+          }
+        },
+        "optional": "(optional)",
+        "durationUnits": {
+          "day": "Tag",
+          "days": "Tage",
+          "max": "max."
+        },
+        "milestones": {
+          "kickoff": "Kickoff",
+          "firstDay": "1. Arbeitstag"
+        },
+        "cta": "Projekt jetzt starten"
+      },
       "cta": {
         "title": "Bereit, Ihre Remote-Fachkräfte zu finden?",
         "text": "Starten Sie noch heute und erleben Sie, wie schnell und effizient Sie die besten Remote-Talente für Ihr Unternehmen finden können.",

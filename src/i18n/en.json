@@ -191,6 +191,49 @@
         "title": "Your path to the perfect remote experts",
         "text": "Our proven 3-week process gets you to your ideal remote professional safely and systematically."
       },
+      "projectTimeline": {
+        "title": "Timeline",
+        "duration": "3 Week Process",
+        "weeks": {
+          "optional": "Opt. Week 1",
+          "week1": "Week 1",
+          "week2": "Week 2",
+          "week3": "Week 3"
+        },
+        "activities": {
+          "consultation": {
+            "title": "Consultation",
+            "description": "Analysis of your requirements and objectives"
+          },
+          "requirements": {
+            "title": "Requirements Gathering",
+            "description": "Detailed specification of required expertise"
+          },
+          "candidateProposal": {
+            "title": "Candidate Proposal",
+            "description": "Presentation of suitable remote experts"
+          },
+          "selection": {
+            "title": "Selection Process",
+            "description": "Interviews and final candidate selection"
+          },
+          "implementation": {
+            "title": "Implementation Support",
+            "description": "Onboarding and continuous support"
+          }
+        },
+        "optional": "(optional)",
+        "durationUnits": {
+          "day": "day",
+          "days": "days",
+          "max": "max."
+        },
+        "milestones": {
+          "kickoff": "Kickoff",
+          "firstDay": "Day 1"
+        },
+        "cta": "Start Project Now"
+      },
       "cta": {
         "title": "Ready to find your remote professionals?",
         "text": "Start today and experience how quickly and efficiently you can find the best remote talent for your company.",
