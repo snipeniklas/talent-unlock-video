@@ -13,32 +13,44 @@ const SolutionsOverview = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const solutions = [
+  const solutions = React.useMemo(() => [
     {
       id: 'backoffice',
-      title: 'Remote Backoffice-Fachkräfte',
-      description: 'Qualifizierte Remote-Mitarbeiter für Administration, Buchhaltung und operative Unterstützung',
+      title: t('solutionsOverview.solutions.backoffice.title'),
+      description: t('solutionsOverview.solutions.backoffice.description'),
       icon: Users,
-      benefits: ['Kosteneinsparung bis zu 60%', 'Flexible Arbeitszeiten', 'Schnelle Einarbeitung'],
-      cta: 'Remote Backoffice-Kräfte finden'
+      benefits: [
+        t('solutionsOverview.solutions.backoffice.benefits.0'),
+        t('solutionsOverview.solutions.backoffice.benefits.1'),
+        t('solutionsOverview.solutions.backoffice.benefits.2')
+      ],
+      cta: t('solutionsOverview.solutions.backoffice.cta')
     },
     {
       id: 'it-development',
-      title: 'Remote IT-Entwickler & Tech-Experten',
-      description: 'Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur',
+      title: t('solutionsOverview.solutions.itDevelopment.title'),
+      description: t('solutionsOverview.solutions.itDevelopment.description'),
       icon: Code,
-      benefits: ['Senior-Level Entwickler', 'Agile Remote-Arbeitsweise', 'Internationale Zeitzone-Abdeckung'],
-      cta: 'Remote IT-Experten finden'
+      benefits: [
+        t('solutionsOverview.solutions.itDevelopment.benefits.0'),
+        t('solutionsOverview.solutions.itDevelopment.benefits.1'),
+        t('solutionsOverview.solutions.itDevelopment.benefits.2')
+      ],
+      cta: t('solutionsOverview.solutions.itDevelopment.cta')
     },
     {
       id: 'ai-ml',
-      title: 'Remote KI & ML-Spezialisten',
-      description: 'KI-Experten und Data Scientists für Machine Learning und AI-Projekte',
+      title: t('solutionsOverview.solutions.aiMl.title'),
+      description: t('solutionsOverview.solutions.aiMl.description'),
       icon: Shield,
-      benefits: ['Spezialisierte KI-Expertise', 'Proven Track Record', 'Modernste Technologien'],
-      cta: 'Remote KI-Experten finden'
+      benefits: [
+        t('solutionsOverview.solutions.aiMl.benefits.0'),
+        t('solutionsOverview.solutions.aiMl.benefits.1'),
+        t('solutionsOverview.solutions.aiMl.benefits.2')
+      ],
+      cta: t('solutionsOverview.solutions.aiMl.cta')
     }
-  ];
+  ], [t]);
 
   return (
     <div className="min-h-screen bg-background font-inter">

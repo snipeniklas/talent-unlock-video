@@ -255,8 +255,40 @@
     "title": "Our international professionals",
     "subtitle": "Qualified remote experts for every area – from admin support to complex IT and AI projects.",
     "ctaTitle": "Not sure which international professionals you need?",
-    "ctaText": "Let’s find the right remote experts for your challenges in a free consultation.",
-    "ctaButton": "Book a consultation now"
+    "ctaText": "Let's find the right remote experts for your challenges in a free consultation.",
+    "ctaButton": "Book a consultation now",
+    "solutions": {
+      "backoffice": {
+        "title": "Remote Backoffice Professionals",
+        "description": "Qualified remote staff for administration, accounting, and operational support",
+        "benefits": [
+          "Cost savings up to 60%",
+          "Flexible working hours",
+          "Quick onboarding"
+        ],
+        "cta": "Find Remote Backoffice Staff"
+      },
+      "itDevelopment": {
+        "title": "Remote IT Developers & Tech Experts",
+        "description": "Experienced remote developers for full-stack, DevOps, and software architecture",
+        "benefits": [
+          "Senior-level developers",
+          "Agile remote work approach",
+          "International timezone coverage"
+        ],
+        "cta": "Find Remote IT Experts"
+      },
+      "aiMl": {
+        "title": "Remote AI & ML Specialists",
+        "description": "AI experts and data scientists for machine learning and AI projects",
+        "benefits": [
+          "Specialized AI expertise",
+          "Proven track record",
+          "Latest technologies"
+        ],
+        "cta": "Find Remote AI Experts"
+      }
+    }
   },
   "contact": {
     "title": "Contact & initial consultation",

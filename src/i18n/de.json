@@ -256,7 +256,39 @@
     "subtitle": "Qualifizierte Remote-Experten für jeden Bereich - von administrativer Unterstützung bis hin zu komplexen IT- und KI-Projekten.",
     "ctaTitle": "Nicht sicher, welche internationalen Fachkräfte Sie benötigen?",
     "ctaText": "Lassen Sie uns in einem kostenlosen Beratungsgespräch gemeinsam die passenden Remote-Experten für Ihre Herausforderungen finden.",
-    "ctaButton": "Beratungstermin jetzt buchen"
+    "ctaButton": "Beratungstermin jetzt buchen",
+    "solutions": {
+      "backoffice": {
+        "title": "Remote Backoffice-Fachkräfte",
+        "description": "Qualifizierte Remote-Mitarbeiter für Administration, Buchhaltung und operative Unterstützung",
+        "benefits": [
+          "Kosteneinsparung bis zu 60%",
+          "Flexible Arbeitszeiten",
+          "Schnelle Einarbeitung"
+        ],
+        "cta": "Remote Backoffice-Kräfte finden"
+      },
+      "itDevelopment": {
+        "title": "Remote IT-Entwickler & Tech-Experten",
+        "description": "Erfahrene Remote-Entwickler für Full-Stack, DevOps und Softwarearchitektur",
+        "benefits": [
+          "Senior-Level Entwickler",
+          "Agile Remote-Arbeitsweise",
+          "Internationale Zeitzone-Abdeckung"
+        ],
+        "cta": "Remote IT-Experten finden"
+      },
+      "aiMl": {
+        "title": "Remote KI & ML-Spezialisten",
+        "description": "KI-Experten und Data Scientists für Machine Learning und AI-Projekte",
+        "benefits": [
+          "Spezialisierte KI-Expertise",
+          "Proven Track Record",
+          "Modernste Technologien"
+        ],
+        "cta": "Remote KI-Experten finden"
+      }
+    }
   },
   "contact": {
     "title": "Kontakt & Erstgespräch",
