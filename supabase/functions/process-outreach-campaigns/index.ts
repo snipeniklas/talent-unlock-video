@@ -149,7 +149,40 @@ serve(async (req) => {
       }
 
       // Flatten back to a single list
-      const contactsToProcess = Array.from(contactsBySequence.values()).flat();
+      let contactsToProcess = Array.from(contactsBySequence.values()).flat();
+
+      // ATOMIC BULK LOCK: Lock all contacts at once to prevent race conditions
+      if (contactsToProcess.length > 0) {
+        const contactIds = contactsToProcess.map(c => c.id);
+        
+        console.log(`🔒 BULK LOCK: Attempting to lock ${contactIds.length} contacts atomically...`);
+        
+        const { data: lockedContacts, error: bulkLockError } = await supabase
+          .from("outreach_campaign_contacts")
+          .update({ 
+            status: "processing",
+            updated_at: new Date().toISOString()
+          })
+          .in("id", contactIds)
+          .eq("status", "pending") // Only lock if status is still "pending"
+          .select("id");
+
+        if (bulkLockError) {
+          console.error(`❌ BULK LOCK ERROR:`, bulkLockError);
+          continue; // Skip this campaign
+        }
+
+        const lockedIds = new Set((lockedContacts || []).map(c => c.id));
+        
+        // Filter to only include contacts that were successfully locked
+        const originalCount = contactsToProcess.length;
+        contactsToProcess = contactsToProcess.filter(c => lockedIds.has(c.id));
+        
+        console.log(`✅ BULK LOCK SUCCESS: Locked ${contactsToProcess.length}/${originalCount} contacts`);
+        if (contactsToProcess.length < originalCount) {
+          console.log(`⚠️ ${originalCount - contactsToProcess.length} contact(s) were already locked by another instance`);
+        }
+      }
 
       console.log(`📊 Campaign "${campaign.name}":`);
       for (const [seqNum, contacts] of contactsBySequence.entries()) {
@@ -241,28 +274,8 @@ ABSENDER-UNTERNEHMEN:
           continue;
         }
 
-        // Log contact details before attempting lock
-        console.log(`✅ READY: Contact ${contact.email} - Status: ${contactEntry.status}, Next Seq: #${contactEntry.next_sequence_number || 1}`);
-
-        // STEP 2: OPTIMISTIC LOCKING
-        // Try to acquire lock by setting status to "processing"
-        // This prevents race conditions when multiple function instances run simultaneously
-        const { data: lockData, error: lockError } = await supabase
-          .from("outreach_campaign_contacts")
-          .update({ 
-            status: "processing",
-            updated_at: new Date().toISOString()
-          })
-          .eq("id", contactEntry.id)
-          .eq("status", "pending") // Only lock if status is still "pending"
-          .select();
-
-        if (lockError || !lockData || lockData.length === 0) {
-          console.log(`❌ LOCK FAILED: Contact ${contact.email} - Current status is NOT 'pending' (might be '${contactEntry.status}')`);
-          continue;
-        }
-
-        console.log(`🔒 LOCK ACQUIRED: Contact ${contact.email} - Processing sequence #${contactEntry.next_sequence_number || 1}`);
+        // Contact already locked via bulk lock
+        console.log(`✅ PROCESSING: Contact ${contact.email} - Sequence #${contactEntry.next_sequence_number || 1}`);
 
         // Get the next email sequence to send
         const nextSequenceNumber = contactEntry.next_sequence_number || 1;
