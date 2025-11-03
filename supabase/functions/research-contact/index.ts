@@ -294,7 +294,21 @@ Antworte NUR mit dem JSON-Objekt, ohne zusätzlichen Text.
       throw new Error('Failed to save research data');
     }
 
-    console.log('Research completed successfully');
+    // Update contact status to completed
+    const { error: statusError } = await supabase
+      .from('crm_contacts')
+      .update({
+        research_status: 'completed',
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', contact_id);
+
+    if (statusError) {
+      console.error('Error updating contact status:', statusError);
+      // Don't throw - research was saved successfully
+    }
+
+    console.log('Research completed successfully and status updated');
 
     return new Response(
       JSON.stringify({
