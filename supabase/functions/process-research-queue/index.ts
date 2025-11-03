@@ -17,13 +17,13 @@ Deno.serve(async (req) => {
 
     console.log('Starting research queue processing...');
 
-    // Fetch up to 5 pending contacts
+    // Fetch up to 15 pending contacts for faster processing
     const { data: pendingContacts, error: fetchError } = await supabase
       .from('crm_contacts')
       .select('id, email, first_name, last_name')
       .eq('research_status', 'pending')
       .not('email', 'is', null)
-      .limit(5);
+      .limit(15);
 
     if (fetchError) {
       console.error('Error fetching pending contacts:', fetchError);
@@ -91,8 +91,8 @@ Deno.serve(async (req) => {
         successCount++;
         console.log(`Successfully completed research for contact ${contact.id}`);
 
-        // Delay between requests to avoid rate limits (2 seconds)
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Delay between requests to avoid rate limits (1 second for faster processing)
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
       } catch (error) {
         console.error(`Failed to research contact ${contact.id}:`, error);
