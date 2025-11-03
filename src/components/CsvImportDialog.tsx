@@ -12,6 +12,7 @@ import { useTranslation } from "@/i18n/i18n";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
+import Papa from "papaparse";
 
 interface CsvImportDialogProps {
   open: boolean;
@@ -123,30 +124,41 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
     const reader = new FileReader();
     reader.onload = (e) => {
       const text = e.target?.result as string;
-      const lines = text.split('\n').filter(line => line.trim());
       
-      if (lines.length < 2) {
-        toast({
-          title: "Error",
-          description: "CSV file must have at least a header row and one data row",
-          variant: "destructive"
-        });
-        return;
-      }
+      // Use Papa Parse for robust CSV parsing
+      Papa.parse<CsvRow>(text, {
+        header: true,
+        skipEmptyLines: true,
+        dynamicTyping: false,
+        complete: (results) => {
+          if (results.errors.length > 0) {
+            console.error("CSV parse errors:", results.errors);
+            toast({
+              title: "CSV Parse Warning",
+              description: `Found ${results.errors.length} parsing issue(s). Data might be incomplete.`,
+              variant: "destructive"
+            });
+          }
 
-      const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-      const rows = lines.slice(1).map(line => {
-        const values = line.split(',').map(v => v.trim().replace(/"/g, ''));
-        const row: CsvRow = {};
-        headers.forEach((header, index) => {
-          row[header] = values[index] || '';
-        });
-        return row;
+          const rows = results.data;
+          const headers = results.meta.fields || [];
+
+          if (headers.length === 0 || rows.length === 0) {
+            toast({
+              title: "Error",
+              description: "CSV file must have at least a header row and one data row",
+              variant: "destructive"
+            });
+            return;
+          }
+
+          console.log(`✅ Parsed ${rows.length} rows with ${headers.length} columns:`, headers);
+
+          setCsvHeaders(headers);
+          setCsvData(rows);
+          setStep(2);
+        }
       });
-
-      setCsvHeaders(headers);
-      setCsvData(rows);
-      setStep(2);
     };
     reader.readAsText(file);
   }, [toast]);
