@@ -331,6 +331,24 @@ ABSENDER-UNTERNEHMEN:
             status: "sent",
           });
 
+          // Auto-update CRM status to "contacted" on first email
+          if (nextSequenceNumber === 1) {
+            const { error: crmUpdateError } = await supabase
+              .from("crm_contacts")
+              .update({ 
+                status: "contacted",
+                last_contact_date: new Date().toISOString().split('T')[0],
+                updated_at: new Date().toISOString()
+              })
+              .eq("id", contactEntry.contact_id);
+
+            if (crmUpdateError) {
+              console.error(`⚠️ Failed to update CRM contact status for ${contact.email}:`, crmUpdateError);
+            } else {
+              console.log(`✅ CRM contact ${contactEntry.contact_id} status updated to 'contacted'`);
+            }
+          }
+
           // Calculate next send date based on the next sequence's delay
           // Use campaign's daily_send_time to schedule at exact same time each day
           const allSequences = campaign.outreach_email_sequences || [];
