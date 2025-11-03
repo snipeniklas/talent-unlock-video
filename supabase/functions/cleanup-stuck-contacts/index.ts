@@ -20,15 +20,67 @@ serve(async (req) => {
     
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Call the cleanup function
-    const { error } = await supabase.rpc("cleanup_stuck_processing_contacts");
-
-    if (error) {
-      console.error("Error calling cleanup function:", error);
-      return new Response(
-        JSON.stringify({ error: "Cleanup failed", details: error.message }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
+    // Step 1: Find processing contacts WITH research data and mark them as completed
+    const { data: contactsWithResearch, error: findWithResearchError } = await supabase
+      .from("crm_contacts")
+      .select("id")
+      .eq("research_status", "processing")
+      .in("id", 
+        supabase
+          .from("crm_contact_research")
+          .select("contact_id")
       );
+
+    if (findWithResearchError) {
+      console.error("Error finding contacts with research:", findWithResearchError);
+    } else if (contactsWithResearch && contactsWithResearch.length > 0) {
+      const contactIdsWithResearch = contactsWithResearch.map(c => c.id);
+      
+      const { error: updateCompletedError } = await supabase
+        .from("crm_contacts")
+        .update({ 
+          research_status: "completed",
+          updated_at: new Date().toISOString()
+        })
+        .in("id", contactIdsWithResearch);
+
+      if (updateCompletedError) {
+        console.error("Error updating contacts to completed:", updateCompletedError);
+      } else {
+        console.log(`✅ Set ${contactIdsWithResearch.length} contacts with research to completed`);
+      }
+    }
+
+    // Step 2: Find processing contacts WITHOUT research data and reset them to pending
+    const { data: allProcessing } = await supabase
+      .from("crm_contacts")
+      .select("id")
+      .eq("research_status", "processing");
+
+    const { data: withResearch } = await supabase
+      .from("crm_contact_research")
+      .select("contact_id");
+
+    const researchContactIds = new Set(withResearch?.map(r => r.contact_id) || []);
+    const contactsWithoutResearch = allProcessing?.filter(c => !researchContactIds.has(c.id)) || [];
+
+    if (contactsWithoutResearch.length > 0) {
+      const contactIdsWithoutResearch = contactsWithoutResearch.map(c => c.id);
+      
+      const { error: updatePendingError } = await supabase
+        .from("crm_contacts")
+        .update({ 
+          research_status: "pending",
+          research_retry_count: 0,
+          updated_at: new Date().toISOString()
+        })
+        .in("id", contactIdsWithoutResearch);
+
+      if (updatePendingError) {
+        console.error("Error updating contacts to pending:", updatePendingError);
+      } else {
+        console.log(`✅ Reset ${contactIdsWithoutResearch.length} contacts without research to pending`);
+      }
     }
 
     console.log("✅ Cleanup completed successfully");
@@ -36,7 +88,9 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: "Stuck contacts cleaned up successfully" 
+        message: "Stuck contacts cleaned up successfully",
+        markedCompleted: contactsWithResearch?.length || 0,
+        resetToPending: contactsWithoutResearch.length
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }
     );
