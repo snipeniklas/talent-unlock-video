@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -39,8 +39,6 @@ interface CrmContact {
 const statusOrder = ["new", "contacted", "qualified", "proposal", "negotiation", "won", "lost"];
 
 export default function CrmContacts() {
-  const [contacts, setContacts] = useState<CrmContact[]>([]);
-  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeView, setActiveView] = useState<"kanban" | "table">("kanban");
   const [csvDialogOpen, setCsvDialogOpen] = useState(false);
@@ -50,10 +48,28 @@ export default function CrmContacts() {
   const [addToListDialogOpen, setAddToListDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [contactToDelete, setContactToDelete] = useState<CrmContact | null>(null);
+  const scrollRefs = useRef<{ [key: string]: number }>({});
+  const scrollContainerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  // Fetch contacts with React Query
+  const { data: contacts = [], isLoading: loading } = useQuery({
+    queryKey: ['crm-contacts'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("crm_contacts")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      return data || [];
+    },
+    staleTime: 30000, // 30 seconds
+    refetchOnWindowFocus: false,
+  });
 
   const { data: contactLists } = useQuery({
     queryKey: ['contact-lists'],
@@ -108,7 +124,7 @@ export default function CrmContacts() {
       });
       setDeleteDialogOpen(false);
       setContactToDelete(null);
-      fetchContacts();
+      queryClient.invalidateQueries({ queryKey: ['crm-contacts'] });
     },
     onError: (error) => {
       toast({
@@ -131,25 +147,30 @@ export default function CrmContacts() {
     }
   };
 
-  useEffect(() => {
-    fetchContacts();
-  }, []);
-
-  const fetchContacts = async () => {
-    try {
-      const { data, error } = await (supabase as any)
-        .from("crm_contacts")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-      setContacts(data || []);
-    } catch (error) {
-      console.error("Error fetching contacts:", error);
-    } finally {
-      setLoading(false);
+  // Save scroll positions before re-render
+  useLayoutEffect(() => {
+    if (activeView === 'kanban') {
+      statusOrder.forEach(status => {
+        const container = scrollContainerRefs.current[status];
+        if (container) {
+          scrollRefs.current[status] = container.scrollTop;
+        }
+      });
     }
-  };
+  });
+
+  // Restore scroll positions after re-render
+  useLayoutEffect(() => {
+    if (activeView === 'kanban' && contacts.length > 0) {
+      statusOrder.forEach(status => {
+        const container = scrollContainerRefs.current[status];
+        const savedScroll = scrollRefs.current[status];
+        if (container && savedScroll !== undefined) {
+          container.scrollTop = savedScroll;
+        }
+      });
+    }
+  }, [contacts, activeView]);
 
   const filteredContacts = contacts.filter(contact =>
     contact.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -205,24 +226,33 @@ export default function CrmContacts() {
     e.preventDefault();
     if (!draggedContact || draggedContact.status === newStatus) return;
     
-    // Optimistic Update
     const oldStatus = draggedContact.status;
-    setContacts(prev => prev.map(c => 
-      c.id === draggedContact.id ? { ...c, status: newStatus } : c
-    ));
+    const contactId = draggedContact.id;
+    
+    // Optimistic Update
+    queryClient.setQueryData(['crm-contacts'], (old: CrmContact[] = []) => 
+      old.map(c => c.id === contactId ? { ...c, status: newStatus } : c)
+    );
     
     // Database Update
-    const { error } = await (supabase as any)
-      .from('crm_contacts')
-      .update({ status: newStatus })
-      .eq('id', draggedContact.id);
-    
-    if (error) {
+    try {
+      const { error } = await supabase
+        .from('crm_contacts')
+        .update({ status: newStatus })
+        .eq('id', contactId);
+      
+      if (error) throw error;
+    } catch (error) {
       console.error(error);
       // Rollback on error
-      setContacts(prev => prev.map(c => 
-        c.id === draggedContact.id ? { ...c, status: oldStatus } : c
-      ));
+      queryClient.setQueryData(['crm-contacts'], (old: CrmContact[] = []) => 
+        old.map(c => c.id === contactId ? { ...c, status: oldStatus } : c)
+      );
+      toast({
+        title: "Fehler",
+        description: "Status konnte nicht aktualisiert werden.",
+        variant: "destructive",
+      });
     }
     
     setDragOverStatus(null);
@@ -357,7 +387,14 @@ export default function CrmContacts() {
                     </div>
                   </div>
                   
-                  <div className="p-3 space-y-2 min-h-[500px] max-h-[70vh] overflow-y-auto">
+                  <div 
+                    ref={(el) => scrollContainerRefs.current[status] = el}
+                    className="p-3 space-y-2 min-h-[500px] max-h-[70vh] overflow-y-auto"
+                    onScroll={(e) => {
+                      const target = e.target as HTMLDivElement;
+                      scrollRefs.current[status] = target.scrollTop;
+                    }}
+                  >
                     {statusContacts.length === 0 ? (
                       <div className="text-center py-8 text-muted-foreground">
                         <IconComponent className={`h-8 w-8 mx-auto mb-2 opacity-20 ${info.iconColor}`} />
@@ -675,7 +712,7 @@ export default function CrmContacts() {
             open={csvDialogOpen}
             onOpenChange={setCsvDialogOpen}
             type="contacts"
-            onImportComplete={fetchContacts}
+            onImportComplete={() => queryClient.invalidateQueries({ queryKey: ['crm-contacts'] })}
           />
           <Button variant="outline" onClick={() => setCsvDialogOpen(true)}>
             <Upload className="h-4 w-4 mr-2" />
