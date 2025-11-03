@@ -561,6 +561,23 @@ WICHTIG - DIE PROMPTS SIND ANWEISUNGEN, KEINE VORLAGEN:
 - Beziehe dich auf konkrete Details aus der Research (aktuelle Aktivitäten, News, Pain Points)
 - Verwende Talking Points als natürliche Gesprächseinstiege
 
+ANREDE-REGEL (KRITISCH):
+- Beginne JEDE E-Mail mit der korrekten deutschen Anrede
+- Analysiere den Vornamen des Kontakts und wähle automatisch:
+  • Bei männlichen Vornamen → "Guten Tag Herr [Nachname],"
+  • Bei weiblichen Vornamen → "Guten Tag Frau [Nachname],"
+  • Bei unklaren/internationalen Namen → "Guten Tag [Vorname] [Nachname],"
+- NIEMALS Platzhalter wie {{first_name}} oder {{last_name}} verwenden
+- Schreibe den Namen direkt aus den Kontakt-Informationen
+- Falls der Nachname fehlt, verwende nur den Vornamen
+
+Beispiele:
+✅ "Guten Tag Herr Schmidt," (Vorname: Michael)
+✅ "Guten Tag Frau Müller," (Vorname: Andrea)
+✅ "Guten Tag Alex Weber," (Vorname: Alex - unklar)
+❌ "Guten Tag Michael Schmidt," (zu informell)
+❌ "Guten Tag {{salutation}} {{last_name}}," (Platzhalter verboten)
+
 FORMATIERUNGS-ANFORDERUNGEN:
 - Generiere HTML-formatierte E-Mail-Inhalte (NUR Content, KEINE vollständige HTML-Struktur)
 - Nutze <p> Tags für Absätze
