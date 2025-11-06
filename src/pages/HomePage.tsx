@@ -20,6 +20,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [activeService, setActiveService] = useState(0);
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const { t, get } = useTranslation();
 
@@ -234,14 +235,34 @@ const HomePage = () => {
                 {/* Video */}
                 <div className="relative">
                   <div className="aspect-video rounded-lg sm:rounded-xl lg:rounded-2xl overflow-hidden shadow-xl bg-white/10 backdrop-blur-sm border border-primary/20">
-                    <iframe 
-                      src="https://drive.google.com/file/d/1WefgP8aD5WkWngIE5FxNY1DIZVW6ciEN/preview" 
-                      className="w-full h-full border-0"
-                      allow="autoplay"
-                      allowFullScreen 
-                      title="Hej Talent Intro Video - Premium Remote Recruiting seit 2016"
-                      loading="lazy"
-                    />
+                    {!isVideoPlaying ? (
+                      <div 
+                        className="relative w-full h-full cursor-pointer group"
+                        onClick={() => setIsVideoPlaying(true)}
+                      >
+                        <img 
+                          src="/lovable-uploads/video-thumbnail-hero.jpg" 
+                          alt="Hej Talent Video Preview"
+                          className="w-full h-full object-cover"
+                        />
+                        {/* Play Button Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full bg-primary/90 group-hover:bg-primary flex items-center justify-center transition-all transform group-hover:scale-110 shadow-2xl">
+                            <svg className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z"/>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <iframe 
+                        src="https://drive.google.com/file/d/1WefgP8aD5WkWngIE5FxNY1DIZVW6ciEN/preview?autoplay=1" 
+                        className="w-full h-full border-0"
+                        allow="autoplay"
+                        allowFullScreen 
+                        title="Hej Talent Intro Video - Premium Remote Recruiting seit 2016"
+                      />
+                    )}
                   </div>
                   {/* Video accent border */}
                   <div className="absolute -inset-0.5 bg-gradient-primary rounded-lg sm:rounded-xl lg:rounded-2xl opacity-50 -z-10"></div>
