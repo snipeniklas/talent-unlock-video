@@ -24,7 +24,8 @@ import {
   Edit,
   Copy,
   UserCog,
-  Key
+  Key,
+  Trash2
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -70,6 +71,7 @@ export default function AdminSettings() {
   const [companies, setCompanies] = useState<{id: string, name: string}[]>([]);
   const [editingRole, setEditingRole] = useState<{userId: string, currentRole: string} | null>(null);
   const [resetLinkDialog, setResetLinkDialog] = useState<{email: string, link: string} | null>(null);
+  const [deleteUserDialog, setDeleteUserDialog] = useState<{userId: string, email: string, name: string} | null>(null);
   const [copiedToClipboard, setCopiedToClipboard] = useState(false);
   const [emailSignature, setEmailSignature] = useState('');
   const { toast } = useToast();
@@ -250,6 +252,45 @@ export default function AdminSettings() {
       toast({
         title: "Fehler beim Kopieren",
         description: "Der Link konnte nicht kopiert werden.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const deleteUser = async (userId: string) => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        throw new Error('Nicht authentifiziert');
+      }
+
+      const { data, error } = await supabase.functions.invoke('delete-user', {
+        body: { userId },
+        headers: {
+          Authorization: `Bearer ${session.access_token}`
+        }
+      });
+
+      if (error) throw error;
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      toast({
+        title: "Benutzer gelöscht",
+        description: "Der Benutzer wurde erfolgreich aus dem System entfernt.",
+      });
+
+      // Benutzerliste aktualisieren
+      fetchUsers();
+      setDeleteUserDialog(null);
+    } catch (error: any) {
+      console.error('Error deleting user:', error);
+      toast({
+        title: "Fehler beim Löschen",
+        description: error.message || "Der Benutzer konnte nicht gelöscht werden.",
         variant: "destructive",
       });
     }
@@ -636,11 +677,15 @@ export default function AdminSettings() {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => toggleUserStatus(user.user_id, true)}
-                              className="flex items-center gap-1"
+                              onClick={() => setDeleteUserDialog({
+                                userId: user.user_id,
+                                email: user.email || '',
+                                name: `${user.first_name} ${user.last_name}`
+                              })}
+                              className="flex items-center gap-1 text-destructive hover:text-destructive"
                             >
-                              <UserX className="h-4 w-4" />
-                              Sperren
+                              <Trash2 className="h-4 w-4" />
+                              Löschen
                             </Button>
                           </div>
                         </TableCell>
@@ -692,6 +737,45 @@ export default function AdminSettings() {
           </AlertDialogContent>
         </AlertDialog>
       )}
+
+      {/* Benutzer löschen Dialog */}
+      <AlertDialog open={!!deleteUserDialog} onOpenChange={() => setDeleteUserDialog(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              Benutzer endgültig löschen?
+            </AlertDialogTitle>
+            <AlertDialogDescription className="space-y-2">
+              <p>
+                Sie sind dabei, den Benutzer <strong>{deleteUserDialog?.name}</strong> ({deleteUserDialog?.email}) 
+                unwiderruflich aus dem System zu löschen.
+              </p>
+              <p className="text-destructive font-semibold">
+                Diese Aktion kann nicht rückgängig gemacht werden!
+              </p>
+              <p>
+                Folgende Daten werden gelöscht:
+              </p>
+              <ul className="list-disc list-inside space-y-1 text-sm">
+                <li>Benutzerprofil und Authentifizierung</li>
+                <li>Alle Benutzerrollen</li>
+                <li>E-Mail-Einstellungen und MS365-Verbindungen</li>
+                <li>Verknüpfungen mit CRM-Kontakten werden aufgehoben</li>
+              </ul>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => deleteUserDialog && deleteUser(deleteUserDialog.userId)}
+              className="bg-destructive hover:bg-destructive/90"
+            >
+              Benutzer löschen
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {/* Passwort-Reset Link Dialog */}
       <Dialog open={!!resetLinkDialog} onOpenChange={() => setResetLinkDialog(null)}>

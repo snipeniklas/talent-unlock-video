@@ -24,6 +24,9 @@ verify_jwt = false
 [functions.cleanup-stuck-contacts]
 verify_jwt = false
 
+[functions.delete-user]
+verify_jwt = true
+
 [edge_runtime]
 enabled = true
 
