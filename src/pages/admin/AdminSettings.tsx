@@ -282,13 +282,15 @@ export default function AdminSettings() {
     // Höchste Rolle zurückgeben
     if (userRoles.some(r => r.role === "admin")) return "admin";
     if (userRoles.some(r => r.role === "company_admin")) return "company_admin";
+    if (userRoles.some(r => r.role === "resource_manager")) return "resource_manager";
     return "user";
   };
 
   const getRoleColor = (role: string): "default" | "destructive" | "secondary" | "outline" => {
     const colors = {
       admin: "destructive" as const,
-      company_admin: "default" as const, 
+      company_admin: "default" as const,
+      resource_manager: "outline" as const,
       user: "secondary" as const
     };
     return colors[role as keyof typeof colors] || "secondary";
@@ -298,6 +300,7 @@ export default function AdminSettings() {
     const texts = {
       admin: "Hej Talent Admin",
       company_admin: "Unternehmens-Admin",
+      resource_manager: "Ressourcen-Manager",
       user: "Benutzer"
     };
     return texts[role as keyof typeof texts] || "Benutzer";
@@ -328,7 +331,7 @@ export default function AdminSettings() {
         .from('user_roles')
         .upsert({
           user_id: userId,
-          role: newRole as 'admin' | 'company_admin' | 'user'
+          role: newRole as any // Type will be updated after migration
         }, {
           onConflict: 'user_id,role'
         });
@@ -551,6 +554,7 @@ export default function AdminSettings() {
                 <SelectItem value="all">Alle Rollen</SelectItem>
                 <SelectItem value="admin">Hej Talent Admin</SelectItem>
                 <SelectItem value="company_admin">Unternehmens-Admin</SelectItem>
+                <SelectItem value="resource_manager">Ressourcen-Manager</SelectItem>
                 <SelectItem value="user">Benutzer</SelectItem>
               </SelectContent>
             </Select>
@@ -672,6 +676,7 @@ export default function AdminSettings() {
                 <SelectContent>
                   <SelectItem value="user">Benutzer</SelectItem>
                   <SelectItem value="company_admin">Unternehmens-Admin</SelectItem>
+                  <SelectItem value="resource_manager">Ressourcen-Manager</SelectItem>
                   <SelectItem value="admin">Hej Talent Admin</SelectItem>
                 </SelectContent>
               </Select>
