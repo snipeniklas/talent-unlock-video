@@ -115,17 +115,25 @@ const App = () => (
           {/* Microsoft 365 OAuth Callback - Outside AppLayout */}
           <Route path="/admin/ms365-callback" element={<MS365Callback />} />
           
-          {/* Admin Routes mit AppLayout - Protected with admin role */}
+          {/* Admin Routes mit AppLayout - Kandidaten-Routes für Admin UND Resource Manager */}
+          <Route path="/admin" element={
+            <ProtectedRoute allowedRoles={['admin', 'resource_manager']}>
+              <AppLayout />
+            </ProtectedRoute>
+          }>
+            <Route path="candidates" element={<CandidateManagement />} />
+            <Route path="candidates/:id" element={<CandidateView />} />
+            <Route path="candidates/:id/edit" element={<CandidateDetail />} />
+            <Route path="candidates/new" element={<NewCandidate />} />
+          </Route>
+
+          {/* Admin-only Routes */}
           <Route path="/admin" element={
             <ProtectedRoute requiredRole="admin">
               <AppLayout />
             </ProtectedRoute>
           }>
             <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="candidates" element={<CandidateManagement />} />
-            <Route path="candidates/:id" element={<CandidateView />} />
-            <Route path="candidates/:id/edit" element={<CandidateDetail />} />
-            <Route path="candidates/new" element={<NewCandidate />} />
             <Route path="search-requests" element={<AdminSearchRequests />} />
             <Route path="search-requests/:id" element={<AdminSearchRequestDetail />} />
             <Route path="search-requests/:id/allocations" element={<SearchRequestAllocations />} />

@@ -5,10 +5,11 @@ import { toast } from '@/hooks/use-toast';
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  requiredRole?: 'admin' | 'company_admin' | 'user';
+  requiredRole?: 'admin' | 'company_admin' | 'user' | 'resource_manager';
+  allowedRoles?: ('admin' | 'company_admin' | 'user' | 'resource_manager')[];
 }
 
-export const ProtectedRoute = ({ children, requiredRole }: ProtectedRouteProps) => {
+export const ProtectedRoute = ({ children, requiredRole, allowedRoles }: ProtectedRouteProps) => {
   const { data: userData, isLoading } = useUserData();
   const userRole = useUserRole();
   const navigate = useNavigate();
@@ -22,8 +23,20 @@ export const ProtectedRoute = ({ children, requiredRole }: ProtectedRouteProps) 
       return;
     }
 
-    // Check if user has required role
-    if (requiredRole) {
+    // Check if user has required role (using allowedRoles array if provided)
+    if (allowedRoles && allowedRoles.length > 0) {
+      // Check if user has one of the allowed roles
+      if (!allowedRoles.includes(userRole as any)) {
+        toast({
+          title: 'Keine Berechtigung',
+          description: 'Sie haben keine Berechtigung für diesen Bereich.',
+          variant: 'destructive',
+        });
+        navigate('/app/dashboard');
+        return;
+      }
+    } else if (requiredRole) {
+      // Backward compatibility: use requiredRole if allowedRoles not provided
       // Admin always has access to everything
       if (userRole === 'admin') {
         return;
@@ -40,7 +53,7 @@ export const ProtectedRoute = ({ children, requiredRole }: ProtectedRouteProps) 
         return;
       }
     }
-  }, [userData, userRole, requiredRole, isLoading, navigate]);
+  }, [userData, userRole, requiredRole, allowedRoles, isLoading, navigate]);
 
   // Show loading spinner while checking authentication
   if (isLoading) {
@@ -57,7 +70,11 @@ export const ProtectedRoute = ({ children, requiredRole }: ProtectedRouteProps) 
   }
 
   // Don't render if role check fails
-  if (requiredRole && userRole !== 'admin' && userRole !== requiredRole) {
+  if (allowedRoles && allowedRoles.length > 0) {
+    if (!allowedRoles.includes(userRole as any)) {
+      return null;
+    }
+  } else if (requiredRole && userRole !== 'admin' && userRole !== requiredRole) {
     return null;
   }
 
