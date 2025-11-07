@@ -51,7 +51,7 @@ const Settings = () => {
     website: ''
   });
   const [inviteEmail, setInviteEmail] = useState('');
-  const [inviteRole, setInviteRole] = useState<'user' | 'admin' | 'company_admin'>('user');
+  const [inviteRole, setInviteRole] = useState<'user' | 'admin' | 'company_admin' | 'resource_manager'>('user');
   const [isCompanyAdmin, setIsCompanyAdmin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -217,7 +217,7 @@ const Settings = () => {
           email: inviteEmail.toLowerCase().trim(),
           company_id: currentUser.profile.company_id,
           invited_by: currentUser.user.id,
-          invited_role: isAdmin ? inviteRole : 'user',
+          invited_role: (isAdmin ? inviteRole : 'user') as any, // Type will be updated after migration
           status: 'pending',
           expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
         })
@@ -504,13 +504,14 @@ const Settings = () => {
                   {isAdmin && (
                     <div>
                       <Label htmlFor="inviteRole">{t('app.settings.team.invite.role', 'Rolle')}</Label>
-                      <Select value={inviteRole} onValueChange={(value: 'user' | 'admin' | 'company_admin') => setInviteRole(value)}>
+                      <Select value={inviteRole} onValueChange={(value: 'user' | 'admin' | 'company_admin' | 'resource_manager') => setInviteRole(value)}>
                         <SelectTrigger>
                           <SelectValue placeholder={t('app.settings.team.invite.role', 'Rolle auswählen')} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="user">{t('app.settings.team.roles.user', 'Benutzer')}</SelectItem>
                           <SelectItem value="company_admin">{t('app.settings.team.roles.company_admin', 'Unternehmens-Administrator')}</SelectItem>
+                          <SelectItem value="resource_manager">{t('app.settings.team.roles.resource_manager', 'Ressourcen-Manager')}</SelectItem>
                           <SelectItem value="admin">{t('app.settings.team.roles.admin', 'Administrator')}</SelectItem>
                         </SelectContent>
                       </Select>
