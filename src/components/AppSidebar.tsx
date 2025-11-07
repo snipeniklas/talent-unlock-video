@@ -4,6 +4,7 @@ import {
   Home, 
   Search, 
   Users, 
+  Settings, 
   Settings as SettingsIcon, 
   LogOut, 
   Building2, 
@@ -15,7 +16,8 @@ import {
   UserCog,
   Mail,
   CheckSquare,
-  List
+  List,
+  AlertCircle
 } from "lucide-react";
 import {
   Sidebar,
@@ -110,7 +112,49 @@ export function AppSidebar() {
     );
   }
 
-  const navigationItems = userRole === 'admin' ? adminItems : companyItems;
+  // Resource Manager Navigation Items
+  const resourceManagerItems = [
+    { 
+      title: 'RaaS Ressourcen', 
+      url: "/admin/candidates", 
+      icon: UserCog,
+      accessible: true 
+    },
+    { 
+      title: 'Dashboard', 
+      url: "/app/dashboard", 
+      icon: Home,
+      accessible: false 
+    },
+    { 
+      title: 'Kundenprojekte', 
+      url: "/admin/search-requests", 
+      icon: FileText,
+      accessible: false 
+    },
+    { 
+      title: 'Einstellungen', 
+      url: "/app/settings", 
+      icon: Settings,
+      accessible: true 
+    },
+  ];
+
+  const handleRestrictedClick = (e: React.MouseEvent, item: typeof resourceManagerItems[0]) => {
+    if (!item.accessible && userRole === 'resource_manager') {
+      e.preventDefault();
+      toast({
+        title: "Zugriff eingeschränkt",
+        description: "In Ihrer Userrolle nicht nutzbar, wenden Sie sich an den Admin.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const navigationItems = 
+    userRole === 'admin' ? adminItems : 
+    userRole === 'resource_manager' ? resourceManagerItems :
+    companyItems;
 
   return (
     <Sidebar className={isCollapsed ? "w-14" : "w-60"}>
@@ -130,25 +174,43 @@ export function AppSidebar() {
 
         <SidebarGroup>
           <SidebarGroupLabel className="text-foreground font-semibold">
-            {userRole === 'admin' ? t('app.sidebar.section.admin', 'Admin Bereich') : t('app.sidebar.section.main', 'Hauptmenü')}
+            {userRole === 'admin' 
+              ? t('app.sidebar.section.admin', 'Admin Bereich') 
+              : userRole === 'resource_manager'
+              ? 'Ressourcen-Manager'
+              : t('app.sidebar.section.main', 'Hauptmenü')}
           </SidebarGroupLabel>
           
           <SidebarGroupContent>
             <SidebarMenu>
-              {navigationItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <NavLink 
-                      to={item.url} 
-                      end 
-                      className={({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${getNavCls({ isActive })}`}
-                    >
-                      <item.icon className="h-4 w-4 flex-shrink-0" />
-                      {!isCollapsed && <span className="flex-1">{item.title}</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {navigationItems.map((item) => {
+                const isRestricted = userRole === 'resource_manager' && 'accessible' in item && !item.accessible;
+                
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <NavLink 
+                        to={item.url} 
+                        end 
+                        onClick={(e) => {
+                          if (userRole === 'resource_manager' && 'accessible' in item) {
+                            handleRestrictedClick(e, item as typeof resourceManagerItems[0]);
+                          }
+                        }}
+                        className={({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${getNavCls({ isActive })} ${isRestricted ? 'opacity-60' : ''}`}
+                      >
+                        <item.icon className="h-4 w-4 flex-shrink-0" />
+                        {!isCollapsed && (
+                          <span className="flex-1 flex items-center gap-2">
+                            {item.title}
+                            {isRestricted && <AlertCircle className="h-3 w-3" />}
+                          </span>
+                        )}
+                      </NavLink>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -181,8 +243,8 @@ export function AppSidebar() {
           </SidebarGroup>
         )}
 
-        {/* Quick Actions */}
-        {userRole !== 'admin' && (
+        {/* Quick Actions - Only for non-admin and non-resource-manager users */}
+        {userRole !== 'admin' && userRole !== 'resource_manager' && (
           <SidebarGroup>
             <SidebarGroupLabel className="text-foreground font-semibold">{t('app.sidebar.quick', 'Schnellzugriff')}</SidebarGroupLabel>
             <SidebarGroupContent>
