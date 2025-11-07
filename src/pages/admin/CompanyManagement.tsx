@@ -5,9 +5,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
-import { Search, Eye, Building2, Mail, Globe, Users, FileText, Calendar, UserCheck } from "lucide-react";
+import { Search, Eye, Building2, Mail, Globe, Users, FileText, Calendar, UserCheck, Trash2, AlertTriangle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/hooks/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface Company {
   id: string;
@@ -31,7 +42,9 @@ export default function CompanyManagement() {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [deleteCompanyDialog, setDeleteCompanyDialog] = useState<{companyId: string, name: string, userCount: number} | null>(null);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     fetchCompanies();
@@ -78,6 +91,45 @@ export default function CompanyManagement() {
   const getCompanyAdmin = (profiles: any[]) => {
     // Erstes Profil als Ansprechpartner anzeigen
     return profiles.length > 0 ? profiles[0] : null;
+  };
+
+  const deleteCompany = async (companyId: string) => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        throw new Error('Nicht authentifiziert');
+      }
+
+      const { data, error } = await supabase.functions.invoke('delete-company', {
+        body: { companyId },
+        headers: {
+          Authorization: `Bearer ${session.access_token}`
+        }
+      });
+
+      if (error) throw error;
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      toast({
+        title: "Unternehmen gelöscht",
+        description: "Das Unternehmen wurde erfolgreich aus dem System entfernt.",
+      });
+
+      // Unternehmensliste aktualisieren
+      fetchCompanies();
+      setDeleteCompanyDialog(null);
+    } catch (error: any) {
+      console.error('Error deleting company:', error);
+      toast({
+        title: "Fehler beim Löschen",
+        description: error.message || "Das Unternehmen konnte nicht gelöscht werden.",
+        variant: "destructive",
+      });
+    }
   };
 
   if (loading) {
@@ -310,6 +362,18 @@ export default function CompanyManagement() {
                               <FileText className="w-4 h-4 mr-1" />
                               Aufträge
                             </Button>
+                            <Button 
+                              size="sm" 
+                              variant="outline"
+                              onClick={() => setDeleteCompanyDialog({
+                                companyId: company.id,
+                                name: company.name,
+                                userCount: stats.totalUsers
+                              })}
+                              className="text-destructive hover:text-destructive"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
                           </div>
                         </TableCell>
                       </TableRow>
@@ -321,6 +385,58 @@ export default function CompanyManagement() {
           )}
         </CardContent>
       </Card>
+
+      {/* Unternehmen löschen Dialog */}
+      <AlertDialog open={!!deleteCompanyDialog} onOpenChange={() => setDeleteCompanyDialog(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              Unternehmen endgültig löschen?
+            </AlertDialogTitle>
+            <AlertDialogDescription className="space-y-2">
+              <p>
+                Sie sind dabei, das Unternehmen <strong>{deleteCompanyDialog?.name}</strong> unwiderruflich aus dem System zu löschen.
+              </p>
+              {deleteCompanyDialog && deleteCompanyDialog.userCount > 0 ? (
+                <div className="p-3 bg-destructive/10 border border-destructive rounded-md">
+                  <p className="text-destructive font-semibold">
+                    ⚠️ Dieses Unternehmen hat noch {deleteCompanyDialog.userCount} Benutzer!
+                  </p>
+                  <p className="text-sm text-destructive mt-1">
+                    Sie müssen zuerst alle Benutzer löschen, bevor Sie das Unternehmen löschen können.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <p className="text-destructive font-semibold">
+                    Diese Aktion kann nicht rückgängig gemacht werden!
+                  </p>
+                  <p>
+                    Folgende Daten werden gelöscht:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-sm">
+                    <li>Unternehmensprofil und alle Daten</li>
+                    <li>Support-Tickets</li>
+                    <li>Einladungen</li>
+                  </ul>
+                </>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+            {deleteCompanyDialog && deleteCompanyDialog.userCount === 0 && (
+              <AlertDialogAction
+                onClick={() => deleteCompanyDialog && deleteCompany(deleteCompanyDialog.companyId)}
+                className="bg-destructive hover:bg-destructive/90"
+              >
+                Unternehmen löschen
+              </AlertDialogAction>
+            )}
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
