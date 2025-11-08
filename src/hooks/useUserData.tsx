@@ -74,12 +74,6 @@ export const useUserData = () => {
       
       console.log('User data loaded successfully:', result);
       
-      // Trigger dashboard data reload immediately when user data is loaded
-      queryClient.invalidateQueries({ 
-        queryKey: ['dashboardData'],
-        exact: false 
-      });
-      
       return result;
     },
     staleTime: 1000 * 60 * 5, // 5 minutes

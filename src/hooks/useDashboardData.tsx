@@ -128,15 +128,15 @@ export const useDashboardData = () => {
       return result;
     },
     enabled: !!companyId && userSuccess && !userLoading,
-    staleTime: 1000 * 10, // 10 seconds - very short for immediate updates
-    gcTime: 1000 * 60 * 1, // 1 minute - short cache
-    refetchOnMount: true, // Always refetch when component mounts
-    refetchOnWindowFocus: true, // Refetch when user returns to tab
+    staleTime: 1000 * 60, // 60 seconds - less aggressive refetching
+    gcTime: 1000 * 60 * 5, // 5 minutes cache
+    refetchOnMount: 'always', // Always refetch when component mounts
+    refetchOnWindowFocus: false, // Don't refetch on window focus during initial load
     retry: (failureCount, error) => {
       console.log('Dashboard query retry:', { failureCount, error: error.message });
       // Don't retry if company ID is missing
-      return failureCount < 1 && !error.message.includes('No company ID');
+      return failureCount < 2 && !error.message.includes('No company ID');
     },
-    retryDelay: 1000, // Quick retry
+    retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 5000), // Exponential backoff
   });
 };
