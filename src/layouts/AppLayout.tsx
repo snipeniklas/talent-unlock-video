@@ -140,7 +140,11 @@ const AppLayout = () => {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => navigate('/admin/settings')}>
+                  <DropdownMenuItem onClick={() => {
+                    const role = userData?.profile?.user_roles?.[0]?.role;
+                    const settingsPath = role === 'admin' ? '/admin/settings' : '/app/settings';
+                    navigate(settingsPath);
+                  }}>
                     <UserIcon className="mr-2 h-4 w-4" />
                     <span>Profil</span>
                   </DropdownMenuItem>
