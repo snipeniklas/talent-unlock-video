@@ -12,6 +12,102 @@
       "back": "Back"
     }
   },
+  "candidate": {
+    "new": {
+      "title": "Create new RaaS Resource",
+      "backButton": "Back",
+      "sections": {
+        "basic": "Basic Information",
+        "location": "Location",
+        "availability": "Availability & Rates",
+        "skills": "Skills",
+        "languages": "Languages",
+        "experience": "Work Experience & Projects",
+        "links": "Links & Portfolio"
+      },
+      "fields": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "uploadAvatar": "Upload",
+        "primaryRole": "Primary Role *",
+        "primaryRolePlaceholder": "e.g. Customer Support, Full-Stack Developer",
+        "seniority": "Seniority Level",
+        "seniorityPlaceholder": "Select seniority",
+        "yearsExperience": "Years of Experience",
+        "headline": "Headline",
+        "headlinePlaceholder": "Short pitch in one sentence",
+        "bio": "Bio",
+        "bioPlaceholder": "Longer description of the RaaS resource",
+        "country": "Country",
+        "city": "City",
+        "availability": "Availability",
+        "availabilityPlaceholder": "Select availability",
+        "hoursPerWeek": "Hours per Week (Desired)",
+        "startEarliest": "Earliest Start",
+        "noticePeriod": "Notice Period (Days)",
+        "currency": "Currency",
+        "monthlyRate": "Monthly Rate (Target) *",
+        "monthlyRatePlaceholder": "e.g. 8000",
+        "hourlyRate": "Hourly Rate (auto-calculated)",
+        "hourlyRatePlaceholder": "Calculated automatically (Monthly rate ÷ 160h)",
+        "skillName": "Skill Name",
+        "skillNamePlaceholder": "e.g. React",
+        "skillLevel": "Level (1-5)",
+        "yearsUsed": "Years Used",
+        "lastUsed": "Last Used",
+        "languageCode": "Language (Code)",
+        "languageCodePlaceholder": "e.g. de, en, es",
+        "proficiency": "Proficiency",
+        "position": "Position/Role *",
+        "positionPlaceholder": "e.g. Senior Developer, Customer Support Manager",
+        "organization": "Company/Organization",
+        "organizationPlaceholder": "e.g. Tech GmbH, Freelance",
+        "startDate": "Start Date",
+        "endDate": "End Date (empty = current)",
+        "description": "Description & Responsibilities",
+        "descriptionPlaceholder": "Brief description of activities and responsibilities...",
+        "techStack": "Tech Stack / Tools Used",
+        "techStackPlaceholder": "e.g. React, Node.js, PostgreSQL, Docker (comma-separated)",
+        "linkLabel": "Label",
+        "linkLabelPlaceholder": "e.g. GitHub, Portfolio",
+        "linkUrl": "URL",
+        "linkUrlPlaceholder": "https://..."
+      },
+      "seniority": {
+        "junior": "Junior",
+        "mid": "Mid",
+        "senior": "Senior",
+        "lead": "Lead"
+      },
+      "availability": {
+        "immediately": "Available immediately",
+        "noticePeriod": "Notice period",
+        "booked": "Booked",
+        "paused": "Paused"
+      },
+      "proficiency": {
+        "basic": "Basic",
+        "conversational": "Conversational",
+        "fluent": "Fluent",
+        "native": "Native"
+      },
+      "experienceTitle": "Experience #",
+      "noExperience": "No work experience added yet. Click the plus icon to get started.",
+      "buttons": {
+        "cancel": "Cancel",
+        "submit": "Create RaaS Resource",
+        "submitting": "Creating..."
+      },
+      "success": {
+        "title": "Success",
+        "description": "RaaS resource was created successfully."
+      },
+      "error": {
+        "title": "Error",
+        "description": "RaaS resource could not be created."
+      }
+    }
+  },
   "header": {
     "nav": {
       "home": "Home",

@@ -10,6 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import AvatarUpload from '@/components/AvatarUpload';
+import { useTranslation } from '@/i18n/i18n';
 
 interface Skill {
   name: string;
@@ -40,6 +41,7 @@ interface Link {
 export default function NewCandidate() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   // Basic candidate data
@@ -238,16 +240,16 @@ export default function NewCandidate() {
       }
 
       toast({
-        title: "Erfolg",
-        description: "RaaS Ressource wurde erfolgreich angelegt.",
+        title: t('candidate.new.success.title', 'Erfolg'),
+        description: t('candidate.new.success.description', 'RaaS Ressource wurde erfolgreich angelegt.'),
       });
 
       navigate('/admin/candidates');
     } catch (error) {
       console.error('Error creating candidate:', error);
       toast({
-        title: "Fehler",
-        description: "RaaS Ressource konnte nicht angelegt werden.",
+        title: t('candidate.new.error.title', 'Fehler'),
+        description: t('candidate.new.error.description', 'RaaS Ressource konnte nicht angelegt werden.'),
         variant: "destructive",
       });
     } finally {
@@ -264,21 +266,21 @@ export default function NewCandidate() {
           className="flex items-center gap-2"
         >
           <ArrowLeft className="h-4 w-4" />
-          Zurück
+          {t('candidate.new.backButton', 'Zurück')}
         </Button>
-        <h1 className="text-2xl font-bold">Neue RaaS Ressource anlegen</h1>
+        <h1 className="text-2xl font-bold">{t('candidate.new.title', 'Neue RaaS Ressource anlegen')}</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Basic Information */}
         <Card>
           <CardHeader>
-            <CardTitle>Grundinformationen</CardTitle>
+            <CardTitle>{t('candidate.new.sections.basic', 'Grundinformationen')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="first_name">Vorname</Label>
+                <Label htmlFor="first_name">{t('candidate.new.fields.firstName', 'Vorname')}</Label>
                 <Input
                   id="first_name"
                   value={identity.first_name}
@@ -286,7 +288,7 @@ export default function NewCandidate() {
                 />
               </div>
               <div>
-                <Label htmlFor="last_name">Nachname</Label>
+                <Label htmlFor="last_name">{t('candidate.new.fields.lastName', 'Nachname')}</Label>
                 <Input
                   id="last_name"
                   value={identity.last_name}
@@ -304,36 +306,36 @@ export default function NewCandidate() {
             </div>
 
             <div>
-              <Label htmlFor="primary_role">Primäre Rolle *</Label>
+              <Label htmlFor="primary_role">{t('candidate.new.fields.primaryRole', 'Primäre Rolle *')}</Label>
               <Input
                 id="primary_role"
                 value={formData.primary_role}
                 onChange={(e) => setFormData({ ...formData, primary_role: e.target.value })}
                 required
-                placeholder="z.B. Customer Support, Full-Stack Developer"
+                placeholder={t('candidate.new.fields.primaryRolePlaceholder', 'z.B. Customer Support, Full-Stack Developer')}
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="seniority">Seniority Level</Label>
+                <Label htmlFor="seniority">{t('candidate.new.fields.seniority', 'Seniority Level')}</Label>
                 <Select 
                   value={formData.seniority} 
                   onValueChange={(value) => setFormData({ ...formData, seniority: value as any })}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Seniority auswählen" />
+                    <SelectValue placeholder={t('candidate.new.fields.seniorityPlaceholder', 'Seniority auswählen')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="junior">Junior</SelectItem>
-                    <SelectItem value="mid">Mid</SelectItem>
-                    <SelectItem value="senior">Senior</SelectItem>
-                    <SelectItem value="lead">Lead</SelectItem>
+                    <SelectItem value="junior">{t('candidate.new.seniority.junior', 'Junior')}</SelectItem>
+                    <SelectItem value="mid">{t('candidate.new.seniority.mid', 'Mid')}</SelectItem>
+                    <SelectItem value="senior">{t('candidate.new.seniority.senior', 'Senior')}</SelectItem>
+                    <SelectItem value="lead">{t('candidate.new.seniority.lead', 'Lead')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <Label htmlFor="years_experience">Jahre Erfahrung</Label>
+                <Label htmlFor="years_experience">{t('candidate.new.fields.yearsExperience', 'Jahre Erfahrung')}</Label>
                 <Input
                   id="years_experience"
                   type="number"
@@ -345,22 +347,22 @@ export default function NewCandidate() {
             </div>
 
             <div>
-              <Label htmlFor="headline">Headline</Label>
+              <Label htmlFor="headline">{t('candidate.new.fields.headline', 'Headline')}</Label>
               <Input
                 id="headline"
                 value={formData.headline}
                 onChange={(e) => setFormData({ ...formData, headline: e.target.value })}
-                placeholder="Kurzer Pitch in einem Satz"
+                placeholder={t('candidate.new.fields.headlinePlaceholder', 'Kurzer Pitch in einem Satz')}
               />
             </div>
 
             <div>
-              <Label htmlFor="bio">Bio</Label>
+              <Label htmlFor="bio">{t('candidate.new.fields.bio', 'Bio')}</Label>
               <Textarea
                 id="bio"
                 value={formData.bio}
                 onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                placeholder="Längere Beschreibung der RaaS Ressource"
+                placeholder={t('candidate.new.fields.bioPlaceholder', 'Längere Beschreibung der RaaS Ressource')}
                 rows={4}
               />
             </div>
@@ -370,12 +372,12 @@ export default function NewCandidate() {
         {/* Location */}
         <Card>
           <CardHeader>
-            <CardTitle>Standort</CardTitle>
+            <CardTitle>{t('candidate.new.sections.location', 'Standort')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="country">Land</Label>
+                <Label htmlFor="country">{t('candidate.new.fields.country', 'Land')}</Label>
                 <Input
                   id="country"
                   value={identity.country}
@@ -383,7 +385,7 @@ export default function NewCandidate() {
                 />
               </div>
               <div>
-                <Label htmlFor="city">Stadt</Label>
+                <Label htmlFor="city">{t('candidate.new.fields.city', 'Stadt')}</Label>
                 <Input
                   id="city"
                   value={identity.city}
@@ -397,29 +399,29 @@ export default function NewCandidate() {
         {/* Availability & Rates */}
         <Card>
           <CardHeader>
-            <CardTitle>Verfügbarkeit & Rates</CardTitle>
+            <CardTitle>{t('candidate.new.sections.availability', 'Verfügbarkeit & Rates')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="availability">Verfügbarkeit</Label>
+                <Label htmlFor="availability">{t('candidate.new.fields.availability', 'Verfügbarkeit')}</Label>
                 <Select 
                   value={formData.availability} 
                   onValueChange={(value) => setFormData({ ...formData, availability: value as any })}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Verfügbarkeit auswählen" />
+                    <SelectValue placeholder={t('candidate.new.fields.availabilityPlaceholder', 'Verfügbarkeit auswählen')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="immediately">Sofort verfügbar</SelectItem>
-                    <SelectItem value="notice_period">Kündigungsfrist</SelectItem>
-                    <SelectItem value="booked">Gebucht</SelectItem>
-                    <SelectItem value="paused">Pausiert</SelectItem>
+                    <SelectItem value="immediately">{t('candidate.new.availability.immediately', 'Sofort verfügbar')}</SelectItem>
+                    <SelectItem value="notice_period">{t('candidate.new.availability.noticePeriod', 'Kündigungsfrist')}</SelectItem>
+                    <SelectItem value="booked">{t('candidate.new.availability.booked', 'Gebucht')}</SelectItem>
+                    <SelectItem value="paused">{t('candidate.new.availability.paused', 'Pausiert')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <Label htmlFor="hours_per_week_pref">Wochenstunden (Wunsch)</Label>
+                <Label htmlFor="hours_per_week_pref">{t('candidate.new.fields.hoursPerWeek', 'Wochenstunden (Wunsch)')}</Label>
                 <Input
                   id="hours_per_week_pref"
                   type="number"
@@ -431,7 +433,7 @@ export default function NewCandidate() {
 
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <Label htmlFor="start_earliest">Frühester Start</Label>
+                <Label htmlFor="start_earliest">{t('candidate.new.fields.startEarliest', 'Frühester Start')}</Label>
                 <Input
                   id="start_earliest"
                   type="date"
@@ -440,7 +442,7 @@ export default function NewCandidate() {
                 />
               </div>
               <div>
-                <Label htmlFor="notice_period_days">Kündigungsfrist (Tage)</Label>
+                <Label htmlFor="notice_period_days">{t('candidate.new.fields.noticePeriod', 'Kündigungsfrist (Tage)')}</Label>
                 <Input
                   id="notice_period_days"
                   type="number"
@@ -449,7 +451,7 @@ export default function NewCandidate() {
                 />
               </div>
               <div>
-                <Label htmlFor="currency">Währung</Label>
+                <Label htmlFor="currency">{t('candidate.new.fields.currency', 'Währung')}</Label>
                 <Select 
                   value={formData.currency} 
                   onValueChange={(value) => setFormData({ ...formData, currency: value })}
@@ -468,7 +470,7 @@ export default function NewCandidate() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="rate_monthly_target">Monatssatz (Ziel) *</Label>
+                <Label htmlFor="rate_monthly_target">{t('candidate.new.fields.monthlyRate', 'Monatssatz (Ziel) *')}</Label>
                 <Input
                   id="rate_monthly_target"
                   type="number"
@@ -483,18 +485,18 @@ export default function NewCandidate() {
                       rate_hourly_target: hourlyRate.toString()
                     });
                   }}
-                  placeholder="z.B. 8000"
+                  placeholder={t('candidate.new.fields.monthlyRatePlaceholder', 'z.B. 8000')}
                 />
               </div>
               <div>
-                <Label htmlFor="rate_hourly_target">Stundensatz (automatisch berechnet)</Label>
+                <Label htmlFor="rate_hourly_target">{t('candidate.new.fields.hourlyRate', 'Stundensatz (automatisch berechnet)')}</Label>
                 <Input
                   id="rate_hourly_target"
                   type="number"
                   step="0.01"
                   value={formData.rate_hourly_target}
                   disabled
-                  placeholder="Wird automatisch berechnet (Monatssatz ÷ 160h)"
+                  placeholder={t('candidate.new.fields.hourlyRatePlaceholder', 'Wird automatisch berechnet (Monatssatz ÷ 160h)')}
                 />
               </div>
             </div>
@@ -505,7 +507,7 @@ export default function NewCandidate() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              Skills
+              {t('candidate.new.sections.skills', 'Skills')}
               <Button type="button" variant="outline" size="sm" onClick={addSkill}>
                 <Plus className="h-4 w-4" />
               </Button>
@@ -516,15 +518,15 @@ export default function NewCandidate() {
               {skills.map((skill, index) => (
                 <div key={index} className="grid grid-cols-5 gap-2 items-end">
                   <div>
-                    <Label>Skill Name</Label>
+                    <Label>{t('candidate.new.fields.skillName', 'Skill Name')}</Label>
                     <Input
                       value={skill.name}
                       onChange={(e) => updateSkill(index, 'name', e.target.value)}
-                      placeholder="z.B. React"
+                      placeholder={t('candidate.new.fields.skillNamePlaceholder', 'z.B. React')}
                     />
                   </div>
                   <div>
-                    <Label>Level (1-5)</Label>
+                    <Label>{t('candidate.new.fields.skillLevel', 'Level (1-5)')}</Label>
                     <Input
                       type="number"
                       min="1"
@@ -534,7 +536,7 @@ export default function NewCandidate() {
                     />
                   </div>
                   <div>
-                    <Label>Jahre verwendet</Label>
+                    <Label>{t('candidate.new.fields.yearsUsed', 'Jahre verwendet')}</Label>
                     <Input
                       type="number"
                       step="0.1"
@@ -543,7 +545,7 @@ export default function NewCandidate() {
                     />
                   </div>
                   <div>
-                    <Label>Zuletzt verwendet</Label>
+                    <Label>{t('candidate.new.fields.lastUsed', 'Zuletzt verwendet')}</Label>
                     <Input
                       type="date"
                       value={skill.last_used}
@@ -563,7 +565,7 @@ export default function NewCandidate() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              Sprachen
+              {t('candidate.new.sections.languages', 'Sprachen')}
               <Button type="button" variant="outline" size="sm" onClick={addLanguage}>
                 <Plus className="h-4 w-4" />
               </Button>
@@ -574,15 +576,15 @@ export default function NewCandidate() {
               {languages.map((language, index) => (
                 <div key={index} className="grid grid-cols-3 gap-4 items-end">
                   <div>
-                    <Label>Sprache (Code)</Label>
+                    <Label>{t('candidate.new.fields.languageCode', 'Sprache (Code)')}</Label>
                     <Input
                       value={language.lang_code}
                       onChange={(e) => updateLanguage(index, 'lang_code', e.target.value)}
-                      placeholder="z.B. de, en, es"
+                      placeholder={t('candidate.new.fields.languageCodePlaceholder', 'z.B. de, en, es')}
                     />
                   </div>
                   <div>
-                    <Label>Niveau</Label>
+                    <Label>{t('candidate.new.fields.proficiency', 'Niveau')}</Label>
                     <Select 
                       value={language.proficiency} 
                       onValueChange={(value) => updateLanguage(index, 'proficiency', value)}
@@ -591,10 +593,10 @@ export default function NewCandidate() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="basic">Basic</SelectItem>
-                        <SelectItem value="conversational">Conversational</SelectItem>
-                        <SelectItem value="fluent">Fluent</SelectItem>
-                        <SelectItem value="native">Native</SelectItem>
+                        <SelectItem value="basic">{t('candidate.new.proficiency.basic', 'Basic')}</SelectItem>
+                        <SelectItem value="conversational">{t('candidate.new.proficiency.conversational', 'Conversational')}</SelectItem>
+                        <SelectItem value="fluent">{t('candidate.new.proficiency.fluent', 'Fluent')}</SelectItem>
+                        <SelectItem value="native">{t('candidate.new.proficiency.native', 'Native')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -611,7 +613,7 @@ export default function NewCandidate() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              Berufserfahrung & Projekte
+              {t('candidate.new.sections.experience', 'Berufserfahrung & Projekte')}
               <Button type="button" variant="outline" size="sm" onClick={addExperience}>
                 <Plus className="h-4 w-4" />
               </Button>
@@ -622,7 +624,7 @@ export default function NewCandidate() {
               {experiences.map((experience, index) => (
                 <div key={index} className="border rounded-lg p-4 space-y-4">
                   <div className="flex justify-between items-start">
-                    <h4 className="font-medium">Erfahrung #{index + 1}</h4>
+                    <h4 className="font-medium">{t('candidate.new.experienceTitle', 'Erfahrung #')}{index + 1}</h4>
                     <Button type="button" variant="outline" size="sm" onClick={() => removeExperience(index)}>
                       <Minus className="h-4 w-4" />
                     </Button>
@@ -630,26 +632,26 @@ export default function NewCandidate() {
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label>Position/Rolle *</Label>
+                      <Label>{t('candidate.new.fields.position', 'Position/Rolle *')}</Label>
                       <Input
                         value={experience.title}
                         onChange={(e) => updateExperience(index, 'title', e.target.value)}
-                        placeholder="z.B. Senior Developer, Customer Support Manager"
+                        placeholder={t('candidate.new.fields.positionPlaceholder', 'z.B. Senior Developer, Customer Support Manager')}
                       />
                     </div>
                     <div>
-                      <Label>Unternehmen/Organisation</Label>
+                      <Label>{t('candidate.new.fields.organization', 'Unternehmen/Organisation')}</Label>
                       <Input
                         value={experience.org_name}
                         onChange={(e) => updateExperience(index, 'org_name', e.target.value)}
-                        placeholder="z.B. Tech GmbH, Freelance"
+                        placeholder={t('candidate.new.fields.organizationPlaceholder', 'z.B. Tech GmbH, Freelance')}
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label>Start Datum</Label>
+                      <Label>{t('candidate.new.fields.startDate', 'Start Datum')}</Label>
                       <Input
                         type="date"
                         value={experience.start_date}
@@ -657,7 +659,7 @@ export default function NewCandidate() {
                       />
                     </div>
                     <div>
-                      <Label>End Datum (leer = aktuell)</Label>
+                      <Label>{t('candidate.new.fields.endDate', 'End Datum (leer = aktuell)')}</Label>
                       <Input
                         type="date"
                         value={experience.end_date}
@@ -667,21 +669,21 @@ export default function NewCandidate() {
                   </div>
 
                   <div>
-                    <Label>Beschreibung & Aufgaben</Label>
+                    <Label>{t('candidate.new.fields.description', 'Beschreibung & Aufgaben')}</Label>
                     <Textarea
                       value={experience.summary}
                       onChange={(e) => updateExperience(index, 'summary', e.target.value)}
-                      placeholder="Kurze Beschreibung der Tätigkeiten und Verantwortlichkeiten..."
+                      placeholder={t('candidate.new.fields.descriptionPlaceholder', 'Kurze Beschreibung der Tätigkeiten und Verantwortlichkeiten...')}
                       rows={3}
                     />
                   </div>
 
                   <div>
-                    <Label>Tech Stack / Verwendete Tools</Label>
+                    <Label>{t('candidate.new.fields.techStack', 'Tech Stack / Verwendete Tools')}</Label>
                     <Input
                       value={experience.tech_stack.join(', ')}
                       onChange={(e) => updateExperience(index, 'tech_stack', e.target.value.split(',').map(s => s.trim()).filter(s => s))}
-                      placeholder="z.B. React, Node.js, PostgreSQL, Docker (kommagetrennt)"
+                      placeholder={t('candidate.new.fields.techStackPlaceholder', 'z.B. React, Node.js, PostgreSQL, Docker (kommagetrennt)')}
                     />
                   </div>
                 </div>
@@ -689,7 +691,7 @@ export default function NewCandidate() {
               
               {experiences.length === 0 && (
                 <p className="text-muted-foreground text-center py-4">
-                  Noch keine Berufserfahrung hinzugefügt. Klicken Sie auf das Plus-Symbol, um zu beginnen.
+                  {t('candidate.new.noExperience', 'Noch keine Berufserfahrung hinzugefügt. Klicken Sie auf das Plus-Symbol, um zu beginnen.')}
                 </p>
               )}
             </div>
@@ -700,7 +702,7 @@ export default function NewCandidate() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              Links & Portfolio
+              {t('candidate.new.sections.links', 'Links & Portfolio')}
               <Button type="button" variant="outline" size="sm" onClick={addLink}>
                 <Plus className="h-4 w-4" />
               </Button>
@@ -711,19 +713,19 @@ export default function NewCandidate() {
               {links.map((link, index) => (
                 <div key={index} className="grid grid-cols-3 gap-4 items-end">
                   <div>
-                    <Label>Label</Label>
+                    <Label>{t('candidate.new.fields.linkLabel', 'Label')}</Label>
                     <Input
                       value={link.label}
                       onChange={(e) => updateLink(index, 'label', e.target.value)}
-                      placeholder="z.B. GitHub, Portfolio"
+                      placeholder={t('candidate.new.fields.linkLabelPlaceholder', 'z.B. GitHub, Portfolio')}
                     />
                   </div>
                   <div>
-                    <Label>URL</Label>
+                    <Label>{t('candidate.new.fields.linkUrl', 'URL')}</Label>
                     <Input
                       value={link.url}
                       onChange={(e) => updateLink(index, 'url', e.target.value)}
-                      placeholder="https://..."
+                      placeholder={t('candidate.new.fields.linkUrlPlaceholder', 'https://...')}
                     />
                   </div>
                   <Button type="button" variant="outline" size="sm" onClick={() => removeLink(index)}>
@@ -741,10 +743,10 @@ export default function NewCandidate() {
             variant="outline" 
             onClick={() => navigate('/admin/candidates')}
           >
-            Abbrechen
+            {t('candidate.new.buttons.cancel', 'Abbrechen')}
           </Button>
           <Button type="submit" disabled={loading}>
-            {loading ? 'Wird angelegt...' : 'RaaS Ressource anlegen'}
+            {loading ? t('candidate.new.buttons.submitting', 'Wird angelegt...') : t('candidate.new.buttons.submit', 'RaaS Ressource anlegen')}
           </Button>
         </div>
       </form>
