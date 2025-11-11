@@ -108,6 +108,61 @@
       }
     }
   },
+  "candidateView": {
+    "loading": "Loading...",
+    "notFound": "RaaS resource not found",
+    "backButton": "Back",
+    "editButton": "Edit",
+    "sections": {
+      "overview": "Overview",
+      "skills": "Skills",
+      "experience": "Work Experience",
+      "rates": "Rates & Availability",
+      "languages": "Languages",
+      "links": "Links & Portfolio"
+    },
+    "fields": {
+      "headline": "Headline",
+      "bio": "Bio",
+      "experience": "Experience",
+      "years": "years",
+      "monthlyRate": "Monthly Rate",
+      "hoursPerWeek": "h/week (desired)",
+      "availableFrom": "Available from:",
+      "noticePeriod": "Notice Period",
+      "days": "days"
+    },
+    "skills": {
+      "level": "Level",
+      "experienceYears": "Experience: {years} years",
+      "lastUsed": "Last used:"
+    },
+    "availability": {
+      "immediately": "Available immediately",
+      "noticePeriod": "Notice period",
+      "booked": "Booked",
+      "paused": "Paused"
+    },
+    "seniority": {
+      "junior": "junior",
+      "mid": "mid",
+      "senior": "senior",
+      "lead": "lead"
+    },
+    "proficiency": {
+      "basic": "Basic",
+      "conversational": "Conversational",
+      "fluent": "Fluent",
+      "native": "Native"
+    },
+    "date": {
+      "today": "Today"
+    },
+    "error": {
+      "title": "Error",
+      "description": "RaaS resource could not be loaded."
+    }
+  },
   "header": {
     "nav": {
       "home": "Home",

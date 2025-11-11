@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from '@/i18n/i18n';
 
 interface Skill {
   name: string;
@@ -65,6 +66,7 @@ export default function CandidateView() {
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [candidate, setCandidate] = useState<Candidate | null>(null);
@@ -142,8 +144,8 @@ export default function CandidateView() {
     } catch (error) {
       console.error('Error loading candidate:', error);
       toast({
-        title: "Fehler",
-        description: "RaaS Ressource konnte nicht geladen werden.",
+        title: t('candidateView.error.title', 'Fehler'),
+        description: t('candidateView.error.description', 'RaaS Ressource konnte nicht geladen werden.'),
         variant: "destructive",
       });
     } finally {
@@ -180,16 +182,16 @@ export default function CandidateView() {
   
   const getProficiencyLabel = (proficiency: string) => {
     const labels = {
-      'basic': 'Grundkenntnisse',
-      'conversational': 'Unterhaltung',
-      'fluent': 'Fließend',
-      'native': 'Muttersprache'
+      'basic': t('candidateView.proficiency.basic', 'Grundkenntnisse'),
+      'conversational': t('candidateView.proficiency.conversational', 'Unterhaltung'),
+      'fluent': t('candidateView.proficiency.fluent', 'Fließend'),
+      'native': t('candidateView.proficiency.native', 'Muttersprache')
     };
     return labels[proficiency as keyof typeof labels] || proficiency;
   };
 
   const formatDate = (dateString: string) => {
-    if (!dateString) return 'Heute';
+    if (!dateString) return t('candidateView.date.today', 'Heute');
     return new Date(dateString).toLocaleDateString('de-DE', {
       month: 'short',
       year: 'numeric'
@@ -200,7 +202,7 @@ export default function CandidateView() {
     return (
       <div className="p-6 max-w-6xl mx-auto">
         <div className="flex justify-center items-center h-64">
-          <div className="text-lg">Laden...</div>
+          <div className="text-lg">{t('candidateView.loading', 'Laden...')}</div>
         </div>
       </div>
     );
@@ -210,7 +212,7 @@ export default function CandidateView() {
     return (
       <div className="p-6 max-w-6xl mx-auto">
         <div className="text-center">
-          <h2 className="text-xl font-semibold">RaaS Ressource nicht gefunden</h2>
+          <h2 className="text-xl font-semibold">{t('candidateView.notFound', 'RaaS Ressource nicht gefunden')}</h2>
         </div>
       </div>
     );
@@ -227,7 +229,7 @@ export default function CandidateView() {
             className="flex items-center gap-2"
           >
             <ArrowLeft className="h-4 w-4" />
-            Zurück
+            {t('candidateView.backButton', 'Zurück')}
           </Button>
           <Avatar className="h-16 w-16">
             <AvatarImage src={identity?.avatar_url || undefined} alt="Profilbild" />
@@ -247,7 +249,7 @@ export default function CandidateView() {
           className="flex items-center gap-2"
         >
           <Edit className="h-4 w-4" />
-          Bearbeiten
+          {t('candidateView.editButton', 'Bearbeiten')}
         </Button>
       </div>
 
@@ -258,38 +260,39 @@ export default function CandidateView() {
           {/* Overview */}
           <Card>
             <CardHeader>
-              <CardTitle>Übersicht</CardTitle>
+              <CardTitle>{t('candidateView.sections.overview', 'Übersicht')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center gap-2">
                 <Badge className={getSeniorityColor(candidate.seniority)}>
-                  {candidate.seniority}
+                  {t(`candidateView.seniority.${candidate.seniority}`, candidate.seniority)}
                 </Badge>
                 <Badge className={getAvailabilityColor(candidate.availability)}>
-                  {candidate.availability === 'immediately' ? 'Sofort verfügbar' : 
-                   candidate.availability === 'notice_period' ? 'Kündigungsfrist' :
-                   candidate.availability === 'booked' ? 'Gebucht' : 'Pausiert'}
+                  {t(`candidateView.availability.${candidate.availability}`, 
+                    candidate.availability === 'immediately' ? 'Sofort verfügbar' : 
+                    candidate.availability === 'notice_period' ? 'Kündigungsfrist' :
+                    candidate.availability === 'booked' ? 'Gebucht' : 'Pausiert')}
                 </Badge>
               </div>
               
               {candidate.headline && (
                 <div>
-                  <h3 className="font-medium text-sm text-muted-foreground">Headline</h3>
+                  <h3 className="font-medium text-sm text-muted-foreground">{t('candidateView.fields.headline', 'Headline')}</h3>
                   <p className="text-lg font-medium">{candidate.headline}</p>
                 </div>
               )}
               
               {candidate.bio && (
                 <div>
-                  <h3 className="font-medium text-sm text-muted-foreground">Bio</h3>
+                  <h3 className="font-medium text-sm text-muted-foreground">{t('candidateView.fields.bio', 'Bio')}</h3>
                   <p className="text-sm leading-relaxed">{candidate.bio}</p>
                 </div>
               )}
 
               <div className="grid grid-cols-2 gap-4 pt-4">
                 <div>
-                  <h3 className="font-medium text-sm text-muted-foreground">Erfahrung</h3>
-                  <p>{candidate.years_experience} Jahre</p>
+                  <h3 className="font-medium text-sm text-muted-foreground">{t('candidateView.fields.experience', 'Erfahrung')}</h3>
+                  <p>{candidate.years_experience} {t('candidateView.fields.years', 'Jahre')}</p>
                 </div>
                 {identity?.city && (
                   <div className="flex items-center gap-1">
@@ -305,7 +308,7 @@ export default function CandidateView() {
           {candidate.skills && candidate.skills.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Skills</CardTitle>
+                <CardTitle>{t('candidateView.sections.skills', 'Skills')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -313,12 +316,12 @@ export default function CandidateView() {
                     <div key={index} className="border rounded-lg p-3">
                       <div className="flex justify-between items-start mb-2">
                         <h4 className="font-medium">{skill.name}</h4>
-                        <Badge variant="outline">Level {skill.level}/5</Badge>
+                        <Badge variant="outline">{t('candidateView.skills.level', 'Level')} {skill.level}/5</Badge>
                       </div>
                       <div className="text-xs text-muted-foreground space-y-1">
-                        <div>Erfahrung: {skill.years_used} Jahre</div>
+                        <div>{t('candidateView.fields.experience', 'Erfahrung')}: {skill.years_used} {t('candidateView.fields.years', 'Jahre')}</div>
                         {skill.last_used && (
-                          <div>Zuletzt: {formatDate(skill.last_used)}</div>
+                          <div>{t('candidateView.skills.lastUsed', 'Zuletzt')}: {formatDate(skill.last_used)}</div>
                         )}
                       </div>
                     </div>
@@ -332,7 +335,7 @@ export default function CandidateView() {
           {experiences.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Berufserfahrung</CardTitle>
+                <CardTitle>{t('candidateView.sections.experience', 'Berufserfahrung')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
@@ -377,12 +380,12 @@ export default function CandidateView() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <DollarSign className="h-5 w-5" />
-                Rates & Verfügbarkeit
+                {t('candidateView.sections.rates', 'Rates & Verfügbarkeit')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <h3 className="font-medium text-sm text-muted-foreground">Monatssatz</h3>
+                <h3 className="font-medium text-sm text-muted-foreground">{t('candidateView.fields.monthlyRate', 'Monatssatz')}</h3>
                 <p className="text-xl font-bold text-primary">
                   {Math.round(candidate.rate_monthly_target || 0).toLocaleString()} {candidate.currency}
                 </p>
@@ -394,21 +397,21 @@ export default function CandidateView() {
               {candidate.hours_per_week_pref && (
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-muted-foreground" />
-                  <span>{candidate.hours_per_week_pref}h/Woche (Wunsch)</span>
+                  <span>{candidate.hours_per_week_pref}{t('candidateView.fields.hoursPerWeek', 'h/Woche (Wunsch)')}</span>
                 </div>
               )}
               
               {candidate.start_earliest && (
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span>Verfügbar ab: {formatDate(candidate.start_earliest)}</span>
+                  <span>{t('candidateView.fields.availableFrom', 'Verfügbar ab:')} {formatDate(candidate.start_earliest)}</span>
                 </div>
               )}
               
               {candidate.notice_period_days && (
                 <div>
-                  <h3 className="font-medium text-sm text-muted-foreground">Kündigungsfrist</h3>
-                  <p>{candidate.notice_period_days} Tage</p>
+                  <h3 className="font-medium text-sm text-muted-foreground">{t('candidateView.fields.noticePeriod', 'Kündigungsfrist')}</h3>
+                  <p>{candidate.notice_period_days} {t('candidateView.fields.days', 'Tage')}</p>
                 </div>
               )}
             </CardContent>
@@ -420,7 +423,7 @@ export default function CandidateView() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Globe className="h-5 w-5" />
-                  Sprachen
+                  {t('candidateView.sections.languages', 'Sprachen')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -442,7 +445,7 @@ export default function CandidateView() {
           {links.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Links & Portfolio</CardTitle>
+                <CardTitle>{t('candidateView.sections.links', 'Links & Portfolio')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
