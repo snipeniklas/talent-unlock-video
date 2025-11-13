@@ -1,6 +1,22 @@
 {
   "common": {
     "error": "Fehler",
+    "success": "Erfolg",
+    "loading": "Lädt...",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "add": "Hinzufügen",
+    "search": "Suchen",
+    "filter": "Filter",
+    "clear": "Zurücksetzen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "submit": "Absenden",
+    "close": "Schließen",
+    "confirm": "Bestätigen",
     "actions": {
       "login": "Login",
       "create": "Erstellen",
@@ -10,6 +26,38 @@
       "save": "Speichern",
       "view": "Ansehen",
       "back": "Zurück"
+    }
+  },
+  "company": {
+    "detail": {
+      "subtitle": "Unternehmensdetails",
+      "notFound": "Unternehmen nicht gefunden",
+      "fetchError": "Fehler beim Laden der Unternehmensdaten",
+      "basicInfo": "Grundinformationen",
+      "companyName": "Unternehmensname",
+      "email": "E-Mail",
+      "website": "Website",
+      "registered": "Registriert am",
+      "valueProposition": "Wertversprechen",
+      "statistics": "Statistiken",
+      "totalUsers": "Benutzer",
+      "totalRequests": "Projekte gesamt",
+      "activeRequests": "Aktive Projekte",
+      "completedRequests": "Abgeschlossen",
+      "users": "Benutzer",
+      "usersDescription": "Alle registrierten Benutzer dieses Unternehmens",
+      "noUsers": "Keine Benutzer gefunden",
+      "searchRequests": "Kundenprojekte",
+      "searchRequestsDescription": "Alle Projekte und Aufträge dieses Unternehmens",
+      "noSearchRequests": "Keine Projekte gefunden"
+    }
+  },
+  "searchRequest": {
+    "status": {
+      "active": "Aktiv",
+      "completed": "Abgeschlossen",
+      "on_hold": "Pausiert",
+      "cancelled": "Storniert"
     }
   },
   "header": {

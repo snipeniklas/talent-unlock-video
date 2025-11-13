@@ -28,6 +28,7 @@ import ITDevelopmentSolution from "./pages/solutions/ITDevelopmentSolution";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminSearchRequests from "./pages/admin/AdminSearchRequests";
 import CompanyManagement from "./pages/admin/CompanyManagement";
+import CompanyDetail from "./pages/admin/CompanyDetail";
 import AdminSettings from "./pages/admin/AdminSettings";
 import SolutionsOverview from "./pages/SolutionsOverview";
 import HowWeWork from "./pages/HowWeWork";
@@ -138,6 +139,7 @@ const App = () => (
             <Route path="search-requests/:id" element={<AdminSearchRequestDetail />} />
             <Route path="search-requests/:id/allocations" element={<SearchRequestAllocations />} />
             <Route path="companies" element={<CompanyManagement />} />
+            <Route path="companies/:id" element={<CompanyDetail />} />
             <Route path="crm" element={<CrmOverview />} />
             <Route path="crm/companies" element={<CrmCompanies />} />
             <Route path="crm/companies/new" element={<CrmCompanyForm />} />
