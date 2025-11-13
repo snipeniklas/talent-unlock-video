@@ -163,13 +163,13 @@ const Dashboard = () => {
         ) : (
           <>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
-              <Card className="hover:shadow-lg transition-shadow duration-300 p-3 lg:p-6">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 lg:pb-2">
-                  <CardTitle className="text-xs lg:text-sm font-medium">{t('app.dashboard.cards.active.title', 'Aktive Suchaufträge')}</CardTitle>
-                  <Search className="h-3 w-3 lg:h-4 lg:w-4 text-muted-foreground" />
+              <Card className="hover:shadow-lg transition-shadow duration-300">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium whitespace-nowrap">{t('app.dashboard.cards.active.title', 'Aktive Suchaufträge')}</CardTitle>
+                  <Search className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 </CardHeader>
-                <CardContent className="p-0 pt-1 lg:pt-2">
-                  <div className="text-xl lg:text-2xl font-bold text-primary">{dashboardData?.stats?.activeSearchRequests || 0}</div>
+                <CardContent>
+                  <div className="text-2xl font-bold text-primary">{dashboardData?.stats?.activeSearchRequests || 0}</div>
                   <p className="text-xs text-muted-foreground">
                     {t('app.dashboard.cards.active.delta', '+2 seit letztem Monat')}
                   </p>
@@ -178,8 +178,8 @@ const Dashboard = () => {
 
               <Card className="hover:shadow-lg transition-shadow duration-300">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">{t('app.dashboard.cards.specialists.title', 'Spezialisten')}</CardTitle>
-                  <Users className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-sm font-medium whitespace-nowrap">{t('app.dashboard.cards.specialists.title', 'Spezialisten')}</CardTitle>
+                  <Users className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-primary">{dashboardData?.stats?.totalSpecialists || 0}</div>
@@ -191,8 +191,8 @@ const Dashboard = () => {
 
               <Card className="hover:shadow-lg transition-shadow duration-300">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">{t('app.dashboard.cards.completed.title', 'Abgeschlossen')}</CardTitle>
-                  <CheckCircle className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-sm font-medium whitespace-nowrap">{t('app.dashboard.cards.completed.title', 'Abgeschlossen')}</CardTitle>
+                  <CheckCircle className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-green-600">{dashboardData?.stats?.completedProjects || 0}</div>
@@ -204,8 +204,8 @@ const Dashboard = () => {
 
               <Card className="hover:shadow-lg transition-shadow duration-300">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">{t('app.dashboard.cards.pending.title', 'Ausstehend')}</CardTitle>
-                  <Clock className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-sm font-medium whitespace-nowrap">{t('app.dashboard.cards.pending.title', 'Ausstehend')}</CardTitle>
+                  <Clock className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-orange-600">{dashboardData?.stats?.pendingRequests || 0}</div>
