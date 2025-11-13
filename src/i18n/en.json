@@ -1,6 +1,22 @@
 {
   "common": {
     "error": "Error",
+    "success": "Success",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "close": "Close",
+    "confirm": "Confirm",
     "actions": {
       "login": "Login",
       "create": "Create",
@@ -10,6 +26,38 @@
       "save": "Save",
       "view": "View",
       "back": "Back"
+    }
+  },
+  "company": {
+    "detail": {
+      "subtitle": "Company Details",
+      "notFound": "Company not found",
+      "fetchError": "Error loading company data",
+      "basicInfo": "Basic Information",
+      "companyName": "Company Name",
+      "email": "Email",
+      "website": "Website",
+      "registered": "Registered on",
+      "valueProposition": "Value Proposition",
+      "statistics": "Statistics",
+      "totalUsers": "Users",
+      "totalRequests": "Total Projects",
+      "activeRequests": "Active Projects",
+      "completedRequests": "Completed",
+      "users": "Users",
+      "usersDescription": "All registered users of this company",
+      "noUsers": "No users found",
+      "searchRequests": "Customer Projects",
+      "searchRequestsDescription": "All projects and orders for this company",
+      "noSearchRequests": "No projects found"
+    }
+  },
+  "searchRequest": {
+    "status": {
+      "active": "Active",
+      "completed": "Completed",
+      "on_hold": "On Hold",
+      "cancelled": "Cancelled"
     }
   },
   "candidate": {
