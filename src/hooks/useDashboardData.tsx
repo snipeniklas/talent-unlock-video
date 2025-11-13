@@ -64,10 +64,8 @@ export const useDashboardData = () => {
           .select('status')
           .eq('company_id', companyId),
         
-        // Total candidates count
-        supabase
-          .from('candidates')
-          .select('id', { count: 'exact', head: true }),
+        // Total candidates count (absolute, bypasses RLS)
+        supabase.rpc('get_total_candidates_count'),
         
         // Recent search requests (limit 3)
         supabase
@@ -100,7 +98,7 @@ export const useDashboardData = () => {
         activeSearchRequests: searchRequests.filter(r => r.status === 'active').length,
         completedProjects: searchRequests.filter(r => r.status === 'completed').length,
         pendingRequests: searchRequests.filter(r => r.status === 'pending').length,
-        totalSpecialists: candidatesData.count || 0,
+        totalSpecialists: candidatesData.data || 0,
       };
       
       console.log('Calculated dashboard stats:', stats);
