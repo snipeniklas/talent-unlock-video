@@ -50,6 +50,7 @@ interface Candidate {
   notice_period_days?: number;
   rate_hourly_target?: number;
   rate_monthly_target?: number;
+  margin?: number;
   currency?: string;
   skills: any;
   created_at: string;
@@ -189,6 +190,20 @@ const CustomerCandidateDetail: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Helper functions for pricing (customer sees selling price)
+  const calculateCustomerMonthlyRate = (candidate: Candidate): number => {
+    const baseRate = candidate.rate_monthly_target || 0;
+    const margin = candidate.margin || 0;
+    return baseRate + margin;
+  };
+
+  const calculateCustomerHourlyRate = (candidate: Candidate): number => {
+    const monthlyRate = calculateCustomerMonthlyRate(candidate);
+    const hours = candidate.hours_per_week_pref || 40;
+    const hoursPerMonth = hours * 4.33; // Average weeks per month
+    return monthlyRate / hoursPerMonth;
   };
 
   // Helper functions
@@ -411,16 +426,16 @@ const CustomerCandidateDetail: React.FC = () => {
                   <div>
                     <p className="text-sm font-medium text-gray-600">Stundensatz</p>
                     <p className="text-lg font-semibold text-green-600">
-                      {candidate.rate_hourly_target} {candidate.currency || 'EUR'}/h
+                      {calculateCustomerHourlyRate(candidate).toFixed(2)} {candidate.currency || 'EUR'}/h
                     </p>
                   </div>
                 )}
-                
+
                 {candidate.rate_monthly_target && (
                   <div>
                     <p className="text-sm font-medium text-gray-600">Monatssatz</p>
                     <p className="text-lg font-semibold text-green-600">
-                      {candidate.rate_monthly_target} {candidate.currency || 'EUR'}/Monat
+                      {calculateCustomerMonthlyRate(candidate).toFixed(2)} {candidate.currency || 'EUR'}/Monat
                     </p>
                   </div>
                 )}
