@@ -313,15 +313,11 @@ const Specialists = () => {
                 <Button 
                   size="sm" 
                   variant="outline" 
-                  className="flex-1"
+                  className="w-full"
                   onClick={() => navigate(`/app/specialists/${specialist.id}`)}
                 >
                   <Eye className="w-4 h-4 mr-2" />
                   Vollständiges Profil
-                </Button>
-                <Button size="sm" className="flex-1 bg-primary hover:bg-primary-hover">
-                  <UserPlus className="w-4 h-4 mr-2" />
-                  Kontakt aufnehmen
                 </Button>
               </div>
             </CardContent>
