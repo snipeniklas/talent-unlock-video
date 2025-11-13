@@ -34,6 +34,7 @@ export default function AdminDashboard() {
   const fetchDashboardStats = async () => {
     try {
       const [candidatesResult, requestsResult, companiesResult, ticketsResult] = await Promise.all([
+        // @ts-ignore - RPC function not yet in generated types
         supabase.rpc('get_total_candidates_count'),
         supabase.from('search_requests').select('id', { count: 'exact', head: true }),
         supabase.from('companies').select('id', { count: 'exact', head: true }),
@@ -53,7 +54,7 @@ export default function AdminDashboard() {
         .limit(5);
 
       setStats({
-        totalCandidates: candidatesResult.data || 0,
+        totalCandidates: (candidatesResult.data as unknown as number) || 0,
         totalRequests: requestsResult.count || 0,
         totalCompanies: companiesResult.count || 0,
         openTickets: ticketsResult.count || 0,
