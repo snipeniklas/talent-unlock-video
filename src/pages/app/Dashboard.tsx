@@ -171,7 +171,7 @@ const Dashboard = () => {
                 <CardContent>
                   <div className="text-2xl font-bold text-primary">{dashboardData?.stats?.activeSearchRequests || 0}</div>
                   <p className="text-xs text-muted-foreground">
-                    {t('app.dashboard.cards.active.delta', '+2 seit letztem Monat')}
+                    {t('app.dashboard.cards.active.delta', 'Ihre Requests')}
                   </p>
                 </CardContent>
               </Card>
