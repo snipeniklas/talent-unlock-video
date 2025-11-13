@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Plus, Minus, Save } from 'lucide-react';
+import { ArrowLeft, Plus, Minus, Save, DollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -60,7 +60,11 @@ export default function CandidateDetail() {
     currency: 'EUR',
     rate_hourly_target: '',
     rate_monthly_target: '',
+    margin: '',
   });
+
+  // User role for conditional rendering
+  const [userRole, setUserRole] = useState<string>('');
 
   // Identity data
   const [identity, setIdentity] = useState({
@@ -85,7 +89,25 @@ export default function CandidateDetail() {
 
   useEffect(() => {
     loadCandidateData();
+    loadUserRole();
   }, [id]);
+
+  const loadUserRole = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      
+      const { data: roles } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', user.id)
+        .single();
+      
+      setUserRole(roles?.role || '');
+    } catch (error) {
+      console.error('Error loading user role:', error);
+    }
+  };
 
   const loadCandidateData = async () => {
     if (!id) return;
@@ -114,6 +136,7 @@ export default function CandidateDetail() {
         currency: candidate.currency || 'EUR',
         rate_hourly_target: candidate.rate_hourly_target?.toString() || '',
         rate_monthly_target: candidate.rate_monthly_target?.toString() || '',
+        margin: candidate.margin?.toString() || '0',
       });
 
       try {
@@ -260,6 +283,20 @@ export default function CandidateDetail() {
     setLinks(updatedLinks);
   };
 
+  // Helper functions for pricing calculations
+  const calculateSellingPrice = (): number => {
+    const monthly = parseFloat(formData.rate_monthly_target) || 0;
+    const margin = parseFloat(formData.margin) || 0;
+    return monthly + margin;
+  };
+
+  const calculateHourlySellingPrice = (): number => {
+    const sellingPrice = calculateSellingPrice();
+    const hours = parseFloat(formData.hours_per_week_pref) || 40;
+    const hoursPerMonth = hours * 4.33; // Average weeks per month
+    return sellingPrice / hoursPerMonth;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!id) return;
@@ -267,21 +304,32 @@ export default function CandidateDetail() {
     setLoading(true);
 
     try {
-      // Update candidate
-      const candidateData = {
-        ...formData,
+      // Prepare update data
+      const updateData: any = {
+        primary_role: formData.primary_role,
+        seniority: formData.seniority,
         years_experience: formData.years_experience ? parseFloat(formData.years_experience) : null,
+        headline: formData.headline,
+        bio: formData.bio,
+        availability: formData.availability,
         hours_per_week_pref: formData.hours_per_week_pref ? parseInt(formData.hours_per_week_pref) : null,
+        start_earliest: formData.start_earliest || null,
         notice_period_days: formData.notice_period_days ? parseInt(formData.notice_period_days) : null,
+        currency: formData.currency,
         rate_hourly_target: formData.rate_hourly_target ? parseFloat(formData.rate_hourly_target) : null,
         rate_monthly_target: formData.rate_monthly_target ? parseFloat(formData.rate_monthly_target) : null,
-        start_earliest: formData.start_earliest || null,
-        skills: skills.length > 0 ? JSON.parse(JSON.stringify(skills)) : [],
+        skills: skills.filter(s => s.name),
       };
 
+      // Only admins can update margin
+      if (userRole === 'admin') {
+        updateData.margin = parseFloat(formData.margin) || 0;
+      }
+
+      // Update candidate
       const { error: candidateError } = await supabase
         .from('candidates')
-        .update(candidateData)
+        .update(updateData)
         .eq('id', id);
 
       if (candidateError) throw candidateError;
@@ -676,6 +724,67 @@ export default function CandidateDetail() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Margin & Pricing - Only for Hej Talent Admins */}
+        {userRole === 'admin' && (
+          <Card className="border-2 border-primary/20 bg-primary/5">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <DollarSign className="h-5 w-5" />
+                Marge & Preisgestaltung (Nur Hej Talent Admin)
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Monthly Rates Overview */}
+              <div className="grid grid-cols-3 gap-4 p-4 bg-background rounded-lg border">
+                <div>
+                  <Label className="text-xs text-muted-foreground">Einkaufspreis (Monat)</Label>
+                  <p className="text-lg font-semibold text-foreground">
+                    {formData.rate_monthly_target ? parseFloat(formData.rate_monthly_target).toFixed(2) : '0.00'} {formData.currency}
+                  </p>
+                </div>
+                <div>
+                  <Label htmlFor="margin">Marge (pro Monat) *</Label>
+                  <Input
+                    id="margin"
+                    type="number"
+                    step="0.01"
+                    value={formData.margin}
+                    onChange={(e) => setFormData({ ...formData, margin: e.target.value })}
+                    placeholder="z.B. 2000"
+                    className="bg-background"
+                  />
+                </div>
+                <div>
+                  <Label className="text-xs text-muted-foreground">Verkaufspreis (Monat)</Label>
+                  <p className="text-lg font-bold text-primary">
+                    {calculateSellingPrice().toFixed(2)} {formData.currency}
+                  </p>
+                </div>
+              </div>
+              
+              {/* Hourly Rates Overview */}
+              <div className="grid grid-cols-2 gap-4 p-4 bg-background rounded-lg border">
+                <div>
+                  <Label className="text-xs text-muted-foreground">Einkaufs-Stundensatz</Label>
+                  <p className="text-lg font-semibold text-foreground">
+                    {formData.rate_hourly_target ? parseFloat(formData.rate_hourly_target).toFixed(2) : '0.00'} {formData.currency}/h
+                  </p>
+                </div>
+                <div>
+                  <Label className="text-xs text-muted-foreground">Verkaufs-Stundensatz</Label>
+                  <p className="text-lg font-bold text-primary">
+                    {calculateHourlySellingPrice().toFixed(2)} {formData.currency}/h
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-xs text-muted-foreground">
+                * Der Verkaufspreis wird dem Kunden angezeigt. Einkaufspreis und Marge sind nur für Hej Talent Admins sichtbar.
+              </p>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Skills */}
         <Card>
