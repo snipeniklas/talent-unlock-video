@@ -190,7 +190,7 @@ export function RaasInquiryDialog({
                 className="w-full"
               >
                 <a 
-                  href="https://calendly.com/pascal-hejtalent/15min" 
+                  href="https://calendly.com/pascal-hej-talent/15min" 
                   target="_blank" 
                   rel="noopener noreferrer"
                 >

@@ -57,7 +57,7 @@ const ContactCTA = () => {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="font-semibold text-brand-dark text-sm sm:text-base">{t('contactCTA.labels.linkedin', 'LinkedIn Profil')}</div>
-                  <a href="https://www.linkedin.com/company/hejtalent/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm sm:text-base">
+                  <a href="https://www.linkedin.com/company/hej-talent/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm sm:text-base">
                     LinkedIn
                   </a>
                 </div>
