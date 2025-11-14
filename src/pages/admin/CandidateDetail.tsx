@@ -136,7 +136,7 @@ export default function CandidateDetail() {
         currency: candidate.currency || 'EUR',
         rate_hourly_target: candidate.rate_hourly_target?.toString() || '',
         rate_monthly_target: candidate.rate_monthly_target?.toString() || '',
-        margin: candidate.margin?.toString() || '0',
+        margin: (candidate as any).margin?.toString() || '0',
       });
 
       try {
