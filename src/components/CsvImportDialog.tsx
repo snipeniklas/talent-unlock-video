@@ -125,23 +125,26 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
     reader.onload = (e) => {
       const text = e.target?.result as string;
       
-      // Use Papa Parse for robust CSV parsing
+      // Use Papa Parse for robust CSV parsing with auto delimiter detection
       Papa.parse<CsvRow>(text, {
         header: true,
         skipEmptyLines: true,
         dynamicTyping: false,
+        delimiter: "", // Auto-detect delimiter (comma, semicolon, tab, etc.)
         complete: (results) => {
-          if (results.errors.length > 0) {
-            console.error("CSV parse errors:", results.errors);
-            toast({
-              title: "CSV Parse Warning",
-              description: `Found ${results.errors.length} parsing issue(s). Data might be incomplete.`,
-              variant: "destructive"
-            });
-          }
-
           const rows = results.data;
           const headers = results.meta.fields || [];
+
+          // Check if parsing resulted in only 1 column - likely wrong delimiter
+          if (headers.length === 1 && rows.length > 0) {
+            console.error("CSV parsing detected only 1 column - delimiter issue");
+            toast({
+              title: "CSV Format Error",
+              description: "Could not detect correct delimiter. Please ensure your CSV uses comma (,) or semicolon (;) as separator.",
+              variant: "destructive"
+            });
+            return;
+          }
 
           if (headers.length === 0 || rows.length === 0) {
             toast({
@@ -150,6 +153,19 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
               variant: "destructive"
             });
             return;
+          }
+
+          // Only show error warning if actual parsing errors occurred (not just row-level warnings)
+          if (results.errors.length > 0) {
+            const criticalErrors = results.errors.filter(err => err.type === 'Delimiter' || err.type === 'Quotes');
+            if (criticalErrors.length > 0) {
+              console.error("CSV parse errors:", results.errors);
+              toast({
+                title: "CSV Parse Warning",
+                description: `Found ${results.errors.length} parsing issue(s). Data might be incomplete.`,
+                variant: "destructive"
+              });
+            }
           }
 
           console.log(`✅ Parsed ${rows.length} rows with ${headers.length} columns:`, headers);
