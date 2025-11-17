@@ -157,6 +157,7 @@ export type Database = {
           headline: string | null
           hours_per_week_pref: number | null
           id: string
+          margin: number | null
           notice_period_days: number | null
           primary_role: string | null
           rate_hourly_target: number | null
@@ -179,6 +180,7 @@ export type Database = {
           headline?: string | null
           hours_per_week_pref?: number | null
           id?: string
+          margin?: number | null
           notice_period_days?: number | null
           primary_role?: string | null
           rate_hourly_target?: number | null
@@ -201,6 +203,7 @@ export type Database = {
           headline?: string | null
           hours_per_week_pref?: number | null
           id?: string
+          margin?: number | null
           notice_period_days?: number | null
           primary_role?: string | null
           rate_hourly_target?: number | null
@@ -1416,6 +1419,7 @@ export type Database = {
     }
     Functions: {
       cleanup_stuck_processing_contacts: { Args: never; Returns: undefined }
+      get_total_candidates_count: { Args: never; Returns: number }
       get_user_company: { Args: { _user_id: string }; Returns: string }
       has_role: {
         Args: {
@@ -1426,7 +1430,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "company_admin" | "user"
+      app_role: "admin" | "company_admin" | "user" | "resource_manager"
       availability_status: "immediately" | "notice_period" | "booked" | "paused"
       proficiency: "basic" | "conversational" | "fluent" | "native"
       research_status:
@@ -1563,7 +1567,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "company_admin", "user"],
+      app_role: ["admin", "company_admin", "user", "resource_manager"],
       availability_status: ["immediately", "notice_period", "booked", "paused"],
       proficiency: ["basic", "conversational", "fluent", "native"],
       research_status: [
