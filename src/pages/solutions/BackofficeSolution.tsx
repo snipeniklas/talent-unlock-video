@@ -11,29 +11,43 @@ import ContactCTA from "@/components/ContactCTA";
 import { useTranslation } from '@/i18n/i18n';
 
 const BackofficeSolution = () => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
-  const targetAudience = [
+  const targetAudience = lang === 'de' ? [
     'Geschäftsführer kleiner und mittlerer Unternehmen',
     'Office-Manager und Assistenzteams',
     'Buchhalter und Controlling-Verantwortliche',
     'HR-Verantwortliche'
+  ] : [
+    'CEOs of small and medium-sized enterprises',
+    'Office managers and assistant teams',
+    'Accountants and controlling managers',
+    'HR managers'
   ];
 
-  const coreProblems = [
+  const coreProblems = lang === 'de' ? [
     { title: 'Hohe Personalkosten im administrativen Bereich', description: 'Vollzeit-Backoffice-Kräfte vor Ort sind teuer und oft nicht voll ausgelastet' },
     { title: 'Zeitaufwändige Routine-Aufgaben', description: 'Administration und Buchhaltung binden wertvolle Ressourcen, die für Kerngeschäft fehlen' },
     { title: 'Schwankende Arbeitsbelastung', description: 'Saisonale oder projektbedingte Spitzen schwer mit festem Personal abdecken' }
+  ] : [
+    { title: 'High personnel costs in administration', description: 'Full-time on-site backoffice staff are expensive and often underutilized' },
+    { title: 'Time-consuming routine tasks', description: 'Administration and accounting tie up valuable resources needed for core business' },
+    { title: 'Fluctuating workload', description: 'Difficult to cover seasonal or project-based peaks with permanent staff' }
   ];
 
-  const remoteTalents = [
+  const remoteTalents = lang === 'de' ? [
     { role: 'Virtuelle Assistenten', skills: 'E-Mail-Management, Terminplanung, Kundenkommunikation, Datenerfassung', experience: '3+ Jahre Erfahrung' },
     { role: 'Remote Buchhalter', skills: 'Finanzbuchhaltung, Lohnabrechnung, Controlling, Steuervorbereitungen', experience: '5+ Jahre Erfahrung, DATEV-zertifiziert' },
     { role: 'Administrative Spezialisten', skills: 'Projektmanagement, Qualitätsmanagement, Compliance, Dokumentation', experience: '4+ Jahre Branchenerfahrung' },
     { role: 'Customer Service Agents', skills: 'Kundenbetreuung, Beschwerdemanagement, CRM-Systeme, Verkaufsunterstützung', experience: '3+ Jahre im Kundenservice' }
+  ] : [
+    { role: 'Virtual Assistants', skills: 'Email management, appointment scheduling, customer communication, data entry', experience: '3+ years experience' },
+    { role: 'Remote Accountants', skills: 'Financial accounting, payroll, controlling, tax preparation', experience: '5+ years experience, certified' },
+    { role: 'Administrative Specialists', skills: 'Project management, quality management, compliance, documentation', experience: '4+ years industry experience' },
+    { role: 'Customer Service Agents', skills: 'Customer support, complaint management, CRM systems, sales support', experience: '3+ years in customer service' }
   ];
 
-  const backofficeTools = [
+  const backofficeTools = lang === 'de' ? [
     { 
       category: 'Buchhaltung & Finanzen', 
       tools: ['DATEV', 'Lexoffice', 'QuickBooks', 'Xero'],
@@ -64,9 +78,40 @@ const BackofficeSolution = () => {
       tools: ['Microsoft 365', 'Google Workspace', 'Notion', 'Confluence'],
       description: 'Dokumentenmanagement und Zusammenarbeit'
     }
+  ] : [
+    { 
+      category: 'Accounting & Finance', 
+      tools: ['DATEV', 'Lexoffice', 'QuickBooks', 'Xero'],
+      description: 'Professional accounting systems for precise financial processing'
+    },
+    { 
+      category: 'CRM & Sales', 
+      tools: ['Salesforce', 'HubSpot', 'Pipedrive', 'Zoho CRM'],
+      description: 'Customer management and sales support'
+    },
+    { 
+      category: 'Communication', 
+      tools: ['Slack', 'Microsoft Teams', 'Zoom', 'Google Meet'],
+      description: 'Seamless team communication and video conferencing'
+    },
+    { 
+      category: 'Project Management', 
+      tools: ['Asana', 'Trello', 'Monday.com', 'Jira'],
+      description: 'Efficient task management and project organization'
+    },
+    { 
+      category: 'HR & Personnel', 
+      tools: ['Personio', 'BambooHR', 'Workday', 'SAP SuccessFactors'],
+      description: 'Personnel management and HR processes'
+    },
+    { 
+      category: 'Office & Documentation', 
+      tools: ['Microsoft 365', 'Google Workspace', 'Notion', 'Confluence'],
+      description: 'Document management and collaboration'
+    }
   ];
 
-  const useCases = [
+  const useCases = lang === 'de' ? [
     {
       title: 'Buchhaltung & Finanzen',
       description: 'Ein mittelständisches E-Commerce-Unternehmen automatisierte seine Rechnungsstellung und Finanzbuchhaltung mit Remote-Buchhaltern',
@@ -94,22 +139,62 @@ const BackofficeSolution = () => {
         'Verbesserte Compliance und Dokumentation'
       ]
     }
+  ] : [
+    {
+      title: 'Accounting & Finance',
+      description: 'A mid-sized e-commerce company automated its invoicing and financial accounting with remote accountants',
+      results: [
+        '50% time savings on monthly closings',
+        '60% cost reduction compared to local full-time staff',
+        '99% error-free through double-checking'
+      ]
+    },
+    {
+      title: 'Customer Support & CRM',
+      description: 'A SaaS startup scaled its customer support with remote customer service agents and improved CRM management',
+      results: [
+        '95% customer satisfaction score',
+        '3x faster response times',
+        'Extended service hours without additional costs'
+      ]
+    },
+    {
+      title: 'Administrative Processes',
+      description: 'A tax consultancy digitized workflows and document management with virtual assistants',
+      results: [
+        '60% efficiency increase in routine tasks',
+        '40 hours/week more time for core business',
+        'Improved compliance and documentation'
+      ]
+    }
   ];
 
-  const benefits = [
+  const benefits = lang === 'de' ? [
     'Bis zu 60% Kosteneinsparung gegenüber lokalen Vollzeitkräften',
     'Flexible Skalierung je nach Bedarf (Stunden, Tage, Monate)',
     'Internationale Remote-Fachkräfte mit optimaler Zeitzone-Abdeckung',
     'Schneller Start: Einsatzbereit in 1-2 Wochen',
     'Keine HR-Aufwände: Wir übernehmen Recruiting und Betreuung',
     'Backup-Lösungen bei Ausfall verfügbar'
+  ] : [
+    'Up to 60% cost savings compared to local full-time staff',
+    'Flexible scaling as needed (hours, days, months)',
+    'International remote professionals with optimal timezone coverage',
+    'Quick start: Ready to go in 1-2 weeks',
+    'No HR overhead: We handle recruiting and management',
+    'Backup solutions available in case of absence'
   ];
 
-  const results = [
+  const results = lang === 'de' ? [
     { metric: '60%', description: 'Kosteneinsparung im Backoffice' },
     { metric: '40h/Woche', description: 'Freigesetzte Zeit für Kerngeschäft' },
     { metric: '98%', description: 'Kundenzufriedenheit mit Remote-Kräften' },
     { metric: '2 Wochen', description: 'Durchschnittliche Einarbeitungszeit' }
+  ] : [
+    { metric: '60%', description: 'Cost savings in backoffice' },
+    { metric: '40h/week', description: 'Time freed up for core business' },
+    { metric: '98%', description: 'Customer satisfaction with remote staff' },
+    { metric: '2 weeks', description: 'Average onboarding time' }
   ];
 
   return (
@@ -154,7 +239,9 @@ const BackofficeSolution = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.audienceTitle', 'Für wen?')}</h2>
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">
+              {lang === 'de' ? 'Für wen?' : 'For whom?'}
+            </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {targetAudience.map((audience, index) => (
                 <div key={index} className="flex items-center gap-3 p-4 bg-gradient-subtle rounded-lg">
@@ -171,7 +258,9 @@ const BackofficeSolution = () => {
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.problemsTitle', 'Kernprobleme')}</h2>
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">
+              {lang === 'de' ? 'Kernprobleme' : 'Core problems'}
+            </h2>
             <div className="grid md:grid-cols-3 gap-8">
               {coreProblems.map((problem, index) => (
                 <Card key={index} className="bg-white text-center hover:shadow-lg transition-shadow">
@@ -195,7 +284,9 @@ const BackofficeSolution = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.talentsTitle', 'Unsere Remote-Fachkräfte')}</h2>
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">
+              {lang === 'de' ? 'Unsere Remote-Fachkräfte' : 'Our remote professionals'}
+            </h2>
             <div className="grid md:grid-cols-2 gap-8">
               {remoteTalents.map((talent, index) => (
                 <Card key={index} className="bg-white hover:shadow-lg transition-shadow">
@@ -218,10 +309,13 @@ const BackofficeSolution = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-brand-dark text-center mb-4">
-              {t('solutions.backoffice.toolsTitle', 'Backoffice Tools & Software')}
+              {lang === 'de' ? 'Backoffice Tools & Software' : 'Backoffice Tools & Software'}
             </h2>
             <p className="text-lg text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-              {t('solutions.backoffice.toolsSubtitle', 'Unsere Remote-Fachkräfte sind versiert im Umgang mit führenden Backoffice-Tools und können nahtlos in Ihre bestehende IT-Infrastruktur integriert werden.')}
+              {lang === 'de' 
+                ? 'Unsere Remote-Fachkräfte sind versiert im Umgang mit führenden Backoffice-Tools und können nahtlos in Ihre bestehende IT-Infrastruktur integriert werden.'
+                : 'Our remote professionals are proficient in using leading backoffice tools and can be seamlessly integrated into your existing IT infrastructure.'
+              }
             </p>
             <div className="grid md:grid-cols-3 gap-8">
               {backofficeTools.map((toolCategory, index) => (
@@ -259,10 +353,13 @@ const BackofficeSolution = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-brand-dark text-center mb-4">
-              {t('solutions.backoffice.useCasesTitle', 'Erfolgreiche Backoffice-Anwendungsfälle')}
+              {lang === 'de' ? 'Erfolgreiche Backoffice-Anwendungsfälle' : 'Successful Backoffice Use Cases'}
             </h2>
             <p className="text-lg text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-              {t('solutions.backoffice.useCasesSubtitle', 'Reale Beispiele, wie Unternehmen ihre Backoffice-Prozesse mit unseren Remote-Fachkräften optimiert haben.')}
+              {lang === 'de'
+                ? 'Reale Beispiele, wie Unternehmen ihre Backoffice-Prozesse mit unseren Remote-Fachkräften optimiert haben.'
+                : 'Real examples of how companies optimized their backoffice processes with our remote professionals.'
+              }
             </p>
             <div className="grid md:grid-cols-3 gap-8">
               {useCases.map((useCase, index) => (
@@ -280,7 +377,9 @@ const BackofficeSolution = () => {
                     <div className="pt-4 border-t border-border space-y-2">
                       <div className="flex items-center gap-2 mb-2">
                         <Award className="w-4 h-4 text-primary" />
-                        <span className="text-xs font-semibold text-brand-dark">Ergebnisse:</span>
+                        <span className="text-xs font-semibold text-brand-dark">
+                          {lang === 'de' ? 'Ergebnisse:' : 'Results:'}
+                        </span>
                       </div>
                       {useCase.results.map((result, resultIndex) => (
                         <div key={resultIndex} className="flex items-start gap-2">
@@ -301,7 +400,9 @@ const BackofficeSolution = () => {
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.benefitsTitle', 'Ihre Vorteile')}</h2>
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">
+              {lang === 'de' ? 'Ihre Vorteile' : 'Your benefits'}
+            </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-start gap-3">
@@ -318,7 +419,9 @@ const BackofficeSolution = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.resultsTitle', 'Messbare Ergebnisse')}</h2>
+            <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">
+              {lang === 'de' ? 'Messbare Ergebnisse' : 'Measurable results'}
+            </h2>
             <div className="grid md:grid-cols-4 gap-8">
               {results.map((result, index) => (
                 <div key={index} className="text-center">
