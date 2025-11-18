@@ -207,14 +207,26 @@ const BackofficeSolution = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             <Badge className="mb-8 bg-gradient-primary text-white px-8 py-3 text-xl font-semibold shadow-lg border-0">
-              {t('solutions.backoffice.hero.badge', 'Remote Backoffice-Fachkräfte')}
+              {lang === 'de' ? 'Remote Backoffice-Fachkräfte' : 'Remote backoffice professionals'}
             </Badge>
             <h1 className="text-5xl lg:text-7xl font-bold text-brand-dark mb-8 leading-tight">
-              {t('solutions.backoffice.hero.title', 'Qualifizierte ')}<span className="text-primary">Remote</span>{t('solutions.backoffice.hero.titleSuffix', '-Unterstützung ')}
-              <span className="bg-gradient-hero bg-clip-text text-transparent">{t('solutions.backoffice.hero.highlight', ' für Ihr Backoffice')}</span>
+              {lang === 'de' ? (
+                <>
+                  Qualifizierte <span className="text-primary">Remote</span>-Unterstützung{' '}
+                  <span className="bg-gradient-hero bg-clip-text text-transparent">für Ihr Backoffice</span>
+                </>
+              ) : (
+                <>
+                  Qualified <span className="text-primary">Remote</span> support{' '}
+                  <span className="bg-gradient-hero bg-clip-text text-transparent">for your backoffice</span>
+                </>
+              )}
             </h1>
             <p className="text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto font-light">
-              {t('solutions.backoffice.hero.text', 'Entlasten Sie Ihr Team mit erfahrenen Remote-Fachkräften für Administration, Buchhaltung und operative Aufgaben. Flexibel, kostengünstig und sofort einsatzbereit.')}
+              {lang === 'de' 
+                ? 'Entlasten Sie Ihr Team mit erfahrenen Remote-Fachkräften für Administration, Buchhaltung und operative Aufgaben. Flexibel, kostengünstig und sofort einsatzbereit.'
+                : 'Relieve your team with experienced remote professionals for administration, accounting and operational tasks. Flexible, cost-effective and ready to start immediately.'
+              }
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <RaasInquiryDialog
@@ -222,13 +234,13 @@ const BackofficeSolution = () => {
                 trigger={
                   <Button size="lg" className="text-xl px-12 py-6 bg-primary text-white hover:bg-primary-hover hover:shadow-xl hover:scale-105 transition-all duration-300 border-0">
                     <Phone className="w-6 h-6 mr-3" />
-                    {t('solutions.backoffice.hero.ctaPrimary', 'RaaS Anfrage erstellen')}
+                    {lang === 'de' ? 'RaaS Anfrage erstellen' : 'Create RaaS request'}
                     <ArrowRight className="w-6 h-6 ml-3" />
                   </Button>
                 }
               />
               <Button variant="outline" size="lg" className="text-xl px-12 py-6 border-2 border-primary bg-white text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105">
-                {t('solutions.backoffice.hero.ctaSecondary', 'Remote Backoffice-Kräfte entdecken')}
+                {lang === 'de' ? 'Remote Backoffice-Kräfte entdecken' : 'Explore remote backoffice'}
               </Button>
             </div>
           </div>
@@ -439,10 +451,13 @@ const BackofficeSolution = () => {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8">
-            {t('solutions.backoffice.cta.title', 'Bereit für Remote Backoffice-Unterstützung?')}
+            {lang === 'de' ? 'Bereit für Remote Backoffice-Unterstützung?' : 'Ready for remote backoffice support?'}
           </h2>
           <p className="text-2xl text-white/90 mb-12 max-w-3xl mx-auto font-light">
-            {t('solutions.backoffice.cta.text', 'Sprechen Sie mit uns über Ihre Anforderungen. Wir finden die passenden Remote-Fachkräfte für Ihr Backoffice.')}
+            {lang === 'de' 
+              ? 'Sprechen Sie mit uns über Ihre Anforderungen. Wir finden die passenden Remote-Fachkräfte für Ihr Backoffice.'
+              : 'Talk to us about your requirements. We will find the right remote professionals for your backoffice.'
+            }
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <RaasInquiryDialog
@@ -450,12 +465,12 @@ const BackofficeSolution = () => {
               trigger={
                 <Button size="lg" className="text-xl px-12 py-6 bg-white text-primary hover:bg-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
                   <Phone className="w-6 h-6 mr-3" />
-                  {t('solutions.backoffice.cta.primary', 'RaaS Anfrage erstellen')}
+                  {lang === 'de' ? 'RaaS Anfrage erstellen' : 'Create RaaS request'}
                 </Button>
               }
             />
             <Button variant="outline" size="lg" className="text-xl px-12 py-6 border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105">
-              {t('solutions.backoffice.cta.secondary', 'Remote-Fachkräfte kennenlernen')}
+              {lang === 'de' ? 'Remote-Fachkräfte kennenlernen' : 'Meet remote professionals'}
             </Button>
           </div>
         </div>
