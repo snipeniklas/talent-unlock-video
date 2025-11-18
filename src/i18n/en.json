@@ -288,16 +288,19 @@
       "backoffice": {
         "title": "Remote backoffice professionals",
         "desc": "Qualified remote staff for admin, accounting and operations",
+        "features": ["Office Organization & Administration", "Accounting & Controlling", "Customer Service & Support"],
         "cta": "Get started"
       },
       "it": {
         "title": "Remote IT developers & tech experts",
         "desc": "Experienced remote developers for full stack, DevOps and software architecture",
+        "features": ["Full-Stack Development", "DevOps & Cloud", "Mobile & Web Apps"],
         "cta": "Get started"
       },
       "ai": {
         "title": "Remote AI & ML specialists",
         "desc": "AI experts and data scientists for machine learning and AI projects",
+        "features": ["Machine Learning", "Data Science", "AI Strategy Consulting"],
         "cta": "Get started"
       }
     },
