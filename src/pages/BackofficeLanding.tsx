@@ -239,6 +239,117 @@ const BackofficeLanding = () => {
         </div>
       </section>
 
+      {/* Solution Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
+              {t('landing.backoffice.solution.title', 'Die Lösung: Geprüfte Backoffice-Fachkräfte in 48 Stunden')}
+            </h2>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-3">{t('landing.backoffice.solution.0.title', '48h Perfect Match')}</h3>
+                <p className="text-muted-foreground">
+                  {t('landing.backoffice.solution.0.text', 'Aus 500+ geprüften Backoffice-Profis finden wir in 48h den perfekten Match für Ihre Anforderungen')}
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-3">{t('landing.backoffice.solution.1.title', '95% Erfolgsquote')}</h3>
+                <p className="text-muted-foreground">
+                  {t('landing.backoffice.solution.1.text', 'Unser Screening-Prozess garantiert höchste Qualität – nur die besten 5% werden zugelassen')}
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Calendar className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-3">{t('landing.backoffice.solution.2.title', 'Start in 2-4 Wochen')}</h3>
+                <p className="text-muted-foreground">
+                  {t('landing.backoffice.solution.2.text', 'Nach dem Match: Onboarding, Tool-Setup und produktive Arbeit binnen 2-4 Wochen')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
+              {t('landing.backoffice.pricing.title', 'Sparen Sie 40-60% gegenüber lokalen Mitarbeitern')}
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <Card className="p-8 bg-white border-2">
+                <h3 className="font-bold text-xl mb-4 text-red-600">{t('landing.backoffice.pricing.local.title', 'Traditionell (lokal)')}</h3>
+                <div className="text-4xl font-bold mb-6">€3.500-5.000<span className="text-lg font-normal text-muted-foreground">/Monat</span></div>
+                <div className="space-y-3 text-left text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>{t('landing.backoffice.pricing.local.0', 'Hohe Fixkosten + Nebenkosten')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>{t('landing.backoffice.pricing.local.1', 'Bürofläche erforderlich')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>{t('landing.backoffice.pricing.local.2', 'Lange Kündigungsfristen')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>{t('landing.backoffice.pricing.local.3', 'Schwierige Skalierung')}</span>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-8 bg-primary/5 border-2 border-primary relative overflow-hidden">
+                <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold">
+                  {t('landing.backoffice.pricing.raas.badge', 'Empfohlen')}
+                </div>
+                <h3 className="font-bold text-xl mb-4 text-primary">{t('landing.backoffice.pricing.raas.title', 'RaaS (Remote)')}</h3>
+                <div className="text-4xl font-bold mb-6 text-primary">€1.800-2.500<span className="text-lg font-normal text-muted-foreground">/Monat</span></div>
+                <div className="space-y-3 text-left text-sm">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>{t('landing.backoffice.pricing.raas.0', '40-60% Kostenersparnis')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>{t('landing.backoffice.pricing.raas.1', 'Keine Bürokosten')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>{t('landing.backoffice.pricing.raas.2', 'Flexible Skalierung')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>{t('landing.backoffice.pricing.raas.3', 'Geprüfte Qualität')}</span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <div className="bg-green-50 p-6 rounded-xl border-l-4 border-green-500">
+              <p className="text-lg font-semibold text-brand-dark">
+                {t('landing.backoffice.pricing.savings', '💰 Ersparnis: €20.000 - €30.000 pro Jahr und Mitarbeiter')}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* How it Works */}
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-4">
@@ -332,6 +443,168 @@ const BackofficeLanding = () => {
               </div>
               <span className="font-semibold text-lg hover:scale-110 transition-transform duration-300">4,8 / 5</span>
               <span className="text-muted-foreground hover:text-foreground transition-colors duration-300">{t('landing.backoffice.reviews.caption', 'aus 42 Bewertungen')}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Guarantee Section */}
+      <section className="py-16 bg-green-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
+              {t('landing.backoffice.guarantee.title', '🛡️ Unsere Zufriedenheitsgarantie')}
+            </h2>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <Card className="p-6 bg-white">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold mb-3">{t('landing.backoffice.guarantee.moneyBack.title', '14 Tage Geld-zurück')}</h3>
+                <p className="text-muted-foreground text-sm">
+                  {t('landing.backoffice.guarantee.moneyBack.text', 'Nicht zufrieden? 100% Rückerstattung ohne Fragen in den ersten 14 Tagen')}
+                </p>
+              </Card>
+
+              <Card className="p-6 bg-white">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold mb-3">{t('landing.backoffice.guarantee.replacement.title', 'Kostenloser Ersatz')}</h3>
+                <p className="text-muted-foreground text-sm">
+                  {t('landing.backoffice.guarantee.replacement.text', 'Stimmt die Chemie nicht? Wir finden kostenfrei eine neue Fachkraft')}
+                </p>
+              </Card>
+
+              <Card className="p-6 bg-white">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Clock className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold mb-3">{t('landing.backoffice.guarantee.match.title', '48h Match-Garantie')}</h3>
+                <p className="text-muted-foreground text-sm">
+                  {t('landing.backoffice.guarantee.match.text', 'Kein passender Kandidat in 48h? Service komplett kostenfrei')}
+                </p>
+              </Card>
+            </div>
+
+            <div className="bg-white p-8 rounded-xl border-l-4 border-green-500">
+              <h3 className="font-bold text-lg mb-4">{t('landing.backoffice.guarantee.why.title', 'Warum können wir das garantieren?')}</h3>
+              <div className="grid md:grid-cols-2 gap-6 text-left">
+                <div>
+                  <h4 className="font-semibold mb-2">📊 {t('landing.backoffice.guarantee.why.successRate.title', '95% Erfolgsquote')}</h4>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    {t('landing.backoffice.guarantee.why.successRate.text', 'Über 400 erfolgreiche Matches in den letzten 2 Jahren')}
+                  </p>
+                  
+                  <h4 className="font-semibold mb-2">🔍 {t('landing.backoffice.guarantee.why.screening.title', 'Rigoroser Screening')}</h4>
+                  <p className="text-muted-foreground text-sm">
+                    {t('landing.backoffice.guarantee.why.screening.text', 'Nur 5% aller Bewerber bestehen unseren mehrstufigen Prüfprozess')}
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">🎯 {t('landing.backoffice.guarantee.why.matching.title', 'Präzises Matching')}</h4>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    {t('landing.backoffice.guarantee.why.matching.text', 'Algorithmus analysiert Fähigkeiten, Erfahrung und Arbeitsweise')}
+                  </p>
+                  
+                  <h4 className="font-semibold mb-2">📞 {t('landing.backoffice.guarantee.why.support.title', 'Persönlicher Support')}</h4>
+                  <p className="text-muted-foreground text-sm">
+                    {t('landing.backoffice.guarantee.why.support.text', 'Deutscher Account Manager betreut Sie während der gesamten Zusammenarbeit')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Urgency Section */}
+      <section className="py-16 bg-red-50 border-l-4 border-red-500">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-brand-dark mb-6 animate-fade-in">
+              {t('landing.backoffice.urgency.title', '⚠️ Warum Sie JETZT handeln sollten')}
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <Card className="p-6 bg-white">
+                <h3 className="font-bold mb-4 text-red-600">{t('landing.backoffice.urgency.without.title', 'Ohne Hej Talent:')}</h3>
+                <div className="space-y-3 text-left text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>{t('landing.backoffice.urgency.without.0', 'Monatelange Suche nach geeignetem Personal')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>{t('landing.backoffice.urgency.without.1', '€40.000+ jährliche Mehrkosten pro Mitarbeiter')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>{t('landing.backoffice.urgency.without.2', 'Überlastete Teams und verpasste Chancen')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <span>{t('landing.backoffice.urgency.without.3', 'Schwierige Skalierung bei Wachstum')}</span>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 bg-green-50 border-2 border-green-500">
+                <h3 className="font-bold mb-4 text-green-600">{t('landing.backoffice.urgency.with.title', 'Mit Hej Talent:')}</h3>
+                <div className="space-y-3 text-left text-sm">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>{t('landing.backoffice.urgency.with.0', 'Qualifizierte Fachkraft in 2-4 Wochen')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>{t('landing.backoffice.urgency.with.1', '€20.000-30.000 Ersparnis pro Jahr')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>{t('landing.backoffice.urgency.with.2', 'Entlastung für Ihr Kernteam')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>{t('landing.backoffice.urgency.with.3', 'Flexible Skalierung jederzeit möglich')}</span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl border-l-4 border-primary">
+              <p className="text-lg font-semibold text-brand-dark mb-2">
+                {t('landing.backoffice.urgency.cta.text', '⏰ Jeder Monat ohne optimierte Backoffice-Prozesse kostet Sie Zeit und Geld')}
+              </p>
+              <p className="text-muted-foreground mb-6">
+                {t('landing.backoffice.urgency.cta.subtext', 'Starten Sie jetzt und konzentrieren Sie sich auf Ihr Kerngeschäft!')}
+              </p>
+              
+              <RaasInquiryDialog
+                source="backoffice-landing-urgency"
+                trigger={
+                  <Button
+                    variant="cta"
+                    size="xl"
+                    className="animate-pulse hover:scale-105"
+                    onClick={() => {
+                      trackEvent('InitiateCheckout', {
+                        content_name: 'RaaS Anfrage',
+                        value: 0,
+                        currency: 'EUR'
+                      });
+                      localStorage.setItem('raas_lead_intent', JSON.stringify({
+                        timestamp: Date.now(),
+                        source: 'backoffice-landing-urgency',
+                        content: 'Urgency Section CTA'
+                      }));
+                    }}
+                  >
+                    {t('landing.backoffice.urgency.cta.button', 'Jetzt starten & sparen')}
+                  </Button>
+                }
+              />
             </div>
           </div>
         </div>
