@@ -304,6 +304,18 @@
         "cta": "Get started"
       }
     },
+    "testimonials": {
+      "title": "What our clients say",
+      "subtitle": "Rely on the experiences of our satisfied customers",
+      "items": [
+        {
+          "text": "Hej Talent connected us with the perfect remote accountant within 2 weeks. Professional and reliable."
+        },
+        {
+          "text": "The excellent work of a new colleague convinced us to bring a second Hej Talent professional into the team."
+        }
+      ]
+    },
     "stats": {
       "headline": "Market leader",
       "headlineSuffix": "in remote recruiting since 2016",
@@ -616,7 +628,7 @@
     "admin": {
       "title": "Admin Dashboard",
       "badge": "Hej Talent Admin",
-      "stats": {
+    "stats": {
         "companies": "Registered Companies",
         "resources": "Available Resources"
       },

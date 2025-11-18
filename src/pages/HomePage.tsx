@@ -83,13 +83,13 @@ const HomePage = () => {
     {
       name: "Niklas Clasen",
       company: "SNIPE Solutions",
-      text: "Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.",
+      text: t('home.testimonials.items.0.text', 'Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.'),
       rating: 5
     },
     {
       name: "Marc Palma",
       company: "ECO Containertrans",
-      text: "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen.",
+      text: t('home.testimonials.items.1.text', 'Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen.'),
       rating: 5
     }
   ];
