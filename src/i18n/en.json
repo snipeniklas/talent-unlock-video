@@ -1082,6 +1082,61 @@
         "primary": "Create RaaS request",
         "secondary": "Browse developer profiles"
       }
+    },
+    "aiMl": {
+      "audience": [
+        "CIOs and data strategists",
+        "Innovation managers and Chief Digital Officers",
+        "Product owners for AI projects",
+        "Startups with AI/ML ambitions"
+      ],
+      "audienceTitle": "For whom?",
+      "problems": [
+        {"title": "Lack of AI expertise in the company", "description": "Difficulty finding qualified data scientists and ML engineers"},
+        {"title": "High costs for AI specialists", "description": "AI experts are extremely expensive and rarely available"},
+        {"title": "Underestimated complexity of AI projects", "description": "AI projects require special skills and experience"}
+      ],
+      "problemsTitle": "Core problems",
+      "roles": [
+        {"role": "Machine Learning Engineers", "skills": "TensorFlow, PyTorch, scikit-learn, MLOps, Model Deployment", "specialization": "ML pipeline development, model training & optimization", "experience": "4+ years"},
+        {"role": "Data Scientists", "skills": "Python, R, Statistical Analysis, Predictive Modeling, Feature Engineering", "specialization": "Data analysis, business intelligence, statistical modeling", "experience": "5+ years"},
+        {"role": "AI/NLP Specialists", "skills": "HuggingFace, OpenAI, LangChain, Prompt Engineering, Chatbots", "specialization": "Natural language processing, conversational AI", "experience": "3+ years"},
+        {"role": "Computer Vision Engineers", "skills": "OpenCV, YOLO, CNN, Image Processing, Object Detection", "specialization": "Image recognition, video analysis, visual AI", "experience": "4+ years"},
+        {"role": "MLOps Engineers", "skills": "Docker, Kubernetes, MLflow, Kubeflow, CI/CD for ML", "specialization": "ML infrastructure, model deployment, monitoring", "experience": "4+ years"},
+        {"role": "AI Product Consultants", "skills": "AI Strategy, Business Case Development, ROI Analysis", "specialization": "AI implementation strategy, business integration", "experience": "6+ years"}
+      ],
+      "rolesTitle": "Our AI specialists",
+      "tech": [
+        {"name": "Machine Learning", "tools": ["TensorFlow", "PyTorch", "scikit-learn", "XGBoost"]},
+        {"name": "Deep Learning", "tools": ["Neural Networks", "CNN", "RNN", "Transformers"]},
+        {"name": "NLP & LLMs", "tools": ["HuggingFace", "OpenAI", "LangChain", "BERT"]},
+        {"name": "Computer Vision", "tools": ["OpenCV", "YOLO", "Object Detection", "OCR"]},
+        {"name": "MLOps", "tools": ["MLflow", "Kubeflow", "Docker", "Kubernetes"]},
+        {"name": "Data Engineering", "tools": ["Apache Spark", "Airflow", "dbt", "BigQuery"]}
+      ],
+      "techTitle": "Technology expertise",
+      "benefits": [
+        "Access to top AI experts internationally",
+        "Flexible project durations: from proof of concepts to long-term projects",
+        "Complete AI teams or individual specialists",
+        "Proven experience across various industries",
+        "Fast project start: AI experts available in 1-2 weeks",
+        "No long-term personnel commitments"
+      ],
+      "benefitsTitle": "Your benefits",
+      "results": [
+        {"metric": "70%", "description": "Successful AI projects"},
+        {"metric": "50%", "description": "Cost savings vs. local AI experts"},
+        {"metric": "3x", "description": "Faster implementation"},
+        {"metric": "90%", "description": "Customer satisfaction with AI solutions"}
+      ],
+      "resultsTitle": "Measurable results",
+      "cta": {
+        "title": "Ready for AI/ML support?",
+        "text": "Talk to us about your AI needs. We'll find the right AI experts for your project.",
+        "primary": "Create RaaS request",
+        "secondary": "Browse AI specialist profiles"
+      }
     }
   },
   "app": {
