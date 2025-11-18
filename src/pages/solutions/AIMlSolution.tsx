@@ -76,7 +76,11 @@ const AIMlSolution = () => {
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-6 bg-primary text-white px-6 py-2 text-lg">{t('solutions.aiMl.hero.badge', 'Remote KI & ML-Spezialisten')}</Badge>
             <h1 className="text-4xl lg:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              {t('solutions.aiMl.hero.title', 'Erfahrene Remote ')}<span className="text-primary">KI</span>{t('solutions.aiMl.hero.titleSuffix', '-Experten für Ihre AI-Projekte')}
+              {t('solutions.aiMl.hero.title', 'Erfahrene Remote ')}
+              <span className="text-primary">
+                {t('solutions.aiMl.hero.kiLabel', 'KI')}
+              </span>
+              {t('solutions.aiMl.hero.titleSuffix', '-Experten für Ihre AI-Projekte')}
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               {t('solutions.aiMl.hero.text', 'Realisieren Sie Ihre KI-Visionen mit erstklassigen Remote-Spezialisten. Von Machine Learning bis Computer Vision - wir haben die Experten für Ihr Projekt.')}
