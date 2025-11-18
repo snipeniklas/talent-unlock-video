@@ -1468,5 +1468,31 @@
       "noContacts": "No contacts in this stage",
       "contactsCount": "contacts"
     }
+  },
+  "legal": {
+    "imprint": {
+      "title": "Imprint",
+      "subtitle": "Legal Information according to §5 TMG",
+      "company": {
+        "title": "Company Information"
+      },
+      "register": {
+        "title": "Commercial Register",
+        "court": "Register Court:",
+        "courtValue": "Munich Local Court",
+        "number": "Registration number:",
+        "numberValue": "HRB 263357"
+      },
+      "vat": {
+        "title": "Sales Tax Identification Number",
+        "label": "Sales tax identification number according to §27a UStG:"
+      },
+      "contact": {
+        "title": "Still Have Some Questions Left?",
+        "callUs": "Call us",
+        "phone": "Tel: +49 89 9017 6218",
+        "note": "Feel free to contact our support team to learn more about the services provided by us and multiple offers for Your business!"
+      }
+    }
   }
 }
