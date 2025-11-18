@@ -174,7 +174,7 @@ const BackofficeSolution = () => {
             <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.problemsTitle', 'Kernprobleme')}</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {coreProblems.map((problem, index) => (
-                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                <Card key={index} className="bg-white text-center hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                       {index===0 ? <Calculator className="w-8 h-8 text-white" /> : index===1 ? <Clock className="w-8 h-8 text-white" /> : <FileText className="w-8 h-8 text-white" />}
@@ -198,7 +198,7 @@ const BackofficeSolution = () => {
             <h2 className="text-3xl font-bold text-brand-dark text-center mb-12">{t('solutions.backoffice.talentsTitle', 'Unsere Remote-Fachkräfte')}</h2>
             <div className="grid md:grid-cols-2 gap-8">
               {remoteTalents.map((talent, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
+                <Card key={index} className="bg-white hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <CardTitle className="text-xl text-primary">{talent.role}</CardTitle>
                     <Badge variant="outline" className="w-fit">{talent.experience}</Badge>
@@ -225,7 +225,7 @@ const BackofficeSolution = () => {
             </p>
             <div className="grid md:grid-cols-3 gap-8">
               {backofficeTools.map((toolCategory, index) => (
-                <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <Card key={index} className="bg-white hover:shadow-lg transition-all duration-300 hover:scale-105">
                   <CardHeader>
                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
                       {index === 0 ? <Calculator className="w-6 h-6 text-primary" /> :
@@ -266,7 +266,7 @@ const BackofficeSolution = () => {
             </p>
             <div className="grid md:grid-cols-3 gap-8">
               {useCases.map((useCase, index) => (
-                <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105 border-t-4 border-t-primary">
+                <Card key={index} className="bg-white hover:shadow-lg transition-all duration-300 hover:scale-105 border-t-4 border-t-primary">
                   <CardHeader>
                     <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mb-4 mx-auto">
                       {index === 0 ? <Calculator className="w-8 h-8 text-white" /> :
