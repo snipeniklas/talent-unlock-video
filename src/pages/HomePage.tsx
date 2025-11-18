@@ -209,9 +209,9 @@ const HomePage = () => {
                     trigger={
                       <Button size="lg" className="w-full text-xs sm:text-sm md:text-base px-2 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5 bg-gradient-primary hover:shadow-xl hover:scale-105 transition-all duration-300 border-0 relative">
                         <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs px-1 py-0.5 rounded-full animate-pulse">
-                          KOSTENLOS
+                          {t('home.hero.ctaBadge', 'KOSTENLOS')}
                         </span>
-                        <span className="truncate">RaaS Anfrage</span>
+                        <span className="truncate">{t('home.hero.ctaPrimary', 'RaaS Anfrage')}</span>
                         <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4 ml-1 sm:ml-2 flex-shrink-0" />
                       </Button>
                     }
@@ -224,7 +224,7 @@ const HomePage = () => {
                       className="text-xs text-primary hover:bg-primary/10 px-2 py-1.5"
                       onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
                     >
-                      <span className="text-center">Expertise entdecken →</span>
+                      <span className="text-center">{t('home.hero.ctaSecondary', 'Expertise entdecken →')}</span>
                     </Button>
                   </div>
                 </div>
