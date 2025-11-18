@@ -1020,6 +1020,68 @@
       "results": [],
       "resultsTitle": "Measurable results",
       "cta": {"title": "Ready for remote backoffice support?", "text": "Talk to us about your needs. We’ll find the right remote professionals.", "primary": "Create RaaS request", "secondary": "Meet remote professionals"}
+    },
+    "itDev": {
+      "hero": {
+        "badge": "Remote IT developers",
+        "title": "Experienced ",
+        "titleSuffix": " developers for your IT projects",
+        "text": "Strengthen your IT team with qualified international remote developers. From full-stack development to DevOps – we have the right experts for your project.",
+        "cta": "Create RaaS request"
+      },
+      "audience": [
+        "CTOs and technical leaders",
+        "Startup founders with tech needs",
+        "Product owners and product managers",
+        "Agencies and consulting firms"
+      ],
+      "audienceTitle": "For whom?",
+      "problems": [
+        {"title": "IT skills shortage", "description": "Difficulty finding and retaining qualified developers in-house"},
+        {"title": "High personnel costs for IT expertise", "description": "Senior developers are expensive and often not available long term"},
+        {"title": "Scaling challenges for growing projects", "description": "Hard to scale development teams quickly with changing project demands"}
+      ],
+      "problemsTitle": "Core problems",
+      "roles": [
+        {"role": "Full-stack developers", "skills": "React, Node.js, Python, Django, JavaScript/TypeScript", "specialization": "Web applications, APIs, frontend & backend", "experience": "5+ years"},
+        {"role": "DevOps engineers", "skills": "AWS, Docker, Kubernetes, CI/CD, Infrastructure as Code", "specialization": "Cloud migration, deployment automation, monitoring", "experience": "4+ years"},
+        {"role": "Mobile app developers", "skills": "React Native, Flutter, iOS (Swift), Android (Kotlin)", "specialization": "Cross-platform apps, native development", "experience": "4+ years"},
+        {"role": "Backend specialists", "skills": "Java, .NET, Go, microservices, database design", "specialization": "Scalable architectures, performance optimization", "experience": "6+ years"},
+        {"role": "Frontend experts", "skills": "React, Vue.js, Angular, UI/UX implementation", "specialization": "Responsive design, performance, accessibility", "experience": "4+ years"},
+        {"role": "QA & test engineers", "skills": "Automated testing, manual QA, test-driven development", "specialization": "Quality assurance, bug detection, test automation", "experience": "3+ years"}
+      ],
+      "rolesTitle": "Our remote developers",
+      "tech": [
+        {"name": "Frontend", "tools": ["React", "Vue.js", "Angular", "TypeScript"]},
+        {"name": "Backend", "tools": ["Node.js", "Python", "Java", ".NET", "Go"]},
+        {"name": "Mobile", "tools": ["React Native", "Flutter", "iOS", "Android"]},
+        {"name": "Cloud", "tools": ["AWS", "Azure", "Google Cloud", "Docker"]},
+        {"name": "Database", "tools": ["PostgreSQL", "MongoDB", "Redis", "MySQL"]},
+        {"name": "DevOps", "tools": ["Kubernetes", "CI/CD", "Terraform", "Jenkins"]}
+      ],
+      "techTitle": "Technology expertise",
+      "benefits": [
+        "Access to top international developers",
+        "Flexible team set-up depending on project requirements",
+        "Agile ways of working and modern development practices",
+        "Optimal time zone coverage for remote collaboration",
+        "Fast project start: developers ready within 1–2 weeks",
+        "No recruiting costs or HR overhead"
+      ],
+      "benefitsTitle": "Your benefits",
+      "results": [
+        {"metric": "50%", "description": "Faster development times"},
+        {"metric": "40%", "description": "Cost savings vs. local developers"},
+        {"metric": "95%", "description": "Project success rate"},
+        {"metric": "1–2 weeks", "description": "Time-to-start for new developers"}
+      ],
+      "resultsTitle": "Measurable results",
+      "cta": {
+        "title": "Ready for remote IT support?",
+        "text": "Talk to us about your development needs. We’ll find the right remote developers for your project.",
+        "primary": "Create RaaS request",
+        "secondary": "Browse developer profiles"
+      }
     }
   },
   "app": {
