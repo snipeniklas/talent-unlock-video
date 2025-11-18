@@ -221,7 +221,7 @@ const BackofficeLanding = () => {
             </h2>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group bg-white">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
                   <Users className="w-6 h-6 text-primary" />
                 </div>
@@ -233,7 +233,7 @@ const BackofficeLanding = () => {
                 </p>
               </Card>
 
-              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group bg-white">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
                   <Calculator className="w-6 h-6 text-primary" />
                 </div>
@@ -245,7 +245,7 @@ const BackofficeLanding = () => {
                 </p>
               </Card>
 
-              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group bg-white">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
                   <Headphones className="w-6 h-6 text-primary" />
                 </div>
@@ -257,7 +257,7 @@ const BackofficeLanding = () => {
                 </p>
               </Card>
 
-              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group bg-white">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
                   <Shield className="w-6 h-6 text-primary" />
                 </div>
@@ -379,7 +379,7 @@ const BackofficeLanding = () => {
             </h2>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 bg-white">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <CheckCircle className="w-5 h-5 text-green-600" />
@@ -393,7 +393,7 @@ const BackofficeLanding = () => {
                 </div>
               </Card>
 
-              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 bg-white">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Clock className="w-5 h-5 text-blue-600" />
@@ -407,7 +407,7 @@ const BackofficeLanding = () => {
                 </div>
               </Card>
 
-              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 bg-white">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Shield className="w-5 h-5 text-purple-600" />
@@ -421,7 +421,7 @@ const BackofficeLanding = () => {
                 </div>
               </Card>
 
-              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 bg-white">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Users className="w-5 h-5 text-orange-600" />
@@ -435,7 +435,7 @@ const BackofficeLanding = () => {
                 </div>
               </Card>
 
-              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 bg-white">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Shield className="w-5 h-5 text-red-600" />
@@ -449,7 +449,7 @@ const BackofficeLanding = () => {
                 </div>
               </Card>
 
-              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 bg-white">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Headphones className="w-5 h-5 text-teal-600" />
