@@ -212,6 +212,261 @@ const BackofficeLanding = () => {
         </div>
       </section>
 
+      {/* Target Audience Section - Für wen? */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
+              {t('landing.backoffice.target.title', 'Für wen?')}
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
+                  <Users className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-bold text-center mb-3 group-hover:text-primary transition-colors duration-300">
+                  {t('landing.backoffice.target.0.title', 'KMUs & Mittelstand')}
+                </h3>
+                <p className="text-sm text-muted-foreground text-center">
+                  {t('landing.backoffice.target.0.desc', 'Unternehmen, die Backoffice-Kosten senken und sich auf Kerngeschäft fokussieren wollen')}
+                </p>
+              </Card>
+
+              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
+                  <Calculator className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-bold text-center mb-3 group-hover:text-primary transition-colors duration-300">
+                  {t('landing.backoffice.target.1.title', 'Steuerberater & Buchhalter')}
+                </h3>
+                <p className="text-sm text-muted-foreground text-center">
+                  {t('landing.backoffice.target.1.desc', 'Kanzleien, die ihr Team skalieren möchten ohne lokale Fixkosten')}
+                </p>
+              </Card>
+
+              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
+                  <Headphones className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-bold text-center mb-3 group-hover:text-primary transition-colors duration-300">
+                  {t('landing.backoffice.target.2.title', 'E-Commerce & Online-Händler')}
+                </h3>
+                <p className="text-sm text-muted-foreground text-center">
+                  {t('landing.backoffice.target.2.desc', 'Shops, die Kundenservice und Admin-Aufgaben professionell abdecken wollen')}
+                </p>
+              </Card>
+
+              <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
+                  <Shield className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-bold text-center mb-3 group-hover:text-primary transition-colors duration-300">
+                  {t('landing.backoffice.target.3.title', 'Wachsende Startups')}
+                </h3>
+                <p className="text-sm text-muted-foreground text-center">
+                  {t('landing.backoffice.target.3.desc', 'Teams, die schnell und flexibel Backoffice-Kapazitäten aufbauen müssen')}
+                </p>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Specialists Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-4 animate-fade-in">
+              {t('landing.backoffice.specialists.title', 'Unsere Remote-Fachkräfte')}
+            </h2>
+            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+              {t('landing.backoffice.specialists.subtitle', 'Qualifizierte Experten für alle Ihre Backoffice-Bedürfnisse')}
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card className="p-8 hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors duration-300">
+                  <Calculator className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="font-bold text-xl text-center mb-4 group-hover:text-primary transition-colors duration-300">
+                  {t('landing.backoffice.specialists.accounting.title', 'Buchhaltung & Finanzen')}
+                </h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.accounting.0', 'Finanzbuchhaltung (FIBU)')}</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.accounting.1', 'Debitoren & Kreditoren')}</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.accounting.2', 'Lohnbuchhaltung')}</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.accounting.3', 'Controlling & Reporting')}</span>
+                  </li>
+                </ul>
+              </Card>
+
+              <Card className="p-8 hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors duration-300">
+                  <Headphones className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold text-xl text-center mb-4 group-hover:text-primary transition-colors duration-300">
+                  {t('landing.backoffice.specialists.support.title', 'Kundenservice & Support')}
+                </h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.support.0', 'E-Mail Support (DE/EN)')}</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.support.1', 'Telefon-Hotline')}</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.support.2', 'Chat-Support & Ticketing')}</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.support.3', 'CRM-Management')}</span>
+                  </li>
+                </ul>
+              </Card>
+
+              <Card className="p-8 hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors duration-300">
+                  <Clock3 className="w-8 h-8 text-purple-600" />
+                </div>
+                <h3 className="font-bold text-xl text-center mb-4 group-hover:text-primary transition-colors duration-300">
+                  {t('landing.backoffice.specialists.admin.title', 'Administration & Assistenz')}
+                </h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.admin.0', 'Datenpflege & Eingabe')}</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.admin.1', 'Terminkoordination')}</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.admin.2', 'Dokumentenmanagement')}</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{t('landing.backoffice.specialists.admin.3', 'Virtuelle Assistenz')}</span>
+                  </li>
+                </ul>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section - Ihre Vorteile */}
+      <section className="py-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-brand-dark mb-12 animate-fade-in">
+              {t('landing.backoffice.benefits.title', 'Ihre Vorteile')}
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-2">{t('landing.backoffice.benefits.0.title', '40-60% Kostenersparnis')}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {t('landing.backoffice.benefits.0.text', 'Sparen Sie bis zu €30.000 pro Jahr pro Fachkraft gegenüber lokalen Mitarbeitern')}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-2">{t('landing.backoffice.benefits.1.title', 'Schneller Start')}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {t('landing.backoffice.benefits.1.text', 'Qualifizierte Fachkraft produktiv in 2-4 Wochen statt monatelanger Suche')}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-5 h-5 text-purple-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-2">{t('landing.backoffice.benefits.2.title', 'Geprüfte Qualität')}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {t('landing.backoffice.benefits.2.text', 'Alle Fachkräfte durchlaufen mehrstufigen Screening-Prozess und Qualitätschecks')}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Users className="w-5 h-5 text-orange-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-2">{t('landing.backoffice.benefits.3.title', 'Flexible Skalierung')}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {t('landing.backoffice.benefits.3.text', 'Von 10h/Woche bis Vollzeit – passen Sie Kapazität jederzeit an')}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-5 h-5 text-red-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-2">{t('landing.backoffice.benefits.4.title', 'DSGVO-konform')}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {t('landing.backoffice.benefits.4.text', 'Alle Prozesse entsprechen deutschen Datenschutz- und Compliance-Standards')}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Headphones className="w-5 h-5 text-teal-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-2">{t('landing.backoffice.benefits.5.title', 'Deutscher Support')}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {t('landing.backoffice.benefits.5.text', 'Persönlicher Account Manager betreut Sie während der gesamten Zusammenarbeit')}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Problem Section */}
       <section className="py-16 bg-red-50">
         <div className="container mx-auto px-4">
