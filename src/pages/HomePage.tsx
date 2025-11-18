@@ -256,11 +256,12 @@ const HomePage = () => {
                       </div>
                     ) : (
                       <iframe 
-                        src="https://drive.google.com/file/d/1WefgP8aD5WkWngIE5FxNY1DIZVW6ciEN/preview?autoplay=1" 
+                        src="https://drive.google.com/file/d/1WefgP8aD5WkWngIE5FxNY1DIZVW6ciEN/preview" 
                         className="w-full h-full border-0"
-                        allow="autoplay"
+                        allow="autoplay; fullscreen; picture-in-picture"
                         allowFullScreen 
                         title="Hej Talent Intro Video - Premium Remote Recruiting seit 2016"
+                        loading="eager"
                       />
                     )}
                   </div>
