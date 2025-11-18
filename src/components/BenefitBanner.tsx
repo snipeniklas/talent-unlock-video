@@ -7,7 +7,7 @@ const BenefitBanner = () => {
 
   return (
     <div className="bg-neutral-50 h-12 flex items-center overflow-hidden border-b">
-      <div className="animate-slide-text hover:animate-none flex items-center gap-12 whitespace-nowrap min-w-max">
+      <div className="animate-slide-text flex items-center gap-12 whitespace-nowrap min-w-max">
         {/* First set */}
         {items.map((benefit, index) => (
           <span key={index} className="flex items-center gap-3 text-sm font-medium text-brand-dark">
