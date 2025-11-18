@@ -1223,6 +1223,138 @@
       "results": [],
       "resultsTitle": "Messbare Ergebnisse",
       "cta": {"title": "Bereit für Remote Backoffice-Unterstützung?", "text": "Sprechen Sie mit uns ...", "primary": "RaaS Anfrage erstellen", "secondary": "Remote-Fachkräfte kennenlernen"}
+    },
+    "itDev": {
+      "hero": {
+        "badge": "Remote IT-Entwickler",
+        "title": "Erfahrene ",
+        "titleSuffix": "-Entwickler für Ihre IT-Projekte",
+        "text": "Verstärken Sie Ihr IT-Team mit qualifizierten internationalen Remote-Entwicklern. Von Full-Stack Development bis DevOps - wir haben die Experten für Ihr Projekt.",
+        "cta": "RaaS Anfrage erstellen"
+      },
+      "audienceTitle": "Für wen?",
+      "audience": [
+        "CTOs und Technical Leaders",
+        "Startup-Gründer mit Tech-Bedarf",
+        "Product Owner und Produktmanager",
+        "Agenturen und Beratungsunternehmen"
+      ],
+      "problemsTitle": "Kernprobleme",
+      "problems": [
+        {
+          "title": "Fachkräftemangel im IT-Bereich",
+          "description": "Schwierigkeiten, qualifizierte Entwickler zu finden und langfristig zu halten"
+        },
+        {
+          "title": "Hohe Personalkosten für IT-Expertise",
+          "description": "Senior-Entwickler sind teuer und oft nicht dauerhaft verfügbar"
+        },
+        {
+          "title": "Skalierungsprobleme bei wachsenden Projekten",
+          "description": "Schwierig, das Entwicklerteam schnell an Projektanforderungen anzupassen"
+        }
+      ],
+      "rolesTitle": "Unsere Remote-Entwickler",
+      "experience": "Erfahrung",
+      "roles": [
+        {
+          "role": "Full-Stack Entwickler",
+          "skills": "React, Node.js, Python, Django, JavaScript/TypeScript",
+          "specialization": "Web-Anwendungen, APIs, Frontend & Backend",
+          "experience": "5+ Jahre"
+        },
+        {
+          "role": "DevOps Engineers",
+          "skills": "AWS, Docker, Kubernetes, CI/CD, Infrastructure as Code",
+          "specialization": "Cloud-Migration, Deployment-Automation, Monitoring",
+          "experience": "4+ Jahre"
+        },
+        {
+          "role": "Mobile App Entwickler",
+          "skills": "React Native, Flutter, iOS (Swift), Android (Kotlin)",
+          "specialization": "Cross-Platform Apps, Native Development",
+          "experience": "4+ Jahre"
+        },
+        {
+          "role": "Backend Spezialisten",
+          "skills": "Java, .NET, Go, Microservices, Database Design",
+          "specialization": "Skalierbare Architekturen, Performance-Optimierung",
+          "experience": "6+ Jahre"
+        },
+        {
+          "role": "Frontend Experten",
+          "skills": "React, Vue.js, Angular, UI/UX Implementation",
+          "specialization": "Responsive Design, Performance, Accessibility",
+          "experience": "4+ Jahre"
+        },
+        {
+          "role": "QA & Test Engineers",
+          "skills": "Automated Testing, Manual QA, Test-Driven Development",
+          "specialization": "Quality Assurance, Bug Detection, Test Automation",
+          "experience": "3+ Jahre"
+        }
+      ],
+      "techTitle": "Technologie-Expertise",
+      "tech": [
+        {
+          "name": "Frontend",
+          "tools": ["React", "Vue.js", "Angular", "TypeScript"]
+        },
+        {
+          "name": "Backend",
+          "tools": ["Node.js", "Python", "Java", ".NET", "Go"]
+        },
+        {
+          "name": "Mobile",
+          "tools": ["React Native", "Flutter", "iOS", "Android"]
+        },
+        {
+          "name": "Cloud",
+          "tools": ["AWS", "Azure", "Google Cloud", "Docker"]
+        },
+        {
+          "name": "Database",
+          "tools": ["PostgreSQL", "MongoDB", "Redis", "MySQL"]
+        },
+        {
+          "name": "DevOps",
+          "tools": ["Kubernetes", "CI/CD", "Terraform", "Jenkins"]
+        }
+      ],
+      "benefitsTitle": "Ihre Vorteile",
+      "benefits": [
+        "Zugang zu Top-Entwicklern international",
+        "Flexible Team-Zusammenstellung je nach Projektanforderungen",
+        "Agile Arbeitsweise und moderne Entwicklungspraktiken",
+        "Optimale Zeitzone-Abdeckung für Remote-Zusammenarbeit",
+        "Schneller Projektstart: Entwickler in 1-2 Wochen einsatzbereit",
+        "Keine Recruiting-Kosten oder HR-Aufwände"
+      ],
+      "resultsTitle": "Messbare Ergebnisse",
+      "results": [
+        {
+          "metric": "50%",
+          "description": "Schnellere Entwicklungszeiten"
+        },
+        {
+          "metric": "40%",
+          "description": "Kosteneinsparung vs. lokale Entwickler"
+        },
+        {
+          "metric": "95%",
+          "description": "Projekterfolgsrate"
+        },
+        {
+          "metric": "1-2 Wochen",
+          "description": "Time-to-Start für neue Entwickler"
+        }
+      ],
+      "cta": {
+        "title": "Bereit für Remote IT-Verstärkung?",
+        "text": "Sprechen Sie mit uns über Ihre Entwicklungsanforderungen. Wir finden die passenden Remote-Entwickler für Ihr Projekt.",
+        "primary": "RaaS Anfrage erstellen",
+        "secondary": "Entwickler-Profile ansehen"
+      }
     }
   },
   "app": {
