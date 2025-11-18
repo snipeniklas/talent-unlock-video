@@ -1686,5 +1686,31 @@
       "noContacts": "Keine Kontakte in dieser Phase",
       "contactsCount": "Kontakte"
     }
+  },
+  "legal": {
+    "imprint": {
+      "title": "Impressum",
+      "subtitle": "Rechtliche Informationen gemäß §5 TMG",
+      "company": {
+        "title": "Firmeninformationen"
+      },
+      "register": {
+        "title": "Handelsregister",
+        "court": "Register Court:",
+        "courtValue": "Amtsgericht München",
+        "number": "Registernummer:",
+        "numberValue": "HRB 263357"
+      },
+      "vat": {
+        "title": "Umsatzsteuer-Identifikationsnummer",
+        "label": "Umsatzsteuer-Identifikationsnummer gemäß §27a UStG:"
+      },
+      "contact": {
+        "title": "Haben Sie noch Fragen?",
+        "callUs": "Rufen Sie uns an",
+        "phone": "Tel: +49 89 9017 6218",
+        "note": "Kontaktieren Sie gerne unser Support-Team, um mehr über unsere Dienstleistungen und vielfältigen Angebote für Ihr Unternehmen zu erfahren!"
+      }
+    }
   }
 }
