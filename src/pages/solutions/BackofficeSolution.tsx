@@ -11,29 +11,29 @@ import ContactCTA from "@/components/ContactCTA";
 import { useTranslation } from '@/i18n/i18n';
 
 const BackofficeSolution = () => {
-  const { t, get } = useTranslation();
+  const { t } = useTranslation();
 
-  const targetAudience = get<string[]>('solutions.backoffice.audience', [
+  const targetAudience = [
     'Geschäftsführer kleiner und mittlerer Unternehmen',
     'Office-Manager und Assistenzteams',
     'Buchhalter und Controlling-Verantwortliche',
     'HR-Verantwortliche'
-  ]);
+  ];
 
-  const coreProblems = get<Array<{ title: string; description: string; icon?: string }>>('solutions.backoffice.problems', [
+  const coreProblems = [
     { title: 'Hohe Personalkosten im administrativen Bereich', description: 'Vollzeit-Backoffice-Kräfte vor Ort sind teuer und oft nicht voll ausgelastet' },
     { title: 'Zeitaufwändige Routine-Aufgaben', description: 'Administration und Buchhaltung binden wertvolle Ressourcen, die für Kerngeschäft fehlen' },
     { title: 'Schwankende Arbeitsbelastung', description: 'Saisonale oder projektbedingte Spitzen schwer mit festem Personal abdecken' }
-  ]);
+  ];
 
-  const remoteTalents = get<Array<{ role: string; skills: string; experience: string }>>('solutions.backoffice.talents', [
+  const remoteTalents = [
     { role: 'Virtuelle Assistenten', skills: 'E-Mail-Management, Terminplanung, Kundenkommunikation, Datenerfassung', experience: '3+ Jahre Erfahrung' },
     { role: 'Remote Buchhalter', skills: 'Finanzbuchhaltung, Lohnabrechnung, Controlling, Steuervorbereitungen', experience: '5+ Jahre Erfahrung, DATEV-zertifiziert' },
     { role: 'Administrative Spezialisten', skills: 'Projektmanagement, Qualitätsmanagement, Compliance, Dokumentation', experience: '4+ Jahre Branchenerfahrung' },
     { role: 'Customer Service Agents', skills: 'Kundenbetreuung, Beschwerdemanagement, CRM-Systeme, Verkaufsunterstützung', experience: '3+ Jahre im Kundenservice' }
-  ]);
+  ];
 
-  const backofficeTools = get<Array<{ category: string; tools: string[]; description: string }>>('solutions.backoffice.tools', [
+  const backofficeTools = [
     { 
       category: 'Buchhaltung & Finanzen', 
       tools: ['DATEV', 'Lexoffice', 'QuickBooks', 'Xero'],
@@ -64,9 +64,9 @@ const BackofficeSolution = () => {
       tools: ['Microsoft 365', 'Google Workspace', 'Notion', 'Confluence'],
       description: 'Dokumentenmanagement und Zusammenarbeit'
     }
-  ]);
+  ];
 
-  const useCases = get<Array<{ title: string; description: string; results: string[]; icon?: string }>>('solutions.backoffice.useCases', [
+  const useCases = [
     {
       title: 'Buchhaltung & Finanzen',
       description: 'Ein mittelständisches E-Commerce-Unternehmen automatisierte seine Rechnungsstellung und Finanzbuchhaltung mit Remote-Buchhaltern',
@@ -94,23 +94,23 @@ const BackofficeSolution = () => {
         'Verbesserte Compliance und Dokumentation'
       ]
     }
-  ]);
+  ];
 
-  const benefits = get<string[]>('solutions.backoffice.benefits', [
+  const benefits = [
     'Bis zu 60% Kosteneinsparung gegenüber lokalen Vollzeitkräften',
     'Flexible Skalierung je nach Bedarf (Stunden, Tage, Monate)',
     'Internationale Remote-Fachkräfte mit optimaler Zeitzone-Abdeckung',
     'Schneller Start: Einsatzbereit in 1-2 Wochen',
     'Keine HR-Aufwände: Wir übernehmen Recruiting und Betreuung',
     'Backup-Lösungen bei Ausfall verfügbar'
-  ]);
+  ];
 
-  const results = get<Array<{ metric: string; description: string }>>('solutions.backoffice.results', [
+  const results = [
     { metric: '60%', description: 'Kosteneinsparung im Backoffice' },
     { metric: '40h/Woche', description: 'Freigesetzte Zeit für Kerngeschäft' },
     { metric: '98%', description: 'Kundenzufriedenheit mit Remote-Kräften' },
     { metric: '2 Wochen', description: 'Durchschnittliche Einarbeitungszeit' }
-  ]);
+  ];
 
   return (
     <div className="min-h-screen bg-background font-inter">
