@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Users, Eye, Edit, Search } from 'lucide-react';
+import { Plus, Users, Eye, Edit, Search, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { useUserRole } from '@/hooks/useUserData';
 
 interface Candidate {
   id: string;
@@ -31,8 +42,12 @@ export default function CandidateManagement() {
   const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [candidateToDelete, setCandidateToDelete] = useState<Candidate | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const userRole = useUserRole();
 
   useEffect(() => {
     fetchCandidates();
@@ -70,6 +85,44 @@ export default function CandidateManagement() {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDeleteClick = (candidate: Candidate) => {
+    setCandidateToDelete(candidate);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!candidateToDelete) return;
+
+    setIsDeleting(true);
+    try {
+      const { error } = await supabase
+        .from('candidates')
+        .delete()
+        .eq('id', candidateToDelete.id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Erfolgreich gelöscht",
+        description: "Die RaaS Ressource wurde vollständig gelöscht.",
+      });
+
+      // Refresh candidates list
+      await fetchCandidates();
+    } catch (error) {
+      console.error('Error deleting candidate:', error);
+      toast({
+        title: "Fehler",
+        description: "RaaS Ressource konnte nicht gelöscht werden.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsDeleting(false);
+      setDeleteDialogOpen(false);
+      setCandidateToDelete(null);
     }
   };
 
@@ -225,6 +278,17 @@ export default function CandidateManagement() {
                       <Edit className="h-4 w-4" />
                       Bearbeiten
                     </Button>
+                    {userRole === 'admin' && (
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleDeleteClick(candidate)}
+                        className="flex items-center gap-1 text-destructive hover:text-destructive"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                        Löschen
+                      </Button>
+                    )}
                   </div>
                 </div>
               </CardContent>
@@ -232,6 +296,42 @@ export default function CandidateManagement() {
           ))}
         </div>
       )}
+
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>RaaS Ressource löschen</AlertDialogTitle>
+            <AlertDialogDescription>
+              Möchten Sie die RaaS Ressource{' '}
+              <strong>
+                {candidateToDelete?.candidate_identity
+                  ? `${candidateToDelete.candidate_identity.first_name} ${candidateToDelete.candidate_identity.last_name}`
+                  : 'diese Ressource'}
+              </strong>{' '}
+              wirklich löschen?
+              <br />
+              <br />
+              Diese Aktion kann nicht rückgängig gemacht werden. Die Ressource wird:
+              <ul className="list-disc pl-5 mt-2 space-y-1">
+                <li>Vollständig aus der Datenbank entfernt</li>
+                <li>Nicht mehr im Admin Portal sichtbar sein</li>
+                <li>Nicht mehr bei Kunden angezeigt werden</li>
+                <li>Aus allen Dashboards entfernt</li>
+              </ul>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>Abbrechen</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteConfirm}
+              disabled={isDeleting}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {isDeleting ? 'Wird gelöscht...' : 'Löschen'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
