@@ -1194,7 +1194,7 @@
       "subtitle": "Overview of your activities",
       "cta": {"newShort": "RaaS request", "new": "New request"},
       "cards": {
-        "active": {"title": "Active search requests", "delta": "+2 since last month"},
+        "active": {"title": "Active search requests", "delta": "Ongoing requests"},
         "specialists": {"title": "Specialists", "caption": "Available experts"},
         "completed": {"title": "Completed", "caption": "Successful projects"},
         "pending": {"title": "Pending", "caption": "Waiting for processing"}
