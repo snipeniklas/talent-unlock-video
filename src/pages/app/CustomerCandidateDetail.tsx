@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft, MapPin, Calendar, DollarSign, Clock, Globe, ExternalLink } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, DollarSign, Clock, Globe, ExternalLink, User, Mail, Phone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -482,6 +482,34 @@ const CustomerCandidateDetail: React.FC = () => {
                     <p>{candidate.years_experience} Jahre</p>
                   </div>
                 )}
+              </CardContent>
+            </Card>
+
+            {/* Consultant Contact Information */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <User className="h-5 w-5 mr-2" />
+                  Ansprechpartner
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center gap-2 text-gray-700">
+                  <User className="h-4 w-4" />
+                  <span className="font-medium">Pascal Spieß</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-600">
+                  <Mail className="h-4 w-4" />
+                  <a href="mailto:pascal@hejtalent.de" className="hover:text-primary transition-colors">
+                    pascal@hejtalent.de
+                  </a>
+                </div>
+                <div className="flex items-center gap-2 text-gray-600">
+                  <Phone className="h-4 w-4" />
+                  <a href="tel:+4917634407838" className="hover:text-primary transition-colors">
+                    +49 176 34407838
+                  </a>
+                </div>
               </CardContent>
             </Card>
 

@@ -306,15 +306,25 @@ const Specialists = () => {
                 </div>
               </div>
               
-              {/* Contact Info */}
-              <div className="grid grid-cols-1 gap-2 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
-                  <span>{specialist.email || 'Nicht angegeben'}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4" />
-                  <span>{specialist.phone || 'Nicht angegeben'}</span>
+              {/* Consultant Contact Info */}
+              <div>
+                <span className="font-medium text-sm mb-2 block">Ansprechpartner:</span>
+                <div className="grid grid-cols-1 gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium text-foreground">Pascal Spieß</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-4 h-4" />
+                    <a href="mailto:pascal@hejtalent.de" className="hover:text-primary transition-colors">
+                      pascal@hejtalent.de
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4" />
+                    <a href="tel:+4917634407838" className="hover:text-primary transition-colors">
+                      +49 176 34407838
+                    </a>
+                  </div>
                 </div>
               </div>
               

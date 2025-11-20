@@ -279,13 +279,21 @@ const SpecialistDetail = () => {
                 <Button className="w-full">
                   Anfrage senden
                 </Button>
-                <Button variant="outline" className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => window.location.href = 'mailto:pascal@hejtalent.de'}
+                >
                   <Mail className="h-4 w-4 mr-2" />
-                  E-Mail senden
+                  E-Mail an Berater
                 </Button>
-                <Button variant="outline" className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => window.location.href = 'tel:+4917634407838'}
+                >
                   <Phone className="h-4 w-4 mr-2" />
-                  Anrufen
+                  Berater anrufen
                 </Button>
               </div>
             </CardContent>
@@ -321,19 +329,26 @@ const SpecialistDetail = () => {
             </CardContent>
           </Card>
 
-          {/* Contact Info */}
+          {/* Consultant Contact Info */}
           <Card>
             <CardHeader>
-              <CardTitle>Kontaktdaten</CardTitle>
+              <CardTitle>Ansprechpartner</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex items-center gap-3">
+                <span className="text-sm font-medium">Pascal Spieß</span>
+              </div>
+              <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">{specialist.email}</span>
+                <a href="mailto:pascal@hejtalent.de" className="text-sm hover:text-primary transition-colors">
+                  pascal@hejtalent.de
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">{specialist.phone}</span>
+                <a href="tel:+4917634407838" className="text-sm hover:text-primary transition-colors">
+                  +49 176 34407838
+                </a>
               </div>
             </CardContent>
           </Card>
