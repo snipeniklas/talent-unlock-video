@@ -390,7 +390,7 @@ const AuthPage = () => {
                   <form onSubmit={handlePersonalDataSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="first-name" className="text-sm lg:text-base">Vorname</Label>
+                        <Label htmlFor="first-name" className="text-sm lg:text-base">Vorname *</Label>
                         <Input
                           id="first-name"
                           value={firstName}
@@ -401,7 +401,7 @@ const AuthPage = () => {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="last-name" className="text-sm lg:text-base">Nachname</Label>
+                        <Label htmlFor="last-name" className="text-sm lg:text-base">Nachname *</Label>
                         <Input
                           id="last-name"
                           value={lastName}
@@ -414,7 +414,7 @@ const AuthPage = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="position">Position im Unternehmen</Label>
+                      <Label htmlFor="position">Position im Unternehmen *</Label>
                       <Input
                         id="position"
                         value={position}
@@ -439,7 +439,7 @@ const AuthPage = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="signup-email">E-Mail</Label>
+                      <Label htmlFor="signup-email">E-Mail *</Label>
                       <Input
                         id="signup-email"
                         type="email"
@@ -451,7 +451,7 @@ const AuthPage = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="signup-password">Passwort</Label>
+                      <Label htmlFor="signup-password">Passwort *</Label>
                       <Input
                         id="signup-password"
                         type="password"
@@ -462,7 +462,7 @@ const AuthPage = () => {
                         minLength={6}
                       />
                     </div>
-                    
+
                     <Button 
                       type="submit" 
                       className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-3" 
@@ -476,7 +476,7 @@ const AuthPage = () => {
                   <form onSubmit={handleCompanyDataSubmit} className="space-y-4">
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="company-name">Unternehmensname</Label>
+                        <Label htmlFor="company-name">Unternehmensname *</Label>
                         <Input
                           id="company-name"
                           value={companyName}
@@ -485,7 +485,7 @@ const AuthPage = () => {
                           disabled={isSubmitting}
                         />
                       </div>
-                      
+
                       <div className="space-y-2">
                         <Label htmlFor="company-email">Unternehmens-E-Mail</Label>
                         <Input

@@ -215,7 +215,7 @@ const InviteRegister = () => {
           <form onSubmit={handleRegister} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="firstName">Vorname</Label>
+                <Label htmlFor="firstName">Vorname *</Label>
                 <Input
                   id="firstName"
                   value={formData.firstName}
@@ -225,7 +225,7 @@ const InviteRegister = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="lastName">Nachname</Label>
+                <Label htmlFor="lastName">Nachname *</Label>
                 <Input
                   id="lastName"
                   value={formData.lastName}
@@ -237,7 +237,7 @@ const InviteRegister = () => {
             </div>
 
             <div>
-              <Label htmlFor="password">Passwort</Label>
+              <Label htmlFor="password">Passwort *</Label>
               <Input
                 id="password"
                 type="password"
@@ -249,7 +249,7 @@ const InviteRegister = () => {
             </div>
 
             <div>
-              <Label htmlFor="confirmPassword">Passwort bestätigen</Label>
+              <Label htmlFor="confirmPassword">Passwort bestätigen *</Label>
               <Input
                 id="confirmPassword"
                 type="password"
