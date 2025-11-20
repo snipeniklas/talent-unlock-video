@@ -1272,7 +1272,7 @@
       "subtitle": "Übersicht Ihrer Aktivitäten",
       "cta": {"newShort": "RaaS Anfrage", "new": "Neue Anfrage"},
       "cards": {
-        "active": {"title": "Aktive Suchaufträge", "delta": "+2 seit letztem Monat"},
+        "active": {"title": "Aktive Suchaufträge", "delta": "Laufende Anfragen"},
         "specialists": {"title": "Spezialisten", "caption": "Verfügbare Experten"},
         "completed": {"title": "Abgeschlossen", "caption": "Erfolgreiche Projekte"},
         "pending": {"title": "Ausstehend", "caption": "Warten auf Bearbeitung"}
