@@ -178,7 +178,7 @@ const SearchRequests = () => {
   };
 
   const canEditRequest = () => {
-    return userRoles.includes('admin') || userRoles.includes('company_admin');
+    return userRoles.includes('admin');
   };
 
 
