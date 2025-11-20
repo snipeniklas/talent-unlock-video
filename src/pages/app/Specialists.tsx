@@ -74,23 +74,33 @@ const Specialists = () => {
         }
 
         // Transform candidate data to match specialist interface
-        const transformedData = (resources || []).map((candidate: any) => ({
-          ...candidate,
-          first_name: candidate.candidate_identity?.first_name || '',
-          last_name: candidate.candidate_identity?.last_name || '',
-          email: candidate.email || '',
-          phone: candidate.phone,
-          location: candidate.candidate_identity?.city || '',
-          current_position: candidate.primary_role || '',
-          experience_years: candidate.years_experience,
-          skills: [], // We'll need to extract from skills JSON
-          languages: [], // We'll need to get from candidate_languages
-          availability: candidate.availability,
-          hourly_rate_min: candidate.rate_hourly_target,
-          hourly_rate_max: candidate.rate_hourly_target,
-          rating: 5, // Default rating
-          status: candidate.availability === 'immediately' ? 'available' : 'unavailable'
-        }));
+        const transformedData = (resources || []).map((candidate: any) => {
+          // Calculate customer hourly rate (selling price)
+          const baseMonthlyRate = candidate.rate_monthly_target || 0;
+          const margin = candidate.margin || 0;
+          const monthlyRate = baseMonthlyRate + margin;
+          const hoursPerWeek = candidate.hours_per_week_pref || 40;
+          const hoursPerMonth = hoursPerWeek * 4;
+          const customerHourlyRate = monthlyRate && hoursPerMonth ? monthlyRate / hoursPerMonth : 0;
+          
+          return {
+            ...candidate,
+            first_name: candidate.candidate_identity?.first_name || '',
+            last_name: candidate.candidate_identity?.last_name || '',
+            email: candidate.email || '',
+            phone: candidate.phone,
+            location: candidate.candidate_identity?.city || '',
+            current_position: candidate.primary_role || '',
+            experience_years: candidate.years_experience,
+            skills: [], // We'll need to extract from skills JSON
+            languages: [], // We'll need to get from candidate_languages
+            availability: candidate.availability,
+            hourly_rate_min: customerHourlyRate,
+            hourly_rate_max: customerHourlyRate,
+            rating: 5, // Default rating
+            status: candidate.availability === 'immediately' ? 'available' : 'unavailable'
+          };
+        });
 
         setSpecialists(transformedData);
         setFilteredSpecialists(transformedData);
@@ -284,8 +294,8 @@ const Specialists = () => {
                 <div>
                   <span className="font-medium">Stundensatz:</span>
                   <div className="text-primary font-semibold">
-                    {specialist.hourly_rate_min && specialist.hourly_rate_max 
-                      ? `${specialist.hourly_rate_min}-${specialist.hourly_rate_max} €`
+                    {specialist.hourly_rate_min 
+                      ? `${specialist.hourly_rate_min.toFixed(2)} €`
                       : 'Nicht angegeben'
                     }
                   </div>
