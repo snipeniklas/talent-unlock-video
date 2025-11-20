@@ -21,7 +21,6 @@ import ApplicantManagement from "./pages/app/ApplicantManagement";
 import CandidateKanbanBoard from "./pages/app/CandidateKanbanBoard";
 import CustomerCandidateDetail from "./pages/app/CustomerCandidateDetail";
 import Specialists from "./pages/app/Specialists";
-import SpecialistDetail from "./pages/app/SpecialistDetail";
 import BackofficeSolution from "./pages/solutions/BackofficeSolution";
 import AIMlSolution from "./pages/solutions/AIMlSolution";
 import ITDevelopmentSolution from "./pages/solutions/ITDevelopmentSolution";
@@ -108,7 +107,7 @@ const App = () => (
             <Route path="search-requests/:id/applicants" element={<ApplicantManagement />} />
             <Route path="candidate/:id" element={<CustomerCandidateDetail />} />
             <Route path="specialists" element={<Specialists />} />
-            <Route path="specialists/:id" element={<SpecialistDetail />} />
+            <Route path="specialists/:id" element={<CustomerCandidateDetail />} />
             <Route path="support" element={<Support />} />
             <Route path="settings" element={<Settings />} />
           </Route>
