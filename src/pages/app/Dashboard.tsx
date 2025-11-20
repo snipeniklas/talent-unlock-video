@@ -217,12 +217,14 @@ const Dashboard = () => {
             </div>
 
             {/* Email Widget and Recent Activity */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
-              <div className="lg:col-span-1">
-                <UserEmailWidget />
-              </div>
+            <div className={`grid grid-cols-1 gap-4 lg:gap-6 ${userRole === 'admin' ? 'lg:grid-cols-3' : 'lg:grid-cols-1'}`}>
+              {userRole === 'admin' && (
+                <div className="lg:col-span-1">
+                  <UserEmailWidget />
+                </div>
+              )}
               
-              <div className="lg:col-span-2">
+              <div className={userRole === 'admin' ? 'lg:col-span-2' : 'lg:col-span-1'}>
               <Card className="p-4 lg:p-6">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
