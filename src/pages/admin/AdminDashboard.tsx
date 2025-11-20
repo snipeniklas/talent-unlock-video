@@ -199,7 +199,11 @@ export default function AdminDashboard() {
           ) : (
             <div className="space-y-3">
               {stats.recentActivity.map((activity: any) => (
-                <div key={activity.id} className="flex items-center justify-between p-3 border rounded-lg">
+                <div 
+                  key={activity.id} 
+                  className="flex items-center justify-between p-3 border rounded-lg hover:bg-accent cursor-pointer transition-colors"
+                  onClick={() => navigate(`/admin/search-requests/${activity.id}`)}
+                >
                   <div className="flex items-center gap-3">
                     <Calendar className="h-4 w-4 text-muted-foreground" />
                     <div>
