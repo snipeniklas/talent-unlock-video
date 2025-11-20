@@ -422,7 +422,7 @@ const CustomerCandidateDetail: React.FC = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {candidate.rate_hourly_target && (
+                {candidate.rate_monthly_target && (
                   <div>
                     <p className="text-sm font-medium text-gray-600">Stundensatz</p>
                     <p className="text-lg font-semibold text-green-600">
