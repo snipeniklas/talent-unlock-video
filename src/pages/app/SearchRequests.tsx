@@ -177,6 +177,11 @@ const SearchRequests = () => {
     return request.created_by === currentUserId;
   };
 
+  const canEditRequest = () => {
+    return userRoles.includes('admin') || userRoles.includes('company_admin');
+  };
+
+
   const handleDeleteRequest = async (requestId: string) => {
     try {
       const { error } = await supabase
@@ -330,10 +335,12 @@ const SearchRequests = () => {
                         <Eye className="w-4 h-4 mr-2" />
                         {t('common.actions.view', 'Ansehen')}
                       </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Edit className="w-4 h-4 mr-2" />
-                        {t('common.actions.edit', 'Bearbeiten')}
-                      </DropdownMenuItem>
+                      {canEditRequest() && (
+                        <DropdownMenuItem>
+                          <Edit className="w-4 h-4 mr-2" />
+                          {t('common.actions.edit', 'Bearbeiten')}
+                        </DropdownMenuItem>
+                      )}
                       {canDeleteRequest(request) && (
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
@@ -425,7 +432,7 @@ const SearchRequests = () => {
                   >
                     {t('app.searchRequests.details.manageCandidates', 'Kandidaten verwalten')} ({request.candidate_count || 0})
                   </Button>
-                  {request.status === 'active' && (
+                  {canEditRequest() && request.status === 'active' && (
                     <Button size="sm" variant="outline">
                       <Edit className="w-4 h-4 mr-2" />
                       {t('common.actions.edit', 'Bearbeiten')}
