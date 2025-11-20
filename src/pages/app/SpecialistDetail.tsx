@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowLeft, MapPin, Mail, Phone, Star, Calendar, Briefcase, Award } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Specialist {
   id: string;
@@ -37,49 +38,71 @@ const SpecialistDetail = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Mock data - replace with actual API call
-    setTimeout(() => {
-      const mockData: Specialist = {
-        id: id || "1",
-        name: "Sarah Mueller",
-        title: "Senior Frontend Developer",
-        location: "Berlin, Deutschland",
-        skills: ["React", "TypeScript", "Next.js", "Node.js", "MongoDB", "AWS"],
-        availability: "available",
-        email: "sarah.mueller@example.com",
-        phone: "+49 30 12345678",
-        avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
-        bio: "Erfahrene Frontend-Entwicklerin mit über 8 Jahren Expertise in der Entwicklung moderner Web-Anwendungen. Spezialisiert auf React, TypeScript und performante User Interfaces. Leidenschaftlich bei der Umsetzung von komplexen Designs in sauberen, wartbaren Code.",
-        experience: "8+ Jahre",
-        rating: 4.9,
-        completedProjects: 47,
-        languages: ["Deutsch (Muttersprache)", "Englisch (Fließend)", "Französisch (Grundkenntnisse)"],
-        certifications: [
-          "AWS Certified Developer",
-          "React Professional Certification",
-          "TypeScript Advanced Certification"
-        ],
-        portfolio: [
-          {
-            title: "E-Commerce Platform",
-            description: "Vollständige Entwicklung eines modernen E-Commerce-Hubs mit React, TypeScript und Stripe Integration.",
-            technologies: ["React", "TypeScript", "Stripe", "Node.js"]
-          },
-          {
-            title: "Fintech Dashboard",
-            description: "Entwicklung eines komplexen Fintech-Dashboards mit Echtzeit-Daten und fortgeschrittenen Visualisierungen.",
-            technologies: ["React", "D3.js", "WebSocket", "Material-UI"]
-          },
-          {
-            title: "Mobile App",
-            description: "React Native App für iOS und Android mit Backend-Integration und Push-Notifications.",
-            technologies: ["React Native", "Firebase", "Redux", "TypeScript"]
-          }
-        ]
-      };
-      setSpecialist(mockData);
-      setLoading(false);
-    }, 500);
+    const fetchSpecialist = async () => {
+      if (!id) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const { data: candidate, error } = await supabase
+          .from('candidates')
+          .select(`
+            *,
+            candidate_identity (first_name, last_name, country, city, avatar_url),
+            candidate_languages (lang_code, proficiency),
+            candidate_links (url, label),
+            candidate_experience (title, org_name, summary, start_date, end_date, tech_stack)
+          `)
+          .eq('id', id)
+          .single();
+
+        if (error) {
+          console.error('Error fetching specialist:', error);
+          setSpecialist(null);
+          setLoading(false);
+          return;
+        }
+
+        // Transform candidate data to specialist format
+        const transformedData: Specialist = {
+          id: candidate.id,
+          name: `${candidate.candidate_identity?.first_name || ''} ${candidate.candidate_identity?.last_name || ''}`.trim(),
+          title: candidate.primary_role || candidate.headline || 'Spezialist',
+          location: candidate.candidate_identity?.city && candidate.candidate_identity?.country 
+            ? `${candidate.candidate_identity.city}, ${candidate.candidate_identity.country}`
+            : candidate.candidate_identity?.city || candidate.candidate_identity?.country || 'Nicht angegeben',
+          skills: Array.isArray(candidate.skills) ? candidate.skills.map(s => String(s)) : [],
+          availability: candidate.availability === 'immediately' ? 'available' : 
+                       candidate.availability === 'booked' ? 'busy' : 'unavailable',
+          email: '', // Not exposed to customers
+          phone: '', // Not exposed to customers
+          avatar: candidate.candidate_identity?.avatar_url,
+          bio: candidate.bio || 'Keine Beschreibung verfügbar.',
+          experience: candidate.years_experience ? `${candidate.years_experience}+ Jahre` : 'Nicht angegeben',
+          rating: 4.9, // Default rating
+          completedProjects: 47, // Default projects count
+          languages: candidate.candidate_languages?.map((lang: any) => 
+            `${lang.lang_code} (${lang.proficiency || 'Nicht angegeben'})`
+          ) || [],
+          certifications: [], // Can be added if needed
+          portfolio: candidate.candidate_experience?.map((exp: any) => ({
+            title: exp.title || 'Projekt',
+            description: exp.summary || 'Keine Beschreibung verfügbar',
+            technologies: Array.isArray(exp.tech_stack) ? exp.tech_stack : []
+          })) || []
+        };
+
+        setSpecialist(transformedData);
+      } catch (error) {
+        console.error('Error:', error);
+        setSpecialist(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSpecialist();
   }, [id]);
 
   const getAvailabilityColor = (availability: string) => {
