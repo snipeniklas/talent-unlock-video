@@ -17,6 +17,9 @@ interface Candidate {
   seniority: string;
   years_experience: number;
   rate_hourly_target: number;
+  rate_monthly_target: number;
+  margin: number;
+  hours_per_week_pref: number;
   currency: string;
   skills: Array<{
     name: string;
@@ -71,6 +74,17 @@ const CandidateKanbanBoard = () => {
   const [loading, setLoading] = useState(true);
   const [draggedItem, setDraggedItem] = useState<string | null>(null);
   const [dragOverColumn, setDragOverColumn] = useState<string | null>(null);
+
+  // Helper function to calculate customer hourly rate (selling price)
+  const calculateCustomerHourlyRate = (candidate: Candidate): number => {
+    const baseMonthlyRate = candidate.rate_monthly_target || 0;
+    const margin = candidate.margin || 0;
+    const monthlyRate = baseMonthlyRate + margin;
+    const hoursPerWeek = candidate.hours_per_week_pref || 40;
+    const hoursPerMonth = hoursPerWeek * 4; // 4 Wochen pro Monat
+    if (!monthlyRate || !hoursPerMonth) return 0;
+    return monthlyRate / hoursPerMonth;
+  };
 
   useEffect(() => {
     if (id) {
@@ -356,10 +370,10 @@ const CandidateKanbanBoard = () => {
                           </div>
                         )}
                         
-                        {candidate?.rate_hourly_target && (
+                        {candidate?.rate_monthly_target && (
                           <div className="flex items-center gap-2 text-muted-foreground">
                             <Euro className="h-3 w-3" />
-                            <span>€{candidate.rate_hourly_target}/h</span>
+                            <span>€{calculateCustomerHourlyRate(candidate).toFixed(2)}/h</span>
                           </div>
                         )}
 
