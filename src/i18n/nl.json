@@ -1584,6 +1584,76 @@
         "primary": "RaaS Aanvraag maken",
         "secondary": "Ontwikkelaarsprofielen bekijken"
       }
+    },
+    "aiMl": {
+      "hero": {
+        "badge": "Remote AI & ML-specialisten",
+        "title": "Ervaren Remote ",
+        "kiLabel": "AI",
+        "titleSuffix": "-experts voor uw AI-projecten",
+        "text": "Realiseer uw AI-visies met eersteklas remote-specialisten. Van Machine Learning tot Computer Vision – wij hebben de experts voor uw project.",
+        "cta": "RaaS Aanvraag maken"
+      },
+      "audience": [
+        "CIO's en Data-strategen",
+        "Innovatiemanagers en Chief Digital Officers",
+        "Product Owners voor AI-projecten",
+        "Startups met AI/ML-ambities"
+      ],
+      "audienceTitle": "Voor wie?",
+      "problems": [
+        {"title": "Gebrek aan AI-expertise in het bedrijf", "description": "Moeite om gekwalificeerde Data Scientists en ML-Engineers te vinden"},
+        {"title": "Hoge kosten voor AI-specialisten", "description": "AI-experts zijn extreem duur en zelden beschikbaar"},
+        {"title": "Complexiteit van AI-projecten onderschat", "description": "AI-projecten vereisen speciale competenties en ervaring"}
+      ],
+      "problemsTitle": "Kernproblemen",
+      "roles": [
+        {"role": "Machine Learning Engineers", "skills": "TensorFlow, PyTorch, scikit-learn, MLOps, Model Deployment", "specialization": "ML-Pipeline Development, Model Training & Optimalisatie", "experience": "4+ jaar"},
+        {"role": "Data Scientists", "skills": "Python, R, Statistical Analysis, Predictive Modeling, Feature Engineering", "specialization": "Data Analysis, Business Intelligence, Statistical Modeling", "experience": "5+ jaar"},
+        {"role": "AI/NLP Specialisten", "skills": "HuggingFace, OpenAI, LangChain, Prompt Engineering, Chatbots", "specialization": "Natural Language Processing, Conversational AI", "experience": "3+ jaar"},
+        {"role": "Computer Vision Engineers", "skills": "OpenCV, YOLO, CNN, Image Processing, Object Detection", "specialization": "Beeldherkenning, Video-analyse, Visual AI", "experience": "4+ jaar"},
+        {"role": "MLOps Engineers", "skills": "Docker, Kubernetes, MLflow, Kubeflow, CI/CD for ML", "specialization": "ML-infrastructuur, Model Deployment, Monitoring", "experience": "4+ jaar"},
+        {"role": "AI Product Consultants", "skills": "AI Strategy, Business Case Development, ROI Analysis", "specialization": "AI-implementatiestrategie, Business Integration", "experience": "6+ jaar"}
+      ],
+      "rolesTitle": "Onze AI-specialisten",
+      "experience": "ervaring",
+      "tech": [
+        {"name": "Machine Learning", "tools": ["TensorFlow", "PyTorch", "scikit-learn", "XGBoost"]},
+        {"name": "Deep Learning", "tools": ["Neural Networks", "CNN", "RNN", "Transformers"]},
+        {"name": "NLP & LLMs", "tools": ["HuggingFace", "OpenAI", "LangChain", "BERT"]},
+        {"name": "Computer Vision", "tools": ["OpenCV", "YOLO", "Object Detection", "OCR"]},
+        {"name": "MLOps", "tools": ["MLflow", "Kubeflow", "Docker", "Kubernetes"]},
+        {"name": "Data Engineering", "tools": ["Apache Spark", "Airflow", "dbt", "BigQuery"]}
+      ],
+      "techTitle": "AI-Technologie-expertise",
+      "benefits": [
+        "Toegang tot top internationale AI-experts",
+        "Flexibele projectduur: van Proof of Concepts tot langetermijnprojecten",
+        "Complete AI-teams of individuele specialisten",
+        "Praktijkervaring in diverse branches",
+        "Snelle projectstart: AI-experts binnen 1-2 weken beschikbaar",
+        "Geen langdurige personeelsverplichtingen"
+      ],
+      "benefitsTitle": "Uw Voordelen",
+      "results": [
+        {"metric": "70%", "description": "Succesvolle AI-projecten"},
+        {"metric": "50%", "description": "Kostenbesparing vs. lokale AI-experts"},
+        {"metric": "3x", "description": "Snellere implementatie"},
+        {"metric": "90%", "description": "Klanttevredenheid met AI-oplossingen"}
+      ],
+      "resultsTitle": "Meetbare Resultaten",
+      "useCases": [
+        {"title": "Chatbots & Customer Service AI", "description": "Intelligente klantenservice-automatisering met NLP", "result": "80% reductie van supportaanvragen"},
+        {"title": "Predictive Analytics", "description": "Voorspellingsmodellen voor Sales, Inventory en Maintenance", "result": "30% verbetering van forecast-nauwkeurigheid"},
+        {"title": "Computer Vision Toepassingen", "description": "Geautomatiseerde beeld- en video-analyse", "result": "95% nauwkeurigheid bij objectherkenning"}
+      ],
+      "useCasesTitle": "Succesvolle AI-toepassingen",
+      "cta": {
+        "title": "Klaar voor AI-innovatie?",
+        "text": "Bespreek uw AI-visies met ons. Wij vinden de juiste remote-experts voor uw AI-project.",
+        "primary": "RaaS Aanvraag maken",
+        "secondary": "AI-experts ontmoeten"
+      }
     }
   },
   "app": {
