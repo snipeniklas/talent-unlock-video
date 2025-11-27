@@ -1521,6 +1521,69 @@
         "primary": "RaaS Aanvraag maken",
         "secondary": "Remote-professionals ontmoeten"
       }
+    },
+    "itDev": {
+      "hero": {
+        "badge": "Remote IT-ontwikkelaars",
+        "title": "Ervaren ",
+        "titleSuffix": "-ontwikkelaars voor uw IT-projecten",
+        "text": "Versterk uw IT-team met gekwalificeerde internationale remote-ontwikkelaars. Van Full-Stack Development tot DevOps – wij hebben de experts voor uw project.",
+        "cta": "RaaS Aanvraag maken"
+      },
+      "audience": [
+        "CTO's en Technical Leaders",
+        "Startup-oprichters met tech-behoeften",
+        "Product Owners en Productmanagers",
+        "Bureaus en adviesbureaus"
+      ],
+      "audienceTitle": "Voor wie?",
+      "problems": [
+        {"title": "IT-personeelstekort", "description": "Moeite om gekwalificeerde ontwikkelaars te vinden en langdurig te behouden"},
+        {"title": "Hoge personeelskosten voor IT-expertise", "description": "Senior-ontwikkelaars zijn duur en vaak niet permanent beschikbaar"},
+        {"title": "Schaalbaarheidsproblemen bij groeiende projecten", "description": "Lastig om het ontwikkelteam snel aan te passen aan projectvereisten"}
+      ],
+      "problemsTitle": "Kernproblemen",
+      "roles": [
+        {"role": "Full-Stack Ontwikkelaars", "skills": "React, Node.js, Python, Django, JavaScript/TypeScript", "specialization": "Webapplicaties, APIs, Frontend & Backend", "experience": "5+ jaar"},
+        {"role": "DevOps Engineers", "skills": "AWS, Docker, Kubernetes, CI/CD, Infrastructure as Code", "specialization": "Cloud-migratie, Deployment-automatisering, Monitoring", "experience": "4+ jaar"},
+        {"role": "Mobile App Ontwikkelaars", "skills": "React Native, Flutter, iOS (Swift), Android (Kotlin)", "specialization": "Cross-Platform Apps, Native Development", "experience": "4+ jaar"},
+        {"role": "Backend Specialisten", "skills": "Java, .NET, Go, Microservices, Database Design", "specialization": "Schaalbare architecturen, Performance-optimalisatie", "experience": "6+ jaar"},
+        {"role": "Frontend Experts", "skills": "React, Vue.js, Angular, UI/UX Implementatie", "specialization": "Responsive Design, Performance, Accessibility", "experience": "4+ jaar"},
+        {"role": "QA & Test Engineers", "skills": "Automated Testing, Manual QA, Test-Driven Development", "specialization": "Quality Assurance, Bug Detection, Test Automation", "experience": "3+ jaar"}
+      ],
+      "rolesTitle": "Onze Remote-ontwikkelaars",
+      "experience": "ervaring",
+      "tech": [
+        {"name": "Frontend", "tools": ["React", "Vue.js", "Angular", "TypeScript"]},
+        {"name": "Backend", "tools": ["Node.js", "Python", "Java", ".NET", "Go"]},
+        {"name": "Mobile", "tools": ["React Native", "Flutter", "iOS", "Android"]},
+        {"name": "Cloud", "tools": ["AWS", "Azure", "Google Cloud", "Docker"]},
+        {"name": "Database", "tools": ["PostgreSQL", "MongoDB", "Redis", "MySQL"]},
+        {"name": "DevOps", "tools": ["Kubernetes", "CI/CD", "Terraform", "Jenkins"]}
+      ],
+      "techTitle": "Technologie-expertise",
+      "benefits": [
+        "Toegang tot top internationale ontwikkelaars",
+        "Flexibele teamsamenstelling afhankelijk van projectvereisten",
+        "Agile werkwijze en moderne ontwikkelpraktijken",
+        "Optimale tijdzone-dekking voor remote-samenwerking",
+        "Snelle projectstart: ontwikkelaars binnen 1-2 weken inzetbaar",
+        "Geen wervingskosten of HR-overhead"
+      ],
+      "benefitsTitle": "Uw Voordelen",
+      "results": [
+        {"metric": "50%", "description": "Snellere ontwikkeltijden"},
+        {"metric": "40%", "description": "Kostenbesparing vs. lokale ontwikkelaars"},
+        {"metric": "95%", "description": "Projectsuccespercentage"},
+        {"metric": "1-2 weken", "description": "Time-to-Start voor nieuwe ontwikkelaars"}
+      ],
+      "resultsTitle": "Meetbare Resultaten",
+      "cta": {
+        "title": "Klaar voor Remote IT-versterking?",
+        "text": "Bespreek uw ontwikkelbehoeften met ons. Wij vinden de juiste remote-ontwikkelaars voor uw project.",
+        "primary": "RaaS Aanvraag maken",
+        "secondary": "Ontwikkelaarsprofielen bekijken"
+      }
     }
   },
   "app": {
