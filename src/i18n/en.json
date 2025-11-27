@@ -1768,6 +1768,76 @@
       "contactsCount": "contacts"
     }
   },
+  "auth": {
+    "backToHome": "Back to homepage",
+    "welcome": {
+      "title": "Welcome to Hej Talent",
+      "subtitle": "Your RaaS Hub for top-tier remote professionals"
+    },
+    "badges": {
+      "developers": "500+ Developers",
+      "quality": "Verified Quality"
+    },
+    "tabs": {
+      "login": "Sign In",
+      "signup": "Register"
+    },
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in and manage your AI projects",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "submitting": "Signing in...",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "No account yet? Switch to the \"Register\" tab"
+    },
+    "signup": {
+      "title": "Register your company",
+      "stepOf": "Step {step} of 2",
+      "step1Subtitle": "Get started and find the best AI developers for your company",
+      "step2Subtitle": "Complete your company profile",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "position": "Position in company",
+      "positionPlaceholder": "e.g. CEO, IT Manager, CTO",
+      "phone": "Phone number",
+      "phonePlaceholder": "+49 123 456789",
+      "email": "Email",
+      "password": "Password",
+      "companyName": "Company name",
+      "companyEmail": "Company email",
+      "companyWebsite": "Website (optional)",
+      "websitePlaceholder": "https://...",
+      "nextStep": "Continue to Step 2",
+      "prevStep": "Back",
+      "submit": "Complete Registration",
+      "submitting": "Registering...",
+      "hasAccount": "Already registered? Switch to the \"Sign In\" tab"
+    },
+    "toast": {
+      "loginFailed": "Login failed",
+      "loginSuccess": "Successfully signed in",
+      "welcomeBack": "Welcome back!",
+      "emailRequired": "Email required",
+      "emailRequiredDesc": "Please enter your email address to reset your password.",
+      "resetSent": "Reset link sent",
+      "resetSentDesc": "Check your emails for the password reset link.",
+      "resetFailed": "Failed to send reset link.",
+      "accountExists": "Account already exists",
+      "accountExistsDesc": "This email address is already registered. Please sign in.",
+      "signupFailed": "Registration failed",
+      "signupSuccess": "Registration successful",
+      "signupSuccessDesc": "Please check your emails for confirmation.",
+      "error": "Error",
+      "unexpectedError": "An unexpected error occurred."
+    },
+    "benefits": {
+      "item1": "Access to 500+ verified AI developers",
+      "item2": "98% customer satisfaction",
+      "item3": "Personal support guaranteed"
+    }
+  },
   "legal": {
     "imprint": {
       "title": "Imprint",
