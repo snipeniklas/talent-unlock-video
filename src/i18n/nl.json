@@ -1027,39 +1027,108 @@
   },
   "resourceHub": {
     "hero": {
-      "title": "Resource Hub",
-      "subtitle": "Uw centrale platform voor het beheer van remote-professionals"
+      "title": "RaaS Hub",
+      "titleSuffix": " - Uw Service-Centrale",
+      "subtitle": "Beheer uw Remote-Services, projecten en deliverables in één intelligent platform",
+      "badges": ["✨ Realtime Updates", "🔒 AVG-conform", "📊 Advanced Analytics"]
     },
     "overview": {
-      "title": "Alles op één plek",
-      "description": "Onze Resource Hub biedt u alle tools die u nodig heeft om uw remote-team efficiënt te beheren. Van het aanvragen van nieuwe professionals tot het monitoren van lopende projecten."
+      "title": "Uw RaaS Services in overzicht",
+      "subtitle": "Beheer al uw Remote-Services centraal - van aanvraag tot delivery"
     },
-    "features": {
-      "dashboard": {
-        "title": "Overzichtelijk dashboard",
-        "description": "Behoud het overzicht over al uw professionals, projecten en statistieken op één centrale plek."
-      },
-      "serviceManagement": {
-        "title": "Diensten beheren",
-        "description": "Beheer actieve diensten, bekijk contractdetails en verleng of pas contracten aan."
-      },
-      "requestProcess": {
-        "title": "Aanvraagproces",
-        "description": "Vraag eenvoudig nieuwe professionals aan en volg de status van uw aanvragen in realtime."
-      },
-      "analytics": {
-        "title": "Analytics & Rapportage",
-        "description": "Gedetailleerde inzichten en rapporten over uw remote-team en projectvoortgang."
-      },
-      "security": {
-        "title": "Beveiliging & Privacy",
-        "description": "Al uw gegevens zijn veilig opgeslagen en worden volgens GDPR-richtlijnen verwerkt."
+    "dashboard": {
+      "title": "Service Dashboard",
+      "active": "12 Actieve Services",
+      "items": [
+        {"title": "AI-Data-analyse Service", "desc": "Fulltime • 2 Data Scientists", "status": "In Progress"},
+        {"title": "Cloud Migration Service", "desc": "Project • 3 DevOps Engineers", "status": "Delivered"},
+        {"title": "Boekhoud-Automatisering", "desc": "Deeltijd • 1 Backoffice Expert", "status": "Starting"}
+      ],
+      "kpis": {"mrr": "Maandelijkse Services", "sla": "SLA Nakoming", "response": "Gem. Respons"}
+    },
+    "management": {
+      "title": "Service-Management eenvoudig gemaakt",
+      "text": "Behoud het overzicht over al uw Remote-Services. Van AI-projecten tot Backoffice-Automatisering - alles centraal beheerd met realtime status en performance-metrics.",
+      "bullets": [
+        {"title": "Service-Portfolio Overzicht", "desc": "Alle lopende services in één oogopslag"},
+        {"title": "Realtime Performance", "desc": "SLA-Tracking en Delivery-Status"},
+        {"title": "Kosten-Transparantie", "desc": "Heldere uitsplitsing van alle service-kosten"}
+      ],
+      "title2": "Meetbare Business-Resultaten",
+      "text2": "Volg de ROI van uw RaaS Services met gedetailleerde performance-metrics. Zie hoe Remote-Services uw business transformeren.",
+      "roiTracking": {"title": "ROI-Tracking", "desc": "Meetbare kostenbesparingen en efficiëntieverhogingen"},
+      "performanceAnalytics": {"title": "Performance Analytics", "desc": "Gedetailleerde service-prestatie-beoordelingen"},
+      "businessImpact": {"title": "Business Impact", "desc": "Concrete verbeteringen van uw bedrijfsprocessen"}
+    },
+    "request": {
+      "title": "Nieuwe RaaS Services aanvragen",
+      "text": "Beschrijf uw business-probleem en ontvang op maat gemaakte service-oplossingen. Ons AI-systeem matcht u automatisch met de juiste expert-teams.",
+      "bullets": [
+        {"title": "Probleem-naar-Oplossing Matching", "desc": "AI-gestuurde service-aanbevelingen"},
+        {"title": "Snelle Service-Activering", "desc": "Services starten binnen 48 uur"},
+        {"title": "Gegarandeerde Kwaliteit", "desc": "SLA-backed Service Delivery"}
+      ],
+      "mock": {
+        "title": "Nieuwe Service-Aanvraag",
+        "subtitle": "Probleem beschrijven",
+        "example": "Automatisering van onze factuurverwerking met AI-gebaseerde data-extractie",
+        "exampleLabel": "Wat wilt u bereiken?",
+        "type": "Gewenst Service-Type",
+        "tags": ["Backoffice Automation", "AI/ML"],
+        "timeline": "Timeline & Budget",
+        "timelineValue": "Start: Binnen 2 weken • Budget: €15-25k/maand",
+        "ai": "AI-Aanbeveling",
+        "aiResult": "3 passende expert-teams gevonden • Geschatte implementatie: 4-6 weken",
+        "cta": "Service-Match starten"
       }
     },
-    "cta": {
-      "title": "Klaar om te starten?",
-      "subtitle": "Vraag vandaag nog toegang tot onze Resource Hub aan",
-      "button": "Nu registreren"
+    "analytics": {
+      "title": "Service Performance & ROI",
+      "subtitle": "Laatste 90 dagen",
+      "roi": "ROI Toename",
+      "savings": "Kostenbesparing",
+      "deliveryRate": "Service Delivery Rate",
+      "avgTime": "Gem. Probleem-naar-Oplossing Tijd",
+      "quality": "Service-Kwaliteit Score",
+      "impactTitle": "Top Service-Impact",
+      "impactDetail": "Backoffice Automation: 45% efficiëntietoename"
+    },
+    "security": {
+      "title": "Enterprise-Grade Service Security",
+      "subtitle": "Uw gevoelige business-data is bij onze RaaS Services in veilige handen. Volledige compliance en hoogste beveiligingsstandaarden.",
+      "bullets": [
+        {"title": "Databeveiliging", "desc": "End-to-end encryptie van alle service-data"},
+        {"title": "Compliance & Certificering", "desc": "ISO 27001, AVG, SOC 2 Type II"},
+        {"title": "Service Continuity", "desc": "99.9% Uptime SLA voor kritieke services"}
+      ],
+      "status": {
+        "title": "Security & Compliance Status",
+        "subtitle": "Alle services bewaakt",
+        "badges": ["AVG", "ISO 27001", "SOC 2"],
+        "uptime": {"title": "Service Uptime", "value": "99.97%", "caption": "Laatste 12 maanden"}
+      },
+      "items": {
+        "encrypt": "Service-Data-encryptie",
+        "mfa": "Multi-Factor Authenticatie",
+        "audit": "Audit Logs & Monitoring",
+        "sla": "Service SLA Monitoring"
+      }
+    },
+    "mainCta": {
+      "open": "RaaS Hub nu openen"
+    },
+    "features": {
+      "cards": [
+        {"title": "Intelligent Beheer", "desc": "AI-gestuurde automatisering voor moeiteloos Remote-Team beheer"},
+        {"title": "Enterprise Beveiliging", "desc": "Bank-level beveiliging met ISO 27001 certificering en AVG-compliance"},
+        {"title": "Wereldwijd beschikbaar", "desc": "24/7 support en wereldwijd talent-netwerk voor uw succes"}
+      ]
+    },
+    "premium": {
+      "title": "Klaar voor de toekomst van Remote-Recruiting?",
+      "subtitle": "Stap in het nieuwe tijdperk van intelligente talent-werving en ervaar hoe AI uw recruiting revolutioneert.",
+      "open": "Hub nu openen",
+      "demo": "Demo aanvragen"
     }
   },
   "hejTalentLanding": {
