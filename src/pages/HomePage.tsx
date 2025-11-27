@@ -22,7 +22,7 @@ const HomePage = () => {
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const { t, get } = useTranslation();
+  const { t, get, lang } = useTranslation();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -83,13 +83,17 @@ const HomePage = () => {
     {
       name: "Niklas Clasen",
       company: "SNIPE Solutions",
-      text: t('home.testimonials.items.0.text', 'Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.'),
+      text: lang === 'en'
+        ? "Hej Talent connected us with the perfect remote accountant within 2 weeks. Professional and reliable."
+        : "Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.",
       rating: 5
     },
     {
       name: "Marc Palma",
       company: "ECO Containertrans",
-      text: t('home.testimonials.items.1.text', 'Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite HejTalent-Kraft ins Team zu holen.'),
+      text: lang === 'en'
+        ? "The excellent work of a new colleague convinced us to bring a second Hej Talent professional into the team."
+        : "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite Hej Talent-Kraft ins Team zu holen.",
       rating: 5
     }
   ];
