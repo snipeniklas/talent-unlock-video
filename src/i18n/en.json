@@ -841,6 +841,165 @@
       "button": "Create a free RaaS request"
     }
   },
+
+  "solutions": {
+    "backoffice": {
+      "hero": {
+        "badge": "Remote backoffice professionals",
+        "title": "Qualified ",
+        "titleHighlight": "Remote",
+        "titleSuffix": " support ",
+        "highlight": " for your backoffice",
+        "text": "Relieve your team with experienced remote professionals for administration, accounting and operational tasks. Flexible, cost-effective and ready to start immediately.",
+        "ctaPrimary": "Create RaaS request",
+        "ctaSecondary": "Explore remote backoffice"
+      },
+      "audienceTitle": "For whom?",
+      "audience": [
+        "CEOs of small and medium-sized enterprises",
+        "Office managers and assistant teams",
+        "Accountants and controlling managers",
+        "HR managers"
+      ],
+      "problemsTitle": "Core problems",
+      "problems": [
+        {
+          "title": "High personnel costs in administration",
+          "description": "Full-time on-site backoffice staff are expensive and often underutilized"
+        },
+        {
+          "title": "Time-consuming routine tasks",
+          "description": "Administration and accounting tie up valuable resources needed for core business"
+        },
+        {
+          "title": "Fluctuating workload",
+          "description": "Difficult to cover seasonal or project-based peaks with permanent staff"
+        }
+      ],
+      "talentsTitle": "Our remote professionals",
+      "talents": [
+        {
+          "role": "Virtual Assistants",
+          "skills": "Email management, appointment scheduling, customer communication, data entry",
+          "experience": "3+ years experience"
+        },
+        {
+          "role": "Remote Accountants",
+          "skills": "Financial accounting, payroll, controlling, tax preparation",
+          "experience": "5+ years experience, certified"
+        },
+        {
+          "role": "Administrative Specialists",
+          "skills": "Project management, quality management, compliance, documentation",
+          "experience": "4+ years industry experience"
+        },
+        {
+          "role": "Customer Service Agents",
+          "skills": "Customer support, complaint management, CRM systems, sales support",
+          "experience": "3+ years in customer service"
+        }
+      ],
+      "toolsTitle": "Backoffice Tools & Software",
+      "toolsSubtitle": "Our remote professionals are proficient in using leading backoffice tools and can be seamlessly integrated into your existing IT infrastructure.",
+      "tools": [
+        {
+          "category": "Accounting & Finance",
+          "tools": ["DATEV", "Lexoffice", "QuickBooks", "Xero"],
+          "description": "Professional accounting systems for precise financial processing"
+        },
+        {
+          "category": "CRM & Sales",
+          "tools": ["Salesforce", "HubSpot", "Pipedrive", "Zoho CRM"],
+          "description": "Customer management and sales support"
+        },
+        {
+          "category": "Communication",
+          "tools": ["Slack", "Microsoft Teams", "Zoom", "Google Meet"],
+          "description": "Seamless team communication and video conferencing"
+        },
+        {
+          "category": "Project Management",
+          "tools": ["Asana", "Trello", "Monday.com", "Jira"],
+          "description": "Efficient task management and project organization"
+        },
+        {
+          "category": "HR & Personnel",
+          "tools": ["Personio", "BambooHR", "Workday", "SAP SuccessFactors"],
+          "description": "Personnel management and HR processes"
+        },
+        {
+          "category": "Office & Documentation",
+          "tools": ["Microsoft 365", "Google Workspace", "Notion", "Confluence"],
+          "description": "Document management and collaboration"
+        }
+      ],
+      "useCasesTitle": "Use cases",
+      "useCases": [
+        {
+          "title": "Accounting & Finance",
+          "description": "A mid-sized e-commerce company automated its invoicing and financial accounting with remote accountants",
+          "results": [
+            "50% time savings on monthly closings",
+            "60% cost reduction compared to local full-time staff",
+            "99% error-free through double-checking"
+          ]
+        },
+        {
+          "title": "Customer Support & CRM",
+          "description": "A SaaS startup scaled its customer support with remote customer service agents and improved CRM management",
+          "results": [
+            "95% customer satisfaction score",
+            "3x faster response times",
+            "Extended service hours without additional costs"
+          ]
+        },
+        {
+          "title": "Administrative Processes",
+          "description": "A tax consultancy digitized workflows and document management with virtual assistants",
+          "results": [
+            "60% efficiency increase in routine tasks",
+            "40 hours/week more time for core business",
+            "Improved compliance and documentation"
+          ]
+        }
+      ],
+      "benefitsTitle": "Your benefits",
+      "benefits": [
+        "Up to 60% cost savings compared to local full-time staff",
+        "Flexible scaling as needed (hours, days, months)",
+        "International remote professionals with optimal timezone coverage",
+        "Quick start: Ready to go in 1-2 weeks",
+        "No HR overhead: We handle recruiting and management",
+        "Backup solutions available in case of absence"
+      ],
+      "resultsTitle": "Measurable results",
+      "results": [
+        {
+          "metric": "60%",
+          "description": "Cost savings in backoffice"
+        },
+        {
+          "metric": "40h/week",
+          "description": "Time freed up for core business"
+        },
+        {
+          "metric": "98%",
+          "description": "Customer satisfaction with remote staff"
+        },
+        {
+          "metric": "2 weeks",
+          "description": "Average onboarding time"
+        }
+      ],
+      "cta": {
+        "title": "Ready for remote backoffice support?",
+        "text": "Let us analyze your backoffice requirements and find the perfect remote professional. Within 48 hours you will receive qualified candidates presented.",
+        "primary": "Create RaaS request",
+        "secondary": "Meet remote professionals"
+      }
+    }
+  },
+
   "resourceHub": {
     "hero": {
       "title": "RaaS Hub",

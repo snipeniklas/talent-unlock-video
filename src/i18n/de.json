@@ -800,6 +800,164 @@
     }
   },
 
+  "solutions": {
+    "backoffice": {
+      "hero": {
+        "badge": "Remote Backoffice-Fachkräfte",
+        "title": "Qualifizierte ",
+        "titleHighlight": "Remote",
+        "titleSuffix": "-Unterstützung ",
+        "highlight": " für Ihr Backoffice",
+        "text": "Entlasten Sie Ihr Team mit erfahrenen Remote-Fachkräften für Administration, Buchhaltung und operative Aufgaben. Flexibel, kostengünstig und sofort einsatzbereit.",
+        "ctaPrimary": "RaaS Anfrage erstellen",
+        "ctaSecondary": "Remote Backoffice-Kräfte entdecken"
+      },
+      "audienceTitle": "Für wen?",
+      "audience": [
+        "Geschäftsführer kleiner und mittlerer Unternehmen",
+        "Office-Manager und Assistenzteams",
+        "Buchhalter und Controlling-Verantwortliche",
+        "HR-Verantwortliche"
+      ],
+      "problemsTitle": "Kernprobleme",
+      "problems": [
+        {
+          "title": "Hohe Personalkosten im administrativen Bereich",
+          "description": "Vollzeit-Backoffice-Kräfte vor Ort sind teuer und oft nicht voll ausgelastet"
+        },
+        {
+          "title": "Zeitaufwändige Routine-Aufgaben",
+          "description": "Administration und Buchhaltung binden wertvolle Ressourcen, die für Kerngeschäft fehlen"
+        },
+        {
+          "title": "Schwankende Arbeitsbelastung",
+          "description": "Saisonale oder projektbedingte Spitzen schwer mit festem Personal abdecken"
+        }
+      ],
+      "talentsTitle": "Unsere Remote-Fachkräfte",
+      "talents": [
+        {
+          "role": "Virtuelle Assistenten",
+          "skills": "E-Mail-Management, Terminplanung, Kundenkommunikation, Datenerfassung",
+          "experience": "3+ Jahre Erfahrung"
+        },
+        {
+          "role": "Remote Buchhalter",
+          "skills": "Finanzbuchhaltung, Lohnabrechnung, Controlling, Steuervorbereitungen",
+          "experience": "5+ Jahre Erfahrung, DATEV-zertifiziert"
+        },
+        {
+          "role": "Administrative Spezialisten",
+          "skills": "Projektmanagement, Qualitätsmanagement, Compliance, Dokumentation",
+          "experience": "4+ Jahre Branchenerfahrung"
+        },
+        {
+          "role": "Customer Service Agents",
+          "skills": "Kundenbetreuung, Beschwerdemanagement, CRM-Systeme, Verkaufsunterstützung",
+          "experience": "3+ Jahre im Kundenservice"
+        }
+      ],
+      "toolsTitle": "Backoffice Tools & Software",
+      "toolsSubtitle": "Unsere Remote-Fachkräfte sind versiert im Umgang mit führenden Backoffice-Tools und können nahtlos in Ihre bestehende IT-Infrastruktur integriert werden.",
+      "tools": [
+        {
+          "category": "Buchhaltung & Finanzen",
+          "tools": ["DATEV", "Lexoffice", "QuickBooks", "Xero"],
+          "description": "Professionelle Buchhaltungssysteme für präzise Finanzabwicklung"
+        },
+        {
+          "category": "CRM & Vertrieb",
+          "tools": ["Salesforce", "HubSpot", "Pipedrive", "Zoho CRM"],
+          "description": "Kundenmanagement und Vertriebsunterstützung"
+        },
+        {
+          "category": "Kommunikation",
+          "tools": ["Slack", "Microsoft Teams", "Zoom", "Google Meet"],
+          "description": "Nahtlose Team-Kommunikation und Videokonferenzen"
+        },
+        {
+          "category": "Projektmanagement",
+          "tools": ["Asana", "Trello", "Monday.com", "Jira"],
+          "description": "Effiziente Aufgabenverwaltung und Projektorganisation"
+        },
+        {
+          "category": "HR & Personal",
+          "tools": ["Personio", "BambooHR", "Workday", "SAP SuccessFactors"],
+          "description": "Personalverwaltung und HR-Prozesse"
+        },
+        {
+          "category": "Office & Dokumentation",
+          "tools": ["Microsoft 365", "Google Workspace", "Notion", "Confluence"],
+          "description": "Dokumentenmanagement und Zusammenarbeit"
+        }
+      ],
+      "useCasesTitle": "Praxisbeispiele",
+      "useCases": [
+        {
+          "title": "Buchhaltung & Finanzen",
+          "description": "Ein mittelständisches E-Commerce-Unternehmen automatisierte seine Rechnungsstellung und Finanzbuchhaltung mit Remote-Buchhaltern",
+          "results": [
+            "50% Zeitersparnis bei monatlichen Abschlüssen",
+            "60% Kostenreduktion gegenüber lokaler Vollzeitkraft",
+            "99% Fehlerfreiheit durch doppelte Prüfung"
+          ]
+        },
+        {
+          "title": "Customer Support & CRM",
+          "description": "Ein SaaS-Startup skalierte seinen Kundensupport mit Remote Customer Service Agents und verbesserter CRM-Betreuung",
+          "results": [
+            "95% Kundenzufriedenheits-Score",
+            "3x schnellere Response-Zeiten",
+            "Erweiterte Servicezeiten ohne Mehrkosten"
+          ]
+        },
+        {
+          "title": "Administrative Prozesse",
+          "description": "Eine Steuerberatung digitalisierte Workflows und Dokumentenmanagement mit virtuellen Assistenten",
+          "results": [
+            "60% Effizienzsteigerung bei Routineaufgaben",
+            "40 Stunden/Woche mehr Zeit für Kerngeschäft",
+            "Verbesserte Compliance und Dokumentation"
+          ]
+        }
+      ],
+      "benefitsTitle": "Ihre Vorteile",
+      "benefits": [
+        "Bis zu 60% Kosteneinsparung gegenüber lokalen Vollzeitkräften",
+        "Flexible Skalierung je nach Bedarf (Stunden, Tage, Monate)",
+        "Internationale Remote-Fachkräfte mit optimaler Zeitzone-Abdeckung",
+        "Schneller Start: Einsatzbereit in 1-2 Wochen",
+        "Keine HR-Aufwände: Wir übernehmen Recruiting und Betreuung",
+        "Backup-Lösungen bei Ausfall verfügbar"
+      ],
+      "resultsTitle": "Messbare Ergebnisse",
+      "results": [
+        {
+          "metric": "60%",
+          "description": "Kosteneinsparung im Backoffice"
+        },
+        {
+          "metric": "40h/Woche",
+          "description": "Freigesetzte Zeit für Kerngeschäft"
+        },
+        {
+          "metric": "98%",
+          "description": "Kundenzufriedenheit mit Remote-Kräften"
+        },
+        {
+          "metric": "2 Wochen",
+          "description": "Durchschnittliche Einarbeitungszeit"
+        }
+      ],
+      "cta": {
+        "title": "Bereit für Remote Backoffice-Unterstützung?",
+        "text": "Lassen Sie uns Ihre Backoffice-Anforderungen analysieren und die perfekte Remote-Fachkraft finden. Innerhalb von 48 Stunden erhalten Sie qualifizierte Kandidaten präsentiert.",
+        "primary": "RaaS Anfrage erstellen",
+        "secondary": "Remote-Fachkräfte kennenlernen"
+      }
+    }
+  },
+
   "landing": {
     "hejTalent": {
       "ticker": [
