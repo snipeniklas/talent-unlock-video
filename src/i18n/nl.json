@@ -1368,12 +1368,159 @@
   },
   "solutions": {
     "backoffice": {
-      "audience": "Voor bedrijven die hun backoffice willen versterken",
-      "problem": "Administratieve taken kosten te veel tijd en resources",
-      "talents": "Onze Backoffice-professionals",
-      "benefits": "Uw voordelen",
-      "results": "Resultaten die meetbaar zijn",
-      "cta": "Backoffice-professional vinden"
+      "hero": {
+        "badge": "Remote Backoffice-professionals",
+        "title": "Gekwalificeerde ",
+        "titleHighlight": "Remote",
+        "titleSuffix": "-ondersteuning ",
+        "highlight": " voor uw backoffice",
+        "text": "Ontlast uw team met ervaren remote-professionals voor administratie, boekhouding en operationele taken. Flexibel, kostenefficiënt en direct inzetbaar.",
+        "ctaPrimary": "RaaS Aanvraag maken",
+        "ctaSecondary": "Remote Backoffice-krachten ontdekken"
+      },
+      "audienceTitle": "Voor wie?",
+      "audience": [
+        "CEO's van kleine en middelgrote bedrijven",
+        "Office managers en assistententeams",
+        "Accountants en controlling managers",
+        "HR-verantwoordelijken"
+      ],
+      "problemsTitle": "Kernproblemen",
+      "problems": [
+        {
+          "title": "Hoge personeelskosten in administratie",
+          "description": "Fulltime backoffice-medewerkers op locatie zijn duur en vaak niet volledig benut"
+        },
+        {
+          "title": "Tijdrovende routinetaken",
+          "description": "Administratie en boekhouding binden waardevolle resources die nodig zijn voor kernactiviteiten"
+        },
+        {
+          "title": "Wisselende werkbelasting",
+          "description": "Moeilijk om seizoens- of projectpieken op te vangen met vast personeel"
+        }
+      ],
+      "talentsTitle": "Onze Remote-professionals",
+      "talents": [
+        {
+          "role": "Virtuele Assistenten",
+          "skills": "E-mailbeheer, afspraken plannen, klantcommunicatie, gegevensinvoer",
+          "experience": "3+ jaar ervaring"
+        },
+        {
+          "role": "Remote Accountants",
+          "skills": "Financiële boekhouding, salarisadministratie, controlling, belastingvoorbereiding",
+          "experience": "5+ jaar ervaring, gecertificeerd"
+        },
+        {
+          "role": "Administratieve Specialisten",
+          "skills": "Projectmanagement, kwaliteitsmanagement, compliance, documentatie",
+          "experience": "4+ jaar branche-ervaring"
+        },
+        {
+          "role": "Customer Service Agents",
+          "skills": "Klantenondersteuning, klachtenmanagement, CRM-systemen, verkoopondersteuning",
+          "experience": "3+ jaar in klantenservice"
+        }
+      ],
+      "toolsTitle": "Backoffice Tools & Software",
+      "toolsSubtitle": "Onze remote-professionals zijn bedreven in het gebruik van toonaangevende backoffice-tools en kunnen naadloos worden geïntegreerd in uw bestaande IT-infrastructuur.",
+      "tools": [
+        {
+          "category": "Boekhouding & Financiën",
+          "tools": ["DATEV", "Lexoffice", "QuickBooks", "Xero"],
+          "description": "Professionele boekhoudsystemen voor nauwkeurige financiële verwerking"
+        },
+        {
+          "category": "CRM & Verkoop",
+          "tools": ["Salesforce", "HubSpot", "Pipedrive", "Zoho CRM"],
+          "description": "Klantbeheer en verkoopondersteuning"
+        },
+        {
+          "category": "Communicatie",
+          "tools": ["Slack", "Microsoft Teams", "Zoom", "Google Meet"],
+          "description": "Naadloze teamcommunicatie en videoconferenties"
+        },
+        {
+          "category": "Projectmanagement",
+          "tools": ["Asana", "Trello", "Monday.com", "Jira"],
+          "description": "Efficiënt taakbeheer en projectorganisatie"
+        },
+        {
+          "category": "HR & Personeel",
+          "tools": ["Personio", "BambooHR", "Workday", "SAP SuccessFactors"],
+          "description": "Personeelsbeheer en HR-processen"
+        },
+        {
+          "category": "Office & Documentatie",
+          "tools": ["Microsoft 365", "Google Workspace", "Notion", "Confluence"],
+          "description": "Documentbeheer en samenwerking"
+        }
+      ],
+      "useCasesTitle": "Praktijkvoorbeelden",
+      "useCases": [
+        {
+          "title": "Boekhouding & Financiën",
+          "description": "Een middelgroot e-commercebedrijf automatiseerde zijn facturering en financiële boekhouding met remote accountants",
+          "results": [
+            "50% tijdsbesparing bij maandafsluitingen",
+            "60% kostenreductie vergeleken met lokale fulltime medewerkers",
+            "99% foutloos door dubbele controle"
+          ]
+        },
+        {
+          "title": "Customer Support & CRM",
+          "description": "Een SaaS-startup schaalde zijn klantenondersteuning op met remote customer service agents en verbeterd CRM-beheer",
+          "results": [
+            "95% klanttevredenheidsscore",
+            "3x snellere responstijden",
+            "Uitgebreide servicetijden zonder extra kosten"
+          ]
+        },
+        {
+          "title": "Administratieve Processen",
+          "description": "Een belastingadvieskantoor digitaliseerde workflows en documentbeheer met virtuele assistenten",
+          "results": [
+            "60% efficiëntieverhoging bij routinetaken",
+            "40 uur/week meer tijd voor kernactiviteiten",
+            "Verbeterde compliance en documentatie"
+          ]
+        }
+      ],
+      "benefitsTitle": "Uw Voordelen",
+      "benefits": [
+        "Tot 60% kostenbesparing vergeleken met lokale fulltime medewerkers",
+        "Flexibele opschaling naar behoefte (uren, dagen, maanden)",
+        "Internationale remote-professionals met optimale tijdzone-dekking",
+        "Snelle start: binnen 1-2 weken operationeel",
+        "Geen HR-overhead: wij verzorgen werving en begeleiding",
+        "Back-up oplossingen beschikbaar bij afwezigheid"
+      ],
+      "resultsTitle": "Meetbare Resultaten",
+      "results": [
+        {
+          "metric": "60%",
+          "description": "Kostenbesparing in backoffice"
+        },
+        {
+          "metric": "40u/week",
+          "description": "Vrijgekomen tijd voor kernactiviteiten"
+        },
+        {
+          "metric": "98%",
+          "description": "Klanttevredenheid met remote-medewerkers"
+        },
+        {
+          "metric": "2 weken",
+          "description": "Gemiddelde inwerkperiode"
+        }
+      ],
+      "cta": {
+        "title": "Klaar voor Remote Backoffice-ondersteuning?",
+        "text": "Laat ons uw backoffice-behoeften analyseren en de perfecte remote-professional vinden. Binnen 48 uur krijgt u gekwalificeerde kandidaten gepresenteerd.",
+        "primary": "RaaS Aanvraag maken",
+        "secondary": "Remote-professionals ontmoeten"
+      }
     }
   },
   "app": {
