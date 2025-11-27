@@ -1796,46 +1796,45 @@
     }
   },
   "raasInquiry": {
-    "title": "RaaS Aanvraag",
-    "subtitle": "Vertel ons over uw behoeften en wij vinden de perfecte professional voor u",
-    "form": {
+    "title": "RaaS Aanvraag maken",
+    "subtitle": "Beschrijf uw aanvraag – we reageren binnen 24 uur",
+    "fields": {
       "companyName": "Bedrijfsnaam",
-      "companyNamePlaceholder": "Uw bedrijf",
-      "contactPerson": "Contactpersoon",
-      "contactPersonPlaceholder": "Voor- en achternaam",
-      "email": "E-mail",
-      "emailPlaceholder": "uw.email@bedrijf.nl",
-      "phone": "Telefoon",
-      "phonePlaceholder": "+31 20 123 4567",
-      "serviceType": "Type dienst",
-      "serviceTypePlaceholder": "Selecteer type",
-      "backoffice": "Backoffice",
-      "itDevelopment": "IT-ontwikkeling",
-      "aiMl": "AI & ML",
-      "other": "Anders",
-      "requirements": "Vereisten",
-      "requirementsPlaceholder": "Beschrijf uw behoeften...",
-      "startDate": "Gewenste startdatum",
-      "submit": "Aanvraag indienen",
-      "submitting": "Wordt ingediend..."
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "email": "E-mailadres",
+      "phone": "Telefoonnummer",
+      "position": "Functie (optioneel)",
+      "inquiry": "Uw aanvraag"
+    },
+    "placeholders": {
+      "companyName": "Uw Bedrijf B.V.",
+      "inquiry": "Beschrijf uw aanvraag, bijv.: We zoeken een Senior React Developer voor 6 maanden..."
     },
     "validation": {
-      "companyNameRequired": "Bedrijfsnaam is verplicht",
-      "contactPersonRequired": "Contactpersoon is verplicht",
-      "emailRequired": "E-mail is verplicht",
-      "emailInvalid": "Ongeldig e-mailadres",
-      "phoneRequired": "Telefoon is verplicht",
-      "serviceTypeRequired": "Type dienst is verplicht",
-      "requirementsRequired": "Vereisten zijn verplicht"
+      "companyNameMin": "Bedrijfsnaam moet minimaal 2 tekens bevatten",
+      "firstNameMin": "Voornaam moet minimaal 2 tekens bevatten",
+      "lastNameMin": "Achternaam moet minimaal 2 tekens bevatten",
+      "emailInvalid": "Voer een geldig e-mailadres in",
+      "phoneMin": "Voer een geldig telefoonnummer in",
+      "inquiryMin": "Beschrijf uw aanvraag (minimaal 10 tekens)",
+      "inquiryMax": "Uw aanvraag mag maximaal 2000 tekens bevatten"
     },
+    "submit": "Aanvraag versturen",
+    "submitting": "Wordt verstuurd...",
     "success": {
-      "title": "Bedankt voor uw aanvraag!",
-      "message": "Wij hebben uw aanvraag ontvangen en nemen binnen 24 uur contact met u op.",
-      "calendly": "Of plan direct een kennismakingsgesprek:"
+      "title": "Aanvraag succesvol!",
+      "message": "Bedankt voor uw interesse. We hebben uw aanvraag ontvangen.",
+      "calendly": {
+        "title": "Plan nu een strategiegesprek",
+        "description": "Plan direct een afspraak met ons team om uw project te bespreken.",
+        "button": "Afspraak maken (15 min.)",
+        "optional": "U kunt dit venster ook sluiten. Wij nemen contact met u op."
+      }
     },
     "error": {
-      "title": "Er is iets misgegaan",
-      "message": "Probeer het later opnieuw of neem direct contact met ons op."
+      "title": "Fout",
+      "message": "Er is een fout opgetreden. Probeer het opnieuw of neem rechtstreeks contact met ons op."
     }
   },
   "crm": {
