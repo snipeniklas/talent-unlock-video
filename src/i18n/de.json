@@ -1853,6 +1853,76 @@
       "contactsCount": "Kontakte"
     }
   },
+  "auth": {
+    "backToHome": "Zur Startseite",
+    "welcome": {
+      "title": "Willkommen bei Hej Talent",
+      "subtitle": "Ihr RaaS Hub für erstklassige Remote-Fachkräfte"
+    },
+    "badges": {
+      "developers": "500+ Entwickler",
+      "quality": "Geprüfte Qualität"
+    },
+    "tabs": {
+      "login": "Anmelden",
+      "signup": "Registrieren"
+    },
+    "login": {
+      "title": "Willkommen zurück",
+      "subtitle": "Melden Sie sich an und verwalten Sie Ihre KI-Projekte",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "submit": "Anmelden",
+      "submitting": "Anmelden...",
+      "forgotPassword": "Passwort vergessen?",
+      "noAccount": "Noch kein Account? Wechseln Sie zum Tab \"Registrieren\""
+    },
+    "signup": {
+      "title": "Unternehmen registrieren",
+      "stepOf": "Schritt {step} von 2",
+      "step1Subtitle": "Starten Sie jetzt und finden Sie die besten KI-Entwickler für Ihr Unternehmen",
+      "step2Subtitle": "Vervollständigen Sie Ihr Unternehmensprofil",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "position": "Position im Unternehmen",
+      "positionPlaceholder": "z.B. Geschäftsführer, IT-Leiter, CTO",
+      "phone": "Telefonnummer",
+      "phonePlaceholder": "+49 123 456789",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "companyName": "Unternehmensname",
+      "companyEmail": "Unternehmens-E-Mail",
+      "companyWebsite": "Website (optional)",
+      "websitePlaceholder": "https://...",
+      "nextStep": "Weiter zu Schritt 2",
+      "prevStep": "Zurück",
+      "submit": "Jetzt registrieren",
+      "submitting": "Registrieren...",
+      "hasAccount": "Bereits registriert? Wechseln Sie zum Tab \"Anmelden\""
+    },
+    "toast": {
+      "loginFailed": "Login fehlgeschlagen",
+      "loginSuccess": "Erfolgreich angemeldet",
+      "welcomeBack": "Willkommen zurück!",
+      "emailRequired": "E-Mail erforderlich",
+      "emailRequiredDesc": "Bitte geben Sie Ihre E-Mail-Adresse ein, um das Passwort zurückzusetzen.",
+      "resetSent": "Reset-Link gesendet",
+      "resetSentDesc": "Überprüfen Sie Ihre E-Mails für den Passwort-Reset-Link.",
+      "resetFailed": "Reset-Link konnte nicht gesendet werden.",
+      "accountExists": "Account existiert bereits",
+      "accountExistsDesc": "Diese E-Mail-Adresse ist bereits registriert. Bitte loggen Sie sich ein.",
+      "signupFailed": "Registrierung fehlgeschlagen",
+      "signupSuccess": "Registrierung erfolgreich",
+      "signupSuccessDesc": "Bitte prüfen Sie Ihre E-Mails zur Bestätigung.",
+      "error": "Fehler",
+      "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten."
+    },
+    "benefits": {
+      "item1": "Über 500 geprüfte KI-Entwickler",
+      "item2": "98% Kundenzufriedenheit",
+      "item3": "Persönliche Betreuung garantiert"
+    }
+  },
   "legal": {
     "imprint": {
       "title": "Impressum",

@@ -12,10 +12,12 @@ import { User, Session } from '@supabase/supabase-js';
 import { Star, Users, Shield, ArrowLeft } from 'lucide-react';
 import { trackEvent } from '@/components/FacebookPixel';
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
+import { useTranslation } from '@/i18n/i18n';
 
 const AuthPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
@@ -105,20 +107,20 @@ const AuthPage = () => {
 
       if (error) {
         toast({
-          title: "Login fehlgeschlagen",
+          title: t('auth.toast.loginFailed'),
           description: error.message,
           variant: "destructive",
         });
       } else {
         toast({
-          title: "Erfolgreich angemeldet",
-          description: "Willkommen zurück!",
+          title: t('auth.toast.loginSuccess'),
+          description: t('auth.toast.welcomeBack'),
         });
       }
     } catch (error) {
       toast({
-        title: "Fehler",
-        description: "Ein unerwarteter Fehler ist aufgetreten.",
+        title: t('auth.toast.error'),
+        description: t('auth.toast.unexpectedError'),
         variant: "destructive",
       });
     } finally {
@@ -129,8 +131,8 @@ const AuthPage = () => {
   const handlePasswordReset = async () => {
     if (!loginEmail) {
       toast({
-        title: "E-Mail erforderlich",
-        description: "Bitte geben Sie Ihre E-Mail-Adresse ein, um das Passwort zurückzusetzen.",
+        title: t('auth.toast.emailRequired'),
+        description: t('auth.toast.emailRequiredDesc'),
         variant: "destructive",
       });
       return;
@@ -144,13 +146,13 @@ const AuthPage = () => {
       if (error) throw error;
 
       toast({
-        title: "Reset-Link gesendet",
-        description: "Überprüfen Sie Ihre E-Mails für den Passwort-Reset-Link.",
+        title: t('auth.toast.resetSent'),
+        description: t('auth.toast.resetSentDesc'),
       });
     } catch (error: any) {
       toast({
-        title: "Fehler",
-        description: error.message || "Reset-Link konnte nicht gesendet werden.",
+        title: t('auth.toast.error'),
+        description: error.message || t('auth.toast.resetFailed'),
         variant: "destructive",
       });
     }
@@ -192,13 +194,13 @@ const AuthPage = () => {
       if (error) {
         if (error.message.includes('already registered')) {
           toast({
-            title: "Account existiert bereits",
-            description: "Diese E-Mail-Adresse ist bereits registriert. Bitte loggen Sie sich ein.",
+            title: t('auth.toast.accountExists'),
+            description: t('auth.toast.accountExistsDesc'),
             variant: "destructive",
           });
         } else {
           toast({
-            title: "Registrierung fehlgeschlagen",
+            title: t('auth.toast.signupFailed'),
             description: error.message,
             variant: "destructive",
           });
@@ -228,15 +230,15 @@ const AuthPage = () => {
         }
         
         toast({
-          title: "Registrierung erfolgreich",
-          description: "Bitte prüfen Sie Ihre E-Mails zur Bestätigung.",
+          title: t('auth.toast.signupSuccess'),
+          description: t('auth.toast.signupSuccessDesc'),
         });
         setRegistrationStep(1); // Reset to step 1
       }
     } catch (error) {
       toast({
-        title: "Fehler",
-        description: "Ein unerwarteter Fehler ist aufgetreten.",
+        title: t('auth.toast.error'),
+        description: t('auth.toast.unexpectedError'),
         variant: "destructive",
       });
     } finally {
@@ -268,7 +270,7 @@ const AuthPage = () => {
               className="text-muted-foreground hover:text-primary text-sm lg:text-base order-2 sm:order-1"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Zur Startseite
+              {t('auth.backToHome')}
             </Button>
             <img 
               src={hejTalentLogo} 
@@ -278,21 +280,21 @@ const AuthPage = () => {
             />
           </div>
           <h1 className="text-2xl md:text-3xl font-bold text-brand-dark mb-2">
-            Willkommen bei Hej Talent
+            {t('auth.welcome.title')}
           </h1>
           <p className="text-muted-foreground mb-4 text-sm lg:text-base">
-            Ihr RaaS Hub für erstklassige Remote-Fachkräfte
+            {t('auth.welcome.subtitle')}
           </p>
           
           {/* Trust indicators */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-2 lg:gap-4 mb-6">
             <Badge variant="secondary" className="animate-slide-in-left text-xs lg:text-sm">
               <Star className="w-3 h-3 mr-1 text-primary" />
-              500+ Entwickler
+              {t('auth.badges.developers')}
             </Badge>
             <Badge variant="secondary" className="animate-slide-in-right text-xs lg:text-sm">
               <Shield className="w-3 h-3 mr-1 text-primary" />
-              Geprüfte Qualität
+              {t('auth.badges.quality')}
             </Badge>
           </div>
         </div>
@@ -301,24 +303,24 @@ const AuthPage = () => {
           <Tabs defaultValue="login" className="w-full">
             <TabsList className="grid w-full grid-cols-2 bg-muted/50">
               <TabsTrigger value="login" className="data-[state=active]:bg-primary data-[state=active]:text-white">
-                Anmelden
+                {t('auth.tabs.login')}
               </TabsTrigger>
               <TabsTrigger value="signup" className="data-[state=active]:bg-primary data-[state=active]:text-white">
-                Registrieren
+                {t('auth.tabs.signup')}
               </TabsTrigger>
             </TabsList>
             
             <TabsContent value="login" className="animate-fade-in">
               <CardHeader className="text-center">
-                <CardTitle className="text-2xl text-brand-dark">Willkommen zurück</CardTitle>
+                <CardTitle className="text-2xl text-brand-dark">{t('auth.login.title')}</CardTitle>
                 <CardDescription className="text-base">
-                  Melden Sie sich an und verwalten Sie Ihre KI-Projekte
+                  {t('auth.login.subtitle')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="login-email">E-Mail</Label>
+                    <Label htmlFor="login-email">{t('auth.login.email')}</Label>
                     <Input
                       id="login-email"
                       type="email"
@@ -329,7 +331,7 @@ const AuthPage = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="login-password">Passwort</Label>
+                    <Label htmlFor="login-password">{t('auth.login.password')}</Label>
                     <Input
                       id="login-password"
                       type="password"
@@ -344,7 +346,7 @@ const AuthPage = () => {
                     className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-3" 
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "Anmelden..." : "Anmelden"}
+                    {isSubmitting ? t('auth.login.submitting') : t('auth.login.submit')}
                   </Button>
                   
                   <Button 
@@ -353,11 +355,11 @@ const AuthPage = () => {
                     className="w-full text-sm" 
                     onClick={handlePasswordReset}
                   >
-                    Passwort vergessen?
+                    {t('auth.login.forgotPassword')}
                   </Button>
                   
                   <div className="text-center text-sm text-muted-foreground mt-4">
-                    Noch kein Account? Wechseln Sie zum Tab "Registrieren"
+                    {t('auth.login.noAccount')}
                   </div>
                 </form>
               </CardContent>
@@ -366,12 +368,12 @@ const AuthPage = () => {
             <TabsContent value="signup" className="animate-fade-in">
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl text-brand-dark">
-                  Unternehmen registrieren - Schritt {registrationStep} von 2
+                  {t('auth.signup.title')} - {t('auth.signup.stepOf').replace('{step}', registrationStep.toString())}
                 </CardTitle>
                 <CardDescription className="text-base">
                   {registrationStep === 1 
-                    ? "Starten Sie jetzt und finden Sie die besten KI-Entwickler für Ihr Unternehmen"
-                    : "Vervollständigen Sie Ihr Unternehmensprofil"
+                    ? t('auth.signup.step1Subtitle')
+                    : t('auth.signup.step2Subtitle')
                   }
                 </CardDescription>
                 
@@ -390,7 +392,7 @@ const AuthPage = () => {
                   <form onSubmit={handlePersonalDataSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="first-name" className="text-sm lg:text-base">Vorname *</Label>
+                        <Label htmlFor="first-name" className="text-sm lg:text-base">{t('auth.signup.firstName')} *</Label>
                         <Input
                           id="first-name"
                           value={firstName}
@@ -401,7 +403,7 @@ const AuthPage = () => {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="last-name" className="text-sm lg:text-base">Nachname *</Label>
+                        <Label htmlFor="last-name" className="text-sm lg:text-base">{t('auth.signup.lastName')} *</Label>
                         <Input
                           id="last-name"
                           value={lastName}
@@ -414,19 +416,19 @@ const AuthPage = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="position">Position im Unternehmen *</Label>
+                      <Label htmlFor="position">{t('auth.signup.position')} *</Label>
                       <Input
                         id="position"
                         value={position}
                         onChange={(e) => setPosition(e.target.value)}
                         required
                         disabled={isSubmitting}
-                        placeholder="z.B. Geschäftsführer, IT-Leiter, CTO"
+                        placeholder={t('auth.signup.positionPlaceholder')}
                       />
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="phone-number">Telefonnummer *</Label>
+                      <Label htmlFor="phone-number">{t('auth.signup.phone')} *</Label>
                       <Input
                         id="phone-number"
                         type="tel"
@@ -434,12 +436,12 @@ const AuthPage = () => {
                         onChange={(e) => setPhoneNumber(e.target.value)}
                         required
                         disabled={isSubmitting}
-                        placeholder="+49 123 456789"
+                        placeholder={t('auth.signup.phonePlaceholder')}
                       />
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="signup-email">E-Mail *</Label>
+                      <Label htmlFor="signup-email">{t('auth.signup.email')} *</Label>
                       <Input
                         id="signup-email"
                         type="email"
@@ -451,7 +453,7 @@ const AuthPage = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="signup-password">Passwort *</Label>
+                      <Label htmlFor="signup-password">{t('auth.signup.password')} *</Label>
                       <Input
                         id="signup-password"
                         type="password"
@@ -469,14 +471,14 @@ const AuthPage = () => {
                       disabled={isSubmitting}
                     >
                       <Users className="w-4 h-4 mr-2" />
-                      Weiter zu Schritt 2
+                      {t('auth.signup.nextStep')}
                     </Button>
                   </form>
                 ) : (
                   <form onSubmit={handleCompanyDataSubmit} className="space-y-4">
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="company-name">Unternehmensname *</Label>
+                        <Label htmlFor="company-name">{t('auth.signup.companyName')} *</Label>
                         <Input
                           id="company-name"
                           value={companyName}
@@ -487,7 +489,7 @@ const AuthPage = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="company-email">Unternehmens-E-Mail</Label>
+                        <Label htmlFor="company-email">{t('auth.signup.companyEmail')}</Label>
                         <Input
                           id="company-email"
                           type="email"
@@ -499,14 +501,14 @@ const AuthPage = () => {
                       </div>
                       
                       <div className="space-y-2">
-                        <Label htmlFor="company-website">Website (optional)</Label>
+                        <Label htmlFor="company-website">{t('auth.signup.companyWebsite')}</Label>
                         <Input
                           id="company-website"
                           type="url"
                           value={companyWebsite}
                           onChange={(e) => setCompanyWebsite(e.target.value)}
                           disabled={isSubmitting}
-                          placeholder="https://..."
+                          placeholder={t('auth.signup.websitePlaceholder')}
                         />
                       </div>
                     </div>
@@ -520,14 +522,14 @@ const AuthPage = () => {
                         disabled={isSubmitting}
                       >
                         <ArrowLeft className="w-4 h-4 mr-2" />
-                        Zurück
+                        {t('auth.signup.prevStep')}
                       </Button>
                       <Button 
                         type="submit" 
                         className="flex-1 bg-primary hover:bg-primary-hover text-white font-medium py-3" 
                         disabled={isSubmitting}
                       >
-                        {isSubmitting ? "Registrieren..." : "Jetzt registrieren"}
+                        {isSubmitting ? t('auth.signup.submitting') : t('auth.signup.submit')}
                       </Button>
                     </div>
                   </form>
@@ -542,15 +544,15 @@ const AuthPage = () => {
           <div className="grid grid-cols-1 gap-3 max-w-sm mx-auto">
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <Star className="w-4 h-4 text-primary" />
-              <span>Über 500 geprüfte KI-Entwickler</span>
+              <span>{t('auth.benefits.item1')}</span>
             </div>
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <Shield className="w-4 h-4 text-primary" />
-              <span>98% Kundenzufriedenheit</span>
+              <span>{t('auth.benefits.item2')}</span>
             </div>
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <Users className="w-4 h-4 text-primary" />
-              <span>Persönliche Betreuung garantiert</span>
+              <span>{t('auth.benefits.item3')}</span>
             </div>
           </div>
         </div>
@@ -562,7 +564,7 @@ const AuthPage = () => {
             className="text-muted-foreground hover:text-brand-dark hover:bg-transparent group"
           >
             <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
-            Zurück zur Startseite
+            {t('auth.backToHome')}
           </Button>
         </div>
       </div>

@@ -1922,6 +1922,76 @@
       }
     }
   },
+  "auth": {
+    "backToHome": "Terug naar startpagina",
+    "welcome": {
+      "title": "Welkom bij Hej Talent",
+      "subtitle": "Uw RaaS Hub voor eersteklas remote-professionals"
+    },
+    "badges": {
+      "developers": "500+ Ontwikkelaars",
+      "quality": "Geverifieerde kwaliteit"
+    },
+    "tabs": {
+      "login": "Aanmelden",
+      "signup": "Registreren"
+    },
+    "login": {
+      "title": "Welkom terug",
+      "subtitle": "Meld u aan en beheer uw AI-projecten",
+      "email": "E-mail",
+      "password": "Wachtwoord",
+      "submit": "Aanmelden",
+      "submitting": "Aanmelden...",
+      "forgotPassword": "Wachtwoord vergeten?",
+      "noAccount": "Nog geen account? Ga naar het tabblad \"Registreren\""
+    },
+    "signup": {
+      "title": "Bedrijf registreren",
+      "stepOf": "Stap {step} van 2",
+      "step1Subtitle": "Start nu en vind de beste AI-ontwikkelaars voor uw bedrijf",
+      "step2Subtitle": "Voltooi uw bedrijfsprofiel",
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "position": "Functie in bedrijf",
+      "positionPlaceholder": "bijv. CEO, IT-manager, CTO",
+      "phone": "Telefoonnummer",
+      "phonePlaceholder": "+31 20 123 4567",
+      "email": "E-mail",
+      "password": "Wachtwoord",
+      "companyName": "Bedrijfsnaam",
+      "companyEmail": "Bedrijfs-e-mail",
+      "companyWebsite": "Website (optioneel)",
+      "websitePlaceholder": "https://...",
+      "nextStep": "Verder naar stap 2",
+      "prevStep": "Terug",
+      "submit": "Registratie voltooien",
+      "submitting": "Wordt geregistreerd...",
+      "hasAccount": "Al geregistreerd? Ga naar het tabblad \"Aanmelden\""
+    },
+    "toast": {
+      "loginFailed": "Aanmelden mislukt",
+      "loginSuccess": "Succesvol aangemeld",
+      "welcomeBack": "Welkom terug!",
+      "emailRequired": "E-mail vereist",
+      "emailRequiredDesc": "Voer uw e-mailadres in om uw wachtwoord te resetten.",
+      "resetSent": "Reset-link verzonden",
+      "resetSentDesc": "Controleer uw e-mails voor de wachtwoord-reset-link.",
+      "resetFailed": "Kon reset-link niet verzenden.",
+      "accountExists": "Account bestaat al",
+      "accountExistsDesc": "Dit e-mailadres is al geregistreerd. Meld u aan.",
+      "signupFailed": "Registratie mislukt",
+      "signupSuccess": "Registratie succesvol",
+      "signupSuccessDesc": "Controleer uw e-mails voor bevestiging.",
+      "error": "Fout",
+      "unexpectedError": "Er is een onverwachte fout opgetreden."
+    },
+    "benefits": {
+      "item1": "Toegang tot 500+ geverifieerde AI-ontwikkelaars",
+      "item2": "98% klanttevredenheid",
+      "item3": "Persoonlijke begeleiding gegarandeerd"
+    }
+  },
   "imprint": {
     "title": "Impressum",
     "company": {
