@@ -85,6 +85,8 @@ const HomePage = () => {
       company: "SNIPE Solutions",
       text: lang === 'en'
         ? "Hej Talent connected us with the perfect remote accountant within 2 weeks. Professional and reliable."
+        : lang === 'nl'
+        ? "Hej Talent heeft ons binnen 2 weken verbonden met de perfecte externe boekhouder. Professioneel en betrouwbaar."
         : "Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig.",
       rating: 5
     },
@@ -93,6 +95,8 @@ const HomePage = () => {
       company: "ECO Containertrans",
       text: lang === 'en'
         ? "The excellent work of a new colleague convinced us to bring a second Hej Talent professional into the team."
+        : lang === 'nl'
+        ? "Het uitstekende werk van een nieuwe collega overtuigde ons om een tweede Hej Talent-professional in het team op te nemen."
         : "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite Hej Talent-Kraft ins Team zu holen.",
       rating: 5
     }
