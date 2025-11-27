@@ -78,14 +78,19 @@
     "errorFetching": "Fout bij ophalen bedrijfsgegevens"
   },
   "header": {
-    "home": "Startpagina",
-    "solutions": "Oplossingen",
-    "howWeWork": "Hoe wij werken",
-    "aboutUs": "Over ons",
-    "contact": "Contact",
-    "login": "Inloggen",
-    "createRequest": "Aanvraag maken",
-    "resourceHub": "Resource Hub"
+    "nav": {
+      "home": "Startpagina",
+      "solutions": "RaaS Oplossingen",
+      "howWeWork": "Hoe wij werken",
+      "aboutUs": "Over ons",
+      "hub": "RaaS Hub",
+      "contact": "Contact"
+    },
+    "cta": {
+      "login": "Inloggen",
+      "createRequest": "RaaS Aanvraag maken",
+      "createRequestShort": "RaaS Aanvraag"
+    }
   },
   "footer": {
     "brand": "Hej Talent",
