@@ -717,35 +717,40 @@
   "solutionsOverview": {
     "title": "Onze oplossingen",
     "subtitle": "Vind de perfecte remote-professionals voor uw behoeften",
-    "backoffice": {
-      "title": "Backoffice-professionals",
-      "description": "Van boekhouding tot HR - wij vinden de perfecte ondersteuning voor uw backoffice-processen.",
-      "features": [
-        "Boekhouding & Finance",
-        "HR & Personeelsbeheer",
-        "Administratie & Organisatie",
-        "Klantenservice & Support"
-      ]
-    },
-    "itDev": {
-      "title": "IT-ontwikkelaars",
-      "description": "Ervaren ontwikkelaars voor uw projecten - flexibel, betaalbaar en direct inzetbaar.",
-      "features": [
-        "Full-Stack ontwikkeling",
-        "Frontend & Backend",
-        "Mobile App ontwikkeling",
-        "DevOps & Cloud"
-      ]
-    },
-    "aiMl": {
-      "title": "AI & ML experts",
-      "description": "Gespecialiseerde professionals voor uw AI- en ML-projecten - van prototype tot productie.",
-      "features": [
-        "Machine Learning",
-        "Data Science & Analytics",
-        "Natural Language Processing",
-        "Computer Vision"
-      ]
+    "ctaTitle": "Niet zeker welke internationale professionals u nodig heeft?",
+    "ctaText": "Laten we in een gratis adviesgesprek samen de juiste remote-experts voor uw uitdagingen vinden.",
+    "ctaButton": "Nu adviesgesprek boeken",
+    "solutions": {
+      "backoffice": {
+        "title": "Remote Backoffice-professionals",
+        "description": "Gekwalificeerde remote-medewerkers voor administratie, boekhouding en operationele ondersteuning",
+        "benefits": [
+          "Kostenbesparing tot 60%",
+          "Flexibele werktijden",
+          "Snelle inwerkperiode"
+        ],
+        "cta": "Remote Backoffice-professionals vinden"
+      },
+      "itDevelopment": {
+        "title": "Remote IT-ontwikkelaars & Tech-experts",
+        "description": "Ervaren remote-ontwikkelaars voor Full-Stack, DevOps en software-architectuur",
+        "benefits": [
+          "Senior-level ontwikkelaars",
+          "Agile remote werkwijze",
+          "Internationale tijdzone-dekking"
+        ],
+        "cta": "Remote IT-experts vinden"
+      },
+      "aiMl": {
+        "title": "Remote AI & ML-specialisten",
+        "description": "AI-experts en Data Scientists voor Machine Learning en AI-projecten",
+        "benefits": [
+          "Gespecialiseerde AI-expertise",
+          "Bewezen track record",
+          "Moderne technologieën"
+        ],
+        "cta": "Remote AI-experts vinden"
+      }
     }
   },
   "contact": {
