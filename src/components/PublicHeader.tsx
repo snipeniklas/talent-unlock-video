@@ -7,6 +7,7 @@ import BenefitBanner from "@/components/BenefitBanner";
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 import { useTranslation } from '@/i18n/i18n';
 import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const PublicHeader = () => {
   const navigate = useNavigate();
@@ -68,9 +69,7 @@ const PublicHeader = () => {
                   </Button>
                 }
               />
-              <Button variant="ghost" onClick={() => setLang(lang === 'de' ? 'en' : 'de')}>
-                {lang === 'de' ? 'EN' : 'DE'}
-              </Button>
+              <LanguageSwitcher />
             </div>
 
             {/* Mobile Menu */}
@@ -83,9 +82,7 @@ const PublicHeader = () => {
                   </Button>
                 }
               />
-              <Button variant="ghost" size="sm" onClick={() => setLang(lang === 'de' ? 'en' : 'de')}>
-                {lang === 'de' ? 'EN' : 'DE'}
-              </Button>
+              <LanguageSwitcher />
               
               <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
                 <SheetTrigger asChild>
