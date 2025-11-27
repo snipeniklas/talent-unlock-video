@@ -756,24 +756,25 @@
   "contact": {
     "title": "Neem contact met ons op",
     "subtitle": "Wij helpen u graag bij het vinden van de perfecte remote-professional",
-    "form": {
-      "name": "Naam",
-      "namePlaceholder": "Uw naam",
-      "email": "E-mail",
-      "emailPlaceholder": "uw.email@bedrijf.nl",
-      "company": "Bedrijf",
-      "companyPlaceholder": "Uw bedrijf",
-      "message": "Bericht",
-      "messagePlaceholder": "Vertel ons over uw project...",
-      "submit": "Bericht verzenden",
-      "success": "Bedankt voor uw bericht! We nemen spoedig contact met u op.",
-      "error": "Er is een fout opgetreden. Probeer het later opnieuw."
-    },
-    "info": {
-      "title": "Contactgegevens",
+    "talkToUs": "Neem contact op",
+    "labels": {
       "email": "E-mail",
       "phone": "Telefoon",
-      "address": "Adres"
+      "address": "Adres",
+      "hours": "Openingstijden"
+    },
+    "form": {
+      "title": "Zoekopdracht gratis aanmaken",
+      "subtitle": "Vertel ons over uw project en wij nemen binnen 24 uur contact met u op",
+      "placeholders": {
+        "firstName": "Voornaam",
+        "lastName": "Achternaam",
+        "email": "E-mailadres",
+        "company": "Bedrijf",
+        "phone": "Telefoon",
+        "description": "Beschrijf uw remote professional behoefte..."
+      },
+      "submit": "Bericht verzenden"
     }
   },
   "contactCTA": {
