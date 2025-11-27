@@ -107,13 +107,21 @@
   },
   "home": {
     "hero": {
-      "badge": "Professionele Remote-as-a-Service",
-      "title": "Gekwalificeerde externe professionals voor uw bedrijf",
-      "subtitle": "Van Backoffice tot IT-ontwikkeling - wij verbinden u met de beste remote-talent uit Europa binnen 2-4 weken. Voordelig, betrouwbaar en zonder risico.",
-      "cta": {
-        "primary": "Gratis kennismakingsgesprek",
-        "secondary": "Bekijk oplossingen"
-      }
+      "badges": {
+        "specialists": "500+ Remote Professionals",
+        "success": "98% Succes",
+        "quality": "Kwaliteitsgarantie"
+      },
+      "tagline": {
+        "prefix": "Global Remote Talents."
+      },
+      "title": "Internationale Remote-Professionals binnen een week voor uw bedrijf",
+      "description": "Wij integreren onze remote IT-, AI- en Backoffice-medewerkers in uw team en besparen zo minimaal 30% op personeelskosten – 100% flexibel via freelance contracten en binnen een week operationeel.\n\nMaak nu binnen 3 minuten uw RaaS-zoekopdracht aan en ontvang direct vrijblijvende kandidaatvoorstellen.",
+      "ctaBadge": "GRATIS",
+      "ctaPrimary": "RaaS Aanvraag",
+      "ctaSecondary": "Expertise ontdekken →",
+      "riskFreeTitle": "✅ 100% gratis & vrijblijvend",
+      "riskFreeText": "Op maat gemaakte resource-voorstellen zonder verplichting. Pas na uw goedkeuring begint de samenwerking."
     },
     "trust": {
       "title": "Vertrouwd door innovatieve bedrijven",
@@ -122,19 +130,27 @@
     "cards": {
       "backoffice": {
         "title": "Remote Backoffice-professionals",
-        "description": "Van boekhouding tot HR - wij vinden de perfecte ondersteuning voor uw backoffice.",
-        "cta": "Backoffice-professionals ontdekken"
+        "desc": "Gekwalificeerde remote-medewerkers voor administratie, boekhouding en operationele ondersteuning",
+        "cta": "Backoffice-professionals ontdekken",
+        "features": ["Kantoororganisatie & Administratie", "Boekhouding & Controlling", "Klantenservice & Support"]
       },
-      "itDev": {
-        "title": "Remote IT-ontwikkelaars",
-        "description": "Ervaren ontwikkelaars voor uw projecten - flexibel, betaalbaar en direct inzetbaar.",
-        "cta": "IT-talent vinden"
+      "it": {
+        "title": "Remote IT-ontwikkelaars & Tech-experts",
+        "desc": "Ervaren remote-ontwikkelaars voor alle gebieden van softwareontwikkeling",
+        "cta": "Nu starten",
+        "features": ["Full-Stack Ontwikkeling", "DevOps & Cloud", "Mobile & Web Apps"]
       },
-      "aiMl": {
-        "title": "AI & Machine Learning experts",
-        "description": "Gespecialiseerde professionals voor uw AI- en ML-projecten - van prototype tot productie.",
-        "cta": "AI-experts ontdekken"
+      "ai": {
+        "title": "Remote AI & ML-specialisten",
+        "desc": "AI-experts en Data Scientists voor Machine Learning en AI-projecten",
+        "cta": "Nu starten",
+        "features": ["Machine Learning", "Data Science", "AI-strategieadvies"]
       }
+    },
+    "about": {
+      "title": "Over Hej Talent",
+      "text": "Sinds 2016 zijn wij de betrouwbare partner voor bedrijven die op zoek zijn naar eersteklas remote-professionals. Onze focus ligt op grondige screening en bemiddeling van internationale remote-talenten.",
+      "bullets": ["Uitgebreide Background-Checks", "Persoonlijke begeleiding", "Kwaliteitsgarantie"]
     },
     "stats": {
       "headline": "Marktleider",
@@ -755,13 +771,27 @@
       "address": "Adres"
     }
   },
-  "contactCta": {
-    "title": "Klaar om te starten?",
-    "subtitle": "Neem vandaag nog contact met ons op en vind de perfecte remote-professional voor uw team",
-    "button": "Gratis kennismakingsgesprek"
+  "contactCTA": {
+    "title": "Contact opnemen",
+    "subtitle": "Laten we samen de juiste remote-professionals voor uw bedrijf vinden",
+    "talkToUs": "Neem contact op",
+    "labels": {
+      "email": "E-mail",
+      "phone": "Telefoon",
+      "linkedin": "LinkedIn Profiel",
+      "location": "Locatie"
+    },
+    "location": "München, Duitsland",
+    "form": {
+      "title": "Zoekopdracht gratis aanmaken",
+      "subtitle": "Vertel ons over uw project en wij nemen binnen 24 uur contact met u op",
+      "buttonText": "Nu starten"
+    }
   },
   "miniTeam": {
     "title": "Ontmoet de oprichters van Hej Talent",
+    "subtitle": "Maak kennis met onze oprichters en ontdek meer over onze visie",
+    "cta": "Meer over ons team ontdekken",
     "pascal": {
       "role": "Medeoprichter & CEO",
       "quote": "Wij geloven in de kracht van remote-work en willen bedrijven helpen om de beste professionals te vinden."
