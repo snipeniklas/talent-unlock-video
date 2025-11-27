@@ -10,72 +10,55 @@
     "add": "Toevoegen",
     "search": "Zoeken",
     "filter": "Filteren",
-    "export": "Exporteren",
-    "import": "Importeren",
-    "download": "Downloaden",
-    "upload": "Uploaden",
+    "clear": "Resetten",
     "back": "Terug",
     "next": "Volgende",
     "previous": "Vorige",
     "submit": "Verzenden",
-    "confirm": "Bevestigen",
     "close": "Sluiten",
-    "view": "Bekijken",
-    "details": "Details",
-    "actions": "Acties",
-    "status": "Status",
-    "date": "Datum",
-    "name": "Naam",
-    "email": "E-mail",
-    "phone": "Telefoon",
-    "address": "Adres",
-    "description": "Beschrijving",
-    "notes": "Notities",
-    "created": "Aangemaakt",
-    "updated": "Bijgewerkt",
-    "yes": "Ja",
-    "no": "Nee",
-    "login": "Inloggen",
-    "logout": "Uitloggen",
-    "register": "Registreren",
-    "password": "Wachtwoord",
-    "forgotPassword": "Wachtwoord vergeten",
-    "resetPassword": "Wachtwoord resetten",
-    "newPassword": "Nieuw wachtwoord",
-    "confirmPassword": "Wachtwoord bevestigen",
-    "currentPassword": "Huidig wachtwoord",
-    "changePassword": "Wachtwoord wijzigen",
-    "profile": "Profiel",
-    "settings": "Instellingen",
-    "help": "Help",
-    "support": "Ondersteuning",
-    "documentation": "Documentatie",
-    "contact": "Contact",
-    "about": "Over ons",
-    "terms": "Voorwaarden",
-    "privacy": "Privacy",
-    "cookies": "Cookies",
-    "all": "Alle",
-    "active": "Actief",
-    "inactive": "Inactief",
-    "pending": "In behandeling",
-    "completed": "Voltooid",
-    "failed": "Mislukt",
-    "required": "Verplicht",
-    "optional": "Optioneel"
+    "confirm": "Bevestigen",
+    "actions": {
+      "login": "Inloggen",
+      "create": "Aanmaken",
+      "edit": "Bewerken",
+      "delete": "Verwijderen",
+      "cancel": "Annuleren",
+      "save": "Opslaan",
+      "view": "Bekijken",
+      "back": "Terug"
+    }
   },
-  "companyDetail": {
-    "title": "Bedrijfsdetails",
-    "companyName": "Bedrijfsnaam",
-    "email": "E-mail",
-    "website": "Website",
-    "valueProposition": "Waardepropositie",
-    "statistics": "Statistieken",
-    "totalUsers": "Totaal aantal gebruikers",
-    "totalRequests": "Totaal aantal aanvragen",
-    "activeRequests": "Actieve aanvragen",
-    "notFound": "Bedrijf niet gevonden",
-    "errorFetching": "Fout bij ophalen bedrijfsgegevens"
+  "company": {
+    "detail": {
+      "subtitle": "Bedrijfsdetails",
+      "notFound": "Bedrijf niet gevonden",
+      "fetchError": "Fout bij laden bedrijfsgegevens",
+      "basicInfo": "Basisinformatie",
+      "companyName": "Bedrijfsnaam",
+      "email": "E-mail",
+      "website": "Website",
+      "registered": "Geregistreerd op",
+      "valueProposition": "Waardepropositie",
+      "statistics": "Statistieken",
+      "totalUsers": "Gebruikers",
+      "totalRequests": "Totaal projecten",
+      "activeRequests": "Actieve projecten",
+      "completedRequests": "Afgerond",
+      "users": "Gebruikers",
+      "usersDescription": "Alle geregistreerde gebruikers van dit bedrijf",
+      "noUsers": "Geen gebruikers gevonden",
+      "searchRequests": "Klantprojecten",
+      "searchRequestsDescription": "Alle projecten en opdrachten van dit bedrijf",
+      "noSearchRequests": "Geen projecten gevonden"
+    }
+  },
+  "searchRequest": {
+    "status": {
+      "active": "Actief",
+      "completed": "Afgerond",
+      "on_hold": "Gepauzeerd",
+      "cancelled": "Geannuleerd"
+    }
   },
   "header": {
     "nav": {
@@ -93,25 +76,25 @@
     }
   },
   "footer": {
-    "brand": "Hej Talent",
-    "tagline": "Gekwalificeerde externe professionals voor uw bedrijf",
-    "solutions": "Oplossingen",
-    "company": "Bedrijf",
-    "legal": "Juridisch",
-    "howWeWork": "Hoe wij werken",
-    "aboutUs": "Over ons",
-    "contact": "Contact",
-    "backoffice": "Backoffice",
-    "itDevelopment": "IT-ontwikkeling",
-    "aiMl": "AI & ML",
-    "privacy": "Privacy",
-    "imprint": "Impressum",
-    "copyright": "© 2024 Hej Talent. Alle rechten voorbehouden.",
-    "address": "Adres",
-    "addressLine1": "Hej Talent GmbH",
-    "addressLine2": "Deichstraße 14",
-    "addressLine3": "20459 Hamburg",
-    "addressLine4": "Duitsland"
+    "brand": "Hej Talent, a hej consulting GmbH brand",
+    "tagline": "Uw betrouwbare partner voor gekwalificeerde internationale remote-professionals.",
+    "sections": {
+      "solutions": "Onze Oplossingen",
+      "company": "Bedrijf",
+      "contact": "Contact"
+    },
+    "links": {
+      "backoffice": "Remote Backoffice-professionals",
+      "it": "Remote IT-ontwikkelaars",
+      "ai": "Remote AI-specialisten",
+      "howWeWork": "Hoe wij werken",
+      "hub": "Resource Hub",
+      "contact": "Contact",
+      "privacy": "Privacy",
+      "imprint": "Impressum"
+    },
+    "copyright": "© 2024 Hej Talent, a hej consulting GmbH brand. Alle rechten voorbehouden.",
+    "address": "Herzogstrasse 19, 80803 München, Germany"
   },
   "benefitBanner": {
     "items": [
@@ -154,13 +137,24 @@
       }
     },
     "stats": {
-      "title": "Uw voordelen in cijfers",
-      "candidates": "Professionals",
-      "candidatesDesc": "in ons geverifieerd netwerk",
-      "savings": "Besparing",
-      "savingsDesc": "gemiddeld t.o.v. lokale professionals",
-      "time": "Weken",
-      "timeDesc": "gemiddelde onboardingtijd"
+      "headline": "Marktleider",
+      "headlineSuffix": "voor Remote-Recruiting sinds 2016",
+      "sub": "Cijfers die onze expertise bewijzen",
+      "award": "🏆 Bekroond als \"Best Remote Recruiting Platform 2023\"",
+      "more": "Meer dan 150 bedrijven vertrouwen al op onze bewezen RaaS-methodologie. Van startups tot DAX-bedrijven - wij vinden de juiste remote-experts.",
+      "ctaTitle": "Uw gratis RaaS-aanvraag duurt slechts 3 minuten",
+      "ctaText": "Beschrijf uw uitdaging, wij stellen u geschikte experts voor. Geen risico, geen verborgen kosten.",
+      "ctaButton": "Nu gratis starten",
+      "items": {
+        "placed": "Remote-professionals actief",
+        "successful": "Succesvolle plaatsingen",
+        "satisfaction": "Tevreden bedrijven",
+        "weeks": "Weken plaatsingstijd"
+      }
+    },
+    "trust": {
+      "line": "Vertrouw op 9+ jaar expertise:",
+      "items": ["Internationale klanten", "AVG-conform", "ISO 27001"]
     },
     "solutions": {
       "title": "Onze oplossingen",
@@ -179,28 +173,123 @@
       }
     },
     "hub": {
-      "badge": "Alles-in-één platform",
-      "title": "Beheer uw remote-team efficiënt",
-      "subtitle": "Onze Resource Hub biedt u alle tools voor succesvol remote-work",
+      "title": "Beleef onze",
+      "titleSuffix": "Hub",
+      "text": "Ontdek hoe onze intuïtieve Hub uw hele RaaS-proces vereenvoudigt - van aanvraag tot succesvolle samenwerking.",
       "features": {
-        "dashboard": {
-          "title": "Overzichtelijk dashboard",
-          "description": "Behoud het overzicht over al uw professionals en projecten"
+        "request": {
+          "title": "RaaS Aanvraag maken",
+          "points": ["Skill-gebaseerde selectie", "Budget & tijdskader", "Projectspecificatie"]
         },
-        "requests": {
-          "title": "Eenvoudig aanvragen beheren",
-          "description": "Nieuwe professionals aanvragen binnen enkele minuten"
+        "matching": {
+          "title": "Resource-Matching",
+          "text": "AI-ondersteunde matching verbindt u met de juiste remote-experts uit onze voorgekwalificeerde pool van meer dan 500+ professionals.",
+          "points": ["Automatische matching", "Profiel-beoordelingen", "Beschikbaarheidscheck"]
         },
-        "candidates": {
-          "title": "Transparante matching",
-          "description": "Bekijk profielen en maak weloverwogen beslissingen"
-        },
-        "support": {
-          "title": "Persoonlijke ondersteuning",
-          "description": "Ons team staat altijd voor u klaar"
+        "pm": {
+          "title": "Projectmanagement",
+          "text": "Volg uw RaaS-projecten in realtime. Van selectie tot succesvolle implementatie houdt u altijd het overzicht.",
+          "points": ["Live-dashboard", "Voortgang-tracking", "Communicatie-hub"]
         }
       },
-      "cta": "Gratis demo aanvragen"
+      "floatingDemo": {
+        "title": "Beleef RaaS in actie",
+        "description": "Zie hoe ons intelligente systeem uw resource-aanvragen in realtime verwerkt en de perfecte remote-experts voor u vindt.",
+        "cards": {
+          "dashboard": {
+            "title": "RaaS Dashboard",
+            "live": "Live",
+            "activeProjects": "Actieve Projecten",
+            "successRate": "Succesrate",
+            "remoteDevelopers": "Remote-Ontwikkelaars",
+            "developersActive": "actief",
+            "backofficeStaff": "Backoffice-Krachten",
+            "staffActive": "actief"
+          },
+          "request": {
+            "title": "Nieuwe RaaS Aanvraag",
+            "subtitle": "Python Ontwikkelaar gezocht",
+            "response24h": "Antwoord in 24u verwacht",
+            "candidatesFound": "Kandidaten gevonden",
+            "viewDetails": "Details bekijken"
+          },
+          "resourcePool": {
+            "title": "Resource Pool",
+            "subtitle": "Beschikbare Experts",
+            "aiExperts": "AI/ML Experts",
+            "fullstackDev": "Fullstack Dev",
+            "backoffice": "Backoffice"
+          },
+          "performance": {
+            "title": "Performance",
+            "increase": "+15% deze maand",
+            "successfulMatches": "Succesvolle Matches",
+            "avgPlacement": "Ø Plaatsingstijd",
+            "weeks": "Weken",
+            "satisfaction": "Klanttevredenheid"
+          },
+          "notification": {
+            "title": "Match gevonden!",
+            "description": "Perfecte Python-ontwikkelaar voor uw AI-project beschikbaar. 5⭐ beoordeling, direct inzetbaar.",
+            "viewProfile": "Profiel bekijken",
+            "later": "Later"
+          },
+          "cta": "RaaS Aanvraag starten"
+        }
+      },
+      "timeline": {
+        "title": "Uw weg naar de perfecte Remote-Experts",
+        "text": "Ons bewezen 3-weken-proces brengt u veilig en gestructureerd naar uw ideale remote-professional."
+      },
+      "projectTimeline": {
+        "title": "Tijdschema",
+        "duration": "3 Weken Proces",
+        "weeks": {
+          "optional": "Opt. Week 1",
+          "week1": "Week 1",
+          "week2": "Week 2",
+          "week3": "Week 3"
+        },
+        "activities": {
+          "consultation": {
+            "title": "Advies",
+            "description": "Analyse van uw eisen en doelstellingen"
+          },
+          "requirements": {
+            "title": "Opname Vereisten",
+            "description": "Gedetailleerde specificatie van benodigde expertise"
+          },
+          "candidateProposal": {
+            "title": "Kandidatenvoorstel",
+            "description": "Presentatie van passende remote-experts"
+          },
+          "selection": {
+            "title": "Selectieproces",
+            "description": "Interviews en definitieve kandidatenselectie"
+          },
+          "implementation": {
+            "title": "Implementatiebegeleiding",
+            "description": "Onboarding en continue ondersteuning"
+          }
+        },
+        "optional": "(optioneel)",
+        "durationUnits": {
+          "day": "Dag",
+          "days": "Dagen",
+          "max": "max."
+        },
+        "milestones": {
+          "kickoff": "Kickoff",
+          "firstDay": "1e Werkdag"
+        },
+        "cta": "Project nu starten"
+      },
+      "cta": {
+        "title": "Klaar om uw remote-professionals te vinden?",
+        "text": "Start vandaag en ervaar hoe snel en efficiënt u de beste remote-talenten voor uw bedrijf kunt vinden.",
+        "primary": "Gratis testen",
+        "secondary": "Naar RaaS Hub"
+      }
     },
     "testimonials": {
       "title": "Wat onze klanten zeggen",
@@ -218,6 +307,395 @@
       "title": "Klaar om uw team uit te breiden?",
       "subtitle": "Laten we samen de perfecte remote-professional voor u vinden",
       "button": "Gratis kennismakingsgesprek"
+    }
+  },
+  "landing": {
+    "hejTalent": {
+      "ticker": [
+        "Remote-professionals vanaf 2 weken",
+        "30% goedkoper",
+        "Gecontroleerde kwaliteit",
+        "Backoffice, IT & AI",
+        "Flexibele contracten",
+        "Geen headhunter-fee"
+      ],
+      "hero": {
+        "title": "- Uw Remote Experts",
+        "badge": "30-50% goedkoper",
+        "trailing": "dan lokale talenten",
+        "p1": "Ons bewezen RaaS-systeem maakt het eenvoudig: U beschrijft uw bedrijfsprobleem, wij leveren de perfecte remote-oplossing.",
+        "p2": "Ontdek hoe u binnen 7-14 dagen hoogwerkwaardige remote-professionals voor Backoffice, IT-ontwikkeling of AI/ML uit ons gecontroleerd netwerk krijgt – direct productief.",
+        "cta": "RaaS Aanvraag maken"
+      },
+      "bullets": {
+        "0": {
+          "title": "Snelle start",
+          "text": "Perfecte match binnen 48u, onboarding in 7-14 dagen – productief vanaf dag 1"
+        },
+        "1": {
+          "title": "Gecontroleerde kwaliteit",
+          "text": "Alle professionals doorlopen ons screening-proces – 97% succesquote"
+        },
+        "2": {
+          "title": "Flexibel & betaalbaar",
+          "text": "30-50% kostenreductie zonder kwaliteitsverlies – schaalbaar naar behoefte"
+        }
+      },
+      "trust": {
+        "title": "Meer dan 100 bedrijven ontwikkelen met onze remote-professionals"
+      },
+      "testimonials": {
+        "title": "Succesverhalen van onze klanten"
+      },
+      "reviews": {
+        "title": "Wat onze klanten zeggen"
+      },
+      "faq": {
+        "title": "Veelgestelde vragen",
+        "items": {
+          "0": {
+            "q": "Welke remote-professionals bieden jullie aan?",
+            "a": "Backoffice (boekhouding, HR, admin), IT-ontwikkelaars (Full-Stack, Frontend, Backend), en AI/ML-specialists (Data Science, Machine Learning, NLP)."
+          },
+          "1": {
+            "q": "Hoe wordt de kwaliteit gegarandeerd?",
+            "a": "3-staps controlereprocess: Skills Assessment, Live Challenge en Referentiecheck. Slechts de beste 3% haalt onze normen."
+          },
+          "2": {
+            "q": "Kan ik eerst met een project starten?",
+            "a": "Ja! Projectgebaseerde samenwerking is mogelijk. Bij succes kunt u altijd overschakelen naar langere contracten."
+          },
+          "3": {
+            "q": "Wat bij ontevredenheid?",
+            "a": "100% geld-terug-garantie in de eerste 14 dagen. Als het niet past, vinden wij gratis vervanging of restitueren alle kosten."
+          }
+        }
+      },
+      "footer": {
+        "title": "Klaar om te starten?",
+        "subtitle": "Boek nu uw gratis kennismakingsgesprek",
+        "cta": "Gratis gesprek boeken"
+      }
+    },
+    "backoffice": {
+      "ticker": [
+        "Backoffice-krachten vanaf 2 weken",
+        "40-60% goedkoper",
+        "Boekhouding, HR, Admin",
+        "Gecontroleerde kwaliteit",
+        "Flexibele inzet",
+        "Geen headhunter-fee"
+      ],
+      "hero": {
+        "title": "- Remote Backoffice-Professionals",
+        "badge": "40-60% goedkoper",
+        "trailing": "dan lokale krachten",
+        "p1": "Ons bewezen RaaS-systeem maakt het eenvoudig: U beschrijft uw backoffice-uitdaging, wij leveren de perfecte oplossing.",
+        "p2": "Van boekhouding tot HR-administratie: Haal binnen 7-14 dagen gekwalificeerde backoffice-professionals uit ons gecontroleerd netwerk – remote en direct productief.",
+        "cta": "RaaS Aanvraag maken"
+      },
+      "bullets": {
+        "0": {
+          "title": "Backoffice-Experts",
+          "text": "Boekhouders, HR-specialisten, administratief personeel met 3+ jaar ervaring en bewezen vaardigheden"
+        },
+        "1": {
+          "title": "Snelle start",
+          "text": "Perfecte match in 48u, onboarding in 7-14 dagen – productief vanaf dag 1"
+        },
+        "2": {
+          "title": "Bewezen methode",
+          "text": "97% succesquote door nauwkeurige screening en culture-fit-tests"
+        }
+      },
+      "problem": {
+        "title": "Herkent u deze backoffice-uitdagingen?",
+        "items": [
+          {
+            "title": "Te hoge kosten",
+            "desc": "€3.500+/maand voor lokale backoffice-kracht – budget explodeert, flexibiliteit ontbreekt"
+          },
+          {
+            "title": "Tijdrovende werving",
+            "desc": "3-6 maanden zoeken naar geschikte backoffice-medewerker – projecten lopen vast"
+          },
+          {
+            "title": "Kwaliteitsgebrek",
+            "desc": "Moeilijk om ervaren professionals te vinden – veelvuldig wisselen van personeel"
+          }
+        ]
+      },
+      "how": {
+        "title": "Zo werkt het: Uw Backoffice-Professional in 3 eenvoudige stappen",
+        "0": {
+          "title": "Aanvraag via ons platform maken",
+          "text": "Log in op ons systeem en maak een gedetailleerde zoekopdracht. Definieer vaardigheden, ervaringsniveau, projectduur en speciale eisen direct in de gebruikersinterface."
+        },
+        "1": {
+          "title": "AI-Matching & Kandidaten-Review",
+          "text": "Ons systeem analyseert uw aanvraag en matcht automatisch passende kandidaten uit onze talentpool. U ontvangt binnen 48u een gecureerde lijst met 3-5 top-matches direct in het platform."
+        },
+        "2": {
+          "title": "Interview-Management & Onboarding",
+          "text": "Afspraakplanning, interview-coördinatie en contractafhandeling verlopen volledig via het platform. Na uw keuze zorgen wij voor de complete onboarding en setup."
+        }
+      },
+      "trust": {
+        "title": "Meer dan 100 bedrijven werken met onze backoffice-professionals"
+      },
+      "testimonials": {
+        "title": "Succesverhalen van onze klanten"
+      },
+      "faq": {
+        "title": "Veelgestelde vragen",
+        "items": {
+          "0": {
+            "q": "Welke backoffice-taken kunnen jullie professionals uitvoeren?",
+            "a": "Boekhouding, debiteuren/crediteuren, HR-administratie, salarisadministratie, algemene administratie, documentbeheer en klantenservice."
+          },
+          "1": {
+            "q": "Hoe wordt kwaliteit gegarandeerd?",
+            "a": "Alle professionals doorlopen skills-tests, referentiechecks en proefperiodes. Regelmatige kwaliteitscontroles tijdens de samenwerking."
+          },
+          "2": {
+            "q": "Kan ik eerst met een proefperiode starten?",
+            "a": "Ja! Wij bieden een risicovrije proefperiode van 2 weken. Niet tevreden? Geld terug of gratis vervanging."
+          },
+          "3": {
+            "q": "Hoe snel kan de backoffice-professional starten?",
+            "a": "Na match: 7-14 dagen tot productieve start. Bij dringende gevallen ook sneller mogelijk."
+          }
+        }
+      },
+      "footer": {
+        "title": "Klaar om uw backoffice te optimaliseren?",
+        "subtitle": "Boek nu uw gratis kennismakingsgesprek",
+        "cta": "Gratis gesprek boeken"
+      }
+    },
+    "itDev": {
+      "ticker": [
+        "Senior IT-ontwikkelaars vanaf 2 weken",
+        "30-50% goedkoper",
+        "React, Node.js, Python",
+        "5+ jaar ervaring",
+        "Direct productief",
+        "Geen headhunter-fee"
+      ],
+      "hero": {
+        "title": "- Senior IT-Ontwikkelaars",
+        "badge": "30-50% goedkoper",
+        "trailing": "dan lokale talenten",
+        "p1": "Ons bewezen RaaS-systeem maakt het eenvoudig: U beschrijft uw IT-project, wij leveren de perfecte ontwikkelaar-oplossing.",
+        "p2": "Ontdek hoe u binnen 7-14 dagen hoogwerkwaardige Senior-ontwikkelaars voor React, Node.js, Python & meer uit ons gecontroleerd netwerk krijgt – remote en direct productief.",
+        "cta": "RaaS Aanvraag maken"
+      },
+      "bullets": {
+        "0": {
+          "title": "Senior-Level Expertise",
+          "text": "Alleen ontwikkelaars met 5+ jaar ervaring en bewezen vaardigheden in moderne technologieën"
+        },
+        "1": {
+          "title": "Snelle start",
+          "text": "Perfecte match in 48u, onboarding in 7-14 dagen – productief vanaf dag 1"
+        },
+        "2": {
+          "title": "Bewezen matching",
+          "text": "97% succesquote door nauwkeurige Technical Screening en Culture-Fit-tests"
+        }
+      },
+      "problem": {
+        "title": "Herkent u deze IT-uitdagingen?",
+        "items": [
+          {
+            "title": "Maandenlang zoeken",
+            "desc": "6+ maanden recruiting voor een Senior-ontwikkelaar – projecten vertragen, deadlines mislopen"
+          },
+          {
+            "title": "Te dure freelancers",
+            "desc": "€120+/u voor middelmatige freelancers – budget explodeert, kwaliteit teleurstelt"
+          },
+          {
+            "title": "Onbetrouwbare bureaus",
+            "desc": "Hoge headhunter-fees, slechte matches, geen garanties – geld weg, probleem blijft"
+          }
+        ]
+      },
+      "solution": {
+        "title": "De oplossing: Gecontroleerde Senior-ontwikkelaars in 48 uur",
+        "0": {
+          "title": "48u Perfect Match",
+          "text": "Uit 1.000+ gecontroleerde ontwikkelaars vinden wij in 48u de perfecte match voor uw project"
+        },
+        "1": {
+          "title": "97% Succesquote",
+          "text": "Ons 3-staps controleproces garandeert hoogste kwaliteit – slechts 3% van alle sollicitanten haalt het"
+        },
+        "2": {
+          "title": "Start in 7 dagen",
+          "text": "Na match: Onboarding, setup en productief werk binnen een week"
+        }
+      },
+      "how": {
+        "title": "Zo werkt het: Uw Ontwikkelaar in 3 eenvoudige stappen",
+        "0": {
+          "title": "Aanvraag via ons platform maken",
+          "text": "Log in op ons systeem en maak een gedetailleerde zoekopdracht. Definieer technologie-stack, ervaringsniveau, projectduur en speciale eisen direct in de gebruikersinterface."
+        },
+        "1": {
+          "title": "AI-Matching & Kandidaten-Review",
+          "text": "Ons systeem analyseert uw aanvraag en matcht automatisch passende kandidaten uit onze talentpool. U ontvangt binnen 48u een gecureerde lijst met 3-5 top-matches direct in het platform."
+        },
+        "2": {
+          "title": "Interview-Management & Onboarding",
+          "text": "Afspraakplanning, interview-coördinatie en contractafhandeling verlopen volledig via het platform. Na uw keuze zorgen wij voor de complete onboarding en setup."
+        }
+      },
+      "tech": {
+        "title": "Alle technologieën die u nodig heeft",
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "mobile": "Mobile",
+        "devops": "Cloud & DevOps"
+      },
+      "cases": {
+        "title": "Succesverhalen van onze klanten"
+      },
+      "guarantee": {
+        "title": "Onze 100% Succes-Garantie"
+      },
+      "urgency": {
+        "title": "⚠️ Waarom u NU moet handelen"
+      },
+      "finalCta": {
+        "title": "Start VANDAAG met uw nieuwe ontwikkelteam",
+        "text": "Boek nu uw gratis kennismakingsgesprek",
+        "badges": [
+          "Geen verplichting",
+          "Direct beschikbaar",
+          "14 dagen garantie"
+        ]
+      },
+      "trust": {
+        "title": "Meer dan 100 bedrijven ontwikkelen met onze remote-ontwikkelaars"
+      },
+      "faq": {
+        "title": "Veelgestelde vragen",
+        "items": {
+          "0": {
+            "q": "Welke technologieën dekken jullie?",
+            "a": "Alle moderne technologieën: React, Vue, Angular, Node.js, Python, Java, .NET, Go, Ruby en meer. Frontend, Backend, Mobile, DevOps – wij hebben experts voor alles."
+          },
+          "1": {
+            "q": "Hoe wordt kwaliteit gegarandeerd?",
+            "a": "3-staps controleproces: Technical Skills Assessment, Live Coding Challenge en Referentiecheck. Slechts de beste 3% haalt onze normen."
+          },
+          "2": {
+            "q": "Kan ik eerst met een project starten?",
+            "a": "Ja! Projectgebaseerde samenwerking is mogelijk. Bij succes kunt u altijd overschakelen naar langere contracten."
+          },
+          "3": {
+            "q": "Wat bij ontevredenheid?",
+            "a": "100% geld-terug-garantie in de eerste 14 dagen. Als het niet past, vinden wij gratis vervanging of restitueren alle kosten."
+          },
+          "4": {
+            "q": "Hoe snel kan de ontwikkelaar starten?",
+            "a": "Na match: 7-14 dagen tot productieve start. Bij dringende gevallen ook sneller mogelijk."
+          }
+        }
+      },
+      "footer": {
+        "tagline": "Senior IT-Ontwikkelaars voor Nederlandse bedrijven",
+        "tech": "Technologieën",
+        "company": "Bedrijf",
+        "contact": "Contact",
+        "rights": "Alle rechten voorbehouden.",
+        "terms": "Algemene voorwaarden"
+      }
+    },
+    "aiMl": {
+      "ticker": [
+        "AI-experts vanaf 3 maanden",
+        "40-60% goedkoper",
+        "Bewezen AI-oplossingen",
+        "Van concept tot deployment",
+        "ML, Deep Learning, NLP",
+        "Geen headhunter-fee"
+      ],
+      "hero": {
+        "title": "- AI & ML Experts",
+        "badge": "40-60% goedkoper",
+        "trailing": "voor uw AI-transformatie",
+        "p1": "Ons bewezen RaaS-systeem maakt het eenvoudig: U beschrijft uw AI-probleem, wij leveren de perfecte expert-oplossing.",
+        "p2": "Van AI-strategie tot productieve oplossing: Haal gespecialiseerde Data Scientists, ML Engineers en AI-ontwikkelaars uit onze gecontroleerde expertpool – remote en direct inzetbaar.",
+        "cta": "RaaS Aanvraag maken"
+      },
+      "bullets": {
+        "0": {
+          "title": "AI-Specialisten",
+          "text": "Data Scientists, ML Engineers en AI-ontwikkelaars met PhD/Master en 5+ jaar praktijkervaring"
+        },
+        "1": {
+          "title": "Bewezen AI-oplossingen",
+          "text": "Van Computer Vision tot NLP – praktijkbewezen oplossingen voor uw bedrijfsmodel"
+        },
+        "2": {
+          "title": "ROI-Focus",
+          "text": "Meetbare bedrijfsresultaten in 3-6 maanden in plaats van jarenlang onderzoek"
+        }
+      },
+      "problem": {
+        "title": "Waarom mislukken de meeste AI-projecten?",
+        "items": [
+          {
+            "title": "Ontbrekende AI-knowhow",
+            "desc": "Interne teams hebben geen ervaring met ML-projecten en overschatten de complexiteit"
+          },
+          {
+            "title": "Maandenlang zoeken",
+            "desc": "Gekwalificeerde Data Scientists zijn schaars en duur – als ze al beschikbaar zijn"
+          },
+          {
+            "title": "Geen bedrijfsfocus",
+            "desc": "Projecten verzanden in eindeloos onderzoek zonder meetbare bedrijfsresultaten"
+          }
+        ]
+      },
+      "how": {
+        "title": "Zo werkt het: Uw AI-Expert in 3 eenvoudige stappen"
+      },
+      "trust": {
+        "title": "Toonaangevende bedrijven vertrouwen op onze AI-experts"
+      },
+      "faq": {
+        "title": "Veelgestelde vragen",
+        "items": {
+          "0": {
+            "q": "Welke AI-technologieën dekken jullie?",
+            "a": "Machine Learning, Deep Learning, NLP, Computer Vision, Recommendation Systems, Predictive Analytics en meer. Wij hebben experts voor alle gangbare frameworks."
+          },
+          "1": {
+            "q": "Hoe gekwalificeerd zijn de AI-experts?",
+            "a": "Allen hebben een relevante opleiding (Master/PhD), 5+ jaar praktijkervaring en aantoonbare successen in productieve AI-projecten."
+          },
+          "2": {
+            "q": "Kan ik met een PoC starten?",
+            "a": "Ja! Wij bevelen 3-maands-projecten aan voor Proof of Concepts, voordat u in grotere implementaties investeert."
+          },
+          "3": {
+            "q": "Hoe lang duurt het tot productieve inzet?",
+            "a": "Afhankelijk van complexiteit: PoC in 3 maanden, MVP in 6 maanden. Wij focussen op snelle, meetbare resultaten in plaats van langdurig onderzoek."
+          }
+        }
+      },
+      "footer": {
+        "tagline": "AI & ML Experts voor Nederlandse bedrijven",
+        "areas": "AI-Gebieden",
+        "company": "Bedrijf",
+        "contact": "Contact",
+        "rights": "Alle rechten voorbehouden.",
+        "terms": "Algemene voorwaarden"
+      }
     }
   },
   "solutionsOverview": {
@@ -313,126 +791,203 @@
   },
   "aboutUs": {
     "hero": {
-      "title": "Over Hej Talent",
-      "subtitle": "Wij verbinden bedrijven met de beste remote-professionals uit Europa"
+      "title": "Over ",
+      "subtitle": "Sinds 2016 zijn wij Nederlands toonaangevend platform voor internationale remote-professionals. Wij verbinden bedrijven met de beste talenten wereldwijd."
     },
     "mission": {
       "title": "Onze missie",
-      "description": "Wij geloven dat de beste professionals overal ter wereld kunnen werken. Onze missie is het verbinden van bedrijven met toptalent - ongeacht de locatie. Zo maken wij remote-work eenvoudig, betrouwbaar en succesvol."
+      "p1": "Wij maken internationale expertise toegankelijk voor Nederlandse bedrijven. Met ons Resources as a Service (RaaS) model revolutioneren wij de manier waarop bedrijven toegang krijgen tot professionals – flexibel, efficiënt en zonder grenzen.",
+      "p2": "In plaats van klassieke aanstellingen leveren wij remote-resources via dienstverleningscontracten en creëren zo directe toegang tot gekwalificeerde specialisten wereldwijd.",
+      "stats": ["500+ internationale professionals", "150+ succesvolle projecten", "98% klanttevredenheid"]
     },
     "values": {
-      "title": "Onze waarden",
-      "quality": {
-        "title": "Kwaliteit",
-        "description": "Wij werken alleen met geverifieerde en gekwalificeerde professionals"
+      "0": {
+        "title": "Internationale expertise",
+        "desc": "Wij verbinden Nederlandse bedrijven met de beste internationale talenten wereldwijd."
       },
-      "transparency": {
-        "title": "Transparantie",
-        "description": "Eerlijke communicatie en duidelijke processen"
+      "1": {
+        "title": "Gecontroleerde kwaliteit",
+        "desc": "Elke remote-professional doorloopt ons meersta pskwalificatieproces."
       },
-      "support": {
-        "title": "Ondersteuning",
-        "description": "Persoonlijke begeleiding gedurende het hele proces"
+      "2": {
+        "title": "Snelle bemiddeling",
+        "desc": "Van aanvraag tot integratie in slechts 2-4 weken."
+      },
+      "3": {
+        "title": "Meetbare successen",
+        "desc": "98% klanttevredenheid en meer dan 90% projectvoortzettin gspercentage."
       }
     },
     "team": {
-      "title": "Ons team",
-      "pascal": {
-        "name": "Pascal Spieß",
-        "role": "Medeoprichter & CEO",
-        "bio": "Pascal heeft meer dan 10 jaar ervaring in recruiting en remote-work. Hij heeft Hej Talent opgericht om bedrijven te helpen bij het vinden van de beste professionals."
-      },
+      "title": "Over ons - Joachim & Pascal",
       "joachim": {
-        "name": "Joachim Kalff",
-        "role": "Medeoprichter & CTO",
-        "bio": "Joachim is een ervaren software-ontwikkelaar en heeft meerdere startups opgericht. Hij zorgt ervoor dat onze technologie altijd up-to-date is."
+        "role": "Oprichter & Geschäftsführer",
+        "image": "/lovable-uploads/joachim-kalff.jpg",
+        "p1": "Mijn naam is Joachim Kalff, oprichter en geschäftsführer van Hej Talent. Met ons \"RaaS\"-concept denken wij HR-processen opnieuw: frisser, slimmer, gewoon beter! \"Hej\" komt uit het Scandinavisch en betekent \"hallo\" – een begroeting met \"Wake-up\"-karakter. Voor mij staat het voor vriendelijkheid, lichtheid en sympathie.",
+        "p2": "Tegelijkertijd verenigt \"Hej\" de initialen van mijn kinderen Henry en Emilia – de \"J\" staat voor mijn voornaam. Zo verbind ik de positieve Scandinavische houding met mijn persoonlijke handtekening. Zo ga ik ook om met ons internationale remote-team: verantwoordelijk, waarderend en benaderbaar.",
+        "p3": "Met enthousiasme en ondernemersdrijfveer ontwikkel ik oplossingen die duurzaam werken en echte meerwaarde creëren – pragmatisch, creatief en altijd vooruitkijkend.",
+        "qa": {
+          "q1": "Waarom is het onderwerp personeel belangrijk voor mij?",
+          "a1": "Omdat bedrijven niet groeien door producten, maar door mensen. Achter elk succes staan talenten die hun persoonlijkheid, ideeën en energie inbrengen.",
+          "q2": "Wat drijft mij bij Hej Talent?",
+          "a2": "Verbindingen creëren die verder gaan dan AI – echte ontmoetingen die gebaseerd zijn op vertrouwen, authenticiteit en gedeelde waarden. Want technologie kan veel, maar menselijke diepte en vertrouwen nooit vervangen.",
+          "q3": "Mijn mooiste momenten bij Hej Talent zijn…",
+          "a3": "…wanneer talenten en bedrijven merken dat ze niet alleen professioneel, maar ook menselijk bij elkaar passen. Dan wordt een baan een echte kans voor het leven."
+        }
+      },
+      "pascal": {
+        "role": "Consultant",
+        "p1": "Ik ben Pascal Spieß, Consultant bij Hej Talent, met meer dan 11 jaar ervaring in advies en verkoop. Al altijd heeft mij de vraag gedreven hoe bedrijven efficiënter, flexibeler en succesvoller kunnen werken – en precies hier zet ik nu in.",
+        "p2": "Het enthousiasmeert mij om samen met mijn klanten in ons \"RaaS\"-concept te werken - snel, flexibel en kosteneffectief.",
+        "p3": "Bij Hej Talent ondersteun ik bedrijven om het tekort aan vakmensen te overwinnen en processen duurzaam te optimaliseren. Samen met onze klanten integreer ik internationale remote-talenten – van AI- en Tech-talenten tot Backoffice- en boekhoudprofs tot IT- en softwareontwikkelaars.",
+        "qa": {
+          "q1": "Waarom is het onderwerp personeel belangrijk voor mij?",
+          "a1": "Omdat de juiste persoon op de juiste plaats meer kan bereiken dan elke strategie. Personeel is niet alleen een resource, maar het hart van elke organisatie.",
+          "q2": "Wat drijft mij bij Hej Talent?",
+          "a2": "De overtuiging dat carrières niet moeten afhangen van toevalligheden of algoritmes. Maar van ontmoetingen die zin geven en deuren openen.",
+          "q3": "Mijn mooiste momenten bij Hej Talent zijn…",
+          "a3": "…wanneer mensen merken: \"Hier word ik gezien – zoals ik ben.\" Precies dan ontstaan kansen die ver verder gaan dan de volgende baan."
+        }
       }
     },
     "milestones": {
-      "title": "Onze mijlpalen",
-      "items": [
-        {
-          "year": "2022",
-          "title": "Oprichting",
-          "description": "Hej Talent wordt opgericht in Hamburg"
-        },
-        {
-          "year": "2023",
-          "title": "Eerste klanten",
-          "description": "50+ bedrijven vertrouwen op onze professionals"
-        },
-        {
-          "year": "2024",
-          "title": "Uitbreiding",
-          "description": "Nieuw platform en uitgebreid netwerk"
-        }
-      ]
+      "2016": {
+        "title": "Oprichting van Hej Talent",
+        "desc": "Start als gespecialiseerd Remote-Recruiting Platform"
+      },
+      "2021": {
+        "title": "Eerste 100 Bemiddelingen",
+        "desc": "Succesvolle plaatsing van 100+ remote-professionals"
+      },
+      "2022": {
+        "title": "Internationale Expansie",
+        "desc": "Uitbreiding van netwerk naar 15+ landen"
+      },
+      "2023": {
+        "title": "Best Remote Recruiting Platform",
+        "desc": "Bekroond als toonaangevend Remote-Recruiting Platform"
+      },
+      "2024": {
+        "title": "500+ Remote-Professionals",
+        "desc": "Meer dan 500 gecontroleerde internationale experts in netwerk"
+      }
     },
     "development": {
-      "title": "Van idee tot realiteit",
-      "description": "Onze reis begon met een eenvoudige observatie: veel bedrijven hebben moeite om gekwalificeerde professionals te vinden, terwijl er wereldwijd talent beschikbaar is. Wij hebben Hej Talent opgericht om deze kloof te dichten en remote-work voor iedereen toegankelijk te maken.",
-      "achievements": {
-        "title": "Wat wij hebben bereikt",
-        "items": [
-          "100+ succesvolle plaatsingen",
-          "50+ tevreden klanten",
-          "200+ professionals in ons netwerk",
-          "95% retentiepercentage"
-        ]
-      }
+      "title": "Onze ontwikkeling sinds 2016"
+    },
+    "why": {
+      "title": "Waarom internationale professionals?",
+      "subtitle": "Het Nederlandse tekort aan vakmensen vereist nieuwe oplossingen. Onze internationale remote-experts bieden niet alleen kosteneffectieve alternatieven, maar ook frisse perspectieven en expertise uit wereldwijde markten.",
+      "cards": [
+        {"title": "Kostenbesparing", "desc": "Gemiddelde besparing ten opzichte van lokale voltijdkrachten"},
+        {"title": "Landen", "desc": "Internationale expertise uit verschillende tijdzones"},
+        {"title": "Beschikbaarheid", "desc": "Continue productiviteit door wereldwijde tijdzone-dekking"}
+      ]
+    },
+    "cta": {
+      "title": "Klaar voor internationale versterking?",
+      "subtitle": "Ontdek hoe onze internationale remote-professionals uw bedrijf vooruit kunnen brengen.",
+      "button": "Gratis RaaS Aanvraag starten"
     }
   },
   "howWeWork": {
     "hero": {
-      "title": "Hoe wij werken",
-      "subtitle": "Uw weg naar de perfecte remote-professional in 4 eenvoudige stappen"
+      "title": "Zo werkt ",
+      "subtitle": "Van de eerste RaaS-aanvraag tot de succesvolle integratie van uw remote-resource - ons bewezen 4-stappen-proces garandeert u de beste kandidaten."
     },
-    "raas": {
-      "title": "Wat is Resource-as-a-Service?",
-      "description": "Resource-as-a-Service (RaaS) is ons innovatieve model om bedrijven te verbinden met gekwalificeerde remote-professionals. U krijgt toegang tot een geverifieerd netwerk van specialisten zonder de lasten van traditionele werving.",
-      "benefits": {
-        "title": "Uw voordelen",
-        "flexibility": {
-          "title": "Flexibiliteit",
-          "description": "Schaal uw team op of af naar wens"
-        },
-        "speed": {
-          "title": "Snelheid",
-          "description": "Onboarding binnen 2-4 weken"
-        },
-        "quality": {
-          "title": "Kwaliteit",
-          "description": "Geverifieerde en ervaren professionals"
-        },
-        "cost": {
-          "title": "Kostenefficiëntie",
-          "description": "Tot 30% besparing t.o.v. lokale professionals"
-        }
-      }
+    "left": {
+      "title": "RaaS - Een revolutionair serviceconcept",
+      "p1": "is meer dan alleen een moderne term – het is een fundamenteel andere benadering voor het leveren van professionals. In tegenstelling tot traditionele personeelsbemiddeling of uitzendbureau's sluit u bij ons ",
+      "p1b": "geen arbeidscontract",
+      "p1c": ", maar een flexibel ",
+      "p1d": "dienstverleningscontract",
+      "p1e": ".",
+      "p2": "Dit onderscheid is essentieel: Terwijl arbeidsverhoudingen starre structuren, opzegtermijnen en uitgebreide arbeidsrechtelijke verplichtingen met zich meebrengen, biedt ons RaaS-model ",
+      "p2b": "maximale flexibiliteit",
+      "p2c": ". U krijgt precies de expertise die u nodig heeft – wanneer u die nodig heeft.",
+      "p3": "Onze remote-professionals zijn niet uw werknemers, maar gespecialiseerde ",
+      "p3b": "dienstverleningspartners",
+      "p3c": ", die naadloos in uw projectstructuren worden geïntegreerd. Dat betekent: geen loonkosten, geen socialezekerheidsbijdragen, geen vakantierechten of ziekteverzuim aan uw kant.",
+      "highlight": "De voordelen zijn meetbaar: ",
+      "highlightA": "Tot 60% kostenbesparing ten opzichte van lokale voltijdkrachten",
+      "highlightB": "100% planbare budgetten",
+      "highlightC": "zonder verborgen personeelskosten en de mogelijkheid om ",
+      "highlightD": "direct te schalen",
+      "highlightE": "– naar boven of beneden."
+    },
+    "right": {
+      "title": "Internationale expertise zonder grenzen",
+      "p1": "Ons wereldwijde netwerk omvat meer dan ",
+      "p1b": "500+ gecontroleerde remote-professionals",
+      "p1c": "uit verschillende tijdzones en culturen. Deze diversiteit is geen toeval, maar strategisch voordeel: U krijgt toegang tot talenten en perspectieven die lokaal niet beschikbaar zouden zijn.",
+      "p2": "Elk van onze remote-resources doorloopt een ",
+      "p2b": "meerstapskwalificatieproces",
+      "p2c": ": Technische skills-tests, taalvaardigheidstests, referentievalidatie en culturele compatibiliteitsbeoordeling. Het resultaat: ",
+      "p2d": "98% klanttevredenheid",
+      "p2e": "en een gemiddeld projectvoorzettingspercentage van meer dan 90%.",
+      "p3": "Bijzonder waardevol is onze ",
+      "p3b": "24/7-beschikbaarheid",
+      "p3c": "door internationale tijdzone-dekking. Terwijl uw Nederlandse team slaapt, werken onze resources in andere tijdzones verder aan uw projecten – een continue productiviteitswinst.",
+      "highlight": "De juridische structuur is daarbij kristalhelder: ",
+      "highlightB": "Wij nemen de volledige verantwoordelijkheid",
+      "highlightC": "voor onze remote-professionals – van contractontwerp tot kwaliteitsborging tot back-upplanning bij uitval. U concentreert zich uitsluitend op uw kernbusiness, terwijl wij de ",
+      "highlightD": "operationele uitmuntendheid",
+      "highlightE": "van uw uitgebreide remote-teams garanderen."
     },
     "process": {
-      "title": "Ons proces",
-      "step1": {
-        "title": "1. Kennismakingsgesprek",
-        "description": "In een persoonlijk gesprek leren wij uw behoeften en vereisten kennen."
+      "title": "Ons ",
+      "titleSuffix": "Proces in 4 stappen",
+      "subtitle": "Klik op een stap om de corresponderende app-weergave te zien"
+    },
+    "steps": [
+      {
+        "step": "01",
+        "title": "Behoefteanalyse",
+        "description": "Uw eisen begrijpen",
+        "details": "In een uitgebreid gesprek analyseren wij uw huidige uitdagingen, gewenste skills en budget. Wij identificeren het type remote-professionals dat u nodig heeft.",
+        "timeline": "1-2 dagen"
       },
-      "step2": {
-        "title": "2. Matching",
-        "description": "Wij zoeken de perfecte professionals uit ons geverifieerde netwerk voor u."
+      {
+        "step": "02",
+        "title": "Kandidaten-Matching",
+        "description": "Passende remote-experts vinden",
+        "details": "Op basis van uw behoefteanalyse presenteren wij u 3-5 voorgekwalificeerde remote-kandidaten uit ons netwerk. Elke kandidaat wordt zorgvuldig afgestemd op uw eisen.",
+        "timeline": "3-5 dagen"
       },
-      "step3": {
-        "title": "3. Interviews",
-        "description": "U leert de kandidaten kennen en maakt uw keuze."
+      {
+        "step": "03",
+        "title": "Interview & Selectie",
+        "description": "Kennismaking en beslissing",
+        "details": "U voert interviews met de voorgestelde kandidaten. Wij ondersteunen u bij het hele selectieproces en bij contractonderhandelingen.",
+        "timeline": "1 week"
       },
-      "step4": {
-        "title": "4. Onboarding",
-        "description": "Wij ondersteunen u bij de integratie in uw team en zorgen voor een soepele start."
+      {
+        "step": "04",
+        "title": "Onboarding & Support",
+        "description": "Succesvolle integratie waarborgen",
+        "details": "Wij begeleiden de onboarding van uw nieuwe remote-professional en staan bij vragen ter beschikking. Regelmatige check-ins zorgen voor een vlotte samenwerking.",
+        "timeline": "Doorlopend"
       }
+    ],
+    "appScreen": {
+      "step": "Stap",
+      "desc": "Zie hier hoe {step} in onze RaaS Hub werkt"
+    },
+    "benefits": {
+      "title": "Waarom ons proces werkt",
+      "items": [
+        "Snelle start: Gekwalificeerde remote-professional in 2-4 weken",
+        "Gecontroleerde kwaliteit: Alle kandidaten doorlopen ons screeningproces",
+        "Flexibele werkmodellen: Voltijd, deeltijd of projectgebaseerd",
+        "Transparante communicatie: Regelmatige updates en feedback",
+        "Culturele fit: Internationale remote-kandidaten met passende werkcultuur",
+        "Rechtszekerheid: Alle arbeidsrechtelijke aspecten zijn afgedekt"
+      ]
     },
     "cta": {
-      "title": "Klaar om te starten?",
-      "subtitle": "Neem vandaag nog contact met ons op en vind de perfecte remote-professional voor uw team",
-      "button": "Gratis kennismakingsgesprek"
+      "title": "Klaar voor remote-versterking?",
+      "subtitle": "Laten we in een gratis adviesgesprek over uw eisen praten en samen de passende remote-professionals voor uw bedrijf vinden.",
+      "button": "RaaS Aanvraag gratis maken"
     }
   },
   "resourceHub": {
