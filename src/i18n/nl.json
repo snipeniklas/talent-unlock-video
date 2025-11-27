@@ -1,0 +1,1005 @@
+{
+  "common": {
+    "error": "Fout",
+    "success": "Succes",
+    "loading": "Laden...",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "add": "Toevoegen",
+    "search": "Zoeken",
+    "filter": "Filteren",
+    "export": "Exporteren",
+    "import": "Importeren",
+    "download": "Downloaden",
+    "upload": "Uploaden",
+    "back": "Terug",
+    "next": "Volgende",
+    "previous": "Vorige",
+    "submit": "Verzenden",
+    "confirm": "Bevestigen",
+    "close": "Sluiten",
+    "view": "Bekijken",
+    "details": "Details",
+    "actions": "Acties",
+    "status": "Status",
+    "date": "Datum",
+    "name": "Naam",
+    "email": "E-mail",
+    "phone": "Telefoon",
+    "address": "Adres",
+    "description": "Beschrijving",
+    "notes": "Notities",
+    "created": "Aangemaakt",
+    "updated": "Bijgewerkt",
+    "yes": "Ja",
+    "no": "Nee",
+    "login": "Inloggen",
+    "logout": "Uitloggen",
+    "register": "Registreren",
+    "password": "Wachtwoord",
+    "forgotPassword": "Wachtwoord vergeten",
+    "resetPassword": "Wachtwoord resetten",
+    "newPassword": "Nieuw wachtwoord",
+    "confirmPassword": "Wachtwoord bevestigen",
+    "currentPassword": "Huidig wachtwoord",
+    "changePassword": "Wachtwoord wijzigen",
+    "profile": "Profiel",
+    "settings": "Instellingen",
+    "help": "Help",
+    "support": "Ondersteuning",
+    "documentation": "Documentatie",
+    "contact": "Contact",
+    "about": "Over ons",
+    "terms": "Voorwaarden",
+    "privacy": "Privacy",
+    "cookies": "Cookies",
+    "all": "Alle",
+    "active": "Actief",
+    "inactive": "Inactief",
+    "pending": "In behandeling",
+    "completed": "Voltooid",
+    "failed": "Mislukt",
+    "required": "Verplicht",
+    "optional": "Optioneel"
+  },
+  "companyDetail": {
+    "title": "Bedrijfsdetails",
+    "companyName": "Bedrijfsnaam",
+    "email": "E-mail",
+    "website": "Website",
+    "valueProposition": "Waardepropositie",
+    "statistics": "Statistieken",
+    "totalUsers": "Totaal aantal gebruikers",
+    "totalRequests": "Totaal aantal aanvragen",
+    "activeRequests": "Actieve aanvragen",
+    "notFound": "Bedrijf niet gevonden",
+    "errorFetching": "Fout bij ophalen bedrijfsgegevens"
+  },
+  "header": {
+    "home": "Startpagina",
+    "solutions": "Oplossingen",
+    "howWeWork": "Hoe wij werken",
+    "aboutUs": "Over ons",
+    "contact": "Contact",
+    "login": "Inloggen",
+    "createRequest": "Aanvraag maken",
+    "resourceHub": "Resource Hub"
+  },
+  "footer": {
+    "brand": "Hej Talent",
+    "tagline": "Gekwalificeerde externe professionals voor uw bedrijf",
+    "solutions": "Oplossingen",
+    "company": "Bedrijf",
+    "legal": "Juridisch",
+    "howWeWork": "Hoe wij werken",
+    "aboutUs": "Over ons",
+    "contact": "Contact",
+    "backoffice": "Backoffice",
+    "itDevelopment": "IT-ontwikkeling",
+    "aiMl": "AI & ML",
+    "privacy": "Privacy",
+    "imprint": "Impressum",
+    "copyright": "© 2024 Hej Talent. Alle rechten voorbehouden.",
+    "address": "Adres",
+    "addressLine1": "Hej Talent GmbH",
+    "addressLine2": "Deichstraße 14",
+    "addressLine3": "20459 Hamburg",
+    "addressLine4": "Duitsland"
+  },
+  "benefitBanner": {
+    "items": [
+      "30% goedkoper dan lokale professionals",
+      "Onboarding binnen 2-4 weken",
+      "Geverifieerde externe professionals",
+      "Volledige ondersteuning door ons team",
+      "Flexibele contracten zonder risico"
+    ]
+  },
+  "home": {
+    "hero": {
+      "badge": "Professionele Remote-as-a-Service",
+      "title": "Gekwalificeerde externe professionals voor uw bedrijf",
+      "subtitle": "Van Backoffice tot IT-ontwikkeling - wij verbinden u met de beste remote-talent uit Europa binnen 2-4 weken. Voordelig, betrouwbaar en zonder risico.",
+      "cta": {
+        "primary": "Gratis kennismakingsgesprek",
+        "secondary": "Bekijk oplossingen"
+      }
+    },
+    "trust": {
+      "title": "Vertrouwd door innovatieve bedrijven",
+      "subtitle": "Meer dan 50 bedrijven vertrouwen op onze professionals"
+    },
+    "cards": {
+      "backoffice": {
+        "title": "Remote Backoffice-professionals",
+        "description": "Van boekhouding tot HR - wij vinden de perfecte ondersteuning voor uw backoffice.",
+        "cta": "Backoffice-professionals ontdekken"
+      },
+      "itDev": {
+        "title": "Remote IT-ontwikkelaars",
+        "description": "Ervaren ontwikkelaars voor uw projecten - flexibel, betaalbaar en direct inzetbaar.",
+        "cta": "IT-talent vinden"
+      },
+      "aiMl": {
+        "title": "AI & Machine Learning experts",
+        "description": "Gespecialiseerde professionals voor uw AI- en ML-projecten - van prototype tot productie.",
+        "cta": "AI-experts ontdekken"
+      }
+    },
+    "stats": {
+      "title": "Uw voordelen in cijfers",
+      "candidates": "Professionals",
+      "candidatesDesc": "in ons geverifieerd netwerk",
+      "savings": "Besparing",
+      "savingsDesc": "gemiddeld t.o.v. lokale professionals",
+      "time": "Weken",
+      "timeDesc": "gemiddelde onboardingtijd"
+    },
+    "solutions": {
+      "title": "Onze oplossingen",
+      "subtitle": "Vind de perfecte remote-professionals voor uw behoeften",
+      "backoffice": {
+        "title": "Backoffice",
+        "description": "Boekhouding, HR, administratie en meer"
+      },
+      "itDev": {
+        "title": "IT-ontwikkeling",
+        "description": "Full-stack, frontend, backend en DevOps"
+      },
+      "aiMl": {
+        "title": "AI & ML",
+        "description": "Data Science, Machine Learning en AI-consultancy"
+      }
+    },
+    "hub": {
+      "badge": "Alles-in-één platform",
+      "title": "Beheer uw remote-team efficiënt",
+      "subtitle": "Onze Resource Hub biedt u alle tools voor succesvol remote-work",
+      "features": {
+        "dashboard": {
+          "title": "Overzichtelijk dashboard",
+          "description": "Behoud het overzicht over al uw professionals en projecten"
+        },
+        "requests": {
+          "title": "Eenvoudig aanvragen beheren",
+          "description": "Nieuwe professionals aanvragen binnen enkele minuten"
+        },
+        "candidates": {
+          "title": "Transparante matching",
+          "description": "Bekijk profielen en maak weloverwogen beslissingen"
+        },
+        "support": {
+          "title": "Persoonlijke ondersteuning",
+          "description": "Ons team staat altijd voor u klaar"
+        }
+      },
+      "cta": "Gratis demo aanvragen"
+    },
+    "testimonials": {
+      "title": "Wat onze klanten zeggen",
+      "subtitle": "Ervaar waarom bedrijven voor Hej Talent kiezen",
+      "items": {
+        "0": {
+          "text": "Hej Talent heeft ons binnen 2 weken verbonden met de perfecte externe boekhouder. Professioneel en betrouwbaar."
+        },
+        "1": {
+          "text": "Het uitstekende werk van een nieuwe collega overtuigde ons om een tweede Hej Talent-professional in het team op te nemen."
+        }
+      }
+    },
+    "cta": {
+      "title": "Klaar om uw team uit te breiden?",
+      "subtitle": "Laten we samen de perfecte remote-professional voor u vinden",
+      "button": "Gratis kennismakingsgesprek"
+    }
+  },
+  "solutionsOverview": {
+    "title": "Onze oplossingen",
+    "subtitle": "Vind de perfecte remote-professionals voor uw behoeften",
+    "backoffice": {
+      "title": "Backoffice-professionals",
+      "description": "Van boekhouding tot HR - wij vinden de perfecte ondersteuning voor uw backoffice-processen.",
+      "features": [
+        "Boekhouding & Finance",
+        "HR & Personeelsbeheer",
+        "Administratie & Organisatie",
+        "Klantenservice & Support"
+      ]
+    },
+    "itDev": {
+      "title": "IT-ontwikkelaars",
+      "description": "Ervaren ontwikkelaars voor uw projecten - flexibel, betaalbaar en direct inzetbaar.",
+      "features": [
+        "Full-Stack ontwikkeling",
+        "Frontend & Backend",
+        "Mobile App ontwikkeling",
+        "DevOps & Cloud"
+      ]
+    },
+    "aiMl": {
+      "title": "AI & ML experts",
+      "description": "Gespecialiseerde professionals voor uw AI- en ML-projecten - van prototype tot productie.",
+      "features": [
+        "Machine Learning",
+        "Data Science & Analytics",
+        "Natural Language Processing",
+        "Computer Vision"
+      ]
+    }
+  },
+  "contact": {
+    "title": "Neem contact met ons op",
+    "subtitle": "Wij helpen u graag bij het vinden van de perfecte remote-professional",
+    "form": {
+      "name": "Naam",
+      "namePlaceholder": "Uw naam",
+      "email": "E-mail",
+      "emailPlaceholder": "uw.email@bedrijf.nl",
+      "company": "Bedrijf",
+      "companyPlaceholder": "Uw bedrijf",
+      "message": "Bericht",
+      "messagePlaceholder": "Vertel ons over uw project...",
+      "submit": "Bericht verzenden",
+      "success": "Bedankt voor uw bericht! We nemen spoedig contact met u op.",
+      "error": "Er is een fout opgetreden. Probeer het later opnieuw."
+    },
+    "info": {
+      "title": "Contactgegevens",
+      "email": "E-mail",
+      "phone": "Telefoon",
+      "address": "Adres"
+    }
+  },
+  "contactCta": {
+    "title": "Klaar om te starten?",
+    "subtitle": "Neem vandaag nog contact met ons op en vind de perfecte remote-professional voor uw team",
+    "button": "Gratis kennismakingsgesprek"
+  },
+  "miniTeam": {
+    "title": "Ontmoet de oprichters van Hej Talent",
+    "pascal": {
+      "role": "Medeoprichter & CEO",
+      "quote": "Wij geloven in de kracht van remote-work en willen bedrijven helpen om de beste professionals te vinden."
+    },
+    "joachim": {
+      "role": "Medeoprichter & CTO",
+      "quote": "Technologie en menselijkheid - dat is wat ons onderscheidt."
+    }
+  },
+  "interactiveApp": {
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Overzichtelijk overzicht van al uw professionals en projecten"
+    },
+    "requests": {
+      "title": "Aanvragen",
+      "description": "Beheer uw aanvragen voor nieuwe professionals"
+    },
+    "resources": {
+      "title": "Resources",
+      "description": "Alle professionals in één overzicht"
+    },
+    "admin": {
+      "title": "Admin",
+      "description": "Geavanceerde beheerfuncties voor uw team"
+    }
+  },
+  "aboutUs": {
+    "hero": {
+      "title": "Over Hej Talent",
+      "subtitle": "Wij verbinden bedrijven met de beste remote-professionals uit Europa"
+    },
+    "mission": {
+      "title": "Onze missie",
+      "description": "Wij geloven dat de beste professionals overal ter wereld kunnen werken. Onze missie is het verbinden van bedrijven met toptalent - ongeacht de locatie. Zo maken wij remote-work eenvoudig, betrouwbaar en succesvol."
+    },
+    "values": {
+      "title": "Onze waarden",
+      "quality": {
+        "title": "Kwaliteit",
+        "description": "Wij werken alleen met geverifieerde en gekwalificeerde professionals"
+      },
+      "transparency": {
+        "title": "Transparantie",
+        "description": "Eerlijke communicatie en duidelijke processen"
+      },
+      "support": {
+        "title": "Ondersteuning",
+        "description": "Persoonlijke begeleiding gedurende het hele proces"
+      }
+    },
+    "team": {
+      "title": "Ons team",
+      "pascal": {
+        "name": "Pascal Spieß",
+        "role": "Medeoprichter & CEO",
+        "bio": "Pascal heeft meer dan 10 jaar ervaring in recruiting en remote-work. Hij heeft Hej Talent opgericht om bedrijven te helpen bij het vinden van de beste professionals."
+      },
+      "joachim": {
+        "name": "Joachim Kalff",
+        "role": "Medeoprichter & CTO",
+        "bio": "Joachim is een ervaren software-ontwikkelaar en heeft meerdere startups opgericht. Hij zorgt ervoor dat onze technologie altijd up-to-date is."
+      }
+    },
+    "milestones": {
+      "title": "Onze mijlpalen",
+      "items": [
+        {
+          "year": "2022",
+          "title": "Oprichting",
+          "description": "Hej Talent wordt opgericht in Hamburg"
+        },
+        {
+          "year": "2023",
+          "title": "Eerste klanten",
+          "description": "50+ bedrijven vertrouwen op onze professionals"
+        },
+        {
+          "year": "2024",
+          "title": "Uitbreiding",
+          "description": "Nieuw platform en uitgebreid netwerk"
+        }
+      ]
+    },
+    "development": {
+      "title": "Van idee tot realiteit",
+      "description": "Onze reis begon met een eenvoudige observatie: veel bedrijven hebben moeite om gekwalificeerde professionals te vinden, terwijl er wereldwijd talent beschikbaar is. Wij hebben Hej Talent opgericht om deze kloof te dichten en remote-work voor iedereen toegankelijk te maken.",
+      "achievements": {
+        "title": "Wat wij hebben bereikt",
+        "items": [
+          "100+ succesvolle plaatsingen",
+          "50+ tevreden klanten",
+          "200+ professionals in ons netwerk",
+          "95% retentiepercentage"
+        ]
+      }
+    }
+  },
+  "howWeWork": {
+    "hero": {
+      "title": "Hoe wij werken",
+      "subtitle": "Uw weg naar de perfecte remote-professional in 4 eenvoudige stappen"
+    },
+    "raas": {
+      "title": "Wat is Resource-as-a-Service?",
+      "description": "Resource-as-a-Service (RaaS) is ons innovatieve model om bedrijven te verbinden met gekwalificeerde remote-professionals. U krijgt toegang tot een geverifieerd netwerk van specialisten zonder de lasten van traditionele werving.",
+      "benefits": {
+        "title": "Uw voordelen",
+        "flexibility": {
+          "title": "Flexibiliteit",
+          "description": "Schaal uw team op of af naar wens"
+        },
+        "speed": {
+          "title": "Snelheid",
+          "description": "Onboarding binnen 2-4 weken"
+        },
+        "quality": {
+          "title": "Kwaliteit",
+          "description": "Geverifieerde en ervaren professionals"
+        },
+        "cost": {
+          "title": "Kostenefficiëntie",
+          "description": "Tot 30% besparing t.o.v. lokale professionals"
+        }
+      }
+    },
+    "process": {
+      "title": "Ons proces",
+      "step1": {
+        "title": "1. Kennismakingsgesprek",
+        "description": "In een persoonlijk gesprek leren wij uw behoeften en vereisten kennen."
+      },
+      "step2": {
+        "title": "2. Matching",
+        "description": "Wij zoeken de perfecte professionals uit ons geverifieerde netwerk voor u."
+      },
+      "step3": {
+        "title": "3. Interviews",
+        "description": "U leert de kandidaten kennen en maakt uw keuze."
+      },
+      "step4": {
+        "title": "4. Onboarding",
+        "description": "Wij ondersteunen u bij de integratie in uw team en zorgen voor een soepele start."
+      }
+    },
+    "cta": {
+      "title": "Klaar om te starten?",
+      "subtitle": "Neem vandaag nog contact met ons op en vind de perfecte remote-professional voor uw team",
+      "button": "Gratis kennismakingsgesprek"
+    }
+  },
+  "resourceHub": {
+    "hero": {
+      "title": "Resource Hub",
+      "subtitle": "Uw centrale platform voor het beheer van remote-professionals"
+    },
+    "overview": {
+      "title": "Alles op één plek",
+      "description": "Onze Resource Hub biedt u alle tools die u nodig heeft om uw remote-team efficiënt te beheren. Van het aanvragen van nieuwe professionals tot het monitoren van lopende projecten."
+    },
+    "features": {
+      "dashboard": {
+        "title": "Overzichtelijk dashboard",
+        "description": "Behoud het overzicht over al uw professionals, projecten en statistieken op één centrale plek."
+      },
+      "serviceManagement": {
+        "title": "Diensten beheren",
+        "description": "Beheer actieve diensten, bekijk contractdetails en verleng of pas contracten aan."
+      },
+      "requestProcess": {
+        "title": "Aanvraagproces",
+        "description": "Vraag eenvoudig nieuwe professionals aan en volg de status van uw aanvragen in realtime."
+      },
+      "analytics": {
+        "title": "Analytics & Rapportage",
+        "description": "Gedetailleerde inzichten en rapporten over uw remote-team en projectvoortgang."
+      },
+      "security": {
+        "title": "Beveiliging & Privacy",
+        "description": "Al uw gegevens zijn veilig opgeslagen en worden volgens GDPR-richtlijnen verwerkt."
+      }
+    },
+    "cta": {
+      "title": "Klaar om te starten?",
+      "subtitle": "Vraag vandaag nog toegang tot onze Resource Hub aan",
+      "button": "Nu registreren"
+    }
+  },
+  "hejTalentLanding": {
+    "hero": {
+      "badge": "Vertrouwd door 50+ bedrijven",
+      "title": "De slimme manier om remote-professionals te vinden",
+      "subtitle": "Hej Talent verbindt u binnen 2-4 weken met gekwalificeerde professionals uit Europa. Flexibel, betaalbaar en zonder risico.",
+      "cta": "Gratis kennismakingsgesprek"
+    },
+    "benefits": {
+      "title": "Waarom Hej Talent?",
+      "cost": {
+        "title": "30% kostenreductie",
+        "description": "Bespaar gemiddeld 30% op personeelskosten zonder kwaliteitsverlies"
+      },
+      "speed": {
+        "title": "Snelle onboarding",
+        "description": "Uw nieuwe professional kan binnen 2-4 weken beginnen"
+      },
+      "quality": {
+        "title": "Geverifieerde professionals",
+        "description": "Alle professionals worden door ons gescreend en getest"
+      },
+      "support": {
+        "title": "Volledige ondersteuning",
+        "description": "Ons team begeleidt u gedurende het hele proces"
+      }
+    },
+    "problems": {
+      "title": "Deze uitdagingen kennen wij",
+      "hiring": {
+        "title": "Langdurige vacatures",
+        "description": "Maanden zoeken zonder geschikte kandidaten te vinden"
+      },
+      "costs": {
+        "title": "Hoge personeelskosten",
+        "description": "Lokale salarissen zijn vaak te hoog voor startups en MKB"
+      },
+      "quality": {
+        "title": "Kwaliteitsgebrek",
+        "description": "Moeilijk om gekwalificeerde specialisten te vinden"
+      }
+    },
+    "solution": {
+      "title": "Onze oplossing",
+      "description": "Met Hej Talent krijgt u toegang tot een geverifieerd netwerk van professionals uit Europa. Wij nemen het wervingsproces volledig uit handen en zorgen voor een soepele integratie in uw team.",
+      "features": [
+        "Geen wervingskosten",
+        "Flexibele contracten",
+        "Persoonlijke ondersteuning",
+        "Risico-vrije testperiode"
+      ]
+    },
+    "testimonials": {
+      "title": "Wat onze klanten zeggen"
+    },
+    "faq": {
+      "title": "Veelgestelde vragen",
+      "q1": {
+        "question": "Hoe lang duurt het matching-proces?",
+        "answer": "Gemiddeld 2-4 weken van eerste gesprek tot start van de professional."
+      },
+      "q2": {
+        "question": "Welke professionals bieden jullie aan?",
+        "answer": "Van Backoffice (boekhouding, HR) tot IT-ontwikkeling en AI/ML-experts."
+      },
+      "q3": {
+        "question": "Hoe werkt de facturering?",
+        "answer": "Wij factureren maandelijks op basis van gewerkte uren of een vast maandtarief."
+      },
+      "q4": {
+        "question": "Kan ik een professional eerst testen?",
+        "answer": "Ja, wij bieden een risico-vrije testperiode van 2 weken."
+      }
+    },
+    "footer": {
+      "title": "Klaar om te starten?",
+      "subtitle": "Boek een gratis kennismakingsgesprek en ontdek hoe wij uw team kunnen versterken",
+      "cta": "Gratis gesprek boeken"
+    }
+  },
+  "backofficeLanding": {
+    "hero": {
+      "title": "Remote Backoffice-professionals",
+      "subtitle": "Van boekhouding tot HR - vind de perfecte ondersteuning voor uw backoffice binnen 2-4 weken",
+      "cta": "Gratis kennismakingsgesprek"
+    },
+    "benefits": {
+      "title": "Uw voordelen",
+      "cost": "30% kostenreductie",
+      "speed": "Onboarding binnen 2-4 weken",
+      "quality": "Geverifieerde professionals",
+      "support": "Volledige ondersteuning"
+    },
+    "problems": {
+      "title": "Deze uitdagingen kennen wij",
+      "admin": {
+        "title": "Administratieve last",
+        "description": "Te veel administratie, te weinig tijd voor de kernactiviteiten"
+      },
+      "costs": {
+        "title": "Hoge kosten",
+        "description": "Lokale backoffice-medewerkers zijn vaak te duur"
+      },
+      "quality": {
+        "title": "Kwaliteitsgebrek",
+        "description": "Moeilijk om gekwalificeerde backoffice-professionals te vinden"
+      }
+    },
+    "solution": {
+      "title": "Onze Backoffice-professionals",
+      "description": "Wij bieden professionals voor alle backoffice-taken",
+      "accounting": "Boekhouding & Finance",
+      "hr": "HR & Personeelsbeheer",
+      "admin": "Administratie & Organisatie",
+      "support": "Klantenservice & Support"
+    },
+    "testimonials": {
+      "title": "Succesverhalen"
+    },
+    "faq": {
+      "title": "Veelgestelde vragen"
+    },
+    "footer": {
+      "title": "Klaar om uw backoffice te versterken?",
+      "cta": "Gratis kennismakingsgesprek"
+    }
+  },
+  "itDevLanding": {
+    "hero": {
+      "title": "Remote IT-ontwikkelaars",
+      "subtitle": "Ervaren ontwikkelaars voor uw projecten - flexibel, betaalbaar en binnen 2-4 weken inzetbaar",
+      "cta": "Gratis kennismakingsgesprek"
+    },
+    "benefits": {
+      "title": "Waarom onze IT-ontwikkelaars?",
+      "experience": "5+ jaar ervaring gemiddeld",
+      "technologies": "Alle gangbare technologieën",
+      "flexibility": "Flexibele inzet",
+      "support": "Technische ondersteuning"
+    },
+    "problems": {
+      "title": "Deze uitdagingen kennen wij",
+      "shortage": {
+        "title": "Ontwikkelaarstekort",
+        "description": "Moeilijk om gekwalificeerde ontwikkelaars te vinden"
+      },
+      "costs": {
+        "title": "Hoge salarissen",
+        "description": "Lokale ontwikkelaars zijn vaak te duur"
+      },
+      "speed": {
+        "title": "Lange werving",
+        "description": "Wervingsprocessen duren maanden"
+      }
+    },
+    "solution": {
+      "title": "Onze IT-ontwikkelaars",
+      "description": "Specialisten voor uw technische projecten",
+      "fullstack": "Full-Stack ontwikkeling",
+      "frontend": "Frontend & Backend",
+      "mobile": "Mobile App ontwikkeling",
+      "devops": "DevOps & Cloud"
+    },
+    "technologies": {
+      "title": "Technologieën & Skills",
+      "frontend": "React, Vue, Angular, TypeScript",
+      "backend": "Node.js, Python, Java, .NET",
+      "mobile": "React Native, Flutter, iOS, Android",
+      "cloud": "AWS, Azure, Google Cloud"
+    },
+    "testimonials": {
+      "title": "Succesverhalen"
+    },
+    "faq": {
+      "title": "Veelgestelde vragen"
+    },
+    "footer": {
+      "title": "Klaar om uw ontwikkelteam uit te breiden?",
+      "cta": "Gratis kennismakingsgesprek"
+    }
+  },
+  "aiMlLanding": {
+    "hero": {
+      "title": "AI & Machine Learning experts",
+      "subtitle": "Gespecialiseerde professionals voor uw AI-projecten - van prototype tot productie binnen 2-4 weken",
+      "cta": "Gratis kennismakingsgesprek"
+    },
+    "benefits": {
+      "title": "Waarom onze AI-experts?",
+      "expertise": "Diepe AI/ML-expertise",
+      "experience": "Praktijkervaring in productie",
+      "technologies": "Nieuwste technologieën & frameworks",
+      "support": "Strategische AI-consultancy"
+    },
+    "problems": {
+      "title": "Deze uitdagingen kennen wij",
+      "shortage": {
+        "title": "AI-talentschaarste",
+        "description": "Moeilijk om gekwalificeerde AI-experts te vinden"
+      },
+      "costs": {
+        "title": "Hoge kosten",
+        "description": "AI-specialisten zijn zeer duur"
+      },
+      "complexity": {
+        "title": "Complexiteit",
+        "description": "AI-projecten vereisen specifieke expertise"
+      }
+    },
+    "solution": {
+      "title": "Onze AI & ML experts",
+      "description": "Specialisten voor uw AI-initiatieven",
+      "ml": "Machine Learning Engineering",
+      "data": "Data Science & Analytics",
+      "nlp": "Natural Language Processing",
+      "vision": "Computer Vision"
+    },
+    "useCases": {
+      "title": "Toepassingsgebieden",
+      "automation": "Procesautomatisering met AI",
+      "prediction": "Predictieve analyses & forecasting",
+      "nlp": "Chatbots & tekstanalyse",
+      "vision": "Beeldherkenning & classificatie"
+    },
+    "testimonials": {
+      "title": "Succesverhalen"
+    },
+    "faq": {
+      "title": "Veelgestelde vragen"
+    },
+    "footer": {
+      "title": "Klaar om uw AI-ambities te realiseren?",
+      "cta": "Gratis kennismakingsgesprek"
+    }
+  },
+  "solutions": {
+    "backoffice": {
+      "audience": "Voor bedrijven die hun backoffice willen versterken",
+      "problem": "Administratieve taken kosten te veel tijd en resources",
+      "talents": "Onze Backoffice-professionals",
+      "benefits": "Uw voordelen",
+      "results": "Resultaten die meetbaar zijn",
+      "cta": "Backoffice-professional vinden"
+    }
+  },
+  "app": {
+    "layout": {
+      "dashboard": "Dashboard",
+      "searchRequests": "Aanvragen",
+      "specialists": "Specialisten",
+      "settings": "Instellingen",
+      "support": "Ondersteuning",
+      "logout": "Uitloggen"
+    },
+    "sidebar": {
+      "company": {
+        "overview": "Overzicht",
+        "requests": "Aanvragen",
+        "resources": "Resources",
+        "settings": "Instellingen",
+        "support": "Ondersteuning"
+      },
+      "admin": {
+        "dashboard": "Dashboard",
+        "requests": "Aanvragen",
+        "candidates": "Kandidaten",
+        "companies": "Bedrijven",
+        "allocations": "Toewijzingen",
+        "crm": "CRM",
+        "settings": "Instellingen",
+        "support": "Ondersteuning"
+      }
+    },
+    "status": {
+      "active": "Actief",
+      "pending": "In behandeling",
+      "completed": "Voltooid",
+      "cancelled": "Geannuleerd"
+    },
+    "dashboard": {
+      "welcome": "Welkom terug",
+      "stats": {
+        "activeRequests": "Actieve aanvragen",
+        "totalResources": "Totaal aantal resources",
+        "pendingTasks": "Openstaande taken",
+        "completedThisMonth": "Voltooid deze maand"
+      },
+      "recentRequests": "Recente aanvragen",
+      "quickActions": "Snelle acties",
+      "createRequest": "Nieuwe aanvraag",
+      "viewResources": "Resources bekijken",
+      "contactSupport": "Contact opnemen"
+    },
+    "searchRequests": {
+      "title": "Aanvragen",
+      "new": "Nieuwe aanvraag",
+      "filters": {
+        "all": "Alle",
+        "active": "Actief",
+        "pending": "In behandeling",
+        "completed": "Voltooid"
+      },
+      "table": {
+        "title": "Titel",
+        "status": "Status",
+        "created": "Aangemaakt",
+        "actions": "Acties"
+      },
+      "empty": "Geen aanvragen gevonden",
+      "createFirst": "Maak uw eerste aanvraag"
+    },
+    "newRequest": {
+      "title": "Nieuwe aanvraag",
+      "form": {
+        "title": "Titel",
+        "titlePlaceholder": "Bijv. Senior React-ontwikkelaar",
+        "description": "Beschrijving",
+        "descriptionPlaceholder": "Beschrijf de vereisten...",
+        "skills": "Vereiste vaardigheden",
+        "skillsPlaceholder": "React, TypeScript, Node.js",
+        "experience": "Ervaring",
+        "startDate": "Startdatum",
+        "budget": "Budget",
+        "submit": "Aanvraag indienen",
+        "cancel": "Annuleren"
+      },
+      "success": "Aanvraag succesvol ingediend",
+      "error": "Fout bij indienen van aanvraag"
+    },
+    "settings": {
+      "title": "Instellingen",
+      "profile": {
+        "title": "Profiel",
+        "firstName": "Voornaam",
+        "lastName": "Achternaam",
+        "email": "E-mail",
+        "phone": "Telefoon",
+        "save": "Opslaan"
+      },
+      "company": {
+        "title": "Bedrijfsgegevens",
+        "name": "Bedrijfsnaam",
+        "website": "Website",
+        "industry": "Branche"
+      },
+      "password": {
+        "title": "Wachtwoord wijzigen",
+        "current": "Huidig wachtwoord",
+        "new": "Nieuw wachtwoord",
+        "confirm": "Wachtwoord bevestigen",
+        "change": "Wachtwoord wijzigen"
+      }
+    },
+    "support": {
+      "title": "Ondersteuning",
+      "chat": {
+        "title": "Chat met ondersteuning",
+        "placeholder": "Typ uw bericht...",
+        "send": "Verzenden"
+      },
+      "tickets": {
+        "title": "Mijn tickets",
+        "new": "Nieuw ticket",
+        "view": "Bekijken"
+      }
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "stats": {
+        "totalRequests": "Totaal aantal aanvragen",
+        "activeCandidates": "Actieve kandidaten",
+        "totalCompanies": "Totaal aantal bedrijven",
+        "revenue": "Omzet"
+      }
+    },
+    "searchRequests": {
+      "title": "Aanvragen beheren",
+      "assignCandidate": "Kandidaat toewijzen",
+      "updateStatus": "Status bijwerken",
+      "viewDetails": "Details bekijken"
+    }
+  },
+  "raasInquiry": {
+    "title": "RaaS Aanvraag",
+    "subtitle": "Vertel ons over uw behoeften en wij vinden de perfecte professional voor u",
+    "form": {
+      "companyName": "Bedrijfsnaam",
+      "companyNamePlaceholder": "Uw bedrijf",
+      "contactPerson": "Contactpersoon",
+      "contactPersonPlaceholder": "Voor- en achternaam",
+      "email": "E-mail",
+      "emailPlaceholder": "uw.email@bedrijf.nl",
+      "phone": "Telefoon",
+      "phonePlaceholder": "+31 20 123 4567",
+      "serviceType": "Type dienst",
+      "serviceTypePlaceholder": "Selecteer type",
+      "backoffice": "Backoffice",
+      "itDevelopment": "IT-ontwikkeling",
+      "aiMl": "AI & ML",
+      "other": "Anders",
+      "requirements": "Vereisten",
+      "requirementsPlaceholder": "Beschrijf uw behoeften...",
+      "startDate": "Gewenste startdatum",
+      "submit": "Aanvraag indienen",
+      "submitting": "Wordt ingediend..."
+    },
+    "validation": {
+      "companyNameRequired": "Bedrijfsnaam is verplicht",
+      "contactPersonRequired": "Contactpersoon is verplicht",
+      "emailRequired": "E-mail is verplicht",
+      "emailInvalid": "Ongeldig e-mailadres",
+      "phoneRequired": "Telefoon is verplicht",
+      "serviceTypeRequired": "Type dienst is verplicht",
+      "requirementsRequired": "Vereisten zijn verplicht"
+    },
+    "success": {
+      "title": "Bedankt voor uw aanvraag!",
+      "message": "Wij hebben uw aanvraag ontvangen en nemen binnen 24 uur contact met u op.",
+      "calendly": "Of plan direct een kennismakingsgesprek:"
+    },
+    "error": {
+      "title": "Er is iets misgegaan",
+      "message": "Probeer het later opnieuw of neem direct contact met ons op."
+    }
+  },
+  "crm": {
+    "overview": {
+      "title": "CRM Overzicht",
+      "companies": "Bedrijven",
+      "contacts": "Contacten",
+      "tasks": "Taken",
+      "viewAll": "Alles bekijken"
+    },
+    "companies": {
+      "title": "Bedrijven",
+      "new": "Nieuw bedrijf",
+      "fields": {
+        "name": "Naam",
+        "email": "E-mail",
+        "phone": "Telefoon",
+        "website": "Website",
+        "industry": "Branche",
+        "size": "Grootte",
+        "status": "Status",
+        "revenue": "Omzet",
+        "address": "Adres",
+        "notes": "Notities"
+      },
+      "status": {
+        "lead": "Lead",
+        "prospect": "Prospect",
+        "customer": "Klant",
+        "inactive": "Inactief"
+      },
+      "detail": {
+        "overview": "Overzicht",
+        "contacts": "Contacten",
+        "tasks": "Taken",
+        "notes": "Notities",
+        "activity": "Activiteit"
+      }
+    },
+    "contacts": {
+      "title": "Contacten",
+      "new": "Nieuw contact",
+      "import": "Importeren",
+      "fields": {
+        "firstName": "Voornaam",
+        "lastName": "Achternaam",
+        "email": "E-mail",
+        "phone": "Telefoon",
+        "mobile": "Mobiel",
+        "position": "Functie",
+        "department": "Afdeling",
+        "company": "Bedrijf",
+        "status": "Status",
+        "priority": "Prioriteit",
+        "notes": "Notities"
+      },
+      "status": {
+        "lead": "Lead",
+        "qualified": "Gekwalificeerd",
+        "proposal": "Voorstel",
+        "negotiation": "Onderhandeling",
+        "closed": "Gesloten",
+        "lost": "Verloren"
+      },
+      "priority": {
+        "low": "Laag",
+        "medium": "Gemiddeld",
+        "high": "Hoog"
+      },
+      "detail": {
+        "overview": "Overzicht",
+        "activity": "Activiteit",
+        "tasks": "Taken",
+        "notes": "Notities",
+        "emails": "E-mails"
+      },
+      "import": {
+        "title": "Contacten importeren",
+        "subtitle": "Upload een CSV-bestand met uw contacten",
+        "downloadTemplate": "Download sjabloon",
+        "dragDrop": "Sleep uw bestand hierheen of klik om te uploaden",
+        "processing": "Wordt verwerkt...",
+        "success": "Contacten succesvol geïmporteerd",
+        "error": "Fout bij importeren van contacten"
+      }
+    }
+  },
+  "imprint": {
+    "title": "Impressum",
+    "company": {
+      "title": "Bedrijfsgegevens",
+      "name": "Hej Talent GmbH",
+      "address": "Deichstraße 14",
+      "city": "20459 Hamburg",
+      "country": "Duitsland"
+    },
+    "registration": {
+      "title": "Registratie",
+      "court": "Handelsregister: Amtsgericht Hamburg",
+      "number": "Registratienummer: HRB 123456"
+    },
+    "vat": {
+      "title": "BTW",
+      "id": "BTW-identificatienummer: DE123456789"
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "E-mail: info@hejtalent.de",
+      "phone": "Telefoon: +49 40 123456"
+    }
+  }
+}

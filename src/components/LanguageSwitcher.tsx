@@ -20,7 +20,8 @@ export default function LanguageSwitcher() {
 
   const languages = [
     { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-    { code: 'en', name: 'English', flag: '🇺🇸' }
+    { code: 'en', name: 'English', flag: '🇺🇸' },
+    { code: 'nl', name: 'Nederlands', flag: '🇳🇱' }
   ];
 
   return (

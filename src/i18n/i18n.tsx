@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useMemo, useState, useEffect, ReactNode } from 'react';
 import de from './de.json';
 import en from './en.json';
+import nl from './nl.json';
 
-export type SupportedLanguage = 'de' | 'en';
+export type SupportedLanguage = 'de' | 'en' | 'nl';
 
 type Dictionary = Record<string, unknown>;
 
@@ -15,7 +16,7 @@ interface I18nContextValue {
 
 const I18nContext = createContext<I18nContextValue | undefined>(undefined);
 
-const dictionaries: Record<SupportedLanguage, Dictionary> = { de, en };
+const dictionaries: Record<SupportedLanguage, Dictionary> = { de, en, nl };
 
 function getByPath(dict: Dictionary, path: string): unknown {
   return path.split('.').reduce<unknown>((acc, segment) => {
@@ -29,7 +30,7 @@ function getByPath(dict: Dictionary, path: string): unknown {
 export const I18nProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLangState] = useState<SupportedLanguage>(() => {
     const stored = typeof window !== 'undefined' ? window.localStorage.getItem('lang') : null;
-    return (stored === 'de' || stored === 'en') ? (stored as SupportedLanguage) : 'de';
+    return (stored === 'de' || stored === 'en' || stored === 'nl') ? (stored as SupportedLanguage) : 'de';
   });
 
   useEffect(() => {
