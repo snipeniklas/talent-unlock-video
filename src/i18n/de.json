@@ -296,7 +296,15 @@
     },
     "testimonials": {
       "title": "Was unsere Kunden sagen",
-      "subtitle": "Vertrauen Sie auf die Erfahrungen unserer zufriedenen Kunden"
+      "subtitle": "Vertrauen Sie auf die Erfahrungen unserer zufriedenen Kunden",
+      "items": {
+        "0": {
+          "text": "Hej Talent hat uns innerhalb von 2 Wochen die perfekte Remote-Buchhalterin vermittelt. Professionell und zuverlässig."
+        },
+        "1": {
+          "text": "Die hervorragende Arbeit von einem neuen Kollegen hat uns überzeugt, eine zweite Hej Talent-Kraft ins Team zu holen."
+        }
+      }
     }
   },
   "solutionsOverview": {
