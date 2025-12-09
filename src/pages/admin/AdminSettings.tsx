@@ -33,6 +33,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { MS365ConnectButton } from "@/components/MS365ConnectButton";
 import { useMS365Integration } from "@/hooks/useMS365Integration";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "@/i18n/i18n";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -77,6 +78,16 @@ export default function AdminSettings() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { isConnected: ms365Connected } = useMS365Integration();
+  const { t, lang } = useTranslation();
+
+  // Get date locale based on language
+  const getDateLocale = () => {
+    switch (lang) {
+      case 'de': return 'de-DE';
+      case 'nl': return 'nl-NL';
+      default: return 'en-US';
+    }
+  };
 
   // Fetch current user for email settings
   const { data: currentUser } = useQuery({
@@ -132,14 +143,12 @@ export default function AdminSettings() {
 
       if (error) throw error;
 
-      // Benutzerrollen für jeden Benutzer abrufen
       const { data: userRoles, error: rolesError } = await supabase
         .from('user_roles')
         .select('user_id, role');
 
       if (rolesError) throw rolesError;
 
-      // Rollen zu Benutzerprofilen hinzufügen
       const usersWithRoles = profiles?.map(profile => ({
         ...profile,
         user_roles: userRoles?.filter(role => role.user_id === profile.user_id) || []
@@ -149,8 +158,8 @@ export default function AdminSettings() {
     } catch (error) {
       console.error('Error fetching users:', error);
       toast({
-        title: "Fehler beim Laden der Benutzer",
-        description: "Die Benutzerdaten konnten nicht geladen werden.",
+        title: t('adminSettings.users.toast.loadError'),
+        description: t('adminSettings.users.toast.loadErrorDescription'),
         variant: "destructive",
       });
     } finally {
@@ -175,7 +184,6 @@ export default function AdminSettings() {
   const filterUsers = () => {
     let filtered = users;
 
-    // Textsuche
     if (searchTerm) {
       filtered = filtered.filter(user => 
         user.first_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -185,12 +193,10 @@ export default function AdminSettings() {
       );
     }
 
-    // Unternehmensfilter
     if (companyFilter !== "all") {
       filtered = filtered.filter(user => user.company?.id === companyFilter);
     }
 
-    // Rollenfilter  
     if (roleFilter !== "all") {
       filtered = filtered.filter(user => 
         user.user_roles.some(role => role.role === roleFilter)
@@ -217,7 +223,6 @@ export default function AdminSettings() {
         throw new Error(data.error);
       }
 
-      // Zeige den Reset-Link im Dialog an
       if (data.resetLink) {
         setResetLinkDialog({
           email: email,
@@ -226,14 +231,14 @@ export default function AdminSettings() {
       }
 
       toast({
-        title: "Passwort-Reset gesendet",
-        description: data.message || `Ein Passwort-Reset Link wurde an ${email} gesendet.`,
+        title: t('adminSettings.users.toast.passwordReset'),
+        description: data.message || t('adminSettings.users.toast.passwordResetDescription').replace('{email}', email),
       });
     } catch (error: any) {
       console.error('Error resetting password:', error);
       toast({
-        title: "Fehler beim Passwort-Reset",
-        description: error.message || "Der Passwort-Reset konnte nicht gesendet werden.",
+        title: t('adminSettings.users.toast.passwordResetError'),
+        description: error.message || t('adminSettings.users.toast.passwordResetErrorDescription'),
         variant: "destructive",
       });
     }
@@ -245,13 +250,13 @@ export default function AdminSettings() {
       setCopiedToClipboard(true);
       setTimeout(() => setCopiedToClipboard(false), 2000);
       toast({
-        title: "Link kopiert",
-        description: "Der Passwort-Reset Link wurde in die Zwischenablage kopiert.",
+        title: t('adminSettings.users.toast.linkCopied'),
+        description: t('adminSettings.users.toast.linkCopiedDescription'),
       });
     } catch (error) {
       toast({
-        title: "Fehler beim Kopieren",
-        description: "Der Link konnte nicht kopiert werden.",
+        title: t('adminSettings.users.toast.copyError'),
+        description: t('adminSettings.users.toast.copyErrorDescription'),
         variant: "destructive",
       });
     }
@@ -262,7 +267,7 @@ export default function AdminSettings() {
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session) {
-        throw new Error('Nicht authentifiziert');
+        throw new Error(t('adminSettings.users.toast.notAuthenticated'));
       }
 
       const { data, error } = await supabase.functions.invoke('delete-user', {
@@ -279,18 +284,17 @@ export default function AdminSettings() {
       }
 
       toast({
-        title: "Benutzer gelöscht",
-        description: "Der Benutzer wurde erfolgreich aus dem System entfernt.",
+        title: t('adminSettings.users.toast.deleted'),
+        description: t('adminSettings.users.toast.deletedDescription'),
       });
 
-      // Benutzerliste aktualisieren
       fetchUsers();
       setDeleteUserDialog(null);
     } catch (error: any) {
       console.error('Error deleting user:', error);
       toast({
-        title: "Fehler beim Löschen",
-        description: error.message || "Der Benutzer konnte nicht gelöscht werden.",
+        title: t('adminSettings.users.toast.deleteError'),
+        description: error.message || t('adminSettings.users.toast.deleteErrorDescription'),
         variant: "destructive",
       });
     }
@@ -298,21 +302,16 @@ export default function AdminSettings() {
 
   const toggleUserStatus = async (userId: string, currentlyActive: boolean) => {
     try {
-      // Vereinfachte Simulation der User-Sperrung
-      // In einer echten Implementierung würde man die User über die Auth API verwalten
       toast({
-        title: "Funktion noch nicht implementiert",
-        description: "Die User-Sperrung wird in einer zukünftigen Version verfügbar sein.",
+        title: t('adminSettings.users.toast.notImplemented'),
+        description: t('adminSettings.users.toast.notImplementedDescription'),
         variant: "destructive",
       });
-      
-      // Alternative: User-Status in einer eigenen Tabelle verwalten
-      // oder mit Supabase Row Level Security arbeiten
     } catch (error) {
       console.error('Error toggling user status:', error);
       toast({
-        title: "Fehler",
-        description: "Der Benutzerstatus konnte nicht geändert werden.",
+        title: t('adminSettings.users.toast.statusError'),
+        description: t('adminSettings.users.toast.statusErrorDescription'),
         variant: "destructive",
       });
     }
@@ -320,7 +319,6 @@ export default function AdminSettings() {
 
   const getUserRole = (userRoles: {role: string}[]) => {
     if (userRoles.length === 0) return "user";
-    // Höchste Rolle zurückgeben
     if (userRoles.some(r => r.role === "admin")) return "admin";
     if (userRoles.some(r => r.role === "company_admin")) return "company_admin";
     if (userRoles.some(r => r.role === "resource_manager")) return "resource_manager";
@@ -338,20 +336,13 @@ export default function AdminSettings() {
   };
 
   const getRoleText = (role: string) => {
-    const texts = {
-      admin: "Hej Talent Admin",
-      company_admin: "Unternehmens-Admin",
-      resource_manager: "Ressourcen-Manager",
-      user: "Benutzer"
-    };
-    return texts[role as keyof typeof texts] || "Benutzer";
+    return t(`adminSettings.users.roles.${role}`, role);
   };
 
   const updateUserRole = async (userId: string, newRole: string) => {
     try {
       console.log('Updating role for user:', userId, 'to role:', newRole);
       
-      // Alle alten Rollen löschen (sicherstellen dass die Tabelle sauber ist)
       const { error: deleteError } = await supabase
         .from('user_roles')
         .delete()
@@ -364,15 +355,13 @@ export default function AdminSettings() {
 
       console.log('Deleted all existing roles for user');
 
-      // Kurze Pause um sicherzustellen dass DELETE abgeschlossen ist
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Neue Rolle hinzufügen mit UPSERT
       const { error: upsertError } = await supabase
         .from('user_roles')
         .upsert({
           user_id: userId,
-          role: newRole as any // Type will be updated after migration
+          role: newRole as any
         }, {
           onConflict: 'user_id,role'
         });
@@ -385,24 +374,18 @@ export default function AdminSettings() {
       console.log('Successfully upserted new role');
 
       toast({
-        title: "Rolle aktualisiert",
-        description: "Die Benutzerrolle wurde erfolgreich geändert.",
+        title: t('adminSettings.users.toast.roleChanged'),
+        description: t('adminSettings.users.toast.roleChangedDescription'),
       });
 
-      // Benutzerliste aktualisieren
       fetchUsers();
       setEditingRole(null);
     } catch (error: any) {
       console.error('Error updating user role:', error);
-      let errorMessage = "Die Rolle konnte nicht geändert werden.";
-      
-      if (error.code === '23505') {
-        errorMessage = "Fehler beim Zuweisen der Rolle. Bitte versuchen Sie es erneut.";
-      }
       
       toast({
-        title: "Fehler beim Aktualisieren der Rolle",
-        description: errorMessage,
+        title: t('adminSettings.users.toast.roleError'),
+        description: t('adminSettings.users.toast.roleErrorDescription'),
         variant: "destructive",
       });
     }
@@ -411,7 +394,7 @@ export default function AdminSettings() {
   // Update email signature mutation
   const updateEmailSignatureMutation = useMutation({
     mutationFn: async () => {
-      if (!currentUser?.id) throw new Error('Nicht authentifiziert');
+      if (!currentUser?.id) throw new Error(t('adminSettings.users.toast.notAuthenticated'));
 
       const { error } = await supabase
         .from('user_email_settings')
@@ -427,13 +410,13 @@ export default function AdminSettings() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['adminEmailSettings'] });
       toast({
-        title: 'E-Mail Signatur gespeichert',
-        description: 'Ihre E-Mail Signatur wurde erfolgreich aktualisiert.',
+        title: t('adminSettings.email.toast.saved'),
+        description: t('adminSettings.email.toast.savedDescription'),
       });
     },
     onError: (error: any) => {
       toast({
-        title: 'Fehler',
+        title: t('adminSettings.email.toast.error'),
         description: error.message,
         variant: 'destructive',
       });
@@ -457,10 +440,10 @@ export default function AdminSettings() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Users className="h-5 w-5" />
-              Benutzerverwaltung
+              {t('adminSettings.users.title')}
             </CardTitle>
             <CardDescription>
-              Verwalten Sie alle Benutzer und deren Rollen
+              {t('adminSettings.users.subtitle')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -498,11 +481,11 @@ export default function AdminSettings() {
         <TabsList>
           <TabsTrigger value="users">
             <Users className="h-4 w-4 mr-2" />
-            Benutzerverwaltung
+            {t('adminSettings.tabs.users')}
           </TabsTrigger>
           <TabsTrigger value="email">
             <Mail className="h-4 w-4 mr-2" />
-            E-Mail Integration
+            {t('adminSettings.tabs.email')}
           </TabsTrigger>
         </TabsList>
 
@@ -511,10 +494,10 @@ export default function AdminSettings() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Users className="h-5 w-5" />
-                Benutzerverwaltung
+                {t('adminSettings.users.title')}
               </CardTitle>
               <CardDescription>
-                Verwalten Sie alle Benutzer und deren Rollen im System
+                {t('adminSettings.users.subtitle')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -524,7 +507,7 @@ export default function AdminSettings() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-blue-500" />
-                  <span className="text-sm font-medium text-muted-foreground">Gesamt Benutzer</span>
+                  <span className="text-sm font-medium text-muted-foreground">{t('adminSettings.users.stats.totalUsers')}</span>
                 </div>
                 <p className="text-2xl font-bold">{totalUsers}</p>
               </CardContent>
@@ -534,7 +517,7 @@ export default function AdminSettings() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-2">
                   <Shield className="h-4 w-4 text-red-500" />
-                  <span className="text-sm font-medium text-muted-foreground">Hej Talent Admins</span>
+                  <span className="text-sm font-medium text-muted-foreground">{t('adminSettings.users.stats.hejTalentAdmins')}</span>
                 </div>
                 <p className="text-2xl font-bold">{totalAdmins}</p>
               </CardContent>
@@ -544,7 +527,7 @@ export default function AdminSettings() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-2">
                   <UserCog className="h-4 w-4 text-orange-500" />
-                  <span className="text-sm font-medium text-muted-foreground">Unternehmens-Admins</span>
+                  <span className="text-sm font-medium text-muted-foreground">{t('adminSettings.users.stats.companyAdmins')}</span>
                 </div>
                 <p className="text-2xl font-bold">{totalCompanyAdmins}</p>
               </CardContent>
@@ -554,7 +537,7 @@ export default function AdminSettings() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-2">
                   <Building2 className="h-4 w-4 text-green-500" />
-                  <span className="text-sm font-medium text-muted-foreground">Unternehmen</span>
+                  <span className="text-sm font-medium text-muted-foreground">{t('adminSettings.users.stats.companies')}</span>
                 </div>
                 <p className="text-2xl font-bold">{totalCompanies}</p>
               </CardContent>
@@ -566,7 +549,7 @@ export default function AdminSettings() {
             <div className="relative">
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Benutzer suchen..."
+                placeholder={t('adminSettings.users.search.placeholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
@@ -575,10 +558,10 @@ export default function AdminSettings() {
             
             <Select value={companyFilter} onValueChange={setCompanyFilter}>
               <SelectTrigger>
-                <SelectValue placeholder="Unternehmen filtern" />
+                <SelectValue placeholder={t('adminSettings.users.filters.filterCompany')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Alle Unternehmen</SelectItem>
+                <SelectItem value="all">{t('adminSettings.users.filters.allCompanies')}</SelectItem>
                 {companies.map((company) => (
                   <SelectItem key={company.id} value={company.id}>
                     {company.name}
@@ -589,14 +572,14 @@ export default function AdminSettings() {
             
             <Select value={roleFilter} onValueChange={setRoleFilter}>
               <SelectTrigger>
-                <SelectValue placeholder="Rolle filtern" />
+                <SelectValue placeholder={t('adminSettings.users.filters.filterRole')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Alle Rollen</SelectItem>
-                <SelectItem value="admin">Hej Talent Admin</SelectItem>
-                <SelectItem value="company_admin">Unternehmens-Admin</SelectItem>
-                <SelectItem value="resource_manager">Ressourcen-Manager</SelectItem>
-                <SelectItem value="user">Benutzer</SelectItem>
+                <SelectItem value="all">{t('adminSettings.users.filters.allRoles')}</SelectItem>
+                <SelectItem value="admin">{t('adminSettings.users.roles.admin')}</SelectItem>
+                <SelectItem value="company_admin">{t('adminSettings.users.roles.company_admin')}</SelectItem>
+                <SelectItem value="resource_manager">{t('adminSettings.users.roles.resource_manager')}</SelectItem>
+                <SelectItem value="user">{t('adminSettings.users.roles.user')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -606,20 +589,20 @@ export default function AdminSettings() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>E-Mail</TableHead>
-                  <TableHead>Unternehmen</TableHead>
-                  <TableHead>Rolle</TableHead>
-                  <TableHead>Registriert</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Aktionen</TableHead>
+                  <TableHead>{t('adminSettings.users.columns.name')}</TableHead>
+                  <TableHead>{t('adminSettings.users.columns.email')}</TableHead>
+                  <TableHead>{t('adminSettings.users.columns.company')}</TableHead>
+                  <TableHead>{t('adminSettings.users.columns.role')}</TableHead>
+                  <TableHead>{t('adminSettings.users.columns.registered')}</TableHead>
+                  <TableHead>{t('adminSettings.users.columns.status')}</TableHead>
+                  <TableHead className="text-right">{t('adminSettings.users.columns.actions')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredUsers.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={7} className="h-24 text-center">
-                      Keine Benutzer gefunden.
+                      {t('adminSettings.users.search.noResults')}
                     </TableCell>
                   </TableRow>
                 ) : (
@@ -640,13 +623,13 @@ export default function AdminSettings() {
                         <TableCell>
                           <div className="flex items-center gap-2">
                             <Calendar className="h-4 w-4 text-muted-foreground" />
-                            {new Date(user.created_at).toLocaleDateString('de-DE')}
+                            {new Date(user.created_at).toLocaleDateString(getDateLocale())}
                           </div>
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
                             <CheckCircle className="h-4 w-4 text-green-500" />
-                            <span className="text-sm">Aktiv</span>
+                            <span className="text-sm">{t('adminSettings.users.status.active')}</span>
                           </div>
                         </TableCell>
                         <TableCell className="text-right">
@@ -661,7 +644,7 @@ export default function AdminSettings() {
                               className="flex items-center gap-1"
                             >
                               <Edit className="h-4 w-4" />
-                              Rolle
+                              {t('adminSettings.users.actions.role')}
                             </Button>
                             
                             <Button
@@ -671,7 +654,7 @@ export default function AdminSettings() {
                               className="flex items-center gap-1"
                             >
                               <Key className="h-4 w-4" />
-                              Reset
+                              {t('adminSettings.users.actions.reset')}
                             </Button>
                             
                             <Button
@@ -685,7 +668,7 @@ export default function AdminSettings() {
                               className="flex items-center gap-1 text-destructive hover:text-destructive"
                             >
                               <Trash2 className="h-4 w-4" />
-                              Löschen
+                              {t('adminSettings.users.actions.delete')}
                             </Button>
                           </div>
                         </TableCell>
@@ -704,13 +687,13 @@ export default function AdminSettings() {
         <AlertDialog open={!!editingRole} onOpenChange={() => setEditingRole(null)}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Benutzerrolle ändern</AlertDialogTitle>
+              <AlertDialogTitle>{t('adminSettings.users.dialog.changeRoleTitle')}</AlertDialogTitle>
               <AlertDialogDescription>
-                Wählen Sie eine neue Rolle für diesen Benutzer aus.
+                {t('adminSettings.users.dialog.changeRoleDescription')}
               </AlertDialogDescription>
             </AlertDialogHeader>
             <div className="py-4">
-              <Label htmlFor="role-select">Neue Rolle:</Label>
+              <Label htmlFor="role-select">{t('adminSettings.users.dialog.newRole')}</Label>
               <Select 
                 value={editingRole.currentRole} 
                 onValueChange={(value) => setEditingRole({...editingRole, currentRole: value})}
@@ -719,19 +702,19 @@ export default function AdminSettings() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="user">Benutzer</SelectItem>
-                  <SelectItem value="company_admin">Unternehmens-Admin</SelectItem>
-                  <SelectItem value="resource_manager">Ressourcen-Manager</SelectItem>
-                  <SelectItem value="admin">Hej Talent Admin</SelectItem>
+                  <SelectItem value="user">{t('adminSettings.users.roles.user')}</SelectItem>
+                  <SelectItem value="company_admin">{t('adminSettings.users.roles.company_admin')}</SelectItem>
+                  <SelectItem value="resource_manager">{t('adminSettings.users.roles.resource_manager')}</SelectItem>
+                  <SelectItem value="admin">{t('adminSettings.users.roles.admin')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <AlertDialogFooter>
-              <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+              <AlertDialogCancel>{t('adminSettings.users.dialog.cancel')}</AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => updateUserRole(editingRole.userId, editingRole.currentRole)}
               >
-                Rolle ändern
+                {t('adminSettings.users.dialog.confirm')}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -744,34 +727,35 @@ export default function AdminSettings() {
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2">
               <AlertTriangle className="h-5 w-5 text-destructive" />
-              Benutzer endgültig löschen?
+              {t('adminSettings.users.dialog.deleteTitle')}
             </AlertDialogTitle>
             <AlertDialogDescription className="space-y-2">
               <p>
-                Sie sind dabei, den Benutzer <strong>{deleteUserDialog?.name}</strong> ({deleteUserDialog?.email}) 
-                unwiderruflich aus dem System zu löschen.
+                {t('adminSettings.users.dialog.deleteWarning')
+                  .replace('{name}', deleteUserDialog?.name || '')
+                  .replace('{email}', deleteUserDialog?.email || '')}
               </p>
               <p className="text-destructive font-semibold">
-                Diese Aktion kann nicht rückgängig gemacht werden!
+                {t('adminSettings.users.dialog.deleteIrreversible')}
               </p>
               <p>
-                Folgende Daten werden gelöscht:
+                {t('adminSettings.users.dialog.deleteDataTitle')}
               </p>
               <ul className="list-disc list-inside space-y-1 text-sm">
-                <li>Benutzerprofil und Authentifizierung</li>
-                <li>Alle Benutzerrollen</li>
-                <li>E-Mail-Einstellungen und MS365-Verbindungen</li>
-                <li>Verknüpfungen mit CRM-Kontakten werden aufgehoben</li>
+                <li>{t('adminSettings.users.dialog.deleteDataItems.profile')}</li>
+                <li>{t('adminSettings.users.dialog.deleteDataItems.roles')}</li>
+                <li>{t('adminSettings.users.dialog.deleteDataItems.emailSettings')}</li>
+                <li>{t('adminSettings.users.dialog.deleteDataItems.crmLinks')}</li>
               </ul>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+            <AlertDialogCancel>{t('adminSettings.users.dialog.cancel')}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => deleteUserDialog && deleteUser(deleteUserDialog.userId)}
               className="bg-destructive hover:bg-destructive/90"
             >
-              Benutzer löschen
+              {t('adminSettings.users.dialog.deleteButton')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -781,16 +765,15 @@ export default function AdminSettings() {
       <Dialog open={!!resetLinkDialog} onOpenChange={() => setResetLinkDialog(null)}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Passwort-Reset Link generiert</DialogTitle>
+            <DialogTitle>{t('adminSettings.users.dialog.resetTitle')}</DialogTitle>
             <DialogDescription>
-              Der Passwort-Reset Link wurde erfolgreich generiert und an {resetLinkDialog?.email} gesendet.
-              Sie können den Link auch direkt kopieren und an den Benutzer weiterleiten.
+              {t('adminSettings.users.dialog.resetDescription').replace('{email}', resetLinkDialog?.email || '')}
             </DialogDescription>
           </DialogHeader>
           
           <div className="space-y-4">
             <div>
-              <Label htmlFor="reset-link">Passwort-Reset Link:</Label>
+              <Label htmlFor="reset-link">{t('adminSettings.users.dialog.resetLinkLabel')}</Label>
               <div className="flex gap-2 mt-2">
                 <Input
                   id="reset-link"
@@ -816,7 +799,7 @@ export default function AdminSettings() {
           
           <DialogFooter>
             <Button onClick={() => setResetLinkDialog(null)}>
-              Schließen
+              {t('adminSettings.users.dialog.close')}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -831,10 +814,10 @@ export default function AdminSettings() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Mail className="h-5 w-5" />
-                  Microsoft 365 Integration
+                  {t('adminSettings.email.ms365.title')}
                 </CardTitle>
                 <CardDescription>
-                  Verbinden Sie Ihr Microsoft 365 Konto, um E-Mails automatisch mit CRM-Kontakten zu synchronisieren
+                  {t('adminSettings.email.ms365.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -843,12 +826,12 @@ export default function AdminSettings() {
                     <Mail className="w-5 h-5 text-muted-foreground" />
                     <div>
                       <p className="font-medium">
-                        {ms365Connected ? 'Verbunden' : 'Nicht verbunden'}
+                        {ms365Connected ? t('adminSettings.email.ms365.connected') : t('adminSettings.email.ms365.notConnected')}
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {ms365Connected 
-                          ? 'Ihre E-Mails werden automatisch synchronisiert' 
-                          : 'Verbinden Sie Ihr Konto, um E-Mails zu synchronisieren'}
+                          ? t('adminSettings.email.ms365.connectedDescription') 
+                          : t('adminSettings.email.ms365.notConnectedDescription')}
                       </p>
                     </div>
                   </div>
@@ -862,24 +845,24 @@ export default function AdminSettings() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Mail className="h-5 h-5" />
-                  E-Mail Signatur (HTML)
+                  {t('adminSettings.email.signature.title')}
                 </CardTitle>
                 <CardDescription>
-                  Definieren Sie Ihre persönliche E-Mail Signatur in HTML-Format
+                  {t('adminSettings.email.signature.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label htmlFor="emailSignature">HTML Signatur</Label>
+                  <Label htmlFor="emailSignature">{t('adminSettings.email.signature.label')}</Label>
                   <Textarea
                     id="emailSignature"
                     value={emailSignature}
                     onChange={(e) => setEmailSignature(e.target.value)}
-                    placeholder="<div>Mit freundlichen Grüßen,<br/>Ihr Name</div>"
+                    placeholder={t('adminSettings.email.signature.placeholder')}
                     className="min-h-[200px] font-mono text-sm"
                   />
                   <p className="text-xs text-muted-foreground mt-2">
-                    Verwenden Sie HTML-Tags für die Formatierung. Beispiel: &lt;strong&gt;Fett&lt;/strong&gt;, &lt;br/&gt; für Zeilenumbruch
+                    {t('adminSettings.email.signature.help')}
                   </p>
                 </div>
                 <Button 
@@ -887,7 +870,7 @@ export default function AdminSettings() {
                   disabled={updateEmailSignatureMutation.isPending}
                   className="bg-primary hover:bg-primary/90"
                 >
-                  {updateEmailSignatureMutation.isPending ? 'Wird gespeichert...' : 'Signatur speichern'}
+                  {updateEmailSignatureMutation.isPending ? t('adminSettings.email.savingButton') : t('adminSettings.email.saveButton')}
                 </Button>
               </CardContent>
             </Card>

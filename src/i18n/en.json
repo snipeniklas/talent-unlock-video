@@ -2525,13 +2525,23 @@
     },
     "users": {
       "title": "User Management",
-      "subtitle": "Manage all system users",
+      "subtitle": "Manage all users and their roles in the system",
       "search": {
         "placeholder": "Search users...",
         "noResults": "No users found"
       },
+      "stats": {
+        "totalUsers": "Total Users",
+        "hejTalentAdmins": "Hej Talent Admins",
+        "companyAdmins": "Company Admins",
+        "companies": "Companies"
+      },
       "filters": {
         "all": "All",
+        "allCompanies": "All Companies",
+        "allRoles": "All Roles",
+        "filterCompany": "Filter by company",
+        "filterRole": "Filter by role",
         "company": "Company",
         "role": "Role"
       },
@@ -2540,29 +2550,75 @@
         "email": "Email",
         "company": "Company",
         "role": "Role",
-        "created": "Created At"
+        "created": "Created At",
+        "registered": "Registered",
+        "status": "Status",
+        "actions": "Actions"
       },
       "roles": {
         "user": "User",
         "company_admin": "Company Admin",
-        "admin": "Administrator",
+        "admin": "Hej Talent Admin",
         "resource_manager": "Resource Manager"
+      },
+      "status": {
+        "active": "Active"
       },
       "actions": {
         "changeRole": "Change Role",
         "resetPassword": "Reset Password",
-        "delete": "Delete"
+        "delete": "Delete",
+        "role": "Role",
+        "reset": "Reset"
       },
       "dialog": {
-        "changeRoleTitle": "Change Role",
+        "changeRoleTitle": "Change User Role",
+        "changeRoleDescription": "Select a new role for this user.",
         "changeRoleConfirm": "Are you sure you want to change the role?",
-        "deleteTitle": "Delete User",
-        "deleteConfirm": "Are you sure you want to delete this user?"
+        "newRole": "New Role:",
+        "cancel": "Cancel",
+        "confirm": "Change Role",
+        "deleteTitle": "Permanently Delete User?",
+        "deleteWarning": "You are about to permanently delete user {name} ({email}) from the system.",
+        "deleteIrreversible": "This action cannot be undone!",
+        "deleteDataTitle": "The following data will be deleted:",
+        "deleteDataItems": {
+          "profile": "User profile and authentication",
+          "roles": "All user roles",
+          "emailSettings": "Email settings and MS365 connections",
+          "crmLinks": "CRM contact links will be removed"
+        },
+        "deleteButton": "Delete User",
+        "deleteConfirm": "Are you sure you want to delete this user?",
+        "resetTitle": "Password Reset Link Generated",
+        "resetDescription": "The password reset link was successfully generated and sent to {email}. You can also copy the link directly and forward it to the user.",
+        "resetLinkLabel": "Password Reset Link:",
+        "close": "Close"
       },
       "toast": {
-        "roleChanged": "Role changed",
-        "passwordReset": "Password reset email sent",
-        "deleted": "User deleted",
+        "roleChanged": "Role Updated",
+        "roleChangedDescription": "The user role has been successfully changed.",
+        "roleError": "Error Updating Role",
+        "roleErrorDescription": "The role could not be changed.",
+        "passwordReset": "Password Reset Sent",
+        "passwordResetDescription": "A password reset link has been sent to {email}.",
+        "passwordResetError": "Password Reset Error",
+        "passwordResetErrorDescription": "The password reset could not be sent.",
+        "linkCopied": "Link Copied",
+        "linkCopiedDescription": "The password reset link has been copied to clipboard.",
+        "copyError": "Copy Error",
+        "copyErrorDescription": "The link could not be copied.",
+        "deleted": "User Deleted",
+        "deletedDescription": "The user has been successfully removed from the system.",
+        "deleteError": "Delete Error",
+        "deleteErrorDescription": "The user could not be deleted.",
+        "loadError": "Error Loading Users",
+        "loadErrorDescription": "User data could not be loaded.",
+        "notImplemented": "Feature Not Yet Implemented",
+        "notImplementedDescription": "User suspension will be available in a future version.",
+        "statusError": "Error",
+        "statusErrorDescription": "The user status could not be changed.",
+        "notAuthenticated": "Not authenticated",
         "error": "Error with user action"
       },
       "empty": {
@@ -2575,17 +2631,24 @@
       "subtitle": "Manage email integration and signature",
       "ms365": {
         "title": "Microsoft 365 Integration",
-        "description": "Connect your Microsoft 365 account",
+        "description": "Connect your Microsoft 365 account to automatically sync emails with CRM contacts",
         "connected": "Connected",
         "notConnected": "Not connected",
+        "connectedDescription": "Your emails are being automatically synced",
+        "notConnectedDescription": "Connect your account to sync emails",
         "connect": "Connect",
         "disconnect": "Disconnect",
         "connectedAs": "Connected as"
       },
       "signature": {
-        "title": "Email Signature",
-        "placeholder": "Your email signature..."
+        "title": "Email Signature (HTML)",
+        "description": "Define your personal email signature in HTML format",
+        "label": "HTML Signature",
+        "placeholder": "<div>Best regards,<br/>Your Name</div>",
+        "help": "Use HTML tags for formatting. Example: <strong>Bold</strong>, <br/> for line break"
       },
+      "saveButton": "Save Signature",
+      "savingButton": "Saving...",
       "syncSettings": {
         "title": "Sync Settings",
         "syncEnabled": "Sync enabled",
@@ -2593,7 +2656,8 @@
         "autoMatchContacts": "Auto-match contacts"
       },
       "toast": {
-        "saved": "Settings saved",
+        "saved": "Email Signature Saved",
+        "savedDescription": "Your email signature has been successfully updated.",
         "error": "Error saving settings"
       }
     },

@@ -3052,13 +3052,23 @@
     },
     "users": {
       "title": "Gebruikersbeheer",
-      "subtitle": "Alle systeemgebruikers beheren",
+      "subtitle": "Beheer alle gebruikers en hun rollen in het systeem",
       "search": {
         "placeholder": "Gebruikers zoeken...",
         "noResults": "Geen gebruikers gevonden"
       },
+      "stats": {
+        "totalUsers": "Totaal Gebruikers",
+        "hejTalentAdmins": "Hej Talent Admins",
+        "companyAdmins": "Bedrijfsadmins",
+        "companies": "Bedrijven"
+      },
       "filters": {
         "all": "Alle",
+        "allCompanies": "Alle Bedrijven",
+        "allRoles": "Alle Rollen",
+        "filterCompany": "Filter op bedrijf",
+        "filterRole": "Filter op rol",
         "company": "Bedrijf",
         "role": "Rol"
       },
@@ -3067,29 +3077,75 @@
         "email": "E-mail",
         "company": "Bedrijf",
         "role": "Rol",
-        "created": "Aangemaakt op"
+        "created": "Aangemaakt op",
+        "registered": "Geregistreerd",
+        "status": "Status",
+        "actions": "Acties"
       },
       "roles": {
         "user": "Gebruiker",
         "company_admin": "Bedrijfsadmin",
-        "admin": "Administrator",
+        "admin": "Hej Talent Admin",
         "resource_manager": "Resource Manager"
+      },
+      "status": {
+        "active": "Actief"
       },
       "actions": {
         "changeRole": "Rol wijzigen",
         "resetPassword": "Wachtwoord resetten",
-        "delete": "Verwijderen"
+        "delete": "Verwijderen",
+        "role": "Rol",
+        "reset": "Reset"
       },
       "dialog": {
-        "changeRoleTitle": "Rol wijzigen",
+        "changeRoleTitle": "Gebruikersrol wijzigen",
+        "changeRoleDescription": "Selecteer een nieuwe rol voor deze gebruiker.",
         "changeRoleConfirm": "Weet u zeker dat u de rol wilt wijzigen?",
-        "deleteTitle": "Gebruiker verwijderen",
-        "deleteConfirm": "Weet u zeker dat u deze gebruiker wilt verwijderen?"
+        "newRole": "Nieuwe rol:",
+        "cancel": "Annuleren",
+        "confirm": "Rol wijzigen",
+        "deleteTitle": "Gebruiker permanent verwijderen?",
+        "deleteWarning": "U staat op het punt gebruiker {name} ({email}) permanent uit het systeem te verwijderen.",
+        "deleteIrreversible": "Deze actie kan niet ongedaan worden gemaakt!",
+        "deleteDataTitle": "De volgende gegevens worden verwijderd:",
+        "deleteDataItems": {
+          "profile": "Gebruikersprofiel en authenticatie",
+          "roles": "Alle gebruikersrollen",
+          "emailSettings": "E-mailinstellingen en MS365-verbindingen",
+          "crmLinks": "CRM-contactkoppelingen worden verwijderd"
+        },
+        "deleteButton": "Gebruiker verwijderen",
+        "deleteConfirm": "Weet u zeker dat u deze gebruiker wilt verwijderen?",
+        "resetTitle": "Wachtwoord-reset link gegenereerd",
+        "resetDescription": "De wachtwoord-reset link is succesvol gegenereerd en verzonden naar {email}. U kunt de link ook direct kopiëren en doorsturen naar de gebruiker.",
+        "resetLinkLabel": "Wachtwoord-reset link:",
+        "close": "Sluiten"
       },
       "toast": {
-        "roleChanged": "Rol gewijzigd",
-        "passwordReset": "Wachtwoord-reset e-mail verzonden",
+        "roleChanged": "Rol bijgewerkt",
+        "roleChangedDescription": "De gebruikersrol is succesvol gewijzigd.",
+        "roleError": "Fout bij bijwerken rol",
+        "roleErrorDescription": "De rol kon niet worden gewijzigd.",
+        "passwordReset": "Wachtwoord-reset verzonden",
+        "passwordResetDescription": "Een wachtwoord-reset link is verzonden naar {email}.",
+        "passwordResetError": "Wachtwoord-reset fout",
+        "passwordResetErrorDescription": "De wachtwoord-reset kon niet worden verzonden.",
+        "linkCopied": "Link gekopieerd",
+        "linkCopiedDescription": "De wachtwoord-reset link is naar het klembord gekopieerd.",
+        "copyError": "Kopieerfout",
+        "copyErrorDescription": "De link kon niet worden gekopieerd.",
         "deleted": "Gebruiker verwijderd",
+        "deletedDescription": "De gebruiker is succesvol uit het systeem verwijderd.",
+        "deleteError": "Verwijderfout",
+        "deleteErrorDescription": "De gebruiker kon niet worden verwijderd.",
+        "loadError": "Fout bij laden gebruikers",
+        "loadErrorDescription": "Gebruikersgegevens konden niet worden geladen.",
+        "notImplemented": "Functie nog niet geïmplementeerd",
+        "notImplementedDescription": "Gebruikersblokkering is beschikbaar in een toekomstige versie.",
+        "statusError": "Fout",
+        "statusErrorDescription": "De gebruikersstatus kon niet worden gewijzigd.",
+        "notAuthenticated": "Niet geauthenticeerd",
         "error": "Fout bij gebruikersactie"
       },
       "empty": {
@@ -3102,17 +3158,24 @@
       "subtitle": "E-mailintegratie en handtekening beheren",
       "ms365": {
         "title": "Microsoft 365 Integratie",
-        "description": "Verbind uw Microsoft 365-account",
+        "description": "Verbind uw Microsoft 365-account om e-mails automatisch te synchroniseren met CRM-contacten",
         "connected": "Verbonden",
         "notConnected": "Niet verbonden",
+        "connectedDescription": "Uw e-mails worden automatisch gesynchroniseerd",
+        "notConnectedDescription": "Verbind uw account om e-mails te synchroniseren",
         "connect": "Verbinden",
         "disconnect": "Ontkoppelen",
         "connectedAs": "Verbonden als"
       },
       "signature": {
-        "title": "E-mailhandtekening",
-        "placeholder": "Uw e-mailhandtekening..."
+        "title": "E-mailhandtekening (HTML)",
+        "description": "Definieer uw persoonlijke e-mailhandtekening in HTML-formaat",
+        "label": "HTML Handtekening",
+        "placeholder": "<div>Met vriendelijke groet,<br/>Uw Naam</div>",
+        "help": "Gebruik HTML-tags voor opmaak. Voorbeeld: <strong>Vet</strong>, <br/> voor regelovergang"
       },
+      "saveButton": "Handtekening opslaan",
+      "savingButton": "Wordt opgeslagen...",
       "syncSettings": {
         "title": "Synchronisatie-instellingen",
         "syncEnabled": "Synchronisatie ingeschakeld",
@@ -3120,7 +3183,8 @@
         "autoMatchContacts": "Contacten automatisch koppelen"
       },
       "toast": {
-        "saved": "Instellingen opgeslagen",
+        "saved": "E-mailhandtekening opgeslagen",
+        "savedDescription": "Uw e-mailhandtekening is succesvol bijgewerkt.",
         "error": "Fout bij opslaan"
       }
     },

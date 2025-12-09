@@ -2761,13 +2761,23 @@
     },
     "users": {
       "title": "Benutzerverwaltung",
-      "subtitle": "Alle Systembenutzer verwalten",
+      "subtitle": "Verwalten Sie alle Benutzer und deren Rollen im System",
       "search": {
         "placeholder": "Benutzer suchen...",
         "noResults": "Keine Benutzer gefunden"
       },
+      "stats": {
+        "totalUsers": "Gesamt Benutzer",
+        "hejTalentAdmins": "Hej Talent Admins",
+        "companyAdmins": "Unternehmens-Admins",
+        "companies": "Unternehmen"
+      },
       "filters": {
         "all": "Alle",
+        "allCompanies": "Alle Unternehmen",
+        "allRoles": "Alle Rollen",
+        "filterCompany": "Unternehmen filtern",
+        "filterRole": "Rolle filtern",
         "company": "Unternehmen",
         "role": "Rolle"
       },
@@ -2776,29 +2786,75 @@
         "email": "E-Mail",
         "company": "Unternehmen",
         "role": "Rolle",
-        "created": "Erstellt am"
+        "created": "Erstellt am",
+        "registered": "Registriert",
+        "status": "Status",
+        "actions": "Aktionen"
       },
       "roles": {
         "user": "Benutzer",
         "company_admin": "Unternehmens-Admin",
-        "admin": "Administrator",
+        "admin": "Hej Talent Admin",
         "resource_manager": "Ressourcen-Manager"
+      },
+      "status": {
+        "active": "Aktiv"
       },
       "actions": {
         "changeRole": "Rolle ändern",
         "resetPassword": "Passwort zurücksetzen",
-        "delete": "Löschen"
+        "delete": "Löschen",
+        "role": "Rolle",
+        "reset": "Reset"
       },
       "dialog": {
-        "changeRoleTitle": "Rolle ändern",
+        "changeRoleTitle": "Benutzerrolle ändern",
+        "changeRoleDescription": "Wählen Sie eine neue Rolle für diesen Benutzer aus.",
         "changeRoleConfirm": "Sind Sie sicher, dass Sie die Rolle ändern möchten?",
-        "deleteTitle": "Benutzer löschen",
-        "deleteConfirm": "Sind Sie sicher, dass Sie diesen Benutzer löschen möchten?"
+        "newRole": "Neue Rolle:",
+        "cancel": "Abbrechen",
+        "confirm": "Rolle ändern",
+        "deleteTitle": "Benutzer endgültig löschen?",
+        "deleteWarning": "Sie sind dabei, den Benutzer {name} ({email}) unwiderruflich aus dem System zu löschen.",
+        "deleteIrreversible": "Diese Aktion kann nicht rückgängig gemacht werden!",
+        "deleteDataTitle": "Folgende Daten werden gelöscht:",
+        "deleteDataItems": {
+          "profile": "Benutzerprofil und Authentifizierung",
+          "roles": "Alle Benutzerrollen",
+          "emailSettings": "E-Mail-Einstellungen und MS365-Verbindungen",
+          "crmLinks": "Verknüpfungen mit CRM-Kontakten werden aufgehoben"
+        },
+        "deleteButton": "Benutzer löschen",
+        "deleteConfirm": "Sind Sie sicher, dass Sie diesen Benutzer löschen möchten?",
+        "resetTitle": "Passwort-Reset Link generiert",
+        "resetDescription": "Der Passwort-Reset Link wurde erfolgreich generiert und an {email} gesendet. Sie können den Link auch direkt kopieren und an den Benutzer weiterleiten.",
+        "resetLinkLabel": "Passwort-Reset Link:",
+        "close": "Schließen"
       },
       "toast": {
-        "roleChanged": "Rolle geändert",
-        "passwordReset": "Passwort-Reset-E-Mail gesendet",
+        "roleChanged": "Rolle aktualisiert",
+        "roleChangedDescription": "Die Benutzerrolle wurde erfolgreich geändert.",
+        "roleError": "Fehler beim Aktualisieren der Rolle",
+        "roleErrorDescription": "Die Rolle konnte nicht geändert werden.",
+        "passwordReset": "Passwort-Reset gesendet",
+        "passwordResetDescription": "Ein Passwort-Reset Link wurde an {email} gesendet.",
+        "passwordResetError": "Fehler beim Passwort-Reset",
+        "passwordResetErrorDescription": "Der Passwort-Reset konnte nicht gesendet werden.",
+        "linkCopied": "Link kopiert",
+        "linkCopiedDescription": "Der Passwort-Reset Link wurde in die Zwischenablage kopiert.",
+        "copyError": "Fehler beim Kopieren",
+        "copyErrorDescription": "Der Link konnte nicht kopiert werden.",
         "deleted": "Benutzer gelöscht",
+        "deletedDescription": "Der Benutzer wurde erfolgreich aus dem System entfernt.",
+        "deleteError": "Fehler beim Löschen",
+        "deleteErrorDescription": "Der Benutzer konnte nicht gelöscht werden.",
+        "loadError": "Fehler beim Laden der Benutzer",
+        "loadErrorDescription": "Die Benutzerdaten konnten nicht geladen werden.",
+        "notImplemented": "Funktion noch nicht implementiert",
+        "notImplementedDescription": "Die User-Sperrung wird in einer zukünftigen Version verfügbar sein.",
+        "statusError": "Fehler",
+        "statusErrorDescription": "Der Benutzerstatus konnte nicht geändert werden.",
+        "notAuthenticated": "Nicht authentifiziert",
         "error": "Fehler bei der Benutzeraktion"
       },
       "empty": {
@@ -2811,17 +2867,24 @@
       "subtitle": "E-Mail-Integration und Signatur verwalten",
       "ms365": {
         "title": "Microsoft 365 Integration",
-        "description": "Verbinden Sie Ihr Microsoft 365 Konto",
+        "description": "Verbinden Sie Ihr Microsoft 365 Konto, um E-Mails automatisch mit CRM-Kontakten zu synchronisieren",
         "connected": "Verbunden",
         "notConnected": "Nicht verbunden",
+        "connectedDescription": "Ihre E-Mails werden automatisch synchronisiert",
+        "notConnectedDescription": "Verbinden Sie Ihr Konto, um E-Mails zu synchronisieren",
         "connect": "Verbinden",
         "disconnect": "Trennen",
         "connectedAs": "Verbunden als"
       },
       "signature": {
-        "title": "E-Mail Signatur",
-        "placeholder": "Ihre E-Mail-Signatur..."
+        "title": "E-Mail Signatur (HTML)",
+        "description": "Definieren Sie Ihre persönliche E-Mail Signatur in HTML-Format",
+        "label": "HTML Signatur",
+        "placeholder": "<div>Mit freundlichen Grüßen,<br/>Ihr Name</div>",
+        "help": "Verwenden Sie HTML-Tags für die Formatierung. Beispiel: <strong>Fett</strong>, <br/> für Zeilenumbruch"
       },
+      "saveButton": "Signatur speichern",
+      "savingButton": "Wird gespeichert...",
       "syncSettings": {
         "title": "Synchronisations-Einstellungen",
         "syncEnabled": "Synchronisation aktiviert",
@@ -2829,7 +2892,8 @@
         "autoMatchContacts": "Kontakte automatisch zuordnen"
       },
       "toast": {
-        "saved": "Einstellungen gespeichert",
+        "saved": "E-Mail Signatur gespeichert",
+        "savedDescription": "Ihre E-Mail Signatur wurde erfolgreich aktualisiert.",
         "error": "Fehler beim Speichern"
       }
     },
