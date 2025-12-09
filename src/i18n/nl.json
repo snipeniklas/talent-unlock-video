@@ -2125,26 +2125,82 @@
     },
     "settings": {
       "title": "Instellingen",
+      "subtitle": "Beheer uw profiel, bedrijf en medewerkers",
+      "tabs": {
+        "profile": "Profiel & Wachtwoord",
+        "company": "Bedrijf",
+        "team": "Teambeheer"
+      },
       "profile": {
         "title": "Profiel",
+        "desc": "Uw persoonlijke gegevens (alleen-lezen)",
         "firstName": "Voornaam",
         "lastName": "Achternaam",
-        "email": "E-mail",
+        "email": "E-mailadres",
         "phone": "Telefoon",
-        "save": "Opslaan"
-      },
-      "company": {
-        "title": "Bedrijfsgegevens",
-        "name": "Bedrijfsnaam",
-        "website": "Website",
-        "industry": "Branche"
+        "save": "Opslaan",
+        "companyAdmin": "Bedrijfsbeheerder"
       },
       "password": {
         "title": "Wachtwoord wijzigen",
+        "desc": "Wijzig uw wachtwoord voor meer veiligheid",
         "current": "Huidig wachtwoord",
         "new": "Nieuw wachtwoord",
         "confirm": "Wachtwoord bevestigen",
-        "change": "Wachtwoord wijzigen"
+        "change": "Wachtwoord wijzigen",
+        "changing": "Wordt gewijzigd...",
+        "min": "Minimaal 6 tekens"
+      },
+      "company": {
+        "title": "Bedrijfsgegevens",
+        "desc": "Beheer de gegevens van uw bedrijf",
+        "name": "Bedrijfsnaam",
+        "email": "Bedrijfs-e-mail",
+        "website": "Website",
+        "industry": "Branche",
+        "save": "Wijzigingen opslaan",
+        "saving": "Wordt opgeslagen...",
+        "updatedTitle": "Bedrijf bijgewerkt",
+        "updatedDesc": "De bedrijfsgegevens zijn succesvol bijgewerkt."
+      },
+      "team": {
+        "invite": {
+          "title": "Medewerker uitnodigen",
+          "desc": "Nodig nieuwe medewerkers uit voor uw bedrijf",
+          "email": "E-mailadres",
+          "role": "Rol",
+          "send": "Uitnodiging versturen",
+          "sending": "Wordt verstuurd...",
+          "sentTitle": "Uitnodiging verstuurd",
+          "sentDesc": "De uitnodiging is succesvol verstuurd.",
+          "deletedTitle": "Uitnodiging verwijderd",
+          "deletedDesc": "De uitnodiging is succesvol verwijderd."
+        },
+        "roles": {
+          "user": "Gebruiker",
+          "company_admin": "Bedrijfsbeheerder",
+          "admin": "Administrator"
+        },
+        "list": {
+          "title": "Verstuurde uitnodigingen",
+          "desc": "Overzicht van alle verstuurde uitnodigingen",
+          "none": "Nog geen uitnodigingen verstuurd",
+          "sentOn": "Verstuurd op",
+          "expires": "Verloopt op",
+          "status": {
+            "pending": "In afwachting",
+            "accepted": "Geaccepteerd",
+            "expired": "Verlopen"
+          }
+        }
+      },
+      "toasts": {
+        "error": "Fout",
+        "unexpected": "Er is een onverwachte fout opgetreden.",
+        "passwordChanged": {
+          "title": "Wachtwoord gewijzigd",
+          "desc": "Uw wachtwoord is succesvol gewijzigd."
+        }
       }
     },
     "support": {
