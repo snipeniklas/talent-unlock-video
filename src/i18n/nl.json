@@ -2063,6 +2063,175 @@
       "contactsCount": "contacten"
     }
   },
+  "outreach": {
+    "title": "Outreach",
+    "subtitle": "E-mailcampagnes beheren",
+    "campaigns": {
+      "title": "Campagnes",
+      "subtitle": "Outreach-campagnes beheren",
+      "addNew": "Nieuwe campagne",
+      "editCampaign": "Campagne bewerken",
+      "viewCampaign": "Campagne bekijken",
+      "deleteCampaign": "Campagne verwijderen",
+      "fields": {
+        "name": "Naam",
+        "description": "Beschrijving",
+        "status": "Status",
+        "targetAudience": "Doelgroep",
+        "desiredCta": "Gewenste call to action",
+        "aiInstructions": "AI-instructies",
+        "emailTemplate": "E-mailsjabloon",
+        "dailySendTime": "Dagelijkse verzendtijd",
+        "nextSendDate": "Volgende verzenddatum",
+        "contactLists": "Contactlijsten",
+        "createdAt": "Aangemaakt op"
+      },
+      "status": {
+        "draft": "Concept",
+        "active": "Actief",
+        "paused": "Gepauzeerd",
+        "completed": "Voltooid"
+      },
+      "tabs": {
+        "overview": "Overzicht",
+        "sequences": "Sequenties",
+        "contacts": "Contacten",
+        "analytics": "Analyse"
+      },
+      "empty": {
+        "title": "Geen campagnes",
+        "description": "Maak uw eerste outreach-campagne aan"
+      },
+      "toast": {
+        "created": "Campagne aangemaakt",
+        "updated": "Campagne bijgewerkt",
+        "deleted": "Campagne verwijderd",
+        "started": "Campagne gestart",
+        "paused": "Campagne gepauzeerd",
+        "error": "Campagnefout"
+      },
+      "actions": {
+        "start": "Starten",
+        "pause": "Pauzeren",
+        "resume": "Hervatten",
+        "duplicate": "Dupliceren"
+      }
+    },
+    "sequences": {
+      "title": "E-mailsequenties",
+      "subtitle": "Geautomatiseerde e-mailreeksen",
+      "addStep": "Stap toevoegen",
+      "editStep": "Stap bewerken",
+      "deleteStep": "Stap verwijderen",
+      "fields": {
+        "sequenceNumber": "Stap",
+        "subject": "Onderwerp",
+        "body": "Inhoud",
+        "delayDays": "Vertraging (dagen)"
+      },
+      "empty": {
+        "title": "Geen sequenties",
+        "description": "Voeg uw eerste e-mailstap toe"
+      },
+      "toast": {
+        "created": "Sequentie aangemaakt",
+        "updated": "Sequentie bijgewerkt",
+        "deleted": "Sequentie verwijderd",
+        "error": "Sequentiefout"
+      }
+    },
+    "contacts": {
+      "title": "Campagnecontacten",
+      "subtitle": "Contacten in deze campagne",
+      "addContacts": "Contacten toevoegen",
+      "addFromList": "Uit lijst toevoegen",
+      "removeContact": "Contact verwijderen",
+      "excludeContact": "Contact uitsluiten",
+      "fields": {
+        "contact": "Contact",
+        "status": "Status",
+        "nextSequence": "Volgende sequentie",
+        "nextSendDate": "Volgende verzenddatum",
+        "excluded": "Uitgesloten"
+      },
+      "status": {
+        "pending": "In afwachting",
+        "active": "Actief",
+        "sent": "Verzonden",
+        "replied": "Beantwoord",
+        "bounced": "Mislukt",
+        "completed": "Voltooid",
+        "excluded": "Uitgesloten"
+      },
+      "empty": {
+        "title": "Geen contacten",
+        "description": "Voeg contacten toe aan de campagne"
+      },
+      "toast": {
+        "added": "Contacten toegevoegd",
+        "removed": "Contact verwijderd",
+        "excluded": "Contact uitgesloten",
+        "error": "Contactfout"
+      }
+    },
+    "emails": {
+      "title": "Verzonden e-mails",
+      "subtitle": "E-mailgeschiedenis van campagne",
+      "fields": {
+        "subject": "Onderwerp",
+        "recipient": "Ontvanger",
+        "sentAt": "Verzonden op",
+        "status": "Status"
+      },
+      "status": {
+        "sent": "Verzonden",
+        "delivered": "Afgeleverd",
+        "opened": "Geopend",
+        "clicked": "Aangeklikt",
+        "bounced": "Mislukt",
+        "error": "Fout"
+      }
+    },
+    "profile": {
+      "title": "Outreach Profiel",
+      "subtitle": "E-mailinstellingen beheren",
+      "emailSettings": "E-mailinstellingen",
+      "signature": "E-mailhandtekening",
+      "signaturePlaceholder": "Uw e-mailhandtekening...",
+      "ms365": {
+        "title": "Microsoft 365 Integratie",
+        "description": "Verbind uw Microsoft 365-account voor e-mailverzending",
+        "connected": "Verbonden",
+        "notConnected": "Niet verbonden",
+        "connect": "Verbinden",
+        "disconnect": "Ontkoppelen",
+        "connectedAs": "Verbonden als"
+      },
+      "syncSettings": {
+        "title": "Synchronisatie-instellingen",
+        "syncEnabled": "Synchronisatie ingeschakeld",
+        "syncSentItems": "Verzonden e-mails synchroniseren",
+        "autoMatchContacts": "Contacten automatisch koppelen"
+      },
+      "toast": {
+        "saved": "Instellingen opgeslagen",
+        "error": "Fout bij opslaan"
+      }
+    },
+    "activities": {
+      "title": "Activiteiten",
+      "addActivity": "Activiteit toevoegen",
+      "types": {
+        "email_sent": "E-mail verzonden",
+        "email_opened": "E-mail geopend",
+        "email_clicked": "Link aangeklikt",
+        "email_replied": "Antwoord ontvangen",
+        "meeting_scheduled": "Vergadering gepland",
+        "call_made": "Telefoontje gepleegd",
+        "note_added": "Notitie toegevoegd"
+      }
+    }
+  },
   "auth": {
     "backToHome": "Terug naar startpagina",
     "welcome": {
