@@ -2558,6 +2558,128 @@
       "updated": "Resource bijgewerkt",
       "deleted": "Resource verwijderd",
       "error": "Resourcefout"
+    },
+    "actions": {
+      "addNew": "Nieuwe resource"
+    },
+    "yearsExperience": "jaar ervaring",
+    "unnamed": "Naamloos",
+    "emptyState": {
+      "title": "Geen resources gevonden",
+      "noMatch": "Geen resources komen overeen met uw zoekopdracht.",
+      "none": "Er zijn nog geen RaaS resources aangemaakt.",
+      "addFirst": "Eerste resource toevoegen"
+    },
+    "deleteDialog": {
+      "title": "Resource verwijderen",
+      "confirm": "Wilt u de resource",
+      "thisResource": "deze resource",
+      "really": "verwijderen?",
+      "warning": "Deze actie kan niet ongedaan worden gemaakt. De volgende gegevens worden permanent verwijderd:",
+      "deleting": "Verwijderen...",
+      "consequences": {
+        "database": "Volledige verwijdering uit de database",
+        "admin": "Verwijdering uit het adminportaal",
+        "customer": "Verwijdering uit klantweergaven",
+        "dashboard": "Verwijdering uit alle dashboardstatistieken"
+      }
+    },
+    "toastMessages": {
+      "loadError": "Kon resources niet laden.",
+      "deleteSuccess": "Resource verwijderd",
+      "deleteSuccessDesc": "De resource is succesvol verwijderd.",
+      "deleteError": "Kon resource niet verwijderen."
+    },
+    "edit": {
+      "title": "RaaS Resource bewerken",
+      "loading": "Laden...",
+      "back": "Terug",
+      "sections": {
+        "basicInfo": "Basisinformatie",
+        "location": "Locatie",
+        "availability": "Beschikbaarheid & Tarieven",
+        "margin": "Marge & Prijzen (Alleen Hej Talent Admin)",
+        "skills": "Vaardigheden",
+        "languages": "Talen",
+        "experience": "Werkervaring & Projecten",
+        "links": "Links & Portfolio"
+      },
+      "labels": {
+        "firstName": "Voornaam",
+        "lastName": "Achternaam",
+        "role": "Primaire rol *",
+        "seniority": "Senioriteitsniveau",
+        "yearsExperience": "Jaren ervaring",
+        "headline": "Headline",
+        "bio": "Bio",
+        "country": "Land",
+        "city": "Stad",
+        "availability": "Beschikbaarheid",
+        "hoursPerWeek": "Wekelijkse uren (gewenst)",
+        "earliestStart": "Vroegste start",
+        "noticePeriod": "Opzegtermijn (dagen)",
+        "currency": "Valuta",
+        "monthlyRate": "Maandtarief (doel) *",
+        "hourlyRate": "Uurtarief (automatisch berekend)",
+        "skillName": "Vaardigheidsnaam",
+        "skillLevel": "Niveau (1-5)",
+        "yearsUsed": "Jaren gebruikt",
+        "lastUsed": "Laatst gebruikt",
+        "langCode": "Taal (code)",
+        "langLevel": "Niveau",
+        "position": "Functie/Rol *",
+        "company": "Bedrijf/Organisatie",
+        "startDate": "Startdatum",
+        "endDate": "Einddatum (leeg = huidig)",
+        "description": "Beschrijving & Taken",
+        "techStack": "Tech Stack / Gebruikte Tools",
+        "linkLabel": "Label",
+        "linkUrl": "URL"
+      },
+      "placeholders": {
+        "role": "bijv. Customer Support, Full-Stack Developer",
+        "headline": "Korte pitch in één zin",
+        "bio": "Langere beschrijving van de RaaS resource",
+        "monthlyRate": "bijv. 8000",
+        "hourlyRate": "Automatisch berekend (Maandtarief ÷ 160u)",
+        "margin": "bijv. 2000",
+        "skill": "bijv. React",
+        "langCode": "bijv. de, en, es",
+        "position": "bijv. Senior Developer, Customer Support Manager",
+        "company": "bijv. Tech GmbH, Freelance",
+        "techStack": "bijv. React, Node.js, PostgreSQL, Docker (kommagescheiden)",
+        "linkLabel": "bijv. GitHub, Portfolio",
+        "linkUrl": "https://...",
+        "description": "Korte beschrijving van activiteiten en verantwoordelijkheden..."
+      },
+      "selectPlaceholders": {
+        "seniority": "Selecteer senioriteit",
+        "availability": "Selecteer beschikbaarheid"
+      },
+      "pricing": {
+        "purchaseMonthly": "Inkoopprijs (maand)",
+        "sellingMonthly": "Verkoopprijs (maand)",
+        "purchaseHourly": "Inkoop uurtarief",
+        "sellingHourly": "Verkoop uurtarief",
+        "marginLabel": "Marge (per maand) *",
+        "hint": "* De verkoopprijs wordt aan de klant getoond. Inkoopprijs en marge zijn alleen zichtbaar voor Hej Talent Admins."
+      },
+      "experienceSection": {
+        "itemTitle": "Ervaring",
+        "empty": "Nog geen werkervaring toegevoegd. Klik op het plus-icoon om te beginnen."
+      },
+      "buttons": {
+        "cancel": "Annuleren",
+        "save": "Wijzigingen opslaan",
+        "saving": "Opslaan..."
+      },
+      "toast": {
+        "loadError": "Kon RaaS resource niet laden.",
+        "updateSuccess": "Succes",
+        "updateSuccessDesc": "RaaS resource is succesvol bijgewerkt.",
+        "updateError": "Fout",
+        "updateErrorDesc": "Kon RaaS resource niet bijwerken."
+      }
     }
   },
   "companyManagement": {

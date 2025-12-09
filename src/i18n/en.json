@@ -2172,6 +2172,128 @@
       "updated": "Resource updated",
       "deleted": "Resource deleted",
       "error": "Resource error"
+    },
+    "actions": {
+      "addNew": "New Resource"
+    },
+    "yearsExperience": "years experience",
+    "unnamed": "Unnamed",
+    "emptyState": {
+      "title": "No resources found",
+      "noMatch": "No resources match your search.",
+      "none": "No RaaS resources have been created yet.",
+      "addFirst": "Add first resource"
+    },
+    "deleteDialog": {
+      "title": "Delete Resource",
+      "confirm": "Do you want to delete the resource",
+      "thisResource": "this resource",
+      "really": "?",
+      "warning": "This action cannot be undone. The following data will be permanently deleted:",
+      "deleting": "Deleting...",
+      "consequences": {
+        "database": "Complete removal from database",
+        "admin": "Removal from admin portal",
+        "customer": "Removal from customer views",
+        "dashboard": "Removal from all dashboard statistics"
+      }
+    },
+    "toastMessages": {
+      "loadError": "Could not load resources.",
+      "deleteSuccess": "Resource deleted",
+      "deleteSuccessDesc": "The resource was successfully deleted.",
+      "deleteError": "Could not delete resource."
+    },
+    "edit": {
+      "title": "Edit RaaS Resource",
+      "loading": "Loading...",
+      "back": "Back",
+      "sections": {
+        "basicInfo": "Basic Information",
+        "location": "Location",
+        "availability": "Availability & Rates",
+        "margin": "Margin & Pricing (Hej Talent Admin Only)",
+        "skills": "Skills",
+        "languages": "Languages",
+        "experience": "Work Experience & Projects",
+        "links": "Links & Portfolio"
+      },
+      "labels": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "role": "Primary Role *",
+        "seniority": "Seniority Level",
+        "yearsExperience": "Years of Experience",
+        "headline": "Headline",
+        "bio": "Bio",
+        "country": "Country",
+        "city": "City",
+        "availability": "Availability",
+        "hoursPerWeek": "Weekly Hours (Preferred)",
+        "earliestStart": "Earliest Start",
+        "noticePeriod": "Notice Period (Days)",
+        "currency": "Currency",
+        "monthlyRate": "Monthly Rate (Target) *",
+        "hourlyRate": "Hourly Rate (auto-calculated)",
+        "skillName": "Skill Name",
+        "skillLevel": "Level (1-5)",
+        "yearsUsed": "Years Used",
+        "lastUsed": "Last Used",
+        "langCode": "Language (Code)",
+        "langLevel": "Proficiency",
+        "position": "Position/Role *",
+        "company": "Company/Organization",
+        "startDate": "Start Date",
+        "endDate": "End Date (empty = current)",
+        "description": "Description & Tasks",
+        "techStack": "Tech Stack / Tools Used",
+        "linkLabel": "Label",
+        "linkUrl": "URL"
+      },
+      "placeholders": {
+        "role": "e.g. Customer Support, Full-Stack Developer",
+        "headline": "Short pitch in one sentence",
+        "bio": "Longer description of the RaaS resource",
+        "monthlyRate": "e.g. 8000",
+        "hourlyRate": "Auto-calculated (Monthly rate ÷ 160h)",
+        "margin": "e.g. 2000",
+        "skill": "e.g. React",
+        "langCode": "e.g. de, en, es",
+        "position": "e.g. Senior Developer, Customer Support Manager",
+        "company": "e.g. Tech GmbH, Freelance",
+        "techStack": "e.g. React, Node.js, PostgreSQL, Docker (comma-separated)",
+        "linkLabel": "e.g. GitHub, Portfolio",
+        "linkUrl": "https://...",
+        "description": "Brief description of activities and responsibilities..."
+      },
+      "selectPlaceholders": {
+        "seniority": "Select seniority",
+        "availability": "Select availability"
+      },
+      "pricing": {
+        "purchaseMonthly": "Purchase Price (Month)",
+        "sellingMonthly": "Selling Price (Month)",
+        "purchaseHourly": "Purchase Hourly Rate",
+        "sellingHourly": "Selling Hourly Rate",
+        "marginLabel": "Margin (per Month) *",
+        "hint": "* The selling price is shown to the customer. Purchase price and margin are only visible to Hej Talent Admins."
+      },
+      "experienceSection": {
+        "itemTitle": "Experience",
+        "empty": "No work experience added yet. Click the plus icon to start."
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "save": "Save Changes",
+        "saving": "Saving..."
+      },
+      "toast": {
+        "loadError": "Could not load RaaS resource.",
+        "updateSuccess": "Success",
+        "updateSuccessDesc": "RaaS resource was successfully updated.",
+        "updateError": "Error",
+        "updateErrorDesc": "Could not update RaaS resource."
+      }
     }
   },
   "companyManagement": {

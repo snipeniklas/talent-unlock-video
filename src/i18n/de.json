@@ -2408,6 +2408,128 @@
       "updated": "Ressource aktualisiert",
       "deleted": "Ressource gelöscht",
       "error": "Fehler bei der Ressource"
+    },
+    "actions": {
+      "addNew": "Neue Ressource"
+    },
+    "yearsExperience": "Jahre Erfahrung",
+    "unnamed": "Unbenannt",
+    "emptyState": {
+      "title": "Keine Ressourcen gefunden",
+      "noMatch": "Keine Ressourcen entsprechen Ihrer Suche.",
+      "none": "Es wurden noch keine RaaS Ressourcen angelegt.",
+      "addFirst": "Erste Ressource anlegen"
+    },
+    "deleteDialog": {
+      "title": "Ressource löschen",
+      "confirm": "Möchten Sie die Ressource",
+      "thisResource": "diese Ressource",
+      "really": "wirklich löschen?",
+      "warning": "Diese Aktion kann nicht rückgängig gemacht werden. Folgende Daten werden endgültig gelöscht:",
+      "deleting": "Wird gelöscht...",
+      "consequences": {
+        "database": "Vollständige Löschung aus der Datenbank",
+        "admin": "Entfernung aus dem Admin-Portal",
+        "customer": "Entfernung aus Kundenansichten",
+        "dashboard": "Entfernung aus allen Dashboard-Statistiken"
+      }
+    },
+    "toastMessages": {
+      "loadError": "Ressourcen konnten nicht geladen werden.",
+      "deleteSuccess": "Ressource gelöscht",
+      "deleteSuccessDesc": "Die Ressource wurde erfolgreich gelöscht.",
+      "deleteError": "Ressource konnte nicht gelöscht werden."
+    },
+    "edit": {
+      "title": "RaaS Ressource bearbeiten",
+      "loading": "Laden...",
+      "back": "Zurück",
+      "sections": {
+        "basicInfo": "Grundinformationen",
+        "location": "Standort",
+        "availability": "Verfügbarkeit & Rates",
+        "margin": "Marge & Preisgestaltung (Nur Hej Talent Admin)",
+        "skills": "Skills",
+        "languages": "Sprachen",
+        "experience": "Berufserfahrung & Projekte",
+        "links": "Links & Portfolio"
+      },
+      "labels": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "role": "Primäre Rolle *",
+        "seniority": "Seniority Level",
+        "yearsExperience": "Jahre Erfahrung",
+        "headline": "Headline",
+        "bio": "Bio",
+        "country": "Land",
+        "city": "Stadt",
+        "availability": "Verfügbarkeit",
+        "hoursPerWeek": "Wochenstunden (Wunsch)",
+        "earliestStart": "Frühester Start",
+        "noticePeriod": "Kündigungsfrist (Tage)",
+        "currency": "Währung",
+        "monthlyRate": "Monatssatz (Ziel) *",
+        "hourlyRate": "Stundensatz (automatisch berechnet)",
+        "skillName": "Skill Name",
+        "skillLevel": "Level (1-5)",
+        "yearsUsed": "Jahre verwendet",
+        "lastUsed": "Zuletzt verwendet",
+        "langCode": "Sprache (Code)",
+        "langLevel": "Niveau",
+        "position": "Position/Rolle *",
+        "company": "Unternehmen/Organisation",
+        "startDate": "Start Datum",
+        "endDate": "End Datum (leer = aktuell)",
+        "description": "Beschreibung & Aufgaben",
+        "techStack": "Tech Stack / Verwendete Tools",
+        "linkLabel": "Label",
+        "linkUrl": "URL"
+      },
+      "placeholders": {
+        "role": "z.B. Customer Support, Full-Stack Developer",
+        "headline": "Kurzer Pitch in einem Satz",
+        "bio": "Längere Beschreibung der RaaS Ressource",
+        "monthlyRate": "z.B. 8000",
+        "hourlyRate": "Wird automatisch berechnet (Monatssatz ÷ 160h)",
+        "margin": "z.B. 2000",
+        "skill": "z.B. React",
+        "langCode": "z.B. de, en, es",
+        "position": "z.B. Senior Developer, Customer Support Manager",
+        "company": "z.B. Tech GmbH, Freelance",
+        "techStack": "z.B. React, Node.js, PostgreSQL, Docker (kommagetrennt)",
+        "linkLabel": "z.B. GitHub, Portfolio",
+        "linkUrl": "https://...",
+        "description": "Kurze Beschreibung der Tätigkeiten und Verantwortlichkeiten..."
+      },
+      "selectPlaceholders": {
+        "seniority": "Seniority auswählen",
+        "availability": "Verfügbarkeit auswählen"
+      },
+      "pricing": {
+        "purchaseMonthly": "Einkaufspreis (Monat)",
+        "sellingMonthly": "Verkaufspreis (Monat)",
+        "purchaseHourly": "Einkaufs-Stundensatz",
+        "sellingHourly": "Verkaufs-Stundensatz",
+        "marginLabel": "Marge (pro Monat) *",
+        "hint": "* Der Verkaufspreis wird dem Kunden angezeigt. Einkaufspreis und Marge sind nur für Hej Talent Admins sichtbar."
+      },
+      "experienceSection": {
+        "itemTitle": "Erfahrung",
+        "empty": "Noch keine Berufserfahrung hinzugefügt. Klicken Sie auf das Plus-Symbol, um zu beginnen."
+      },
+      "buttons": {
+        "cancel": "Abbrechen",
+        "save": "Änderungen speichern",
+        "saving": "Wird gespeichert..."
+      },
+      "toast": {
+        "loadError": "RaaS Ressource konnte nicht geladen werden.",
+        "updateSuccess": "Erfolg",
+        "updateSuccessDesc": "RaaS Ressource wurde erfolgreich aktualisiert.",
+        "updateError": "Fehler",
+        "updateErrorDesc": "RaaS Ressource konnte nicht aktualisiert werden."
+      }
     }
   },
   "companyManagement": {
