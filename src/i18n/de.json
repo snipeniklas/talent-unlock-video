@@ -1667,6 +1667,8 @@
       "back": "Zurück",
       "title": "Neuen Suchauftrag erstellen",
       "subtitle": "Finden Sie die perfekten Remote-Mitarbeiter für Ihr Unternehmen",
+      "remoteWorker": "Remote-Mitarbeiter",
+      "workAreasLabel": "Benötigte Arbeitsbereiche",
       "sections": {
         "basic": {"title": "Grundinformationen", "desc": "Allgemeine Details zu Ihrem Personalbedarf"},
         "period": {"title": "Arbeitszeitraum", "desc": "Wann sollen die Remote-Mitarbeiter starten und wie lange arbeiten?"},

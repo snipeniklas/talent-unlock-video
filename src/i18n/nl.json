@@ -1874,22 +1874,65 @@
       "createFirst": "Maak uw eerste aanvraag"
     },
     "newRequest": {
-      "title": "Nieuwe aanvraag",
-      "form": {
-        "title": "Titel",
-        "titlePlaceholder": "Bijv. Senior React-ontwikkelaar",
-        "description": "Beschrijving",
-        "descriptionPlaceholder": "Beschrijf de vereisten...",
-        "skills": "Vereiste vaardigheden",
-        "skillsPlaceholder": "React, TypeScript, Node.js",
-        "experience": "Ervaring",
-        "startDate": "Startdatum",
-        "budget": "Budget",
-        "submit": "Aanvraag indienen",
-        "cancel": "Annuleren"
+      "back": "Terug",
+      "title": "Nieuwe zoekopdracht aanmaken",
+      "subtitle": "Vind de perfecte remote-medewerkers voor uw bedrijf",
+      "remoteWorker": "Remote-medewerker(s)",
+      "workAreasLabel": "Benodigde werkgebieden",
+      "sections": {
+        "basic": {"title": "Basisinformatie", "desc": "Algemene informatie over uw personeelsbehoefte"},
+        "period": {"title": "Werkperiode", "desc": "Wanneer moeten de remote-medewerkers starten en hoe lang werken?"},
+        "areas": {"title": "Benodigde werkgebieden", "desc": "In welke gebieden moeten de remote-medewerkers werken?"},
+        "details": {"title": "Gedetailleerde vereisten", "desc": "Specificeer vereisten, skills en hoofdtaken"}
       },
-      "success": "Aanvraag succesvol ingediend",
-      "error": "Fout bij indienen van aanvraag"
+      "labels": {
+        "customerIndustry": "Uw branche *",
+        "numberOfWorkers": "Aantal benodigde remote-medewerkers *",
+        "jobTitle": "Functietitel *",
+        "experience": "Ervaringsniveau",
+        "weeklyHours": "Wekelijkse uren",
+        "startDate": "Gewenste startdatum",
+        "endDate": "Einddatum (optioneel)",
+        "workAreaInput": "Werkgebied invoeren...",
+        "commonAreas": "Veelvoorkomende werkgebieden:",
+        "selectedAreas": "Geselecteerde werkgebieden:",
+        "requirements": "Vereisten",
+        "requirementInput": "Vereiste invoeren...",
+        "skills": "Skills",
+        "skillInput": "Skill invoeren...",
+        "commonSkills": "Veelvoorkomende skills:",
+        "mainTasks": "Hoofdtaken",
+        "mainTaskInput": "Hoofdtaak invoeren..."
+      },
+      "placeholders": {
+        "industry": "bijv. e-commerce, financiële diensten, gezondheidszorg",
+        "jobTitle": "bijv. software-ontwikkelaar, backoffice-medewerker, AI-specialist",
+        "experiencePlaceholder": "Ervaringsniveau selecteren",
+        "hoursPlaceholder": "Werktijd selecteren",
+        "datePick": "Datum selecteren",
+        "noEnd": "Onbeperkt",
+        "passwordMin": "Minimaal 6 tekens"
+      },
+      "experienceLevels": {
+        "junior_ba": "Junior (BA): 1-5 jaar",
+        "senior_ba": "Senior (BA): 5+ jaar",
+        "senior_ma": "Senior (MA): 10+ jaar"
+      },
+      "hours": {"h20": "20 uur", "h30": "30 uur", "h40": "40 uur"},
+      "buttons": {
+        "add": "Toevoegen",
+        "cancel": "Annuleren",
+        "create": "Zoekopdracht aanmaken",
+        "creating": "Wordt aangemaakt..."
+      },
+      "toasts": {
+        "createdTitle": "Zoekopdracht aangemaakt",
+        "createdDesc": "Uw zoekopdracht is succesvol aangemaakt en is nu actief.",
+        "errorTitle": "Fout",
+        "errorDesc": "Er is een fout opgetreden bij het aanmaken van de zoekopdracht."
+      },
+      "predefinedWorkAreas": ["IT-Support", "Aanmaningen", "Boekhouding", "Klantenservice", "Dataverwerking", "Kwaliteitsborging", "Projectmanagement", "Marketing", "Sales"],
+      "predefinedSkills": ["Python", "JavaScript", "React", "Node.js", "SQL", "NoSQL", "AWS", "Azure", "Docker", "Kubernetes", "Git", "Agile", "Scrum"]
     },
     "settings": {
       "title": "Instellingen",
@@ -2779,6 +2822,22 @@
       "resolvedToday": "Vandaag opgelost",
       "avgResponseTime": "Gem. reactietijd"
     }
+  },
+  "adminDashboard": {
+    "title": "Admin Dashboard",
+    "subtitle": "Hej Talent beheergedeelte",
+    "cards": {
+      "resources": {"title": "RaaS Resources", "caption": "Beschikbare resources"},
+      "requests": {"title": "Zoekopdrachten", "caption": "Klantopdrachten"},
+      "companies": {"title": "Bedrijven", "caption": "Geregistreerde bedrijven"},
+      "tickets": {"title": "Support Tickets", "caption": "Open tickets"}
+    },
+    "quick": {
+      "resources": {"title": "RaaS Resources", "desc": "Resources beheren en toevoegen", "all": "Alle resources bekijken", "new": "Nieuwe resource toevoegen"},
+      "projects": {"title": "Klantprojecten", "desc": "Klantopdrachten beheren", "all": "Alle projecten bekijken", "companies": "Bedrijven beheren"},
+      "support": {"title": "Support & Instellingen", "desc": "Support en systeeminstellingen", "support": "Support Chat", "settings": "Instellingen"}
+    },
+    "recent": {"title": "Laatste zoekopdrachten", "none": "Geen recente activiteiten"}
   },
   "adminSearchRequests": {
     "title": "Klantprojecten",
