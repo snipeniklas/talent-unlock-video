@@ -2520,6 +2520,140 @@
       "avgResponseTime": "Ø Antwortzeit"
     }
   },
+  "adminSearchRequests": {
+    "title": "Kundenprojekte",
+    "subtitle": "Projekte und Ressourcenzuweisungen verwalten",
+    "tabs": {
+      "all": "Alle Projekte",
+      "active": "Aktiv",
+      "onHold": "Pausiert",
+      "completed": "Abgeschlossen",
+      "cancelled": "Storniert"
+    },
+    "table": {
+      "project": "Projekt",
+      "company": "Unternehmen",
+      "status": "Status",
+      "created": "Erstellt",
+      "updated": "Aktualisiert",
+      "allocations": "Zuweisungen",
+      "actions": "Aktionen"
+    },
+    "status": {
+      "active": "Aktiv",
+      "on_hold": "Pausiert",
+      "completed": "Abgeschlossen",
+      "cancelled": "Storniert"
+    },
+    "detail": {
+      "title": "Projektdetails",
+      "subtitle": "Details und Ressourcen für dieses Projekt",
+      "backButton": "Zurück zur Liste",
+      "overview": "Übersicht",
+      "allocations": "Ressourcenzuweisungen",
+      "timeline": "Zeitstrahl",
+      "notes": "Notizen",
+      "projectInfo": "Projektinformationen",
+      "jobTitle": "Jobtitel",
+      "description": "Beschreibung",
+      "requirements": "Anforderungen",
+      "location": "Standort",
+      "workAreas": "Arbeitsbereiche",
+      "skills": "Skills",
+      "employmentType": "Beschäftigungsart",
+      "experienceLevel": "Erfahrungsstufe",
+      "weeklyHours": "Wochenstunden",
+      "workers": "Anzahl Mitarbeiter",
+      "salaryRange": "Gehaltsrahmen",
+      "startDate": "Startdatum",
+      "endDate": "Enddatum",
+      "industry": "Branche",
+      "mainTasks": "Hauptaufgaben",
+      "notSpecified": "Nicht angegeben"
+    },
+    "allocations": {
+      "title": "Ressourcenzuweisungen",
+      "subtitle": "Kandidaten, die diesem Projekt zugewiesen sind",
+      "addCandidate": "Kandidat hinzufügen",
+      "removeCandidate": "Kandidat entfernen",
+      "empty": "Keine Kandidaten zugewiesen",
+      "emptyDescription": "Fügen Sie Kandidaten hinzu, um sie diesem Projekt zuzuweisen",
+      "table": {
+        "candidate": "Kandidat",
+        "status": "Status",
+        "allocatedAt": "Zugewiesen am",
+        "allocatedBy": "Zugewiesen von",
+        "clientStatus": "Kundenstatus",
+        "feedback": "Feedback",
+        "notes": "Notizen",
+        "actions": "Aktionen"
+      },
+      "status": {
+        "pending": "Ausstehend",
+        "approved": "Genehmigt",
+        "rejected": "Abgelehnt",
+        "active": "Aktiv",
+        "completed": "Abgeschlossen",
+        "cancelled": "Storniert"
+      },
+      "clientStatus": {
+        "pending": "Warte auf Feedback",
+        "interested": "Interessiert",
+        "interview_scheduled": "Interview geplant",
+        "hired": "Eingestellt",
+        "rejected": "Abgelehnt"
+      },
+      "dialog": {
+        "addTitle": "Kandidat zum Projekt hinzufügen",
+        "removeTitle": "Kandidat entfernen",
+        "removeConfirm": "Möchten Sie diesen Kandidaten wirklich aus dem Projekt entfernen?",
+        "selectCandidate": "Kandidat auswählen",
+        "searchPlaceholder": "Kandidaten suchen...",
+        "noResults": "Keine Kandidaten gefunden",
+        "notes": "Notizen (optional)",
+        "notesPlaceholder": "Zusätzliche Informationen zur Zuweisung..."
+      },
+      "toast": {
+        "added": "Kandidat zugewiesen",
+        "addedDesc": "Der Kandidat wurde dem Projekt zugewiesen",
+        "removed": "Kandidat entfernt",
+        "removedDesc": "Der Kandidat wurde aus dem Projekt entfernt",
+        "updated": "Zuweisung aktualisiert",
+        "error": "Fehler bei der Zuweisung"
+      }
+    },
+    "actions": {
+      "view": "Details anzeigen",
+      "edit": "Bearbeiten",
+      "duplicate": "Duplizieren",
+      "archive": "Archivieren",
+      "delete": "Löschen",
+      "changeStatus": "Status ändern"
+    },
+    "filters": {
+      "status": "Status",
+      "company": "Unternehmen",
+      "dateRange": "Zeitraum",
+      "hasAllocations": "Mit Zuweisungen"
+    },
+    "empty": {
+      "title": "Keine Projekte gefunden",
+      "description": "Es wurden keine Kundenprojekte gefunden"
+    },
+    "stats": {
+      "totalProjects": "Projekte gesamt",
+      "activeProjects": "Aktive Projekte",
+      "totalAllocations": "Zuweisungen gesamt",
+      "pendingFeedback": "Feedback ausstehend"
+    },
+    "toast": {
+      "created": "Projekt erstellt",
+      "updated": "Projekt aktualisiert",
+      "deleted": "Projekt gelöscht",
+      "statusChanged": "Status geändert",
+      "error": "Fehler beim Speichern"
+    }
+  },
   "auth": {
     "backToHome": "Zur Startseite",
     "welcome": {
