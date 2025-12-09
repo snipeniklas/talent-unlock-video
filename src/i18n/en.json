@@ -1448,6 +1448,84 @@
         "deleteFailed": "Failed to delete search request."
       }
     },
+    "searchRequestDetail": {
+      "notFound": {
+        "title": "Search request not found",
+        "text": "The requested search request does not exist.",
+        "back": "Back to overview"
+      },
+      "companyNotAvailable": "Company not available",
+      "cards": {
+        "description": "Description",
+        "noDescription": "No description available.",
+        "requirements": "Requirements",
+        "skills": "Required Skills",
+        "noSkills": "No skills specified"
+      },
+      "sidebar": {
+        "statusActions": "Status & Actions",
+        "status": "Status:",
+        "manageCandidates": "Manage candidates",
+        "contact": "Contact",
+        "details": "Details",
+        "notProvided": "Not specified",
+        "applicants": "0 applicants",
+        "created": "Created:",
+        "employmentType": "Employment type:",
+        "contactPerson": "Contact person"
+      },
+      "employmentTypes": {
+        "full_time": "Full-time",
+        "part_time": "Part-time",
+        "contract": "Contract",
+        "freelance": "Freelance"
+      },
+      "status": {
+        "active": "Active",
+        "pending": "Pending",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "paused": "Paused"
+      },
+      "toast": {
+        "error": "Error",
+        "noCompany": "No company found.",
+        "loadFailed": "Search request could not be loaded.",
+        "unexpected": "An unexpected error occurred."
+      }
+    },
+    "kanban": {
+      "title": "Manage candidates",
+      "columns": {
+        "proposed": "Proposed",
+        "reviewed": "Reviewed",
+        "interested": "Interested",
+        "not_interested": "Not interested",
+        "interview_scheduled": "Interview scheduled",
+        "hired": "Hired",
+        "rejected": "Rejected"
+      },
+      "candidate": {
+        "unknown": "Unknown",
+        "noRole": "No role specified",
+        "yearsExperience": "years experience",
+        "viewDetails": "View details"
+      },
+      "dropzone": {
+        "empty": "No candidates in this status",
+        "dropHere": "Drop here"
+      },
+      "notes": "Notes",
+      "toast": {
+        "error": "Error",
+        "noCompany": "No company found.",
+        "notFound": "Search request not found.",
+        "loadError": "Data could not be loaded.",
+        "statusUpdated": "Status updated",
+        "statusUpdatedDesc": "Candidate status was successfully changed.",
+        "errorUpdate": "Status could not be updated."
+      }
+    },
     "newRequest": {
       "back": "Back",
       "title": "Create new search request",

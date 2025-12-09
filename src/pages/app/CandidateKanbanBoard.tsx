@@ -8,6 +8,7 @@ import { ArrowLeft, Mail, Phone, MapPin, Calendar, Euro, Star } from "lucide-rea
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslation } from "@/i18n/i18n";
 
 interface Candidate {
   id: string;
@@ -54,26 +55,28 @@ interface KanbanColumn {
   candidates: Allocation[];
 }
 
-const statusConfig = {
-  proposed: { title: "Vorgeschlagen", color: "bg-blue-500" },
-  reviewed: { title: "Geprüft", color: "bg-yellow-500" },
-  interested: { title: "Interessant", color: "bg-green-500" },
-  not_interested: { title: "Nicht interessant", color: "bg-gray-500" },
-  interview_scheduled: { title: "Interview geplant", color: "bg-purple-500" },
-  hired: { title: "Eingestellt", color: "bg-emerald-500" },
-  rejected: { title: "Abgelehnt", color: "bg-red-500" },
-};
-
 const CandidateKanbanBoard = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t, lang } = useTranslation();
   
   const [searchRequest, setSearchRequest] = useState<any>(null);
   const [allocations, setAllocations] = useState<Allocation[]>([]);
   const [loading, setLoading] = useState(true);
   const [draggedItem, setDraggedItem] = useState<string | null>(null);
   const [dragOverColumn, setDragOverColumn] = useState<string | null>(null);
+
+  // Status configuration with translations
+  const statusConfig = {
+    proposed: { title: t('app.kanban.columns.proposed'), color: "bg-blue-500" },
+    reviewed: { title: t('app.kanban.columns.reviewed'), color: "bg-yellow-500" },
+    interested: { title: t('app.kanban.columns.interested'), color: "bg-green-500" },
+    not_interested: { title: t('app.kanban.columns.not_interested'), color: "bg-gray-500" },
+    interview_scheduled: { title: t('app.kanban.columns.interview_scheduled'), color: "bg-purple-500" },
+    hired: { title: t('app.kanban.columns.hired'), color: "bg-emerald-500" },
+    rejected: { title: t('app.kanban.columns.rejected'), color: "bg-red-500" },
+  };
 
   // Helper function to calculate customer hourly rate (selling price)
   const calculateCustomerHourlyRate = (candidate: Candidate): number => {
@@ -109,8 +112,8 @@ const CandidateKanbanBoard = () => {
 
       if (!profile?.company_id) {
         toast({
-          title: "Fehler",
-          description: "Keine Firma gefunden.",
+          title: t('app.kanban.toast.error'),
+          description: t('app.kanban.toast.noCompany'),
           variant: "destructive",
         });
         return;
@@ -126,8 +129,8 @@ const CandidateKanbanBoard = () => {
 
       if (requestError || !requestData) {
         toast({
-          title: "Fehler",
-          description: "Suchauftrag nicht gefunden.",
+          title: t('app.kanban.toast.error'),
+          description: t('app.kanban.toast.notFound'),
           variant: "destructive",
         });
         navigate('/app/search-requests');
@@ -169,8 +172,8 @@ const CandidateKanbanBoard = () => {
     } catch (error) {
       console.error('Error fetching data:', error);
       toast({
-        title: "Fehler",
-        description: "Daten konnten nicht geladen werden.",
+        title: t('app.kanban.toast.error'),
+        description: t('app.kanban.toast.loadError'),
         variant: "destructive",
       });
     } finally {
@@ -197,14 +200,14 @@ const CandidateKanbanBoard = () => {
       );
 
       toast({
-        title: "Status aktualisiert",
-        description: "Der Kandidatenstatus wurde erfolgreich geändert.",
+        title: t('app.kanban.toast.statusUpdated'),
+        description: t('app.kanban.toast.statusUpdatedDesc'),
       });
     } catch (error) {
       console.error('Error updating status:', error);
       toast({
-        title: "Fehler",
-        description: "Status konnte nicht aktualisiert werden.",
+        title: t('app.kanban.toast.error'),
+        description: t('app.kanban.toast.errorUpdate'),
         variant: "destructive",
       });
     }
@@ -298,7 +301,7 @@ const CandidateKanbanBoard = () => {
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold">Kandidaten verwalten</h1>
+          <h1 className="text-3xl font-bold">{t('app.kanban.title')}</h1>
           <p className="text-muted-foreground">{searchRequest?.title}</p>
         </div>
       </div>
@@ -353,10 +356,10 @@ const CandidateKanbanBoard = () => {
                         </Avatar>
                         <div className="flex-1 min-w-0">
                           <h4 className="font-medium truncate">
-                            {identity ? `${identity.first_name} ${identity.last_name}` : 'Unbekannt'}
+                            {identity ? `${identity.first_name} ${identity.last_name}` : t('app.kanban.candidate.unknown')}
                           </h4>
                           <p className="text-sm text-muted-foreground truncate">
-                            {candidate?.primary_role || 'Keine Rolle angegeben'}
+                            {candidate?.primary_role || t('app.kanban.candidate.noRole')}
                           </p>
                         </div>
                       </div>
@@ -380,7 +383,7 @@ const CandidateKanbanBoard = () => {
                         {candidate?.years_experience && (
                           <div className="flex items-center gap-2 text-muted-foreground">
                             <Star className="h-3 w-3" />
-                            <span>{candidate.years_experience} Jahre Erfahrung</span>
+                            <span>{candidate.years_experience} {t('app.kanban.candidate.yearsExperience')}</span>
                           </div>
                         )}
                       </div>
@@ -409,7 +412,7 @@ const CandidateKanbanBoard = () => {
                           className="w-full text-xs h-7"
                           onClick={() => navigate(`/app/candidate/${candidate.id}`)}
                         >
-                          Details anzeigen
+                          {t('app.kanban.candidate.viewDetails')}
                         </Button>
                         
                         <div className="flex flex-wrap gap-1">
@@ -434,7 +437,7 @@ const CandidateKanbanBoard = () => {
                       {/* Notes */}
                       {allocation.notes && (
                         <div className="bg-muted p-2 rounded text-xs">
-                          <strong>Notizen:</strong> {allocation.notes}
+                          <strong>{t('app.kanban.notes')}:</strong> {allocation.notes}
                         </div>
                       )}
                     </div>
@@ -446,7 +449,7 @@ const CandidateKanbanBoard = () => {
                 <div className={`text-center py-8 text-muted-foreground text-sm border-2 border-dashed rounded-lg transition-colors ${
                   dragOverColumn === column.status ? 'border-blue-400 bg-blue-50/50' : 'border-gray-200'
                 }`}>
-                  {dragOverColumn === column.status ? 'Hier ablegen' : 'Keine Kandidaten in diesem Status'}
+                  {dragOverColumn === column.status ? t('app.kanban.dropzone.dropHere') : t('app.kanban.dropzone.empty')}
                 </div>
               )}
             </CardContent>

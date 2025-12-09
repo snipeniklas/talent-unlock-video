@@ -1684,6 +1684,84 @@
         "deleteFailed": "Suchauftrag konnte nicht gelöscht werden."
       }
     },
+    "searchRequestDetail": {
+      "notFound": {
+        "title": "Suchauftrag nicht gefunden",
+        "text": "Der angeforderte Suchauftrag existiert nicht.",
+        "back": "Zurück zur Übersicht"
+      },
+      "companyNotAvailable": "Firma nicht verfügbar",
+      "cards": {
+        "description": "Beschreibung",
+        "noDescription": "Keine Beschreibung verfügbar.",
+        "requirements": "Anforderungen",
+        "skills": "Erforderliche Skills",
+        "noSkills": "Keine Skills angegeben"
+      },
+      "sidebar": {
+        "statusActions": "Status & Aktionen",
+        "status": "Status:",
+        "manageCandidates": "Kandidaten verwalten",
+        "contact": "Kontakt aufnehmen",
+        "details": "Details",
+        "notProvided": "Nicht angegeben",
+        "applicants": "0 Bewerber",
+        "created": "Erstellt:",
+        "employmentType": "Arbeitstyp:",
+        "contactPerson": "Ansprechpartner"
+      },
+      "employmentTypes": {
+        "full_time": "Vollzeit",
+        "part_time": "Teilzeit",
+        "contract": "Vertrag",
+        "freelance": "Freelance"
+      },
+      "status": {
+        "active": "Aktiv",
+        "pending": "Ausstehend",
+        "completed": "Abgeschlossen",
+        "cancelled": "Abgebrochen",
+        "paused": "Pausiert"
+      },
+      "toast": {
+        "error": "Fehler",
+        "noCompany": "Keine Firma gefunden.",
+        "loadFailed": "Suchauftrag konnte nicht geladen werden.",
+        "unexpected": "Ein unerwarteter Fehler ist aufgetreten."
+      }
+    },
+    "kanban": {
+      "title": "Kandidaten verwalten",
+      "columns": {
+        "proposed": "Vorgeschlagen",
+        "reviewed": "Geprüft",
+        "interested": "Interessant",
+        "not_interested": "Nicht interessant",
+        "interview_scheduled": "Interview geplant",
+        "hired": "Eingestellt",
+        "rejected": "Abgelehnt"
+      },
+      "candidate": {
+        "unknown": "Unbekannt",
+        "noRole": "Keine Rolle angegeben",
+        "yearsExperience": "Jahre Erfahrung",
+        "viewDetails": "Details anzeigen"
+      },
+      "dropzone": {
+        "empty": "Keine Kandidaten in diesem Status",
+        "dropHere": "Hier ablegen"
+      },
+      "notes": "Notizen",
+      "toast": {
+        "error": "Fehler",
+        "noCompany": "Keine Firma gefunden.",
+        "notFound": "Suchauftrag nicht gefunden.",
+        "loadError": "Daten konnten nicht geladen werden.",
+        "statusUpdated": "Status aktualisiert",
+        "statusUpdatedDesc": "Der Kandidatenstatus wurde erfolgreich geändert.",
+        "errorUpdate": "Status konnte nicht aktualisiert werden."
+      }
+    },
     "newRequest": {
       "back": "Zurück",
       "title": "Neuen Suchauftrag erstellen",
