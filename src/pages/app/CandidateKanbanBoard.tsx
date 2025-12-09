@@ -59,7 +59,13 @@ const CandidateKanbanBoard = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { t, lang } = useTranslation();
+  const { t, lang, get } = useTranslation();
+  
+  // Helper function to dynamically translate stored German titles
+  const translateTitle = (title: string) => {
+    const remoteWorkerTranslation = t('app.newRequest.remoteWorker', 'Remote-Mitarbeiter');
+    return title.replace(/Remote-Mitarbeiter/g, remoteWorkerTranslation);
+  };
   
   const [searchRequest, setSearchRequest] = useState<any>(null);
   const [allocations, setAllocations] = useState<Allocation[]>([]);
@@ -302,7 +308,7 @@ const CandidateKanbanBoard = () => {
         </Button>
         <div>
           <h1 className="text-3xl font-bold">{t('app.kanban.title')}</h1>
-          <p className="text-muted-foreground">{searchRequest?.title}</p>
+          <p className="text-muted-foreground">{translateTitle(searchRequest?.title || '')}</p>
         </div>
       </div>
 
