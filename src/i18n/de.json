@@ -2431,7 +2431,37 @@
       "usersInCompany": "Benutzer",
       "projectsTotal": "Projekte gesamt",
       "projectsActive": "Aktive Projekte",
-      "projectsCompleted": "Abgeschlossene Projekte"
+      "projectsCompleted": "Abgeschlossene Projekte",
+      "companies": "Unternehmen",
+      "registered": "Registrierte Unternehmen",
+      "activeRequests": "Aktive Anfragen",
+      "ongoingRequests": "Laufende Anfragen",
+      "users": "Benutzer",
+      "registeredUsers": "Registrierte Benutzer",
+      "completed": "Abgeschlossen",
+      "successfullyCompleted": "Erfolgreich abgeschlossen"
+    },
+    "filters": {
+      "title": "Suche & Filter",
+      "searchPlaceholder": "Unternehmen suchen..."
+    },
+    "table": {
+      "title": "Alle Unternehmen ({count})",
+      "description": "Übersicht aller registrierten Kundenunternehmen",
+      "cols": {
+        "company": "Unternehmen",
+        "contact": "Ansprechpartner",
+        "contactInfo": "Kontaktdaten",
+        "activity": "Aktivität",
+        "registered": "Registriert",
+        "actions": "Aktionen"
+      },
+      "noContact": "Kein Ansprechpartner",
+      "usersCount": "Benutzer",
+      "requests": "Anfragen",
+      "active": "aktiv",
+      "completedCount": "abgeschlossen",
+      "requestsBtn": "Anfragen"
     },
     "tabs": {
       "overview": "Übersicht",
@@ -2453,7 +2483,9 @@
     },
     "empty": {
       "title": "Keine Unternehmen",
-      "description": "Es wurden noch keine Unternehmen registriert"
+      "description": "Es wurden noch keine Unternehmen registriert",
+      "noMatch": "Keine Unternehmen gefunden",
+      "none": "Noch keine Unternehmen vorhanden"
     },
     "detail": {
       "title": "Unternehmens-Details",
@@ -2469,6 +2501,21 @@
       "typeToConfirm": "Geben Sie den Firmennamen ein, um zu bestätigen:",
       "confirmPlaceholder": "Firmennamen eingeben..."
     },
+    "deleteDialog": {
+      "title": "Unternehmen löschen",
+      "confirm": "Möchten Sie das Unternehmen",
+      "confirmSuffix": "wirklich löschen?",
+      "hasUsers": "Dieses Unternehmen hat {count} zugeordnete Benutzer!",
+      "deleteUsersFirst": "Bitte löschen Sie zuerst alle Benutzer, bevor Sie das Unternehmen löschen können.",
+      "irreversible": "Diese Aktion kann nicht rückgängig gemacht werden!",
+      "dataDeleted": "Folgende Daten werden gelöscht:",
+      "deleteItems": {
+        "profile": "Unternehmensprofil",
+        "tickets": "Support-Tickets",
+        "invitations": "Offene Einladungen"
+      },
+      "confirmButton": "Unternehmen löschen"
+    },
     "actions": {
       "view": "Ansehen",
       "delete": "Löschen"
@@ -2476,6 +2523,9 @@
     "toast": {
       "deleted": "Unternehmen gelöscht",
       "deleteError": "Fehler beim Löschen des Unternehmens",
+      "deleteErrorDesc": "Das Unternehmen konnte nicht gelöscht werden.",
+      "deleteSuccess": "Unternehmen gelöscht",
+      "deleteSuccessDesc": "Das Unternehmen wurde erfolgreich gelöscht.",
       "error": "Fehler beim Laden der Unternehmensdaten"
     }
   },
