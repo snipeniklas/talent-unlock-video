@@ -26,10 +26,16 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { t, lang } = useTranslation();
 
-  // Dynamically translate stored German title parts to current language
+  // Dynamically translate stored German text parts to current language
   const translateTitle = (title: string) => {
     const remoteWorkerTranslation = t('app.newRequest.remoteWorker', 'Remote-Mitarbeiter');
     return title.replace(/Remote-Mitarbeiter/g, remoteWorkerTranslation);
+  };
+
+  const translateDescription = (description: string | null) => {
+    if (!description) return '';
+    const workAreasLabel = t('app.newRequest.workAreasLabel', 'Benötigte Arbeitsbereiche');
+    return description.replace(/Benötigte Arbeitsbereiche/g, workAreasLabel);
   };
   
   // Use optimized hooks with React Query

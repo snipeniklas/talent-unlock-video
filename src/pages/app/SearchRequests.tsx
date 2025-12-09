@@ -66,10 +66,16 @@ const SearchRequests = () => {
   const [currentUserId, setCurrentUserId] = useState<string>('');
   const { t, lang } = useTranslation();
 
-  // Dynamically translate stored German title parts to current language
+  // Dynamically translate stored German text parts to current language
   const translateTitle = (title: string) => {
     const remoteWorkerTranslation = t('app.newRequest.remoteWorker', 'Remote-Mitarbeiter');
     return title.replace(/Remote-Mitarbeiter/g, remoteWorkerTranslation);
+  };
+
+  const translateDescription = (description: string | null) => {
+    if (!description) return '';
+    const workAreasLabel = t('app.newRequest.workAreasLabel', 'Benötigte Arbeitsbereiche');
+    return description.replace(/Benötigte Arbeitsbereiche/g, workAreasLabel);
   };
 
   useEffect(() => {
@@ -240,13 +246,13 @@ const SearchRequests = () => {
   const getStatusText = (status: string) => {
     switch (status) {
       case 'active':
-        return t('app.status.active', 'Aktiv');
+        return t('app.searchRequestDetail.status.active', 'Aktiv');
       case 'pending':
-        return t('app.status.pending', 'Ausstehend');
+        return t('app.searchRequestDetail.status.pending', 'Ausstehend');
       case 'completed':
-        return t('app.status.completed', 'Abgeschlossen');
+        return t('app.searchRequestDetail.status.completed', 'Abgeschlossen');
       case 'cancelled':
-        return t('app.status.cancelled', 'Abgebrochen');
+        return t('app.searchRequestDetail.status.cancelled', 'Abgebrochen');
       default:
         return status;
     }
@@ -323,7 +329,7 @@ const SearchRequests = () => {
                 <div className="flex-1">
                   <CardTitle className="text-xl text-brand-dark mb-2">{translateTitle(request.title)}</CardTitle>
                   <CardDescription className="text-base line-clamp-2">
-                    {request.description}
+                    {translateDescription(request.description)}
                   </CardDescription>
                 </div>
                 <div className="flex items-center gap-2">

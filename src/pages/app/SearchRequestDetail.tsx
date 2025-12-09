@@ -40,10 +40,16 @@ const SearchRequestDetail = () => {
   const { toast } = useToast();
   const { t, lang } = useTranslation();
 
-  // Dynamically translate stored German title parts to current language
+  // Dynamically translate stored German text parts to current language
   const translateTitle = (title: string) => {
     const remoteWorkerTranslation = t('app.newRequest.remoteWorker', 'Remote-Mitarbeiter');
     return title.replace(/Remote-Mitarbeiter/g, remoteWorkerTranslation);
+  };
+
+  const translateDescription = (description: string | null) => {
+    if (!description) return '';
+    const workAreasLabel = t('app.newRequest.workAreasLabel', 'Benötigte Arbeitsbereiche');
+    return description.replace(/Benötigte Arbeitsbereiche/g, workAreasLabel);
   };
 
   const [searchRequest, setSearchRequest] = useState<SearchRequest | null>(null);
@@ -218,7 +224,7 @@ const SearchRequestDetail = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground leading-relaxed">
-                {searchRequest.description || t('app.searchRequestDetail.cards.noDescription')}
+                {translateDescription(searchRequest.description) || t('app.searchRequestDetail.cards.noDescription')}
               </p>
             </CardContent>
           </Card>
