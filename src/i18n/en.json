@@ -2435,6 +2435,140 @@
       "avgResponseTime": "Avg Response Time"
     }
   },
+  "adminSearchRequests": {
+    "title": "Customer Projects",
+    "subtitle": "Manage projects and resource allocations",
+    "tabs": {
+      "all": "All Projects",
+      "active": "Active",
+      "onHold": "On Hold",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "table": {
+      "project": "Project",
+      "company": "Company",
+      "status": "Status",
+      "created": "Created",
+      "updated": "Updated",
+      "allocations": "Allocations",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "on_hold": "On Hold",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "detail": {
+      "title": "Project Details",
+      "subtitle": "Details and resources for this project",
+      "backButton": "Back to list",
+      "overview": "Overview",
+      "allocations": "Resource Allocations",
+      "timeline": "Timeline",
+      "notes": "Notes",
+      "projectInfo": "Project Information",
+      "jobTitle": "Job Title",
+      "description": "Description",
+      "requirements": "Requirements",
+      "location": "Location",
+      "workAreas": "Work Areas",
+      "skills": "Skills",
+      "employmentType": "Employment Type",
+      "experienceLevel": "Experience Level",
+      "weeklyHours": "Weekly Hours",
+      "workers": "Number of Workers",
+      "salaryRange": "Salary Range",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "industry": "Industry",
+      "mainTasks": "Main Tasks",
+      "notSpecified": "Not specified"
+    },
+    "allocations": {
+      "title": "Resource Allocations",
+      "subtitle": "Candidates assigned to this project",
+      "addCandidate": "Add Candidate",
+      "removeCandidate": "Remove Candidate",
+      "empty": "No candidates assigned",
+      "emptyDescription": "Add candidates to assign them to this project",
+      "table": {
+        "candidate": "Candidate",
+        "status": "Status",
+        "allocatedAt": "Allocated at",
+        "allocatedBy": "Allocated by",
+        "clientStatus": "Client Status",
+        "feedback": "Feedback",
+        "notes": "Notes",
+        "actions": "Actions"
+      },
+      "status": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "active": "Active",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "clientStatus": {
+        "pending": "Awaiting Feedback",
+        "interested": "Interested",
+        "interview_scheduled": "Interview Scheduled",
+        "hired": "Hired",
+        "rejected": "Rejected"
+      },
+      "dialog": {
+        "addTitle": "Add Candidate to Project",
+        "removeTitle": "Remove Candidate",
+        "removeConfirm": "Are you sure you want to remove this candidate from the project?",
+        "selectCandidate": "Select Candidate",
+        "searchPlaceholder": "Search candidates...",
+        "noResults": "No candidates found",
+        "notes": "Notes (optional)",
+        "notesPlaceholder": "Additional information about the allocation..."
+      },
+      "toast": {
+        "added": "Candidate assigned",
+        "addedDesc": "The candidate has been assigned to the project",
+        "removed": "Candidate removed",
+        "removedDesc": "The candidate has been removed from the project",
+        "updated": "Allocation updated",
+        "error": "Allocation error"
+      }
+    },
+    "actions": {
+      "view": "View Details",
+      "edit": "Edit",
+      "duplicate": "Duplicate",
+      "archive": "Archive",
+      "delete": "Delete",
+      "changeStatus": "Change Status"
+    },
+    "filters": {
+      "status": "Status",
+      "company": "Company",
+      "dateRange": "Date Range",
+      "hasAllocations": "With Allocations"
+    },
+    "empty": {
+      "title": "No projects found",
+      "description": "No customer projects were found"
+    },
+    "stats": {
+      "totalProjects": "Total Projects",
+      "activeProjects": "Active Projects",
+      "totalAllocations": "Total Allocations",
+      "pendingFeedback": "Pending Feedback"
+    },
+    "toast": {
+      "created": "Project created",
+      "updated": "Project updated",
+      "deleted": "Project deleted",
+      "statusChanged": "Status changed",
+      "error": "Error saving"
+    }
+  },
   "auth": {
     "backToHome": "Back to homepage",
     "welcome": {
