@@ -2634,17 +2634,28 @@
   "adminSupport": {
     "title": "Support Tickets",
     "subtitle": "Manage customer inquiries and support tickets",
+    "header": {
+      "title": "Admin Support Chat",
+      "description": "Manage all customer support requests"
+    },
     "search": {
       "placeholder": "Search tickets...",
       "noResults": "No tickets found"
     },
     "filters": {
-      "all": "All",
+      "all": "All Status",
       "open": "Open",
       "inProgress": "In Progress",
       "resolved": "Resolved",
+      "closed": "Closed",
       "priority": "Priority",
       "category": "Category"
+    },
+    "ticketsList": {
+      "title": "Support Tickets",
+      "count": "Support Tickets ({count})",
+      "loading": "Loading tickets...",
+      "empty": "No tickets found"
     },
     "columns": {
       "title": "Title",
@@ -2684,19 +2695,31 @@
       "markResolved": "Mark as Resolved",
       "assignTo": "Assign To"
     },
+    "chat": {
+      "selectTicket": "Select a ticket to start the admin chat",
+      "youAdmin": "You (Admin)",
+      "adminBadge": "Admin",
+      "internalBadge": "Internal",
+      "internalLabel": "Internal message (visible to admins only)",
+      "messagePlaceholder": "Enter message..."
+    },
     "actions": {
       "view": "View",
       "reply": "Reply",
       "resolve": "Resolve",
       "reopen": "Reopen",
-      "assign": "Assign"
+      "assign": "Assign",
+      "assignToMe": "Assign"
     },
     "toast": {
       "replied": "Reply sent",
       "resolved": "Ticket resolved",
       "assigned": "Ticket assigned",
+      "assignedDesc": "The ticket has been assigned to you.",
       "reopened": "Ticket reopened",
-      "error": "Ticket error"
+      "error": "Ticket error",
+      "updated": "Ticket updated",
+      "updatedDesc": "The ticket has been successfully updated."
     },
     "empty": {
       "title": "No Tickets",

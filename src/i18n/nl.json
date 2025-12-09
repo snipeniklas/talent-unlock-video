@@ -3311,17 +3311,28 @@
   "adminSupport": {
     "title": "Support Tickets",
     "subtitle": "Klantvragen en support-tickets beheren",
+    "header": {
+      "title": "Admin Support Chat",
+      "description": "Beheer alle klant-supportaanvragen"
+    },
     "search": {
       "placeholder": "Tickets zoeken...",
       "noResults": "Geen tickets gevonden"
     },
     "filters": {
-      "all": "Alle",
+      "all": "Alle status",
       "open": "Open",
       "inProgress": "In behandeling",
       "resolved": "Opgelost",
+      "closed": "Gesloten",
       "priority": "Prioriteit",
       "category": "Categorie"
+    },
+    "ticketsList": {
+      "title": "Support Tickets",
+      "count": "Support Tickets ({count})",
+      "loading": "Tickets worden geladen...",
+      "empty": "Geen tickets gevonden"
     },
     "columns": {
       "title": "Titel",
@@ -3361,19 +3372,31 @@
       "markResolved": "Markeren als opgelost",
       "assignTo": "Toewijzen aan"
     },
+    "chat": {
+      "selectTicket": "Selecteer een ticket om de admin-chat te starten",
+      "youAdmin": "U (Admin)",
+      "adminBadge": "Admin",
+      "internalBadge": "Intern",
+      "internalLabel": "Intern bericht (alleen zichtbaar voor admins)",
+      "messagePlaceholder": "Bericht invoeren..."
+    },
     "actions": {
       "view": "Bekijken",
       "reply": "Beantwoorden",
       "resolve": "Oplossen",
       "reopen": "Heropenen",
-      "assign": "Toewijzen"
+      "assign": "Toewijzen",
+      "assignToMe": "Toewijzen"
     },
     "toast": {
       "replied": "Antwoord verzonden",
       "resolved": "Ticket opgelost",
       "assigned": "Ticket toegewezen",
+      "assignedDesc": "Het ticket is aan u toegewezen.",
       "reopened": "Ticket heropend",
-      "error": "Ticketfout"
+      "error": "Ticketfout",
+      "updated": "Ticket bijgewerkt",
+      "updatedDesc": "Het ticket is succesvol bijgewerkt."
     },
     "empty": {
       "title": "Geen tickets",
