@@ -256,7 +256,7 @@ export function AppSidebar() {
                       className={({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${getNavCls({ isActive })}`}
                     >
                       <Plus className="h-4 w-4 flex-shrink-0" />
-                      {!isCollapsed && <span className="flex-1">{t('app.sidebar.quick.new', 'Neue Anfrage')}</span>}
+                      {!isCollapsed && <span className="flex-1">{t('app.sidebar.quickItems.new', 'Neue Anfrage')}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
