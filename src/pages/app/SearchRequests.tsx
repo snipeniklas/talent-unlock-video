@@ -64,7 +64,20 @@ const SearchRequests = () => {
   const [loading, setLoading] = useState(true);
   const [userRoles, setUserRoles] = useState<string[]>([]);
   const [currentUserId, setCurrentUserId] = useState<string>('');
-  const { t, lang } = useTranslation();
+  const { t, get, lang } = useTranslation();
+
+  // German work area names (stored in DB) mapped to translation keys
+  const workAreaTranslations: Record<string, string> = {
+    'IT-Support': get<string[]>('app.newRequest.predefinedWorkAreas', [])[0] || 'IT-Support',
+    'Mahnwesen': get<string[]>('app.newRequest.predefinedWorkAreas', [])[1] || 'Mahnwesen',
+    'Buchhaltung': get<string[]>('app.newRequest.predefinedWorkAreas', [])[2] || 'Buchhaltung',
+    'Kundenservice': get<string[]>('app.newRequest.predefinedWorkAreas', [])[3] || 'Kundenservice',
+    'Datenverarbeitung': get<string[]>('app.newRequest.predefinedWorkAreas', [])[4] || 'Datenverarbeitung',
+    'Qualitätssicherung': get<string[]>('app.newRequest.predefinedWorkAreas', [])[5] || 'Qualitätssicherung',
+    'Projektmanagement': get<string[]>('app.newRequest.predefinedWorkAreas', [])[6] || 'Projektmanagement',
+    'Marketing': get<string[]>('app.newRequest.predefinedWorkAreas', [])[7] || 'Marketing',
+    'Vertrieb': get<string[]>('app.newRequest.predefinedWorkAreas', [])[8] || 'Vertrieb',
+  };
 
   // Dynamically translate stored German text parts to current language
   const translateTitle = (title: string) => {
@@ -75,7 +88,12 @@ const SearchRequests = () => {
   const translateDescription = (description: string | null) => {
     if (!description) return '';
     const workAreasLabel = t('app.newRequest.workAreasLabel', 'Benötigte Arbeitsbereiche');
-    return description.replace(/Benötigte Arbeitsbereiche/g, workAreasLabel);
+    let translated = description.replace(/Benötigte Arbeitsbereiche/g, workAreasLabel);
+    // Translate individual work area names
+    Object.entries(workAreaTranslations).forEach(([german, translated_value]) => {
+      translated = translated.replace(new RegExp(german, 'g'), translated_value);
+    });
+    return translated;
   };
 
   useEffect(() => {
