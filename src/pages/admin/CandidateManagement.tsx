@@ -18,6 +18,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import { useUserRole } from '@/hooks/useUserData';
+import { useTranslation } from '@/i18n/i18n';
 
 interface Candidate {
   id: string;
@@ -48,6 +49,7 @@ export default function CandidateManagement() {
   const { toast } = useToast();
   const navigate = useNavigate();
   const userRole = useUserRole();
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchCandidates();
@@ -79,8 +81,8 @@ export default function CandidateManagement() {
     } catch (error) {
       console.error('Error fetching candidates:', error);
       toast({
-        title: "Fehler",
-        description: "RaaS Ressourcen konnten nicht geladen werden.",
+        title: t('common.error'),
+        description: t('candidateManagement.toast.loadError'),
         variant: "destructive",
       });
     } finally {
@@ -106,8 +108,8 @@ export default function CandidateManagement() {
       if (error) throw error;
 
       toast({
-        title: "Erfolgreich gelöscht",
-        description: "Die RaaS Ressource wurde vollständig gelöscht.",
+        title: t('candidateManagement.toast.deleteSuccess'),
+        description: t('candidateManagement.toast.deleteSuccessDesc'),
       });
 
       // Refresh candidates list
@@ -115,8 +117,8 @@ export default function CandidateManagement() {
     } catch (error) {
       console.error('Error deleting candidate:', error);
       toast({
-        title: "Fehler",
-        description: "RaaS Ressource konnte nicht gelöscht werden.",
+        title: t('common.error'),
+        description: t('candidateManagement.toast.deleteError'),
         variant: "destructive",
       });
     } finally {
@@ -174,14 +176,14 @@ export default function CandidateManagement() {
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-2">
           <Users className="h-6 w-6" />
-          <h1 className="text-2xl font-bold">RaaS Ressourcen-Management</h1>
+          <h1 className="text-2xl font-bold">{t('candidateManagement.title')}</h1>
         </div>
         <Button 
           onClick={() => navigate('/admin/candidates/new')}
           className="flex items-center gap-2"
         >
           <Plus className="h-4 w-4" />
-          Neue RaaS Ressource anlegen
+          {t('candidateManagement.actions.addNew')}
         </Button>
       </div>
 
@@ -189,7 +191,7 @@ export default function CandidateManagement() {
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
-            placeholder="RaaS Ressourcen durchsuchen..."
+            placeholder={t('candidateManagement.search.placeholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -201,12 +203,12 @@ export default function CandidateManagement() {
         <Card>
           <CardContent className="p-8 text-center">
             <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Keine RaaS Ressourcen gefunden</h3>
+            <h3 className="text-lg font-semibold mb-2">{t('candidateManagement.empty.title')}</h3>
             <p className="text-gray-600 mb-4">
-              {searchTerm ? 'Keine RaaS Ressourcen entsprechen Ihrer Suche.' : 'Noch keine RaaS Ressourcen angelegt.'}
+              {searchTerm ? t('candidateManagement.empty.noMatch') : t('candidateManagement.empty.none')}
             </p>
             <Button onClick={() => navigate('/admin/candidates/new')}>
-              Erste RaaS Ressource anlegen
+              {t('candidateManagement.empty.addFirst')}
             </Button>
           </CardContent>
         </Card>
@@ -221,16 +223,16 @@ export default function CandidateManagement() {
                       <h3 className="text-lg font-semibold">
                         {candidate.candidate_identity 
                           ? `${candidate.candidate_identity.first_name} ${candidate.candidate_identity.last_name}`
-                          : 'Unbenannt'
+                          : t('candidateManagement.unnamed')
                         }
                       </h3>
                       <Badge className={getSeniorityColor(candidate.seniority)}>
                         {candidate.seniority}
                       </Badge>
                       <Badge className={getAvailabilityColor(candidate.availability)}>
-                        {candidate.availability === 'immediately' ? 'Sofort verfügbar' : 
-                         candidate.availability === 'notice_period' ? 'Kündigungsfrist' :
-                         candidate.availability === 'booked' ? 'Gebucht' : 'Pausiert'}
+                        {candidate.availability === 'immediately' ? t('candidateManagement.availability.immediately') : 
+                         candidate.availability === 'notice_period' ? t('candidateManagement.availability.noticePeriod') :
+                         candidate.availability === 'booked' ? t('candidateManagement.availability.booked') : t('candidateManagement.availability.paused')}
                       </Badge>
                     </div>
                     
@@ -241,7 +243,7 @@ export default function CandidateManagement() {
                     
                     <div className="flex items-center gap-4 text-sm text-gray-600">
                       {candidate.years_experience && (
-                        <span>{candidate.years_experience} Jahre Erfahrung</span>
+                        <span>{candidate.years_experience} {t('candidateManagement.yearsExperience')}</span>
                       )}
                        {candidate.rate_monthly_target && (
                          <div>
@@ -267,7 +269,7 @@ export default function CandidateManagement() {
                       className="flex items-center gap-1"
                     >
                       <Eye className="h-4 w-4" />
-                      Ansehen
+                      {t('common.actions.view')}
                     </Button>
                     <Button 
                       variant="outline" 
@@ -276,7 +278,7 @@ export default function CandidateManagement() {
                       className="flex items-center gap-1"
                     >
                       <Edit className="h-4 w-4" />
-                      Bearbeiten
+                      {t('common.actions.edit')}
                     </Button>
                     {userRole === 'admin' && (
                       <Button 
@@ -286,7 +288,7 @@ export default function CandidateManagement() {
                         className="flex items-center gap-1 text-destructive hover:text-destructive"
                       >
                         <Trash2 className="h-4 w-4" />
-                        Löschen
+                        {t('common.actions.delete')}
                       </Button>
                     )}
                   </div>
@@ -300,34 +302,34 @@ export default function CandidateManagement() {
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>RaaS Ressource löschen</AlertDialogTitle>
+            <AlertDialogTitle>{t('candidateManagement.deleteDialog.title')}</AlertDialogTitle>
             <AlertDialogDescription>
-              Möchten Sie die RaaS Ressource{' '}
+              {t('candidateManagement.deleteDialog.confirm')}{' '}
               <strong>
                 {candidateToDelete?.candidate_identity
                   ? `${candidateToDelete.candidate_identity.first_name} ${candidateToDelete.candidate_identity.last_name}`
-                  : 'diese Ressource'}
+                  : t('candidateManagement.deleteDialog.thisResource')}
               </strong>{' '}
-              wirklich löschen?
+              {t('candidateManagement.deleteDialog.really')}
               <br />
               <br />
-              Diese Aktion kann nicht rückgängig gemacht werden. Die Ressource wird:
+              {t('candidateManagement.deleteDialog.warning')}
               <ul className="list-disc pl-5 mt-2 space-y-1">
-                <li>Vollständig aus der Datenbank entfernt</li>
-                <li>Nicht mehr im Admin Portal sichtbar sein</li>
-                <li>Nicht mehr bei Kunden angezeigt werden</li>
-                <li>Aus allen Dashboards entfernt</li>
+                <li>{t('candidateManagement.deleteDialog.consequences.database')}</li>
+                <li>{t('candidateManagement.deleteDialog.consequences.admin')}</li>
+                <li>{t('candidateManagement.deleteDialog.consequences.customer')}</li>
+                <li>{t('candidateManagement.deleteDialog.consequences.dashboard')}</li>
               </ul>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isDeleting}>Abbrechen</AlertDialogCancel>
+            <AlertDialogCancel disabled={isDeleting}>{t('common.cancel')}</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDeleteConfirm}
               disabled={isDeleting}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              {isDeleting ? 'Wird gelöscht...' : 'Löschen'}
+              {isDeleting ? t('candidateManagement.deleteDialog.deleting') : t('common.delete')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
