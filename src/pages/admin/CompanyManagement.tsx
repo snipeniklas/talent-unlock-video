@@ -9,6 +9,7 @@ import { Search, Eye, Building2, Mail, Globe, Users, FileText, Calendar, UserChe
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/i18n/i18n";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -45,6 +46,7 @@ export default function CompanyManagement() {
   const [deleteCompanyDialog, setDeleteCompanyDialog] = useState<{companyId: string, name: string, userCount: number} | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchCompanies();
@@ -115,8 +117,8 @@ export default function CompanyManagement() {
       }
 
       toast({
-        title: "Unternehmen gelöscht",
-        description: "Das Unternehmen wurde erfolgreich aus dem System entfernt.",
+        title: t('companyManagement.toast.deleteSuccess'),
+        description: t('companyManagement.toast.deleteSuccessDesc'),
       });
 
       // Unternehmensliste aktualisieren
@@ -125,8 +127,8 @@ export default function CompanyManagement() {
     } catch (error: any) {
       console.error('Error deleting company:', error);
       toast({
-        title: "Fehler beim Löschen",
-        description: error.message || "Das Unternehmen konnte nicht gelöscht werden.",
+        title: t('companyManagement.toast.deleteError'),
+        description: error.message || t('companyManagement.toast.deleteErrorDesc'),
         variant: "destructive",
       });
     }
@@ -151,8 +153,8 @@ export default function CompanyManagement() {
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Unternehmensverwaltung</h1>
-          <p className="text-muted-foreground">Alle Kundenunternehmen im Überblick</p>
+          <h1 className="text-3xl font-bold">{t('companyManagement.title')}</h1>
+          <p className="text-muted-foreground">{t('companyManagement.subtitle')}</p>
         </div>
       </div>
 
@@ -160,18 +162,18 @@ export default function CompanyManagement() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Unternehmen</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('companyManagement.stats.companies')}</CardTitle>
             <Building2 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{companies.length}</div>
-            <p className="text-xs text-muted-foreground">Registrierte Unternehmen</p>
+            <p className="text-xs text-muted-foreground">{t('companyManagement.stats.registered')}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Aktive Aufträge</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('companyManagement.stats.activeRequests')}</CardTitle>
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -180,26 +182,26 @@ export default function CompanyManagement() {
                 sum + company.search_requests.filter(r => r.status === 'active').length, 0
               )}
             </div>
-            <p className="text-xs text-muted-foreground">Laufende Suchaufträge</p>
+            <p className="text-xs text-muted-foreground">{t('companyManagement.stats.ongoingRequests')}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Benutzer</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('companyManagement.stats.users')}</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
               {companies.reduce((sum, company) => sum + company.profiles.length, 0)}
             </div>
-            <p className="text-xs text-muted-foreground">Registrierte Benutzer</p>
+            <p className="text-xs text-muted-foreground">{t('companyManagement.stats.registeredUsers')}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Abgeschlossen</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('companyManagement.stats.completed')}</CardTitle>
             <UserCheck className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -208,7 +210,7 @@ export default function CompanyManagement() {
                 sum + company.search_requests.filter(r => r.status === 'completed').length, 0
               )}
             </div>
-            <p className="text-xs text-muted-foreground">Erfolgreich abgeschlossen</p>
+            <p className="text-xs text-muted-foreground">{t('companyManagement.stats.successfullyCompleted')}</p>
           </CardContent>
         </Card>
       </div>
@@ -216,13 +218,13 @@ export default function CompanyManagement() {
       {/* Filter und Suche */}
       <Card>
         <CardHeader>
-          <CardTitle>Filter</CardTitle>
+          <CardTitle>{t('companyManagement.filters.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Nach Unternehmen, E-Mail oder Website suchen..."
+              placeholder={t('companyManagement.filters.searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -234,9 +236,9 @@ export default function CompanyManagement() {
       {/* Unternehmen Übersicht */}
       <Card>
         <CardHeader>
-          <CardTitle>Unternehmen ({filteredCompanies.length})</CardTitle>
+          <CardTitle>{t('companyManagement.table.title').replace('{count}', String(filteredCompanies.length))}</CardTitle>
           <CardDescription>
-            Übersicht aller registrierten Kundenunternehmen
+            {t('companyManagement.table.description')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -244,8 +246,8 @@ export default function CompanyManagement() {
             <div className="text-center py-8">
               <p className="text-muted-foreground">
                 {searchTerm 
-                  ? "Keine Unternehmen gefunden, die den Suchkriterien entsprechen."
-                  : "Noch keine Unternehmen registriert."
+                  ? t('companyManagement.empty.noMatch')
+                  : t('companyManagement.empty.none')
                 }
               </p>
             </div>
@@ -254,12 +256,12 @@ export default function CompanyManagement() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Unternehmen</TableHead>
-                    <TableHead>Ansprechpartner</TableHead>
-                    <TableHead>Kontakt</TableHead>
-                    <TableHead>Aktivität</TableHead>
-                    <TableHead>Registriert</TableHead>
-                    <TableHead>Aktionen</TableHead>
+                    <TableHead>{t('companyManagement.table.cols.company')}</TableHead>
+                    <TableHead>{t('companyManagement.table.cols.contact')}</TableHead>
+                    <TableHead>{t('companyManagement.table.cols.contactInfo')}</TableHead>
+                    <TableHead>{t('companyManagement.table.cols.activity')}</TableHead>
+                    <TableHead>{t('companyManagement.table.cols.registered')}</TableHead>
+                    <TableHead>{t('companyManagement.table.cols.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -302,7 +304,7 @@ export default function CompanyManagement() {
                               )}
                             </div>
                           ) : (
-                            <span className="text-muted-foreground">Kein Ansprechpartner</span>
+                            <span className="text-muted-foreground">{t('companyManagement.table.noContact')}</span>
                           )}
                         </TableCell>
                         <TableCell>
@@ -315,7 +317,7 @@ export default function CompanyManagement() {
                             )}
                             <p className="text-sm text-muted-foreground flex items-center gap-1">
                               <Users className="h-3 w-3" />
-                              {stats.totalUsers} Benutzer
+                              {stats.totalUsers} {t('companyManagement.table.usersCount')}
                             </p>
                           </div>
                         </TableCell>
@@ -323,16 +325,16 @@ export default function CompanyManagement() {
                           <div className="space-y-1">
                             <div className="flex items-center gap-2">
                               <FileText className="h-3 w-3" />
-                              <span className="text-sm font-medium">{stats.totalRequests} Aufträge</span>
+                              <span className="text-sm font-medium">{stats.totalRequests} {t('companyManagement.table.requests')}</span>
                             </div>
                             {stats.activeRequests > 0 && (
                               <Badge variant="default" className="text-xs">
-                                {stats.activeRequests} aktiv
+                                {stats.activeRequests} {t('companyManagement.table.active')}
                               </Badge>
                             )}
                             {stats.completedRequests > 0 && (
                               <Badge variant="outline" className="text-xs">
-                                {stats.completedRequests} abgeschlossen
+                                {stats.completedRequests} {t('companyManagement.table.completedCount')}
                               </Badge>
                             )}
                           </div>
@@ -360,7 +362,7 @@ export default function CompanyManagement() {
                               onClick={() => navigate(`/admin/search-requests?company=${company.id}`)}
                             >
                               <FileText className="w-4 h-4 mr-1" />
-                              Aufträge
+                              {t('companyManagement.table.requestsBtn')}
                             </Button>
                             <Button 
                               size="sm" 
@@ -392,46 +394,46 @@ export default function CompanyManagement() {
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2">
               <AlertTriangle className="h-5 w-5 text-destructive" />
-              Unternehmen endgültig löschen?
+              {t('companyManagement.deleteDialog.title')}
             </AlertDialogTitle>
             <AlertDialogDescription className="space-y-2">
               <p>
-                Sie sind dabei, das Unternehmen <strong>{deleteCompanyDialog?.name}</strong> unwiderruflich aus dem System zu löschen.
+                {t('companyManagement.deleteDialog.confirm')} <strong>{deleteCompanyDialog?.name}</strong> {t('companyManagement.deleteDialog.confirmSuffix')}
               </p>
               {deleteCompanyDialog && deleteCompanyDialog.userCount > 0 ? (
                 <div className="p-3 bg-destructive/10 border border-destructive rounded-md">
                   <p className="text-destructive font-semibold">
-                    ⚠️ Dieses Unternehmen hat noch {deleteCompanyDialog.userCount} Benutzer!
+                    ⚠️ {t('companyManagement.deleteDialog.hasUsers').replace('{count}', String(deleteCompanyDialog.userCount))}
                   </p>
                   <p className="text-sm text-destructive mt-1">
-                    Sie müssen zuerst alle Benutzer löschen, bevor Sie das Unternehmen löschen können.
+                    {t('companyManagement.deleteDialog.deleteUsersFirst')}
                   </p>
                 </div>
               ) : (
                 <>
                   <p className="text-destructive font-semibold">
-                    Diese Aktion kann nicht rückgängig gemacht werden!
+                    {t('companyManagement.deleteDialog.irreversible')}
                   </p>
                   <p>
-                    Folgende Daten werden gelöscht:
+                    {t('companyManagement.deleteDialog.dataDeleted')}
                   </p>
                   <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>Unternehmensprofil und alle Daten</li>
-                    <li>Support-Tickets</li>
-                    <li>Einladungen</li>
+                    <li>{t('companyManagement.deleteDialog.deleteItems.profile')}</li>
+                    <li>{t('companyManagement.deleteDialog.deleteItems.tickets')}</li>
+                    <li>{t('companyManagement.deleteDialog.deleteItems.invitations')}</li>
                   </ul>
                 </>
               )}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+            <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
             {deleteCompanyDialog && deleteCompanyDialog.userCount === 0 && (
               <AlertDialogAction
                 onClick={() => deleteCompanyDialog && deleteCompany(deleteCompanyDialog.companyId)}
                 className="bg-destructive hover:bg-destructive/90"
               >
-                Unternehmen löschen
+                {t('companyManagement.deleteDialog.confirmButton')}
               </AlertDialogAction>
             )}
           </AlertDialogFooter>
