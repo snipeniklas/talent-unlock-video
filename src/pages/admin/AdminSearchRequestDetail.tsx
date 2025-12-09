@@ -7,6 +7,7 @@ import { ArrowLeft, MapPin, Clock, Euro, Users, Calendar, Building2, User, FileT
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/i18n/i18n";
 
 interface SearchRequest {
   id: string;
@@ -50,9 +51,20 @@ const AdminSearchRequestDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t, lang } = useTranslation();
   const [searchRequest, setSearchRequest] = useState<SearchRequest | null>(null);
   const [loading, setLoading] = useState(true);
   const [allocationsCount, setAllocationsCount] = useState(0);
+
+  const prefix = "adminSearchRequests.detailPage";
+
+  const getDateLocale = () => {
+    switch (lang) {
+      case 'de': return 'de-DE';
+      case 'nl': return 'nl-NL';
+      default: return 'en-US';
+    }
+  };
 
   useEffect(() => {
     const fetchSearchRequest = async () => {
@@ -77,8 +89,8 @@ const AdminSearchRequestDetail = () => {
 
         if (!userRoles || userRoles.role !== 'admin') {
           toast({
-            title: "Zugriff verweigert",
-            description: "Sie haben keine Berechtigung für diesen Bereich.",
+            title: t(`${prefix}.toast.accessDenied`),
+            description: t(`${prefix}.toast.accessDeniedDesc`),
             variant: "destructive",
           });
           navigate('/app/dashboard');
@@ -95,8 +107,8 @@ const AdminSearchRequestDetail = () => {
         if (error || !request) {
           console.error('Error fetching search request:', error);
           toast({
-            title: "Fehler",
-            description: "Suchauftrag konnte nicht geladen werden.",
+            title: t(`${prefix}.toast.error`),
+            description: t(`${prefix}.toast.loadError`),
             variant: "destructive",
           });
           navigate('/admin/search-requests');
@@ -136,8 +148,8 @@ const AdminSearchRequestDetail = () => {
       } catch (error) {
         console.error('Error:', error);
         toast({
-          title: "Fehler",
-          description: "Ein unerwarteter Fehler ist aufgetreten.",
+          title: t(`${prefix}.toast.error`),
+          description: t(`${prefix}.toast.unexpectedError`),
           variant: "destructive",
         });
         navigate('/admin/search-requests');
@@ -147,7 +159,7 @@ const AdminSearchRequestDetail = () => {
     };
 
     fetchSearchRequest();
-  }, [id, navigate, toast]);
+  }, [id, navigate, toast, t]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -161,14 +173,13 @@ const AdminSearchRequestDetail = () => {
   };
 
   const getStatusText = (status: string) => {
-    switch (status) {
-      case "active": return "Aktiv";
-      case "pending": return "Ausstehend";
-      case "completed": return "Abgeschlossen";
-      case "cancelled": return "Abgebrochen";
-      case "paused": return "Pausiert";
-      default: return status;
-    }
+    const statusKey = `${prefix}.status.${status}`;
+    return t(statusKey) || status;
+  };
+
+  const getEmploymentTypeText = (type: string) => {
+    const typeKey = `${prefix}.employmentTypes.${type}`;
+    return t(typeKey) || type;
   };
 
   if (loading) {
@@ -193,10 +204,10 @@ const AdminSearchRequestDetail = () => {
     return (
       <div className="container mx-auto py-6">
         <div className="text-center">
-          <h2 className="text-2xl font-bold">Suchauftrag nicht gefunden</h2>
-          <p className="text-muted-foreground mt-2">Der angeforderte Suchauftrag existiert nicht.</p>
+          <h2 className="text-2xl font-bold">{t(`${prefix}.notFound.title`)}</h2>
+          <p className="text-muted-foreground mt-2">{t(`${prefix}.notFound.description`)}</p>
           <Button onClick={() => navigate("/admin/search-requests")} className="mt-4">
-            Zurück zur Übersicht
+            {t(`${prefix}.notFound.back`)}
           </Button>
         </div>
       </div>
@@ -216,7 +227,7 @@ const AdminSearchRequestDetail = () => {
         </Button>
         <div>
           <h1 className="text-3xl font-bold">{searchRequest.title}</h1>
-          <p className="text-muted-foreground">{searchRequest.company?.name || 'Firma nicht verfügbar'}</p>
+          <p className="text-muted-foreground">{searchRequest.company?.name || t(`${prefix}.companyNotAvailable`)}</p>
         </div>
       </div>
 
@@ -228,45 +239,45 @@ const AdminSearchRequestDetail = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <FileText className="h-5 w-5" />
-                Grundinformationen
+                {t(`${prefix}.sections.basicInfo`)}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {searchRequest.job_title && (
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Job Titel</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t(`${prefix}.labels.jobTitle`)}</label>
                     <p className="text-sm">{searchRequest.job_title}</p>
                   </div>
                 )}
                 {searchRequest.customer_industry && (
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Branche</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t(`${prefix}.labels.industry`)}</label>
                     <p className="text-sm">{searchRequest.customer_industry}</p>
                   </div>
                 )}
                 {searchRequest.number_of_workers && (
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Anzahl Mitarbeiter</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t(`${prefix}.labels.numberOfWorkers`)}</label>
                     <p className="text-sm">{searchRequest.number_of_workers}</p>
                   </div>
                 )}
                 {searchRequest.weekly_hours && (
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Wochenstunden</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t(`${prefix}.labels.weeklyHours`)}</label>
                     <p className="text-sm">{searchRequest.weekly_hours}h</p>
                   </div>
                 )}
                 {searchRequest.start_date && (
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Startdatum</label>
-                    <p className="text-sm">{new Date(searchRequest.start_date).toLocaleDateString('de-DE')}</p>
+                    <label className="text-sm font-medium text-muted-foreground">{t(`${prefix}.labels.startDate`)}</label>
+                    <p className="text-sm">{new Date(searchRequest.start_date).toLocaleDateString(getDateLocale())}</p>
                   </div>
                 )}
                 {searchRequest.end_date && (
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Enddatum</label>
-                    <p className="text-sm">{new Date(searchRequest.end_date).toLocaleDateString('de-DE')}</p>
+                    <label className="text-sm font-medium text-muted-foreground">{t(`${prefix}.labels.endDate`)}</label>
+                    <p className="text-sm">{new Date(searchRequest.end_date).toLocaleDateString(getDateLocale())}</p>
                   </div>
                 )}
               </div>
@@ -276,11 +287,11 @@ const AdminSearchRequestDetail = () => {
           {/* Description */}
           <Card>
             <CardHeader>
-              <CardTitle>Beschreibung</CardTitle>
+              <CardTitle>{t(`${prefix}.sections.description`)}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground leading-relaxed">
-                {searchRequest.description || 'Keine Beschreibung verfügbar.'}
+                {searchRequest.description || t(`${prefix}.fallback.noDescription`)}
               </p>
             </CardContent>
           </Card>
@@ -289,7 +300,7 @@ const AdminSearchRequestDetail = () => {
           {searchRequest.main_tasks && searchRequest.main_tasks.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Hauptaufgaben</CardTitle>
+                <CardTitle>{t(`${prefix}.sections.mainTasks`)}</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="list-disc list-inside space-y-1">
@@ -306,7 +317,7 @@ const AdminSearchRequestDetail = () => {
             (searchRequest.requirements_list && searchRequest.requirements_list.length > 0)) && (
             <Card>
               <CardHeader>
-                <CardTitle>Anforderungen</CardTitle>
+                <CardTitle>{t(`${prefix}.sections.requirements`)}</CardTitle>
               </CardHeader>
               <CardContent>
                 {searchRequest.requirements && (
@@ -328,7 +339,7 @@ const AdminSearchRequestDetail = () => {
           {/* Skills */}
           <Card>
             <CardHeader>
-              <CardTitle>Erforderliche Skills</CardTitle>
+              <CardTitle>{t(`${prefix}.sections.requiredSkills`)}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
@@ -342,7 +353,7 @@ const AdminSearchRequestDetail = () => {
                       </Badge>
                     ))
                 ) : (
-                  <p className="text-muted-foreground">Keine Skills angegeben</p>
+                  <p className="text-muted-foreground">{t(`${prefix}.fallback.noSkills`)}</p>
                 )}
               </div>
             </CardContent>
@@ -352,7 +363,7 @@ const AdminSearchRequestDetail = () => {
           {searchRequest.work_areas && searchRequest.work_areas.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Arbeitsbereiche</CardTitle>
+                <CardTitle>{t(`${prefix}.sections.workAreas`)}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
@@ -372,11 +383,11 @@ const AdminSearchRequestDetail = () => {
           {/* Status & Actions */}
           <Card>
             <CardHeader>
-              <CardTitle>Status & Aktionen</CardTitle>
+              <CardTitle>{t(`${prefix}.sections.statusActions`)}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium">Status:</span>
+                <span className="text-sm font-medium">{t(`${prefix}.labels.status`)}</span>
                 <Badge className={getStatusColor(searchRequest.status)}>
                   {getStatusText(searchRequest.status)}
                 </Badge>
@@ -386,10 +397,10 @@ const AdminSearchRequestDetail = () => {
                   className="w-full"
                   onClick={() => navigate(`/admin/search-requests/${id}/allocations`)}
                 >
-                  Zuweisungen verwalten ({allocationsCount})
+                  {t(`${prefix}.buttons.manageAllocations`).replace('{count}', String(allocationsCount))}
                 </Button>
                 <Button variant="outline" className="w-full">
-                  Bearbeiten
+                  {t(`${prefix}.buttons.edit`)}
                 </Button>
               </div>
             </CardContent>
@@ -398,41 +409,35 @@ const AdminSearchRequestDetail = () => {
           {/* Details */}
           <Card>
             <CardHeader>
-              <CardTitle>Details</CardTitle>
+              <CardTitle>{t(`${prefix}.sections.details`)}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center gap-3">
                 <MapPin className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">{searchRequest.location || 'Nicht angegeben'}</span>
+                <span className="text-sm">{searchRequest.location || t(`${prefix}.fallback.notProvided`)}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Euro className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm">
                   {searchRequest.salary_min && searchRequest.salary_max 
                     ? `€${searchRequest.salary_min.toLocaleString()} - €${searchRequest.salary_max.toLocaleString()}`
-                    : 'Nicht angegeben'
+                    : t(`${prefix}.fallback.notProvided`)
                   }
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <Users className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">{allocationsCount} Zuweisungen</span>
+                <span className="text-sm">{t(`${prefix}.labels.allocations`).replace('{count}', String(allocationsCount))}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Calendar className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">Erstellt: {new Date(searchRequest.created_at).toLocaleDateString('de-DE')}</span>
+                <span className="text-sm">{t(`${prefix}.labels.created`).replace('{date}', new Date(searchRequest.created_at).toLocaleDateString(getDateLocale()))}</span>
               </div>
               {searchRequest.employment_type && (
                 <div className="flex items-center gap-3">
                   <Clock className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm">
-                    Arbeitstyp: {
-                      searchRequest.employment_type === 'full_time' ? 'Vollzeit' :
-                      searchRequest.employment_type === 'part_time' ? 'Teilzeit' :
-                      searchRequest.employment_type === 'contract' ? 'Vertrag' :
-                      searchRequest.employment_type === 'freelance' ? 'Freelance' :
-                      searchRequest.employment_type
-                    }
+                    {t(`${prefix}.labels.employmentType`)} {getEmploymentTypeText(searchRequest.employment_type)}
                   </span>
                 </div>
               )}
@@ -440,7 +445,7 @@ const AdminSearchRequestDetail = () => {
                 <div className="flex items-center gap-3">
                   <Briefcase className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm">
-                    Erfahrung: {searchRequest.experience_level_new || searchRequest.experience_level}
+                    {t(`${prefix}.labels.experience`)} {searchRequest.experience_level_new || searchRequest.experience_level}
                   </span>
                 </div>
               )}
@@ -453,7 +458,7 @@ const AdminSearchRequestDetail = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Building2 className="h-4 w-4" />
-                  Unternehmen
+                  {t(`${prefix}.sections.company`)}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
@@ -474,7 +479,7 @@ const AdminSearchRequestDetail = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <User className="h-4 w-4" />
-                  Ansprechpartner
+                  {t(`${prefix}.sections.contactPerson`)}
                 </CardTitle>
               </CardHeader>
               <CardContent>

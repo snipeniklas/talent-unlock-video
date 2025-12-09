@@ -2841,6 +2841,71 @@
       "deleted": "Project deleted",
       "statusChanged": "Status changed",
       "error": "Error saving"
+    },
+    "detailPage": {
+      "loading": "Loading...",
+      "notFound": {
+        "title": "Search request not found",
+        "description": "The requested search request does not exist.",
+        "back": "Back to overview"
+      },
+      "companyNotAvailable": "Company not available",
+      "sections": {
+        "basicInfo": "Basic Information",
+        "description": "Description",
+        "mainTasks": "Main Tasks",
+        "requirements": "Requirements",
+        "requiredSkills": "Required Skills",
+        "workAreas": "Work Areas",
+        "statusActions": "Status & Actions",
+        "details": "Details",
+        "company": "Company",
+        "contactPerson": "Contact Person"
+      },
+      "labels": {
+        "jobTitle": "Job Title",
+        "industry": "Industry",
+        "numberOfWorkers": "Number of Workers",
+        "weeklyHours": "Weekly Hours",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "status": "Status:",
+        "location": "Location",
+        "salary": "Salary",
+        "allocations": "{count} Allocations",
+        "created": "Created: {date}",
+        "employmentType": "Employment Type:",
+        "experience": "Experience:"
+      },
+      "fallback": {
+        "noDescription": "No description available.",
+        "noSkills": "No skills specified",
+        "notProvided": "Not specified"
+      },
+      "buttons": {
+        "manageAllocations": "Manage Allocations ({count})",
+        "edit": "Edit"
+      },
+      "employmentTypes": {
+        "full_time": "Full-time",
+        "part_time": "Part-time",
+        "contract": "Contract",
+        "freelance": "Freelance"
+      },
+      "status": {
+        "active": "Active",
+        "pending": "Pending",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "paused": "Paused"
+      },
+      "toast": {
+        "accessDenied": "Access Denied",
+        "accessDeniedDesc": "You do not have permission to access this area.",
+        "error": "Error",
+        "loadError": "Search request could not be loaded.",
+        "unexpectedError": "An unexpected error occurred."
+      }
     }
   },
   "auth": {
