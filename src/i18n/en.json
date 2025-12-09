@@ -2038,6 +2038,140 @@
       }
     }
   },
+  "candidateManagement": {
+    "title": "RaaS Resources",
+    "subtitle": "Manage candidates and professionals",
+    "addNew": "New Resource",
+    "editCandidate": "Edit Resource",
+    "viewCandidate": "View Resource",
+    "deleteCandidate": "Delete Resource",
+    "search": {
+      "placeholder": "Search resources...",
+      "noResults": "No resources found"
+    },
+    "filters": {
+      "all": "All",
+      "available": "Available",
+      "booked": "Booked",
+      "seniority": "Seniority",
+      "role": "Role"
+    },
+    "fields": {
+      "name": "Name",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "role": "Primary Role",
+      "headline": "Headline",
+      "bio": "Biography",
+      "seniority": "Seniority",
+      "yearsExperience": "Years of Experience",
+      "availability": "Availability",
+      "startEarliest": "Earliest Start",
+      "noticePeriod": "Notice Period (Days)",
+      "hoursPerWeek": "Hours per Week",
+      "hourlyRate": "Hourly Rate",
+      "monthlyRate": "Monthly Rate",
+      "currency": "Currency",
+      "margin": "Margin (%)",
+      "skills": "Skills",
+      "languages": "Languages",
+      "location": "Location",
+      "country": "Country",
+      "city": "City",
+      "avatar": "Profile Picture"
+    },
+    "seniority": {
+      "junior": "Junior",
+      "mid": "Mid-Level",
+      "senior": "Senior",
+      "lead": "Lead"
+    },
+    "availability": {
+      "immediately": "Immediately Available",
+      "notice_period": "Notice Period",
+      "booked": "Booked",
+      "paused": "Paused"
+    },
+    "proficiency": {
+      "basic": "Basic",
+      "conversational": "Conversational",
+      "fluent": "Fluent",
+      "native": "Native"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "experience": "Experience",
+      "skills": "Skills",
+      "languages": "Languages",
+      "links": "Links",
+      "allocations": "Allocations"
+    },
+    "experience": {
+      "title": "Work Experience",
+      "addNew": "Add Experience",
+      "edit": "Edit",
+      "delete": "Delete",
+      "fields": {
+        "title": "Position",
+        "orgName": "Company",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "summary": "Description",
+        "techStack": "Technologies"
+      },
+      "current": "Current",
+      "empty": "No experience added"
+    },
+    "links": {
+      "title": "Links",
+      "addNew": "Add Link",
+      "fields": {
+        "label": "Label",
+        "url": "URL"
+      },
+      "empty": "No links added"
+    },
+    "allocations": {
+      "title": "Project Allocations",
+      "empty": "No allocations",
+      "fields": {
+        "project": "Project",
+        "company": "Company",
+        "status": "Status",
+        "allocatedAt": "Allocated At"
+      }
+    },
+    "stats": {
+      "total": "Total Resources",
+      "available": "Available",
+      "booked": "Booked",
+      "avgRate": "Average Rate"
+    },
+    "empty": {
+      "title": "No Resources",
+      "description": "Add your first resource"
+    },
+    "detail": {
+      "title": "Resource Details",
+      "notFound": "Resource not found",
+      "contactInfo": "Contact Information",
+      "rateInfo": "Rate Information",
+      "salesRate": "Sales Rate",
+      "internalRate": "Internal Rate"
+    },
+    "dialog": {
+      "deleteTitle": "Delete Resource",
+      "deleteConfirm": "Are you sure you want to delete this resource? This action cannot be undone."
+    },
+    "toast": {
+      "created": "Resource created",
+      "updated": "Resource updated",
+      "deleted": "Resource deleted",
+      "error": "Resource error"
+    }
+  },
   "auth": {
     "backToHome": "Back to homepage",
     "welcome": {
