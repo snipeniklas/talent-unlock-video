@@ -1526,6 +1526,41 @@
         "errorUpdate": "Status could not be updated."
       }
     },
+    "specialists": {
+      "title": "Specialists",
+      "subtitle": "Discover qualified AI developers and experts for your projects",
+      "searchPlaceholder": "Search specialists...",
+      "filter": {
+        "availability": "Availability",
+        "all": "All specialists",
+        "available": "Available",
+        "busy": "Busy",
+        "unavailable": "Unavailable",
+        "unknown": "Unknown"
+      },
+      "card": {
+        "positionNotSet": "Position not specified",
+        "locationNotSet": "Not specified",
+        "years": "years",
+        "noDescription": "No description available.",
+        "skills": "Skills:",
+        "noSkills": "No skills specified",
+        "hourlyRate": "Hourly rate:",
+        "rateNotSet": "Not specified",
+        "experience": "Experience:",
+        "contactPerson": "Contact person:",
+        "viewProfile": "Full profile"
+      },
+      "empty": {
+        "title": "No specialists found",
+        "text": "Try different search terms or filters to find matching experts."
+      },
+      "toasts": {
+        "error": "Error",
+        "loadError": "Specialists could not be loaded.",
+        "unexpectedError": "An unexpected error occurred."
+      }
+    },
     "newRequest": {
       "back": "Back",
       "title": "Create new search request",

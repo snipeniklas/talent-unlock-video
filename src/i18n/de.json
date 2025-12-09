@@ -1762,6 +1762,41 @@
         "errorUpdate": "Status konnte nicht aktualisiert werden."
       }
     },
+    "specialists": {
+      "title": "Spezialisten",
+      "subtitle": "Entdecken Sie qualifizierte KI-Entwickler und Experten für Ihre Projekte",
+      "searchPlaceholder": "Spezialisten durchsuchen...",
+      "filter": {
+        "availability": "Verfügbarkeit",
+        "all": "Alle Spezialisten",
+        "available": "Verfügbar",
+        "busy": "Beschäftigt",
+        "unavailable": "Nicht verfügbar",
+        "unknown": "Unbekannt"
+      },
+      "card": {
+        "positionNotSet": "Position nicht angegeben",
+        "locationNotSet": "Nicht angegeben",
+        "years": "Jahre",
+        "noDescription": "Keine Beschreibung verfügbar.",
+        "skills": "Skills:",
+        "noSkills": "Keine Skills angegeben",
+        "hourlyRate": "Stundensatz:",
+        "rateNotSet": "Nicht angegeben",
+        "experience": "Erfahrung:",
+        "contactPerson": "Ansprechpartner:",
+        "viewProfile": "Vollständiges Profil"
+      },
+      "empty": {
+        "title": "Keine Spezialisten gefunden",
+        "text": "Versuchen Sie andere Suchbegriffe oder Filter, um passende Experten zu finden."
+      },
+      "toasts": {
+        "error": "Fehler",
+        "loadError": "Spezialisten konnten nicht geladen werden.",
+        "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten."
+      }
+    },
     "newRequest": {
       "back": "Zurück",
       "title": "Neuen Suchauftrag erstellen",
