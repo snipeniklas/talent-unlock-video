@@ -7,6 +7,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from '@/i18n/i18n';
 
+const getDateLocale = (lang: string) => {
+  switch (lang) {
+    case 'de': return 'de-DE';
+    case 'nl': return 'nl-NL';
+    default: return 'en-US';
+  }
+};
+
 interface DashboardStats {
   totalCandidates: number;
   totalRequests: number;
@@ -25,7 +33,7 @@ export default function AdminDashboard() {
   });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
     fetchDashboardStats();
@@ -218,7 +226,7 @@ export default function AdminDashboard() {
                       {activity.status}
                     </Badge>
                     <span className="text-xs text-muted-foreground">
-                      {new Date(activity.created_at).toLocaleDateString('de-DE')}
+                      {new Date(activity.created_at).toLocaleDateString(getDateLocale(lang))}
                     </span>
                   </div>
                 </div>

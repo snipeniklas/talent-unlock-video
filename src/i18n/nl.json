@@ -3091,6 +3091,156 @@
         "title": "Geen uitnodigingen",
         "description": "Geen openstaande uitnodigingen"
       }
+    },
+    "adminDashboard": {
+      "title": "Admin Dashboard",
+      "subtitle": "Hej Talent beheergedeelte",
+      "cards": {
+        "resources": {"title": "RaaS Resources", "caption": "Beschikbare resources"},
+        "requests": {"title": "Zoekopdrachten", "caption": "Klantopdrachten"},
+        "companies": {"title": "Bedrijven", "caption": "Geregistreerde bedrijven"},
+        "tickets": {"title": "Support Tickets", "caption": "Open tickets"}
+      },
+      "quick": {
+        "resources": {"title": "RaaS Resources", "desc": "Resources beheren en toevoegen", "all": "Alle resources bekijken", "new": "Nieuwe resource toevoegen"},
+        "projects": {"title": "Klantprojecten", "desc": "Klantopdrachten beheren", "all": "Alle projecten bekijken", "companies": "Bedrijven beheren"},
+        "support": {"title": "Support & Instellingen", "desc": "Support en systeeminstellingen", "support": "Support Chat", "settings": "Instellingen"}
+      },
+      "recent": {"title": "Laatste zoekopdrachten", "none": "Geen recente activiteiten"}
+    },
+    "adminSearchRequests": {
+      "title": "Klantprojecten",
+      "subtitle": "Projecten en resourcetoewijzingen beheren",
+      "tabs": {
+        "all": "Alle projecten",
+        "active": "Actief",
+        "onHold": "Gepauzeerd",
+        "completed": "Afgerond",
+        "cancelled": "Geannuleerd"
+      },
+      "table": {
+        "project": "Project",
+        "company": "Bedrijf",
+        "status": "Status",
+        "created": "Aangemaakt",
+        "updated": "Bijgewerkt",
+        "allocations": "Toewijzingen",
+        "actions": "Acties"
+      },
+      "status": {
+        "active": "Actief",
+        "on_hold": "Gepauzeerd",
+        "completed": "Afgerond",
+        "cancelled": "Geannuleerd"
+      },
+      "detail": {
+        "title": "Projectdetails",
+        "subtitle": "Details en resources voor dit project",
+        "backButton": "Terug naar lijst",
+        "overview": "Overzicht",
+        "allocations": "Resourcetoewijzingen",
+        "timeline": "Tijdlijn",
+        "notes": "Notities",
+        "projectInfo": "Projectinformatie",
+        "jobTitle": "Functietitel",
+        "description": "Beschrijving",
+        "requirements": "Vereisten",
+        "location": "Locatie",
+        "workAreas": "Werkgebieden",
+        "skills": "Vaardigheden",
+        "employmentType": "Dienstverband",
+        "experienceLevel": "Ervaringsniveau",
+        "weeklyHours": "Uren per week",
+        "workers": "Aantal medewerkers",
+        "salaryRange": "Salarisschaal",
+        "startDate": "Startdatum",
+        "endDate": "Einddatum",
+        "industry": "Branche",
+        "mainTasks": "Hoofdtaken",
+        "notSpecified": "Niet gespecificeerd"
+      },
+      "allocations": {
+        "title": "Resourcetoewijzingen",
+        "subtitle": "Kandidaten toegewezen aan dit project",
+        "addCandidate": "Kandidaat toevoegen",
+        "removeCandidate": "Kandidaat verwijderen",
+        "empty": "Geen kandidaten toegewezen",
+        "emptyDescription": "Voeg kandidaten toe om ze aan dit project toe te wijzen",
+        "table": {
+          "candidate": "Kandidaat",
+          "status": "Status",
+          "allocatedAt": "Toegewezen op",
+          "allocatedBy": "Toegewezen door",
+          "clientStatus": "Klantstatus",
+          "feedback": "Feedback",
+          "notes": "Notities",
+          "actions": "Acties"
+        },
+        "status": {
+          "pending": "In afwachting",
+          "approved": "Goedgekeurd",
+          "rejected": "Afgewezen",
+          "active": "Actief",
+          "completed": "Afgerond",
+          "cancelled": "Geannuleerd"
+        },
+        "clientStatus": {
+          "pending": "Wacht op feedback",
+          "interested": "Geïnteresseerd",
+          "interview_scheduled": "Interview gepland",
+          "hired": "Aangenomen",
+          "rejected": "Afgewezen"
+        },
+        "dialog": {
+          "addTitle": "Kandidaat aan project toevoegen",
+          "removeTitle": "Kandidaat verwijderen",
+          "removeConfirm": "Weet u zeker dat u deze kandidaat uit het project wilt verwijderen?",
+          "selectCandidate": "Kandidaat selecteren",
+          "searchPlaceholder": "Kandidaten zoeken...",
+          "noResults": "Geen kandidaten gevonden",
+          "notes": "Notities (optioneel)",
+          "notesPlaceholder": "Aanvullende informatie over de toewijzing..."
+        },
+        "toast": {
+          "added": "Kandidaat toegewezen",
+          "addedDesc": "De kandidaat is aan het project toegewezen",
+          "removed": "Kandidaat verwijderd",
+          "removedDesc": "De kandidaat is uit het project verwijderd",
+          "updated": "Toewijzing bijgewerkt",
+          "error": "Toewijzingsfout"
+        }
+      },
+      "actions": {
+        "view": "Details bekijken",
+        "edit": "Bewerken",
+        "duplicate": "Dupliceren",
+        "archive": "Archiveren",
+        "delete": "Verwijderen",
+        "changeStatus": "Status wijzigen"
+      },
+      "filters": {
+        "status": "Status",
+        "company": "Bedrijf",
+        "dateRange": "Datumbereik",
+        "hasAllocations": "Met toewijzingen"
+      },
+      "empty": {
+        "title": "Geen projecten gevonden",
+        "description": "Er zijn geen klantprojecten gevonden"
+      },
+      "stats": {
+        "totalProjects": "Totaal projecten",
+        "activeProjects": "Actieve projecten",
+        "totalAllocations": "Totaal toewijzingen",
+        "pendingFeedback": "Feedback in afwachting"
+      },
+      "toast": {
+        "created": "Project aangemaakt",
+        "updated": "Project bijgewerkt",
+        "deleted": "Project verwijderd",
+        "statusChanged": "Status gewijzigd",
+        "error": "Fout bij opslaan"
+      }
     }
   },
   "adminSupport": {
@@ -3169,156 +3319,6 @@
       "openTickets": "Open",
       "resolvedToday": "Vandaag opgelost",
       "avgResponseTime": "Gem. reactietijd"
-    }
-  },
-  "adminDashboard": {
-    "title": "Admin Dashboard",
-    "subtitle": "Hej Talent beheergedeelte",
-    "cards": {
-      "resources": {"title": "RaaS Resources", "caption": "Beschikbare resources"},
-      "requests": {"title": "Zoekopdrachten", "caption": "Klantopdrachten"},
-      "companies": {"title": "Bedrijven", "caption": "Geregistreerde bedrijven"},
-      "tickets": {"title": "Support Tickets", "caption": "Open tickets"}
-    },
-    "quick": {
-      "resources": {"title": "RaaS Resources", "desc": "Resources beheren en toevoegen", "all": "Alle resources bekijken", "new": "Nieuwe resource toevoegen"},
-      "projects": {"title": "Klantprojecten", "desc": "Klantopdrachten beheren", "all": "Alle projecten bekijken", "companies": "Bedrijven beheren"},
-      "support": {"title": "Support & Instellingen", "desc": "Support en systeeminstellingen", "support": "Support Chat", "settings": "Instellingen"}
-    },
-    "recent": {"title": "Laatste zoekopdrachten", "none": "Geen recente activiteiten"}
-  },
-  "adminSearchRequests": {
-    "title": "Klantprojecten",
-    "subtitle": "Projecten en resourcetoewijzingen beheren",
-    "tabs": {
-      "all": "Alle projecten",
-      "active": "Actief",
-      "onHold": "Gepauzeerd",
-      "completed": "Afgerond",
-      "cancelled": "Geannuleerd"
-    },
-    "table": {
-      "project": "Project",
-      "company": "Bedrijf",
-      "status": "Status",
-      "created": "Aangemaakt",
-      "updated": "Bijgewerkt",
-      "allocations": "Toewijzingen",
-      "actions": "Acties"
-    },
-    "status": {
-      "active": "Actief",
-      "on_hold": "Gepauzeerd",
-      "completed": "Afgerond",
-      "cancelled": "Geannuleerd"
-    },
-    "detail": {
-      "title": "Projectdetails",
-      "subtitle": "Details en resources voor dit project",
-      "backButton": "Terug naar lijst",
-      "overview": "Overzicht",
-      "allocations": "Resourcetoewijzingen",
-      "timeline": "Tijdlijn",
-      "notes": "Notities",
-      "projectInfo": "Projectinformatie",
-      "jobTitle": "Functietitel",
-      "description": "Beschrijving",
-      "requirements": "Vereisten",
-      "location": "Locatie",
-      "workAreas": "Werkgebieden",
-      "skills": "Vaardigheden",
-      "employmentType": "Dienstverband",
-      "experienceLevel": "Ervaringsniveau",
-      "weeklyHours": "Uren per week",
-      "workers": "Aantal medewerkers",
-      "salaryRange": "Salarisschaal",
-      "startDate": "Startdatum",
-      "endDate": "Einddatum",
-      "industry": "Branche",
-      "mainTasks": "Hoofdtaken",
-      "notSpecified": "Niet gespecificeerd"
-    },
-    "allocations": {
-      "title": "Resourcetoewijzingen",
-      "subtitle": "Kandidaten toegewezen aan dit project",
-      "addCandidate": "Kandidaat toevoegen",
-      "removeCandidate": "Kandidaat verwijderen",
-      "empty": "Geen kandidaten toegewezen",
-      "emptyDescription": "Voeg kandidaten toe om ze aan dit project toe te wijzen",
-      "table": {
-        "candidate": "Kandidaat",
-        "status": "Status",
-        "allocatedAt": "Toegewezen op",
-        "allocatedBy": "Toegewezen door",
-        "clientStatus": "Klantstatus",
-        "feedback": "Feedback",
-        "notes": "Notities",
-        "actions": "Acties"
-      },
-      "status": {
-        "pending": "In afwachting",
-        "approved": "Goedgekeurd",
-        "rejected": "Afgewezen",
-        "active": "Actief",
-        "completed": "Afgerond",
-        "cancelled": "Geannuleerd"
-      },
-      "clientStatus": {
-        "pending": "Wacht op feedback",
-        "interested": "Geïnteresseerd",
-        "interview_scheduled": "Interview gepland",
-        "hired": "Aangenomen",
-        "rejected": "Afgewezen"
-      },
-      "dialog": {
-        "addTitle": "Kandidaat aan project toevoegen",
-        "removeTitle": "Kandidaat verwijderen",
-        "removeConfirm": "Weet u zeker dat u deze kandidaat uit het project wilt verwijderen?",
-        "selectCandidate": "Kandidaat selecteren",
-        "searchPlaceholder": "Kandidaten zoeken...",
-        "noResults": "Geen kandidaten gevonden",
-        "notes": "Notities (optioneel)",
-        "notesPlaceholder": "Aanvullende informatie over de toewijzing..."
-      },
-      "toast": {
-        "added": "Kandidaat toegewezen",
-        "addedDesc": "De kandidaat is aan het project toegewezen",
-        "removed": "Kandidaat verwijderd",
-        "removedDesc": "De kandidaat is uit het project verwijderd",
-        "updated": "Toewijzing bijgewerkt",
-        "error": "Toewijzingsfout"
-      }
-    },
-    "actions": {
-      "view": "Details bekijken",
-      "edit": "Bewerken",
-      "duplicate": "Dupliceren",
-      "archive": "Archiveren",
-      "delete": "Verwijderen",
-      "changeStatus": "Status wijzigen"
-    },
-    "filters": {
-      "status": "Status",
-      "company": "Bedrijf",
-      "dateRange": "Datumbereik",
-      "hasAllocations": "Met toewijzingen"
-    },
-    "empty": {
-      "title": "Geen projecten gevonden",
-      "description": "Er zijn geen klantprojecten gevonden"
-    },
-    "stats": {
-      "totalProjects": "Totaal projecten",
-      "activeProjects": "Actieve projecten",
-      "totalAllocations": "Totaal toewijzingen",
-      "pendingFeedback": "Feedback in afwachting"
-    },
-    "toast": {
-      "created": "Project aangemaakt",
-      "updated": "Project bijgewerkt",
-      "deleted": "Project verwijderd",
-      "statusChanged": "Status gewijzigd",
-      "error": "Fout bij opslaan"
     }
   },
   "auth": {
