@@ -2027,6 +2027,41 @@
         "errorUpdate": "Status kon niet worden bijgewerkt."
       }
     },
+    "specialists": {
+      "title": "Specialisten",
+      "subtitle": "Ontdek gekwalificeerde AI-ontwikkelaars en experts voor uw projecten",
+      "searchPlaceholder": "Specialisten zoeken...",
+      "filter": {
+        "availability": "Beschikbaarheid",
+        "all": "Alle specialisten",
+        "available": "Beschikbaar",
+        "busy": "Bezet",
+        "unavailable": "Niet beschikbaar",
+        "unknown": "Onbekend"
+      },
+      "card": {
+        "positionNotSet": "Functie niet opgegeven",
+        "locationNotSet": "Niet opgegeven",
+        "years": "jaar",
+        "noDescription": "Geen beschrijving beschikbaar.",
+        "skills": "Vaardigheden:",
+        "noSkills": "Geen vaardigheden opgegeven",
+        "hourlyRate": "Uurtarief:",
+        "rateNotSet": "Niet opgegeven",
+        "experience": "Ervaring:",
+        "contactPerson": "Contactpersoon:",
+        "viewProfile": "Volledig profiel"
+      },
+      "empty": {
+        "title": "Geen specialisten gevonden",
+        "text": "Probeer andere zoektermen of filters om passende experts te vinden."
+      },
+      "toasts": {
+        "error": "Fout",
+        "loadError": "Specialisten konden niet worden geladen.",
+        "unexpectedError": "Er is een onverwachte fout opgetreden."
+      }
+    },
     "newRequest": {
       "back": "Terug",
       "title": "Nieuwe zoekopdracht aanmaken",

@@ -25,6 +25,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from '@/i18n/i18n';
 
 interface Specialist {
   id: string;
@@ -46,6 +47,7 @@ interface Specialist {
 const Specialists = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [specialists, setSpecialists] = useState<Specialist[]>([]);
   const [filteredSpecialists, setFilteredSpecialists] = useState<Specialist[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -66,8 +68,8 @@ const Specialists = () => {
         if (error) {
           console.error('Error fetching specialists:', error);
           toast({
-            title: "Fehler",
-            description: "Spezialisten konnten nicht geladen werden.",
+            title: t('app.specialists.toasts.error'),
+            description: t('app.specialists.toasts.loadError'),
             variant: "destructive",
           });
           return;
@@ -107,8 +109,8 @@ const Specialists = () => {
       } catch (error) {
         console.error('Error:', error);
         toast({
-          title: "Fehler",
-          description: "Ein unerwarteter Fehler ist aufgetreten.",
+          title: t('app.specialists.toasts.error'),
+          description: t('app.specialists.toasts.unexpectedError'),
           variant: "destructive",
         });
       } finally {
@@ -117,7 +119,7 @@ const Specialists = () => {
     };
 
     fetchSpecialists();
-  }, [toast]);
+  }, [toast, t]);
 
   useEffect(() => {
     let filtered = specialists;
@@ -158,13 +160,13 @@ const Specialists = () => {
   const getAvailabilityText = (status: string) => {
     switch (status) {
       case 'available':
-        return 'Verfügbar';
+        return t('app.specialists.filter.available');
       case 'busy':
-        return 'Beschäftigt';
+        return t('app.specialists.filter.busy');
       case 'unavailable':
-        return 'Nicht verfügbar';
+        return t('app.specialists.filter.unavailable');
       default:
-        return status || 'Unbekannt';
+        return status || t('app.specialists.filter.unknown');
     }
   };
 
@@ -181,9 +183,9 @@ const Specialists = () => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-brand-dark">Spezialisten</h1>
+          <h1 className="text-3xl font-bold text-brand-dark">{t('app.specialists.title')}</h1>
           <p className="text-muted-foreground mt-1">
-            Entdecken Sie qualifizierte KI-Entwickler und Experten für Ihre Projekte
+            {t('app.specialists.subtitle')}
           </p>
         </div>
       </div>
@@ -193,7 +195,7 @@ const Specialists = () => {
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
           <Input
-            placeholder="Spezialisten durchsuchen..."
+            placeholder={t('app.specialists.searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -204,21 +206,21 @@ const Specialists = () => {
           <DropdownMenuTrigger asChild>
             <Button variant="outline">
               <Filter className="w-4 h-4 mr-2" />
-              Verfügbarkeit
+              {t('app.specialists.filter.availability')}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onClick={() => setAvailabilityFilter('all')}>
-              Alle Spezialisten
+              {t('app.specialists.filter.all')}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setAvailabilityFilter('available')}>
-              Verfügbar
+              {t('app.specialists.filter.available')}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setAvailabilityFilter('busy')}>
-              Beschäftigt
+              {t('app.specialists.filter.busy')}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setAvailabilityFilter('unavailable')}>
-              Nicht verfügbar
+              {t('app.specialists.filter.unavailable')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -243,7 +245,7 @@ const Specialists = () => {
                         {`${specialist.first_name || ''} ${specialist.last_name || ''}`}
                       </CardTitle>
                       <CardDescription className="text-base font-medium text-primary">
-                        {specialist.current_position || 'Position nicht angegeben'}
+                        {specialist.current_position || t('app.specialists.card.positionNotSet')}
                       </CardDescription>
                     </div>
                     <Badge className={getAvailabilityColor(specialist.status)}>
@@ -254,11 +256,11 @@ const Specialists = () => {
                   <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
-                      <span>{specialist.location || 'Nicht angegeben'}</span>
+                      <span>{specialist.location || t('app.specialists.card.locationNotSet')}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Briefcase className="w-4 h-4" />
-                      <span>{specialist.experience_years || 0} Jahre</span>
+                      <span>{specialist.experience_years || 0} {t('app.specialists.card.years')}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
@@ -271,11 +273,11 @@ const Specialists = () => {
             
             <CardContent className="space-y-4">
               {/* Description */}
-              <p className="text-muted-foreground">{specialist.notes || 'Keine Beschreibung verfügbar.'}</p>
+              <p className="text-muted-foreground">{specialist.notes || t('app.specialists.card.noDescription')}</p>
               
               {/* Skills */}
               <div>
-                <span className="font-medium text-sm mb-2 block">Skills:</span>
+                <span className="font-medium text-sm mb-2 block">{t('app.specialists.card.skills')}</span>
                 <div className="flex flex-wrap gap-2">
                   {specialist.skills && specialist.skills.length > 0 ? (
                     specialist.skills.map((skill, index) => (
@@ -284,7 +286,7 @@ const Specialists = () => {
                       </Badge>
                     ))
                   ) : (
-                    <span className="text-muted-foreground text-sm">Keine Skills angegeben</span>
+                    <span className="text-muted-foreground text-sm">{t('app.specialists.card.noSkills')}</span>
                   )}
                 </div>
               </div>
@@ -292,23 +294,23 @@ const Specialists = () => {
               {/* Stats */}
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="font-medium">Stundensatz:</span>
+                  <span className="font-medium">{t('app.specialists.card.hourlyRate')}</span>
                   <div className="text-primary font-semibold">
                     {specialist.hourly_rate_min 
                       ? `${specialist.hourly_rate_min.toFixed(2)} €`
-                      : 'Nicht angegeben'
+                      : t('app.specialists.card.rateNotSet')
                     }
                   </div>
                 </div>
                 <div>
-                  <span className="font-medium">Erfahrung:</span>
-                  <div className="text-brand-dark font-semibold">{specialist.experience_years || 0} Jahre</div>
+                  <span className="font-medium">{t('app.specialists.card.experience')}</span>
+                  <div className="text-brand-dark font-semibold">{specialist.experience_years || 0} {t('app.specialists.card.years')}</div>
                 </div>
               </div>
               
               {/* Consultant Contact Info */}
               <div>
-                <span className="font-medium text-sm mb-2 block">Ansprechpartner:</span>
+                <span className="font-medium text-sm mb-2 block">{t('app.specialists.card.contactPerson')}</span>
                 <div className="grid grid-cols-1 gap-2 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <span className="font-medium text-foreground">Pascal Spieß</span>
@@ -337,7 +339,7 @@ const Specialists = () => {
                   onClick={() => navigate(`/app/specialists/${specialist.id}`)}
                 >
                   <Eye className="w-4 h-4 mr-2" />
-                  Vollständiges Profil
+                  {t('app.specialists.card.viewProfile')}
                 </Button>
               </div>
             </CardContent>
@@ -348,9 +350,9 @@ const Specialists = () => {
       {filteredSpecialists.length === 0 && (
         <div className="text-center py-12">
           <Search className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-brand-dark mb-2">Keine Spezialisten gefunden</h3>
+          <h3 className="text-lg font-semibold text-brand-dark mb-2">{t('app.specialists.empty.title')}</h3>
           <p className="text-muted-foreground">
-            Versuchen Sie andere Suchbegriffe oder Filter, um passende Experten zu finden.
+            {t('app.specialists.empty.text')}
           </p>
         </div>
       )}
