@@ -1563,6 +1563,19 @@
         "support": "Support Chat",
         "settings": "Benutzerverwaltung"
       },
+      "resourceManager": {
+        "resources": "RaaS Ressourcen",
+        "dashboard": "Dashboard",
+        "projects": "Kundenprojekte",
+        "settings": "Einstellungen",
+        "restricted": "Zugriff eingeschränkt",
+        "restrictedDesc": "In Ihrer Userrolle nicht nutzbar, wenden Sie sich an den Admin."
+      },
+      "crm": {
+        "contactLists": "Kontaktlisten",
+        "tasks": "Aufgaben",
+        "outreach": "Outreach Kampagnen"
+      },
       "quick": "Schnellzugriff",
       "quickItems": {"new": "Neue Anfrage"},
       "logout": {

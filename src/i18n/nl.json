@@ -1817,22 +1817,42 @@
       "logout": "Uitloggen"
     },
     "sidebar": {
+      "section": {"admin": "Admin gedeelte", "main": "Hoofdmenu", "resourceManager": "Resource Manager"},
       "company": {
-        "overview": "Overzicht",
-        "requests": "Aanvragen",
-        "resources": "Resources",
-        "settings": "Instellingen",
-        "support": "Ondersteuning"
+        "dashboard": "Dashboard",
+        "requests": "Zoekopdrachten",
+        "specialists": "Specialisten",
+        "support": "Support Chat",
+        "settings": "Instellingen"
       },
       "admin": {
+        "dashboard": "Admin Dashboard",
+        "companies": "Alle bedrijven",
+        "resources": "RaaS Resources",
+        "projects": "Klantprojecten",
+        "support": "Support Chat",
+        "settings": "Gebruikersbeheer"
+      },
+      "resourceManager": {
+        "resources": "RaaS Resources",
         "dashboard": "Dashboard",
-        "requests": "Aanvragen",
-        "candidates": "Kandidaten",
-        "companies": "Bedrijven",
-        "allocations": "Toewijzingen",
-        "crm": "CRM",
+        "projects": "Klantprojecten",
         "settings": "Instellingen",
-        "support": "Ondersteuning"
+        "restricted": "Toegang beperkt",
+        "restrictedDesc": "Niet beschikbaar in uw gebruikersrol, neem contact op met de admin."
+      },
+      "crm": {
+        "contactLists": "Contactlijsten",
+        "tasks": "Taken",
+        "outreach": "Outreach Campagnes"
+      },
+      "quick": "Snelle acties",
+      "quickItems": {"new": "Nieuwe aanvraag"},
+      "logout": {
+        "label": "Uitloggen",
+        "errorTitle": "Fout bij uitloggen",
+        "successTitle": "Succesvol uitgelogd",
+        "successDesc": "U bent succesvol uitgelogd."
       }
     },
     "status": {
@@ -1969,6 +1989,75 @@
         "title": "Mijn tickets",
         "new": "Nieuw ticket",
         "view": "Bekijken"
+      }
+    },
+    "adminSearchRequests": {
+      "title": "Klantprojecten beheren",
+      "subtitle": "Alle klantopdrachten en resourcetoewijzingen in één overzicht",
+      "filters": {
+        "title": "Filter",
+        "search": "Zoeken op titel, bedrijf of locatie...",
+        "status": "Status filteren",
+        "all": "Alle statussen",
+        "active": "Actief",
+        "paused": "Gepauzeerd",
+        "completed": "Afgerond",
+        "cancelled": "Geannuleerd"
+      },
+      "table": {
+        "requests": "Klantprojecten ({count})",
+        "desc": "Overzicht van alle klantopdrachten en resourcetoewijzingen",
+        "cols": {
+          "request": "Opdracht",
+          "company": "Bedrijf",
+          "details": "Details",
+          "salary": "Salaris",
+          "allocations": "Resourcetoewijzingen",
+          "status": "Status",
+          "created": "Aangemaakt",
+          "actions": "Acties"
+        },
+        "employmentType": {
+          "full_time": "Fulltime",
+          "part_time": "Parttime",
+          "contract": "Contract",
+          "freelance": "Freelance",
+          "unknown": "Niet opgegeven"
+        },
+        "experience": {
+          "junior": "Junior",
+          "mid": "Mid-Level",
+          "senior": "Senior",
+          "lead": "Lead",
+          "unknown": "Niet opgegeven"
+        },
+        "notProvided": "Niet opgegeven",
+        "stats": {
+          "total": "{count} totaal",
+          "pending": "{count} voorgesteld",
+          "active": "{count} toegewezen",
+          "completed": "{count} afgerond"
+        },
+        "euroRange": "{min} - {max}"
+      },
+      "buttons": {
+        "resources": "Resources",
+        "view": "Bekijken"
+      },
+      "empty": {
+        "filtered": "Geen klantprojecten gevonden die aan de filtercriteria voldoen.",
+        "none": "Nog geen klantprojecten aanwezig."
+      },
+      "confirmDelete": {
+        "title": "Zoekopdracht verwijderen",
+        "desc": "Weet u zeker dat u deze zoekopdracht wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
+      },
+      "toasts": {
+        "error": "Fout",
+        "deleteSuccessTitle": "Succes",
+        "deleteSuccess": "Zoekopdracht is succesvol verwijderd.",
+        "unexpected": "Er is een onverwachte fout opgetreden.",
+        "deleteFailed": "Zoekopdracht kon niet worden verwijderd."
       }
     }
   },

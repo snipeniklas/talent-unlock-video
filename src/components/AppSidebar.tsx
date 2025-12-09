@@ -94,9 +94,9 @@ export function AppSidebar() {
     { title: t('crm.overview.title', 'CRM Übersicht'), url: "/admin/crm", icon: Shield },
     { title: t('crm.companies.title', 'Unternehmen'), url: "/admin/crm/companies", icon: Building2 },
     { title: t('crm.contacts.title', 'Kontakte'), url: "/admin/crm/contacts", icon: Users },
-    { title: 'Kontaktlisten', url: "/admin/crm/contact-lists", icon: List },
-    { title: 'Aufgaben', url: "/admin/crm/tasks", icon: CheckSquare },
-    { title: 'Outreach Kampagnen', url: "/admin/outreach-campaigns", icon: Mail },
+    { title: t('app.sidebar.crm.contactLists', 'Kontaktlisten'), url: "/admin/crm/contact-lists", icon: List },
+    { title: t('app.sidebar.crm.tasks', 'Aufgaben'), url: "/admin/crm/tasks", icon: CheckSquare },
+    { title: t('app.sidebar.crm.outreach', 'Outreach Kampagnen'), url: "/admin/outreach-campaigns", icon: Mail },
     { title: t('outreach.profile.title', 'Outreach Profil'), url: "/admin/outreach-profile", icon: UserCog },
   ];
 
@@ -115,25 +115,25 @@ export function AppSidebar() {
   // Resource Manager Navigation Items
   const resourceManagerItems = [
     { 
-      title: 'RaaS Ressourcen', 
+      title: t('app.sidebar.resourceManager.resources', 'RaaS Ressourcen'), 
       url: "/admin/candidates", 
       icon: UserCog,
       accessible: true 
     },
     { 
-      title: 'Dashboard', 
+      title: t('app.sidebar.resourceManager.dashboard', 'Dashboard'), 
       url: "/app/dashboard", 
       icon: Home,
       accessible: false 
     },
     { 
-      title: 'Kundenprojekte', 
+      title: t('app.sidebar.resourceManager.projects', 'Kundenprojekte'), 
       url: "/admin/search-requests", 
       icon: FileText,
       accessible: false 
     },
     { 
-      title: 'Einstellungen', 
+      title: t('app.sidebar.resourceManager.settings', 'Einstellungen'), 
       url: "/app/settings", 
       icon: Settings,
       accessible: true 
@@ -144,8 +144,8 @@ export function AppSidebar() {
     if (!item.accessible && userRole === 'resource_manager') {
       e.preventDefault();
       toast({
-        title: "Zugriff eingeschränkt",
-        description: "In Ihrer Userrolle nicht nutzbar, wenden Sie sich an den Admin.",
+        title: t('app.sidebar.resourceManager.restricted', 'Zugriff eingeschränkt'),
+        description: t('app.sidebar.resourceManager.restrictedDesc', 'In Ihrer Userrolle nicht nutzbar, wenden Sie sich an den Admin.'),
         variant: "destructive",
       });
     }
@@ -177,7 +177,7 @@ export function AppSidebar() {
             {userRole === 'admin' 
               ? t('app.sidebar.section.admin', 'Admin Bereich') 
               : userRole === 'resource_manager'
-              ? 'Ressourcen-Manager'
+              ? t('app.sidebar.section.resourceManager', 'Ressourcen-Manager')
               : t('app.sidebar.section.main', 'Hauptmenü')}
           </SidebarGroupLabel>
           

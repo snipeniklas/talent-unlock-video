@@ -1327,6 +1327,19 @@
         "support": "Support chat",
         "settings": "User management"
       },
+      "resourceManager": {
+        "resources": "RaaS Resources",
+        "dashboard": "Dashboard",
+        "projects": "Customer Projects",
+        "settings": "Settings",
+        "restricted": "Access Restricted",
+        "restrictedDesc": "Not available in your user role, please contact the admin."
+      },
+      "crm": {
+        "contactLists": "Contact Lists",
+        "tasks": "Tasks",
+        "outreach": "Outreach Campaigns"
+      },
       "quick": "Quick actions",
       "quickItems": {"new": "New request"},
       "logout": {
