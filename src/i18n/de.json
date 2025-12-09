@@ -60,6 +60,157 @@
       "cancelled": "Storniert"
     }
   },
+  "candidate": {
+    "new": {
+      "title": "Neue RaaS Ressource anlegen",
+      "backButton": "Zurück",
+      "sections": {
+        "basic": "Grundinformationen",
+        "location": "Standort",
+        "availability": "Verfügbarkeit & Raten",
+        "skills": "Skills",
+        "languages": "Sprachen",
+        "experience": "Berufserfahrung & Projekte",
+        "links": "Links & Portfolio"
+      },
+      "fields": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "uploadAvatar": "Hochladen",
+        "primaryRole": "Primäre Rolle *",
+        "primaryRolePlaceholder": "z.B. Customer Support, Full-Stack Developer",
+        "seniority": "Senioritätsstufe",
+        "seniorityPlaceholder": "Senioritätsstufe wählen",
+        "yearsExperience": "Jahre Erfahrung",
+        "headline": "Headline",
+        "headlinePlaceholder": "Kurzer Pitch in einem Satz",
+        "bio": "Bio",
+        "bioPlaceholder": "Längere Beschreibung der RaaS Ressource",
+        "country": "Land",
+        "city": "Stadt",
+        "availability": "Verfügbarkeit",
+        "availabilityPlaceholder": "Verfügbarkeit wählen",
+        "hoursPerWeek": "Stunden pro Woche (gewünscht)",
+        "startEarliest": "Frühester Start",
+        "noticePeriod": "Kündigungsfrist (Tage)",
+        "currency": "Währung",
+        "monthlyRate": "Monatsrate (Ziel) *",
+        "monthlyRatePlaceholder": "z.B. 8000",
+        "hourlyRate": "Stundensatz (automatisch berechnet)",
+        "hourlyRatePlaceholder": "Wird automatisch berechnet (Monatsrate ÷ 160h)",
+        "skillName": "Skill-Name",
+        "skillNamePlaceholder": "z.B. React",
+        "skillLevel": "Level (1-5)",
+        "yearsUsed": "Jahre genutzt",
+        "lastUsed": "Zuletzt verwendet",
+        "languageCode": "Sprache (Code)",
+        "languageCodePlaceholder": "z.B. de, en, es",
+        "proficiency": "Sprachniveau",
+        "position": "Position/Rolle *",
+        "positionPlaceholder": "z.B. Senior Developer, Customer Support Manager",
+        "organization": "Unternehmen/Organisation",
+        "organizationPlaceholder": "z.B. Tech GmbH, Freelance",
+        "startDate": "Startdatum",
+        "endDate": "Enddatum (leer = aktuell)",
+        "description": "Beschreibung & Verantwortlichkeiten",
+        "descriptionPlaceholder": "Kurze Beschreibung der Tätigkeiten und Verantwortlichkeiten...",
+        "techStack": "Tech Stack / Verwendete Tools",
+        "techStackPlaceholder": "z.B. React, Node.js, PostgreSQL, Docker (kommagetrennt)",
+        "linkLabel": "Bezeichnung",
+        "linkLabelPlaceholder": "z.B. GitHub, Portfolio",
+        "linkUrl": "URL",
+        "linkUrlPlaceholder": "https://..."
+      },
+      "seniority": {
+        "junior": "Junior",
+        "mid": "Mid",
+        "senior": "Senior",
+        "lead": "Lead"
+      },
+      "availability": {
+        "immediately": "Sofort verfügbar",
+        "noticePeriod": "Kündigungsfrist",
+        "booked": "Gebucht",
+        "paused": "Pausiert"
+      },
+      "proficiency": {
+        "basic": "Grundkenntnisse",
+        "conversational": "Konversationssicher",
+        "fluent": "Fließend",
+        "native": "Muttersprache"
+      },
+      "experienceTitle": "Erfahrung #",
+      "noExperience": "Noch keine Berufserfahrung hinzugefügt. Klicken Sie auf das Plus-Symbol um zu beginnen.",
+      "buttons": {
+        "cancel": "Abbrechen",
+        "submit": "RaaS Ressource anlegen",
+        "submitting": "Wird erstellt..."
+      },
+      "success": {
+        "title": "Erfolg",
+        "description": "RaaS Ressource wurde erfolgreich erstellt."
+      },
+      "error": {
+        "title": "Fehler",
+        "description": "RaaS Ressource konnte nicht erstellt werden."
+      }
+    }
+  },
+  "candidateView": {
+    "loading": "Lädt...",
+    "notFound": "RaaS Ressource nicht gefunden",
+    "backButton": "Zurück",
+    "editButton": "Bearbeiten",
+    "sections": {
+      "overview": "Übersicht",
+      "skills": "Skills",
+      "experience": "Berufserfahrung",
+      "rates": "Raten & Verfügbarkeit",
+      "languages": "Sprachen",
+      "links": "Links & Portfolio"
+    },
+    "fields": {
+      "headline": "Headline",
+      "bio": "Bio",
+      "experience": "Erfahrung",
+      "years": "Jahre",
+      "monthlyRate": "Monatsrate",
+      "hoursPerWeek": "h/Woche (gewünscht)",
+      "availableFrom": "Verfügbar ab:",
+      "noticePeriod": "Kündigungsfrist",
+      "days": "Tage"
+    },
+    "skills": {
+      "level": "Level",
+      "experienceYears": "Erfahrung: {years} Jahre",
+      "lastUsed": "Zuletzt verwendet:"
+    },
+    "availability": {
+      "immediately": "Sofort verfügbar",
+      "noticePeriod": "Kündigungsfrist",
+      "booked": "Gebucht",
+      "paused": "Pausiert"
+    },
+    "seniority": {
+      "junior": "junior",
+      "mid": "mid",
+      "senior": "senior",
+      "lead": "lead"
+    },
+    "proficiency": {
+      "basic": "Grundkenntnisse",
+      "conversational": "Konversationssicher",
+      "fluent": "Fließend",
+      "native": "Muttersprache"
+    },
+    "date": {
+      "today": "Heute"
+    },
+    "error": {
+      "title": "Fehler",
+      "description": "RaaS Ressource konnte nicht geladen werden."
+    }
+  },
   "header": {
     "nav": {
       "home": "Startseite",
