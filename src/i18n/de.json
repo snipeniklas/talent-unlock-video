@@ -3077,6 +3077,71 @@
       "deleted": "Projekt gelöscht",
       "statusChanged": "Status geändert",
       "error": "Fehler beim Speichern"
+    },
+    "detailPage": {
+      "loading": "Lade...",
+      "notFound": {
+        "title": "Suchauftrag nicht gefunden",
+        "description": "Der angeforderte Suchauftrag existiert nicht.",
+        "back": "Zurück zur Übersicht"
+      },
+      "companyNotAvailable": "Firma nicht verfügbar",
+      "sections": {
+        "basicInfo": "Grundinformationen",
+        "description": "Beschreibung",
+        "mainTasks": "Hauptaufgaben",
+        "requirements": "Anforderungen",
+        "requiredSkills": "Erforderliche Skills",
+        "workAreas": "Arbeitsbereiche",
+        "statusActions": "Status & Aktionen",
+        "details": "Details",
+        "company": "Unternehmen",
+        "contactPerson": "Ansprechpartner"
+      },
+      "labels": {
+        "jobTitle": "Job Titel",
+        "industry": "Branche",
+        "numberOfWorkers": "Anzahl Mitarbeiter",
+        "weeklyHours": "Wochenstunden",
+        "startDate": "Startdatum",
+        "endDate": "Enddatum",
+        "status": "Status:",
+        "location": "Standort",
+        "salary": "Gehalt",
+        "allocations": "{count} Zuweisungen",
+        "created": "Erstellt: {date}",
+        "employmentType": "Arbeitstyp:",
+        "experience": "Erfahrung:"
+      },
+      "fallback": {
+        "noDescription": "Keine Beschreibung verfügbar.",
+        "noSkills": "Keine Skills angegeben",
+        "notProvided": "Nicht angegeben"
+      },
+      "buttons": {
+        "manageAllocations": "Zuweisungen verwalten ({count})",
+        "edit": "Bearbeiten"
+      },
+      "employmentTypes": {
+        "full_time": "Vollzeit",
+        "part_time": "Teilzeit",
+        "contract": "Vertrag",
+        "freelance": "Freelance"
+      },
+      "status": {
+        "active": "Aktiv",
+        "pending": "Ausstehend",
+        "completed": "Abgeschlossen",
+        "cancelled": "Abgebrochen",
+        "paused": "Pausiert"
+      },
+      "toast": {
+        "accessDenied": "Zugriff verweigert",
+        "accessDeniedDesc": "Sie haben keine Berechtigung für diesen Bereich.",
+        "error": "Fehler",
+        "loadError": "Suchauftrag konnte nicht geladen werden.",
+        "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten."
+      }
     }
   },
   "auth": {

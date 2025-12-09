@@ -2145,6 +2145,71 @@
           "removeError": "Fout",
           "removeErrorDesc": "Toewijzing kon niet worden verwijderd."
         }
+      },
+      "detailPage": {
+        "loading": "Laden...",
+        "notFound": {
+          "title": "Zoekopdracht niet gevonden",
+          "description": "De opgevraagde zoekopdracht bestaat niet.",
+          "back": "Terug naar overzicht"
+        },
+        "companyNotAvailable": "Bedrijf niet beschikbaar",
+        "sections": {
+          "basicInfo": "Basisinformatie",
+          "description": "Beschrijving",
+          "mainTasks": "Hoofdtaken",
+          "requirements": "Vereisten",
+          "requiredSkills": "Vereiste vaardigheden",
+          "workAreas": "Werkgebieden",
+          "statusActions": "Status & Acties",
+          "details": "Details",
+          "company": "Bedrijf",
+          "contactPerson": "Contactpersoon"
+        },
+        "labels": {
+          "jobTitle": "Functietitel",
+          "industry": "Branche",
+          "numberOfWorkers": "Aantal medewerkers",
+          "weeklyHours": "Wekelijkse uren",
+          "startDate": "Startdatum",
+          "endDate": "Einddatum",
+          "status": "Status:",
+          "location": "Locatie",
+          "salary": "Salaris",
+          "allocations": "{count} Toewijzingen",
+          "created": "Aangemaakt: {date}",
+          "employmentType": "Type dienstverband:",
+          "experience": "Ervaring:"
+        },
+        "fallback": {
+          "noDescription": "Geen beschrijving beschikbaar.",
+          "noSkills": "Geen vaardigheden opgegeven",
+          "notProvided": "Niet opgegeven"
+        },
+        "buttons": {
+          "manageAllocations": "Toewijzingen beheren ({count})",
+          "edit": "Bewerken"
+        },
+        "employmentTypes": {
+          "full_time": "Fulltime",
+          "part_time": "Parttime",
+          "contract": "Contract",
+          "freelance": "Freelance"
+        },
+        "status": {
+          "active": "Actief",
+          "pending": "In behandeling",
+          "completed": "Afgerond",
+          "cancelled": "Geannuleerd",
+          "paused": "Gepauzeerd"
+        },
+        "toast": {
+          "accessDenied": "Toegang geweigerd",
+          "accessDeniedDesc": "U heeft geen toestemming voor dit onderdeel.",
+          "error": "Fout",
+          "loadError": "Zoekopdracht kon niet worden geladen.",
+          "unexpectedError": "Er is een onverwachte fout opgetreden."
+        }
       }
     }
   },
