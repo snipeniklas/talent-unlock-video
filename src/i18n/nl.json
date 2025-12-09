@@ -2058,6 +2058,93 @@
         "deleteSuccess": "Zoekopdracht is succesvol verwijderd.",
         "unexpected": "Er is een onverwachte fout opgetreden.",
         "deleteFailed": "Zoekopdracht kon niet worden verwijderd."
+      },
+      "allocationsPage": {
+        "loading": "Laden...",
+        "notFound": "Zoekopdracht niet gevonden",
+        "back": "Terug",
+        "unknownCompany": "Onbekend bedrijf",
+        "details": {
+          "title": "Zoekopdracht Details",
+          "sections": {
+            "basicInfo": "Basisinformatie",
+            "employment": "Dienstverbanddetails",
+            "schedule": "Planning & Omvang"
+          },
+          "labels": {
+            "description": "Beschrijving",
+            "noDescription": "Geen beschrijving beschikbaar",
+            "location": "Locatie",
+            "status": "Status",
+            "employmentType": "Type dienstverband",
+            "experienceLevel": "Ervaringsniveau",
+            "salaryRange": "Salarisbereik",
+            "salaryFrom": "vanaf €{amount}",
+            "salaryTo": "tot €{amount}",
+            "numberOfWorkers": "Aantal medewerkers",
+            "startDate": "Startdatum",
+            "endDate": "Einddatum",
+            "weeklyHours": "{hours}u/week",
+            "industry": "Branche",
+            "requiredSkills": "Vereiste vaardigheden",
+            "requirements": "Vereisten",
+            "mainTasks": "Hoofdtaken",
+            "workAreas": "Werkgebieden"
+          }
+        },
+        "candidates": {
+          "title": "Toegewezen kandidaten ({count})",
+          "assign": "Kandidaat toewijzen",
+          "yearsExperience": "{years} jaar ervaring",
+          "moreSkills": "+{count} meer",
+          "notes": "Notities:",
+          "assignedAt": "Toegewezen: {date}"
+        },
+        "statusLabels": {
+          "adminStatus": "Admin Status:",
+          "clientStatus": "Klant Status:"
+        },
+        "empty": {
+          "title": "Nog geen kandidaten toegewezen",
+          "description": "Klik op \"Kandidaat toewijzen\" om te beginnen."
+        },
+        "dialog": {
+          "title": "Kandidaat toewijzen",
+          "description": "Selecteer een kandidaat om aan deze zoekopdracht toe te wijzen.",
+          "selectLabel": "Selecteer kandidaat",
+          "selectPlaceholder": "Kandidaat selecteren...",
+          "notesLabel": "Notities (optioneel)",
+          "notesPlaceholder": "Waarom deze kandidaat geschikt is voor de zoekopdracht...",
+          "cancel": "Annuleren",
+          "assign": "Toewijzen"
+        },
+        "status": {
+          "proposed": "Voorgesteld",
+          "presented": "Gepresenteerd",
+          "accepted": "Geaccepteerd",
+          "rejected": "Afgewezen",
+          "hired": "Aangenomen",
+          "reviewed": "Beoordeeld",
+          "interested": "Geïnteresseerd",
+          "not_interested": "Niet geïnteresseerd",
+          "interview_scheduled": "Interview gepland"
+        },
+        "toast": {
+          "loadError": "Fout",
+          "loadErrorDesc": "Gegevens konden niet worden geladen.",
+          "assignSuccess": "Succes",
+          "assignSuccessDesc": "Kandidaat is succesvol toegewezen.",
+          "assignError": "Fout",
+          "assignErrorDesc": "Kandidaat kon niet worden toegewezen.",
+          "statusSuccess": "Succes",
+          "statusSuccessDesc": "Status is bijgewerkt.",
+          "statusError": "Fout",
+          "statusErrorDesc": "Status kon niet worden bijgewerkt.",
+          "removeSuccess": "Succes",
+          "removeSuccessDesc": "Toewijzing is verwijderd.",
+          "removeError": "Fout",
+          "removeErrorDesc": "Toewijzing kon niet worden verwijderd."
+        }
       }
     }
   },

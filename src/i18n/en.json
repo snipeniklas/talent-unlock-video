@@ -1613,7 +1613,94 @@
       "buttons": {"resources": "Resources", "view": "View"},
       "empty": {"filtered": "No customer projects match the filters.", "none": "No customer projects yet."},
       "confirmDelete": {"title": "Delete search request", "desc": "Are you sure you want to delete this search request? This action cannot be undone."},
-      "toasts": {"error": "Error", "deleteSuccessTitle": "Success", "deleteSuccess": "Search request deleted successfully.", "unexpected": "An unexpected error occurred.", "deleteFailed": "Failed to delete search request."}
+      "toasts": {"error": "Error", "deleteSuccessTitle": "Success", "deleteSuccess": "Search request deleted successfully.", "unexpected": "An unexpected error occurred.", "deleteFailed": "Failed to delete search request."},
+      "allocationsPage": {
+        "loading": "Loading...",
+        "notFound": "Search request not found",
+        "back": "Back",
+        "unknownCompany": "Unknown company",
+        "details": {
+          "title": "Search Request Details",
+          "sections": {
+            "basicInfo": "Basic Information",
+            "employment": "Employment Details",
+            "schedule": "Schedule & Scope"
+          },
+          "labels": {
+            "description": "Description",
+            "noDescription": "No description available",
+            "location": "Location",
+            "status": "Status",
+            "employmentType": "Employment Type",
+            "experienceLevel": "Experience Level",
+            "salaryRange": "Salary Range",
+            "salaryFrom": "from €{amount}",
+            "salaryTo": "up to €{amount}",
+            "numberOfWorkers": "Number of Workers",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "weeklyHours": "{hours}h/week",
+            "industry": "Industry",
+            "requiredSkills": "Required Skills",
+            "requirements": "Requirements",
+            "mainTasks": "Main Tasks",
+            "workAreas": "Work Areas"
+          }
+        },
+        "candidates": {
+          "title": "Assigned Candidates ({count})",
+          "assign": "Assign Candidate",
+          "yearsExperience": "{years} years experience",
+          "moreSkills": "+{count} more",
+          "notes": "Notes:",
+          "assignedAt": "Assigned: {date}"
+        },
+        "statusLabels": {
+          "adminStatus": "Admin Status:",
+          "clientStatus": "Client Status:"
+        },
+        "empty": {
+          "title": "No candidates assigned yet",
+          "description": "Click \"Assign Candidate\" to get started."
+        },
+        "dialog": {
+          "title": "Assign Candidate",
+          "description": "Select a candidate to assign to this search request.",
+          "selectLabel": "Select Candidate",
+          "selectPlaceholder": "Select candidate...",
+          "notesLabel": "Notes (optional)",
+          "notesPlaceholder": "Why this candidate is suitable for the search request...",
+          "cancel": "Cancel",
+          "assign": "Assign"
+        },
+        "status": {
+          "proposed": "Proposed",
+          "presented": "Presented",
+          "accepted": "Accepted",
+          "rejected": "Rejected",
+          "hired": "Hired",
+          "reviewed": "Reviewed",
+          "interested": "Interested",
+          "not_interested": "Not interested",
+          "interview_scheduled": "Interview scheduled"
+        },
+        "toast": {
+          "loadError": "Error",
+          "loadErrorDesc": "Failed to load data.",
+          "assignSuccess": "Success",
+          "assignSuccessDesc": "Candidate assigned successfully.",
+          "assignError": "Error",
+          "assignErrorDesc": "Failed to assign candidate.",
+          "statusSuccess": "Success",
+          "statusSuccessDesc": "Status updated successfully.",
+          "statusError": "Error",
+          "statusErrorDesc": "Failed to update status.",
+          "removeSuccess": "Success",
+          "removeSuccessDesc": "Allocation removed successfully.",
+          "removeError": "Error",
+          "removeErrorDesc": "Failed to remove allocation."
+        }
+      }
     }
   },
   "raasInquiry": {

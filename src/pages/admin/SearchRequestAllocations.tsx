@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Plus, User, Mail, MapPin, Calendar, Star, TrendingUp, MessageSquare, Trash2, Euro, Clock, Building2, Users, Briefcase, Target } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/i18n/i18n";
 
 interface SearchRequest {
   id: string;
@@ -80,6 +81,7 @@ const SearchRequestAllocations = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t, lang } = useTranslation();
   
   const [searchRequest, setSearchRequest] = useState<SearchRequest | null>(null);
   const [allocations, setAllocations] = useState<Allocation[]>([]);
@@ -88,6 +90,14 @@ const SearchRequestAllocations = () => {
   const [selectedCandidate, setSelectedCandidate] = useState<string>('');
   const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(true);
+
+  const getLocale = () => {
+    switch (lang) {
+      case 'de': return 'de-DE';
+      case 'nl': return 'nl-NL';
+      default: return 'en-US';
+    }
+  };
 
   useEffect(() => {
     if (id) {
@@ -170,8 +180,8 @@ const SearchRequestAllocations = () => {
     } catch (error) {
       console.error('Error fetching data:', error);
       toast({
-        title: "Fehler",
-        description: "Daten konnten nicht geladen werden.",
+        title: t('app.adminSearchRequests.allocationsPage.toast.loadError'),
+        description: t('app.adminSearchRequests.allocationsPage.toast.loadErrorDesc'),
         variant: "destructive",
       });
     } finally {
@@ -196,8 +206,8 @@ const SearchRequestAllocations = () => {
       if (error) throw error;
 
       toast({
-        title: "Erfolg",
-        description: "Kandidat wurde erfolgreich zugewiesen.",
+        title: t('app.adminSearchRequests.allocationsPage.toast.assignSuccess'),
+        description: t('app.adminSearchRequests.allocationsPage.toast.assignSuccessDesc'),
       });
 
       setIsDialogOpen(false);
@@ -207,8 +217,8 @@ const SearchRequestAllocations = () => {
     } catch (error) {
       console.error('Error allocating candidate:', error);
       toast({
-        title: "Fehler",
-        description: "Kandidat konnte nicht zugewiesen werden.",
+        title: t('app.adminSearchRequests.allocationsPage.toast.assignError'),
+        description: t('app.adminSearchRequests.allocationsPage.toast.assignErrorDesc'),
         variant: "destructive",
       });
     }
@@ -224,16 +234,16 @@ const SearchRequestAllocations = () => {
       if (error) throw error;
 
       toast({
-        title: "Erfolg",
-        description: "Status wurde aktualisiert.",
+        title: t('app.adminSearchRequests.allocationsPage.toast.statusSuccess'),
+        description: t('app.adminSearchRequests.allocationsPage.toast.statusSuccessDesc'),
       });
 
       fetchData();
     } catch (error) {
       console.error('Error updating status:', error);
       toast({
-        title: "Fehler",
-        description: "Status konnte nicht aktualisiert werden.",
+        title: t('app.adminSearchRequests.allocationsPage.toast.statusError'),
+        description: t('app.adminSearchRequests.allocationsPage.toast.statusErrorDesc'),
         variant: "destructive",
       });
     }
@@ -249,16 +259,16 @@ const SearchRequestAllocations = () => {
       if (error) throw error;
 
       toast({
-        title: "Erfolg",
-        description: "Zuweisung wurde entfernt.",
+        title: t('app.adminSearchRequests.allocationsPage.toast.removeSuccess'),
+        description: t('app.adminSearchRequests.allocationsPage.toast.removeSuccessDesc'),
       });
 
       fetchData();
     } catch (error) {
       console.error('Error removing allocation:', error);
       toast({
-        title: "Fehler",
-        description: "Zuweisung konnte nicht entfernt werden.",
+        title: t('app.adminSearchRequests.allocationsPage.toast.removeError'),
+        description: t('app.adminSearchRequests.allocationsPage.toast.removeErrorDesc'),
         variant: "destructive",
       });
     }
@@ -276,14 +286,9 @@ const SearchRequestAllocations = () => {
   };
 
   const getStatusLabel = (status: string) => {
-    switch (status) {
-      case 'proposed': return 'Vorgeschlagen';
-      case 'presented': return 'Präsentiert';
-      case 'accepted': return 'Akzeptiert';
-      case 'rejected': return 'Abgelehnt';
-      case 'hired': return 'Eingestellt';
-      default: return status;
-    }
+    const key = `app.adminSearchRequests.allocationsPage.status.${status}`;
+    const translated = t(key);
+    return translated !== key ? translated : status;
   };
 
   const getClientStatusBadgeVariant = (status: string): "default" | "destructive" | "secondary" | "outline" => {
@@ -300,24 +305,17 @@ const SearchRequestAllocations = () => {
   };
 
   const getClientStatusLabel = (status: string) => {
-    switch (status) {
-      case 'proposed': return 'Vorgeschlagen';
-      case 'reviewed': return 'Geprüft';
-      case 'interested': return 'Interessant';
-      case 'not_interested': return 'Nicht interessant';
-      case 'interview_scheduled': return 'Interview geplant';
-      case 'hired': return 'Eingestellt';
-      case 'rejected': return 'Abgelehnt';
-      default: return status;
-    }
+    const key = `app.adminSearchRequests.allocationsPage.status.${status}`;
+    const translated = t(key);
+    return translated !== key ? translated : status;
   };
 
   if (loading) {
-    return <div className="p-6">Lade...</div>;
+    return <div className="p-6">{t('app.adminSearchRequests.allocationsPage.loading')}</div>;
   }
 
   if (!searchRequest) {
-    return <div className="p-6">Suchauftrag nicht gefunden</div>;
+    return <div className="p-6">{t('app.adminSearchRequests.allocationsPage.notFound')}</div>;
   }
 
   return (
@@ -330,11 +328,11 @@ const SearchRequestAllocations = () => {
           onClick={() => navigate('/admin/search-requests')}
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Zurück
+          {t('app.adminSearchRequests.allocationsPage.back')}
         </Button>
         <div>
           <h1 className="text-2xl font-bold">{searchRequest.title}</h1>
-          <p className="text-muted-foreground">{searchRequest.companies?.name || 'Unbekanntes Unternehmen'}</p>
+          <p className="text-muted-foreground">{searchRequest.companies?.name || t('app.adminSearchRequests.allocationsPage.unknownCompany')}</p>
         </div>
       </div>
 
@@ -343,19 +341,21 @@ const SearchRequestAllocations = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Briefcase className="w-5 h-5" />
-            Suchauftrag Details
+            {t('app.adminSearchRequests.allocationsPage.details.title')}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Grundlegende Informationen */}
             <div className="space-y-4">
-              <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Grundinformationen</h4>
+              <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
+                {t('app.adminSearchRequests.allocationsPage.details.sections.basicInfo')}
+              </h4>
               
               <div>
-                <Label className="text-sm font-medium">Beschreibung</Label>
+                <Label className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.details.labels.description')}</Label>
                 <p className="text-sm text-muted-foreground mt-1">
-                  {searchRequest.description || 'Keine Beschreibung verfügbar'}
+                  {searchRequest.description || t('app.adminSearchRequests.allocationsPage.details.labels.noDescription')}
                 </p>
               </div>
               
@@ -363,7 +363,7 @@ const SearchRequestAllocations = () => {
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-muted-foreground" />
                   <div>
-                    <Label className="text-sm font-medium">Standort</Label>
+                    <Label className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.details.labels.location')}</Label>
                     <p className="text-sm text-muted-foreground">{searchRequest.location}</p>
                   </div>
                 </div>
@@ -372,7 +372,7 @@ const SearchRequestAllocations = () => {
               <div className="flex items-center gap-2">
                 <Building2 className="w-4 h-4 text-muted-foreground" />
                 <div>
-                  <Label className="text-sm font-medium">Status</Label>
+                  <Label className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.details.labels.status')}</Label>
                   <div className="mt-1">
                     <Badge variant={searchRequest.status === 'active' ? 'default' : 'secondary'}>
                       {searchRequest.status}
@@ -384,13 +384,15 @@ const SearchRequestAllocations = () => {
 
             {/* Anstellungsdetails */}
             <div className="space-y-4">
-              <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Anstellungsdetails</h4>
+              <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
+                {t('app.adminSearchRequests.allocationsPage.details.sections.employment')}
+              </h4>
               
               {searchRequest.employment_type && (
                 <div className="flex items-center gap-2">
                   <Briefcase className="w-4 h-4 text-muted-foreground" />
                   <div>
-                    <Label className="text-sm font-medium">Arbeitstyp</Label>
+                    <Label className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.details.labels.employmentType')}</Label>
                     <p className="text-sm text-muted-foreground">{searchRequest.employment_type}</p>
                   </div>
                 </div>
@@ -400,7 +402,7 @@ const SearchRequestAllocations = () => {
                 <div className="flex items-center gap-2">
                   <Star className="w-4 h-4 text-muted-foreground" />
                   <div>
-                    <Label className="text-sm font-medium">Erfahrungslevel</Label>
+                    <Label className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.details.labels.experienceLevel')}</Label>
                     <p className="text-sm text-muted-foreground">{searchRequest.experience_level}</p>
                   </div>
                 </div>
@@ -410,13 +412,13 @@ const SearchRequestAllocations = () => {
                 <div className="flex items-center gap-2">
                   <Euro className="w-4 h-4 text-muted-foreground" />
                   <div>
-                    <Label className="text-sm font-medium">Gehaltsspanne</Label>
+                    <Label className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.details.labels.salaryRange')}</Label>
                     <p className="text-sm text-muted-foreground">
                       {searchRequest.salary_min && searchRequest.salary_max 
-                        ? `€${searchRequest.salary_min?.toLocaleString()} - €${searchRequest.salary_max?.toLocaleString()}`
+                        ? `€${searchRequest.salary_min?.toLocaleString(getLocale())} - €${searchRequest.salary_max?.toLocaleString(getLocale())}`
                         : searchRequest.salary_min 
-                          ? `ab €${searchRequest.salary_min?.toLocaleString()}`
-                          : `bis €${searchRequest.salary_max?.toLocaleString()}`
+                          ? t('app.adminSearchRequests.allocationsPage.details.labels.salaryFrom').replace('{amount}', searchRequest.salary_min?.toLocaleString(getLocale()))
+                          : t('app.adminSearchRequests.allocationsPage.details.labels.salaryTo').replace('{amount}', searchRequest.salary_max?.toLocaleString(getLocale()) || '')
                       }
                     </p>
                   </div>
@@ -427,7 +429,7 @@ const SearchRequestAllocations = () => {
                 <div className="flex items-center gap-2">
                   <Users className="w-4 h-4 text-muted-foreground" />
                   <div>
-                    <Label className="text-sm font-medium">Anzahl Mitarbeiter</Label>
+                    <Label className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.details.labels.numberOfWorkers')}</Label>
                     <p className="text-sm text-muted-foreground">{searchRequest.number_of_workers}</p>
                   </div>
                 </div>
@@ -436,15 +438,17 @@ const SearchRequestAllocations = () => {
 
             {/* Zeitplan & Umfang */}
             <div className="space-y-4">
-              <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Zeitplan & Umfang</h4>
+              <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
+                {t('app.adminSearchRequests.allocationsPage.details.sections.schedule')}
+              </h4>
               
               {searchRequest.start_date && (
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-muted-foreground" />
                   <div>
-                    <Label className="text-sm font-medium">Startdatum</Label>
+                    <Label className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.details.labels.startDate')}</Label>
                     <p className="text-sm text-muted-foreground">
-                      {new Date(searchRequest.start_date).toLocaleDateString('de-DE')}
+                      {new Date(searchRequest.start_date).toLocaleDateString(getLocale())}
                     </p>
                   </div>
                 </div>
@@ -454,9 +458,9 @@ const SearchRequestAllocations = () => {
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-muted-foreground" />
                   <div>
-                    <Label className="text-sm font-medium">Enddatum</Label>
+                    <Label className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.details.labels.endDate')}</Label>
                     <p className="text-sm text-muted-foreground">
-                      {new Date(searchRequest.end_date).toLocaleDateString('de-DE')}
+                      {new Date(searchRequest.end_date).toLocaleDateString(getLocale())}
                     </p>
                   </div>
                 </div>
@@ -466,8 +470,10 @@ const SearchRequestAllocations = () => {
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-muted-foreground" />
                   <div>
-                    <Label className="text-sm font-medium">Wochenstunden</Label>
-                    <p className="text-sm text-muted-foreground">{searchRequest.weekly_hours}h/Woche</p>
+                    <Label className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.details.labels.weeklyHours').split('{hours}')[0]}</Label>
+                    <p className="text-sm text-muted-foreground">
+                      {t('app.adminSearchRequests.allocationsPage.details.labels.weeklyHours').replace('{hours}', String(searchRequest.weekly_hours))}
+                    </p>
                   </div>
                 </div>
               )}
@@ -476,7 +482,7 @@ const SearchRequestAllocations = () => {
                 <div className="flex items-center gap-2">
                   <Building2 className="w-4 h-4 text-muted-foreground" />
                   <div>
-                    <Label className="text-sm font-medium">Branche</Label>
+                    <Label className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.details.labels.industry')}</Label>
                     <p className="text-sm text-muted-foreground">{searchRequest.customer_industry}</p>
                   </div>
                 </div>
@@ -494,7 +500,7 @@ const SearchRequestAllocations = () => {
                 <div>
                   <Label className="text-sm font-medium flex items-center gap-2 mb-2">
                     <Target className="w-4 h-4" />
-                    Benötigte Skills
+                    {t('app.adminSearchRequests.allocationsPage.details.labels.requiredSkills')}
                   </Label>
                   <div className="flex flex-wrap gap-1">
                     {searchRequest.skills_required.map((skill: string, index: number) => (
@@ -508,7 +514,7 @@ const SearchRequestAllocations = () => {
 
               {searchRequest.requirements && (
                 <div>
-                  <Label className="text-sm font-medium mb-2 block">Anforderungen</Label>
+                  <Label className="text-sm font-medium mb-2 block">{t('app.adminSearchRequests.allocationsPage.details.labels.requirements')}</Label>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {searchRequest.requirements}
                   </p>
@@ -520,7 +526,7 @@ const SearchRequestAllocations = () => {
             <div className="space-y-4">
               {searchRequest.main_tasks && searchRequest.main_tasks.length > 0 && (
                 <div>
-                  <Label className="text-sm font-medium mb-2 block">Hauptaufgaben</Label>
+                  <Label className="text-sm font-medium mb-2 block">{t('app.adminSearchRequests.allocationsPage.details.labels.mainTasks')}</Label>
                   <ul className="text-sm text-muted-foreground space-y-1">
                     {searchRequest.main_tasks.map((task: string, index: number) => (
                       <li key={index} className="flex items-start gap-2">
@@ -534,7 +540,7 @@ const SearchRequestAllocations = () => {
 
               {searchRequest.work_areas && searchRequest.work_areas.length > 0 && (
                 <div>
-                  <Label className="text-sm font-medium mb-2 block">Arbeitsbereiche</Label>
+                  <Label className="text-sm font-medium mb-2 block">{t('app.adminSearchRequests.allocationsPage.details.labels.workAreas')}</Label>
                   <div className="flex flex-wrap gap-1">
                     {searchRequest.work_areas.map((area: string, index: number) => (
                       <Badge key={index} variant="secondary" className="text-xs">
@@ -551,29 +557,31 @@ const SearchRequestAllocations = () => {
 
       {/* Allocated Candidates */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Zugewiesene Kandidaten ({allocations.length})</h2>
+        <h2 className="text-xl font-semibold">
+          {t('app.adminSearchRequests.allocationsPage.candidates.title').replace('{count}', String(allocations.length))}
+        </h2>
         
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button>
               <Plus className="w-4 h-4 mr-2" />
-              Kandidat zuweisen
+              {t('app.adminSearchRequests.allocationsPage.candidates.assign')}
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
-              <DialogTitle>Kandidat zuweisen</DialogTitle>
+              <DialogTitle>{t('app.adminSearchRequests.allocationsPage.dialog.title')}</DialogTitle>
               <DialogDescription>
-                Wählen Sie einen Kandidaten aus, um ihn diesem Suchauftrag zuzuweisen.
+                {t('app.adminSearchRequests.allocationsPage.dialog.description')}
               </DialogDescription>
             </DialogHeader>
             
             <div className="space-y-4">
               <div>
-                <Label>Kandidat auswählen</Label>
+                <Label>{t('app.adminSearchRequests.allocationsPage.dialog.selectLabel')}</Label>
                 <Select value={selectedCandidate} onValueChange={setSelectedCandidate}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Kandidat auswählen..." />
+                    <SelectValue placeholder={t('app.adminSearchRequests.allocationsPage.dialog.selectPlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
                     {availableCandidates.map((candidate) => {
@@ -599,23 +607,23 @@ const SearchRequestAllocations = () => {
               </div>
               
               <div>
-                <Label>Notizen (optional)</Label>
+                <Label>{t('app.adminSearchRequests.allocationsPage.dialog.notesLabel')}</Label>
                 <Textarea 
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Warum dieser Kandidat für den Suchauftrag geeignet ist..."
+                  placeholder={t('app.adminSearchRequests.allocationsPage.dialog.notesPlaceholder')}
                 />
               </div>
               
               <div className="flex justify-end gap-2">
                 <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-                  Abbrechen
+                  {t('app.adminSearchRequests.allocationsPage.dialog.cancel')}
                 </Button>
                 <Button 
                   onClick={handleAllocateCandidate}
                   disabled={!selectedCandidate}
                 >
-                  Zuweisen
+                  {t('app.adminSearchRequests.allocationsPage.dialog.assign')}
                 </Button>
               </div>
             </div>
@@ -629,8 +637,8 @@ const SearchRequestAllocations = () => {
           <Card>
             <CardContent className="p-8 text-center text-muted-foreground">
               <User className="w-12 h-12 mx-auto mb-4 opacity-50" />
-              <p>Noch keine Kandidaten zugewiesen</p>
-              <p className="text-sm">Klicken Sie auf "Kandidat zuweisen" um zu beginnen.</p>
+              <p>{t('app.adminSearchRequests.allocationsPage.empty.title')}</p>
+              <p className="text-sm">{t('app.adminSearchRequests.allocationsPage.empty.description')}</p>
             </CardContent>
           </Card>
         ) : (
@@ -665,7 +673,7 @@ const SearchRequestAllocations = () => {
                           </div>
                           <div className="flex items-center gap-1">
                             <TrendingUp className="w-4 h-4" />
-                            <span>{candidate?.years_experience} Jahre Erfahrung</span>
+                            <span>{t('app.adminSearchRequests.allocationsPage.candidates.yearsExperience').replace('{years}', String(candidate?.years_experience))}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <MapPin className="w-4 h-4" />
@@ -689,7 +697,7 @@ const SearchRequestAllocations = () => {
                             })}
                             {candidate.skills.length > 5 && (
                               <Badge variant="outline" className="text-xs">
-                                +{candidate.skills.length - 5} weitere
+                                {t('app.adminSearchRequests.allocationsPage.candidates.moreSkills').replace('{count}', String(candidate.skills.length - 5))}
                               </Badge>
                             )}
                           </div>
@@ -699,7 +707,7 @@ const SearchRequestAllocations = () => {
                           <div className="bg-muted p-3 rounded-lg">
                             <div className="flex items-center gap-2 mb-1">
                               <MessageSquare className="w-4 h-4" />
-                              <span className="text-sm font-medium">Notizen:</span>
+                              <span className="text-sm font-medium">{t('app.adminSearchRequests.allocationsPage.candidates.notes')}</span>
                             </div>
                             <p className="text-sm text-muted-foreground">{allocation.notes}</p>
                           </div>
@@ -709,12 +717,12 @@ const SearchRequestAllocations = () => {
                     
                     <div className="flex flex-col items-end gap-3">
                       <div className="space-y-2">
-                        <div className="text-xs font-medium text-muted-foreground">Admin Status:</div>
+                        <div className="text-xs font-medium text-muted-foreground">{t('app.adminSearchRequests.allocationsPage.statusLabels.adminStatus')}</div>
                         <Badge variant={getStatusBadgeVariant(allocation.status)}>
                           {getStatusLabel(allocation.status)}
                         </Badge>
                         
-                        <div className="text-xs font-medium text-muted-foreground">Kunden Status:</div>
+                        <div className="text-xs font-medium text-muted-foreground">{t('app.adminSearchRequests.allocationsPage.statusLabels.clientStatus')}</div>
                         <Badge variant={getClientStatusBadgeVariant(allocation.client_status || 'proposed')}>
                           {getClientStatusLabel(allocation.client_status || 'proposed')}
                         </Badge>
@@ -729,11 +737,11 @@ const SearchRequestAllocations = () => {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="proposed">Vorgeschlagen</SelectItem>
-                            <SelectItem value="presented">Präsentiert</SelectItem>
-                            <SelectItem value="accepted">Akzeptiert</SelectItem>
-                            <SelectItem value="rejected">Abgelehnt</SelectItem>
-                            <SelectItem value="hired">Eingestellt</SelectItem>
+                            <SelectItem value="proposed">{t('app.adminSearchRequests.allocationsPage.status.proposed')}</SelectItem>
+                            <SelectItem value="presented">{t('app.adminSearchRequests.allocationsPage.status.presented')}</SelectItem>
+                            <SelectItem value="accepted">{t('app.adminSearchRequests.allocationsPage.status.accepted')}</SelectItem>
+                            <SelectItem value="rejected">{t('app.adminSearchRequests.allocationsPage.status.rejected')}</SelectItem>
+                            <SelectItem value="hired">{t('app.adminSearchRequests.allocationsPage.status.hired')}</SelectItem>
                           </SelectContent>
                         </Select>
                         
@@ -748,7 +756,7 @@ const SearchRequestAllocations = () => {
                       </div>
                       
                       <p className="text-xs text-muted-foreground">
-                        Zugewiesen: {new Date(allocation.allocated_at).toLocaleDateString('de-DE')}
+                        {t('app.adminSearchRequests.allocationsPage.candidates.assignedAt').replace('{date}', new Date(allocation.allocated_at).toLocaleDateString(getLocale()))}
                       </p>
                     </div>
                   </div>
