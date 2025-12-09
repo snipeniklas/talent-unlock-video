@@ -1954,6 +1954,175 @@
       "contactsCount": "Kontakte"
     }
   },
+  "outreach": {
+    "title": "Outreach",
+    "subtitle": "E-Mail-Kampagnen verwalten",
+    "campaigns": {
+      "title": "Kampagnen",
+      "subtitle": "Outreach-Kampagnen verwalten",
+      "addNew": "Neue Kampagne",
+      "editCampaign": "Kampagne bearbeiten",
+      "viewCampaign": "Kampagne ansehen",
+      "deleteCampaign": "Kampagne löschen",
+      "fields": {
+        "name": "Name",
+        "description": "Beschreibung",
+        "status": "Status",
+        "targetAudience": "Zielgruppe",
+        "desiredCta": "Gewünschte Handlungsaufforderung",
+        "aiInstructions": "KI-Anweisungen",
+        "emailTemplate": "E-Mail Vorlage",
+        "dailySendTime": "Tägliche Sendezeit",
+        "nextSendDate": "Nächstes Sendedatum",
+        "contactLists": "Kontaktlisten",
+        "createdAt": "Erstellt am"
+      },
+      "status": {
+        "draft": "Entwurf",
+        "active": "Aktiv",
+        "paused": "Pausiert",
+        "completed": "Abgeschlossen"
+      },
+      "tabs": {
+        "overview": "Übersicht",
+        "sequences": "Sequenzen",
+        "contacts": "Kontakte",
+        "analytics": "Analytik"
+      },
+      "empty": {
+        "title": "Keine Kampagnen",
+        "description": "Erstellen Sie Ihre erste Outreach-Kampagne"
+      },
+      "toast": {
+        "created": "Kampagne erstellt",
+        "updated": "Kampagne aktualisiert",
+        "deleted": "Kampagne gelöscht",
+        "started": "Kampagne gestartet",
+        "paused": "Kampagne pausiert",
+        "error": "Fehler bei der Kampagne"
+      },
+      "actions": {
+        "start": "Starten",
+        "pause": "Pausieren",
+        "resume": "Fortsetzen",
+        "duplicate": "Duplizieren"
+      }
+    },
+    "sequences": {
+      "title": "E-Mail Sequenzen",
+      "subtitle": "Automatisierte E-Mail-Abfolgen",
+      "addStep": "Schritt hinzufügen",
+      "editStep": "Schritt bearbeiten",
+      "deleteStep": "Schritt löschen",
+      "fields": {
+        "sequenceNumber": "Schritt",
+        "subject": "Betreff",
+        "body": "Inhalt",
+        "delayDays": "Verzögerung (Tage)"
+      },
+      "empty": {
+        "title": "Keine Sequenzen",
+        "description": "Fügen Sie Ihren ersten E-Mail-Schritt hinzu"
+      },
+      "toast": {
+        "created": "Sequenz erstellt",
+        "updated": "Sequenz aktualisiert",
+        "deleted": "Sequenz gelöscht",
+        "error": "Fehler bei der Sequenz"
+      }
+    },
+    "contacts": {
+      "title": "Kampagnen-Kontakte",
+      "subtitle": "Kontakte in dieser Kampagne",
+      "addContacts": "Kontakte hinzufügen",
+      "addFromList": "Aus Liste hinzufügen",
+      "removeContact": "Kontakt entfernen",
+      "excludeContact": "Kontakt ausschließen",
+      "fields": {
+        "contact": "Kontakt",
+        "status": "Status",
+        "nextSequence": "Nächste Sequenz",
+        "nextSendDate": "Nächstes Sendedatum",
+        "excluded": "Ausgeschlossen"
+      },
+      "status": {
+        "pending": "Ausstehend",
+        "active": "Aktiv",
+        "sent": "Gesendet",
+        "replied": "Geantwortet",
+        "bounced": "Fehlgeschlagen",
+        "completed": "Abgeschlossen",
+        "excluded": "Ausgeschlossen"
+      },
+      "empty": {
+        "title": "Keine Kontakte",
+        "description": "Fügen Sie Kontakte zur Kampagne hinzu"
+      },
+      "toast": {
+        "added": "Kontakte hinzugefügt",
+        "removed": "Kontakt entfernt",
+        "excluded": "Kontakt ausgeschlossen",
+        "error": "Fehler bei den Kontakten"
+      }
+    },
+    "emails": {
+      "title": "Gesendete E-Mails",
+      "subtitle": "E-Mail-Verlauf der Kampagne",
+      "fields": {
+        "subject": "Betreff",
+        "recipient": "Empfänger",
+        "sentAt": "Gesendet am",
+        "status": "Status"
+      },
+      "status": {
+        "sent": "Gesendet",
+        "delivered": "Zugestellt",
+        "opened": "Geöffnet",
+        "clicked": "Geklickt",
+        "bounced": "Fehlgeschlagen",
+        "error": "Fehler"
+      }
+    },
+    "profile": {
+      "title": "Outreach Profil",
+      "subtitle": "E-Mail-Einstellungen verwalten",
+      "emailSettings": "E-Mail Einstellungen",
+      "signature": "E-Mail Signatur",
+      "signaturePlaceholder": "Ihre E-Mail-Signatur...",
+      "ms365": {
+        "title": "Microsoft 365 Integration",
+        "description": "Verbinden Sie Ihr Microsoft 365 Konto für den E-Mail-Versand",
+        "connected": "Verbunden",
+        "notConnected": "Nicht verbunden",
+        "connect": "Verbinden",
+        "disconnect": "Trennen",
+        "connectedAs": "Verbunden als"
+      },
+      "syncSettings": {
+        "title": "Synchronisations-Einstellungen",
+        "syncEnabled": "Synchronisation aktiviert",
+        "syncSentItems": "Gesendete E-Mails synchronisieren",
+        "autoMatchContacts": "Kontakte automatisch zuordnen"
+      },
+      "toast": {
+        "saved": "Einstellungen gespeichert",
+        "error": "Fehler beim Speichern"
+      }
+    },
+    "activities": {
+      "title": "Aktivitäten",
+      "addActivity": "Aktivität hinzufügen",
+      "types": {
+        "email_sent": "E-Mail gesendet",
+        "email_opened": "E-Mail geöffnet",
+        "email_clicked": "Link geklickt",
+        "email_replied": "Antwort erhalten",
+        "meeting_scheduled": "Meeting geplant",
+        "call_made": "Anruf getätigt",
+        "note_added": "Notiz hinzugefügt"
+      }
+    }
+  },
   "auth": {
     "backToHome": "Zur Startseite",
     "welcome": {

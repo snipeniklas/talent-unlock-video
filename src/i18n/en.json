@@ -1869,6 +1869,175 @@
       "contactsCount": "contacts"
     }
   },
+  "outreach": {
+    "title": "Outreach",
+    "subtitle": "Manage email campaigns",
+    "campaigns": {
+      "title": "Campaigns",
+      "subtitle": "Manage outreach campaigns",
+      "addNew": "New Campaign",
+      "editCampaign": "Edit Campaign",
+      "viewCampaign": "View Campaign",
+      "deleteCampaign": "Delete Campaign",
+      "fields": {
+        "name": "Name",
+        "description": "Description",
+        "status": "Status",
+        "targetAudience": "Target Audience",
+        "desiredCta": "Desired Call to Action",
+        "aiInstructions": "AI Instructions",
+        "emailTemplate": "Email Template",
+        "dailySendTime": "Daily Send Time",
+        "nextSendDate": "Next Send Date",
+        "contactLists": "Contact Lists",
+        "createdAt": "Created At"
+      },
+      "status": {
+        "draft": "Draft",
+        "active": "Active",
+        "paused": "Paused",
+        "completed": "Completed"
+      },
+      "tabs": {
+        "overview": "Overview",
+        "sequences": "Sequences",
+        "contacts": "Contacts",
+        "analytics": "Analytics"
+      },
+      "empty": {
+        "title": "No Campaigns",
+        "description": "Create your first outreach campaign"
+      },
+      "toast": {
+        "created": "Campaign created",
+        "updated": "Campaign updated",
+        "deleted": "Campaign deleted",
+        "started": "Campaign started",
+        "paused": "Campaign paused",
+        "error": "Campaign error"
+      },
+      "actions": {
+        "start": "Start",
+        "pause": "Pause",
+        "resume": "Resume",
+        "duplicate": "Duplicate"
+      }
+    },
+    "sequences": {
+      "title": "Email Sequences",
+      "subtitle": "Automated email sequences",
+      "addStep": "Add Step",
+      "editStep": "Edit Step",
+      "deleteStep": "Delete Step",
+      "fields": {
+        "sequenceNumber": "Step",
+        "subject": "Subject",
+        "body": "Body",
+        "delayDays": "Delay (Days)"
+      },
+      "empty": {
+        "title": "No Sequences",
+        "description": "Add your first email step"
+      },
+      "toast": {
+        "created": "Sequence created",
+        "updated": "Sequence updated",
+        "deleted": "Sequence deleted",
+        "error": "Sequence error"
+      }
+    },
+    "contacts": {
+      "title": "Campaign Contacts",
+      "subtitle": "Contacts in this campaign",
+      "addContacts": "Add Contacts",
+      "addFromList": "Add from List",
+      "removeContact": "Remove Contact",
+      "excludeContact": "Exclude Contact",
+      "fields": {
+        "contact": "Contact",
+        "status": "Status",
+        "nextSequence": "Next Sequence",
+        "nextSendDate": "Next Send Date",
+        "excluded": "Excluded"
+      },
+      "status": {
+        "pending": "Pending",
+        "active": "Active",
+        "sent": "Sent",
+        "replied": "Replied",
+        "bounced": "Bounced",
+        "completed": "Completed",
+        "excluded": "Excluded"
+      },
+      "empty": {
+        "title": "No Contacts",
+        "description": "Add contacts to the campaign"
+      },
+      "toast": {
+        "added": "Contacts added",
+        "removed": "Contact removed",
+        "excluded": "Contact excluded",
+        "error": "Contact error"
+      }
+    },
+    "emails": {
+      "title": "Sent Emails",
+      "subtitle": "Campaign email history",
+      "fields": {
+        "subject": "Subject",
+        "recipient": "Recipient",
+        "sentAt": "Sent At",
+        "status": "Status"
+      },
+      "status": {
+        "sent": "Sent",
+        "delivered": "Delivered",
+        "opened": "Opened",
+        "clicked": "Clicked",
+        "bounced": "Bounced",
+        "error": "Error"
+      }
+    },
+    "profile": {
+      "title": "Outreach Profile",
+      "subtitle": "Manage email settings",
+      "emailSettings": "Email Settings",
+      "signature": "Email Signature",
+      "signaturePlaceholder": "Your email signature...",
+      "ms365": {
+        "title": "Microsoft 365 Integration",
+        "description": "Connect your Microsoft 365 account for email sending",
+        "connected": "Connected",
+        "notConnected": "Not connected",
+        "connect": "Connect",
+        "disconnect": "Disconnect",
+        "connectedAs": "Connected as"
+      },
+      "syncSettings": {
+        "title": "Sync Settings",
+        "syncEnabled": "Sync enabled",
+        "syncSentItems": "Sync sent emails",
+        "autoMatchContacts": "Auto-match contacts"
+      },
+      "toast": {
+        "saved": "Settings saved",
+        "error": "Error saving settings"
+      }
+    },
+    "activities": {
+      "title": "Activities",
+      "addActivity": "Add Activity",
+      "types": {
+        "email_sent": "Email sent",
+        "email_opened": "Email opened",
+        "email_clicked": "Link clicked",
+        "email_replied": "Reply received",
+        "meeting_scheduled": "Meeting scheduled",
+        "call_made": "Call made",
+        "note_added": "Note added"
+      }
+    }
+  },
   "auth": {
     "backToHome": "Back to homepage",
     "welcome": {
