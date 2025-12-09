@@ -2195,7 +2195,37 @@
       "usersInCompany": "Users",
       "projectsTotal": "Total Projects",
       "projectsActive": "Active Projects",
-      "projectsCompleted": "Completed Projects"
+      "projectsCompleted": "Completed Projects",
+      "companies": "Companies",
+      "registered": "Registered Companies",
+      "activeRequests": "Active Requests",
+      "ongoingRequests": "Ongoing Requests",
+      "users": "Users",
+      "registeredUsers": "Registered Users",
+      "completed": "Completed",
+      "successfullyCompleted": "Successfully Completed"
+    },
+    "filters": {
+      "title": "Search & Filter",
+      "searchPlaceholder": "Search companies..."
+    },
+    "table": {
+      "title": "All Companies ({count})",
+      "description": "Overview of all registered customer companies",
+      "cols": {
+        "company": "Company",
+        "contact": "Contact Person",
+        "contactInfo": "Contact Info",
+        "activity": "Activity",
+        "registered": "Registered",
+        "actions": "Actions"
+      },
+      "noContact": "No contact person",
+      "usersCount": "Users",
+      "requests": "Requests",
+      "active": "active",
+      "completedCount": "completed",
+      "requestsBtn": "Requests"
     },
     "tabs": {
       "overview": "Overview",
@@ -2217,7 +2247,9 @@
     },
     "empty": {
       "title": "No Companies",
-      "description": "No companies have been registered yet"
+      "description": "No companies have been registered yet",
+      "noMatch": "No companies found",
+      "none": "No companies yet"
     },
     "detail": {
       "title": "Company Details",
@@ -2233,6 +2265,21 @@
       "typeToConfirm": "Type the company name to confirm:",
       "confirmPlaceholder": "Enter company name..."
     },
+    "deleteDialog": {
+      "title": "Delete Company",
+      "confirm": "Do you want to delete the company",
+      "confirmSuffix": "?",
+      "hasUsers": "This company has {count} assigned users!",
+      "deleteUsersFirst": "Please delete all users first before you can delete the company.",
+      "irreversible": "This action cannot be undone!",
+      "dataDeleted": "The following data will be deleted:",
+      "deleteItems": {
+        "profile": "Company profile",
+        "tickets": "Support tickets",
+        "invitations": "Open invitations"
+      },
+      "confirmButton": "Delete Company"
+    },
     "actions": {
       "view": "View",
       "delete": "Delete"
@@ -2240,6 +2287,9 @@
     "toast": {
       "deleted": "Company deleted",
       "deleteError": "Error deleting company",
+      "deleteErrorDesc": "The company could not be deleted.",
+      "deleteSuccess": "Company deleted",
+      "deleteSuccessDesc": "The company was successfully deleted.",
       "error": "Error loading company data"
     }
   },

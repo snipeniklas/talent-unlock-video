@@ -2581,7 +2581,37 @@
       "usersInCompany": "Gebruikers",
       "projectsTotal": "Totaal projecten",
       "projectsActive": "Actieve projecten",
-      "projectsCompleted": "Voltooide projecten"
+      "projectsCompleted": "Voltooide projecten",
+      "companies": "Bedrijven",
+      "registered": "Geregistreerde bedrijven",
+      "activeRequests": "Actieve aanvragen",
+      "ongoingRequests": "Lopende aanvragen",
+      "users": "Gebruikers",
+      "registeredUsers": "Geregistreerde gebruikers",
+      "completed": "Voltooid",
+      "successfullyCompleted": "Succesvol voltooid"
+    },
+    "filters": {
+      "title": "Zoeken & Filteren",
+      "searchPlaceholder": "Bedrijven zoeken..."
+    },
+    "table": {
+      "title": "Alle bedrijven ({count})",
+      "description": "Overzicht van alle geregistreerde klantbedrijven",
+      "cols": {
+        "company": "Bedrijf",
+        "contact": "Contactpersoon",
+        "contactInfo": "Contactgegevens",
+        "activity": "Activiteit",
+        "registered": "Geregistreerd",
+        "actions": "Acties"
+      },
+      "noContact": "Geen contactpersoon",
+      "usersCount": "Gebruikers",
+      "requests": "Aanvragen",
+      "active": "actief",
+      "completedCount": "voltooid",
+      "requestsBtn": "Aanvragen"
     },
     "tabs": {
       "overview": "Overzicht",
@@ -2603,7 +2633,9 @@
     },
     "empty": {
       "title": "Geen bedrijven",
-      "description": "Er zijn nog geen bedrijven geregistreerd"
+      "description": "Er zijn nog geen bedrijven geregistreerd",
+      "noMatch": "Geen bedrijven gevonden",
+      "none": "Nog geen bedrijven"
     },
     "detail": {
       "title": "Bedrijfsdetails",
@@ -2619,6 +2651,21 @@
       "typeToConfirm": "Typ de bedrijfsnaam om te bevestigen:",
       "confirmPlaceholder": "Voer bedrijfsnaam in..."
     },
+    "deleteDialog": {
+      "title": "Bedrijf verwijderen",
+      "confirm": "Wilt u het bedrijf",
+      "confirmSuffix": "verwijderen?",
+      "hasUsers": "Dit bedrijf heeft {count} toegewezen gebruikers!",
+      "deleteUsersFirst": "Verwijder eerst alle gebruikers voordat u het bedrijf kunt verwijderen.",
+      "irreversible": "Deze actie kan niet ongedaan worden gemaakt!",
+      "dataDeleted": "De volgende gegevens worden verwijderd:",
+      "deleteItems": {
+        "profile": "Bedrijfsprofiel",
+        "tickets": "Supporttickets",
+        "invitations": "Openstaande uitnodigingen"
+      },
+      "confirmButton": "Bedrijf verwijderen"
+    },
     "actions": {
       "view": "Bekijken",
       "delete": "Verwijderen"
@@ -2626,6 +2673,9 @@
     "toast": {
       "deleted": "Bedrijf verwijderd",
       "deleteError": "Fout bij het verwijderen van bedrijf",
+      "deleteErrorDesc": "Het bedrijf kon niet worden verwijderd.",
+      "deleteSuccess": "Bedrijf verwijderd",
+      "deleteSuccessDesc": "Het bedrijf is succesvol verwijderd.",
       "error": "Fout bij het laden van bedrijfsgegevens"
     }
   },
