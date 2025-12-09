@@ -2870,17 +2870,28 @@
   "adminSupport": {
     "title": "Support Tickets",
     "subtitle": "Kundenanfragen und Support-Tickets verwalten",
+    "header": {
+      "title": "Admin Support Chat",
+      "description": "Verwalten Sie alle Kunden-Support-Anfragen"
+    },
     "search": {
       "placeholder": "Tickets suchen...",
       "noResults": "Keine Tickets gefunden"
     },
     "filters": {
-      "all": "Alle",
+      "all": "Alle Status",
       "open": "Offen",
       "inProgress": "In Bearbeitung",
       "resolved": "Gelöst",
+      "closed": "Geschlossen",
       "priority": "Priorität",
       "category": "Kategorie"
+    },
+    "ticketsList": {
+      "title": "Support Tickets",
+      "count": "Support Tickets ({count})",
+      "loading": "Tickets werden geladen...",
+      "empty": "Keine Tickets gefunden"
     },
     "columns": {
       "title": "Titel",
@@ -2920,19 +2931,31 @@
       "markResolved": "Als gelöst markieren",
       "assignTo": "Zuweisen an"
     },
+    "chat": {
+      "selectTicket": "Wählen Sie ein Ticket aus, um den Admin-Chat zu starten",
+      "youAdmin": "Sie (Admin)",
+      "adminBadge": "Admin",
+      "internalBadge": "Intern",
+      "internalLabel": "Interne Nachricht (nur für Admins sichtbar)",
+      "messagePlaceholder": "Nachricht eingeben..."
+    },
     "actions": {
       "view": "Ansehen",
       "reply": "Antworten",
       "resolve": "Lösen",
       "reopen": "Wiedereröffnen",
-      "assign": "Zuweisen"
+      "assign": "Zuweisen",
+      "assignToMe": "Zuweisen"
     },
     "toast": {
       "replied": "Antwort gesendet",
       "resolved": "Ticket gelöst",
       "assigned": "Ticket zugewiesen",
+      "assignedDesc": "Das Ticket wurde Ihnen zugewiesen.",
       "reopened": "Ticket wiedereröffnet",
-      "error": "Fehler beim Ticket"
+      "error": "Fehler beim Ticket",
+      "updated": "Ticket aktualisiert",
+      "updatedDesc": "Das Ticket wurde erfolgreich aktualisiert."
     },
     "empty": {
       "title": "Keine Tickets",

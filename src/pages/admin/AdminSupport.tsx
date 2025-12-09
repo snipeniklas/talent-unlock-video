@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -10,10 +9,13 @@ import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { MessageCircle, Send, User, Settings, Building2, Clock, Filter } from "lucide-react";
+import { MessageCircle, Send, User, Settings, Building2, Filter } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "@/i18n/i18n";
+import { de, enUS, nl } from 'date-fns/locale';
 
 const AdminSupport = () => {
+  const { t, lang } = useTranslation();
   const [selectedTicket, setSelectedTicket] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
@@ -22,6 +24,25 @@ const AdminSupport = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Get date locale based on current language
+  const getDateLocale = () => {
+    switch (lang) {
+      case 'de': return de;
+      case 'nl': return nl;
+      default: return enUS;
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString(lang === 'de' ? 'de-DE' : lang === 'nl' ? 'nl-NL' : 'en-US');
+  };
+
+  const formatDateTime = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString(lang === 'de' ? 'de-DE' : lang === 'nl' ? 'nl-NL' : 'en-US');
+  };
 
   // Fetch current user data
   const { data: currentUser } = useQuery({
@@ -160,8 +181,8 @@ const AdminSupport = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['adminSupportTickets'] });
       toast({
-        title: "Ticket aktualisiert",
-        description: "Das Ticket wurde erfolgreich aktualisiert.",
+        title: t('adminSupport.toast.updated'),
+        description: t('adminSupport.toast.updatedDesc'),
       });
     }
   });
@@ -189,8 +210,8 @@ const AdminSupport = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['adminSupportTickets'] });
       toast({
-        title: "Ticket zugewiesen",
-        description: "Das Ticket wurde Ihnen zugewiesen.",
+        title: t('adminSupport.toast.assigned'),
+        description: t('adminSupport.toast.assignedDesc'),
       });
     }
   });
@@ -265,6 +286,16 @@ const AdminSupport = () => {
     }
   };
 
+  const getStatusLabel = (status: string) => {
+    const statusKey = status as 'open' | 'in_progress' | 'waiting' | 'resolved' | 'closed';
+    return t(`adminSupport.status.${statusKey}`) || status;
+  };
+
+  const getPriorityLabel = (priority: string) => {
+    const priorityKey = priority as 'low' | 'medium' | 'high' | 'urgent';
+    return t(`adminSupport.priority.${priorityKey}`) || priority;
+  };
+
   const selectedTicketData = tickets.find(t => t.id === selectedTicket);
 
   return (
@@ -272,10 +303,10 @@ const AdminSupport = () => {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-brand-dark mb-2">
-            Admin <span className="text-primary">Support</span> Chat
+            {t('adminSupport.header.title')}
           </h1>
           <p className="text-muted-foreground">
-            Verwalten Sie alle Kunden-Support-Anfragen
+            {t('adminSupport.header.description')}
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -286,11 +317,11 @@ const AdminSupport = () => {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Alle Status</SelectItem>
-                <SelectItem value="open">Offen</SelectItem>
-                <SelectItem value="in_progress">In Bearbeitung</SelectItem>
-                <SelectItem value="resolved">Gelöst</SelectItem>
-                <SelectItem value="closed">Geschlossen</SelectItem>
+                <SelectItem value="all">{t('adminSupport.filters.all')}</SelectItem>
+                <SelectItem value="open">{t('adminSupport.filters.open')}</SelectItem>
+                <SelectItem value="in_progress">{t('adminSupport.filters.inProgress')}</SelectItem>
+                <SelectItem value="resolved">{t('adminSupport.filters.resolved')}</SelectItem>
+                <SelectItem value="closed">{t('adminSupport.filters.closed')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -303,18 +334,18 @@ const AdminSupport = () => {
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2">
               <MessageCircle className="w-5 h-5" />
-              Support Tickets ({tickets.length})
+              {t('adminSupport.ticketsList.title')} ({tickets.length})
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0">
             <ScrollArea className="h-[500px]">
               {ticketsLoading ? (
                 <div className="p-4 text-center text-muted-foreground">
-                  Tickets werden geladen...
+                  {t('adminSupport.ticketsList.loading')}
                 </div>
               ) : tickets.length === 0 ? (
                 <div className="p-4 text-center text-muted-foreground">
-                  Keine Tickets gefunden
+                  {t('adminSupport.ticketsList.empty')}
                 </div>
               ) : (
                 <div className="space-y-2 p-3">
@@ -329,7 +360,7 @@ const AdminSupport = () => {
                       <div className="flex justify-between items-start mb-2">
                         <h4 className="font-medium text-sm line-clamp-1">{ticket.title}</h4>
                         <Badge variant={getStatusColor(ticket.status)} className="text-xs">
-                          {ticket.status}
+                          {getStatusLabel(ticket.status)}
                         </Badge>
                       </div>
                       <p className="text-xs text-muted-foreground line-clamp-2 mb-2">
@@ -337,10 +368,10 @@ const AdminSupport = () => {
                       </p>
                       <div className="flex justify-between items-center mb-1">
                         <Badge variant={getPriorityColor(ticket.priority)} className="text-xs">
-                          {ticket.priority}
+                          {getPriorityLabel(ticket.priority)}
                         </Badge>
                         <span className="text-xs text-muted-foreground">
-                          {new Date(ticket.created_at).toLocaleDateString('de-DE')}
+                          {formatDate(ticket.created_at)}
                         </span>
                       </div>
                       <div className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -385,7 +416,7 @@ const AdminSupport = () => {
                   </div>
                   <div className="flex gap-2">
                     <Badge variant={getPriorityColor(selectedTicketData.priority)}>
-                      {selectedTicketData.priority}
+                      {getPriorityLabel(selectedTicketData.priority)}
                     </Badge>
                     <Select
                       value={selectedTicketData.status}
@@ -400,10 +431,10 @@ const AdminSupport = () => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="open">Offen</SelectItem>
-                        <SelectItem value="in_progress">In Bearbeitung</SelectItem>
-                        <SelectItem value="resolved">Gelöst</SelectItem>
-                        <SelectItem value="closed">Geschlossen</SelectItem>
+                        <SelectItem value="open">{t('adminSupport.status.open')}</SelectItem>
+                        <SelectItem value="in_progress">{t('adminSupport.status.in_progress')}</SelectItem>
+                        <SelectItem value="resolved">{t('adminSupport.status.resolved')}</SelectItem>
+                        <SelectItem value="closed">{t('adminSupport.status.closed')}</SelectItem>
                       </SelectContent>
                     </Select>
                     {selectedTicketData.status === 'open' && (
@@ -412,7 +443,7 @@ const AdminSupport = () => {
                         onClick={() => assignTicketMutation.mutate(selectedTicket)}
                         disabled={assignTicketMutation.isPending}
                       >
-                        Zuweisen
+                        {t('adminSupport.actions.assignToMe')}
                       </Button>
                     )}
                   </div>
@@ -442,18 +473,18 @@ const AdminSupport = () => {
                             <div className="flex items-center gap-2 mb-1">
                               <span className="text-sm font-medium">
                                 {isCurrentUser 
-                                  ? 'Sie (Admin)' 
+                                  ? t('adminSupport.chat.youAdmin')
                                   : `${message.profiles?.first_name} ${message.profiles?.last_name}`
                                 }
                               </span>
                               {senderIsAdmin && !isCurrentUser && (
-                                <Badge variant="secondary" className="text-xs">Admin</Badge>
+                                <Badge variant="secondary" className="text-xs">{t('adminSupport.chat.adminBadge')}</Badge>
                               )}
                               {message.is_internal && (
-                                <Badge variant="destructive" className="text-xs">Intern</Badge>
+                                <Badge variant="destructive" className="text-xs">{t('adminSupport.chat.internalBadge')}</Badge>
                               )}
                               <span className="text-xs text-muted-foreground">
-                                {new Date(message.created_at).toLocaleString('de-DE')}
+                                {formatDateTime(message.created_at)}
                               </span>
                             </div>
                             <div className={`p-3 rounded-lg ${
@@ -490,12 +521,12 @@ const AdminSupport = () => {
                       className="rounded"
                     />
                     <label htmlFor="internal" className="text-sm font-medium">
-                      Interne Nachricht (nur für Admins sichtbar)
+                      {t('adminSupport.chat.internalLabel')}
                     </label>
                   </div>
                   <div className="flex gap-2">
                     <Input
-                      placeholder="Nachricht eingeben..."
+                      placeholder={t('adminSupport.chat.messagePlaceholder')}
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
@@ -517,7 +548,7 @@ const AdminSupport = () => {
             <div className="h-full flex items-center justify-center text-muted-foreground">
               <div className="text-center">
                 <MessageCircle className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                <p>Wählen Sie ein Ticket aus, um den Admin-Chat zu starten</p>
+                <p>{t('adminSupport.chat.selectTicket')}</p>
               </div>
             </div>
           )}
