@@ -1809,12 +1809,9 @@
   },
   "app": {
     "layout": {
-      "dashboard": "Dashboard",
-      "searchRequests": "Aanvragen",
-      "specialists": "Specialisten",
-      "settings": "Instellingen",
-      "support": "Ondersteuning",
-      "logout": "Uitloggen"
+      "title": "Hej Talent Platform",
+      "profile": "Profiel",
+      "logout": "Afmelden"
     },
     "sidebar": {
       "section": {"admin": "Admin gedeelte", "main": "Hoofdmenu", "resourceManager": "Resource Manager"},
