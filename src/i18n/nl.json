@@ -2148,17 +2148,52 @@
       }
     },
     "support": {
-      "title": "Ondersteuning",
-      "chat": {
-        "title": "Chat met ondersteuning",
-        "placeholder": "Typ uw bericht...",
-        "send": "Verzenden"
+      "title": "Support Chat",
+      "subtitle": "Direct contact met ons supportteam",
+      "newTicket": "Nieuw ticket",
+      "listTitle": "Support Tickets",
+      "loading": "Tickets worden geladen...",
+      "none": "Nog geen tickets aanwezig",
+      "created": "Verstuurd op",
+      "priority": {
+        "low": "Laag",
+        "medium": "Gemiddeld",
+        "high": "Hoog",
+        "urgent": "Urgent"
       },
-      "tickets": {
-        "title": "Mijn tickets",
-        "new": "Nieuw ticket",
-        "view": "Bekijken"
+      "selectTicket": "Selecteer een ticket om de chat te starten",
+      "you": "U",
+      "inputPlaceholder": "Bericht invoeren...",
+      "modal": {
+        "title": "Nieuw support-ticket",
+        "desc": "Beschrijf uw vraag zo gedetailleerd mogelijk",
+        "fields": {
+          "title": "Titel",
+          "desc": "Beschrijving",
+          "category": "Categorie",
+          "priority": "Prioriteit"
+        },
+        "categories": {
+          "general": "Algemeen",
+          "technical": "Technisch",
+          "billing": "Facturatie",
+          "resource_request": "Resource-aanvraag"
+        },
+        "cancel": "Annuleren",
+        "create": "Ticket aanmaken"
+      },
+      "toasts": {
+        "createdTitle": "Ticket aangemaakt",
+        "createdDesc": "Uw support-ticket is succesvol aangemaakt.",
+        "statusUpdatedTitle": "Status bijgewerkt",
+        "statusUpdatedDesc": "De ticketstatus is succesvol bijgewerkt."
       }
+    },
+    "status": {
+      "open": "Open",
+      "in_progress": "In behandeling",
+      "resolved": "Opgelost",
+      "closed": "Gesloten"
     },
     "adminSearchRequests": {
       "title": "Klantprojecten beheren",
