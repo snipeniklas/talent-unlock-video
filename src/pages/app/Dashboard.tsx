@@ -89,15 +89,15 @@ const Dashboard = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <AlertCircle className="h-5 w-5 text-destructive" />
-              Fehler beim Laden
+              {t('app.dashboard.error.loadTitle', 'Fehler beim Laden')}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground mb-4">
-              Benutzerdaten konnten nicht geladen werden.
+              {t('app.dashboard.error.loadUser', 'Benutzerdaten konnten nicht geladen werden.')}
             </p>
             <Button onClick={() => window.location.reload()} className="w-full">
-              Seite neu laden
+              {t('app.dashboard.error.reload', 'Seite neu laden')}
             </Button>
           </CardContent>
         </Card>
@@ -135,7 +135,7 @@ const Dashboard = () => {
               disabled={dashboardLoading}
             >
               <RefreshCw className={`h-4 w-4 mr-2 ${dashboardLoading ? 'animate-spin' : ''}`} />
-              {dashboardLoading ? 'Laden...' : 'Aktualisieren'}
+              {dashboardLoading ? t('app.dashboard.loading', 'Laden...') : t('app.dashboard.refresh', 'Aktualisieren')}
             </Button>
           {userRole !== 'admin' && (
             <Button onClick={() => navigate('/app/search-requests/new')} className="bg-primary hover:bg-primary-hover w-full sm:w-auto text-sm lg:text-base">
@@ -156,7 +156,7 @@ const Dashboard = () => {
             <CardContent className="pt-6">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <AlertCircle className="h-5 w-5" />
-                <p>Dashboard-Daten konnten nicht geladen werden.</p>
+                <p>{t('app.dashboard.error.loadDashboard', 'Dashboard-Daten konnten nicht geladen werden.')}</p>
               </div>
             </CardContent>
           </Card>

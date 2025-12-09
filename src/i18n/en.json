@@ -1364,7 +1364,7 @@
       "title": "Dashboard",
       "welcomePrefix": "Welcome back at",
       "subtitle": "Overview of your activities",
-      "cta": {"newShort": "RaaS request", "new": "New request"},
+      "cta": {"newShort": "RaaS request", "newMedium": "New request", "new": "Create new request"},
       "cards": {
         "active": {"title": "Active search requests", "delta": "Ongoing requests"},
         "specialists": {"title": "Specialists", "caption": "Available experts"},
@@ -1394,6 +1394,14 @@
         "create": "Create new request",
         "browse": "Browse specialists",
         "manage": "Manage requests"
+      },
+      "loading": "Loading...",
+      "refresh": "Refresh",
+      "error": {
+        "loadTitle": "Error loading",
+        "loadUser": "User data could not be loaded.",
+        "loadDashboard": "Dashboard data could not be loaded.",
+        "reload": "Reload page"
       }
     },
     "searchRequests": {
