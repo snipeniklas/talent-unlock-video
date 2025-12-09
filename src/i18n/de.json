@@ -1600,7 +1600,7 @@
       "title": "Dashboard",
       "welcomePrefix": "Willkommen zurück bei",
       "subtitle": "Übersicht Ihrer Aktivitäten",
-      "cta": {"newShort": "RaaS Anfrage", "new": "Neue Anfrage"},
+      "cta": {"newShort": "RaaS Anfrage", "newMedium": "Neue Anfrage", "new": "Neue Anfrage erstellen"},
       "cards": {
         "active": {"title": "Aktive Suchaufträge", "delta": "Laufende Anfragen"},
         "specialists": {"title": "Spezialisten", "caption": "Verfügbare Experten"},
@@ -1630,6 +1630,14 @@
         "create": "Neue Anfrage erstellen",
         "browse": "Spezialisten durchsuchen",
         "manage": "Anfragen verwalten"
+      },
+      "loading": "Laden...",
+      "refresh": "Aktualisieren",
+      "error": {
+        "loadTitle": "Fehler beim Laden",
+        "loadUser": "Benutzerdaten konnten nicht geladen werden.",
+        "loadDashboard": "Dashboard-Daten konnten nicht geladen werden.",
+        "reload": "Seite neu laden"
       }
     },
     "searchRequests": {

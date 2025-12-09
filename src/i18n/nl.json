@@ -1862,18 +1862,48 @@
       "cancelled": "Geannuleerd"
     },
     "dashboard": {
-      "welcome": "Welkom terug",
-      "stats": {
-        "activeRequests": "Actieve aanvragen",
-        "totalResources": "Totaal aantal resources",
-        "pendingTasks": "Openstaande taken",
-        "completedThisMonth": "Voltooid deze maand"
+      "title": "Dashboard",
+      "welcomePrefix": "Welkom terug bij",
+      "subtitle": "Overzicht van uw activiteiten",
+      "cta": {"newShort": "RaaS aanvraag", "newMedium": "Nieuwe aanvraag", "new": "Nieuwe aanvraag aanmaken"},
+      "cards": {
+        "active": {"title": "Actieve aanvragen", "delta": "Lopende aanvragen"},
+        "specialists": {"title": "Specialisten", "caption": "Beschikbare experts"},
+        "completed": {"title": "Voltooid", "caption": "Succesvolle projecten"},
+        "pending": {"title": "In behandeling", "caption": "Wachten op verwerking"}
       },
-      "recentRequests": "Recente aanvragen",
-      "quickActions": "Snelle acties",
-      "createRequest": "Nieuwe aanvraag",
-      "viewResources": "Resources bekijken",
-      "contactSupport": "Contact opnemen"
+      "recent": {
+        "title": "Recente activiteiten",
+        "desc": "Uw laatste aanvragen en updates",
+        "created": "Aangemaakt",
+        "empty": {
+          "text": "Nog geen aanvragen aangemaakt",
+          "btn": "Eerste aanvraag aanmaken"
+        }
+      },
+      "recommended": {
+        "title": "Aanbevolen specialisten",
+        "desc": "Nieuwe experts voor uw behoeften",
+        "fallbackRole": "Specialist",
+        "years": "jaar ervaring",
+        "viewProfile": "Profiel bekijken",
+        "empty": {"text": "Nog geen specialisten beschikbaar", "btn": "Specialisten zoeken"}
+      },
+      "quick": {
+        "title": "Snelle acties",
+        "desc": "Veelgebruikte acties voor efficiënt werken",
+        "create": "Nieuwe aanvraag aanmaken",
+        "browse": "Specialisten zoeken",
+        "manage": "Aanvragen beheren"
+      },
+      "loading": "Laden...",
+      "refresh": "Vernieuwen",
+      "error": {
+        "loadTitle": "Fout bij laden",
+        "loadUser": "Gebruikersgegevens konden niet worden geladen.",
+        "loadDashboard": "Dashboardgegevens konden niet worden geladen.",
+        "reload": "Pagina opnieuw laden"
+      }
     },
     "searchRequests": {
       "title": "Aanvragen",
