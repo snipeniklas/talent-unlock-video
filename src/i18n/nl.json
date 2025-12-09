@@ -60,6 +60,157 @@
       "cancelled": "Geannuleerd"
     }
   },
+  "candidate": {
+    "new": {
+      "title": "Nieuwe RaaS Resource aanmaken",
+      "backButton": "Terug",
+      "sections": {
+        "basic": "Basisinformatie",
+        "location": "Locatie",
+        "availability": "Beschikbaarheid & Tarieven",
+        "skills": "Vaardigheden",
+        "languages": "Talen",
+        "experience": "Werkervaring & Projecten",
+        "links": "Links & Portfolio"
+      },
+      "fields": {
+        "firstName": "Voornaam",
+        "lastName": "Achternaam",
+        "uploadAvatar": "Uploaden",
+        "primaryRole": "Primaire rol *",
+        "primaryRolePlaceholder": "bijv. Customer Support, Full-Stack Developer",
+        "seniority": "Senioriteitsniveau",
+        "seniorityPlaceholder": "Senioriteit selecteren",
+        "yearsExperience": "Jaren ervaring",
+        "headline": "Headline",
+        "headlinePlaceholder": "Korte pitch in één zin",
+        "bio": "Bio",
+        "bioPlaceholder": "Langere beschrijving van de RaaS resource",
+        "country": "Land",
+        "city": "Stad",
+        "availability": "Beschikbaarheid",
+        "availabilityPlaceholder": "Beschikbaarheid selecteren",
+        "hoursPerWeek": "Uren per week (gewenst)",
+        "startEarliest": "Vroegste start",
+        "noticePeriod": "Opzegtermijn (dagen)",
+        "currency": "Valuta",
+        "monthlyRate": "Maandtarief (doel) *",
+        "monthlyRatePlaceholder": "bijv. 8000",
+        "hourlyRate": "Uurtarief (automatisch berekend)",
+        "hourlyRatePlaceholder": "Wordt automatisch berekend (Maandtarief ÷ 160u)",
+        "skillName": "Vaardigheidsnaam",
+        "skillNamePlaceholder": "bijv. React",
+        "skillLevel": "Niveau (1-5)",
+        "yearsUsed": "Jaren gebruikt",
+        "lastUsed": "Laatst gebruikt",
+        "languageCode": "Taal (code)",
+        "languageCodePlaceholder": "bijv. nl, en, de",
+        "proficiency": "Taalniveau",
+        "position": "Positie/Rol *",
+        "positionPlaceholder": "bijv. Senior Developer, Customer Support Manager",
+        "organization": "Bedrijf/Organisatie",
+        "organizationPlaceholder": "bijv. Tech BV, Freelance",
+        "startDate": "Startdatum",
+        "endDate": "Einddatum (leeg = huidig)",
+        "description": "Beschrijving & Verantwoordelijkheden",
+        "descriptionPlaceholder": "Korte beschrijving van activiteiten en verantwoordelijkheden...",
+        "techStack": "Tech Stack / Gebruikte tools",
+        "techStackPlaceholder": "bijv. React, Node.js, PostgreSQL, Docker (komma-gescheiden)",
+        "linkLabel": "Label",
+        "linkLabelPlaceholder": "bijv. GitHub, Portfolio",
+        "linkUrl": "URL",
+        "linkUrlPlaceholder": "https://..."
+      },
+      "seniority": {
+        "junior": "Junior",
+        "mid": "Mid",
+        "senior": "Senior",
+        "lead": "Lead"
+      },
+      "availability": {
+        "immediately": "Direct beschikbaar",
+        "noticePeriod": "Opzegtermijn",
+        "booked": "Geboekt",
+        "paused": "Gepauzeerd"
+      },
+      "proficiency": {
+        "basic": "Basis",
+        "conversational": "Conversatie",
+        "fluent": "Vloeiend",
+        "native": "Moedertaal"
+      },
+      "experienceTitle": "Ervaring #",
+      "noExperience": "Nog geen werkervaring toegevoegd. Klik op het plus-icoon om te beginnen.",
+      "buttons": {
+        "cancel": "Annuleren",
+        "submit": "RaaS Resource aanmaken",
+        "submitting": "Wordt aangemaakt..."
+      },
+      "success": {
+        "title": "Succes",
+        "description": "RaaS Resource is succesvol aangemaakt."
+      },
+      "error": {
+        "title": "Fout",
+        "description": "RaaS Resource kon niet worden aangemaakt."
+      }
+    }
+  },
+  "candidateView": {
+    "loading": "Laden...",
+    "notFound": "RaaS Resource niet gevonden",
+    "backButton": "Terug",
+    "editButton": "Bewerken",
+    "sections": {
+      "overview": "Overzicht",
+      "skills": "Vaardigheden",
+      "experience": "Werkervaring",
+      "rates": "Tarieven & Beschikbaarheid",
+      "languages": "Talen",
+      "links": "Links & Portfolio"
+    },
+    "fields": {
+      "headline": "Headline",
+      "bio": "Bio",
+      "experience": "Ervaring",
+      "years": "jaren",
+      "monthlyRate": "Maandtarief",
+      "hoursPerWeek": "u/week (gewenst)",
+      "availableFrom": "Beschikbaar vanaf:",
+      "noticePeriod": "Opzegtermijn",
+      "days": "dagen"
+    },
+    "skills": {
+      "level": "Niveau",
+      "experienceYears": "Ervaring: {years} jaar",
+      "lastUsed": "Laatst gebruikt:"
+    },
+    "availability": {
+      "immediately": "Direct beschikbaar",
+      "noticePeriod": "Opzegtermijn",
+      "booked": "Geboekt",
+      "paused": "Gepauzeerd"
+    },
+    "seniority": {
+      "junior": "junior",
+      "mid": "mid",
+      "senior": "senior",
+      "lead": "lead"
+    },
+    "proficiency": {
+      "basic": "Basis",
+      "conversational": "Conversatie",
+      "fluent": "Vloeiend",
+      "native": "Moedertaal"
+    },
+    "date": {
+      "today": "Vandaag"
+    },
+    "error": {
+      "title": "Fout",
+      "description": "RaaS Resource kon niet worden geladen."
+    }
+  },
   "header": {
     "nav": {
       "home": "Startpagina",
@@ -2908,28 +3059,34 @@
       }
     }
   },
-  "imprint": {
-    "title": "Impressum",
-    "company": {
-      "title": "Bedrijfsgegevens",
-      "name": "Hej Talent GmbH",
-      "address": "Deichstraße 14",
-      "city": "20459 Hamburg",
-      "country": "Duitsland"
-    },
-    "registration": {
-      "title": "Registratie",
-      "court": "Handelsregister: Amtsgericht Hamburg",
-      "number": "Registratienummer: HRB 123456"
-    },
-    "vat": {
-      "title": "BTW",
-      "id": "BTW-identificatienummer: DE123456789"
-    },
-    "contact": {
-      "title": "Contact",
-      "email": "E-mail: info@hejtalent.de",
-      "phone": "Telefoon: +49 40 123456"
+  "legal": {
+    "imprint": {
+      "title": "Impressum",
+      "company": {
+        "title": "Bedrijfsgegevens",
+        "name": "hej consulting GmbH",
+        "address": "Herzogstraße 19",
+        "city": "80803 München",
+        "country": "Duitsland"
+      },
+      "registration": {
+        "title": "Registratie",
+        "court": "Handelsregister: Amtsgericht München",
+        "number": "Registratienummer: HRB 263357"
+      },
+      "management": {
+        "title": "Directie",
+        "ceo": "Pascal Spieß"
+      },
+      "vat": {
+        "title": "BTW",
+        "id": "BTW-identificatienummer: DE343458892"
+      },
+      "contact": {
+        "title": "Contact",
+        "email": "E-mail: info@hejtalent.de",
+        "phone": "Telefoon: +49 89 21529686"
+      }
     }
   }
 }
