@@ -2435,6 +2435,200 @@
       "error": "Fout bij het laden van bedrijfsgegevens"
     }
   },
+  "adminSettings": {
+    "title": "Admin Instellingen",
+    "subtitle": "Systeem- en gebruikersinstellingen beheren",
+    "tabs": {
+      "users": "Gebruikers",
+      "email": "E-mail",
+      "invitations": "Uitnodigingen"
+    },
+    "users": {
+      "title": "Gebruikersbeheer",
+      "subtitle": "Alle systeemgebruikers beheren",
+      "search": {
+        "placeholder": "Gebruikers zoeken...",
+        "noResults": "Geen gebruikers gevonden"
+      },
+      "filters": {
+        "all": "Alle",
+        "company": "Bedrijf",
+        "role": "Rol"
+      },
+      "columns": {
+        "name": "Naam",
+        "email": "E-mail",
+        "company": "Bedrijf",
+        "role": "Rol",
+        "created": "Aangemaakt op"
+      },
+      "roles": {
+        "user": "Gebruiker",
+        "company_admin": "Bedrijfsadmin",
+        "admin": "Administrator",
+        "resource_manager": "Resource Manager"
+      },
+      "actions": {
+        "changeRole": "Rol wijzigen",
+        "resetPassword": "Wachtwoord resetten",
+        "delete": "Verwijderen"
+      },
+      "dialog": {
+        "changeRoleTitle": "Rol wijzigen",
+        "changeRoleConfirm": "Weet u zeker dat u de rol wilt wijzigen?",
+        "deleteTitle": "Gebruiker verwijderen",
+        "deleteConfirm": "Weet u zeker dat u deze gebruiker wilt verwijderen?"
+      },
+      "toast": {
+        "roleChanged": "Rol gewijzigd",
+        "passwordReset": "Wachtwoord-reset e-mail verzonden",
+        "deleted": "Gebruiker verwijderd",
+        "error": "Fout bij gebruikersactie"
+      },
+      "empty": {
+        "title": "Geen gebruikers",
+        "description": "Er zijn nog geen gebruikers geregistreerd"
+      }
+    },
+    "email": {
+      "title": "E-mailinstellingen",
+      "subtitle": "E-mailintegratie en handtekening beheren",
+      "ms365": {
+        "title": "Microsoft 365 Integratie",
+        "description": "Verbind uw Microsoft 365-account",
+        "connected": "Verbonden",
+        "notConnected": "Niet verbonden",
+        "connect": "Verbinden",
+        "disconnect": "Ontkoppelen",
+        "connectedAs": "Verbonden als"
+      },
+      "signature": {
+        "title": "E-mailhandtekening",
+        "placeholder": "Uw e-mailhandtekening..."
+      },
+      "syncSettings": {
+        "title": "Synchronisatie-instellingen",
+        "syncEnabled": "Synchronisatie ingeschakeld",
+        "syncSentItems": "Verzonden e-mails synchroniseren",
+        "autoMatchContacts": "Contacten automatisch koppelen"
+      },
+      "toast": {
+        "saved": "Instellingen opgeslagen",
+        "error": "Fout bij opslaan"
+      }
+    },
+    "invitations": {
+      "title": "Uitnodigingen",
+      "subtitle": "Gebruikers uitnodigen voor bedrijven",
+      "sendNew": "Nieuwe uitnodiging versturen",
+      "fields": {
+        "email": "E-mailadres",
+        "company": "Bedrijf",
+        "role": "Rol",
+        "status": "Status",
+        "expiresAt": "Verloopt op",
+        "invitedBy": "Uitgenodigd door"
+      },
+      "status": {
+        "pending": "In afwachting",
+        "accepted": "Geaccepteerd",
+        "expired": "Verlopen"
+      },
+      "dialog": {
+        "sendTitle": "Uitnodiging versturen",
+        "resendTitle": "Uitnodiging opnieuw versturen",
+        "deleteTitle": "Uitnodiging verwijderen"
+      },
+      "toast": {
+        "sent": "Uitnodiging verstuurd",
+        "resent": "Uitnodiging opnieuw verstuurd",
+        "deleted": "Uitnodiging verwijderd",
+        "error": "Uitnodigingsfout"
+      },
+      "empty": {
+        "title": "Geen uitnodigingen",
+        "description": "Geen openstaande uitnodigingen"
+      }
+    }
+  },
+  "adminSupport": {
+    "title": "Support Tickets",
+    "subtitle": "Klantvragen en support-tickets beheren",
+    "search": {
+      "placeholder": "Tickets zoeken...",
+      "noResults": "Geen tickets gevonden"
+    },
+    "filters": {
+      "all": "Alle",
+      "open": "Open",
+      "inProgress": "In behandeling",
+      "resolved": "Opgelost",
+      "priority": "Prioriteit",
+      "category": "Categorie"
+    },
+    "columns": {
+      "title": "Titel",
+      "company": "Bedrijf",
+      "status": "Status",
+      "priority": "Prioriteit",
+      "category": "Categorie",
+      "created": "Aangemaakt",
+      "lastMessage": "Laatste bericht"
+    },
+    "status": {
+      "open": "Open",
+      "in_progress": "In behandeling",
+      "waiting": "Wachtend",
+      "resolved": "Opgelost",
+      "closed": "Gesloten"
+    },
+    "priority": {
+      "low": "Laag",
+      "medium": "Gemiddeld",
+      "high": "Hoog",
+      "urgent": "Urgent"
+    },
+    "category": {
+      "general": "Algemeen",
+      "technical": "Technisch",
+      "billing": "Facturering",
+      "feature": "Functieverzoek",
+      "bug": "Bug"
+    },
+    "detail": {
+      "title": "Ticketdetails",
+      "conversation": "Gesprek",
+      "sendReply": "Antwoord versturen",
+      "replyPlaceholder": "Voer uw antwoord in...",
+      "internalNote": "Interne notitie",
+      "markResolved": "Markeren als opgelost",
+      "assignTo": "Toewijzen aan"
+    },
+    "actions": {
+      "view": "Bekijken",
+      "reply": "Beantwoorden",
+      "resolve": "Oplossen",
+      "reopen": "Heropenen",
+      "assign": "Toewijzen"
+    },
+    "toast": {
+      "replied": "Antwoord verzonden",
+      "resolved": "Ticket opgelost",
+      "assigned": "Ticket toegewezen",
+      "reopened": "Ticket heropend",
+      "error": "Ticketfout"
+    },
+    "empty": {
+      "title": "Geen tickets",
+      "description": "Geen support-tickets beschikbaar"
+    },
+    "stats": {
+      "totalTickets": "Totaal tickets",
+      "openTickets": "Open",
+      "resolvedToday": "Vandaag opgelost",
+      "avgResponseTime": "Gem. reactietijd"
+    }
+  },
   "auth": {
     "backToHome": "Terug naar startpagina",
     "welcome": {

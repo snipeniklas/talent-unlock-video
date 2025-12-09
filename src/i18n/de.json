@@ -2326,6 +2326,200 @@
       "error": "Fehler beim Laden der Unternehmensdaten"
     }
   },
+  "adminSettings": {
+    "title": "Admin Einstellungen",
+    "subtitle": "System- und Benutzereinstellungen verwalten",
+    "tabs": {
+      "users": "Benutzer",
+      "email": "E-Mail",
+      "invitations": "Einladungen"
+    },
+    "users": {
+      "title": "Benutzerverwaltung",
+      "subtitle": "Alle Systembenutzer verwalten",
+      "search": {
+        "placeholder": "Benutzer suchen...",
+        "noResults": "Keine Benutzer gefunden"
+      },
+      "filters": {
+        "all": "Alle",
+        "company": "Unternehmen",
+        "role": "Rolle"
+      },
+      "columns": {
+        "name": "Name",
+        "email": "E-Mail",
+        "company": "Unternehmen",
+        "role": "Rolle",
+        "created": "Erstellt am"
+      },
+      "roles": {
+        "user": "Benutzer",
+        "company_admin": "Unternehmens-Admin",
+        "admin": "Administrator",
+        "resource_manager": "Ressourcen-Manager"
+      },
+      "actions": {
+        "changeRole": "Rolle ändern",
+        "resetPassword": "Passwort zurücksetzen",
+        "delete": "Löschen"
+      },
+      "dialog": {
+        "changeRoleTitle": "Rolle ändern",
+        "changeRoleConfirm": "Sind Sie sicher, dass Sie die Rolle ändern möchten?",
+        "deleteTitle": "Benutzer löschen",
+        "deleteConfirm": "Sind Sie sicher, dass Sie diesen Benutzer löschen möchten?"
+      },
+      "toast": {
+        "roleChanged": "Rolle geändert",
+        "passwordReset": "Passwort-Reset-E-Mail gesendet",
+        "deleted": "Benutzer gelöscht",
+        "error": "Fehler bei der Benutzeraktion"
+      },
+      "empty": {
+        "title": "Keine Benutzer",
+        "description": "Es wurden noch keine Benutzer registriert"
+      }
+    },
+    "email": {
+      "title": "E-Mail Einstellungen",
+      "subtitle": "E-Mail-Integration und Signatur verwalten",
+      "ms365": {
+        "title": "Microsoft 365 Integration",
+        "description": "Verbinden Sie Ihr Microsoft 365 Konto",
+        "connected": "Verbunden",
+        "notConnected": "Nicht verbunden",
+        "connect": "Verbinden",
+        "disconnect": "Trennen",
+        "connectedAs": "Verbunden als"
+      },
+      "signature": {
+        "title": "E-Mail Signatur",
+        "placeholder": "Ihre E-Mail-Signatur..."
+      },
+      "syncSettings": {
+        "title": "Synchronisations-Einstellungen",
+        "syncEnabled": "Synchronisation aktiviert",
+        "syncSentItems": "Gesendete E-Mails synchronisieren",
+        "autoMatchContacts": "Kontakte automatisch zuordnen"
+      },
+      "toast": {
+        "saved": "Einstellungen gespeichert",
+        "error": "Fehler beim Speichern"
+      }
+    },
+    "invitations": {
+      "title": "Einladungen",
+      "subtitle": "Benutzer zu Unternehmen einladen",
+      "sendNew": "Neue Einladung senden",
+      "fields": {
+        "email": "E-Mail-Adresse",
+        "company": "Unternehmen",
+        "role": "Rolle",
+        "status": "Status",
+        "expiresAt": "Läuft ab am",
+        "invitedBy": "Eingeladen von"
+      },
+      "status": {
+        "pending": "Ausstehend",
+        "accepted": "Angenommen",
+        "expired": "Abgelaufen"
+      },
+      "dialog": {
+        "sendTitle": "Einladung senden",
+        "resendTitle": "Einladung erneut senden",
+        "deleteTitle": "Einladung löschen"
+      },
+      "toast": {
+        "sent": "Einladung gesendet",
+        "resent": "Einladung erneut gesendet",
+        "deleted": "Einladung gelöscht",
+        "error": "Fehler bei der Einladung"
+      },
+      "empty": {
+        "title": "Keine Einladungen",
+        "description": "Keine ausstehenden Einladungen"
+      }
+    }
+  },
+  "adminSupport": {
+    "title": "Support Tickets",
+    "subtitle": "Kundenanfragen und Support-Tickets verwalten",
+    "search": {
+      "placeholder": "Tickets suchen...",
+      "noResults": "Keine Tickets gefunden"
+    },
+    "filters": {
+      "all": "Alle",
+      "open": "Offen",
+      "inProgress": "In Bearbeitung",
+      "resolved": "Gelöst",
+      "priority": "Priorität",
+      "category": "Kategorie"
+    },
+    "columns": {
+      "title": "Titel",
+      "company": "Unternehmen",
+      "status": "Status",
+      "priority": "Priorität",
+      "category": "Kategorie",
+      "created": "Erstellt",
+      "lastMessage": "Letzte Nachricht"
+    },
+    "status": {
+      "open": "Offen",
+      "in_progress": "In Bearbeitung",
+      "waiting": "Wartend",
+      "resolved": "Gelöst",
+      "closed": "Geschlossen"
+    },
+    "priority": {
+      "low": "Niedrig",
+      "medium": "Mittel",
+      "high": "Hoch",
+      "urgent": "Dringend"
+    },
+    "category": {
+      "general": "Allgemein",
+      "technical": "Technisch",
+      "billing": "Abrechnung",
+      "feature": "Feature-Anfrage",
+      "bug": "Fehler"
+    },
+    "detail": {
+      "title": "Ticket Details",
+      "conversation": "Konversation",
+      "sendReply": "Antwort senden",
+      "replyPlaceholder": "Ihre Antwort eingeben...",
+      "internalNote": "Interne Notiz",
+      "markResolved": "Als gelöst markieren",
+      "assignTo": "Zuweisen an"
+    },
+    "actions": {
+      "view": "Ansehen",
+      "reply": "Antworten",
+      "resolve": "Lösen",
+      "reopen": "Wiedereröffnen",
+      "assign": "Zuweisen"
+    },
+    "toast": {
+      "replied": "Antwort gesendet",
+      "resolved": "Ticket gelöst",
+      "assigned": "Ticket zugewiesen",
+      "reopened": "Ticket wiedereröffnet",
+      "error": "Fehler beim Ticket"
+    },
+    "empty": {
+      "title": "Keine Tickets",
+      "description": "Keine Support-Tickets vorhanden"
+    },
+    "stats": {
+      "totalTickets": "Tickets gesamt",
+      "openTickets": "Offen",
+      "resolvedToday": "Heute gelöst",
+      "avgResponseTime": "Ø Antwortzeit"
+    }
+  },
   "auth": {
     "backToHome": "Zur Startseite",
     "welcome": {

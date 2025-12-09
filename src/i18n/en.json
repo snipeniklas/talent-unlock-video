@@ -2241,6 +2241,200 @@
       "error": "Error loading company data"
     }
   },
+  "adminSettings": {
+    "title": "Admin Settings",
+    "subtitle": "Manage system and user settings",
+    "tabs": {
+      "users": "Users",
+      "email": "Email",
+      "invitations": "Invitations"
+    },
+    "users": {
+      "title": "User Management",
+      "subtitle": "Manage all system users",
+      "search": {
+        "placeholder": "Search users...",
+        "noResults": "No users found"
+      },
+      "filters": {
+        "all": "All",
+        "company": "Company",
+        "role": "Role"
+      },
+      "columns": {
+        "name": "Name",
+        "email": "Email",
+        "company": "Company",
+        "role": "Role",
+        "created": "Created At"
+      },
+      "roles": {
+        "user": "User",
+        "company_admin": "Company Admin",
+        "admin": "Administrator",
+        "resource_manager": "Resource Manager"
+      },
+      "actions": {
+        "changeRole": "Change Role",
+        "resetPassword": "Reset Password",
+        "delete": "Delete"
+      },
+      "dialog": {
+        "changeRoleTitle": "Change Role",
+        "changeRoleConfirm": "Are you sure you want to change the role?",
+        "deleteTitle": "Delete User",
+        "deleteConfirm": "Are you sure you want to delete this user?"
+      },
+      "toast": {
+        "roleChanged": "Role changed",
+        "passwordReset": "Password reset email sent",
+        "deleted": "User deleted",
+        "error": "Error with user action"
+      },
+      "empty": {
+        "title": "No Users",
+        "description": "No users have been registered yet"
+      }
+    },
+    "email": {
+      "title": "Email Settings",
+      "subtitle": "Manage email integration and signature",
+      "ms365": {
+        "title": "Microsoft 365 Integration",
+        "description": "Connect your Microsoft 365 account",
+        "connected": "Connected",
+        "notConnected": "Not connected",
+        "connect": "Connect",
+        "disconnect": "Disconnect",
+        "connectedAs": "Connected as"
+      },
+      "signature": {
+        "title": "Email Signature",
+        "placeholder": "Your email signature..."
+      },
+      "syncSettings": {
+        "title": "Sync Settings",
+        "syncEnabled": "Sync enabled",
+        "syncSentItems": "Sync sent emails",
+        "autoMatchContacts": "Auto-match contacts"
+      },
+      "toast": {
+        "saved": "Settings saved",
+        "error": "Error saving settings"
+      }
+    },
+    "invitations": {
+      "title": "Invitations",
+      "subtitle": "Invite users to companies",
+      "sendNew": "Send New Invitation",
+      "fields": {
+        "email": "Email Address",
+        "company": "Company",
+        "role": "Role",
+        "status": "Status",
+        "expiresAt": "Expires At",
+        "invitedBy": "Invited By"
+      },
+      "status": {
+        "pending": "Pending",
+        "accepted": "Accepted",
+        "expired": "Expired"
+      },
+      "dialog": {
+        "sendTitle": "Send Invitation",
+        "resendTitle": "Resend Invitation",
+        "deleteTitle": "Delete Invitation"
+      },
+      "toast": {
+        "sent": "Invitation sent",
+        "resent": "Invitation resent",
+        "deleted": "Invitation deleted",
+        "error": "Invitation error"
+      },
+      "empty": {
+        "title": "No Invitations",
+        "description": "No pending invitations"
+      }
+    }
+  },
+  "adminSupport": {
+    "title": "Support Tickets",
+    "subtitle": "Manage customer inquiries and support tickets",
+    "search": {
+      "placeholder": "Search tickets...",
+      "noResults": "No tickets found"
+    },
+    "filters": {
+      "all": "All",
+      "open": "Open",
+      "inProgress": "In Progress",
+      "resolved": "Resolved",
+      "priority": "Priority",
+      "category": "Category"
+    },
+    "columns": {
+      "title": "Title",
+      "company": "Company",
+      "status": "Status",
+      "priority": "Priority",
+      "category": "Category",
+      "created": "Created",
+      "lastMessage": "Last Message"
+    },
+    "status": {
+      "open": "Open",
+      "in_progress": "In Progress",
+      "waiting": "Waiting",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "category": {
+      "general": "General",
+      "technical": "Technical",
+      "billing": "Billing",
+      "feature": "Feature Request",
+      "bug": "Bug"
+    },
+    "detail": {
+      "title": "Ticket Details",
+      "conversation": "Conversation",
+      "sendReply": "Send Reply",
+      "replyPlaceholder": "Enter your reply...",
+      "internalNote": "Internal Note",
+      "markResolved": "Mark as Resolved",
+      "assignTo": "Assign To"
+    },
+    "actions": {
+      "view": "View",
+      "reply": "Reply",
+      "resolve": "Resolve",
+      "reopen": "Reopen",
+      "assign": "Assign"
+    },
+    "toast": {
+      "replied": "Reply sent",
+      "resolved": "Ticket resolved",
+      "assigned": "Ticket assigned",
+      "reopened": "Ticket reopened",
+      "error": "Ticket error"
+    },
+    "empty": {
+      "title": "No Tickets",
+      "description": "No support tickets available"
+    },
+    "stats": {
+      "totalTickets": "Total Tickets",
+      "openTickets": "Open",
+      "resolvedToday": "Resolved Today",
+      "avgResponseTime": "Avg Response Time"
+    }
+  },
   "auth": {
     "backToHome": "Back to homepage",
     "welcome": {
