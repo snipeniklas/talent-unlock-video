@@ -2257,6 +2257,75 @@
       "error": "Fehler bei der Ressource"
     }
   },
+  "companyManagement": {
+    "title": "Unternehmen",
+    "subtitle": "Kundenunternehmen verwalten",
+    "search": {
+      "placeholder": "Unternehmen suchen...",
+      "noResults": "Keine Unternehmen gefunden"
+    },
+    "fields": {
+      "name": "Firmenname",
+      "email": "E-Mail",
+      "website": "Website",
+      "valueProposition": "Leistungsangebot",
+      "createdAt": "Erstellt am"
+    },
+    "stats": {
+      "totalCompanies": "Unternehmen gesamt",
+      "totalUsers": "Benutzer gesamt",
+      "activeProjects": "Aktive Projekte",
+      "usersInCompany": "Benutzer",
+      "projectsTotal": "Projekte gesamt",
+      "projectsActive": "Aktive Projekte",
+      "projectsCompleted": "Abgeschlossene Projekte"
+    },
+    "tabs": {
+      "overview": "Übersicht",
+      "users": "Benutzer",
+      "projects": "Projekte",
+      "settings": "Einstellungen"
+    },
+    "users": {
+      "title": "Unternehmens-Benutzer",
+      "admin": "Admin",
+      "role": "Rolle",
+      "addUser": "Benutzer hinzufügen",
+      "empty": "Keine Benutzer in diesem Unternehmen"
+    },
+    "projects": {
+      "title": "Suchaufträge",
+      "empty": "Keine Projekte vorhanden",
+      "viewAll": "Alle ansehen"
+    },
+    "empty": {
+      "title": "Keine Unternehmen",
+      "description": "Es wurden noch keine Unternehmen registriert"
+    },
+    "detail": {
+      "title": "Unternehmens-Details",
+      "notFound": "Unternehmen nicht gefunden",
+      "contactInfo": "Kontaktdaten",
+      "noWebsite": "Keine Website angegeben",
+      "noEmail": "Keine E-Mail angegeben"
+    },
+    "dialog": {
+      "deleteTitle": "Unternehmen löschen",
+      "deleteWarning": "ACHTUNG: Diese Aktion löscht das Unternehmen und ALLE zugehörigen Daten!",
+      "deleteConfirm": "Dies beinhaltet alle Benutzer, Suchaufträge, Tickets und zugehörige Daten. Diese Aktion kann nicht rückgängig gemacht werden.",
+      "typeToConfirm": "Geben Sie den Firmennamen ein, um zu bestätigen:",
+      "confirmPlaceholder": "Firmennamen eingeben..."
+    },
+    "actions": {
+      "view": "Ansehen",
+      "delete": "Löschen"
+    },
+    "toast": {
+      "deleted": "Unternehmen gelöscht",
+      "deleteError": "Fehler beim Löschen des Unternehmens",
+      "error": "Fehler beim Laden der Unternehmensdaten"
+    }
+  },
   "auth": {
     "backToHome": "Zur Startseite",
     "welcome": {

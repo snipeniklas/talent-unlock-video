@@ -2366,6 +2366,75 @@
       "error": "Resourcefout"
     }
   },
+  "companyManagement": {
+    "title": "Bedrijven",
+    "subtitle": "Klantbedrijven beheren",
+    "search": {
+      "placeholder": "Bedrijven zoeken...",
+      "noResults": "Geen bedrijven gevonden"
+    },
+    "fields": {
+      "name": "Bedrijfsnaam",
+      "email": "E-mail",
+      "website": "Website",
+      "valueProposition": "Waardepropositie",
+      "createdAt": "Aangemaakt op"
+    },
+    "stats": {
+      "totalCompanies": "Totaal bedrijven",
+      "totalUsers": "Totaal gebruikers",
+      "activeProjects": "Actieve projecten",
+      "usersInCompany": "Gebruikers",
+      "projectsTotal": "Totaal projecten",
+      "projectsActive": "Actieve projecten",
+      "projectsCompleted": "Voltooide projecten"
+    },
+    "tabs": {
+      "overview": "Overzicht",
+      "users": "Gebruikers",
+      "projects": "Projecten",
+      "settings": "Instellingen"
+    },
+    "users": {
+      "title": "Bedrijfsgebruikers",
+      "admin": "Admin",
+      "role": "Rol",
+      "addUser": "Gebruiker toevoegen",
+      "empty": "Geen gebruikers in dit bedrijf"
+    },
+    "projects": {
+      "title": "Zoekopdrachten",
+      "empty": "Geen projecten beschikbaar",
+      "viewAll": "Alles bekijken"
+    },
+    "empty": {
+      "title": "Geen bedrijven",
+      "description": "Er zijn nog geen bedrijven geregistreerd"
+    },
+    "detail": {
+      "title": "Bedrijfsdetails",
+      "notFound": "Bedrijf niet gevonden",
+      "contactInfo": "Contactgegevens",
+      "noWebsite": "Geen website opgegeven",
+      "noEmail": "Geen e-mail opgegeven"
+    },
+    "dialog": {
+      "deleteTitle": "Bedrijf verwijderen",
+      "deleteWarning": "WAARSCHUWING: Deze actie verwijdert het bedrijf en ALLE bijbehorende gegevens!",
+      "deleteConfirm": "Dit omvat alle gebruikers, zoekopdrachten, tickets en gerelateerde gegevens. Deze actie kan niet ongedaan worden gemaakt.",
+      "typeToConfirm": "Typ de bedrijfsnaam om te bevestigen:",
+      "confirmPlaceholder": "Voer bedrijfsnaam in..."
+    },
+    "actions": {
+      "view": "Bekijken",
+      "delete": "Verwijderen"
+    },
+    "toast": {
+      "deleted": "Bedrijf verwijderd",
+      "deleteError": "Fout bij het verwijderen van bedrijf",
+      "error": "Fout bij het laden van bedrijfsgegevens"
+    }
+  },
   "auth": {
     "backToHome": "Terug naar startpagina",
     "welcome": {
