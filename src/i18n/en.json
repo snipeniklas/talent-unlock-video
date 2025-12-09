@@ -2637,6 +2637,81 @@
       "item1": "Access to 500+ verified AI developers",
       "item2": "98% customer satisfaction",
       "item3": "Personal support guaranteed"
+    },
+    "invite": {
+      "title": "Welcome to Hej Talent",
+      "invitedTo": "You have been invited to",
+      "verified": "Invitation verified",
+      "email": "Email",
+      "form": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "firstNamePlaceholder": "Your first name",
+        "lastNamePlaceholder": "Your last name",
+        "passwordPlaceholder": "At least 6 characters",
+        "confirmPlaceholder": "Repeat password",
+        "submit": "Create account",
+        "submitting": "Creating account..."
+      },
+      "toast": {
+        "invalidLink": "Invalid invitation link",
+        "invalidLinkDesc": "The invitation link is not valid or incomplete.",
+        "notFound": "Invitation not found",
+        "notFoundDesc": "The invitation has expired or has already been used.",
+        "validationError": "Error",
+        "validationErrorDesc": "There was a problem verifying the invitation.",
+        "missingData": "Missing data",
+        "fillAllFields": "Please fill in all fields.",
+        "passwordError": "Password error",
+        "passwordMismatch": "The passwords do not match.",
+        "passwordTooShort": "Password too short",
+        "passwordTooShortDesc": "The password must be at least 6 characters long.",
+        "success": "Registration successful!",
+        "successDesc": "Your account has been created. You will be logged in automatically.",
+        "failed": "Registration failed"
+      },
+      "hasAccount": "Already have an account?",
+      "loginHere": "Log in here"
+    },
+    "resetPassword": {
+      "title": "Reset password",
+      "subtitle": "Enter your new password",
+      "setNew": "Set new password",
+      "setNewDesc": "Choose a secure password with at least 6 characters.",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "passwordPlaceholder": "At least 6 characters",
+      "confirmPlaceholder": "Repeat password",
+      "submit": "Update password",
+      "submitting": "Saving...",
+      "backToLogin": "Back to login",
+      "toDashboard": "Go to Dashboard",
+      "processing": "Processing...",
+      "processingDesc": "Your password reset link is being processed. Please wait a moment.",
+      "expired": {
+        "title": "Link expired",
+        "description": "This password reset link has expired. Please request a new link."
+      },
+      "invalid": {
+        "title": "Invalid link",
+        "description": "This password reset link is invalid or expired. Please request a new link via the login form."
+      },
+      "success": {
+        "title": "Password changed!",
+        "description": "Your password has been successfully updated. You will be redirected automatically..."
+      },
+      "toast": {
+        "mismatch": "Passwords do not match",
+        "mismatchDesc": "Please make sure both passwords are identical.",
+        "tooShort": "Password too short",
+        "tooShortDesc": "The password must be at least 6 characters long.",
+        "success": "Password successfully changed",
+        "successDesc": "Your password has been successfully updated. You can now log in with your new password.",
+        "error": "Error resetting",
+        "errorDesc": "The password could not be reset."
+      }
     }
   },
   "legal": {

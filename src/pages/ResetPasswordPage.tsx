@@ -7,11 +7,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { ArrowLeft, Key, CheckCircle, Loader2 } from 'lucide-react';
+import { useTranslation } from '@/i18n/i18n';
 import hejTalentLogo from '/lovable-uploads/bb059d26-d976-40f0-a8c9-9aa48d77e434.png';
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,8 +33,8 @@ const ResetPasswordPage = () => {
       setIsValidToken(false);
       setIsLoading(false);
       toast({
-        title: "Link abgelaufen",
-        description: "Dieser Passwort-Reset-Link ist abgelaufen. Bitte fordern Sie einen neuen Link an.",
+        title: t('auth.resetPassword.expired.title'),
+        description: t('auth.resetPassword.expired.description'),
         variant: "destructive",
       });
       return;
@@ -77,8 +79,8 @@ const ResetPasswordPage = () => {
               console.log('No valid auth state detected, showing error');
               setIsValidToken(false);
               toast({
-                title: "Ungültiger Link",
-                description: "Dieser Passwort-Reset-Link ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen an.",
+                title: t('auth.resetPassword.invalid.title'),
+                description: t('auth.resetPassword.invalid.description'),
                 variant: "destructive",
               });
             }
@@ -97,15 +99,15 @@ const ResetPasswordPage = () => {
     };
 
     handleAuthFlow();
-  }, [toast, isValidToken]);
+  }, [toast, isValidToken, t]);
 
   const handlePasswordReset = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (newPassword !== confirmPassword) {
       toast({
-        title: "Passwörter stimmen nicht überein",
-        description: "Bitte stellen Sie sicher, dass beide Passwörter identisch sind.",
+        title: t('auth.resetPassword.toast.mismatch'),
+        description: t('auth.resetPassword.toast.mismatchDesc'),
         variant: "destructive",
       });
       return;
@@ -113,8 +115,8 @@ const ResetPasswordPage = () => {
 
     if (newPassword.length < 6) {
       toast({
-        title: "Passwort zu kurz",
-        description: "Das Passwort muss mindestens 6 Zeichen lang sein.",
+        title: t('auth.resetPassword.toast.tooShort'),
+        description: t('auth.resetPassword.toast.tooShortDesc'),
         variant: "destructive",
       });
       return;
@@ -136,8 +138,8 @@ const ResetPasswordPage = () => {
       console.log('Password updated successfully');
       setIsSuccess(true);
       toast({
-        title: "Passwort erfolgreich geändert",
-        description: "Ihr Passwort wurde erfolgreich aktualisiert. Sie können sich jetzt mit dem neuen Passwort anmelden.",
+        title: t('auth.resetPassword.toast.success'),
+        description: t('auth.resetPassword.toast.successDesc'),
       });
 
       // Redirect zum Dashboard nach 3 Sekunden
@@ -148,8 +150,8 @@ const ResetPasswordPage = () => {
     } catch (error: any) {
       console.error('Password reset error:', error);
       toast({
-        title: "Fehler beim Zurücksetzen",
-        description: error.message || "Das Passwort konnte nicht zurückgesetzt werden.",
+        title: t('auth.resetPassword.toast.error'),
+        description: error.message || t('auth.resetPassword.toast.errorDesc'),
         variant: "destructive",
       });
     } finally {
@@ -170,9 +172,9 @@ const ResetPasswordPage = () => {
             <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
               <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
             </div>
-            <CardTitle className="text-2xl font-bold">Verarbeitung...</CardTitle>
+            <CardTitle className="text-2xl font-bold">{t('auth.resetPassword.processing')}</CardTitle>
             <CardDescription>
-              Ihr Passwort-Reset-Link wird verarbeitet. Bitte warten Sie einen Moment.
+              {t('auth.resetPassword.processingDesc')}
             </CardDescription>
           </CardHeader>
         </Card>
@@ -190,10 +192,9 @@ const ResetPasswordPage = () => {
               alt="Hej Talent Logo" 
               className="h-12 mx-auto mb-4"
             />
-            <CardTitle className="text-2xl font-bold text-red-600">Ungültiger Link</CardTitle>
+            <CardTitle className="text-2xl font-bold text-red-600">{t('auth.resetPassword.invalid.title')}</CardTitle>
             <CardDescription>
-              Dieser Passwort-Reset-Link ist ungültig oder abgelaufen. 
-              Bitte fordern Sie über das Login-Formular einen neuen Link an.
+              {t('auth.resetPassword.invalid.description')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -203,7 +204,7 @@ const ResetPasswordPage = () => {
               variant="outline"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Zurück zum Login
+              {t('auth.resetPassword.backToLogin')}
             </Button>
           </CardContent>
         </Card>
@@ -224,9 +225,9 @@ const ResetPasswordPage = () => {
             <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
               <CheckCircle className="w-8 h-8 text-green-600" />
             </div>
-            <CardTitle className="text-2xl font-bold text-green-600">Passwort geändert!</CardTitle>
+            <CardTitle className="text-2xl font-bold text-green-600">{t('auth.resetPassword.success.title')}</CardTitle>
             <CardDescription>
-              Ihr Passwort wurde erfolgreich aktualisiert. Sie werden automatisch weitergeleitet...
+              {t('auth.resetPassword.success.description')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -234,7 +235,7 @@ const ResetPasswordPage = () => {
               onClick={() => navigate('/app/dashboard')} 
               className="w-full"
             >
-              Zum Dashboard
+              {t('auth.resetPassword.toDashboard')}
             </Button>
           </CardContent>
         </Card>
@@ -253,10 +254,10 @@ const ResetPasswordPage = () => {
             className="h-16 mx-auto mb-6"
           />
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Passwort zurücksetzen
+            {t('auth.resetPassword.title')}
           </h1>
           <p className="text-gray-600">
-            Geben Sie Ihr neues Passwort ein
+            {t('auth.resetPassword.subtitle')}
           </p>
         </div>
 
@@ -265,16 +266,16 @@ const ResetPasswordPage = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Key className="h-5 w-5" />
-              Neues Passwort festlegen
+              {t('auth.resetPassword.setNew')}
             </CardTitle>
             <CardDescription>
-              Wählen Sie ein sicheres Passwort mit mindestens 6 Zeichen.
+              {t('auth.resetPassword.setNewDesc')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handlePasswordReset} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="new-password">Neues Passwort</Label>
+                <Label htmlFor="new-password">{t('auth.resetPassword.newPassword')}</Label>
                 <Input
                   id="new-password"
                   type="password"
@@ -282,12 +283,12 @@ const ResetPasswordPage = () => {
                   onChange={(e) => setNewPassword(e.target.value)}
                   required
                   minLength={6}
-                  placeholder="Mindestens 6 Zeichen"
+                  placeholder={t('auth.resetPassword.passwordPlaceholder')}
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="confirm-password">Passwort bestätigen</Label>
+                <Label htmlFor="confirm-password">{t('auth.resetPassword.confirmPassword')}</Label>
                 <Input
                   id="confirm-password"
                   type="password"
@@ -295,7 +296,7 @@ const ResetPasswordPage = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                   minLength={6}
-                  placeholder="Passwort wiederholen"
+                  placeholder={t('auth.resetPassword.confirmPlaceholder')}
                 />
               </div>
 
@@ -307,10 +308,10 @@ const ResetPasswordPage = () => {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Wird gespeichert...
+                    {t('auth.resetPassword.submitting')}
                   </>
                 ) : (
-                  "Passwort aktualisieren"
+                  t('auth.resetPassword.submit')
                 )}
               </Button>
             </form>
@@ -325,7 +326,7 @@ const ResetPasswordPage = () => {
             className="text-gray-600 hover:text-primary"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Zurück zum Login
+            {t('auth.resetPassword.backToLogin')}
           </Button>
         </div>
       </div>

@@ -2722,6 +2722,81 @@
       "item1": "Über 500 geprüfte KI-Entwickler",
       "item2": "98% Kundenzufriedenheit",
       "item3": "Persönliche Betreuung garantiert"
+    },
+    "invite": {
+      "title": "Willkommen bei Hej Talent",
+      "invitedTo": "Sie wurden eingeladen zu",
+      "verified": "Einladung verifiziert",
+      "email": "E-Mail",
+      "form": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "password": "Passwort",
+        "confirmPassword": "Passwort bestätigen",
+        "firstNamePlaceholder": "Ihr Vorname",
+        "lastNamePlaceholder": "Ihr Nachname",
+        "passwordPlaceholder": "Mindestens 6 Zeichen",
+        "confirmPlaceholder": "Passwort wiederholen",
+        "submit": "Konto erstellen",
+        "submitting": "Konto wird erstellt..."
+      },
+      "toast": {
+        "invalidLink": "Ungültiger Einladungslink",
+        "invalidLinkDesc": "Der Einladungslink ist nicht gültig oder unvollständig.",
+        "notFound": "Einladung nicht gefunden",
+        "notFoundDesc": "Die Einladung ist abgelaufen oder wurde bereits verwendet.",
+        "validationError": "Fehler",
+        "validationErrorDesc": "Es gab ein Problem beim Überprüfen der Einladung.",
+        "missingData": "Fehlende Daten",
+        "fillAllFields": "Bitte füllen Sie alle Felder aus.",
+        "passwordError": "Passwort-Fehler",
+        "passwordMismatch": "Die Passwörter stimmen nicht überein.",
+        "passwordTooShort": "Passwort zu kurz",
+        "passwordTooShortDesc": "Das Passwort muss mindestens 6 Zeichen lang sein.",
+        "success": "Registrierung erfolgreich!",
+        "successDesc": "Ihr Konto wurde erstellt. Sie werden automatisch angemeldet.",
+        "failed": "Registrierung fehlgeschlagen"
+      },
+      "hasAccount": "Bereits ein Konto?",
+      "loginHere": "Hier anmelden"
+    },
+    "resetPassword": {
+      "title": "Passwort zurücksetzen",
+      "subtitle": "Geben Sie Ihr neues Passwort ein",
+      "setNew": "Neues Passwort festlegen",
+      "setNewDesc": "Wählen Sie ein sicheres Passwort mit mindestens 6 Zeichen.",
+      "newPassword": "Neues Passwort",
+      "confirmPassword": "Passwort bestätigen",
+      "passwordPlaceholder": "Mindestens 6 Zeichen",
+      "confirmPlaceholder": "Passwort wiederholen",
+      "submit": "Passwort aktualisieren",
+      "submitting": "Wird gespeichert...",
+      "backToLogin": "Zurück zum Login",
+      "toDashboard": "Zum Dashboard",
+      "processing": "Verarbeitung...",
+      "processingDesc": "Ihr Passwort-Reset-Link wird verarbeitet. Bitte warten Sie einen Moment.",
+      "expired": {
+        "title": "Link abgelaufen",
+        "description": "Dieser Passwort-Reset-Link ist abgelaufen. Bitte fordern Sie einen neuen Link an."
+      },
+      "invalid": {
+        "title": "Ungültiger Link",
+        "description": "Dieser Passwort-Reset-Link ist ungültig oder abgelaufen. Bitte fordern Sie über das Login-Formular einen neuen Link an."
+      },
+      "success": {
+        "title": "Passwort geändert!",
+        "description": "Ihr Passwort wurde erfolgreich aktualisiert. Sie werden automatisch weitergeleitet..."
+      },
+      "toast": {
+        "mismatch": "Passwörter stimmen nicht überein",
+        "mismatchDesc": "Bitte stellen Sie sicher, dass beide Passwörter identisch sind.",
+        "tooShort": "Passwort zu kurz",
+        "tooShortDesc": "Das Passwort muss mindestens 6 Zeichen lang sein.",
+        "success": "Passwort erfolgreich geändert",
+        "successDesc": "Ihr Passwort wurde erfolgreich aktualisiert. Sie können sich jetzt mit dem neuen Passwort anmelden.",
+        "error": "Fehler beim Zurücksetzen",
+        "errorDesc": "Das Passwort konnte nicht zurückgesetzt werden."
+      }
     }
   },
   "legal": {
