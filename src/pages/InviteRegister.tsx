@@ -6,12 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { User, Building2, CheckCircle, AlertCircle, UserPlus } from "lucide-react";
+import { CheckCircle, UserPlus } from "lucide-react";
+import { useTranslation } from "@/i18n/i18n";
 
 const InviteRegister = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -30,8 +32,8 @@ const InviteRegister = () => {
     const validateInvitation = async () => {
       if (!inviteToken || !inviteEmail) {
         toast({
-          title: "Ungültiger Einladungslink",
-          description: "Der Einladungslink ist nicht gültig oder unvollständig.",
+          title: t('auth.invite.toast.invalidLink'),
+          description: t('auth.invite.toast.invalidLinkDesc'),
           variant: "destructive",
         });
         navigate('/auth');
@@ -54,8 +56,8 @@ const InviteRegister = () => {
 
         if (error || !inviteData) {
           toast({
-            title: "Einladung nicht gefunden",
-            description: "Die Einladung ist abgelaufen oder wurde bereits verwendet.",
+            title: t('auth.invite.toast.notFound'),
+            description: t('auth.invite.toast.notFoundDesc'),
             variant: "destructive",
           });
           navigate('/auth');
@@ -66,8 +68,8 @@ const InviteRegister = () => {
       } catch (error) {
         console.error('Error validating invitation:', error);
         toast({
-          title: "Fehler",
-          description: "Es gab ein Problem beim Überprüfen der Einladung.",
+          title: t('auth.invite.toast.validationError'),
+          description: t('auth.invite.toast.validationErrorDesc'),
           variant: "destructive",
         });
         navigate('/auth');
@@ -77,15 +79,15 @@ const InviteRegister = () => {
     };
 
     validateInvitation();
-  }, [inviteToken, inviteEmail, navigate, toast]);
+  }, [inviteToken, inviteEmail, navigate, toast, t]);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.firstName.trim() || !formData.lastName.trim()) {
       toast({
-        title: "Fehlende Daten",
-        description: "Bitte füllen Sie alle Felder aus.",
+        title: t('auth.invite.toast.missingData'),
+        description: t('auth.invite.toast.fillAllFields'),
         variant: "destructive",
       });
       return;
@@ -93,8 +95,8 @@ const InviteRegister = () => {
 
     if (formData.password !== formData.confirmPassword) {
       toast({
-        title: "Passwort-Fehler",
-        description: "Die Passwörter stimmen nicht überein.",
+        title: t('auth.invite.toast.passwordError'),
+        description: t('auth.invite.toast.passwordMismatch'),
         variant: "destructive",
       });
       return;
@@ -102,8 +104,8 @@ const InviteRegister = () => {
 
     if (formData.password.length < 6) {
       toast({
-        title: "Passwort zu kurz",
-        description: "Das Passwort muss mindestens 6 Zeichen lang sein.",
+        title: t('auth.invite.toast.passwordTooShort'),
+        description: t('auth.invite.toast.passwordTooShortDesc'),
         variant: "destructive",
       });
       return;
@@ -162,8 +164,8 @@ const InviteRegister = () => {
         if (inviteError) throw inviteError;
 
         toast({
-          title: "Registrierung erfolgreich!",
-          description: "Ihr Konto wurde erstellt. Sie werden automatisch angemeldet.",
+          title: t('auth.invite.toast.success'),
+          description: t('auth.invite.toast.successDesc'),
         });
 
         // Redirect to dashboard
@@ -172,8 +174,8 @@ const InviteRegister = () => {
     } catch (error: any) {
       console.error('Registration error:', error);
       toast({
-        title: "Registrierung fehlgeschlagen",
-        description: error.message || "Es gab ein Problem bei der Registrierung.",
+        title: t('auth.invite.toast.failed'),
+        description: error.message || t('auth.toast.unexpectedError'),
         variant: "destructive",
       });
     } finally {
@@ -196,66 +198,66 @@ const InviteRegister = () => {
           <div className="mx-auto mb-4 w-12 h-12 bg-primary rounded-full flex items-center justify-center">
             <UserPlus className="w-6 h-6 text-white" />
           </div>
-          <CardTitle className="text-2xl">Willkommen bei Hej Talent</CardTitle>
+          <CardTitle className="text-2xl">{t('auth.invite.title')}</CardTitle>
           <CardDescription>
-            Sie wurden zu <strong>{invitation?.companies?.name}</strong> eingeladen
+            {t('auth.invite.invitedTo')} <strong>{invitation?.companies?.name}</strong>
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
             <div className="flex items-center gap-2 text-blue-800">
               <CheckCircle className="w-4 h-4" />
-              <span className="text-sm font-medium">Einladung verifiziert</span>
+              <span className="text-sm font-medium">{t('auth.invite.verified')}</span>
             </div>
             <div className="text-sm text-blue-600 mt-1">
-              E-Mail: {inviteEmail}
+              {t('auth.invite.email')}: {inviteEmail}
             </div>
           </div>
 
           <form onSubmit={handleRegister} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="firstName">Vorname *</Label>
+                <Label htmlFor="firstName">{t('auth.invite.form.firstName')} *</Label>
                 <Input
                   id="firstName"
                   value={formData.firstName}
                   onChange={(e) => setFormData(prev => ({...prev, firstName: e.target.value}))}
-                  placeholder="Ihr Vorname"
+                  placeholder={t('auth.invite.form.firstNamePlaceholder')}
                   required
                 />
               </div>
               <div>
-                <Label htmlFor="lastName">Nachname *</Label>
+                <Label htmlFor="lastName">{t('auth.invite.form.lastName')} *</Label>
                 <Input
                   id="lastName"
                   value={formData.lastName}
                   onChange={(e) => setFormData(prev => ({...prev, lastName: e.target.value}))}
-                  placeholder="Ihr Nachname"
+                  placeholder={t('auth.invite.form.lastNamePlaceholder')}
                   required
                 />
               </div>
             </div>
 
             <div>
-              <Label htmlFor="password">Passwort *</Label>
+              <Label htmlFor="password">{t('auth.invite.form.password')} *</Label>
               <Input
                 id="password"
                 type="password"
                 value={formData.password}
                 onChange={(e) => setFormData(prev => ({...prev, password: e.target.value}))}
-                placeholder="Mindestens 6 Zeichen"
+                placeholder={t('auth.invite.form.passwordPlaceholder')}
                 required
               />
             </div>
 
             <div>
-              <Label htmlFor="confirmPassword">Passwort bestätigen *</Label>
+              <Label htmlFor="confirmPassword">{t('auth.invite.form.confirmPassword')} *</Label>
               <Input
                 id="confirmPassword"
                 type="password"
                 value={formData.confirmPassword}
                 onChange={(e) => setFormData(prev => ({...prev, confirmPassword: e.target.value}))}
-                placeholder="Passwort wiederholen"
+                placeholder={t('auth.invite.form.confirmPlaceholder')}
                 required
               />
             </div>
@@ -265,13 +267,13 @@ const InviteRegister = () => {
               className="w-full bg-primary hover:bg-primary/90" 
               disabled={registering}
             >
-              {registering ? 'Konto wird erstellt...' : 'Konto erstellen'}
+              {registering ? t('auth.invite.form.submitting') : t('auth.invite.form.submit')}
             </Button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
-              Bereits ein Konto? <a href="/auth" className="text-primary hover:underline">Hier anmelden</a>
+              {t('auth.invite.hasAccount')} <a href="/auth" className="text-primary hover:underline">{t('auth.invite.loginHere')}</a>
             </p>
           </div>
         </CardContent>

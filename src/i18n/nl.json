@@ -2831,6 +2831,81 @@
       "item1": "Toegang tot 500+ geverifieerde AI-ontwikkelaars",
       "item2": "98% klanttevredenheid",
       "item3": "Persoonlijke begeleiding gegarandeerd"
+    },
+    "invite": {
+      "title": "Welkom bij Hej Talent",
+      "invitedTo": "U bent uitgenodigd voor",
+      "verified": "Uitnodiging geverifieerd",
+      "email": "E-mail",
+      "form": {
+        "firstName": "Voornaam",
+        "lastName": "Achternaam",
+        "password": "Wachtwoord",
+        "confirmPassword": "Wachtwoord bevestigen",
+        "firstNamePlaceholder": "Uw voornaam",
+        "lastNamePlaceholder": "Uw achternaam",
+        "passwordPlaceholder": "Minimaal 6 tekens",
+        "confirmPlaceholder": "Wachtwoord herhalen",
+        "submit": "Account aanmaken",
+        "submitting": "Account wordt aangemaakt..."
+      },
+      "toast": {
+        "invalidLink": "Ongeldige uitnodigingslink",
+        "invalidLinkDesc": "De uitnodigingslink is niet geldig of onvolledig.",
+        "notFound": "Uitnodiging niet gevonden",
+        "notFoundDesc": "De uitnodiging is verlopen of al gebruikt.",
+        "validationError": "Fout",
+        "validationErrorDesc": "Er was een probleem bij het verifiëren van de uitnodiging.",
+        "missingData": "Ontbrekende gegevens",
+        "fillAllFields": "Vul alle velden in.",
+        "passwordError": "Wachtwoordfout",
+        "passwordMismatch": "De wachtwoorden komen niet overeen.",
+        "passwordTooShort": "Wachtwoord te kort",
+        "passwordTooShortDesc": "Het wachtwoord moet minimaal 6 tekens bevatten.",
+        "success": "Registratie succesvol!",
+        "successDesc": "Uw account is aangemaakt. U wordt automatisch aangemeld.",
+        "failed": "Registratie mislukt"
+      },
+      "hasAccount": "Al een account?",
+      "loginHere": "Hier aanmelden"
+    },
+    "resetPassword": {
+      "title": "Wachtwoord resetten",
+      "subtitle": "Voer uw nieuwe wachtwoord in",
+      "setNew": "Nieuw wachtwoord instellen",
+      "setNewDesc": "Kies een veilig wachtwoord met minimaal 6 tekens.",
+      "newPassword": "Nieuw wachtwoord",
+      "confirmPassword": "Wachtwoord bevestigen",
+      "passwordPlaceholder": "Minimaal 6 tekens",
+      "confirmPlaceholder": "Wachtwoord herhalen",
+      "submit": "Wachtwoord bijwerken",
+      "submitting": "Wordt opgeslagen...",
+      "backToLogin": "Terug naar aanmelden",
+      "toDashboard": "Naar Dashboard",
+      "processing": "Verwerken...",
+      "processingDesc": "Uw wachtwoord-reset-link wordt verwerkt. Even geduld.",
+      "expired": {
+        "title": "Link verlopen",
+        "description": "Deze wachtwoord-reset-link is verlopen. Vraag een nieuwe link aan."
+      },
+      "invalid": {
+        "title": "Ongeldige link",
+        "description": "Deze wachtwoord-reset-link is ongeldig of verlopen. Vraag via het aanmeldformulier een nieuwe link aan."
+      },
+      "success": {
+        "title": "Wachtwoord gewijzigd!",
+        "description": "Uw wachtwoord is succesvol bijgewerkt. U wordt automatisch doorgestuurd..."
+      },
+      "toast": {
+        "mismatch": "Wachtwoorden komen niet overeen",
+        "mismatchDesc": "Zorg ervoor dat beide wachtwoorden identiek zijn.",
+        "tooShort": "Wachtwoord te kort",
+        "tooShortDesc": "Het wachtwoord moet minimaal 6 tekens bevatten.",
+        "success": "Wachtwoord succesvol gewijzigd",
+        "successDesc": "Uw wachtwoord is succesvol bijgewerkt. U kunt nu inloggen met uw nieuwe wachtwoord.",
+        "error": "Fout bij resetten",
+        "errorDesc": "Het wachtwoord kon niet worden gereset."
+      }
     }
   },
   "imprint": {
