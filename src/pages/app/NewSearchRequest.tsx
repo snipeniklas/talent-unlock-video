@@ -103,9 +103,12 @@ const NewSearchRequest = () => {
         throw new Error('No company found for user');
       }
 
+      const remoteWorkerText = t('app.newRequest.remoteWorker', 'Remote-Mitarbeiter');
+      const workAreasLabel = t('app.newRequest.workAreasLabel', 'Benötigte Arbeitsbereiche');
+      
       const insertData = {
-        title: `${formData.jobTitle} - ${formData.numberOfWorkers} Remote-Mitarbeiter`,
-        description: `Benötigte Arbeitsbereiche: ${formData.workAreas.join(', ')}`,
+        title: `${formData.jobTitle} - ${formData.numberOfWorkers} ${remoteWorkerText}`,
+        description: `${workAreasLabel}: ${formData.workAreas.join(', ')}`,
         customer_industry: formData.customerIndustry || null,
         number_of_workers: formData.numberOfWorkers,
         job_title: formData.jobTitle || null,

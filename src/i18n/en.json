@@ -1431,6 +1431,8 @@
       "back": "Back",
       "title": "Create new search request",
       "subtitle": "Find the perfect remote staff for your company",
+      "remoteWorker": "Remote Worker(s)",
+      "workAreasLabel": "Required work areas",
       "sections": {
         "basic": {"title": "Basic information", "desc": "General details about your staffing needs"},
         "period": {"title": "Work period", "desc": "When should remote staff start and how long should they work?"},
