@@ -7,6 +7,7 @@ import { ArrowLeft, MapPin, Clock, Euro, Users, Calendar } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/i18n/i18n";
 
 interface SearchRequest {
   id: string;
@@ -37,6 +38,7 @@ const SearchRequestDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t, lang } = useTranslation();
   const [searchRequest, setSearchRequest] = useState<SearchRequest | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -63,8 +65,8 @@ const SearchRequestDetail = () => {
 
         if (!profile?.company_id) {
           toast({
-            title: "Fehler",
-            description: "Keine Firma gefunden.",
+            title: t('app.searchRequestDetail.toast.error'),
+            description: t('app.searchRequestDetail.toast.noCompany'),
             variant: "destructive",
           });
           navigate('/app/search-requests');
@@ -82,8 +84,8 @@ const SearchRequestDetail = () => {
         if (error || !request) {
           console.error('Error fetching search request:', error);
           toast({
-            title: "Fehler",
-            description: "Suchauftrag konnte nicht geladen werden.",
+            title: t('app.searchRequestDetail.toast.error'),
+            description: t('app.searchRequestDetail.toast.loadFailed'),
             variant: "destructive",
           });
           navigate('/app/search-requests');
@@ -115,8 +117,8 @@ const SearchRequestDetail = () => {
       } catch (error) {
         console.error('Error:', error);
         toast({
-          title: "Fehler",
-          description: "Ein unerwarteter Fehler ist aufgetreten.",
+          title: t('app.searchRequestDetail.toast.error'),
+          description: t('app.searchRequestDetail.toast.unexpected'),
           variant: "destructive",
         });
         navigate('/app/search-requests');
@@ -141,11 +143,11 @@ const SearchRequestDetail = () => {
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case "active": return "Aktiv";
-      case "pending": return "Ausstehend";
-      case "completed": return "Abgeschlossen";
-      case "cancelled": return "Abgebrochen";
-      case "paused": return "Pausiert";
+      case "active": return t('app.searchRequestDetail.status.active');
+      case "pending": return t('app.searchRequestDetail.status.pending');
+      case "completed": return t('app.searchRequestDetail.status.completed');
+      case "cancelled": return t('app.searchRequestDetail.status.cancelled');
+      case "paused": return t('app.searchRequestDetail.status.paused');
       default: return status;
     }
   };
@@ -172,10 +174,10 @@ const SearchRequestDetail = () => {
     return (
       <div className="container mx-auto py-6">
         <div className="text-center">
-          <h2 className="text-2xl font-bold">Suchauftrag nicht gefunden</h2>
-          <p className="text-muted-foreground mt-2">Der angeforderte Suchauftrag existiert nicht.</p>
+          <h2 className="text-2xl font-bold">{t('app.searchRequestDetail.notFound.title')}</h2>
+          <p className="text-muted-foreground mt-2">{t('app.searchRequestDetail.notFound.text')}</p>
           <Button onClick={() => navigate("/app/search-requests")} className="mt-4">
-            Zurück zur Übersicht
+            {t('app.searchRequestDetail.notFound.back')}
           </Button>
         </div>
       </div>
@@ -195,7 +197,7 @@ const SearchRequestDetail = () => {
         </Button>
         <div>
           <h1 className="text-3xl font-bold">{searchRequest.title}</h1>
-          <p className="text-muted-foreground">{searchRequest.company?.name || 'Firma nicht verfügbar'}</p>
+          <p className="text-muted-foreground">{searchRequest.company?.name || t('app.searchRequestDetail.companyNotAvailable')}</p>
         </div>
       </div>
 
@@ -205,11 +207,11 @@ const SearchRequestDetail = () => {
           {/* Description */}
           <Card>
             <CardHeader>
-              <CardTitle>Beschreibung</CardTitle>
+              <CardTitle>{t('app.searchRequestDetail.cards.description')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground leading-relaxed">
-                {searchRequest.description || 'Keine Beschreibung verfügbar.'}
+                {searchRequest.description || t('app.searchRequestDetail.cards.noDescription')}
               </p>
             </CardContent>
           </Card>
@@ -218,7 +220,7 @@ const SearchRequestDetail = () => {
           {searchRequest.requirements && (
             <Card>
               <CardHeader>
-                <CardTitle>Anforderungen</CardTitle>
+                <CardTitle>{t('app.searchRequestDetail.cards.requirements')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
@@ -231,7 +233,7 @@ const SearchRequestDetail = () => {
           {/* Skills */}
           <Card>
             <CardHeader>
-              <CardTitle>Erforderliche Skills</CardTitle>
+              <CardTitle>{t('app.searchRequestDetail.cards.skills')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
@@ -242,7 +244,7 @@ const SearchRequestDetail = () => {
                     </Badge>
                   ))
                 ) : (
-                  <p className="text-muted-foreground">Keine Skills angegeben</p>
+                  <p className="text-muted-foreground">{t('app.searchRequestDetail.cards.noSkills')}</p>
                 )}
               </div>
             </CardContent>
@@ -254,11 +256,11 @@ const SearchRequestDetail = () => {
           {/* Status & Actions */}
           <Card>
             <CardHeader>
-              <CardTitle>Status & Aktionen</CardTitle>
+              <CardTitle>{t('app.searchRequestDetail.sidebar.statusActions')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium">Status:</span>
+                <span className="text-sm font-medium">{t('app.searchRequestDetail.sidebar.status')}</span>
                 <Badge className={getStatusColor(searchRequest.status)}>
                   {getStatusText(searchRequest.status)}
                 </Badge>
@@ -268,10 +270,10 @@ const SearchRequestDetail = () => {
                   className="w-full"
                   onClick={() => navigate(`/app/search-requests/${id}/candidates`)}
                 >
-                  Kandidaten verwalten
+                  {t('app.searchRequestDetail.sidebar.manageCandidates')}
                 </Button>
                 <Button variant="outline" className="w-full">
-                  Kontakt aufnehmen
+                  {t('app.searchRequestDetail.sidebar.contact')}
                 </Button>
               </div>
             </CardContent>
@@ -280,41 +282,35 @@ const SearchRequestDetail = () => {
           {/* Details */}
           <Card>
             <CardHeader>
-              <CardTitle>Details</CardTitle>
+              <CardTitle>{t('app.searchRequestDetail.sidebar.details')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center gap-3">
                 <MapPin className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">{searchRequest.location || 'Nicht angegeben'}</span>
+                <span className="text-sm">{searchRequest.location || t('app.searchRequestDetail.sidebar.notProvided')}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Euro className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm">
                   {searchRequest.salary_min && searchRequest.salary_max 
                     ? `€${searchRequest.salary_min.toLocaleString()} - €${searchRequest.salary_max.toLocaleString()}`
-                    : 'Nicht angegeben'
+                    : t('app.searchRequestDetail.sidebar.notProvided')
                   }
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <Users className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">0 Bewerber</span>
+                <span className="text-sm">{t('app.searchRequestDetail.sidebar.applicants')}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Calendar className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">Erstellt: {new Date(searchRequest.created_at).toLocaleDateString('de-DE')}</span>
+                <span className="text-sm">{t('app.searchRequestDetail.sidebar.created')} {new Date(searchRequest.created_at).toLocaleDateString(lang === 'de' ? 'de-DE' : lang === 'nl' ? 'nl-NL' : 'en-US')}</span>
               </div>
               {searchRequest.employment_type && (
                 <div className="flex items-center gap-3">
                   <Clock className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm">
-                    Arbeitstyp: {
-                      searchRequest.employment_type === 'full_time' ? 'Vollzeit' :
-                      searchRequest.employment_type === 'part_time' ? 'Teilzeit' :
-                      searchRequest.employment_type === 'contract' ? 'Vertrag' :
-                      searchRequest.employment_type === 'freelance' ? 'Freelance' :
-                      searchRequest.employment_type
-                    }
+                    {t('app.searchRequestDetail.sidebar.employmentType')} {t(`app.searchRequestDetail.employmentTypes.${searchRequest.employment_type}`)}
                   </span>
                 </div>
               )}
@@ -325,7 +321,7 @@ const SearchRequestDetail = () => {
           {searchRequest.profile && (
             <Card>
               <CardHeader>
-                <CardTitle>Ansprechpartner</CardTitle>
+                <CardTitle>{t('app.searchRequestDetail.sidebar.contactPerson')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="font-medium">

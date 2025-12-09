@@ -1906,22 +1906,126 @@
       }
     },
     "searchRequests": {
-      "title": "Aanvragen",
+      "title": "Zoekopdrachten",
+      "subtitle": "Beheer uw vacatures en vind de beste kandidaten",
       "new": "Nieuwe aanvraag",
       "filters": {
-        "all": "Alle",
+        "status": "Status",
+        "all": "Alle statussen",
         "active": "Actief",
         "pending": "In behandeling",
         "completed": "Voltooid"
       },
-      "table": {
-        "title": "Titel",
-        "status": "Status",
-        "created": "Aangemaakt",
-        "actions": "Acties"
+      "searchPlaceholder": "Zoekopdrachten doorzoeken...",
+      "details": {
+        "locationUnknown": "Niet opgegeven",
+        "candidates": "kandidaten",
+        "created": "Aangemaakt:",
+        "budget": "Budget:",
+        "notProvided": "Niet opgegeven",
+        "requiredSkills": "Vereiste skills:",
+        "noSkills": "Geen skills opgegeven",
+        "view": "Details bekijken",
+        "manageCandidates": "Kandidaten beheren"
       },
-      "empty": "Geen aanvragen gevonden",
-      "createFirst": "Maak uw eerste aanvraag"
+      "empty": {
+        "title": "Geen zoekopdrachten gevonden",
+        "filtered": "Probeer andere zoektermen of filters.",
+        "start": "Maak uw eerste zoekopdracht om te beginnen.",
+        "btn": "Eerste aanvraag aanmaken"
+      },
+      "actions": {"edit": "Bewerken", "delete": "Verwijderen"},
+      "confirmDelete": {
+        "title": "Zoekopdracht verwijderen",
+        "desc": "Weet u zeker dat u deze zoekopdracht wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
+      },
+      "toasts": {
+        "error": "Fout",
+        "errorCompany": "Geen bedrijf gevonden. Neem contact op met support.",
+        "loadFailed": "Zoekopdrachten konden niet worden geladen.",
+        "unexpected": "Er is een onverwachte fout opgetreden.",
+        "deleteSuccessTitle": "Succes",
+        "deleteSuccess": "Zoekopdracht is succesvol verwijderd.",
+        "deleteFailed": "Zoekopdracht kon niet worden verwijderd."
+      }
+    },
+    "searchRequestDetail": {
+      "notFound": {
+        "title": "Zoekopdracht niet gevonden",
+        "text": "De gevraagde zoekopdracht bestaat niet.",
+        "back": "Terug naar overzicht"
+      },
+      "companyNotAvailable": "Bedrijf niet beschikbaar",
+      "cards": {
+        "description": "Beschrijving",
+        "noDescription": "Geen beschrijving beschikbaar.",
+        "requirements": "Vereisten",
+        "skills": "Vereiste skills",
+        "noSkills": "Geen skills opgegeven"
+      },
+      "sidebar": {
+        "statusActions": "Status & Acties",
+        "status": "Status:",
+        "manageCandidates": "Kandidaten beheren",
+        "contact": "Contact opnemen",
+        "details": "Details",
+        "notProvided": "Niet opgegeven",
+        "applicants": "0 sollicitanten",
+        "created": "Aangemaakt:",
+        "employmentType": "Dienstverband:",
+        "contactPerson": "Contactpersoon"
+      },
+      "employmentTypes": {
+        "full_time": "Fulltime",
+        "part_time": "Parttime",
+        "contract": "Contract",
+        "freelance": "Freelance"
+      },
+      "status": {
+        "active": "Actief",
+        "pending": "In behandeling",
+        "completed": "Voltooid",
+        "cancelled": "Geannuleerd",
+        "paused": "Gepauzeerd"
+      },
+      "toast": {
+        "error": "Fout",
+        "noCompany": "Geen bedrijf gevonden.",
+        "loadFailed": "Zoekopdracht kon niet worden geladen.",
+        "unexpected": "Er is een onverwachte fout opgetreden."
+      }
+    },
+    "kanban": {
+      "title": "Kandidaten beheren",
+      "columns": {
+        "proposed": "Voorgesteld",
+        "reviewed": "Beoordeeld",
+        "interested": "Geïnteresseerd",
+        "not_interested": "Niet geïnteresseerd",
+        "interview_scheduled": "Interview gepland",
+        "hired": "Aangenomen",
+        "rejected": "Afgewezen"
+      },
+      "candidate": {
+        "unknown": "Onbekend",
+        "noRole": "Geen rol opgegeven",
+        "yearsExperience": "jaar ervaring",
+        "viewDetails": "Details bekijken"
+      },
+      "dropzone": {
+        "empty": "Geen kandidaten in deze status",
+        "dropHere": "Hier neerzetten"
+      },
+      "notes": "Notities",
+      "toast": {
+        "error": "Fout",
+        "noCompany": "Geen bedrijf gevonden.",
+        "notFound": "Zoekopdracht niet gevonden.",
+        "loadError": "Gegevens konden niet worden geladen.",
+        "statusUpdated": "Status bijgewerkt",
+        "statusUpdatedDesc": "De kandidaatstatus is succesvol gewijzigd.",
+        "errorUpdate": "Status kon niet worden bijgewerkt."
+      }
     },
     "newRequest": {
       "back": "Terug",
