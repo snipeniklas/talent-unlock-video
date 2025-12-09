@@ -1839,6 +1839,107 @@
         "companyFieldsNote": "Hinweis: Wenn Sie Unternehmensdaten in Ihrer CSV-Datei haben, werden automatisch entsprechende Unternehmen erstellt oder gefunden."
       }
     },
+    "tasks": {
+      "title": "Aufgaben",
+      "subtitle": "CRM Aufgaben verwalten",
+      "addNew": "Neue Aufgabe",
+      "editTask": "Aufgabe bearbeiten",
+      "viewTask": "Aufgabe ansehen",
+      "fields": {
+        "title": "Titel",
+        "description": "Beschreibung",
+        "status": "Status",
+        "priority": "Priorität",
+        "dueDate": "Fälligkeitsdatum",
+        "assignedTo": "Zugewiesen an",
+        "contact": "Kontakt",
+        "company": "Unternehmen",
+        "campaign": "Kampagne"
+      },
+      "status": {
+        "todo": "Zu erledigen",
+        "in_progress": "In Bearbeitung",
+        "waiting": "Wartend",
+        "completed": "Abgeschlossen",
+        "cancelled": "Abgebrochen"
+      },
+      "priority": {
+        "low": "Niedrig",
+        "medium": "Mittel",
+        "high": "Hoch",
+        "urgent": "Dringend"
+      },
+      "actions": {
+        "complete": "Abschließen",
+        "reopen": "Wiedereröffnen",
+        "delete": "Löschen",
+        "edit": "Bearbeiten"
+      },
+      "filters": {
+        "all": "Alle",
+        "myTasks": "Meine Aufgaben",
+        "overdue": "Überfällig",
+        "today": "Heute fällig",
+        "upcoming": "Bevorstehend"
+      },
+      "empty": {
+        "title": "Keine Aufgaben",
+        "description": "Erstellen Sie Ihre erste Aufgabe"
+      },
+      "toast": {
+        "created": "Aufgabe erstellt",
+        "updated": "Aufgabe aktualisiert",
+        "deleted": "Aufgabe gelöscht",
+        "completed": "Aufgabe abgeschlossen",
+        "error": "Fehler bei der Aufgabe"
+      }
+    },
+    "contactLists": {
+      "title": "Kontaktlisten",
+      "subtitle": "Listen für Kampagnen verwalten",
+      "addNew": "Neue Liste",
+      "editList": "Liste bearbeiten",
+      "viewList": "Liste ansehen",
+      "deleteList": "Liste löschen",
+      "fields": {
+        "name": "Listenname",
+        "description": "Beschreibung",
+        "contactCount": "Anzahl Kontakte",
+        "createdAt": "Erstellt am"
+      },
+      "actions": {
+        "addContacts": "Kontakte hinzufügen",
+        "removeContacts": "Kontakte entfernen",
+        "removeFromList": "Aus Liste entfernen"
+      },
+      "empty": {
+        "title": "Keine Listen",
+        "description": "Erstellen Sie Ihre erste Kontaktliste"
+      },
+      "detail": {
+        "title": "Listendetails",
+        "contacts": "Kontakte in dieser Liste",
+        "noContacts": "Keine Kontakte in dieser Liste",
+        "addFirst": "Fügen Sie den ersten Kontakt hinzu"
+      },
+      "dialog": {
+        "createTitle": "Neue Liste erstellen",
+        "editTitle": "Liste bearbeiten",
+        "deleteTitle": "Liste löschen",
+        "deleteConfirm": "Sind Sie sicher, dass Sie diese Liste löschen möchten?",
+        "addContactsTitle": "Kontakte zur Liste hinzufügen",
+        "selectContacts": "Kontakte auswählen",
+        "searchContacts": "Kontakte suchen..."
+      },
+      "toast": {
+        "created": "Liste erstellt",
+        "updated": "Liste aktualisiert",
+        "deleted": "Liste gelöscht",
+        "contactsAdded": "Kontakte hinzugefügt",
+        "contactRemoved": "Kontakt entfernt",
+        "error": "Fehler bei der Liste"
+      }
+    },
     "actions": {
       "save": "Speichern",
       "cancel": "Abbrechen",
