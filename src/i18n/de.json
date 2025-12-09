@@ -1849,7 +1849,94 @@
       "buttons": {"resources": "Ressourcen", "view": "Ansehen"},
       "empty": {"filtered": "Keine Kundenprojekte gefunden, die den Filterkriterien entsprechen.", "none": "Noch keine Kundenprojekte vorhanden."},
       "confirmDelete": {"title": "Suchauftrag löschen", "desc": "Sind Sie sicher, dass Sie diesen Suchauftrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."},
-      "toasts": {"error": "Fehler", "deleteSuccessTitle": "Erfolg", "deleteSuccess": "Suchauftrag wurde erfolgreich gelöscht.", "unexpected": "Ein unerwarteter Fehler ist aufgetreten.", "deleteFailed": "Suchauftrag konnte nicht gelöscht werden."}
+      "toasts": {"error": "Fehler", "deleteSuccessTitle": "Erfolg", "deleteSuccess": "Suchauftrag wurde erfolgreich gelöscht.", "unexpected": "Ein unerwarteter Fehler ist aufgetreten.", "deleteFailed": "Suchauftrag konnte nicht gelöscht werden."},
+      "allocationsPage": {
+        "loading": "Lade...",
+        "notFound": "Suchauftrag nicht gefunden",
+        "back": "Zurück",
+        "unknownCompany": "Unbekanntes Unternehmen",
+        "details": {
+          "title": "Suchauftrag Details",
+          "sections": {
+            "basicInfo": "Grundinformationen",
+            "employment": "Anstellungsdetails",
+            "schedule": "Zeitplan & Umfang"
+          },
+          "labels": {
+            "description": "Beschreibung",
+            "noDescription": "Keine Beschreibung verfügbar",
+            "location": "Standort",
+            "status": "Status",
+            "employmentType": "Arbeitstyp",
+            "experienceLevel": "Erfahrungslevel",
+            "salaryRange": "Gehaltsspanne",
+            "salaryFrom": "ab €{amount}",
+            "salaryTo": "bis €{amount}",
+            "numberOfWorkers": "Anzahl Mitarbeiter",
+            "startDate": "Startdatum",
+            "endDate": "Enddatum",
+            "weeklyHours": "{hours}h/Woche",
+            "industry": "Branche",
+            "requiredSkills": "Benötigte Skills",
+            "requirements": "Anforderungen",
+            "mainTasks": "Hauptaufgaben",
+            "workAreas": "Arbeitsbereiche"
+          }
+        },
+        "candidates": {
+          "title": "Zugewiesene Kandidaten ({count})",
+          "assign": "Kandidat zuweisen",
+          "yearsExperience": "{years} Jahre Erfahrung",
+          "moreSkills": "+{count} weitere",
+          "notes": "Notizen:",
+          "assignedAt": "Zugewiesen: {date}"
+        },
+        "statusLabels": {
+          "adminStatus": "Admin Status:",
+          "clientStatus": "Kunden Status:"
+        },
+        "empty": {
+          "title": "Noch keine Kandidaten zugewiesen",
+          "description": "Klicken Sie auf \"Kandidat zuweisen\" um zu beginnen."
+        },
+        "dialog": {
+          "title": "Kandidat zuweisen",
+          "description": "Wählen Sie einen Kandidaten aus, um ihn diesem Suchauftrag zuzuweisen.",
+          "selectLabel": "Kandidat auswählen",
+          "selectPlaceholder": "Kandidat auswählen...",
+          "notesLabel": "Notizen (optional)",
+          "notesPlaceholder": "Warum dieser Kandidat für den Suchauftrag geeignet ist...",
+          "cancel": "Abbrechen",
+          "assign": "Zuweisen"
+        },
+        "status": {
+          "proposed": "Vorgeschlagen",
+          "presented": "Präsentiert",
+          "accepted": "Akzeptiert",
+          "rejected": "Abgelehnt",
+          "hired": "Eingestellt",
+          "reviewed": "Geprüft",
+          "interested": "Interessant",
+          "not_interested": "Nicht interessant",
+          "interview_scheduled": "Interview geplant"
+        },
+        "toast": {
+          "loadError": "Fehler",
+          "loadErrorDesc": "Daten konnten nicht geladen werden.",
+          "assignSuccess": "Erfolg",
+          "assignSuccessDesc": "Kandidat wurde erfolgreich zugewiesen.",
+          "assignError": "Fehler",
+          "assignErrorDesc": "Kandidat konnte nicht zugewiesen werden.",
+          "statusSuccess": "Erfolg",
+          "statusSuccessDesc": "Status wurde aktualisiert.",
+          "statusError": "Fehler",
+          "statusErrorDesc": "Status konnte nicht aktualisiert werden.",
+          "removeSuccess": "Erfolg",
+          "removeSuccessDesc": "Zuweisung wurde entfernt.",
+          "removeError": "Fehler",
+          "removeErrorDesc": "Zuweisung konnte nicht entfernt werden."
+        }
+      }
     }
   },
   "raasInquiry": {
