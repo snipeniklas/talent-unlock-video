@@ -2123,6 +2123,140 @@
       }
     }
   },
+  "candidateManagement": {
+    "title": "RaaS Ressourcen",
+    "subtitle": "Kandidaten und Fachkräfte verwalten",
+    "addNew": "Neue Ressource",
+    "editCandidate": "Ressource bearbeiten",
+    "viewCandidate": "Ressource ansehen",
+    "deleteCandidate": "Ressource löschen",
+    "search": {
+      "placeholder": "Ressourcen suchen...",
+      "noResults": "Keine Ressourcen gefunden"
+    },
+    "filters": {
+      "all": "Alle",
+      "available": "Verfügbar",
+      "booked": "Gebucht",
+      "seniority": "Seniorität",
+      "role": "Rolle"
+    },
+    "fields": {
+      "name": "Name",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "role": "Primäre Rolle",
+      "headline": "Headline",
+      "bio": "Biografie",
+      "seniority": "Seniorität",
+      "yearsExperience": "Jahre Erfahrung",
+      "availability": "Verfügbarkeit",
+      "startEarliest": "Frühester Start",
+      "noticePeriod": "Kündigungsfrist (Tage)",
+      "hoursPerWeek": "Stunden pro Woche",
+      "hourlyRate": "Stundensatz",
+      "monthlyRate": "Monatssatz",
+      "currency": "Währung",
+      "margin": "Marge (%)",
+      "skills": "Skills",
+      "languages": "Sprachen",
+      "location": "Standort",
+      "country": "Land",
+      "city": "Stadt",
+      "avatar": "Profilbild"
+    },
+    "seniority": {
+      "junior": "Junior",
+      "mid": "Mid-Level",
+      "senior": "Senior",
+      "lead": "Lead"
+    },
+    "availability": {
+      "immediately": "Sofort verfügbar",
+      "notice_period": "Kündigungsfrist",
+      "booked": "Gebucht",
+      "paused": "Pausiert"
+    },
+    "proficiency": {
+      "basic": "Grundkenntnisse",
+      "conversational": "Konversationssicher",
+      "fluent": "Fließend",
+      "native": "Muttersprache"
+    },
+    "tabs": {
+      "overview": "Übersicht",
+      "experience": "Erfahrung",
+      "skills": "Skills",
+      "languages": "Sprachen",
+      "links": "Links",
+      "allocations": "Zuweisungen"
+    },
+    "experience": {
+      "title": "Berufserfahrung",
+      "addNew": "Erfahrung hinzufügen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "fields": {
+        "title": "Position",
+        "orgName": "Unternehmen",
+        "startDate": "Startdatum",
+        "endDate": "Enddatum",
+        "summary": "Beschreibung",
+        "techStack": "Technologien"
+      },
+      "current": "Aktuell",
+      "empty": "Keine Erfahrung hinzugefügt"
+    },
+    "links": {
+      "title": "Links",
+      "addNew": "Link hinzufügen",
+      "fields": {
+        "label": "Bezeichnung",
+        "url": "URL"
+      },
+      "empty": "Keine Links hinzugefügt"
+    },
+    "allocations": {
+      "title": "Projekt-Zuweisungen",
+      "empty": "Keine Zuweisungen",
+      "fields": {
+        "project": "Projekt",
+        "company": "Unternehmen",
+        "status": "Status",
+        "allocatedAt": "Zugewiesen am"
+      }
+    },
+    "stats": {
+      "total": "Ressourcen gesamt",
+      "available": "Verfügbar",
+      "booked": "Gebucht",
+      "avgRate": "Durchschnittlicher Satz"
+    },
+    "empty": {
+      "title": "Keine Ressourcen",
+      "description": "Fügen Sie Ihre erste Ressource hinzu"
+    },
+    "detail": {
+      "title": "Ressourcen-Details",
+      "notFound": "Ressource nicht gefunden",
+      "contactInfo": "Kontaktdaten",
+      "rateInfo": "Konditionen",
+      "salesRate": "Verkaufssatz",
+      "internalRate": "Interner Satz"
+    },
+    "dialog": {
+      "deleteTitle": "Ressource löschen",
+      "deleteConfirm": "Sind Sie sicher, dass Sie diese Ressource löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+    },
+    "toast": {
+      "created": "Ressource erstellt",
+      "updated": "Ressource aktualisiert",
+      "deleted": "Ressource gelöscht",
+      "error": "Fehler bei der Ressource"
+    }
+  },
   "auth": {
     "backToHome": "Zur Startseite",
     "welcome": {

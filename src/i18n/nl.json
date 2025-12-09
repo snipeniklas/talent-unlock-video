@@ -2232,6 +2232,140 @@
       }
     }
   },
+  "candidateManagement": {
+    "title": "RaaS Resources",
+    "subtitle": "Kandidaten en professionals beheren",
+    "addNew": "Nieuwe resource",
+    "editCandidate": "Resource bewerken",
+    "viewCandidate": "Resource bekijken",
+    "deleteCandidate": "Resource verwijderen",
+    "search": {
+      "placeholder": "Resources zoeken...",
+      "noResults": "Geen resources gevonden"
+    },
+    "filters": {
+      "all": "Alle",
+      "available": "Beschikbaar",
+      "booked": "Geboekt",
+      "seniority": "Senioriteit",
+      "role": "Rol"
+    },
+    "fields": {
+      "name": "Naam",
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "email": "E-mail",
+      "phone": "Telefoon",
+      "role": "Primaire rol",
+      "headline": "Headline",
+      "bio": "Biografie",
+      "seniority": "Senioriteit",
+      "yearsExperience": "Jaren ervaring",
+      "availability": "Beschikbaarheid",
+      "startEarliest": "Vroegste start",
+      "noticePeriod": "Opzegtermijn (dagen)",
+      "hoursPerWeek": "Uren per week",
+      "hourlyRate": "Uurtarief",
+      "monthlyRate": "Maandtarief",
+      "currency": "Valuta",
+      "margin": "Marge (%)",
+      "skills": "Vaardigheden",
+      "languages": "Talen",
+      "location": "Locatie",
+      "country": "Land",
+      "city": "Stad",
+      "avatar": "Profielfoto"
+    },
+    "seniority": {
+      "junior": "Junior",
+      "mid": "Mid-Level",
+      "senior": "Senior",
+      "lead": "Lead"
+    },
+    "availability": {
+      "immediately": "Direct beschikbaar",
+      "notice_period": "Opzegtermijn",
+      "booked": "Geboekt",
+      "paused": "Gepauzeerd"
+    },
+    "proficiency": {
+      "basic": "Basis",
+      "conversational": "Conversatie",
+      "fluent": "Vloeiend",
+      "native": "Moedertaal"
+    },
+    "tabs": {
+      "overview": "Overzicht",
+      "experience": "Ervaring",
+      "skills": "Vaardigheden",
+      "languages": "Talen",
+      "links": "Links",
+      "allocations": "Toewijzingen"
+    },
+    "experience": {
+      "title": "Werkervaring",
+      "addNew": "Ervaring toevoegen",
+      "edit": "Bewerken",
+      "delete": "Verwijderen",
+      "fields": {
+        "title": "Functie",
+        "orgName": "Bedrijf",
+        "startDate": "Startdatum",
+        "endDate": "Einddatum",
+        "summary": "Beschrijving",
+        "techStack": "Technologieën"
+      },
+      "current": "Huidig",
+      "empty": "Geen ervaring toegevoegd"
+    },
+    "links": {
+      "title": "Links",
+      "addNew": "Link toevoegen",
+      "fields": {
+        "label": "Label",
+        "url": "URL"
+      },
+      "empty": "Geen links toegevoegd"
+    },
+    "allocations": {
+      "title": "Projecttoewijzingen",
+      "empty": "Geen toewijzingen",
+      "fields": {
+        "project": "Project",
+        "company": "Bedrijf",
+        "status": "Status",
+        "allocatedAt": "Toegewezen op"
+      }
+    },
+    "stats": {
+      "total": "Totaal resources",
+      "available": "Beschikbaar",
+      "booked": "Geboekt",
+      "avgRate": "Gemiddeld tarief"
+    },
+    "empty": {
+      "title": "Geen resources",
+      "description": "Voeg uw eerste resource toe"
+    },
+    "detail": {
+      "title": "Resource-details",
+      "notFound": "Resource niet gevonden",
+      "contactInfo": "Contactgegevens",
+      "rateInfo": "Tariefinformatie",
+      "salesRate": "Verkooptarief",
+      "internalRate": "Intern tarief"
+    },
+    "dialog": {
+      "deleteTitle": "Resource verwijderen",
+      "deleteConfirm": "Weet u zeker dat u deze resource wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
+    },
+    "toast": {
+      "created": "Resource aangemaakt",
+      "updated": "Resource bijgewerkt",
+      "deleted": "Resource verwijderd",
+      "error": "Resourcefout"
+    }
+  },
   "auth": {
     "backToHome": "Terug naar startpagina",
     "welcome": {
