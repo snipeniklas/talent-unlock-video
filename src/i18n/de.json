@@ -1544,7 +1544,9 @@
   },
   "app": {
     "layout": {
-      "title": "Hej Talent Platform"
+      "title": "Hej Talent Platform",
+      "profile": "Profil",
+      "logout": "Abmelden"
     },
     "sidebar": {
       "section": {"admin": "Admin Bereich", "main": "Hauptmenü"},

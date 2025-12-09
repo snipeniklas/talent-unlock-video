@@ -146,12 +146,12 @@ const AppLayout = () => {
                     navigate(settingsPath);
                   }}>
                     <UserIcon className="mr-2 h-4 w-4" />
-                    <span>Profil</span>
+                    <span>{t('app.layout.profile', 'Profil')}</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout} className="text-red-600 focus:text-red-600">
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span>Abmelden</span>
+                    <span>{t('app.layout.logout', 'Abmelden')}</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
