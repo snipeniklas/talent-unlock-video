@@ -1838,46 +1838,68 @@
     }
   },
   "crm": {
+    "title": "CRM Systeem",
     "overview": {
       "title": "CRM Overzicht",
+      "subtitle": "Beheer bedrijven en contacten centraal",
       "companies": "Bedrijven",
       "contacts": "Contacten",
-      "tasks": "Taken",
-      "viewAll": "Alles bekijken"
+      "totalCompanies": "Totaal bedrijven",
+      "totalContacts": "Totaal contacten"
     },
     "companies": {
       "title": "Bedrijven",
-      "new": "Nieuw bedrijf",
+      "subtitle": "Beheer alle CRM-bedrijven",
+      "addNew": "Nieuw bedrijf",
+      "editCompany": "Bedrijf bewerken",
+      "viewCompany": "Bedrijf bekijken",
       "fields": {
-        "name": "Naam",
-        "email": "E-mail",
-        "phone": "Telefoon",
+        "name": "Bedrijfsnaam",
         "website": "Website",
         "industry": "Branche",
-        "size": "Grootte",
-        "status": "Status",
-        "revenue": "Omzet",
-        "address": "Adres",
-        "notes": "Notities"
+        "sizeCategory": "Bedrijfsgrootte",
+        "annualRevenue": "Jaarlijkse omzet",
+        "phone": "Telefoon",
+        "email": "E-mail",
+        "addressStreet": "Straat",
+        "addressCity": "Stad",
+        "addressPostalCode": "Postcode",
+        "addressCountry": "Land",
+        "notes": "Notities",
+        "status": "Status"
       },
       "status": {
-        "lead": "Lead",
         "prospect": "Prospect",
+        "qualified": "Gekwalificeerd",
         "customer": "Klant",
         "inactive": "Inactief"
       },
       "detail": {
-        "overview": "Overzicht",
+        "title": "Bedrijfsdetails",
+        "contactInfo": "Contactgegevens",
+        "address": "Adres",
         "contacts": "Contacten",
-        "tasks": "Taken",
-        "notes": "Notities",
-        "activity": "Activiteit"
+        "stats": "Statistieken",
+        "timeline": "Tijdlijn",
+        "created": "Aangemaakt",
+        "lastUpdated": "Laatst bijgewerkt",
+        "notFound": "Bedrijf niet gevonden",
+        "fetchError": "Fout bij het laden van bedrijfsgegevens",
+        "noIndustry": "Geen branche opgegeven",
+        "totalContacts": "Totaal contacten",
+        "addContact": "Contact toevoegen",
+        "addFirstContact": "Eerste contact toevoegen",
+        "noContacts": "Nog geen contacten"
       }
     },
     "contacts": {
       "title": "Contacten",
-      "new": "Nieuw contact",
-      "import": "Importeren",
+      "subtitle": "Beheer alle CRM-contacten",
+      "addNew": "Nieuw contact",
+      "editContact": "Contact bewerken",
+      "viewContact": "Contact bekijken",
+      "kanbanView": "Kanban weergave",
+      "listView": "Lijstweergave",
       "fields": {
         "firstName": "Voornaam",
         "lastName": "Achternaam",
@@ -1886,17 +1908,21 @@
         "mobile": "Mobiel",
         "position": "Functie",
         "department": "Afdeling",
-        "company": "Bedrijf",
         "status": "Status",
         "priority": "Prioriteit",
-        "notes": "Notities"
+        "leadSource": "Lead bron",
+        "notes": "Notities",
+        "nextFollowUp": "Volgende follow-up",
+        "lastContactDate": "Laatste contactdatum",
+        "company": "Bedrijf"
       },
       "status": {
-        "lead": "Lead",
+        "new": "Nieuw",
+        "contacted": "Gecontacteerd",
         "qualified": "Gekwalificeerd",
         "proposal": "Voorstel",
         "negotiation": "Onderhandeling",
-        "closed": "Gesloten",
+        "won": "Gewonnen",
         "lost": "Verloren"
       },
       "priority": {
@@ -1905,21 +1931,136 @@
         "high": "Hoog"
       },
       "detail": {
-        "overview": "Overzicht",
-        "activity": "Activiteit",
-        "tasks": "Taken",
-        "notes": "Notities",
-        "emails": "E-mails"
+        "title": "Contactdetails",
+        "contactInfo": "Contactgegevens",
+        "company": "Bedrijf",
+        "timeline": "Tijdlijn",
+        "created": "Aangemaakt",
+        "lastUpdated": "Laatst bijgewerkt",
+        "notFound": "Contact niet gevonden",
+        "fetchError": "Fout bij het laden van contactgegevens",
+        "noPosition": "Geen functie opgegeven",
+        "viewCompany": "Bedrijf bekijken"
       },
-      "import": {
-        "title": "Contacten importeren",
-        "subtitle": "Upload een CSV-bestand met uw contacten",
-        "downloadTemplate": "Download sjabloon",
-        "dragDrop": "Sleep uw bestand hierheen of klik om te uploaden",
-        "processing": "Wordt verwerkt...",
-        "success": "Contacten succesvol geïmporteerd",
-        "error": "Fout bij importeren van contacten"
+      "csvImport": {
+        "importBtnText": "CSV-import",
+        "newContactBtnText": "Nieuw contact",
+        "companyFieldsNote": "Opmerking: Als u bedrijfsgegevens in uw CSV-bestand heeft, worden automatisch de bijbehorende bedrijven aangemaakt of gevonden."
       }
+    },
+    "tasks": {
+      "title": "Taken",
+      "subtitle": "CRM-taken beheren",
+      "addNew": "Nieuwe taak",
+      "editTask": "Taak bewerken",
+      "viewTask": "Taak bekijken",
+      "fields": {
+        "title": "Titel",
+        "description": "Beschrijving",
+        "status": "Status",
+        "priority": "Prioriteit",
+        "dueDate": "Vervaldatum",
+        "assignedTo": "Toegewezen aan",
+        "contact": "Contact",
+        "company": "Bedrijf",
+        "campaign": "Campagne"
+      },
+      "status": {
+        "todo": "Te doen",
+        "in_progress": "In uitvoering",
+        "waiting": "Wachtend",
+        "completed": "Voltooid",
+        "cancelled": "Geannuleerd"
+      },
+      "priority": {
+        "low": "Laag",
+        "medium": "Gemiddeld",
+        "high": "Hoog",
+        "urgent": "Urgent"
+      },
+      "actions": {
+        "complete": "Voltooien",
+        "reopen": "Heropenen",
+        "delete": "Verwijderen",
+        "edit": "Bewerken"
+      },
+      "filters": {
+        "all": "Alle",
+        "myTasks": "Mijn taken",
+        "overdue": "Achterstallig",
+        "today": "Vandaag verlopen",
+        "upcoming": "Aanstaand"
+      },
+      "empty": {
+        "title": "Geen taken",
+        "description": "Maak uw eerste taak aan"
+      },
+      "toast": {
+        "created": "Taak aangemaakt",
+        "updated": "Taak bijgewerkt",
+        "deleted": "Taak verwijderd",
+        "completed": "Taak voltooid",
+        "error": "Taakfout"
+      }
+    },
+    "contactLists": {
+      "title": "Contactlijsten",
+      "subtitle": "Lijsten voor campagnes beheren",
+      "addNew": "Nieuwe lijst",
+      "editList": "Lijst bewerken",
+      "viewList": "Lijst bekijken",
+      "deleteList": "Lijst verwijderen",
+      "fields": {
+        "name": "Lijstnaam",
+        "description": "Beschrijving",
+        "contactCount": "Aantal contacten",
+        "createdAt": "Aangemaakt op"
+      },
+      "actions": {
+        "addContacts": "Contacten toevoegen",
+        "removeContacts": "Contacten verwijderen",
+        "removeFromList": "Uit lijst verwijderen"
+      },
+      "empty": {
+        "title": "Geen lijsten",
+        "description": "Maak uw eerste contactlijst aan"
+      },
+      "detail": {
+        "title": "Lijstdetails",
+        "contacts": "Contacten in deze lijst",
+        "noContacts": "Geen contacten in deze lijst",
+        "addFirst": "Voeg het eerste contact toe"
+      },
+      "dialog": {
+        "createTitle": "Nieuwe lijst maken",
+        "editTitle": "Lijst bewerken",
+        "deleteTitle": "Lijst verwijderen",
+        "deleteConfirm": "Weet u zeker dat u deze lijst wilt verwijderen?",
+        "addContactsTitle": "Contacten aan lijst toevoegen",
+        "selectContacts": "Contacten selecteren",
+        "searchContacts": "Contacten zoeken..."
+      },
+      "toast": {
+        "created": "Lijst aangemaakt",
+        "updated": "Lijst bijgewerkt",
+        "deleted": "Lijst verwijderd",
+        "contactsAdded": "Contacten toegevoegd",
+        "contactRemoved": "Contact verwijderd",
+        "error": "Lijstfout"
+      }
+    },
+    "actions": {
+      "save": "Opslaan",
+      "cancel": "Annuleren",
+      "edit": "Bewerken",
+      "delete": "Verwijderen",
+      "view": "Bekijken",
+      "addCompany": "Bedrijf toevoegen",
+      "addContact": "Contact toevoegen"
+    },
+    "kanban": {
+      "noContacts": "Geen contacten in deze fase",
+      "contactsCount": "contacten"
     }
   },
   "auth": {
