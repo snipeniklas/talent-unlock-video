@@ -10,6 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import AvatarUpload from '@/components/AvatarUpload';
+import { useTranslation } from '@/i18n/i18n';
 
 interface Skill {
   name: string;
@@ -45,6 +46,7 @@ export default function CandidateDetail() {
   const [loadingData, setLoadingData] = useState(true);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // Basic candidate data
   const [formData, setFormData] = useState({
@@ -211,8 +213,8 @@ export default function CandidateDetail() {
     } catch (error) {
       console.error('Error loading candidate:', error);
       toast({
-        title: "Fehler",
-        description: "RaaS Ressource konnte nicht geladen werden.",
+        title: t('candidateManagement.edit.toast.updateError'),
+        description: t('candidateManagement.edit.toast.loadError'),
         variant: "destructive",
       });
     } finally {
@@ -448,8 +450,8 @@ export default function CandidateDetail() {
       }
 
       toast({
-        title: "Erfolg",
-        description: "RaaS Ressource wurde erfolgreich aktualisiert.",
+        title: t('candidateManagement.edit.toast.updateSuccess'),
+        description: t('candidateManagement.edit.toast.updateSuccessDesc'),
       });
 
       // Reload data to get fresh state
@@ -458,8 +460,8 @@ export default function CandidateDetail() {
     } catch (error) {
       console.error('Error updating candidate:', error);
       toast({
-        title: "Fehler",
-        description: "RaaS Ressource konnte nicht aktualisiert werden.",
+        title: t('candidateManagement.edit.toast.updateError'),
+        description: t('candidateManagement.edit.toast.updateErrorDesc'),
         variant: "destructive",
       });
     } finally {
@@ -471,7 +473,7 @@ export default function CandidateDetail() {
     return (
       <div className="p-6 max-w-4xl mx-auto">
         <div className="flex justify-center items-center h-64">
-          <div className="text-lg">Laden...</div>
+          <div className="text-lg">{t('candidateManagement.edit.loading')}</div>
         </div>
       </div>
     );
@@ -486,21 +488,21 @@ export default function CandidateDetail() {
           className="flex items-center gap-2"
         >
           <ArrowLeft className="h-4 w-4" />
-          Zurück
+          {t('candidateManagement.edit.back')}
         </Button>
-        <h1 className="text-2xl font-bold">RaaS Ressource bearbeiten</h1>
+        <h1 className="text-2xl font-bold">{t('candidateManagement.edit.title')}</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Basic Information */}
         <Card>
           <CardHeader>
-            <CardTitle>Grundinformationen</CardTitle>
+            <CardTitle>{t('candidateManagement.edit.sections.basicInfo')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="first_name">Vorname</Label>
+                <Label htmlFor="first_name">{t('candidateManagement.edit.labels.firstName')}</Label>
                 <Input
                   id="first_name"
                   value={identity.first_name}
@@ -508,7 +510,7 @@ export default function CandidateDetail() {
                 />
               </div>
               <div>
-                <Label htmlFor="last_name">Nachname</Label>
+                <Label htmlFor="last_name">{t('candidateManagement.edit.labels.lastName')}</Label>
                 <Input
                   id="last_name"
                   value={identity.last_name}
@@ -528,36 +530,36 @@ export default function CandidateDetail() {
             </div>
 
             <div>
-              <Label htmlFor="primary_role">Primäre Rolle *</Label>
+              <Label htmlFor="primary_role">{t('candidateManagement.edit.labels.role')}</Label>
               <Input
                 id="primary_role"
                 value={formData.primary_role}
                 onChange={(e) => setFormData({ ...formData, primary_role: e.target.value })}
                 required
-                placeholder="z.B. Customer Support, Full-Stack Developer"
+                placeholder={t('candidateManagement.edit.placeholders.role')}
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="seniority">Seniority Level</Label>
+                <Label htmlFor="seniority">{t('candidateManagement.edit.labels.seniority')}</Label>
                 <Select 
                   value={formData.seniority} 
                   onValueChange={(value) => setFormData({ ...formData, seniority: value as any })}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Seniority auswählen" />
+                    <SelectValue placeholder={t('candidateManagement.edit.selectPlaceholders.seniority')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="junior">Junior</SelectItem>
-                    <SelectItem value="mid">Mid</SelectItem>
-                    <SelectItem value="senior">Senior</SelectItem>
-                    <SelectItem value="lead">Lead</SelectItem>
+                    <SelectItem value="junior">{t('candidateManagement.seniority.junior')}</SelectItem>
+                    <SelectItem value="mid">{t('candidateManagement.seniority.mid')}</SelectItem>
+                    <SelectItem value="senior">{t('candidateManagement.seniority.senior')}</SelectItem>
+                    <SelectItem value="lead">{t('candidateManagement.seniority.lead')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <Label htmlFor="years_experience">Jahre Erfahrung</Label>
+                <Label htmlFor="years_experience">{t('candidateManagement.edit.labels.yearsExperience')}</Label>
                 <Input
                   id="years_experience"
                   type="number"
@@ -569,22 +571,22 @@ export default function CandidateDetail() {
             </div>
 
             <div>
-              <Label htmlFor="headline">Headline</Label>
+              <Label htmlFor="headline">{t('candidateManagement.edit.labels.headline')}</Label>
               <Input
                 id="headline"
                 value={formData.headline}
                 onChange={(e) => setFormData({ ...formData, headline: e.target.value })}
-                placeholder="Kurzer Pitch in einem Satz"
+                placeholder={t('candidateManagement.edit.placeholders.headline')}
               />
             </div>
 
             <div>
-              <Label htmlFor="bio">Bio</Label>
+              <Label htmlFor="bio">{t('candidateManagement.edit.labels.bio')}</Label>
               <Textarea
                 id="bio"
                 value={formData.bio}
                 onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                placeholder="Längere Beschreibung der RaaS Ressource"
+                placeholder={t('candidateManagement.edit.placeholders.bio')}
                 rows={4}
               />
             </div>
@@ -594,12 +596,12 @@ export default function CandidateDetail() {
         {/* Location */}
         <Card>
           <CardHeader>
-            <CardTitle>Standort</CardTitle>
+            <CardTitle>{t('candidateManagement.edit.sections.location')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="country">Land</Label>
+                <Label htmlFor="country">{t('candidateManagement.edit.labels.country')}</Label>
                 <Input
                   id="country"
                   value={identity.country}
@@ -607,7 +609,7 @@ export default function CandidateDetail() {
                 />
               </div>
               <div>
-                <Label htmlFor="city">Stadt</Label>
+                <Label htmlFor="city">{t('candidateManagement.edit.labels.city')}</Label>
                 <Input
                   id="city"
                   value={identity.city}
@@ -621,29 +623,29 @@ export default function CandidateDetail() {
         {/* Availability & Rates */}
         <Card>
           <CardHeader>
-            <CardTitle>Verfügbarkeit & Rates</CardTitle>
+            <CardTitle>{t('candidateManagement.edit.sections.availability')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="availability">Verfügbarkeit</Label>
+                <Label htmlFor="availability">{t('candidateManagement.edit.labels.availability')}</Label>
                 <Select 
                   value={formData.availability} 
                   onValueChange={(value) => setFormData({ ...formData, availability: value as any })}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Verfügbarkeit auswählen" />
+                    <SelectValue placeholder={t('candidateManagement.edit.selectPlaceholders.availability')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="immediately">Sofort verfügbar</SelectItem>
-                    <SelectItem value="notice_period">Kündigungsfrist</SelectItem>
-                    <SelectItem value="booked">Gebucht</SelectItem>
-                    <SelectItem value="paused">Pausiert</SelectItem>
+                    <SelectItem value="immediately">{t('candidateManagement.availability.immediately')}</SelectItem>
+                    <SelectItem value="notice_period">{t('candidateManagement.availability.notice_period')}</SelectItem>
+                    <SelectItem value="booked">{t('candidateManagement.availability.booked')}</SelectItem>
+                    <SelectItem value="paused">{t('candidateManagement.availability.paused')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <Label htmlFor="hours_per_week_pref">Wochenstunden (Wunsch)</Label>
+                <Label htmlFor="hours_per_week_pref">{t('candidateManagement.edit.labels.hoursPerWeek')}</Label>
                 <Input
                   id="hours_per_week_pref"
                   type="number"
@@ -655,7 +657,7 @@ export default function CandidateDetail() {
 
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <Label htmlFor="start_earliest">Frühester Start</Label>
+                <Label htmlFor="start_earliest">{t('candidateManagement.edit.labels.earliestStart')}</Label>
                 <Input
                   id="start_earliest"
                   type="date"
@@ -664,7 +666,7 @@ export default function CandidateDetail() {
                 />
               </div>
               <div>
-                <Label htmlFor="notice_period_days">Kündigungsfrist (Tage)</Label>
+                <Label htmlFor="notice_period_days">{t('candidateManagement.edit.labels.noticePeriod')}</Label>
                 <Input
                   id="notice_period_days"
                   type="number"
@@ -673,7 +675,7 @@ export default function CandidateDetail() {
                 />
               </div>
               <div>
-                <Label htmlFor="currency">Währung</Label>
+                <Label htmlFor="currency">{t('candidateManagement.edit.labels.currency')}</Label>
                 <Select 
                   value={formData.currency} 
                   onValueChange={(value) => setFormData({ ...formData, currency: value })}
@@ -692,7 +694,7 @@ export default function CandidateDetail() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="rate_monthly_target">Monatssatz (Ziel) *</Label>
+                <Label htmlFor="rate_monthly_target">{t('candidateManagement.edit.labels.monthlyRate')}</Label>
                 <Input
                   id="rate_monthly_target"
                   type="number"
@@ -707,18 +709,18 @@ export default function CandidateDetail() {
                       rate_hourly_target: hourlyRate.toString()
                     });
                   }}
-                  placeholder="z.B. 8000"
+                  placeholder={t('candidateManagement.edit.placeholders.monthlyRate')}
                 />
               </div>
               <div>
-                <Label htmlFor="rate_hourly_target">Stundensatz (automatisch berechnet)</Label>
+                <Label htmlFor="rate_hourly_target">{t('candidateManagement.edit.labels.hourlyRate')}</Label>
                 <Input
                   id="rate_hourly_target"
                   type="number"
                   step="0.01"
                   value={formData.rate_hourly_target}
                   disabled
-                  placeholder="Wird automatisch berechnet (Monatssatz ÷ 160h)"
+                  placeholder={t('candidateManagement.edit.placeholders.hourlyRate')}
                 />
               </div>
             </div>
@@ -731,32 +733,32 @@ export default function CandidateDetail() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <DollarSign className="h-5 w-5" />
-                Marge & Preisgestaltung (Nur Hej Talent Admin)
+                {t('candidateManagement.edit.sections.margin')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Monthly Rates Overview */}
               <div className="grid grid-cols-3 gap-4 p-4 bg-background rounded-lg border">
                 <div>
-                  <Label className="text-xs text-muted-foreground">Einkaufspreis (Monat)</Label>
+                  <Label className="text-xs text-muted-foreground">{t('candidateManagement.edit.pricing.purchaseMonthly')}</Label>
                   <p className="text-lg font-semibold text-foreground">
                     {formData.rate_monthly_target ? parseFloat(formData.rate_monthly_target).toFixed(2) : '0.00'} {formData.currency}
                   </p>
                 </div>
                 <div>
-                  <Label htmlFor="margin">Marge (pro Monat) *</Label>
+                  <Label htmlFor="margin">{t('candidateManagement.edit.pricing.marginLabel')}</Label>
                   <Input
                     id="margin"
                     type="number"
                     step="0.01"
                     value={formData.margin}
                     onChange={(e) => setFormData({ ...formData, margin: e.target.value })}
-                    placeholder="z.B. 2000"
+                    placeholder={t('candidateManagement.edit.placeholders.margin')}
                     className="bg-background"
                   />
                 </div>
                 <div>
-                  <Label className="text-xs text-muted-foreground">Verkaufspreis (Monat)</Label>
+                  <Label className="text-xs text-muted-foreground">{t('candidateManagement.edit.pricing.sellingMonthly')}</Label>
                   <p className="text-lg font-bold text-primary">
                     {calculateSellingPrice().toFixed(2)} {formData.currency}
                   </p>
@@ -766,13 +768,13 @@ export default function CandidateDetail() {
               {/* Hourly Rates Overview */}
               <div className="grid grid-cols-2 gap-4 p-4 bg-background rounded-lg border">
                 <div>
-                  <Label className="text-xs text-muted-foreground">Einkaufs-Stundensatz</Label>
+                  <Label className="text-xs text-muted-foreground">{t('candidateManagement.edit.pricing.purchaseHourly')}</Label>
                   <p className="text-lg font-semibold text-foreground">
                     {formData.rate_hourly_target ? parseFloat(formData.rate_hourly_target).toFixed(2) : '0.00'} {formData.currency}/h
                   </p>
                 </div>
                 <div>
-                  <Label className="text-xs text-muted-foreground">Verkaufs-Stundensatz</Label>
+                  <Label className="text-xs text-muted-foreground">{t('candidateManagement.edit.pricing.sellingHourly')}</Label>
                   <p className="text-lg font-bold text-primary">
                     {calculateHourlySellingPrice().toFixed(2)} {formData.currency}/h
                   </p>
@@ -780,7 +782,7 @@ export default function CandidateDetail() {
               </div>
 
               <p className="text-xs text-muted-foreground">
-                * Der Verkaufspreis wird dem Kunden angezeigt. Einkaufspreis und Marge sind nur für Hej Talent Admins sichtbar.
+                {t('candidateManagement.edit.pricing.hint')}
               </p>
             </CardContent>
           </Card>
@@ -790,7 +792,7 @@ export default function CandidateDetail() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              Skills
+              {t('candidateManagement.edit.sections.skills')}
               <Button type="button" variant="outline" size="sm" onClick={addSkill}>
                 <Plus className="h-4 w-4" />
               </Button>
@@ -801,15 +803,15 @@ export default function CandidateDetail() {
               {skills.map((skill, index) => (
                 <div key={index} className="grid grid-cols-5 gap-2 items-end">
                   <div>
-                    <Label>Skill Name</Label>
+                    <Label>{t('candidateManagement.edit.labels.skillName')}</Label>
                     <Input
                       value={skill.name}
                       onChange={(e) => updateSkill(index, 'name', e.target.value)}
-                      placeholder="z.B. React"
+                      placeholder={t('candidateManagement.edit.placeholders.skill')}
                     />
                   </div>
                   <div>
-                    <Label>Level (1-5)</Label>
+                    <Label>{t('candidateManagement.edit.labels.skillLevel')}</Label>
                     <Input
                       type="number"
                       min="1"
@@ -819,7 +821,7 @@ export default function CandidateDetail() {
                     />
                   </div>
                   <div>
-                    <Label>Jahre verwendet</Label>
+                    <Label>{t('candidateManagement.edit.labels.yearsUsed')}</Label>
                     <Input
                       type="number"
                       step="0.1"
@@ -828,7 +830,7 @@ export default function CandidateDetail() {
                     />
                   </div>
                   <div>
-                    <Label>Zuletzt verwendet</Label>
+                    <Label>{t('candidateManagement.edit.labels.lastUsed')}</Label>
                     <Input
                       type="date"
                       value={skill.last_used}
@@ -848,7 +850,7 @@ export default function CandidateDetail() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              Sprachen
+              {t('candidateManagement.edit.sections.languages')}
               <Button type="button" variant="outline" size="sm" onClick={addLanguage}>
                 <Plus className="h-4 w-4" />
               </Button>
@@ -859,15 +861,15 @@ export default function CandidateDetail() {
               {languages.map((language, index) => (
                 <div key={index} className="grid grid-cols-3 gap-4 items-end">
                   <div>
-                    <Label>Sprache (Code)</Label>
+                    <Label>{t('candidateManagement.edit.labels.langCode')}</Label>
                     <Input
                       value={language.lang_code}
                       onChange={(e) => updateLanguage(index, 'lang_code', e.target.value)}
-                      placeholder="z.B. de, en, es"
+                      placeholder={t('candidateManagement.edit.placeholders.langCode')}
                     />
                   </div>
                   <div>
-                    <Label>Niveau</Label>
+                    <Label>{t('candidateManagement.edit.labels.langLevel')}</Label>
                     <Select 
                       value={language.proficiency} 
                       onValueChange={(value) => updateLanguage(index, 'proficiency', value)}
@@ -876,10 +878,10 @@ export default function CandidateDetail() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="basic">Basic</SelectItem>
-                        <SelectItem value="conversational">Conversational</SelectItem>
-                        <SelectItem value="fluent">Fluent</SelectItem>
-                        <SelectItem value="native">Native</SelectItem>
+                        <SelectItem value="basic">{t('candidateManagement.proficiency.basic')}</SelectItem>
+                        <SelectItem value="conversational">{t('candidateManagement.proficiency.conversational')}</SelectItem>
+                        <SelectItem value="fluent">{t('candidateManagement.proficiency.fluent')}</SelectItem>
+                        <SelectItem value="native">{t('candidateManagement.proficiency.native')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -896,7 +898,7 @@ export default function CandidateDetail() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              Berufserfahrung & Projekte
+              {t('candidateManagement.edit.sections.experience')}
               <Button type="button" variant="outline" size="sm" onClick={addExperience}>
                 <Plus className="h-4 w-4" />
               </Button>
@@ -907,7 +909,7 @@ export default function CandidateDetail() {
               {experiences.map((experience, index) => (
                 <div key={index} className="border rounded-lg p-4 space-y-4">
                   <div className="flex justify-between items-start">
-                    <h4 className="font-medium">Erfahrung #{index + 1}</h4>
+                    <h4 className="font-medium">{t('candidateManagement.edit.experienceSection.itemTitle')} #{index + 1}</h4>
                     <Button type="button" variant="outline" size="sm" onClick={() => removeExperience(index)}>
                       <Minus className="h-4 w-4" />
                     </Button>
@@ -915,26 +917,26 @@ export default function CandidateDetail() {
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label>Position/Rolle *</Label>
+                      <Label>{t('candidateManagement.edit.labels.position')}</Label>
                       <Input
                         value={experience.title}
                         onChange={(e) => updateExperience(index, 'title', e.target.value)}
-                        placeholder="z.B. Senior Developer, Customer Support Manager"
+                        placeholder={t('candidateManagement.edit.placeholders.position')}
                       />
                     </div>
                     <div>
-                      <Label>Unternehmen/Organisation</Label>
+                      <Label>{t('candidateManagement.edit.labels.company')}</Label>
                       <Input
                         value={experience.org_name}
                         onChange={(e) => updateExperience(index, 'org_name', e.target.value)}
-                        placeholder="z.B. Tech GmbH, Freelance"
+                        placeholder={t('candidateManagement.edit.placeholders.company')}
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label>Start Datum</Label>
+                      <Label>{t('candidateManagement.edit.labels.startDate')}</Label>
                       <Input
                         type="date"
                         value={experience.start_date}
@@ -942,7 +944,7 @@ export default function CandidateDetail() {
                       />
                     </div>
                     <div>
-                      <Label>End Datum (leer = aktuell)</Label>
+                      <Label>{t('candidateManagement.edit.labels.endDate')}</Label>
                       <Input
                         type="date"
                         value={experience.end_date}
@@ -952,21 +954,21 @@ export default function CandidateDetail() {
                   </div>
 
                   <div>
-                    <Label>Beschreibung & Aufgaben</Label>
+                    <Label>{t('candidateManagement.edit.labels.description')}</Label>
                     <Textarea
                       value={experience.summary}
                       onChange={(e) => updateExperience(index, 'summary', e.target.value)}
-                      placeholder="Kurze Beschreibung der Tätigkeiten und Verantwortlichkeiten..."
+                      placeholder={t('candidateManagement.edit.placeholders.description')}
                       rows={3}
                     />
                   </div>
 
                   <div>
-                    <Label>Tech Stack / Verwendete Tools</Label>
+                    <Label>{t('candidateManagement.edit.labels.techStack')}</Label>
                     <Input
                       value={experience.tech_stack.join(', ')}
                       onChange={(e) => updateExperience(index, 'tech_stack', e.target.value.split(',').map(s => s.trim()).filter(s => s))}
-                      placeholder="z.B. React, Node.js, PostgreSQL, Docker (kommagetrennt)"
+                      placeholder={t('candidateManagement.edit.placeholders.techStack')}
                     />
                   </div>
                 </div>
@@ -974,7 +976,7 @@ export default function CandidateDetail() {
               
               {experiences.length === 0 && (
                 <p className="text-muted-foreground text-center py-4">
-                  Noch keine Berufserfahrung hinzugefügt. Klicken Sie auf das Plus-Symbol, um zu beginnen.
+                  {t('candidateManagement.edit.experienceSection.empty')}
                 </p>
               )}
             </div>
@@ -985,7 +987,7 @@ export default function CandidateDetail() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              Links & Portfolio
+              {t('candidateManagement.edit.sections.links')}
               <Button type="button" variant="outline" size="sm" onClick={addLink}>
                 <Plus className="h-4 w-4" />
               </Button>
@@ -996,19 +998,19 @@ export default function CandidateDetail() {
               {links.map((link, index) => (
                 <div key={index} className="grid grid-cols-3 gap-4 items-end">
                   <div>
-                    <Label>Label</Label>
+                    <Label>{t('candidateManagement.edit.labels.linkLabel')}</Label>
                     <Input
                       value={link.label}
                       onChange={(e) => updateLink(index, 'label', e.target.value)}
-                      placeholder="z.B. GitHub, Portfolio"
+                      placeholder={t('candidateManagement.edit.placeholders.linkLabel')}
                     />
                   </div>
                   <div>
-                    <Label>URL</Label>
+                    <Label>{t('candidateManagement.edit.labels.linkUrl')}</Label>
                     <Input
                       value={link.url}
                       onChange={(e) => updateLink(index, 'url', e.target.value)}
-                      placeholder="https://..."
+                      placeholder={t('candidateManagement.edit.placeholders.linkUrl')}
                     />
                   </div>
                   <Button type="button" variant="outline" size="sm" onClick={() => removeLink(index)}>
@@ -1026,11 +1028,11 @@ export default function CandidateDetail() {
             variant="outline" 
             onClick={() => navigate('/admin/candidates')}
           >
-            Abbrechen
+            {t('candidateManagement.edit.buttons.cancel')}
           </Button>
           <Button type="submit" disabled={loading} className="flex items-center gap-2">
             <Save className="h-4 w-4" />
-            {loading ? 'Wird gespeichert...' : 'Änderungen speichern'}
+            {loading ? t('candidateManagement.edit.buttons.saving') : t('candidateManagement.edit.buttons.save')}
           </Button>
         </div>
       </form>
