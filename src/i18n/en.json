@@ -2172,6 +2172,75 @@
       "error": "Resource error"
     }
   },
+  "companyManagement": {
+    "title": "Companies",
+    "subtitle": "Manage customer companies",
+    "search": {
+      "placeholder": "Search companies...",
+      "noResults": "No companies found"
+    },
+    "fields": {
+      "name": "Company Name",
+      "email": "Email",
+      "website": "Website",
+      "valueProposition": "Value Proposition",
+      "createdAt": "Created At"
+    },
+    "stats": {
+      "totalCompanies": "Total Companies",
+      "totalUsers": "Total Users",
+      "activeProjects": "Active Projects",
+      "usersInCompany": "Users",
+      "projectsTotal": "Total Projects",
+      "projectsActive": "Active Projects",
+      "projectsCompleted": "Completed Projects"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "users": "Users",
+      "projects": "Projects",
+      "settings": "Settings"
+    },
+    "users": {
+      "title": "Company Users",
+      "admin": "Admin",
+      "role": "Role",
+      "addUser": "Add User",
+      "empty": "No users in this company"
+    },
+    "projects": {
+      "title": "Search Requests",
+      "empty": "No projects available",
+      "viewAll": "View All"
+    },
+    "empty": {
+      "title": "No Companies",
+      "description": "No companies have been registered yet"
+    },
+    "detail": {
+      "title": "Company Details",
+      "notFound": "Company not found",
+      "contactInfo": "Contact Information",
+      "noWebsite": "No website specified",
+      "noEmail": "No email specified"
+    },
+    "dialog": {
+      "deleteTitle": "Delete Company",
+      "deleteWarning": "WARNING: This action will delete the company and ALL associated data!",
+      "deleteConfirm": "This includes all users, search requests, tickets, and related data. This action cannot be undone.",
+      "typeToConfirm": "Type the company name to confirm:",
+      "confirmPlaceholder": "Enter company name..."
+    },
+    "actions": {
+      "view": "View",
+      "delete": "Delete"
+    },
+    "toast": {
+      "deleted": "Company deleted",
+      "deleteError": "Error deleting company",
+      "error": "Error loading company data"
+    }
+  },
   "auth": {
     "backToHome": "Back to homepage",
     "welcome": {
