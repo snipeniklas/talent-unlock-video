@@ -39,6 +39,13 @@ const SearchRequestDetail = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t, lang } = useTranslation();
+
+  // Dynamically translate stored German title parts to current language
+  const translateTitle = (title: string) => {
+    const remoteWorkerTranslation = t('app.newRequest.remoteWorker', 'Remote-Mitarbeiter');
+    return title.replace(/Remote-Mitarbeiter/g, remoteWorkerTranslation);
+  };
+
   const [searchRequest, setSearchRequest] = useState<SearchRequest | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -196,7 +203,7 @@ const SearchRequestDetail = () => {
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold">{searchRequest.title}</h1>
+          <h1 className="text-3xl font-bold">{translateTitle(searchRequest.title)}</h1>
           <p className="text-muted-foreground">{searchRequest.company?.name || t('app.searchRequestDetail.companyNotAvailable')}</p>
         </div>
       </div>

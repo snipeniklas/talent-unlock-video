@@ -25,6 +25,12 @@ import { useEffect } from 'react';
 const Dashboard = () => {
   const navigate = useNavigate();
   const { t, lang } = useTranslation();
+
+  // Dynamically translate stored German title parts to current language
+  const translateTitle = (title: string) => {
+    const remoteWorkerTranslation = t('app.newRequest.remoteWorker', 'Remote-Mitarbeiter');
+    return title.replace(/Remote-Mitarbeiter/g, remoteWorkerTranslation);
+  };
   
   // Use optimized hooks with React Query
   const { data: userData, isLoading: userLoading, error: userError } = useUserData();
@@ -244,7 +250,7 @@ const Dashboard = () => {
                           className={`flex items-center justify-between ${index < dashboardData.recentRequests.length - 1 ? 'border-b pb-3' : ''}`}
                         >
                           <div>
-                            <p className="font-medium">{request.title}</p>
+                            <p className="font-medium">{translateTitle(request.title)}</p>
                             <p className="text-sm text-muted-foreground">
                               {t('app.dashboard.recent.created', 'Erstellt')} {new Date(request.created_at).toLocaleDateString(locale, {
                                 day: 'numeric',

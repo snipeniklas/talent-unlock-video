@@ -66,6 +66,12 @@ const SearchRequests = () => {
   const [currentUserId, setCurrentUserId] = useState<string>('');
   const { t, lang } = useTranslation();
 
+  // Dynamically translate stored German title parts to current language
+  const translateTitle = (title: string) => {
+    const remoteWorkerTranslation = t('app.newRequest.remoteWorker', 'Remote-Mitarbeiter');
+    return title.replace(/Remote-Mitarbeiter/g, remoteWorkerTranslation);
+  };
+
   useEffect(() => {
     const fetchSearchRequests = async () => {
       try {
@@ -315,7 +321,7 @@ const SearchRequests = () => {
             <CardHeader>
               <div className="flex justify-between items-start">
                 <div className="flex-1">
-                  <CardTitle className="text-xl text-brand-dark mb-2">{request.title}</CardTitle>
+                  <CardTitle className="text-xl text-brand-dark mb-2">{translateTitle(request.title)}</CardTitle>
                   <CardDescription className="text-base line-clamp-2">
                     {request.description}
                   </CardDescription>
