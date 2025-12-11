@@ -35,6 +35,7 @@ import { ContactDetailDrawer } from "@/components/ContactDetailDrawer";
 import { QuickActionsMenu } from "@/components/QuickActionsMenu";
 import { RemoveContactDialog, RemovalReason } from "@/components/RemoveContactDialog";
 import { Checkbox } from "@/components/ui/checkbox";
+import CsvImportDialog from "@/components/CsvImportDialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -83,6 +84,9 @@ export default function OutreachCampaignDetail() {
   const [testEmail, setTestEmail] = useState("");
   const [contactToRemove, setContactToRemove] = useState<any>(null);
   const [showRemoveDialog, setShowRemoveDialog] = useState(false);
+  
+  // State for CSV import dialog
+  const [showCsvImportDialog, setShowCsvImportDialog] = useState(false);
 
   const { data: campaign, refetch } = useQuery({
     queryKey: ["outreach-campaign", id],
@@ -195,6 +199,24 @@ export default function OutreachCampaignDetail() {
       const { data, error } = await supabase
         .from("outreach_contact_activities")
         .select("*")
+        .eq("campaign_id", id);
+        
+      if (error) throw error;
+      return data || [];
+    },
+    enabled: !!id,
+  });
+
+  // Fetch campaign lists for CSV import
+  const { data: campaignLists } = useQuery({
+    queryKey: ["campaign-lists", id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("outreach_campaign_lists")
+        .select(`
+          list_id,
+          crm_contact_lists(id, name)
+        `)
         .eq("campaign_id", id);
         
       if (error) throw error;
@@ -1028,7 +1050,17 @@ export default function OutreachCampaignDetail() {
                 onAddContacts={() => toast({ title: "Kontakte hinzufügen", description: "Feature kommt bald" })}
                 onAddSequence={() => toast({ title: "Sequenz hinzufügen", description: "Feature kommt bald" })}
                 onProcessNow={handleProcessNow}
-                onImportCsv={() => toast({ title: "CSV Import", description: "Feature kommt bald" })}
+                onImportCsv={() => {
+                  if (!campaignLists || campaignLists.length === 0) {
+                    toast({
+                      title: "Keine Liste verknüpft",
+                      description: "Die Kampagne hat keine Kontaktliste zugewiesen. Bitte fügen Sie zuerst eine Liste hinzu.",
+                      variant: "destructive",
+                    });
+                    return;
+                  }
+                  setShowCsvImportDialog(true);
+                }}
                 onResetToDraft={() => updateStatusMutation.mutate("draft")}
               />
 
@@ -2146,6 +2178,23 @@ export default function OutreachCampaignDetail() {
             isLoading={removeContactMutation.isPending}
           />
         )}
+
+        {/* CSV Import Dialog */}
+        <CsvImportDialog
+          open={showCsvImportDialog}
+          onOpenChange={setShowCsvImportDialog}
+          type="contacts"
+          preselectedListId={campaignLists?.[0]?.list_id}
+          preselectedListName={(campaignLists?.[0]?.crm_contact_lists as any)?.name}
+          campaignId={id}
+          onImportComplete={() => {
+            queryClient.invalidateQueries({ queryKey: ["outreach-campaign", id] });
+            toast({
+              title: "Import erfolgreich",
+              description: "Kontakte wurden importiert und zur Kampagne hinzugefügt.",
+            });
+          }}
+        />
       </div>
     </TooltipProvider>
   );
