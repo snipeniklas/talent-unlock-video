@@ -421,10 +421,10 @@ export default function CsvImportDialog({
       <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {type === "companies" ? t('crm.csvImport.titleCompanies') : t('crm.csvImport.titleContacts')}
+            {type === "companies" ? t('crm.contacts.csvImport.titleCompanies') : t('crm.contacts.csvImport.titleContacts')}
           </DialogTitle>
           <DialogDescription>
-            {t('crm.csvImport.description')}
+            {t('crm.contacts.csvImport.description')}
           </DialogDescription>
         </DialogHeader>
 
@@ -449,19 +449,19 @@ export default function CsvImportDialog({
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Upload className="h-5 w-5" />
-                  {t('crm.csvImport.step1.title')}
+                  {t('crm.contacts.csvImport.step1.title')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-8 text-center">
                   <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-lg font-medium mb-2">{t('crm.csvImport.step1.chooseFile')}</p>
+                  <p className="text-lg font-medium mb-2">{t('crm.contacts.csvImport.step1.chooseFile')}</p>
                   <p className="text-muted-foreground mb-4">
-                    {type === "companies" ? t('crm.csvImport.step1.selectFileCompanies') : t('crm.csvImport.step1.selectFile')}
+                    {type === "companies" ? t('crm.contacts.csvImport.step1.selectFileCompanies') : t('crm.contacts.csvImport.step1.selectFile')}
                   </p>
                   <label htmlFor="csv-upload" className="cursor-pointer">
                     <Button asChild>
-                      <span>{t('crm.csvImport.step1.browseFiles')}</span>
+                      <span>{t('crm.contacts.csvImport.step1.browseFiles')}</span>
                     </Button>
                   </label>
                   <input
@@ -476,7 +476,7 @@ export default function CsvImportDialog({
                 <div className="text-center">
                   <Button variant="outline" onClick={downloadTemplate}>
                     <Download className="h-4 w-4 mr-2" />
-                    {t('crm.csvImport.step1.downloadTemplate')}
+                    {t('crm.contacts.csvImport.step1.downloadTemplate')}
                   </Button>
                 </div>
               </CardContent>
@@ -489,17 +489,17 @@ export default function CsvImportDialog({
           <div className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>{t('crm.csvImport.step2.title')}</CardTitle>
+                <CardTitle>{t('crm.contacts.csvImport.step2.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
-                  {t('crm.csvImport.step2.foundRows').replace('{{count}}', String(csvData.length))}
+                  {t('crm.contacts.csvImport.step2.foundRows').replace('{{count}}', String(csvData.length))}
                 </p>
                 
                 {type === "contacts" && (
                   <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
                     <p className="text-sm text-blue-700">
-                      {t('crm.csvImport.companyFieldsNote')}
+                      {t('crm.contacts.csvImport.companyFieldsNote')}
                     </p>
                   </div>
                 )}
@@ -507,16 +507,16 @@ export default function CsvImportDialog({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {csvHeaders.map((header) => (
                     <div key={header} className="space-y-2">
-                      <Label>{t('crm.csvImport.step2.csvColumn')}: "{header}"</Label>
+                      <Label>{t('crm.contacts.csvImport.step2.csvColumn')}: "{header}"</Label>
                       <Select
                         value={fieldMapping[header] || ""}
                         onValueChange={(value) => handleFieldMapping(header, value)}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder={t('crm.csvImport.step2.selectField')} />
+                          <SelectValue placeholder={t('crm.contacts.csvImport.step2.selectField')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="skip">{t('crm.csvImport.step2.skipField')}</SelectItem>
+                          <SelectItem value="skip">{t('crm.contacts.csvImport.step2.skipField')}</SelectItem>
                           {Object.entries(fields).map(([key, label]) => (
                             <SelectItem key={key} value={key}>
                               {label}
@@ -536,7 +536,7 @@ export default function CsvImportDialog({
                     onClick={handleImport} 
                     disabled={importing || Object.keys(fieldMapping).length === 0}
                   >
-                    {importing ? t('crm.csvImport.importing') : t('crm.csvImport.importRecords').replace('{{count}}', String(csvData.length))}
+                    {importing ? t('crm.contacts.csvImport.importing') : t('crm.contacts.csvImport.importRecords').replace('{{count}}', String(csvData.length))}
                   </Button>
                 </div>
               </CardContent>
@@ -548,7 +548,7 @@ export default function CsvImportDialog({
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <List className="h-5 w-5" />
-                    {preselectedListId ? t('crm.csvImport.listSection.titleCampaign') : t('crm.csvImport.listSection.title')}
+                    {preselectedListId ? t('crm.contacts.csvImport.listSection.titleCampaign') : t('crm.contacts.csvImport.listSection.title')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -556,7 +556,7 @@ export default function CsvImportDialog({
                   {preselectedListId && campaignId && (
                     <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
                       <p className="text-sm text-blue-700">
-                        {t('crm.csvImport.listSection.campaignInfo').replace('{{listName}}', preselectedListName || '')}
+                        {t('crm.contacts.csvImport.listSection.campaignInfo').replace('{{listName}}', preselectedListName || '')}
                       </p>
                     </div>
                   )}
@@ -567,24 +567,24 @@ export default function CsvImportDialog({
                       <RadioGroup value={listOption} onValueChange={(value: any) => setListOption(value)}>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="none" id="none" />
-                          <Label htmlFor="none">{t('crm.csvImport.listSection.noList')}</Label>
+                          <Label htmlFor="none">{t('crm.contacts.csvImport.listSection.noList')}</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="existing" id="existing" />
-                          <Label htmlFor="existing">{t('crm.csvImport.listSection.existingList')}</Label>
+                          <Label htmlFor="existing">{t('crm.contacts.csvImport.listSection.existingList')}</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="new" id="new" />
-                          <Label htmlFor="new">{t('crm.csvImport.listSection.newList')}</Label>
+                          <Label htmlFor="new">{t('crm.contacts.csvImport.listSection.newList')}</Label>
                         </div>
                       </RadioGroup>
 
                       {listOption === "existing" && (
                         <div className="space-y-2 pl-6">
-                          <Label>{t('crm.csvImport.listSection.selectList')}</Label>
+                          <Label>{t('crm.contacts.csvImport.listSection.selectList')}</Label>
                           <Select value={selectedListId} onValueChange={setSelectedListId}>
                             <SelectTrigger>
-                              <SelectValue placeholder={t('crm.csvImport.listSection.choosePlaceholder')} />
+                              <SelectValue placeholder={t('crm.contacts.csvImport.listSection.choosePlaceholder')} />
                             </SelectTrigger>
                             <SelectContent>
                               {contactLists?.map((list) => (
@@ -600,19 +600,19 @@ export default function CsvImportDialog({
                       {listOption === "new" && (
                         <div className="space-y-4 pl-6">
                           <div className="space-y-2">
-                            <Label>{t('crm.csvImport.listSection.newListName')}</Label>
+                            <Label>{t('crm.contacts.csvImport.listSection.newListName')}</Label>
                             <Input
                               value={newListName}
                               onChange={(e) => setNewListName(e.target.value)}
-                              placeholder={t('crm.csvImport.listSection.newListNamePlaceholder')}
+                              placeholder={t('crm.contacts.csvImport.listSection.newListNamePlaceholder')}
                             />
                           </div>
                           <div className="space-y-2">
-                            <Label>{t('crm.csvImport.listSection.listDescription')}</Label>
+                            <Label>{t('crm.contacts.csvImport.listSection.listDescription')}</Label>
                             <Textarea
                               value={newListDescription}
                               onChange={(e) => setNewListDescription(e.target.value)}
-                              placeholder={t('crm.csvImport.listSection.listDescriptionPlaceholder')}
+                              placeholder={t('crm.contacts.csvImport.listSection.listDescriptionPlaceholder')}
                               rows={3}
                             />
                           </div>
@@ -640,19 +640,19 @@ export default function CsvImportDialog({
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <CheckCircle className="h-5 w-5 text-green-600" />
-                  {t('crm.csvImport.step3.title')}
+                  {t('crm.contacts.csvImport.step3.title')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center p-4 bg-green-50 rounded-lg">
                     <div className="text-2xl font-bold text-green-600">{importResults.success}</div>
-                    <div className="text-sm text-green-700">{t('crm.csvImport.step3.success')}</div>
+                    <div className="text-sm text-green-700">{t('crm.contacts.csvImport.step3.success')}</div>
                   </div>
                   {importResults.errors > 0 && (
                     <div className="text-center p-4 bg-red-50 rounded-lg">
                       <div className="text-2xl font-bold text-red-600">{importResults.errors}</div>
-                      <div className="text-sm text-red-700">{t('crm.csvImport.step3.errors')}</div>
+                      <div className="text-sm text-red-700">{t('crm.contacts.csvImport.step3.errors')}</div>
                     </div>
                   )}
                 </div>
@@ -661,17 +661,17 @@ export default function CsvImportDialog({
                   <div className="flex items-center gap-2 p-3 bg-yellow-50 border border-yellow-200 rounded">
                     <AlertCircle className="h-4 w-4 text-yellow-600" />
                     <p className="text-sm text-yellow-700">
-                      {t('crm.csvImport.step3.errorNote')}
+                      {t('crm.contacts.csvImport.step3.errorNote')}
                     </p>
                   </div>
                 )}
 
                 <div className="flex gap-4">
                   <Button onClick={handleClose}>
-                    {t('crm.csvImport.step3.close')}
+                    {t('crm.contacts.csvImport.step3.close')}
                   </Button>
                   <Button variant="outline" onClick={resetDialog}>
-                    {t('crm.csvImport.step3.importAnother')}
+                    {t('crm.contacts.csvImport.step3.importAnother')}
                   </Button>
                 </div>
               </CardContent>
