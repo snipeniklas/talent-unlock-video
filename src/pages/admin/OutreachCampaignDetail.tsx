@@ -36,6 +36,7 @@ import { QuickActionsMenu } from "@/components/QuickActionsMenu";
 import { RemoveContactDialog, RemovalReason } from "@/components/RemoveContactDialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import CsvImportDialog from "@/components/CsvImportDialog";
+import AddContactsDialog from "@/components/AddContactsDialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -87,6 +88,9 @@ export default function OutreachCampaignDetail() {
   
   // State for CSV import dialog
   const [showCsvImportDialog, setShowCsvImportDialog] = useState(false);
+  
+  // State for Add Contacts dialog
+  const [showAddContactsDialog, setShowAddContactsDialog] = useState(false);
 
   const { data: campaign, refetch } = useQuery({
     queryKey: ["outreach-campaign", id],
@@ -1047,7 +1051,17 @@ export default function OutreachCampaignDetail() {
             <div className="flex gap-2 flex-wrap">
               <QuickActionsMenu
                 campaignStatus={campaign.status}
-                onAddContacts={() => toast({ title: "Kontakte hinzufügen", description: "Feature kommt bald" })}
+                onAddContacts={() => {
+                  if (!campaignLists || campaignLists.length === 0) {
+                    toast({
+                      title: "Keine Liste verknüpft",
+                      description: "Die Kampagne hat keine Kontaktliste zugewiesen. Bitte fügen Sie zuerst eine Liste hinzu.",
+                      variant: "destructive",
+                    });
+                    return;
+                  }
+                  setShowAddContactsDialog(true);
+                }}
                 onAddSequence={() => toast({ title: "Sequenz hinzufügen", description: "Feature kommt bald" })}
                 onProcessNow={handleProcessNow}
                 onImportCsv={() => {
@@ -2193,6 +2207,19 @@ export default function OutreachCampaignDetail() {
               title: "Import erfolgreich",
               description: "Kontakte wurden importiert und zur Kampagne hinzugefügt.",
             });
+          }}
+        />
+
+        {/* Add Contacts Dialog */}
+        <AddContactsDialog
+          open={showAddContactsDialog}
+          onOpenChange={setShowAddContactsDialog}
+          listId={campaignLists?.[0]?.list_id || ""}
+          listName={(campaignLists?.[0]?.crm_contact_lists as any)?.name || ""}
+          campaignId={id || ""}
+          existingContactIds={campaign.outreach_campaign_contacts?.map((cc: any) => cc.contact_id) || []}
+          onContactsAdded={() => {
+            queryClient.invalidateQueries({ queryKey: ["outreach-campaign", id] });
           }}
         />
       </div>

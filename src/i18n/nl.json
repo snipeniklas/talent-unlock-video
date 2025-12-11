@@ -2861,6 +2861,34 @@
         "pause": "Pauzeren",
         "resume": "Hervatten",
         "duplicate": "Dupliceren"
+      },
+      "quickActions": {
+        "title": "Snelle acties",
+        "addContacts": "Contacten toevoegen",
+        "importCsv": "Contacten importeren (CSV)",
+        "addSequence": "Nieuwe sequentie toevoegen",
+        "processNow": "Campagne nu verwerken",
+        "resetToDraft": "Terug naar concept"
+      },
+      "addContactsDialog": {
+        "title": "Contacten toevoegen",
+        "description": "Selecteer bestaande CRM-contacten om toe te voegen aan de campagne.",
+        "searchPlaceholder": "Zoeken op naam, e-mail, functie of bedrijf...",
+        "noContacts": "Geen contacten gevonden",
+        "allContactsAdded": "Alle beschikbare contacten zijn al aan deze campagne toegevoegd.",
+        "selectAll": "Alles selecteren",
+        "available": "beschikbaar",
+        "selected": "{{count}} geselecteerd",
+        "addButton": "{{count}} contacten toevoegen",
+        "addButtonSingle": "1 contact toevoegen",
+        "noEmail": "Geen e-mail",
+        "toast": {
+          "success": "Contacten toegevoegd",
+          "successDescription": "{{count}} contacten zijn aan de campagne toegevoegd.",
+          "error": "Fout bij toevoegen",
+          "noListError": "Geen lijst gekoppeld",
+          "noListDescription": "De campagne heeft geen contactlijst toegewezen."
+        }
       }
     },
     "sequences": {

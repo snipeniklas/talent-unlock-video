@@ -2436,6 +2436,34 @@
         "pause": "Pausieren",
         "resume": "Fortsetzen",
         "duplicate": "Duplizieren"
+      },
+      "quickActions": {
+        "title": "Schnellaktionen",
+        "addContacts": "Kontakte hinzufügen",
+        "importCsv": "Kontakte importieren (CSV)",
+        "addSequence": "Neue Sequenz hinzufügen",
+        "processNow": "Kampagne jetzt verarbeiten",
+        "resetToDraft": "Zurück zu Entwurf"
+      },
+      "addContactsDialog": {
+        "title": "Kontakte hinzufügen",
+        "description": "Wählen Sie bestehende CRM-Kontakte aus, um sie zur Kampagne hinzuzufügen.",
+        "searchPlaceholder": "Nach Name, E-Mail, Position oder Unternehmen suchen...",
+        "noContacts": "Keine Kontakte gefunden",
+        "allContactsAdded": "Alle verfügbaren Kontakte sind bereits in dieser Kampagne.",
+        "selectAll": "Alle auswählen",
+        "available": "verfügbar",
+        "selected": "{{count}} ausgewählt",
+        "addButton": "{{count}} Kontakte hinzufügen",
+        "addButtonSingle": "1 Kontakt hinzufügen",
+        "noEmail": "Keine E-Mail",
+        "toast": {
+          "success": "Kontakte hinzugefügt",
+          "successDescription": "{{count}} Kontakte wurden zur Kampagne hinzugefügt.",
+          "error": "Fehler beim Hinzufügen",
+          "noListError": "Keine Liste verknüpft",
+          "noListDescription": "Die Kampagne hat keine Kontaktliste zugewiesen."
+        }
       }
     },
     "sequences": {
