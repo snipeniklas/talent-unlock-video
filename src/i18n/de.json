@@ -2212,7 +2212,61 @@
       "csvImport": {
         "importBtnText": "CSV-Import",
         "newContactBtnText": "Neuer Kontakt",
-        "companyFieldsNote": "Hinweis: Wenn Sie Unternehmensdaten in Ihrer CSV-Datei haben, werden automatisch entsprechende Unternehmen erstellt oder gefunden."
+        "companyFieldsNote": "Hinweis: Wenn Sie Unternehmensdaten in Ihrer CSV-Datei haben, werden automatisch entsprechende Unternehmen erstellt oder gefunden.",
+        "title": "CSV Import",
+        "titleCompanies": "CSV Import - Unternehmen",
+        "titleContacts": "CSV Import - Kontakte",
+        "description": "Daten aus einer CSV-Datei in 3 einfachen Schritten importieren",
+        "step1": {
+          "title": "Schritt 1: CSV-Datei hochladen",
+          "chooseFile": "CSV-Datei zum Importieren auswählen",
+          "selectFile": "Wählen Sie eine CSV-Datei mit Ihren Kontaktdaten",
+          "selectFileCompanies": "Wählen Sie eine CSV-Datei mit Ihren Unternehmensdaten",
+          "browseFiles": "Dateien durchsuchen",
+          "downloadTemplate": "Vorlage herunterladen"
+        },
+        "step2": {
+          "title": "Schritt 2: Felder zuordnen",
+          "foundRows": "{{count}} Zeilen gefunden. Ordnen Sie Ihre CSV-Spalten den Datenbankfeldern zu:",
+          "csvColumn": "CSV-Spalte",
+          "selectField": "Datenbankfeld auswählen",
+          "skipField": "Dieses Feld überspringen"
+        },
+        "step3": {
+          "title": "Import abgeschlossen",
+          "success": "Erfolgreich importiert",
+          "errors": "Import fehlgeschlagen",
+          "errorNote": "Einige Datensätze konnten nicht importiert werden. Dies liegt meist an fehlenden Pflichtfeldern oder ungültigen Datenformaten.",
+          "close": "Schließen",
+          "importAnother": "Weitere Datei importieren"
+        },
+        "listSection": {
+          "title": "Zu Kontaktliste hinzufügen (optional)",
+          "titleCampaign": "Zielliste",
+          "campaignInfo": "Kontakte werden zur Liste \"{{listName}}\" hinzugefügt und automatisch zur laufenden Kampagne.",
+          "noList": "Zu keiner Liste hinzufügen",
+          "existingList": "Zu bestehender Liste hinzufügen",
+          "newList": "Neue Liste erstellen",
+          "selectList": "Kontaktliste auswählen",
+          "choosePlaceholder": "Liste auswählen",
+          "newListName": "Listenname *",
+          "newListNamePlaceholder": "Listennamen eingeben",
+          "listDescription": "Beschreibung",
+          "listDescriptionPlaceholder": "Optionale Beschreibung"
+        },
+        "importing": "Importiere...",
+        "importRecords": "{{count}} Datensätze importieren",
+        "errors": {
+          "invalidFile": "Bitte wählen Sie eine CSV-Datei aus",
+          "parseError": "CSV-Datei konnte nicht gelesen werden. Stellen Sie sicher, dass Ihre CSV Komma (,) oder Semikolon (;) als Trennzeichen verwendet.",
+          "emptyFile": "CSV-Datei muss mindestens eine Kopfzeile und eine Datenzeile enthalten",
+          "importFailed": "Import fehlgeschlagen",
+          "listCreateFailed": "Kontaktliste konnte nicht erstellt werden",
+          "notAuthenticated": "Nicht authentifiziert"
+        },
+        "warnings": {
+          "listAddWarning": "Kontakte importiert, aber einige konnten nicht zur Liste hinzugefügt werden"
+        }
       }
     },
     "tasks": {
