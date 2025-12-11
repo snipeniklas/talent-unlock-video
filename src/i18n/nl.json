@@ -2637,7 +2637,61 @@
       "csvImport": {
         "importBtnText": "CSV-import",
         "newContactBtnText": "Nieuw contact",
-        "companyFieldsNote": "Opmerking: Als u bedrijfsgegevens in uw CSV-bestand heeft, worden automatisch de bijbehorende bedrijven aangemaakt of gevonden."
+        "companyFieldsNote": "Opmerking: Als u bedrijfsgegevens in uw CSV-bestand heeft, worden automatisch de bijbehorende bedrijven aangemaakt of gevonden.",
+        "title": "CSV Import",
+        "titleCompanies": "CSV Import - Bedrijven",
+        "titleContacts": "CSV Import - Contacten",
+        "description": "Importeer gegevens uit een CSV-bestand in 3 eenvoudige stappen",
+        "step1": {
+          "title": "Stap 1: CSV-bestand uploaden",
+          "chooseFile": "Kies CSV-bestand om te importeren",
+          "selectFile": "Selecteer een CSV-bestand met uw contactgegevens",
+          "selectFileCompanies": "Selecteer een CSV-bestand met uw bedrijfsgegevens",
+          "browseFiles": "Bladeren",
+          "downloadTemplate": "Sjabloon downloaden"
+        },
+        "step2": {
+          "title": "Stap 2: Velden toewijzen",
+          "foundRows": "{{count}} rijen gevonden. Wijs uw CSV-kolommen toe aan databasevelden:",
+          "csvColumn": "CSV-kolom",
+          "selectField": "Selecteer databaseveld",
+          "skipField": "Dit veld overslaan"
+        },
+        "step3": {
+          "title": "Import voltooid",
+          "success": "Succesvol geïmporteerd",
+          "errors": "Import mislukt",
+          "errorNote": "Sommige records konden niet worden geïmporteerd. Dit komt meestal door ontbrekende verplichte velden of ongeldige gegevensindelingen.",
+          "close": "Sluiten",
+          "importAnother": "Ander bestand importeren"
+        },
+        "listSection": {
+          "title": "Toevoegen aan contactlijst (optioneel)",
+          "titleCampaign": "Doellijst",
+          "campaignInfo": "Contacten worden toegevoegd aan lijst \"{{listName}}\" en automatisch aan de lopende campagne.",
+          "noList": "Niet aan een lijst toevoegen",
+          "existingList": "Aan bestaande lijst toevoegen",
+          "newList": "Nieuwe lijst maken",
+          "selectList": "Selecteer contactlijst",
+          "choosePlaceholder": "Kies een contactlijst",
+          "newListName": "Lijstnaam *",
+          "newListNamePlaceholder": "Voer lijstnaam in",
+          "listDescription": "Beschrijving",
+          "listDescriptionPlaceholder": "Optionele beschrijving"
+        },
+        "importing": "Importeren...",
+        "importRecords": "{{count}} records importeren",
+        "errors": {
+          "invalidFile": "Selecteer een CSV-bestand",
+          "parseError": "Kon het juiste scheidingsteken niet detecteren. Zorg ervoor dat uw CSV komma (,) of puntkomma (;) als scheidingsteken gebruikt.",
+          "emptyFile": "CSV-bestand moet minimaal een koptekstrij en één gegevensrij bevatten",
+          "importFailed": "Import mislukt",
+          "listCreateFailed": "Kon contactlijst niet aanmaken",
+          "notAuthenticated": "Gebruiker niet geauthenticeerd"
+        },
+        "warnings": {
+          "listAddWarning": "Contacten geïmporteerd maar sommige konden niet aan de lijst worden toegevoegd"
+        }
       }
     },
     "tasks": {

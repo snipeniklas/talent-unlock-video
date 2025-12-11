@@ -1976,7 +1976,61 @@
       "csvImport": {
         "importBtnText": "CSV Import",
         "newContactBtnText": "New Contact",
-        "companyFieldsNote": "Note: If you have company data in your CSV file, corresponding companies will be automatically created or found."
+        "companyFieldsNote": "Note: If you have company data in your CSV file, corresponding companies will be automatically created or found.",
+        "title": "CSV Import",
+        "titleCompanies": "CSV Import - Companies",
+        "titleContacts": "CSV Import - Contacts",
+        "description": "Import data from a CSV file in 3 easy steps",
+        "step1": {
+          "title": "Step 1: Upload CSV File",
+          "chooseFile": "Choose CSV file to import",
+          "selectFile": "Select a CSV file containing your contact data",
+          "selectFileCompanies": "Select a CSV file containing your company data",
+          "browseFiles": "Browse Files",
+          "downloadTemplate": "Download Template"
+        },
+        "step2": {
+          "title": "Step 2: Map CSV Fields",
+          "foundRows": "Found {{count}} rows. Map your CSV columns to database fields:",
+          "csvColumn": "CSV Column",
+          "selectField": "Select database field",
+          "skipField": "Skip this field"
+        },
+        "step3": {
+          "title": "Import Complete",
+          "success": "Successfully imported",
+          "errors": "Failed to import",
+          "errorNote": "Some records failed to import. This is usually due to missing required fields or invalid data formats.",
+          "close": "Close",
+          "importAnother": "Import Another File"
+        },
+        "listSection": {
+          "title": "Add to Contact List (Optional)",
+          "titleCampaign": "Target List",
+          "campaignInfo": "Contacts will be added to list \"{{listName}}\" and automatically to the running campaign.",
+          "noList": "Don't add to any list",
+          "existingList": "Add to existing list",
+          "newList": "Create new list",
+          "selectList": "Select Contact List",
+          "choosePlaceholder": "Choose a contact list",
+          "newListName": "List Name *",
+          "newListNamePlaceholder": "Enter list name",
+          "listDescription": "Description",
+          "listDescriptionPlaceholder": "Optional description"
+        },
+        "importing": "Importing...",
+        "importRecords": "Import {{count}} Records",
+        "errors": {
+          "invalidFile": "Please select a CSV file",
+          "parseError": "Could not detect correct delimiter. Please ensure your CSV uses comma (,) or semicolon (;) as separator.",
+          "emptyFile": "CSV file must have at least a header row and one data row",
+          "importFailed": "Import failed",
+          "listCreateFailed": "Failed to create contact list",
+          "notAuthenticated": "User not authenticated"
+        },
+        "warnings": {
+          "listAddWarning": "Contacts imported but some could not be added to the list"
+        }
       }
     },
     "tasks": {
