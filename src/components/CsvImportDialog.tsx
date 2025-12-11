@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -19,6 +19,10 @@ interface CsvImportDialogProps {
   onOpenChange: (open: boolean) => void;
   type: "companies" | "contacts";
   onImportComplete: () => void;
+  // For campaign integration - preselect a list
+  preselectedListId?: string;
+  preselectedListName?: string;
+  campaignId?: string;
 }
 
 interface CsvRow {
@@ -74,7 +78,15 @@ const contactFields = {
   company_notes: "Company Notes"
 };
 
-export default function CsvImportDialog({ open, onOpenChange, type, onImportComplete }: CsvImportDialogProps) {
+export default function CsvImportDialog({ 
+  open, 
+  onOpenChange, 
+  type, 
+  onImportComplete,
+  preselectedListId,
+  preselectedListName,
+  campaignId
+}: CsvImportDialogProps) {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [step, setStep] = useState(1);
@@ -84,11 +96,19 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
   const [importing, setImporting] = useState(false);
   const [importResults, setImportResults] = useState<{ success: number; errors: number }>({ success: 0, errors: 0 });
   
-  // Contact list states
-  const [listOption, setListOption] = useState<"none" | "existing" | "new">("none");
-  const [selectedListId, setSelectedListId] = useState<string>("");
+  // Contact list states - preselect if provided
+  const [listOption, setListOption] = useState<"none" | "existing" | "new">(preselectedListId ? "existing" : "none");
+  const [selectedListId, setSelectedListId] = useState<string>(preselectedListId || "");
   const [newListName, setNewListName] = useState("");
   const [newListDescription, setNewListDescription] = useState("");
+  
+  // Reset list selection when preselectedListId changes
+  useEffect(() => {
+    if (preselectedListId) {
+      setListOption("existing");
+      setSelectedListId(preselectedListId);
+    }
+  }, [preselectedListId]);
 
   const fields = type === "companies" ? companyFields : contactFields;
   const tableName = type === "companies" ? "crm_companies" : "crm_contacts";
@@ -528,62 +548,83 @@ export default function CsvImportDialog({ open, onOpenChange, type, onImportComp
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <List className="h-5 w-5" />
-                    Add to Contact List (Optional)
+                    {preselectedListId ? "Zielliste" : "Add to Contact List (Optional)"}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <RadioGroup value={listOption} onValueChange={(value: any) => setListOption(value)}>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="none" id="none" />
-                      <Label htmlFor="none">Don't add to any list</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="existing" id="existing" />
-                      <Label htmlFor="existing">Add to existing list</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="new" id="new" />
-                      <Label htmlFor="new">Create new list</Label>
-                    </div>
-                  </RadioGroup>
-
-                  {listOption === "existing" && (
-                    <div className="space-y-2 pl-6">
-                      <Label>Select Contact List</Label>
-                      <Select value={selectedListId} onValueChange={setSelectedListId}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Choose a contact list" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {contactLists?.map((list) => (
-                            <SelectItem key={list.id} value={list.id}>
-                              {list.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                  {/* Show info banner when preselected for campaign */}
+                  {preselectedListId && campaignId && (
+                    <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
+                      <p className="text-sm text-blue-700">
+                        Kontakte werden zur Liste <strong>"{preselectedListName}"</strong> hinzugefügt und automatisch zur laufenden Kampagne.
+                      </p>
                     </div>
                   )}
+                  
+                  {/* Hide list selection when preselected */}
+                  {!preselectedListId && (
+                    <>
+                      <RadioGroup value={listOption} onValueChange={(value: any) => setListOption(value)}>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="none" id="none" />
+                          <Label htmlFor="none">Don't add to any list</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="existing" id="existing" />
+                          <Label htmlFor="existing">Add to existing list</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="new" id="new" />
+                          <Label htmlFor="new">Create new list</Label>
+                        </div>
+                      </RadioGroup>
 
-                  {listOption === "new" && (
-                    <div className="space-y-4 pl-6">
-                      <div className="space-y-2">
-                        <Label>List Name *</Label>
-                        <Input
-                          value={newListName}
-                          onChange={(e) => setNewListName(e.target.value)}
-                          placeholder="Enter list name"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Description</Label>
-                        <Textarea
-                          value={newListDescription}
-                          onChange={(e) => setNewListDescription(e.target.value)}
-                          placeholder="Optional description"
-                          rows={3}
-                        />
-                      </div>
+                      {listOption === "existing" && (
+                        <div className="space-y-2 pl-6">
+                          <Label>Select Contact List</Label>
+                          <Select value={selectedListId} onValueChange={setSelectedListId}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Choose a contact list" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {contactLists?.map((list) => (
+                                <SelectItem key={list.id} value={list.id}>
+                                  {list.name}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
+
+                      {listOption === "new" && (
+                        <div className="space-y-4 pl-6">
+                          <div className="space-y-2">
+                            <Label>List Name *</Label>
+                            <Input
+                              value={newListName}
+                              onChange={(e) => setNewListName(e.target.value)}
+                              placeholder="Enter list name"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label>Description</Label>
+                            <Textarea
+                              value={newListDescription}
+                              onChange={(e) => setNewListDescription(e.target.value)}
+                              placeholder="Optional description"
+                              rows={3}
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                  
+                  {/* Show selected list info when preselected */}
+                  {preselectedListId && (
+                    <div className="p-2 bg-muted rounded-md">
+                      <p className="text-sm font-medium">{preselectedListName}</p>
                     </div>
                   )}
                 </CardContent>
