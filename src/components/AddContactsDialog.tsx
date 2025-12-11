@@ -164,7 +164,7 @@ export default function AddContactsDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="sm:max-w-[650px] max-h-[85vh] flex flex-col bg-background border shadow-xl z-[100]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Users className="h-5 w-5" />
@@ -180,7 +180,7 @@ export default function AddContactsDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4">
+        <div className="flex-1 flex flex-col gap-4 min-h-0">
           {/* Search Input */}
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -198,21 +198,23 @@ export default function AddContactsDialog({
               <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
             </div>
           ) : availableContacts.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
-              {existingContactIds.length > 0 && allContacts?.length === existingContactIds.length
-                ? t("outreach.campaigns.addContactsDialog.allContactsAdded")
-                : t("outreach.campaigns.addContactsDialog.noContacts")}
+            <div className="flex-1 flex items-center justify-center py-12 text-center">
+              <div className="text-muted-foreground">
+                {existingContactIds.length > 0 && allContacts?.length === existingContactIds.length
+                  ? t("outreach.campaigns.addContactsDialog.allContactsAdded")
+                  : t("outreach.campaigns.addContactsDialog.noContacts")}
+              </div>
             </div>
           ) : (
-            <>
-              {/* Select All */}
-              <div className="flex items-center justify-between px-2 py-1 border-b">
+            <div className="flex-1 flex flex-col border rounded-lg overflow-hidden min-h-0 max-h-[400px]">
+              {/* Select All Header */}
+              <div className="flex items-center justify-between px-3 py-2 bg-muted/30 border-b sticky top-0">
                 <div className="flex items-center gap-2">
                   <Checkbox
                     checked={selectedContactIds.length === availableContacts.length && availableContacts.length > 0}
                     onCheckedChange={toggleAll}
                   />
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-sm font-medium">
                     {t("outreach.campaigns.addContactsDialog.selectAll")}
                   </span>
                 </div>
@@ -221,46 +223,46 @@ export default function AddContactsDialog({
                 </span>
               </div>
 
-              <ScrollArea className="h-[300px] border rounded-md">
+              <ScrollArea className="flex-1 min-h-0">
                 <div className="p-2 space-y-1">
                   {availableContacts.map((contact) => (
                     <div
                       key={contact.id}
-                      className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer"
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 cursor-pointer border border-transparent hover:border-border transition-colors"
                       onClick={() => toggleContact(contact.id)}
                     >
                       <Checkbox
                         checked={selectedContactIds.includes(contact.id)}
                         onCheckedChange={() => toggleContact(contact.id)}
                       />
-                      <Avatar className="h-8 w-8">
-                        <AvatarFallback className="text-xs">
+                      <Avatar className="h-9 w-9 shrink-0">
+                        <AvatarFallback className="text-xs bg-primary/10 text-primary">
                           {getInitials(contact.first_name, contact.last_name)}
                         </AvatarFallback>
                       </Avatar>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-medium text-sm truncate">
-                          {contact.first_name} {contact.last_name}
+                      <div className="flex-1 min-w-0 grid grid-cols-[1fr_auto_auto] gap-2 items-center">
+                        <div className="min-w-0">
+                          <div className="font-medium text-sm truncate">
+                            {contact.first_name} {contact.last_name}
+                          </div>
+                          <div className="text-xs text-muted-foreground truncate">
+                            {contact.email || t("outreach.campaigns.addContactsDialog.noEmail")}
+                          </div>
                         </div>
-                        <div className="text-xs text-muted-foreground truncate">
-                          {contact.email || t("outreach.campaigns.addContactsDialog.noEmail")}
+                        <div className="text-xs text-muted-foreground truncate max-w-[120px] text-right">
+                          {contact.position || ""}
                         </div>
+                        {(contact.crm_companies as any)?.name && (
+                          <Badge variant="secondary" className="text-xs truncate max-w-[120px] shrink-0">
+                            {(contact.crm_companies as any).name}
+                          </Badge>
+                        )}
                       </div>
-                      {contact.position && (
-                        <div className="text-xs text-muted-foreground truncate max-w-[100px]">
-                          {contact.position}
-                        </div>
-                      )}
-                      {(contact.crm_companies as any)?.name && (
-                        <Badge variant="outline" className="text-xs truncate max-w-[100px]">
-                          {(contact.crm_companies as any).name}
-                        </Badge>
-                      )}
                     </div>
                   ))}
                 </div>
               </ScrollArea>
-            </>
+            </div>
           )}
         </div>
 
