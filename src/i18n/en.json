@@ -2200,6 +2200,34 @@
         "pause": "Pause",
         "resume": "Resume",
         "duplicate": "Duplicate"
+      },
+      "quickActions": {
+        "title": "Quick Actions",
+        "addContacts": "Add Contacts",
+        "importCsv": "Import Contacts (CSV)",
+        "addSequence": "Add New Sequence",
+        "processNow": "Process Campaign Now",
+        "resetToDraft": "Reset to Draft"
+      },
+      "addContactsDialog": {
+        "title": "Add Contacts",
+        "description": "Select existing CRM contacts to add to the campaign.",
+        "searchPlaceholder": "Search by name, email, position or company...",
+        "noContacts": "No contacts found",
+        "allContactsAdded": "All available contacts are already in this campaign.",
+        "selectAll": "Select all",
+        "available": "available",
+        "selected": "{{count}} selected",
+        "addButton": "Add {{count}} Contacts",
+        "addButtonSingle": "Add 1 Contact",
+        "noEmail": "No email",
+        "toast": {
+          "success": "Contacts added",
+          "successDescription": "{{count}} contacts were added to the campaign.",
+          "error": "Error adding contacts",
+          "noListError": "No list linked",
+          "noListDescription": "The campaign has no contact list assigned."
+        }
       }
     },
     "sequences": {
