@@ -206,9 +206,9 @@ export default function AddContactsDialog({
               </div>
             </div>
           ) : (
-            <div className="flex-1 flex flex-col border rounded-lg overflow-hidden min-h-0 max-h-[400px]">
+            <div className="flex flex-col border rounded-lg overflow-hidden">
               {/* Select All Header */}
-              <div className="flex items-center justify-between px-3 py-2 bg-muted/30 border-b sticky top-0">
+              <div className="flex items-center justify-between px-3 py-2 bg-muted/50 border-b">
                 <div className="flex items-center gap-2">
                   <Checkbox
                     checked={selectedContactIds.length === availableContacts.length && availableContacts.length > 0}
@@ -223,7 +223,7 @@ export default function AddContactsDialog({
                 </span>
               </div>
 
-              <ScrollArea className="flex-1 min-h-0">
+              <ScrollArea className="h-[350px]">
                 <div className="p-2 space-y-1">
                   {availableContacts.map((contact) => (
                     <div
