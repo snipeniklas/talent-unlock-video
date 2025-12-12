@@ -154,6 +154,14 @@
         "title": "Fout",
         "description": "RaaS Resource kon niet worden aangemaakt."
       }
+    },
+    "category": {
+      "label": "Categorie",
+      "placeholder": "Categorie selecteren (optioneel)",
+      "none": "Geen categorie",
+      "ki": "AI",
+      "it": "IT",
+      "backoffice": "Backoffice"
     }
   },
   "candidateView": {

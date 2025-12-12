@@ -53,6 +53,7 @@ interface Candidate {
   margin?: number;
   currency?: string;
   skills: any;
+  category?: string;
   created_at: string;
   updated_at: string;
 }
@@ -228,6 +229,19 @@ const CustomerCandidateDetail: React.FC = () => {
     return colors[availability as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
 
+  const getCategoryLabel = (category: string) => {
+    switch (category) {
+      case 'ki':
+        return 'KI';
+      case 'it':
+        return 'IT';
+      case 'backoffice':
+        return 'Backoffice';
+      default:
+        return category;
+    }
+  };
+
   const getInitials = (firstName?: string, lastName?: string) => {
     const first = firstName?.charAt(0) || '';
     const last = lastName?.charAt(0) || '';
@@ -335,6 +349,11 @@ const CustomerCandidateDetail: React.FC = () => {
                       {candidate.seniority && (
                         <Badge className={getSeniorityColor(candidate.seniority)}>
                           {candidate.seniority}
+                        </Badge>
+                      )}
+                      {candidate.category && (
+                        <Badge className="bg-rose-100 text-rose-800">
+                          {getCategoryLabel(candidate.category)}
                         </Badge>
                       )}
                     </div>

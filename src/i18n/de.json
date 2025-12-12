@@ -154,6 +154,14 @@
         "title": "Fehler",
         "description": "RaaS Ressource konnte nicht erstellt werden."
       }
+    },
+    "category": {
+      "label": "Kategorie",
+      "placeholder": "Kategorie auswählen (optional)",
+      "none": "Keine Kategorie",
+      "ki": "KI",
+      "it": "IT",
+      "backoffice": "Backoffice"
     }
   },
   "candidateView": {

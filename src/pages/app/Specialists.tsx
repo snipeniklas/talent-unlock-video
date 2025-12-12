@@ -42,6 +42,7 @@ interface Specialist {
   notes: string;
   email: string;
   phone: string;
+  category?: string;
 }
 
 const Specialists = () => {
@@ -100,7 +101,8 @@ const Specialists = () => {
             hourly_rate_min: customerHourlyRate,
             hourly_rate_max: customerHourlyRate,
             rating: 5, // Default rating
-            status: candidate.availability === 'immediately' ? 'available' : 'unavailable'
+            status: candidate.availability === 'immediately' ? 'available' : 'unavailable',
+            category: candidate.category || undefined,
           };
         });
 
@@ -167,6 +169,19 @@ const Specialists = () => {
         return t('app.specialists.filter.unavailable');
       default:
         return status || t('app.specialists.filter.unknown');
+    }
+  };
+
+  const getCategoryLabel = (category: string) => {
+    switch (category) {
+      case 'ki':
+        return t('candidate.category.ki', 'KI');
+      case 'it':
+        return t('candidate.category.it', 'IT');
+      case 'backoffice':
+        return t('candidate.category.backoffice', 'Backoffice');
+      default:
+        return category;
     }
   };
 
@@ -248,9 +263,16 @@ const Specialists = () => {
                         {specialist.current_position || t('app.specialists.card.positionNotSet')}
                       </CardDescription>
                     </div>
-                    <Badge className={getAvailabilityColor(specialist.status)}>
-                      {getAvailabilityText(specialist.status)}
-                    </Badge>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge className={getAvailabilityColor(specialist.status)}>
+                        {getAvailabilityText(specialist.status)}
+                      </Badge>
+                      {specialist.category && (
+                        <Badge className="bg-rose-100 text-rose-800 hover:bg-rose-100">
+                          {getCategoryLabel(specialist.category)}
+                        </Badge>
+                      )}
+                    </div>
                   </div>
                   
                   <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">

@@ -152,6 +152,7 @@ export type Database = {
             | Database["public"]["Enums"]["availability_status"]
             | null
           bio: string | null
+          category: string | null
           created_at: string
           currency: string | null
           headline: string | null
@@ -175,6 +176,7 @@ export type Database = {
             | Database["public"]["Enums"]["availability_status"]
             | null
           bio?: string | null
+          category?: string | null
           created_at?: string
           currency?: string | null
           headline?: string | null
@@ -198,6 +200,7 @@ export type Database = {
             | Database["public"]["Enums"]["availability_status"]
             | null
           bio?: string | null
+          category?: string | null
           created_at?: string
           currency?: string | null
           headline?: string | null
