@@ -11,8 +11,7 @@ import {
   TrendingUp,
   Building2,
   UserCheck,
-  AlertCircle,
-  RefreshCw
+  AlertCircle
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '@/i18n/i18n';
@@ -157,16 +156,6 @@ const Dashboard = () => {
               {userRole === 'company_admin' ? `${t('app.dashboard.welcomePrefix', 'Willkommen zurück bei')} ${company?.name || ''}` : t('app.dashboard.subtitle', 'Übersicht Ihrer Aktivitäten')}
             </p>
           </div>
-          <div className="flex gap-2">
-            <Button 
-              onClick={() => refetch()} 
-              variant="outline" 
-              size="sm"
-              disabled={dashboardLoading}
-            >
-              <RefreshCw className={`h-4 w-4 mr-2 ${dashboardLoading ? 'animate-spin' : ''}`} />
-              {dashboardLoading ? t('app.dashboard.loading', 'Laden...') : t('app.dashboard.refresh', 'Aktualisieren')}
-            </Button>
           {userRole !== 'admin' && (
             <Button onClick={() => navigate('/app/search-requests/new')} className="bg-primary hover:bg-primary-hover w-full sm:w-auto text-sm lg:text-base">
               <Plus className="w-4 h-4 mr-2" />
@@ -174,8 +163,7 @@ const Dashboard = () => {
               <span className="hidden sm:inline lg:hidden">{t('app.dashboard.cta.newMedium', 'Neue Anfrage')}</span>
               <span className="hidden lg:inline">{t('app.dashboard.cta.new', 'Neue Anfrage erstellen')}</span>
             </Button>
-            )}
-          </div>
+          )}
         </div>
 
         {/* Stats Cards */}
