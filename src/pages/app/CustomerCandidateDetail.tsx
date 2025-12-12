@@ -6,9 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft, MapPin, Calendar, DollarSign, Clock, Globe, ExternalLink, User, Mail, Phone } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, DollarSign, Clock, Globe, ExternalLink, User, Mail, Phone, Lock, AlertCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from '@/i18n/i18n';
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 // Interface definitions
 interface Skill {
@@ -71,6 +73,7 @@ const CustomerCandidateDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
   
   const [candidate, setCandidate] = useState<Candidate | null>(null);
   const [identity, setIdentity] = useState<Identity | null>(null);
@@ -78,6 +81,7 @@ const CustomerCandidateDetail: React.FC = () => {
   const [languages, setLanguages] = useState<Language[]>([]);
   const [links, setLinks] = useState<Link[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAllocated, setIsAllocated] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -91,7 +95,7 @@ const CustomerCandidateDetail: React.FC = () => {
     try {
       setLoading(true);
 
-      // Check if user has access to this candidate through allocations
+      // Get current user
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         navigate('/auth');
@@ -106,16 +110,16 @@ const CustomerCandidateDetail: React.FC = () => {
 
       if (!profile?.company_id) {
         toast({
-          title: "Fehler",
-          description: "Keine Firma gefunden.",
+          title: t('common.error'),
+          description: t('app.candidateDetail.noCompanyError'),
           variant: "destructive",
         });
         navigate('/app/dashboard');
         return;
       }
 
-      // Check if this candidate is allocated to any search request of the user's company
-      const { data: allocations, error: allocationError } = await supabase
+      // Check if this candidate is allocated to user's company
+      const { data: allocations } = await supabase
         .from('search_request_allocations')
         .select(`
           candidate_id,
@@ -123,46 +127,20 @@ const CustomerCandidateDetail: React.FC = () => {
         `)
         .eq('candidate_id', id);
 
-      if (allocationError) {
-        console.error('Error checking allocation:', allocationError);
-        toast({
-          title: "Zugriff verweigert",
-          description: "Sie haben keinen Zugriff auf diesen Kandidaten.",
-          variant: "destructive",
-        });
-        navigate('/app/dashboard');
-        return;
+      let allocated = false;
+      if (allocations && allocations.length > 0) {
+        const searchRequestIds = allocations.map(a => a.search_request_id);
+        const { data: searchRequests } = await supabase
+          .from('search_requests')
+          .select('id')
+          .in('id', searchRequestIds)
+          .eq('company_id', profile.company_id);
+        
+        allocated = searchRequests !== null && searchRequests.length > 0;
       }
+      setIsAllocated(allocated);
 
-      if (!allocations || allocations.length === 0) {
-        toast({
-          title: "Zugriff verweigert", 
-          description: "Sie haben keinen Zugriff auf diesen Kandidaten.",
-          variant: "destructive",
-        });
-        navigate('/app/dashboard');
-        return;
-      }
-
-      // Verify at least one allocation belongs to a search request from user's company
-      const searchRequestIds = allocations.map(a => a.search_request_id);
-      const { data: searchRequests, error: searchError } = await supabase
-        .from('search_requests')
-        .select('id')
-        .in('id', searchRequestIds)
-        .eq('company_id', profile.company_id);
-
-      if (searchError || !searchRequests || searchRequests.length === 0) {
-        toast({
-          title: "Zugriff verweigert",
-          description: "Sie haben keinen Zugriff auf diesen Kandidaten.",
-          variant: "destructive",
-        });
-        navigate('/app/dashboard');
-        return;
-      }
-
-      // Load candidate data
+      // Load candidate data (now accessible due to new RLS policy)
       const [candidateResponse, identityResponse, experienceResponse, languageResponse, linkResponse] = await Promise.all([
         supabase.from('candidates').select('*').eq('id', id).single(),
         supabase.from('candidate_identity').select('*').eq('candidate_id', id).single(),
@@ -184,8 +162,8 @@ const CustomerCandidateDetail: React.FC = () => {
     } catch (error) {
       console.error('Error loading candidate data:', error);
       toast({
-        title: "Fehler",
-        description: "Kandidatendaten konnten nicht geladen werden.",
+        title: t('common.error'),
+        description: t('app.candidateDetail.loadError'),
         variant: "destructive",
       });
     } finally {
@@ -205,6 +183,7 @@ const CustomerCandidateDetail: React.FC = () => {
     if (!monthlyRate) return 0;
     return monthlyRate / 173.3;
   };
+
   // Helper functions
   const getSeniorityColor = (seniority: string) => {
     const colors = {
@@ -230,11 +209,11 @@ const CustomerCandidateDetail: React.FC = () => {
   const getCategoryLabel = (category: string) => {
     switch (category) {
       case 'ki':
-        return 'KI';
+        return t('candidate.category.ki', 'KI');
       case 'it':
-        return 'IT';
+        return t('candidate.category.it', 'IT');
       case 'backoffice':
-        return 'Backoffice';
+        return t('candidate.category.backoffice', 'Backoffice');
       default:
         return category;
     }
@@ -248,11 +227,14 @@ const CustomerCandidateDetail: React.FC = () => {
 
   const getProficiencyLabel = (proficiency: string) => {
     const labels = {
-      'beginner': 'Anfänger',
-      'intermediate': 'Fortgeschritten',
-      'advanced': 'Erfahren',
-      'expert': 'Experte',
-      'native': 'Muttersprache'
+      'beginner': t('app.candidateDetail.proficiency.beginner', 'Anfänger'),
+      'intermediate': t('app.candidateDetail.proficiency.intermediate', 'Fortgeschritten'),
+      'advanced': t('app.candidateDetail.proficiency.advanced', 'Erfahren'),
+      'expert': t('app.candidateDetail.proficiency.expert', 'Experte'),
+      'native': t('app.candidateDetail.proficiency.native', 'Muttersprache'),
+      'basic': t('app.candidateDetail.proficiency.basic', 'Grundkenntnisse'),
+      'conversational': t('app.candidateDetail.proficiency.conversational', 'Konversationssicher'),
+      'fluent': t('app.candidateDetail.proficiency.fluent', 'Fließend')
     };
     return labels[proficiency as keyof typeof labels] || proficiency;
   };
@@ -290,10 +272,10 @@ const CustomerCandidateDetail: React.FC = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Kandidat nicht gefunden</h2>
-          <p className="text-gray-600 mb-4">Der angeforderte Kandidat konnte nicht gefunden werden.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('app.candidateDetail.notFound')}</h2>
+          <p className="text-gray-600 mb-4">{t('app.candidateDetail.notFoundDesc')}</p>
           <Button onClick={() => navigate('/app/dashboard')}>
-            Zurück zum Dashboard
+            {t('app.candidateDetail.backToDashboard')}
           </Button>
         </div>
       </div>
@@ -311,10 +293,22 @@ const CustomerCandidateDetail: React.FC = () => {
             className="mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Zurück
+            {t('common.back')}
           </Button>
-          <h1 className="text-3xl font-bold text-gray-900">Kandidatendetails</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{t('app.candidateDetail.title')}</h1>
         </div>
+
+        {/* Restricted Access Banner */}
+        {!isAllocated && (
+          <Alert className="mb-6 border-amber-200 bg-amber-50">
+            <Lock className="h-4 w-4 text-amber-600" />
+            <AlertDescription className="text-amber-800">
+              <span className="font-medium">{t('app.candidateDetail.restricted.title')}</span>
+              <br />
+              {t('app.candidateDetail.restricted.description')}
+            </AlertDescription>
+          </Alert>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Main Content */}
@@ -324,24 +318,34 @@ const CustomerCandidateDetail: React.FC = () => {
               <CardHeader>
                 <div className="flex items-start space-x-4">
                   <Avatar className="h-20 w-20">
-                    <AvatarImage src={identity?.avatar_url || ''} alt={identity?.first_name || ''} />
-                    <AvatarFallback className="text-xl bg-primary/10 text-primary">
+                    <AvatarImage src={isAllocated ? (identity?.avatar_url || '') : ''} alt={identity?.first_name || ''} />
+                    <AvatarFallback className={`text-xl ${isAllocated ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground'}`}>
                       {getInitials(identity?.first_name, identity?.last_name)}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
-                    <CardTitle className="text-2xl">
-                      {identity?.first_name} {identity?.last_name}
+                    <CardTitle className={`text-2xl ${!isAllocated ? 'text-muted-foreground' : ''}`}>
+                      {isAllocated 
+                        ? `${identity?.first_name} ${identity?.last_name}`
+                        : `${identity?.first_name?.[0] || ''}. ${identity?.last_name?.[0] || ''}.`
+                      }
+                      {!isAllocated && <Lock className="inline-block w-5 h-5 ml-2 text-muted-foreground" />}
                     </CardTitle>
                     <p className="text-lg text-gray-600 mt-1">{candidate.primary_role}</p>
-                    {candidate.headline && (
+                    {isAllocated && candidate.headline && (
                       <p className="text-gray-500 mt-2">{candidate.headline}</p>
                     )}
                     <div className="flex items-center space-x-4 mt-3">
-                      {identity?.city && (
+                      {isAllocated && identity?.city && (
                         <div className="flex items-center text-gray-500">
                           <MapPin className="h-4 w-4 mr-1" />
                           <span>{identity.city}, {identity.country}</span>
+                        </div>
+                      )}
+                      {!isAllocated && (
+                        <div className="flex items-center text-muted-foreground">
+                          <MapPin className="h-4 w-4 mr-1" />
+                          <span className="blur-sm select-none">—</span>
                         </div>
                       )}
                       {candidate.seniority && (
@@ -358,23 +362,32 @@ const CustomerCandidateDetail: React.FC = () => {
                   </div>
                 </div>
               </CardHeader>
-              {candidate.bio && (
+              {/* Bio - only for allocated */}
+              {isAllocated && candidate.bio && (
                 <CardContent>
-                  <h3 className="font-semibold mb-2">Über mich</h3>
+                  <h3 className="font-semibold mb-2">{t('app.candidateDetail.aboutMe')}</h3>
                   <p className="text-gray-700 whitespace-pre-wrap">{candidate.bio}</p>
+                </CardContent>
+              )}
+              {!isAllocated && (
+                <CardContent>
+                  <div className="p-4 bg-muted/50 rounded-lg text-center text-muted-foreground">
+                    <Lock className="w-6 h-6 mx-auto mb-2" />
+                    <p className="text-sm">{t('app.candidateDetail.restricted.bioHidden')}</p>
+                  </div>
                 </CardContent>
               )}
             </Card>
 
-            {/* Skills */}
+            {/* Skills - always visible */}
             {candidate.skills && candidate.skills.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle>Fähigkeiten</CardTitle>
+                  <CardTitle>{t('app.candidateDetail.skills')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {candidate.skills.map((skill, index) => (
+                    {candidate.skills.map((skill: any, index: number) => (
                       <Badge key={index} variant="secondary" className="bg-blue-100 text-blue-800">
                         {typeof skill === 'string' ? skill : skill.name}
                       </Badge>
@@ -384,11 +397,11 @@ const CustomerCandidateDetail: React.FC = () => {
               </Card>
             )}
 
-            {/* Work Experience */}
+            {/* Work Experience - always visible */}
             {experiences.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle>Berufserfahrung</CardTitle>
+                  <CardTitle>{t('app.candidateDetail.experience')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-6">
@@ -401,7 +414,7 @@ const CustomerCandidateDetail: React.FC = () => {
                           <div className="flex items-center text-gray-500 text-sm mt-1">
                             <Calendar className="h-4 w-4 mr-1" />
                             <span>
-                              {formatDate(exp.start_date)} - {exp.end_date ? formatDate(exp.end_date) : 'Aktuell'}
+                              {formatDate(exp.start_date)} - {exp.end_date ? formatDate(exp.end_date) : t('app.candidateDetail.current')}
                             </span>
                           </div>
                           {exp.summary && (
@@ -409,9 +422,9 @@ const CustomerCandidateDetail: React.FC = () => {
                           )}
                           {exp.tech_stack && exp.tech_stack.length > 0 && (
                             <div className="mt-3">
-                              <p className="text-sm font-medium text-gray-600 mb-2">Technologien:</p>
+                              <p className="text-sm font-medium text-gray-600 mb-2">{t('app.candidateDetail.technologies')}:</p>
                               <div className="flex flex-wrap gap-1">
-                                {exp.tech_stack.map((tech, techIndex) => (
+                                {exp.tech_stack.map((tech: any, techIndex: number) => (
                                   <Badge key={techIndex} variant="outline" className="text-xs">
                                     {typeof tech === 'string' ? tech : tech.name || tech}
                                   </Badge>
@@ -430,18 +443,18 @@ const CustomerCandidateDetail: React.FC = () => {
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Rates & Availability */}
+            {/* Rates & Availability - always visible */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <DollarSign className="h-5 w-5 mr-2" />
-                  Konditionen & Verfügbarkeit
+                  {t('app.candidateDetail.ratesAvailability')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {candidate.rate_monthly_target && (
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Stundensatz</p>
+                    <p className="text-sm font-medium text-gray-600">{t('app.candidateDetail.hourlyRate')}</p>
                     <p className="text-lg font-semibold text-green-600">
                       {calculateCustomerHourlyRate(candidate).toFixed(2)} {candidate.currency || 'EUR'}/h
                     </p>
@@ -450,64 +463,64 @@ const CustomerCandidateDetail: React.FC = () => {
 
                 {candidate.rate_monthly_target && (
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Monatssatz</p>
+                    <p className="text-sm font-medium text-gray-600">{t('app.candidateDetail.monthlyRate')}</p>
                     <p className="text-lg font-semibold text-green-600">
-                      {calculateCustomerMonthlyRate(candidate).toFixed(2)} {candidate.currency || 'EUR'}/Monat
+                      {calculateCustomerMonthlyRate(candidate).toFixed(2)} {candidate.currency || 'EUR'}/{t('app.candidateDetail.month')}
                     </p>
                   </div>
                 )}
 
                 {candidate.availability && (
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Verfügbarkeit</p>
+                    <p className="text-sm font-medium text-gray-600">{t('app.candidateDetail.availability')}</p>
                     <Badge className={getAvailabilityColor(candidate.availability)}>
-                      {candidate.availability === 'immediately' && 'Sofort verfügbar'}
-                      {candidate.availability === '1_month' && 'In 1 Monat'}
-                      {candidate.availability === '3_months' && 'In 3 Monaten'}
-                      {candidate.availability === '6_months' && 'In 6 Monaten'}
+                      {candidate.availability === 'immediately' && t('app.candidateDetail.availabilityStatus.immediately')}
+                      {candidate.availability === 'notice_period' && t('app.candidateDetail.availabilityStatus.noticePeriod')}
+                      {candidate.availability === 'booked' && t('app.candidateDetail.availabilityStatus.booked')}
+                      {candidate.availability === 'paused' && t('app.candidateDetail.availabilityStatus.paused')}
                     </Badge>
                   </div>
                 )}
 
                 {candidate.hours_per_week_pref && (
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Wochenstunden</p>
+                    <p className="text-sm font-medium text-gray-600">{t('app.candidateDetail.weeklyHours')}</p>
                     <div className="flex items-center">
                       <Clock className="h-4 w-4 mr-1" />
-                      <span>{candidate.hours_per_week_pref}h/Woche</span>
+                      <span>{candidate.hours_per_week_pref}h/{t('app.candidateDetail.week')}</span>
                     </div>
                   </div>
                 )}
 
                 {candidate.start_earliest && (
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Frühester Start</p>
+                    <p className="text-sm font-medium text-gray-600">{t('app.candidateDetail.earliestStart')}</p>
                     <p>{formatDate(candidate.start_earliest)}</p>
                   </div>
                 )}
 
                 {candidate.notice_period_days && (
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Kündigungsfrist</p>
-                    <p>{candidate.notice_period_days} Tage</p>
+                    <p className="text-sm font-medium text-gray-600">{t('app.candidateDetail.noticePeriod')}</p>
+                    <p>{candidate.notice_period_days} {t('app.candidateDetail.days')}</p>
                   </div>
                 )}
 
                 {candidate.years_experience && (
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Berufserfahrung</p>
-                    <p>{candidate.years_experience} Jahre</p>
+                    <p className="text-sm font-medium text-gray-600">{t('app.candidateDetail.yearsExperience')}</p>
+                    <p>{candidate.years_experience} {t('app.candidateDetail.years')}</p>
                   </div>
                 )}
               </CardContent>
             </Card>
 
-            {/* Consultant Contact Information */}
+            {/* Consultant Contact Information - always visible */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <User className="h-5 w-5 mr-2" />
-                  Ansprechpartner
+                  {t('app.candidateDetail.contactPerson')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -530,13 +543,13 @@ const CustomerCandidateDetail: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* Languages */}
+            {/* Languages - always visible */}
             {languages.length > 0 && (
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Globe className="h-5 w-5 mr-2" />
-                    Sprachen
+                    {t('app.candidateDetail.languages')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -556,13 +569,13 @@ const CustomerCandidateDetail: React.FC = () => {
               </Card>
             )}
 
-            {/* Links */}
-            {links.length > 0 && (
+            {/* Links - only for allocated */}
+            {isAllocated && links.length > 0 && (
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <ExternalLink className="h-5 w-5 mr-2" />
-                    Links
+                    {t('app.candidateDetail.links')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -579,6 +592,24 @@ const CustomerCandidateDetail: React.FC = () => {
                         <span>{link.label}</span>
                       </a>
                     ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Links placeholder for non-allocated */}
+            {!isAllocated && links.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center text-muted-foreground">
+                    <ExternalLink className="h-5 w-5 mr-2" />
+                    {t('app.candidateDetail.links')}
+                    <Lock className="h-4 w-4 ml-2" />
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="p-4 bg-muted/50 rounded-lg text-center text-muted-foreground">
+                    <p className="text-sm">{t('app.candidateDetail.restricted.linksHidden')}</p>
                   </div>
                 </CardContent>
               </Card>

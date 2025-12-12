@@ -1781,6 +1781,10 @@
       "title": "Spezialisten",
       "subtitle": "Entdecken Sie qualifizierte KI-Entwickler und Experten für Ihre Projekte",
       "searchPlaceholder": "Spezialisten durchsuchen...",
+      "tabs": {
+        "recommended": "Empfohlene Spezialisten",
+        "all": "Alle Spezialisten"
+      },
       "filter": {
         "availability": "Verfügbarkeit",
         "all": "Alle Spezialisten",
@@ -1801,16 +1805,74 @@
         "rateNotSet": "Nicht angegeben",
         "experience": "Erfahrung:",
         "contactPerson": "Ansprechpartner:",
-        "viewProfile": "Vollständiges Profil"
+        "viewProfile": "Vollständiges Profil",
+        "viewRestricted": "Eingeschränktes Profil"
+      },
+      "restricted": {
+        "bannerTitle": "Eingeschränkte Ansicht",
+        "bannerText": "Spezialisten ohne Zuweisung zeigen anonymisierte Daten. Vollständige Profile werden nach Zuweisung zu Ihrem Suchauftrag sichtbar.",
+        "bioHidden": "Über mich wird nach Zuweisung sichtbar"
       },
       "empty": {
         "title": "Keine Spezialisten gefunden",
-        "text": "Versuchen Sie andere Suchbegriffe oder Filter, um passende Experten zu finden."
+        "text": "Versuchen Sie andere Suchbegriffe oder Filter, um passende Experten zu finden.",
+        "recommendedTitle": "Noch keine Spezialisten empfohlen",
+        "recommendedText": "Erstellen Sie einen Suchauftrag, um passende Spezialisten zugewiesen zu bekommen."
       },
       "toasts": {
         "error": "Fehler",
         "loadError": "Spezialisten konnten nicht geladen werden.",
         "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten."
+      }
+    },
+    "candidateDetail": {
+      "title": "Kandidatendetails",
+      "notFound": "Kandidat nicht gefunden",
+      "notFoundDesc": "Der angeforderte Kandidat konnte nicht gefunden werden.",
+      "backToDashboard": "Zurück zum Dashboard",
+      "noCompanyError": "Keine Firma gefunden.",
+      "loadError": "Kandidatendaten konnten nicht geladen werden.",
+      "aboutMe": "Über mich",
+      "skills": "Fähigkeiten",
+      "experience": "Berufserfahrung",
+      "current": "Aktuell",
+      "technologies": "Technologien",
+      "ratesAvailability": "Konditionen & Verfügbarkeit",
+      "hourlyRate": "Stundensatz",
+      "monthlyRate": "Monatssatz",
+      "month": "Monat",
+      "availability": "Verfügbarkeit",
+      "availabilityStatus": {
+        "immediately": "Sofort verfügbar",
+        "noticePeriod": "Mit Kündigungsfrist",
+        "booked": "Gebucht",
+        "paused": "Pausiert"
+      },
+      "weeklyHours": "Wochenstunden",
+      "week": "Woche",
+      "earliestStart": "Frühester Start",
+      "noticePeriod": "Kündigungsfrist",
+      "days": "Tage",
+      "yearsExperience": "Berufserfahrung",
+      "years": "Jahre",
+      "contactPerson": "Ansprechpartner",
+      "languages": "Sprachen",
+      "links": "Links",
+      "proficiency": {
+        "beginner": "Anfänger",
+        "intermediate": "Fortgeschritten",
+        "advanced": "Erfahren",
+        "expert": "Experte",
+        "native": "Muttersprache",
+        "basic": "Grundkenntnisse",
+        "conversational": "Konversationssicher",
+        "fluent": "Fließend"
+      },
+      "restricted": {
+        "title": "Eingeschränkte Ansicht",
+        "description": "Einige Informationen sind ausgeblendet. Vollständige Profile werden sichtbar, wenn dieser Spezialist Ihrem Suchauftrag zugewiesen wird.",
+        "bioHidden": "Über mich wird nach Zuweisung sichtbar",
+        "linksHidden": "Links werden nach Zuweisung sichtbar"
       }
     },
     "newRequest": {
