@@ -372,45 +372,6 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            {/* Quick Actions */}
-            {userRole !== 'admin' && (
-              <Card className="p-4 lg:p-6">
-                <CardHeader className="p-0 pb-4">
-                  <CardTitle className="text-lg lg:text-xl">{t('app.dashboard.quick.title', 'Schnellzugriff')}</CardTitle>
-                  <CardDescription className="text-sm">
-                    {t('app.dashboard.quick.desc', 'Häufig verwendete Aktionen für effizientes Arbeiten')}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="p-0">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
-                    <Button 
-                      variant="outline" 
-                      className="h-14 lg:h-16 xl:h-20 flex flex-col items-center justify-center gap-2 text-center"
-                      onClick={() => navigate('/app/search-requests/new')}
-                    >
-                      <Plus className="w-4 h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6" />
-                      <span className="text-xs lg:text-sm xl:text-base">{t('app.dashboard.quick.create', 'Neue Anfrage erstellen')}</span>
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      className="h-14 lg:h-16 xl:h-20 flex flex-col items-center justify-center gap-2 text-center"
-                      onClick={() => navigate('/app/specialists')}
-                    >
-                      <Users className="w-4 h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6" />
-                      <span className="text-xs lg:text-sm xl:text-base">{t('app.dashboard.quick.browse', 'Spezialisten durchsuchen')}</span>
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      className="h-14 lg:h-16 xl:h-20 flex flex-col items-center justify-center gap-2 sm:col-span-2 lg:col-span-1 text-center"
-                      onClick={() => navigate('/app/search-requests')}
-                    >
-                      <Search className="w-4 h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6" />
-                      <span className="text-xs lg:text-sm xl:text-base">{t('app.dashboard.quick.manage', 'Anfragen verwalten')}</span>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
           </>
         )}
       </div>
