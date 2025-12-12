@@ -1712,13 +1712,18 @@
         "statusActions": "Status & Aktionen",
         "status": "Status:",
         "manageCandidates": "Kandidaten verwalten",
-        "contact": "Kontakt aufnehmen",
+        "help": "Hilfe",
         "details": "Details",
         "notProvided": "Nicht angegeben",
         "applicants": "0 Bewerber",
         "created": "Erstellt:",
         "employmentType": "Arbeitstyp:",
         "contactPerson": "Ansprechpartner"
+      },
+      "helpDialog": {
+        "title": "Ihr Ansprechpartner",
+        "consultant": "Consultant:",
+        "bookAppointment": "Termin buchen"
       },
       "employmentTypes": {
         "full_time": "Vollzeit",

@@ -1972,13 +1972,18 @@
         "statusActions": "Status & Acties",
         "status": "Status:",
         "manageCandidates": "Kandidaten beheren",
-        "contact": "Contact opnemen",
+        "help": "Hulp",
         "details": "Details",
         "notProvided": "Niet opgegeven",
         "applicants": "0 sollicitanten",
         "created": "Aangemaakt:",
         "employmentType": "Dienstverband:",
         "contactPerson": "Contactpersoon"
+      },
+      "helpDialog": {
+        "title": "Uw Contactpersoon",
+        "consultant": "Consultant:",
+        "bookAppointment": "Afspraak maken"
       },
       "employmentTypes": {
         "full_time": "Fulltime",
