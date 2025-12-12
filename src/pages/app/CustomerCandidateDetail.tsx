@@ -202,10 +202,8 @@ const CustomerCandidateDetail: React.FC = () => {
 
   const calculateCustomerHourlyRate = (candidate: Candidate): number => {
     const monthlyRate = calculateCustomerMonthlyRate(candidate);
-    const hoursPerWeek = candidate.hours_per_week_pref || 40;
-    const hoursPerMonth = hoursPerWeek * 4; // 4 Wochen pro Monat
-    if (!monthlyRate || !hoursPerMonth) return 0;
-    return monthlyRate / hoursPerMonth;
+    if (!monthlyRate) return 0;
+    return monthlyRate / 173.3;
   };
   // Helper functions
   const getSeniorityColor = (seniority: string) => {

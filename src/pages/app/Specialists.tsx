@@ -82,9 +82,7 @@ const Specialists = () => {
           const baseMonthlyRate = candidate.rate_monthly_target || 0;
           const margin = candidate.margin || 0;
           const monthlyRate = baseMonthlyRate + margin;
-          const hoursPerWeek = candidate.hours_per_week_pref || 40;
-          const hoursPerMonth = hoursPerWeek * 4;
-          const customerHourlyRate = monthlyRate && hoursPerMonth ? monthlyRate / hoursPerMonth : 0;
+          const customerHourlyRate = monthlyRate ? monthlyRate / 173.3 : 0;
           
           return {
             ...candidate,
