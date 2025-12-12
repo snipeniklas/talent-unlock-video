@@ -513,16 +513,27 @@ export default function OutreachCampaignDetail() {
 
       if (updateError) throw updateError;
 
-      // Set all draft contacts to "pending" status
-      if (contactIds.length > 0) {
-        const { error: contactError } = await supabase
-          .from("outreach_campaign_contacts")
-          .update({ status: "pending" })
-          .eq("campaign_id", id)
-          .in("contact_id", contactIds);
+      // FIX: Only set DRAFT contacts to "pending" status (not completed ones)
+      const { error: updateDraftError } = await supabase
+        .from("outreach_campaign_contacts")
+        .update({ 
+          status: "pending",
+          next_send_date: new Date().toISOString()
+        })
+        .eq("campaign_id", id)
+        .eq("status", "draft");
 
-        if (contactError) throw contactError;
-      }
+      if (updateDraftError) throw updateDraftError;
+
+      // FIX: Set next_send_date for existing pending contacts that don't have one
+      const { error: pendingError } = await supabase
+        .from("outreach_campaign_contacts")
+        .update({ next_send_date: new Date().toISOString() })
+        .eq("campaign_id", id)
+        .eq("status", "pending")
+        .is("next_send_date", null);
+
+      if (pendingError) throw pendingError;
 
       // Trigger immediate email send
       console.log("📧 Triggering immediate email send...");

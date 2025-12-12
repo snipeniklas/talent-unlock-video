@@ -26,6 +26,16 @@ export function QuickActionsMenu({
   onResetToDraft,
   campaignStatus,
 }: QuickActionsMenuProps) {
+  const handleResetToDraft = () => {
+    const confirmed = window.confirm(
+      "⚠️ WARNUNG: Beim erneuten Aktivieren werden nur neue/draft Kontakte verarbeitet. " +
+      "Abgeschlossene Kontakte bleiben unberührt und erhalten keine weiteren E-Mails.\n\n" +
+      "Möchten Sie die Kampagne zurücksetzen?"
+    );
+    if (confirmed && onResetToDraft) {
+      onResetToDraft();
+    }
+  };
   const { t } = useTranslation();
 
   return (
@@ -58,7 +68,7 @@ export function QuickActionsMenu({
         {(campaignStatus === 'active' || campaignStatus === 'paused') && onResetToDraft && (
           <>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={onResetToDraft} className="text-orange-600">
+            <DropdownMenuItem onClick={handleResetToDraft} className="text-orange-600">
               <RotateCcw className="h-4 w-4 mr-2" />
               {t("outreach.campaigns.quickActions.resetToDraft")}
             </DropdownMenuItem>
