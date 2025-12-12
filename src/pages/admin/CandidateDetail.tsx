@@ -63,6 +63,7 @@ export default function CandidateDetail() {
     rate_hourly_target: '',
     rate_monthly_target: '',
     margin: '',
+    category: '',
   });
 
   // User role for conditional rendering
@@ -139,6 +140,7 @@ export default function CandidateDetail() {
         rate_hourly_target: candidate.rate_hourly_target?.toString() || '',
         rate_monthly_target: candidate.rate_monthly_target?.toString() || '',
         margin: (candidate as any).margin?.toString() || '0',
+        category: (candidate as any).category || '',
       });
 
       try {
@@ -321,6 +323,7 @@ export default function CandidateDetail() {
         rate_hourly_target: formData.rate_hourly_target ? parseFloat(formData.rate_hourly_target) : null,
         rate_monthly_target: formData.rate_monthly_target ? parseFloat(formData.rate_monthly_target) : null,
         skills: skills.filter(s => s.name),
+        category: formData.category || null,
       };
 
       // Only admins can update margin
@@ -540,7 +543,7 @@ export default function CandidateDetail() {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <div>
                 <Label htmlFor="seniority">{t('candidateManagement.edit.labels.seniority')}</Label>
                 <Select 
@@ -555,6 +558,23 @@ export default function CandidateDetail() {
                     <SelectItem value="mid">{t('candidateManagement.seniority.mid')}</SelectItem>
                     <SelectItem value="senior">{t('candidateManagement.seniority.senior')}</SelectItem>
                     <SelectItem value="lead">{t('candidateManagement.seniority.lead')}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="category">{t('candidate.category.label', 'Kategorie')}</Label>
+                <Select 
+                  value={formData.category} 
+                  onValueChange={(value) => setFormData({ ...formData, category: value === 'none' ? '' : value })}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder={t('candidate.category.placeholder', 'Kategorie auswählen (optional)')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">{t('candidate.category.none', 'Keine Kategorie')}</SelectItem>
+                    <SelectItem value="ki">{t('candidate.category.ki', 'KI')}</SelectItem>
+                    <SelectItem value="it">{t('candidate.category.it', 'IT')}</SelectItem>
+                    <SelectItem value="backoffice">{t('candidate.category.backoffice', 'Backoffice')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

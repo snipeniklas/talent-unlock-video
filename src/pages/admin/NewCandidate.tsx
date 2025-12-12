@@ -58,6 +58,7 @@ export default function NewCandidate() {
     currency: 'EUR',
     rate_hourly_target: '',
     rate_monthly_target: '',
+    category: '',
   });
 
   // Identity data
@@ -158,6 +159,7 @@ export default function NewCandidate() {
         rate_hourly_target: formData.rate_hourly_target ? parseFloat(formData.rate_hourly_target) : null,
         rate_monthly_target: formData.rate_monthly_target ? parseFloat(formData.rate_monthly_target) : null,
         start_earliest: formData.start_earliest || null,
+        category: formData.category || null,
         skills: skills.length > 0 ? JSON.parse(JSON.stringify(skills)) : [],
         attributes: {},
       };
@@ -316,7 +318,7 @@ export default function NewCandidate() {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <div>
                 <Label htmlFor="seniority">{t('candidate.new.fields.seniority', 'Seniority Level')}</Label>
                 <Select 
@@ -331,6 +333,23 @@ export default function NewCandidate() {
                     <SelectItem value="mid">{t('candidate.new.seniority.mid', 'Mid')}</SelectItem>
                     <SelectItem value="senior">{t('candidate.new.seniority.senior', 'Senior')}</SelectItem>
                     <SelectItem value="lead">{t('candidate.new.seniority.lead', 'Lead')}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="category">{t('candidate.category.label', 'Kategorie')}</Label>
+                <Select 
+                  value={formData.category} 
+                  onValueChange={(value) => setFormData({ ...formData, category: value === 'none' ? '' : value })}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder={t('candidate.category.placeholder', 'Kategorie auswählen (optional)')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">{t('candidate.category.none', 'Keine Kategorie')}</SelectItem>
+                    <SelectItem value="ki">{t('candidate.category.ki', 'KI')}</SelectItem>
+                    <SelectItem value="it">{t('candidate.category.it', 'IT')}</SelectItem>
+                    <SelectItem value="backoffice">{t('candidate.category.backoffice', 'Backoffice')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

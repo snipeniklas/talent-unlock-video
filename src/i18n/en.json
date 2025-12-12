@@ -154,6 +154,14 @@
         "title": "Error",
         "description": "RaaS resource could not be created."
       }
+    },
+    "category": {
+      "label": "Category",
+      "placeholder": "Select category (optional)",
+      "none": "No category",
+      "ki": "AI",
+      "it": "IT",
+      "backoffice": "Backoffice"
     }
   },
   "candidateView": {
