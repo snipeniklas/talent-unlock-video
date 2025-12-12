@@ -3,7 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, MapPin, Clock, Euro, Users, Calendar } from "lucide-react";
+import { ArrowLeft, MapPin, Clock, Euro, Users, Calendar, Phone, Mail, CalendarDays } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -303,9 +304,43 @@ const SearchRequestDetail = () => {
                 >
                   {t('app.searchRequestDetail.sidebar.manageCandidates')}
                 </Button>
-                <Button variant="outline" className="w-full">
-                  {t('app.searchRequestDetail.sidebar.contact')}
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" className="w-full">
+                      {t('app.searchRequestDetail.sidebar.help')}
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>{t('app.searchRequestDetail.helpDialog.title')}</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4 py-4">
+                      <div className="flex items-center gap-3">
+                        <span className="font-medium">{t('app.searchRequestDetail.helpDialog.consultant')}</span>
+                        <span>Pascal Spieß</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Phone className="h-4 w-4 text-muted-foreground" />
+                        <a href="tel:+4917634407838" className="text-primary hover:underline">
+                          +49 176 34407838
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Mail className="h-4 w-4 text-muted-foreground" />
+                        <a href="mailto:pascal@hejtalent.de" className="text-primary hover:underline">
+                          pascal@hejtalent.de
+                        </a>
+                      </div>
+                      <Button 
+                        className="w-full mt-4" 
+                        onClick={() => window.open('https://calendly.com/pascal-hejtalent/15min', '_blank')}
+                      >
+                        <CalendarDays className="h-4 w-4 mr-2" />
+                        {t('app.searchRequestDetail.helpDialog.bookAppointment')}
+                      </Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
             </CardContent>
           </Card>

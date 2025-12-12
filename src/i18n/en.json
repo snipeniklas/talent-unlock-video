@@ -1476,13 +1476,18 @@
         "statusActions": "Status & Actions",
         "status": "Status:",
         "manageCandidates": "Manage candidates",
-        "contact": "Contact",
+        "help": "Help",
         "details": "Details",
         "notProvided": "Not specified",
         "applicants": "0 applicants",
         "created": "Created:",
         "employmentType": "Employment type:",
         "contactPerson": "Contact person"
+      },
+      "helpDialog": {
+        "title": "Your Contact Person",
+        "consultant": "Consultant:",
+        "bookAppointment": "Book Appointment"
       },
       "employmentTypes": {
         "full_time": "Full-time",
