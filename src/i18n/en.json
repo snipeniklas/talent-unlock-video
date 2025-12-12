@@ -1566,7 +1566,9 @@
     "newRequest": {
       "back": "Back",
       "title": "Create new search request",
+      "editTitle": "Edit search request",
       "subtitle": "Find the perfect remote staff for your company",
+      "editSubtitle": "Update the details of your search request",
       "remoteWorker": "Remote Worker(s)",
       "workAreasLabel": "Required work areas",
       "sections": {
@@ -1613,13 +1615,19 @@
         "add": "Add",
         "cancel": "Cancel",
         "create": "Create search request",
-        "creating": "Creating..."
+        "creating": "Creating...",
+        "update": "Save changes",
+        "updating": "Saving..."
       },
       "toasts": {
         "createdTitle": "Search request created",
         "createdDesc": "Your search request has been created successfully and is now active.",
         "errorTitle": "Error",
-        "errorDesc": "An error occurred while creating the search request."
+        "errorDesc": "An error occurred while creating the search request.",
+        "updatedTitle": "Search request updated",
+        "updatedDesc": "Your changes have been saved successfully.",
+        "updateError": "An error occurred while saving the search request.",
+        "loadError": "Failed to load search request."
       },
       "predefinedWorkAreas": ["IT support","Dunning","Accounting","Customer service","Data processing","Quality assurance","Project management","Marketing","Sales"],
       "predefinedSkills": ["Python","JavaScript","React","Node.js","SQL","NoSQL","AWS","Azure","Docker","Kubernetes","Git","Agile","Scrum"]
