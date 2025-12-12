@@ -2041,6 +2041,10 @@
       "title": "Specialisten",
       "subtitle": "Ontdek gekwalificeerde AI-ontwikkelaars en experts voor uw projecten",
       "searchPlaceholder": "Specialisten zoeken...",
+      "tabs": {
+        "recommended": "Aanbevolen Specialisten",
+        "all": "Alle Specialisten"
+      },
       "filter": {
         "availability": "Beschikbaarheid",
         "all": "Alle specialisten",
@@ -2061,16 +2065,74 @@
         "rateNotSet": "Niet opgegeven",
         "experience": "Ervaring:",
         "contactPerson": "Contactpersoon:",
-        "viewProfile": "Volledig profiel"
+        "viewProfile": "Volledig profiel",
+        "viewRestricted": "Beperkt profiel"
+      },
+      "restricted": {
+        "bannerTitle": "Beperkte weergave",
+        "bannerText": "Niet-toegewezen specialisten tonen geanonimiseerde gegevens. Volledige profielen worden zichtbaar na toewijzing aan uw zoekopdracht.",
+        "bioHidden": "Over mij wordt zichtbaar na toewijzing"
       },
       "empty": {
         "title": "Geen specialisten gevonden",
-        "text": "Probeer andere zoektermen of filters om passende experts te vinden."
+        "text": "Probeer andere zoektermen of filters om passende experts te vinden.",
+        "recommendedTitle": "Nog geen specialisten aanbevolen",
+        "recommendedText": "Maak een zoekopdracht aan om passende specialisten toegewezen te krijgen."
       },
       "toasts": {
         "error": "Fout",
         "loadError": "Specialisten konden niet worden geladen.",
         "unexpectedError": "Er is een onverwachte fout opgetreden."
+      }
+    },
+    "candidateDetail": {
+      "title": "Kandidaatdetails",
+      "notFound": "Kandidaat niet gevonden",
+      "notFoundDesc": "De opgevraagde kandidaat kon niet worden gevonden.",
+      "backToDashboard": "Terug naar Dashboard",
+      "noCompanyError": "Geen bedrijf gevonden.",
+      "loadError": "Kandidaatgegevens konden niet worden geladen.",
+      "aboutMe": "Over mij",
+      "skills": "Vaardigheden",
+      "experience": "Werkervaring",
+      "current": "Huidig",
+      "technologies": "Technologieën",
+      "ratesAvailability": "Tarieven & Beschikbaarheid",
+      "hourlyRate": "Uurtarief",
+      "monthlyRate": "Maandtarief",
+      "month": "maand",
+      "availability": "Beschikbaarheid",
+      "availabilityStatus": {
+        "immediately": "Direct beschikbaar",
+        "noticePeriod": "Met opzegtermijn",
+        "booked": "Geboekt",
+        "paused": "Gepauzeerd"
+      },
+      "weeklyHours": "Wekelijkse uren",
+      "week": "week",
+      "earliestStart": "Vroegste start",
+      "noticePeriod": "Opzegtermijn",
+      "days": "dagen",
+      "yearsExperience": "Jaren ervaring",
+      "years": "jaar",
+      "contactPerson": "Contactpersoon",
+      "languages": "Talen",
+      "links": "Links",
+      "proficiency": {
+        "beginner": "Beginner",
+        "intermediate": "Gemiddeld",
+        "advanced": "Gevorderd",
+        "expert": "Expert",
+        "native": "Moedertaal",
+        "basic": "Basis",
+        "conversational": "Conversatie",
+        "fluent": "Vloeiend"
+      },
+      "restricted": {
+        "title": "Beperkte weergave",
+        "description": "Sommige informatie is verborgen. Volledige profielen worden zichtbaar wanneer deze specialist aan uw zoekopdracht wordt toegewezen.",
+        "bioHidden": "Over mij wordt zichtbaar na toewijzing",
+        "linksHidden": "Links worden zichtbaar na toewijzing"
       }
     },
     "newRequest": {

@@ -1545,6 +1545,10 @@
       "title": "Specialists",
       "subtitle": "Discover qualified AI developers and experts for your projects",
       "searchPlaceholder": "Search specialists...",
+      "tabs": {
+        "recommended": "Recommended Specialists",
+        "all": "All Specialists"
+      },
       "filter": {
         "availability": "Availability",
         "all": "All specialists",
@@ -1565,16 +1569,74 @@
         "rateNotSet": "Not specified",
         "experience": "Experience:",
         "contactPerson": "Contact person:",
-        "viewProfile": "Full profile"
+        "viewProfile": "Full profile",
+        "viewRestricted": "Restricted profile"
+      },
+      "restricted": {
+        "bannerTitle": "Restricted View",
+        "bannerText": "Unassigned specialists show anonymized data. Full profiles become visible after assignment to your search request.",
+        "bioHidden": "About me becomes visible after assignment"
       },
       "empty": {
         "title": "No specialists found",
-        "text": "Try different search terms or filters to find matching experts."
+        "text": "Try different search terms or filters to find matching experts.",
+        "recommendedTitle": "No specialists recommended yet",
+        "recommendedText": "Create a search request to get matching specialists assigned."
       },
       "toasts": {
         "error": "Error",
         "loadError": "Specialists could not be loaded.",
         "unexpectedError": "An unexpected error occurred."
+      }
+    },
+    "candidateDetail": {
+      "title": "Candidate Details",
+      "notFound": "Candidate not found",
+      "notFoundDesc": "The requested candidate could not be found.",
+      "backToDashboard": "Back to Dashboard",
+      "noCompanyError": "No company found.",
+      "loadError": "Candidate data could not be loaded.",
+      "aboutMe": "About me",
+      "skills": "Skills",
+      "experience": "Work Experience",
+      "current": "Current",
+      "technologies": "Technologies",
+      "ratesAvailability": "Rates & Availability",
+      "hourlyRate": "Hourly rate",
+      "monthlyRate": "Monthly rate",
+      "month": "month",
+      "availability": "Availability",
+      "availabilityStatus": {
+        "immediately": "Available immediately",
+        "noticePeriod": "With notice period",
+        "booked": "Booked",
+        "paused": "Paused"
+      },
+      "weeklyHours": "Weekly hours",
+      "week": "week",
+      "earliestStart": "Earliest start",
+      "noticePeriod": "Notice period",
+      "days": "days",
+      "yearsExperience": "Years of experience",
+      "years": "years",
+      "contactPerson": "Contact Person",
+      "languages": "Languages",
+      "links": "Links",
+      "proficiency": {
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advanced": "Advanced",
+        "expert": "Expert",
+        "native": "Native",
+        "basic": "Basic",
+        "conversational": "Conversational",
+        "fluent": "Fluent"
+      },
+      "restricted": {
+        "title": "Restricted View",
+        "description": "Some information is hidden. Full profiles become visible when this specialist is assigned to your search request.",
+        "bioHidden": "About me becomes visible after assignment",
+        "linksHidden": "Links become visible after assignment"
       }
     },
     "newRequest": {
