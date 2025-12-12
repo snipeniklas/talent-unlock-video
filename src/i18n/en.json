@@ -1561,6 +1561,7 @@
         "skills": "Skills:",
         "noSkills": "No skills specified",
         "hourlyRate": "Hourly rate:",
+        "monthlyRate": "Monthly rate:",
         "rateNotSet": "Not specified",
         "experience": "Experience:",
         "contactPerson": "Contact person:",
