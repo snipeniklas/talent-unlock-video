@@ -329,7 +329,8 @@ const Dashboard = () => {
                     dashboardData.specialists.map((specialist, index) => (
                       <div 
                         key={specialist.id} 
-                        className={`flex items-center justify-between ${index < dashboardData.specialists.length - 1 ? 'border-b pb-3' : ''}`}
+                        className={`flex items-center justify-between cursor-pointer hover:bg-accent/50 rounded-lg p-2 -m-2 transition-colors ${index < dashboardData.specialists.length - 1 ? 'border-b pb-3' : ''}`}
+                        onClick={() => navigate(`/app/specialists/${specialist.id}`)}
                       >
                         <div>
                           <p className="font-medium">{specialist.first_name} {specialist.last_name}</p>
@@ -343,7 +344,6 @@ const Dashboard = () => {
                         <Button 
                           variant="outline" 
                           size="sm"
-                          onClick={() => navigate(`/app/specialists/${specialist.id}`)}
                         >
                           {t('app.dashboard.recommended.viewProfile', 'Profil ansehen')}
                         </Button>
