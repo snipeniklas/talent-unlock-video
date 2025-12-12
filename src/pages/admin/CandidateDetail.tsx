@@ -720,7 +720,7 @@ export default function CandidateDetail() {
                   value={formData.rate_monthly_target}
                   onChange={(e) => {
                     const monthlyRate = e.target.value;
-                    const hourlyRate = monthlyRate ? Math.round((parseFloat(monthlyRate) / 160) * 100) / 100 : '';
+                    const hourlyRate = monthlyRate ? Math.round((parseFloat(monthlyRate) / 173.3) * 100) / 100 : '';
                     setFormData({ 
                       ...formData, 
                       rate_monthly_target: monthlyRate,
