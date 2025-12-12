@@ -296,9 +296,7 @@ export default function CandidateDetail() {
 
   const calculateHourlySellingPrice = (): number => {
     const sellingPrice = calculateSellingPrice();
-    const hours = parseFloat(formData.hours_per_week_pref) || 40;
-    const hoursPerMonth = hours * 4.33; // Average weeks per month
-    return sellingPrice / hoursPerMonth;
+    return sellingPrice / 173.3; // 40h/week × 4.33 weeks/month
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -790,7 +788,7 @@ export default function CandidateDetail() {
                 <div>
                   <Label className="text-xs text-muted-foreground">{t('candidateManagement.edit.pricing.purchaseHourly')}</Label>
                   <p className="text-lg font-semibold text-foreground">
-                    {formData.rate_hourly_target ? parseFloat(formData.rate_hourly_target).toFixed(2) : '0.00'} {formData.currency}/h
+                    {((parseFloat(formData.rate_monthly_target) || 0) / 173.3).toFixed(2)} {formData.currency}/h
                   </p>
                 </div>
                 <div>
