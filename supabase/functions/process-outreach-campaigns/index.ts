@@ -118,13 +118,16 @@ serve(async (req) => {
       console.log(`\n=== Processing Campaign: ${campaign.name} (ID: ${campaign.id}) ===`);
 
       // Fetch ALL due contacts for this campaign (new + follow-ups)
+      // FIX: Always require next_send_date <= now to prevent race conditions
+      // This ensures contacts added later don't get processed multiple times
       const { data: allDueContacts, error: contactsError } = await supabase
         .from("outreach_campaign_contacts")
         .select("*, crm_contacts(*)")
         .eq("campaign_id", campaign.id)
         .eq("status", "pending")
         .eq("is_excluded", false)
-        .or(`next_sequence_number.eq.1,and(next_sequence_number.gt.1,next_send_date.lte.${now.toISOString()})`)
+        .not("next_send_date", "is", null)
+        .lte("next_send_date", now.toISOString())
         .order("next_sequence_number", { ascending: true })
         .order("added_at", { ascending: true });
 
