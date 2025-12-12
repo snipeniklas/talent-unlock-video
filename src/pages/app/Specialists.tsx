@@ -43,6 +43,7 @@ interface Specialist {
   email: string;
   phone: string;
   category?: string;
+  customerMonthlyRate: number;
 }
 
 const Specialists = () => {
@@ -84,16 +85,22 @@ const Specialists = () => {
           const monthlyRate = baseMonthlyRate + margin;
           const customerHourlyRate = monthlyRate ? monthlyRate / 173.3 : 0;
           
+          // Extract skills from JSON
+          const extractedSkills = Array.isArray(candidate.skills) 
+            ? candidate.skills.map((s: any) => s.name || s).filter(Boolean)
+            : [];
+          
           return {
             ...candidate,
             first_name: candidate.candidate_identity?.first_name || '',
             last_name: candidate.candidate_identity?.last_name || '',
             email: candidate.email || '',
             phone: candidate.phone,
+            notes: candidate.bio || '', // Use bio as description
             location: candidate.candidate_identity?.city || '',
             current_position: candidate.primary_role || '',
             experience_years: candidate.years_experience,
-            skills: [], // We'll need to extract from skills JSON
+            skills: extractedSkills,
             languages: [], // We'll need to get from candidate_languages
             availability: candidate.availability,
             hourly_rate_min: customerHourlyRate,
@@ -101,6 +108,7 @@ const Specialists = () => {
             rating: 5, // Default rating
             status: candidate.availability === 'immediately' ? 'available' : 'unavailable',
             category: candidate.category || undefined,
+            customerMonthlyRate: monthlyRate,
           };
         });
 
@@ -293,7 +301,7 @@ const Specialists = () => {
             
             <CardContent className="space-y-4">
               {/* Description */}
-              <p className="text-muted-foreground">{specialist.notes || t('app.specialists.card.noDescription')}</p>
+              <p className="text-muted-foreground line-clamp-2">{specialist.notes || t('app.specialists.card.noDescription')}</p>
               
               {/* Skills */}
               <div>
@@ -312,12 +320,21 @@ const Specialists = () => {
               </div>
               
               {/* Stats */}
-              <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="grid grid-cols-3 gap-4 text-sm">
                 <div>
                   <span className="font-medium">{t('app.specialists.card.hourlyRate')}</span>
                   <div className="text-primary font-semibold">
                     {specialist.hourly_rate_min 
                       ? `${specialist.hourly_rate_min.toFixed(2)} €`
+                      : t('app.specialists.card.rateNotSet')
+                    }
+                  </div>
+                </div>
+                <div>
+                  <span className="font-medium">{t('app.specialists.card.monthlyRate')}</span>
+                  <div className="text-primary font-semibold">
+                    {specialist.customerMonthlyRate 
+                      ? `${specialist.customerMonthlyRate.toLocaleString('de-DE')} €`
                       : t('app.specialists.card.rateNotSet')
                     }
                   </div>
