@@ -1802,7 +1802,9 @@
     "newRequest": {
       "back": "Zurück",
       "title": "Neuen Suchauftrag erstellen",
+      "editTitle": "Suchauftrag bearbeiten",
       "subtitle": "Finden Sie die perfekten Remote-Mitarbeiter für Ihr Unternehmen",
+      "editSubtitle": "Aktualisieren Sie die Details Ihres Suchauftrags",
       "remoteWorker": "Remote-Mitarbeiter",
       "workAreasLabel": "Benötigte Arbeitsbereiche",
       "sections": {
@@ -1849,13 +1851,19 @@
         "add": "Hinzufügen",
         "cancel": "Abbrechen",
         "create": "Suchauftrag erstellen",
-        "creating": "Wird erstellt..."
+        "creating": "Wird erstellt...",
+        "update": "Änderungen speichern",
+        "updating": "Wird gespeichert..."
       },
       "toasts": {
         "createdTitle": "Suchauftrag erstellt",
         "createdDesc": "Ihr Suchauftrag wurde erfolgreich erstellt und ist jetzt aktiv.",
         "errorTitle": "Fehler",
-        "errorDesc": "Beim Erstellen des Suchauftrags ist ein Fehler aufgetreten."
+        "errorDesc": "Beim Erstellen des Suchauftrags ist ein Fehler aufgetreten.",
+        "updatedTitle": "Suchauftrag aktualisiert",
+        "updatedDesc": "Ihre Änderungen wurden erfolgreich gespeichert.",
+        "updateError": "Beim Speichern des Suchauftrags ist ein Fehler aufgetreten.",
+        "loadError": "Suchauftrag konnte nicht geladen werden."
       },
       "predefinedWorkAreas": ["IT-Support","Mahnwesen","Buchhaltung","Kundenservice","Datenverarbeitung","Qualitätssicherung","Projektmanagement","Marketing","Vertrieb"],
       "predefinedSkills": ["Python","JavaScript","React","Node.js","SQL","NoSQL","AWS","Azure","Docker","Kubernetes","Git","Agile","Scrum"]

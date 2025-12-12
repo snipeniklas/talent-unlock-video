@@ -2062,7 +2062,9 @@
     "newRequest": {
       "back": "Terug",
       "title": "Nieuwe zoekopdracht aanmaken",
+      "editTitle": "Zoekopdracht bewerken",
       "subtitle": "Vind de perfecte remote-medewerkers voor uw bedrijf",
+      "editSubtitle": "Werk de details van uw zoekopdracht bij",
       "remoteWorker": "Remote-medewerker(s)",
       "workAreasLabel": "Benodigde werkgebieden",
       "sections": {
@@ -2109,13 +2111,19 @@
         "add": "Toevoegen",
         "cancel": "Annuleren",
         "create": "Zoekopdracht aanmaken",
-        "creating": "Wordt aangemaakt..."
+        "creating": "Wordt aangemaakt...",
+        "update": "Wijzigingen opslaan",
+        "updating": "Wordt opgeslagen..."
       },
       "toasts": {
         "createdTitle": "Zoekopdracht aangemaakt",
         "createdDesc": "Uw zoekopdracht is succesvol aangemaakt en is nu actief.",
         "errorTitle": "Fout",
-        "errorDesc": "Er is een fout opgetreden bij het aanmaken van de zoekopdracht."
+        "errorDesc": "Er is een fout opgetreden bij het aanmaken van de zoekopdracht.",
+        "updatedTitle": "Zoekopdracht bijgewerkt",
+        "updatedDesc": "Uw wijzigingen zijn succesvol opgeslagen.",
+        "updateError": "Er is een fout opgetreden bij het opslaan van de zoekopdracht.",
+        "loadError": "Zoekopdracht kon niet worden geladen."
       },
       "predefinedWorkAreas": ["IT-Support", "Aanmaningen", "Boekhouding", "Klantenservice", "Dataverwerking", "Kwaliteitsborging", "Projectmanagement", "Marketing", "Sales"],
       "predefinedSkills": ["Python", "JavaScript", "React", "Node.js", "SQL", "NoSQL", "AWS", "Azure", "Docker", "Kubernetes", "Git", "Agile", "Scrum"]

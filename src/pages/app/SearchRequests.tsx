@@ -207,8 +207,13 @@ const SearchRequests = () => {
     return request.created_by === currentUserId;
   };
 
-  const canEditRequest = () => {
-    return userRoles.includes('admin');
+  const canEditRequest = (request: SearchRequest) => {
+    // Admins can edit all
+    if (userRoles.includes('admin')) return true;
+    // Company admins can edit their company's requests
+    if (userRoles.includes('company_admin')) return true;
+    // Regular users can edit their own requests
+    return request.created_by === currentUserId;
   };
 
 
@@ -365,8 +370,8 @@ const SearchRequests = () => {
                         <Eye className="w-4 h-4 mr-2" />
                         {t('common.actions.view', 'Ansehen')}
                       </DropdownMenuItem>
-                      {canEditRequest() && (
-                        <DropdownMenuItem>
+                      {canEditRequest(request) && (
+                        <DropdownMenuItem onClick={() => navigate(`/app/search-requests/${request.id}/edit`)}>
                           <Edit className="w-4 h-4 mr-2" />
                           {t('common.actions.edit', 'Bearbeiten')}
                         </DropdownMenuItem>
@@ -462,8 +467,8 @@ const SearchRequests = () => {
                   >
                     {t('app.searchRequests.details.manageCandidates', 'Kandidaten verwalten')} ({request.candidate_count || 0})
                   </Button>
-                  {canEditRequest() && request.status === 'active' && (
-                    <Button size="sm" variant="outline">
+                  {canEditRequest(request) && request.status === 'active' && (
+                    <Button size="sm" variant="outline" onClick={() => navigate(`/app/search-requests/${request.id}/edit`)}>
                       <Edit className="w-4 h-4 mr-2" />
                       {t('common.actions.edit', 'Bearbeiten')}
                     </Button>

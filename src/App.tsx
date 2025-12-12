@@ -102,6 +102,7 @@ const App = () => (
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="search-requests" element={<SearchRequests />} />
             <Route path="search-requests/new" element={<NewSearchRequest />} />
+            <Route path="search-requests/:id/edit" element={<NewSearchRequest />} />
             <Route path="search-requests/:id" element={<SearchRequestDetail />} />
             <Route path="search-requests/:id/candidates" element={<CandidateKanbanBoard />} />
             <Route path="search-requests/:id/applicants" element={<ApplicantManagement />} />

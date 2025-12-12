@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -29,8 +29,11 @@ import { useTranslation } from '@/i18n/i18n';
 
 const NewSearchRequest = () => {
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const { toast } = useToast();
   const { t, get, lang } = useTranslation();
+  
+  const isEditMode = !!id;
   
   // Form state
   const [formData, setFormData] = useState({
@@ -52,6 +55,52 @@ const NewSearchRequest = () => {
   const [newSkill, setNewSkill] = useState('');
   const [newMainTask, setNewMainTask] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(isEditMode);
+
+  // Load existing search request data for edit mode
+  useEffect(() => {
+    if (!isEditMode) return;
+
+    const loadSearchRequest = async () => {
+      try {
+        const { data: request, error } = await supabase
+          .from('search_requests')
+          .select('*')
+          .eq('id', id)
+          .single();
+
+        if (error) throw error;
+
+        if (request) {
+          setFormData({
+            customerIndustry: request.customer_industry || '',
+            numberOfWorkers: request.number_of_workers || 1,
+            jobTitle: request.job_title || '',
+            workAreas: request.work_areas || [],
+            experienceLevel: request.experience_level_new || '',
+            weeklyHours: request.weekly_hours || 40,
+            startDate: request.start_date ? new Date(request.start_date) : undefined,
+            endDate: request.end_date ? new Date(request.end_date) : undefined,
+            requirements: request.requirements_list || [],
+            skills: request.skills_list || [],
+            mainTasks: request.main_tasks || [],
+          });
+        }
+      } catch (error) {
+        console.error('Error loading search request:', error);
+        toast({
+          title: t('app.newRequest.toasts.errorTitle', 'Fehler'),
+          description: t('app.newRequest.toasts.loadError', 'Suchauftrag konnte nicht geladen werden.'),
+          variant: 'destructive',
+        });
+        navigate('/app/search-requests');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadSearchRequest();
+  }, [id, isEditMode, navigate, toast, t]);
 
   const predefinedWorkAreas = get<string[]>('app.newRequest.predefinedWorkAreas', [
     'IT-Support', 'Mahnwesen', 'Buchhaltung', 'Kundenservice', 'Datenverarbeitung',
@@ -93,20 +142,10 @@ const NewSearchRequest = () => {
         throw new Error('Not authenticated');
       }
 
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('company_id')
-        .eq('user_id', user.id)
-        .single();
-
-      if (!profile?.company_id) {
-        throw new Error('No company found for user');
-      }
-
       const remoteWorkerText = t('app.newRequest.remoteWorker', 'Remote-Mitarbeiter');
       const workAreasLabel = t('app.newRequest.workAreasLabel', 'Benötigte Arbeitsbereiche');
       
-      const insertData = {
+      const requestData = {
         title: `${formData.jobTitle} - ${formData.numberOfWorkers} ${remoteWorkerText}`,
         description: `${workAreasLabel}: ${formData.workAreas.join(', ')}`,
         customer_industry: formData.customerIndustry || null,
@@ -120,31 +159,64 @@ const NewSearchRequest = () => {
         requirements_list: formData.requirements.length > 0 ? formData.requirements : null,
         skills_list: formData.skills.length > 0 ? formData.skills : null,
         main_tasks: formData.mainTasks.length > 0 ? formData.mainTasks : null,
-        company_id: profile.company_id,
-        created_by: user.id,
-        status: 'active'
       };
-      
-      const { error } = await supabase
-        .from('search_requests')
-        .insert(insertData);
 
-      if (error) {
-        console.error('Database error:', error);
-        throw error;
+      if (isEditMode) {
+        // Update existing search request
+        const { error } = await supabase
+          .from('search_requests')
+          .update(requestData)
+          .eq('id', id);
+
+        if (error) {
+          console.error('Database error:', error);
+          throw error;
+        }
+        
+        toast({
+          title: t('app.newRequest.toasts.updatedTitle', 'Suchauftrag aktualisiert'),
+          description: t('app.newRequest.toasts.updatedDesc', 'Ihre Änderungen wurden erfolgreich gespeichert.'),
+        });
+      } else {
+        // Create new search request
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('company_id')
+          .eq('user_id', user.id)
+          .single();
+
+        if (!profile?.company_id) {
+          throw new Error('No company found for user');
+        }
+
+        const { error } = await supabase
+          .from('search_requests')
+          .insert({
+            ...requestData,
+            company_id: profile.company_id,
+            created_by: user.id,
+            status: 'active'
+          });
+
+        if (error) {
+          console.error('Database error:', error);
+          throw error;
+        }
+        
+        toast({
+          title: t('app.newRequest.toasts.createdTitle', 'Suchauftrag erstellt'),
+          description: t('app.newRequest.toasts.createdDesc', 'Ihr Suchauftrag wurde erfolgreich erstellt und ist jetzt aktiv.'),
+        });
       }
-      
-      toast({
-        title: t('app.newRequest.toasts.createdTitle', 'Suchauftrag erstellt'),
-        description: t('app.newRequest.toasts.createdDesc', 'Ihr Suchauftrag wurde erfolgreich erstellt und ist jetzt aktiv.'),
-      });
       
       navigate('/app/search-requests');
     } catch (error) {
-      console.error('Error creating search request:', error);
+      console.error('Error saving search request:', error);
       toast({
         title: t('app.newRequest.toasts.errorTitle', 'Fehler'),
-        description: t('app.newRequest.toasts.errorDesc', 'Beim Erstellen des Suchauftrags ist ein Fehler aufgetreten.'),
+        description: isEditMode 
+          ? t('app.newRequest.toasts.updateError', 'Beim Speichern des Suchauftrags ist ein Fehler aufgetreten.')
+          : t('app.newRequest.toasts.errorDesc', 'Beim Erstellen des Suchauftrags ist ein Fehler aufgetreten.'),
         variant: 'destructive',
       });
     } finally {
@@ -153,6 +225,14 @@ const NewSearchRequest = () => {
   };
 
   const dateLocale = lang === 'en' ? enLocale : deLocale;
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -167,9 +247,15 @@ const NewSearchRequest = () => {
           {t('app.newRequest.back', 'Zurück')}
         </Button>
         <div>
-          <h1 className="text-3xl font-bold text-brand-dark">{t('app.newRequest.title', 'Neuen Suchauftrag erstellen')}</h1>
+          <h1 className="text-3xl font-bold text-brand-dark">
+            {isEditMode 
+              ? t('app.newRequest.editTitle', 'Suchauftrag bearbeiten')
+              : t('app.newRequest.title', 'Neuen Suchauftrag erstellen')}
+          </h1>
           <p className="text-muted-foreground mt-1">
-            {t('app.newRequest.subtitle', 'Finden Sie die perfekten Remote-Mitarbeiter für Ihr Unternehmen')}
+            {isEditMode
+              ? t('app.newRequest.editSubtitle', 'Aktualisieren Sie die Details Ihres Suchauftrags')
+              : t('app.newRequest.subtitle', 'Finden Sie die perfekten Remote-Mitarbeiter für Ihr Unternehmen')}
           </p>
         </div>
       </div>
@@ -563,7 +649,9 @@ const NewSearchRequest = () => {
             disabled={isSubmitting || !formData.customerIndustry || !formData.jobTitle}
           >
             <Save className="w-4 h-4 mr-2" />
-            {isSubmitting ? t('app.newRequest.buttons.creating', 'Wird erstellt...') : t('app.newRequest.buttons.create', 'Suchauftrag erstellen')}
+            {isSubmitting 
+              ? (isEditMode ? t('app.newRequest.buttons.updating', 'Wird gespeichert...') : t('app.newRequest.buttons.creating', 'Wird erstellt...'))
+              : (isEditMode ? t('app.newRequest.buttons.update', 'Änderungen speichern') : t('app.newRequest.buttons.create', 'Suchauftrag erstellen'))}
           </Button>
         </div>
       </form>
