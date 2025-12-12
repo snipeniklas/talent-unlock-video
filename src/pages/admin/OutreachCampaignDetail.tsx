@@ -284,6 +284,21 @@ export default function OutreachCampaignDetail() {
         .eq("id", id);
 
       if (error) throw error;
+
+      // FIX: Bei Resume (paused→active) next_send_date für pending Kontakte setzen
+      // Dies stellt sicher, dass während der Pause hinzugefügte Kontakte verarbeitet werden
+      if (newStatus === "active" && campaign?.status === "paused") {
+        const { error: contactError } = await supabase
+          .from("outreach_campaign_contacts")
+          .update({ next_send_date: new Date().toISOString() })
+          .eq("campaign_id", id)
+          .eq("status", "pending")
+          .is("next_send_date", null);
+
+        if (contactError) {
+          console.error("Error updating pending contacts on resume:", contactError);
+        }
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["outreach-campaign", id] });
