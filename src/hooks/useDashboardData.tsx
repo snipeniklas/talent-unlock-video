@@ -56,6 +56,17 @@ export const useDashboardData = () => {
         };
       }
 
+      // First, get allocated candidate IDs for this company
+      const { data: allocationsData } = await supabase
+        .from('search_request_allocations')
+        .select(`
+          candidate_id,
+          search_requests!inner(company_id)
+        `)
+        .eq('search_requests.company_id', companyId);
+
+      const allocatedCandidateIds = allocationsData?.map(a => a.candidate_id) || [];
+
       // Parallel data fetching for better performance
       const [searchRequestsData, candidatesData, recentRequestsData, specialistsData] = await Promise.all([
         // Search requests for stats
@@ -76,19 +87,22 @@ export const useDashboardData = () => {
           .order('created_at', { ascending: false })
           .limit(3),
         
-        // Recommended specialists
-        supabase
-          .from('candidate_identity')
-          .select(`
-            candidate_id,
-            first_name,
-            last_name,
-            candidates!inner(
-              primary_role,
-              years_experience
-            )
-          `)
-          .limit(3)
+        // Recommended specialists - only those allocated to this company's search requests
+        allocatedCandidateIds.length > 0
+          ? supabase
+              .from('candidate_identity')
+              .select(`
+                candidate_id,
+                first_name,
+                last_name,
+                candidates!inner(
+                  primary_role,
+                  years_experience
+                )
+              `)
+              .in('candidate_id', allocatedCandidateIds)
+              .limit(3)
+          : Promise.resolve({ data: [], error: null })
       ]);
 
       // Calculate stats

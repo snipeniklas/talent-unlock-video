@@ -224,10 +224,10 @@ const Specialists = () => {
     return `${firstName?.[0] || ''}${lastName?.[0] || ''}`.toUpperCase();
   };
 
-  // Get recommended (allocated) specialists
+  // Get recommended (allocated) specialists - full visibility
   const recommendedSpecialists = filteredSpecialists.filter(s => allocatedCandidateIds.has(s.id));
-  // Get all specialists for the "all" tab
-  const allSpecialists = filteredSpecialists;
+  // Get non-allocated specialists for the "all" tab - always greyed out
+  const nonAllocatedSpecialists = filteredSpecialists.filter(s => !allocatedCandidateIds.has(s.id));
 
   const renderSpecialistCard = (specialist: Specialist, isAllocated: boolean) => (
     <Card 
@@ -428,7 +428,7 @@ const Specialists = () => {
             {t('app.specialists.tabs.recommended')} ({recommendedSpecialists.length})
           </TabsTrigger>
           <TabsTrigger value="all">
-            {t('app.specialists.tabs.all')} ({allSpecialists.length})
+            {t('app.specialists.tabs.all')} ({nonAllocatedSpecialists.length})
           </TabsTrigger>
         </TabsList>
 
@@ -504,10 +504,10 @@ const Specialists = () => {
             </div>
           </div>
 
-          {allSpecialists.length > 0 ? (
+          {nonAllocatedSpecialists.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {allSpecialists.map((specialist) => 
-                renderSpecialistCard(specialist, allocatedCandidateIds.has(specialist.id))
+              {nonAllocatedSpecialists.map((specialist) => 
+                renderSpecialistCard(specialist, false)
               )}
             </div>
           ) : (
