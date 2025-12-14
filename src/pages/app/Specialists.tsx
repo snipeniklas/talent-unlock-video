@@ -83,19 +83,27 @@ const Specialists = () => {
           return;
         }
 
-        // Fetch allocated candidate IDs for the user's company
+        // Fetch allocated candidate IDs for the user's company (two-step query)
         if (userData?.profile?.company_id) {
-          const { data: allocations } = await supabase
-            .from('search_request_allocations')
-            .select(`
-              candidate_id,
-              search_requests!inner(company_id)
-            `)
-            .eq('search_requests.company_id', userData.profile.company_id);
+          // First, get search request IDs for the user's company
+          const { data: companySearchRequests } = await supabase
+            .from('search_requests')
+            .select('id')
+            .eq('company_id', userData.profile.company_id);
 
-          if (allocations) {
-            const allocatedIds = new Set(allocations.map(a => a.candidate_id));
-            setAllocatedCandidateIds(allocatedIds);
+          const searchRequestIds = companySearchRequests?.map(sr => sr.id) || [];
+
+          // Then get allocated candidate IDs for those search requests
+          if (searchRequestIds.length > 0) {
+            const { data: allocations } = await supabase
+              .from('search_request_allocations')
+              .select('candidate_id')
+              .in('search_request_id', searchRequestIds);
+
+            if (allocations) {
+              const allocatedIds = new Set(allocations.map(a => a.candidate_id));
+              setAllocatedCandidateIds(allocatedIds);
+            }
           }
         }
 
