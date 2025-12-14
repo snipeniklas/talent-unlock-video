@@ -37,6 +37,10 @@ interface SearchRequest {
   company: {
     name: string;
   };
+  allocations?: {
+    id: string;
+    status: string;
+  }[];
 }
 
 export default function AdminSearchRequests() {
@@ -54,7 +58,8 @@ export default function AdminSearchRequests() {
 
   const fetchSearchRequests = async () => {
     try {
-      const { data, error } = await supabase
+      // Fetch search requests
+      const { data: requestsData, error: requestsError } = await supabase
         .from('search_requests')
         .select(`
           *,
@@ -62,8 +67,22 @@ export default function AdminSearchRequests() {
         `)
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
-      setSearchRequests(data || []);
+      if (requestsError) throw requestsError;
+
+      // Fetch all allocations
+      const { data: allocationsData, error: allocationsError } = await supabase
+        .from('search_request_allocations')
+        .select('id, status, search_request_id');
+
+      if (allocationsError) throw allocationsError;
+
+      // Combine data
+      const requestsWithAllocations = (requestsData || []).map(request => ({
+        ...request,
+        allocations: (allocationsData || []).filter(a => a.search_request_id === request.id)
+      }));
+
+      setSearchRequests(requestsWithAllocations);
     } catch (error) {
       console.error('Error fetching search requests:', error);
     } finally {
@@ -146,8 +165,14 @@ export default function AdminSearchRequests() {
     return level ? levels[level] : t('app.adminSearchRequests.table.experience.unknown', 'Nicht angegeben');
   };
 
-  const getAssignmentStats = () => {
-    return { total: 0, pending: 0, active: 0, completed: 0 };
+  const getAssignmentStats = (request: SearchRequest) => {
+    const allocations = request.allocations || [];
+    return {
+      total: allocations.length,
+      pending: allocations.filter(a => a.status === 'proposed').length,
+      active: allocations.filter(a => a.status === 'allocated' || a.status === 'active').length,
+      completed: allocations.filter(a => a.status === 'completed').length
+    };
   };
 
   if (loading) {
@@ -241,7 +266,7 @@ export default function AdminSearchRequests() {
                 </TableHeader>
                 <TableBody>
                   {filteredRequests.map((request) => {
-                    const stats = getAssignmentStats();
+                    const stats = getAssignmentStats(request);
                     return (
                       <TableRow key={request.id}>
                         <TableCell>
