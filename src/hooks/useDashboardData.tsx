@@ -56,14 +56,21 @@ export const useDashboardData = () => {
         };
       }
 
-      // First, get allocated candidate IDs for this company
-      const { data: allocationsData } = await supabase
-        .from('search_request_allocations')
-        .select(`
-          candidate_id,
-          search_requests!inner(company_id)
-        `)
-        .eq('search_requests.company_id', companyId);
+      // First, get search request IDs for this company
+      const { data: companySearchRequests } = await supabase
+        .from('search_requests')
+        .select('id')
+        .eq('company_id', companyId);
+
+      const searchRequestIds = companySearchRequests?.map(sr => sr.id) || [];
+
+      // Then get allocated candidate IDs for those search requests
+      const { data: allocationsData } = searchRequestIds.length > 0
+        ? await supabase
+            .from('search_request_allocations')
+            .select('candidate_id')
+            .in('search_request_id', searchRequestIds)
+        : { data: [] };
 
       const allocatedCandidateIds = allocationsData?.map(a => a.candidate_id) || [];
 
