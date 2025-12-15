@@ -925,7 +925,7 @@
       "hours": "Openingstijden"
     },
     "form": {
-      "title": "Zoekopdracht gratis aanmaken",
+      "title": "Maak gratis een zoekopdracht aan",
       "subtitle": "Vertel ons over uw project en wij nemen binnen 24 uur contact met u op",
       "placeholders": {
         "firstName": "Voornaam",
@@ -950,7 +950,7 @@
     },
     "location": "München, Duitsland",
     "form": {
-      "title": "Zoekopdracht gratis aanmaken",
+      "title": "Maak gratis een zoekopdracht aan",
       "subtitle": "Vertel ons over uw project en wij nemen binnen 24 uur contact met u op",
       "buttonText": "Nu starten"
     }
