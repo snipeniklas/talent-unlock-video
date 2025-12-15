@@ -613,7 +613,7 @@ const HomePage = () => {
           <div className="mt-16 animate-slide-up-delay-4">
             <div className="text-center mb-12">
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-brand-dark">
-                {t('home.hub.timeline.title', 'Ihr Weg zu den perfekten ')} <span className="text-primary">Remote-Experten</span>
+                {t('home.hub.timeline.title', 'Ihr Weg zu den perfekten ')} <span className="text-primary">{t('home.hub.timeline.titleSuffix', 'Remote-Experten')}</span>
               </h3>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 {t('home.hub.timeline.text', 'Unser bewährter 3-Wochen-Prozess bringt Sie sicher und strukturiert zu Ihrer idealen Remote-Fachkraft.')}
