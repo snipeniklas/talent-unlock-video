@@ -336,6 +336,7 @@
       "features": {
         "request": {
           "title": "RaaS Anfrage erstellen",
+          "text": "Definieren Sie Ihre Anforderungen in nur wenigen Klicks. Unser intelligentes System erfasst automatisch alle relevanten Details für Ihre RaaS-Lösung.",
           "points": ["Skill-basierte Auswahl", "Budget & Zeitrahmen", "Projektspezifikation"]
         },
         "matching": {
