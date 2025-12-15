@@ -354,6 +354,7 @@
       "features": {
         "request": {
           "title": "RaaS Aanvraag maken",
+          "text": "Definieer uw vereisten in slechts enkele klikken. Ons intelligente systeem legt automatisch alle relevante details voor uw RaaS-oplossing vast.",
           "points": ["Skill-gebaseerde selectie", "Budget & tijdskader", "Projectspecificatie"]
         },
         "matching": {

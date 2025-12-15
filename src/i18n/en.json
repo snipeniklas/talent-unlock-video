@@ -351,6 +351,7 @@
       "features": {
         "request": {
           "title": "Create a RaaS request",
+          "text": "Define your requirements in just a few clicks. Our intelligent system automatically captures all relevant details for your RaaS solution.",
           "points": ["Skill-based selection", "Budget & timeline", "Project specification"]
         },
         "matching": {
