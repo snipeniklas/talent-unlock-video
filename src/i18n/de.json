@@ -271,6 +271,7 @@
   },
   "home": {
     "hero": {
+      "videoUrl": "https://www.youtube.com/embed/4Z2P-ywJdPo",
       "title": "RaaS - Resources as a Service",
       "ctaBadge": "KOSTENFREI",
       "ctaPrimary": "Unverbindliche RaaS Anfrage starten",

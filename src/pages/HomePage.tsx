@@ -264,9 +264,9 @@ const HomePage = () => {
                       </div>
                     ) : (
                       <iframe 
-                        src="https://drive.google.com/file/d/1WefgP8aD5WkWngIE5FxNY1DIZVW6ciEN/preview" 
+                        src={`${t('home.hero.videoUrl')}?autoplay=1&rel=0`}
                         className="w-full h-full border-0"
-                        allow="autoplay; fullscreen; picture-in-picture"
+                        allow="autoplay; fullscreen; picture-in-picture; accelerometer; clipboard-write; encrypted-media; gyroscope"
                         allowFullScreen 
                         title="Hej Talent Intro Video - Premium Remote Recruiting seit 2016"
                         loading="eager"

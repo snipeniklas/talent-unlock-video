@@ -266,6 +266,7 @@
   },
   "home": {
     "hero": {
+      "videoUrl": "https://www.youtube.com/embed/aYFBWLs8MGk",
       "badges": {
         "specialists": "500+ Remote Professionals",
         "success": "98% Succes",

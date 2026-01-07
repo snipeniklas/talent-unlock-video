@@ -271,6 +271,7 @@
   },
   "home": {
     "hero": {
+      "videoUrl": "https://www.youtube.com/embed/aYFBWLs8MGk",
       "title": "RaaS - Resources as a Service",
       "ctaBadge": "FREE",
       "ctaPrimary": "Start a non-binding RaaS request",
