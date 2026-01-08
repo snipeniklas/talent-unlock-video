@@ -1008,6 +1008,131 @@
         "primary": "Create RaaS request",
         "secondary": "Meet remote professionals"
       }
+    },
+    "itDev": {
+      "hero": {
+        "badge": "Remote IT developers",
+        "title": "Experienced ",
+        "titleSuffix": " developers for your IT projects",
+        "text": "Strengthen your IT team with qualified international remote developers. From full-stack development to DevOps – we have the right experts for your project.",
+        "cta": "Create RaaS request"
+      },
+      "audience": [
+        "CTOs and technical leaders",
+        "Startup founders with tech needs",
+        "Product owners and product managers",
+        "Agencies and consulting firms"
+      ],
+      "audienceTitle": "For whom?",
+      "problems": [
+        {"title": "IT skills shortage", "description": "Difficulty finding and retaining qualified developers in-house"},
+        {"title": "High personnel costs for IT expertise", "description": "Senior developers are expensive and often not available long term"},
+        {"title": "Scaling challenges for growing projects", "description": "Hard to scale development teams quickly with changing project demands"}
+      ],
+      "problemsTitle": "Core problems",
+      "roles": [
+        {"role": "Full-stack developers", "skills": "React, Node.js, Python, Django, JavaScript/TypeScript", "specialization": "Web applications, APIs, frontend & backend", "experience": "5+ years"},
+        {"role": "DevOps engineers", "skills": "AWS, Docker, Kubernetes, CI/CD, Infrastructure as Code", "specialization": "Cloud migration, deployment automation, monitoring", "experience": "4+ years"},
+        {"role": "Mobile app developers", "skills": "React Native, Flutter, iOS (Swift), Android (Kotlin)", "specialization": "Cross-platform apps, native development", "experience": "4+ years"},
+        {"role": "Backend specialists", "skills": "Java, .NET, Go, microservices, database design", "specialization": "Scalable architectures, performance optimization", "experience": "6+ years"},
+        {"role": "Frontend experts", "skills": "React, Vue.js, Angular, UI/UX implementation", "specialization": "Responsive design, performance, accessibility", "experience": "4+ years"},
+        {"role": "QA & test engineers", "skills": "Automated testing, manual QA, test-driven development", "specialization": "Quality assurance, bug detection, test automation", "experience": "3+ years"}
+      ],
+      "rolesTitle": "Our remote developers",
+      "tech": [
+        {"name": "Frontend", "tools": ["React", "Vue.js", "Angular", "TypeScript"]},
+        {"name": "Backend", "tools": ["Node.js", "Python", "Java", ".NET", "Go"]},
+        {"name": "Mobile", "tools": ["React Native", "Flutter", "iOS", "Android"]},
+        {"name": "Cloud", "tools": ["AWS", "Azure", "Google Cloud", "Docker"]},
+        {"name": "Database", "tools": ["PostgreSQL", "MongoDB", "Redis", "MySQL"]},
+        {"name": "DevOps", "tools": ["Kubernetes", "CI/CD", "Terraform", "Jenkins"]}
+      ],
+      "techTitle": "Technology expertise",
+      "benefits": [
+        "Access to top international developers",
+        "Flexible team set-up depending on project requirements",
+        "Agile ways of working and modern development practices",
+        "Optimal time zone coverage for remote collaboration",
+        "Fast project start: developers ready within 1–2 weeks",
+        "No recruiting costs or HR overhead"
+      ],
+      "benefitsTitle": "Your benefits",
+      "results": [
+        {"metric": "50%", "description": "Faster development times"},
+        {"metric": "40%", "description": "Cost savings vs. local developers"},
+        {"metric": "95%", "description": "Project success rate"},
+        {"metric": "1–2 weeks", "description": "Time-to-start for new developers"}
+      ],
+      "resultsTitle": "Measurable results",
+      "cta": {
+        "title": "Ready for remote IT support?",
+        "text": "Talk to us about your development needs. We'll find the right remote developers for your project.",
+        "primary": "Create RaaS request",
+        "secondary": "Browse developer profiles"
+      }
+    },
+    "aiMl": {
+      "hero": {
+        "badge": "Remote AI & ML specialists",
+        "title": "Experienced remote ",
+        "titleSuffix": "experts for your AI projects",
+        "text": "Bring your AI vision to life with top-tier remote specialists. From machine learning to computer vision - we provide the right experts for your project.",
+        "cta": "Create RaaS request",
+        "kiLabel": "AI"
+      },
+      "audience": [
+        "CIOs and data strategists",
+        "Innovation managers and Chief Digital Officers",
+        "Product owners for AI projects",
+        "Startups with AI/ML ambitions"
+      ],
+      "audienceTitle": "For whom?",
+      "problems": [
+        {"title": "Lack of AI expertise in the company", "description": "Difficulty finding qualified data scientists and ML engineers"},
+        {"title": "High costs for AI specialists", "description": "AI experts are extremely expensive and rarely available"},
+        {"title": "Underestimated complexity of AI projects", "description": "AI projects require special skills and experience"}
+      ],
+      "problemsTitle": "Core problems",
+      "roles": [
+        {"role": "Machine Learning Engineers", "skills": "TensorFlow, PyTorch, scikit-learn, MLOps, Model Deployment", "specialization": "ML pipeline development, model training & optimization", "experience": "4+ years"},
+        {"role": "Data Scientists", "skills": "Python, R, Statistical Analysis, Predictive Modeling, Feature Engineering", "specialization": "Data analysis, business intelligence, statistical modeling", "experience": "5+ years"},
+        {"role": "AI/NLP Specialists", "skills": "HuggingFace, OpenAI, LangChain, Prompt Engineering, Chatbots", "specialization": "Natural language processing, conversational AI", "experience": "3+ years"},
+        {"role": "Computer Vision Engineers", "skills": "OpenCV, YOLO, CNN, Image Processing, Object Detection", "specialization": "Image recognition, video analysis, visual AI", "experience": "4+ years"},
+        {"role": "MLOps Engineers", "skills": "Docker, Kubernetes, MLflow, Kubeflow, CI/CD for ML", "specialization": "ML infrastructure, model deployment, monitoring", "experience": "4+ years"},
+        {"role": "AI Product Consultants", "skills": "AI Strategy, Business Case Development, ROI Analysis", "specialization": "AI implementation strategy, business integration", "experience": "6+ years"}
+      ],
+      "rolesTitle": "Our AI specialists",
+      "tech": [
+        {"name": "Machine Learning", "tools": ["TensorFlow", "PyTorch", "scikit-learn", "XGBoost"]},
+        {"name": "Deep Learning", "tools": ["Neural Networks", "CNN", "RNN", "Transformers"]},
+        {"name": "NLP & LLMs", "tools": ["HuggingFace", "OpenAI", "LangChain", "BERT"]},
+        {"name": "Computer Vision", "tools": ["OpenCV", "YOLO", "Object Detection", "OCR"]},
+        {"name": "MLOps", "tools": ["MLflow", "Kubeflow", "Docker", "Kubernetes"]},
+        {"name": "Data Engineering", "tools": ["Apache Spark", "Airflow", "dbt", "BigQuery"]}
+      ],
+      "techTitle": "Technology expertise",
+      "benefits": [
+        "Access to top AI experts internationally",
+        "Flexible project durations: from proof of concepts to long-term projects",
+        "Complete AI teams or individual specialists",
+        "Proven experience across various industries",
+        "Fast project start: AI experts available in 1-2 weeks",
+        "No long-term personnel commitments"
+      ],
+      "benefitsTitle": "Your benefits",
+      "results": [
+        {"metric": "70%", "description": "Successful AI projects"},
+        {"metric": "50%", "description": "Cost savings vs. local AI experts"},
+        {"metric": "3x", "description": "Faster implementation"},
+        {"metric": "90%", "description": "Customer satisfaction with AI solutions"}
+      ],
+      "resultsTitle": "Measurable results",
+      "cta": {
+        "title": "Ready for AI/ML support?",
+        "text": "Talk to us about your AI needs. We'll find the right AI experts for your project.",
+        "primary": "Create RaaS request",
+        "secondary": "Browse AI specialist profiles"
+      }
     }
   },
 
@@ -1174,147 +1299,6 @@
       "trust": {"title": "Leading companies trust our AI experts"},
       "faq": {"title": "Frequently asked questions", "items": {"0": {"q": "Which AI technologies do you cover?","a": "Machine learning, deep learning, NLP, computer vision, recommendation systems, predictive analytics and more. We have experts for all common frameworks."}, "1": {"q": "How qualified are the AI experts?","a": "All have a relevant degree (Master/PhD), 5+ years of practical experience and proven success in productive AI projects."}, "2": {"q": "Can I start with a PoC?","a": "Yes! We recommend 3-month projects for proof of concepts before you invest in larger implementations."}, "3": {"q": "How long until productive use?","a": "Depending on complexity: PoC in 3 months, MVP in 6 months. We focus on fast, measurable results instead of lengthy research."}}},
       "footer": {"tagline": "AI & ML experts for German businesses", "areas": "AI areas", "company": "Company", "contact": "Contact", "rights": "All rights reserved.", "terms": "Terms"}
-    }
-  },
-  "solutions": {
-    "backoffice": {
-      "hero": {"badge": "Remote backoffice professionals", "title": "Qualified ", "titleSuffix": " support ", "highlight": " for your backoffice", "text": "Relieve your team with experienced remote professionals ...", "ctaPrimary": "Create RaaS request", "ctaSecondary": "Explore remote backoffice"},
-      "audience": [],
-      "audienceTitle": "For whom?",
-      "problems": [],
-      "problemsTitle": "Core problems",
-      "talents": [],
-      "talentsTitle": "Our remote professionals",
-      "benefits": [],
-      "benefitsTitle": "Your benefits",
-      "results": [],
-      "resultsTitle": "Measurable results",
-      "cta": {"title": "Ready for remote backoffice support?", "text": "Talk to us about your needs. We’ll find the right remote professionals.", "primary": "Create RaaS request", "secondary": "Meet remote professionals"}
-    },
-    "itDev": {
-      "hero": {
-        "badge": "Remote IT developers",
-        "title": "Experienced ",
-        "titleSuffix": " developers for your IT projects",
-        "text": "Strengthen your IT team with qualified international remote developers. From full-stack development to DevOps – we have the right experts for your project.",
-        "cta": "Create RaaS request"
-      },
-      "audience": [
-        "CTOs and technical leaders",
-        "Startup founders with tech needs",
-        "Product owners and product managers",
-        "Agencies and consulting firms"
-      ],
-      "audienceTitle": "For whom?",
-      "problems": [
-        {"title": "IT skills shortage", "description": "Difficulty finding and retaining qualified developers in-house"},
-        {"title": "High personnel costs for IT expertise", "description": "Senior developers are expensive and often not available long term"},
-        {"title": "Scaling challenges for growing projects", "description": "Hard to scale development teams quickly with changing project demands"}
-      ],
-      "problemsTitle": "Core problems",
-      "roles": [
-        {"role": "Full-stack developers", "skills": "React, Node.js, Python, Django, JavaScript/TypeScript", "specialization": "Web applications, APIs, frontend & backend", "experience": "5+ years"},
-        {"role": "DevOps engineers", "skills": "AWS, Docker, Kubernetes, CI/CD, Infrastructure as Code", "specialization": "Cloud migration, deployment automation, monitoring", "experience": "4+ years"},
-        {"role": "Mobile app developers", "skills": "React Native, Flutter, iOS (Swift), Android (Kotlin)", "specialization": "Cross-platform apps, native development", "experience": "4+ years"},
-        {"role": "Backend specialists", "skills": "Java, .NET, Go, microservices, database design", "specialization": "Scalable architectures, performance optimization", "experience": "6+ years"},
-        {"role": "Frontend experts", "skills": "React, Vue.js, Angular, UI/UX implementation", "specialization": "Responsive design, performance, accessibility", "experience": "4+ years"},
-        {"role": "QA & test engineers", "skills": "Automated testing, manual QA, test-driven development", "specialization": "Quality assurance, bug detection, test automation", "experience": "3+ years"}
-      ],
-      "rolesTitle": "Our remote developers",
-      "tech": [
-        {"name": "Frontend", "tools": ["React", "Vue.js", "Angular", "TypeScript"]},
-        {"name": "Backend", "tools": ["Node.js", "Python", "Java", ".NET", "Go"]},
-        {"name": "Mobile", "tools": ["React Native", "Flutter", "iOS", "Android"]},
-        {"name": "Cloud", "tools": ["AWS", "Azure", "Google Cloud", "Docker"]},
-        {"name": "Database", "tools": ["PostgreSQL", "MongoDB", "Redis", "MySQL"]},
-        {"name": "DevOps", "tools": ["Kubernetes", "CI/CD", "Terraform", "Jenkins"]}
-      ],
-      "techTitle": "Technology expertise",
-      "benefits": [
-        "Access to top international developers",
-        "Flexible team set-up depending on project requirements",
-        "Agile ways of working and modern development practices",
-        "Optimal time zone coverage for remote collaboration",
-        "Fast project start: developers ready within 1–2 weeks",
-        "No recruiting costs or HR overhead"
-      ],
-      "benefitsTitle": "Your benefits",
-      "results": [
-        {"metric": "50%", "description": "Faster development times"},
-        {"metric": "40%", "description": "Cost savings vs. local developers"},
-        {"metric": "95%", "description": "Project success rate"},
-        {"metric": "1–2 weeks", "description": "Time-to-start for new developers"}
-      ],
-      "resultsTitle": "Measurable results",
-      "cta": {
-        "title": "Ready for remote IT support?",
-        "text": "Talk to us about your development needs. We’ll find the right remote developers for your project.",
-        "primary": "Create RaaS request",
-        "secondary": "Browse developer profiles"
-      }
-    },
-    "aiMl": {
-      "hero": {
-        "badge": "Remote AI & ML specialists",
-        "title": "Experienced remote ",
-        "titleSuffix": "experts for your AI projects",
-        "text": "Bring your AI vision to life with top-tier remote specialists. From machine learning to computer vision - we provide the right experts for your project.",
-        "cta": "Create RaaS request",
-        "kiLabel": "AI"
-      },
-      "audience": [
-        "CIOs and data strategists",
-        "Innovation managers and Chief Digital Officers",
-        "Product owners for AI projects",
-        "Startups with AI/ML ambitions"
-      ],
-      "audienceTitle": "For whom?",
-      "problems": [
-        {"title": "Lack of AI expertise in the company", "description": "Difficulty finding qualified data scientists and ML engineers"},
-        {"title": "High costs for AI specialists", "description": "AI experts are extremely expensive and rarely available"},
-        {"title": "Underestimated complexity of AI projects", "description": "AI projects require special skills and experience"}
-      ],
-      "problemsTitle": "Core problems",
-      "roles": [
-        {"role": "Machine Learning Engineers", "skills": "TensorFlow, PyTorch, scikit-learn, MLOps, Model Deployment", "specialization": "ML pipeline development, model training & optimization", "experience": "4+ years"},
-        {"role": "Data Scientists", "skills": "Python, R, Statistical Analysis, Predictive Modeling, Feature Engineering", "specialization": "Data analysis, business intelligence, statistical modeling", "experience": "5+ years"},
-        {"role": "AI/NLP Specialists", "skills": "HuggingFace, OpenAI, LangChain, Prompt Engineering, Chatbots", "specialization": "Natural language processing, conversational AI", "experience": "3+ years"},
-        {"role": "Computer Vision Engineers", "skills": "OpenCV, YOLO, CNN, Image Processing, Object Detection", "specialization": "Image recognition, video analysis, visual AI", "experience": "4+ years"},
-        {"role": "MLOps Engineers", "skills": "Docker, Kubernetes, MLflow, Kubeflow, CI/CD for ML", "specialization": "ML infrastructure, model deployment, monitoring", "experience": "4+ years"},
-        {"role": "AI Product Consultants", "skills": "AI Strategy, Business Case Development, ROI Analysis", "specialization": "AI implementation strategy, business integration", "experience": "6+ years"}
-      ],
-      "rolesTitle": "Our AI specialists",
-      "tech": [
-        {"name": "Machine Learning", "tools": ["TensorFlow", "PyTorch", "scikit-learn", "XGBoost"]},
-        {"name": "Deep Learning", "tools": ["Neural Networks", "CNN", "RNN", "Transformers"]},
-        {"name": "NLP & LLMs", "tools": ["HuggingFace", "OpenAI", "LangChain", "BERT"]},
-        {"name": "Computer Vision", "tools": ["OpenCV", "YOLO", "Object Detection", "OCR"]},
-        {"name": "MLOps", "tools": ["MLflow", "Kubeflow", "Docker", "Kubernetes"]},
-        {"name": "Data Engineering", "tools": ["Apache Spark", "Airflow", "dbt", "BigQuery"]}
-      ],
-      "techTitle": "Technology expertise",
-      "benefits": [
-        "Access to top AI experts internationally",
-        "Flexible project durations: from proof of concepts to long-term projects",
-        "Complete AI teams or individual specialists",
-        "Proven experience across various industries",
-        "Fast project start: AI experts available in 1-2 weeks",
-        "No long-term personnel commitments"
-      ],
-      "benefitsTitle": "Your benefits",
-      "results": [
-        {"metric": "70%", "description": "Successful AI projects"},
-        {"metric": "50%", "description": "Cost savings vs. local AI experts"},
-        {"metric": "3x", "description": "Faster implementation"},
-        {"metric": "90%", "description": "Customer satisfaction with AI solutions"}
-      ],
-      "resultsTitle": "Measurable results",
-      "cta": {
-        "title": "Ready for AI/ML support?",
-        "text": "Talk to us about your AI needs. We'll find the right AI experts for your project.",
-        "primary": "Create RaaS request",
-        "secondary": "Browse AI specialist profiles"
-      }
     }
   },
   "app": {
