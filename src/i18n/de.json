@@ -1536,23 +1536,6 @@
       }
     }
   },
-
-  "solutions": {
-    "backoffice": {
-      "hero": {"badge": "Remote Backoffice-Fachkräfte", "title": "Qualifizierte ", "titleSuffix": "-Unterstützung ", "highlight": " für Ihr Backoffice", "text": "Entlasten Sie Ihr Team ...", "ctaPrimary": "RaaS Anfrage erstellen", "ctaSecondary": "Remote Backoffice-Kräfte entdecken"},
-      "audience": [],
-      "audienceTitle": "Für wen?",
-      "problems": [],
-      "problemsTitle": "Kernprobleme",
-      "talents": [],
-      "talentsTitle": "Unsere Remote-Fachkräfte",
-      "benefits": [],
-      "benefitsTitle": "Ihre Vorteile",
-      "results": [],
-      "resultsTitle": "Messbare Ergebnisse",
-      "cta": {"title": "Bereit für Remote Backoffice-Unterstützung?", "text": "Sprechen Sie mit uns ...", "primary": "RaaS Anfrage erstellen", "secondary": "Remote-Fachkräfte kennenlernen"}
-    }
-  },
   "app": {
     "layout": {
       "title": "Hej Talent Platform",
