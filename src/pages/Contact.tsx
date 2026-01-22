@@ -11,7 +11,22 @@ import { useTranslation } from '@/i18n/i18n';
 import { RaasInquiryDialog } from '@/components/RaasInquiryDialog';
 
 const Contact = () => {
-  const { t } = useTranslation();
+  const { t, get } = useTranslation();
+
+  // Get contact data from i18n (different for NL vs DE/EN)
+  const contactData = get('contact.data') as {
+    email: string;
+    phone: string;
+    phoneTel: string;
+    address: string;
+    hours: string;
+  } | undefined;
+
+  const email = contactData?.email || 'hello@hejtalent.de';
+  const phone = contactData?.phone || '+49 89 9017 6218';
+  const phoneTel = contactData?.phoneTel || '+498990176218';
+  const address = contactData?.address || 'Herzogstrasse 19, 80803 München, Germany';
+  const hours = contactData?.hours || 'Mo-Fr 9:00-18:00 Uhr';
 
   return (
     <div className="min-h-screen bg-background font-inter">
@@ -36,8 +51,8 @@ const Contact = () => {
                   <Mail className="w-5 h-5 lg:w-6 lg:h-6 text-primary mt-1 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-sm lg:text-base">{t('contact.labels.email')}</div>
-                  <a href="mailto:hello@hejtalent.de" className="text-muted-foreground text-sm lg:text-base hover:text-primary break-all">
-                    hello@hejtalent.de
+                  <a href={`mailto:${email}`} className="text-muted-foreground text-sm lg:text-base hover:text-primary break-all">
+                    {email}
                   </a>
                   </div>
                 </div>
@@ -45,8 +60,8 @@ const Contact = () => {
                   <Phone className="w-5 h-5 lg:w-6 lg:h-6 text-primary mt-1 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-sm lg:text-base">{t('contact.labels.phone')}</div>
-                    <a href="tel:+498990176218" className="text-muted-foreground text-sm lg:text-base hover:text-primary">
-                      +49 89 9017 6218
+                    <a href={`tel:${phoneTel}`} className="text-muted-foreground text-sm lg:text-base hover:text-primary">
+                      {phone}
                     </a>
                   </div>
                 </div>
@@ -54,14 +69,14 @@ const Contact = () => {
                   <MapPin className="w-5 h-5 lg:w-6 lg:h-6 text-primary mt-1 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-sm lg:text-base">{t('contact.labels.address')}</div>
-                    <div className="text-muted-foreground text-sm lg:text-base">Herzogstrasse 19, 80803 München, Germany</div>
+                    <div className="text-muted-foreground text-sm lg:text-base">{address}</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 lg:gap-4">
                   <Clock className="w-5 h-5 lg:w-6 lg:h-6 text-primary mt-1 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-sm lg:text-base">{t('contact.labels.hours')}</div>
-                    <div className="text-muted-foreground text-sm lg:text-base">Mo-Fr 9:00-18:00 Uhr</div>
+                    <div className="text-muted-foreground text-sm lg:text-base">{hours}</div>
                   </div>
                 </div>
               </div>

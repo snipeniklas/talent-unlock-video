@@ -253,7 +253,12 @@
       "imprint": "Imprint"
     },
     "copyright": "© 2024 Hej Talent, a hej consulting GmbH brand. All rights reserved.",
-    "address": "Herzogstrasse 19, 80803 München, Germany"
+    "address": "Herzogstrasse 19, 80803 München, Germany",
+    "data": {
+      "email": "hello@hejtalent.de",
+      "phone": "+49 89 9017 6218",
+      "phoneTel": "+498990176218"
+    }
   },
   "benefitBanner": {
     "items": [
@@ -524,6 +529,13 @@
       "phone": "Phone",
       "address": "Address",
       "hours": "Business hours"
+    },
+    "data": {
+      "email": "hello@hejtalent.de",
+      "phone": "+49 89 9017 6218",
+      "phoneTel": "+498990176218",
+      "address": "Herzogstrasse 19, 80803 München, Germany",
+      "hours": "Mon-Fri 9:00-18:00"
     },
     "form": {
       "title": "Create a search request for free",
