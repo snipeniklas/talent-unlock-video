@@ -1222,21 +1222,21 @@
       "kpis": {"mrr": "Maandelijkse Services", "sla": "SLA Nakoming", "response": "Gem. Respons"}
     },
     "management": {
-      "title": "Service-Management eenvoudig gemaakt",
+      "title": "Service management made easy",
       "text": "Behoud het overzicht over al uw Remote-Services. Van AI-projecten tot Backoffice-Automatisering - alles centraal beheerd met realtime status en performance-metrics.",
       "bullets": [
         {"title": "Service-Portfolio Overzicht", "desc": "Alle lopende services in één oogopslag"},
         {"title": "Realtime Performance", "desc": "SLA-Tracking en Delivery-Status"},
         {"title": "Kosten-Transparantie", "desc": "Heldere uitsplitsing van alle service-kosten"}
       ],
-      "title2": "Meetbare Business-Resultaten",
+      "title2": "Measurable business success",
       "text2": "Volg de ROI van uw RaaS Services met gedetailleerde performance-metrics. Zie hoe Remote-Services uw business transformeren.",
       "roiTracking": {"title": "ROI-Tracking", "desc": "Meetbare kostenbesparingen en efficiëntieverhogingen"},
       "performanceAnalytics": {"title": "Performance Analytics", "desc": "Gedetailleerde service-prestatie-beoordelingen"},
       "businessImpact": {"title": "Business Impact", "desc": "Concrete verbeteringen van uw bedrijfsprocessen"}
     },
     "request": {
-      "title": "Nieuwe RaaS Services aanvragen",
+      "title": "Request new RaaS services",
       "text": "Beschrijf uw business-probleem en ontvang op maat gemaakte service-oplossingen. Ons AI-systeem matcht u automatisch met de juiste expert-teams.",
       "bullets": [
         {"title": "Probleem-naar-Oplossing Matching", "desc": "AI-gestuurde service-aanbevelingen"},
@@ -1269,7 +1269,7 @@
       "impactDetail": "Backoffice Automation: 45% efficiëntietoename"
     },
     "security": {
-      "title": "Enterprise-Grade Service Security",
+      "title": "Enterprise-grade service security",
       "subtitle": "Uw gevoelige business-data is bij onze RaaS Services in veilige handen. Volledige compliance en hoogste beveiligingsstandaarden.",
       "bullets": [
         {"title": "Databeveiliging", "desc": "End-to-end encryptie van alle service-data"},
