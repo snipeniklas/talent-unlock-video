@@ -850,7 +850,7 @@
     "hero": {
       "title": "RaaS Hub",
       "titleSuffix": " - Ihre Service-Zentrale",
-      "subtitle": "Verwalten Sie Ihre Remote-Services, Projekte und Deliverables in einer intelligenten Plattform",
+      "subtitle": "Verwalten Sie Ihre Remote-Services, Projekte und Leistungsergebnisse in einer intelligenten Plattform.",
       "badges": ["✨ Echtzeit-Updates", "🔒 DSGVO-konform", "📊 Advanced Analytics"]
     },
     "overview": {
