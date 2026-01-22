@@ -253,7 +253,12 @@
       "imprint": "Impressum"
     },
     "copyright": "© 2024 Hej Talent, a hej consulting GmbH brand. Alle rechten voorbehouden.",
-    "address": "Herzogstrasse 19, 80803 München, Germany"
+    "address": "St. Rochusstraat 34, 5611 RJ Eindhoven, Nederland",
+    "data": {
+      "email": "sjors@hejtalent.de",
+      "phone": "+31 6 8190 2854",
+      "phoneTel": "+31681902854"
+    }
   },
   "benefitBanner": {
     "items": [
@@ -924,6 +929,13 @@
       "phone": "Telefoon",
       "address": "Adres",
       "hours": "Openingstijden"
+    },
+    "data": {
+      "email": "sjors@hejtalent.de",
+      "phone": "+31 6 8190 2854",
+      "phoneTel": "+31681902854",
+      "address": "St. Rochusstraat 34, 5611 RJ Eindhoven, Nederland",
+      "hours": "Ma-Vr 9:00-18:00"
     },
     "form": {
       "title": "Maak gratis een zoekopdracht aan",
